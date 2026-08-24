@@ -1,0 +1,68 @@
+/* ===========================================================================
+   Vault use cases — deployment stories. Layers on nopii.css + vaults.css.
+   =========================================================================== */
+
+.vu-rv{opacity:0;transform:translateY(16px);transition:opacity .55s var(--np-ease),transform .55s var(--np-ease);}
+.vu-rv.is-in{opacity:1;transform:none;}
+@media (prefers-reduced-motion:reduce){.vu-rv{opacity:1;transform:none;transition:none;}}
+
+/* ---------- Hero figure ---------- */
+.vu-herofig{margin:0;position:relative;border-radius:16px;overflow:hidden;aspect-ratio:5 / 4;background:#FCFCFD;border:1px solid var(--border-hairline);box-shadow:0 1px 2px rgba(42,51,64,.04);}
+.vu-herofig img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:6%;mix-blend-mode:multiply;animation:vuFloat 9s ease-in-out infinite;}
+.vu-herofig figcaption{position:absolute;left:20px;bottom:16px;font-family:var(--ev-font-sans);font-size:10px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--ev-slate);}
+@keyframes vuFloat{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-10px) scale(1.015)}}
+@media (prefers-reduced-motion:reduce){.vu-herofig img{animation:none;}}
+@media (max-width:1023px){.vu-herofig{max-width:520px;margin:0 auto;}}
+
+/* ---------- Case index ---------- */
+.vu-index{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:44px;}
+.vu-index a{background:var(--ev-porcelain);border:1px solid var(--border-hairline);border-radius:10px;padding:20px 22px;text-decoration:none;display:flex;flex-direction:column;gap:10px;transition:background .2s var(--np-ease),border-color .2s var(--np-ease);}
+.vu-index a:hover{background:#fff;border-color:var(--ev-mineral-blue);}
+.vu-index__n{font-family:var(--ev-font-sans);font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--ev-mineral-50);}
+.vu-index__t{font-family:var(--font-display);font-size:15px;font-weight:500;line-height:1.35;color:var(--ev-ink);}
+.vu-index a:hover .vu-index__t{color:var(--ev-mineral-blue);}
+@media (max-width:1023px){.vu-index{grid-template-columns:repeat(2,1fr);}}
+@media (max-width:600px){.vu-index{grid-template-columns:1fr;}}
+
+/* ---------- Case story ---------- */
+.vu-case{display:grid;grid-template-columns:1fr 0.82fr;gap:56px;align-items:center;padding:80px 0;border-top:1px solid var(--border-hairline);scroll-margin-top:118px;}
+.vu-case:first-of-type{border-top:none;}
+.vu-case--flip .vu-case__media{order:-1;}
+.vu-case__n{font-family:var(--ev-font-sans);font-size:10.5px;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--ev-slate);margin:0 0 14px;display:flex;align-items:center;gap:12px;}
+.vu-case__n i{height:1px;width:44px;background:var(--ev-cool-stone);display:block;}
+.vu-case__t{font-family:var(--font-display);font-size:clamp(26px,2.7vw,36px);font-weight:500;letter-spacing:-0.022em;line-height:1.14;color:var(--headline-base);margin:0;text-wrap:balance;}
+.vu-case__b{font-size:16.5px;line-height:1.68;color:var(--text-body);margin:20px 0 0;max-width:64ch;text-wrap:pretty;}
+.vu-case__tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px;}
+.vu-tag{display:inline-flex;align-items:center;gap:8px;font-family:var(--ev-font-sans);font-size:11.5px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--ev-mineral-blue);background:var(--ev-mineral-25);border:1px solid var(--ev-mineral-50);border-radius:5px;padding:6px 10px;}
+.vu-tag i{width:5px;height:5px;border-radius:1px;background:var(--ev-mineral-blue);display:block;}
+.vu-case__link{display:inline-flex;align-items:center;gap:8px;margin-top:24px;font-family:var(--ev-font-sans);font-size:14px;font-weight:500;color:var(--ev-mineral-blue);text-decoration:none;transition:gap .2s var(--np-ease);}
+.vu-case__link:hover{gap:12px;text-decoration:underline;text-underline-offset:3px;}
+.vu-case__media{position:relative;min-width:0;}
+.vu-plate{margin:0;position:relative;border-radius:16px;overflow:hidden;aspect-ratio:1 / 1;background:#FCFCFD;border:1px solid var(--border-hairline);}
+.vu-plate img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:8%;mix-blend-mode:multiply;transition:transform .6s var(--np-ease);}
+.vu-case:hover .vu-plate img{transform:scale(1.03);}
+@media (max-width:1023px){
+  .vu-case{grid-template-columns:1fr;gap:32px;padding:60px 0;}
+  .vu-case--flip .vu-case__media{order:0;}
+  .vu-plate{max-width:440px;}
+}
+
+/* ---------- Industry rows ---------- */
+.vu-inds{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:44px;}
+.vu-ind{background:#fff;border:1px solid var(--border-hairline);border-radius:12px;padding:26px 28px;display:flex;gap:18px;box-shadow:0 1px 2px rgba(42,51,64,.04);transition:border-color .22s var(--np-ease),box-shadow .22s var(--np-ease),transform .22s var(--np-ease);}
+.vu-ind:hover{border-color:var(--border-emphasis);box-shadow:0 12px 30px rgba(42,51,64,.06);transform:translateY(-3px);}
+.vu-ind__ic{width:42px;height:42px;flex:none;border-radius:10px;display:grid;place-items:center;background:var(--ev-warm-cloud);border:1px solid var(--border-hairline);color:var(--ev-mineral-blue);}
+.vu-ind__ic svg{width:21px;height:21px;}
+.vu-ind__t{font-family:var(--font-display);font-size:18px;font-weight:600;letter-spacing:-0.01em;color:var(--text-heading);margin:0 0 8px;}
+.vu-ind__b{font-size:15.5px;line-height:1.6;color:var(--text-body);margin:0;}
+@media (max-width:767px){.vu-inds{grid-template-columns:1fr;}}
+
+/* ---------- Closing statement ---------- */
+.vu-close{position:relative;overflow:hidden;background:#05080F;}
+.vu-close__art{position:absolute;right:-4%;top:50%;transform:translateY(-50%);width:52%;max-width:640px;opacity:.5;z-index:0;pointer-events:none;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 45%);mask-image:linear-gradient(90deg,transparent 0%,#000 45%);}
+.vu-close > .np-container{position:relative;z-index:1;}
+.vu-close__t{font-family:var(--font-display);font-size:clamp(28px,3.6vw,50px);font-weight:300;letter-spacing:-0.024em;line-height:1.12;color:#F4F7FA;margin:0;max-width:22ch;text-wrap:balance;}
+.vu-close__t em{font-style:normal;font-weight:600;color:#9FC4D6;}
+.vu-close__ctas{display:flex;gap:14px;flex-wrap:wrap;margin-top:36px;}
+@media (max-width:1023px){.vu-close__art{display:none;}}

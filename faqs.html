@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- SEO -->
+<title>Enigma Vault API FAQs | Tokenization and PCI Scope</title>
+<meta name="description" content="Answers on searchable encryption, card tokenization, file storage, secure intake, keys, compliance scope, right-to-erasure, and Enigma Vault API pricing.">
+<link rel="canonical" href="https://www.enigmavault.io/vault/faqs.html">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Enigma Vault">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="Enigma Vault API FAQs | Tokenization and PCI Scope">
+<meta property="og:description" content="Answers on searchable encryption, card tokenization, file storage, secure intake, keys, compliance scope, right-to-erasure, and Enigma Vault API pricing.">
+<meta property="og:url" content="https://www.enigmavault.io/vault/faqs.html">
+<meta property="og:image" content="https://www.enigmavault.io/assets/og/vault-faqs.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Vault, answered. — Enigma Vault">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Enigma Vault API FAQs | Tokenization and PCI Scope">
+<meta name="twitter:description" content="Answers on searchable encryption, card tokenization, file storage, secure intake, keys, compliance scope, right-to-erasure, and Enigma Vault API pricing.">
+<meta name="twitter:image" content="https://www.enigmavault.io/assets/og/vault-faqs.jpg">
+<meta name="twitter:image:alt" content="The Vault, answered. — Enigma Vault">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="../assets/favicon-16.png" sizes="16x16" type="image/png">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<link rel="manifest" href="../site.webmanifest">
+<meta name="theme-color" content="#0F3D56">
+<!-- /SEO -->
+<script>document.documentElement.className += ' np-js';</script>
+
+<link rel="stylesheet" href="../_ds/enigma-vault-design-system-c6ec97e5-9180-4fd4-ac22-cbb8ea807d04/tokens/fonts.css">
+<link rel="stylesheet" href="../_ds/enigma-vault-design-system-c6ec97e5-9180-4fd4-ac22-cbb8ea807d04/tokens/colors.css">
+<link rel="stylesheet" href="../_ds/enigma-vault-design-system-c6ec97e5-9180-4fd4-ac22-cbb8ea807d04/tokens/palette.css">
+<link rel="stylesheet" href="../_ds/enigma-vault-design-system-c6ec97e5-9180-4fd4-ac22-cbb8ea807d04/tokens/typography.css">
+<link rel="stylesheet" href="../_ds/enigma-vault-design-system-c6ec97e5-9180-4fd4-ac22-cbb8ea807d04/tokens/spacing.css">
+<link rel="stylesheet" href="../_ds/enigma-vault-design-system-c6ec97e5-9180-4fd4-ac22-cbb8ea807d04/tokens/base.css">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
+<link rel="stylesheet" href="../nopii/nopii.css">
+<link rel="stylesheet" href="vaults.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type":"Question","name":"What is Enigma Vault?","acceptedAnswer":{"@type":"Answer","text":"Enigma Vault is an encryption and tokenization platform that holds your most sensitive data, so a breach of your systems exposes nothing worth stealing. It offers four vaults through one API: Card Vault for payment tokenization, Data Vault for searchable field encryption, File Vault for encrypted storage, and Customer Vault for secure intake. It is PCI DSS Level 1 certified and SOC 2 Type II attested, distributed on AWS Marketplace."}},
+    {"@type":"Question","name":"How can data be encrypted and still searchable?","acceptedAnswer":{"@type":"Answer","text":"Data Vault encrypts at the field level with AES-256 and keeps fields queryable while encrypted, and its deterministic tokens preserve your lookups and joins. You query your data without decrypting the whole table, so protection does not break the workflows that depend on it."}},
+    {"@type":"Question","name":"Where do my files actually live?","acceptedAnswer":{"@type":"Answer","text":"In File Vault, encrypted with AES-GCM envelope encryption, up to 5GB per file. Your application holds a reference, never the contents, and access happens through presigned URLs that expire on your schedule. The file stays out of your servers and your backups."}},
+    {"@type":"Question","name":"Can a non-technical team use it?","acceptedAnswer":{"@type":"Answer","text":"Yes. Customer Vault is a turnkey, branded web app that replaces fax and email for secure intake: no-login links, a staff inbox, expiring file sharing, WebAuthn passkeys, and enforced MFA. No developers and no integration to go live the same day, with webhooks available when you want to connect it to your systems."}},
+    {"@type":"Question","name":"How fast is integration for developers?","acceptedAnswer":{"@type":"Answer","text":"Two lines. The vault is a versioned REST API (currently v1.13) your developers hit from any language. A live Swagger UI at api.enigmavault.io and examples on GitHub mean most teams ship in a day, not a quarter."}},
+    {"@type":"Question","name":"How are the keys and tokens handled?","acceptedAnswer":{"@type":"Answer","text":"Keys live in managed KMS with per-tenant isolation and automatic rotation with no downtime, so you never manage a key. Tokens are generated by a CSPRNG and encoded in Base64URL: 128 bits of entropy in 22 characters, with no structure to reverse."}},
+    {"@type":"Question","name":"How does it reduce compliance scope?","acceptedAnswer":{"@type":"Answer","text":"By moving sensitive data out of your systems and into a certified vault, the data in scope for your audit shrinks, and a breach of your systems yields ciphertext and tokens that reference nothing. One trust layer also means one compliance boundary instead of three from a stitched-together stack."}},
+    {"@type":"Question","name":"Does it help with right-to-erasure?","acceptedAnswer":{"@type":"Answer","text":"Yes. Because values are tokenized at capture and the real data lives only in the vault, deletion resolves at the vault level. Tokens left behind in your systems reference nothing, so GDPR, CCPA, and DPDP requests become an operation rather than an excavation."}},
+    {"@type":"Question","name":"What does it cost to start?","acceptedAnswer":{"@type":"Answer","text":"The Lite tier is free forever, per vault, on AWS Marketplace, with core encryption and tokenization and the same certified infrastructure as every paid tier. Plus is $49.99 a month, Premium is $249.99, and enterprise volume is custom. No contract to begin."}}
+  ]
+}
+</script>
+</head>
+<body>
+
+<header class="hp-nav">
+  <div class="hp-nav__inner">
+    <a class="hp-nav__brandlink" href="../index.html" aria-label="Enigma Vault home">
+      <img class="hp-nav__logo" src="../assets/logo/lockup-transparent.png" alt="Enigma Vault">
+    </a>
+    <div class="hp-nav__links" data-site-nav data-base="../"></div>
+      <div class="hp-nav__actions" data-site-nav-actions data-base="../"></div>
+  </div>
+</header>
+
+<main>
+
+  <header class="np-hero np-hero--center">
+    <div class="np-container np-hero__inner">
+      <div class="np-hero__copy">
+        <h1 class="np-h1">The Vault, <em>answered</em>.</h1>
+      </div>
+    </div>
+  </header>
+
+  <section class="np-section np-rule-top" style="padding-top:24px">
+    <div class="np-container">
+      <div class="np-acc" style="max-width:860px;margin:0 auto;">
+        <details open>
+          <summary>What is Enigma Vault?</summary>
+          <div class="np-acc__body">Enigma Vault is an encryption and tokenization platform that holds your most sensitive data, so a breach of your systems exposes nothing worth stealing. It offers four vaults through one API: Card Vault for payment tokenization, Data Vault for searchable field encryption, File Vault for encrypted storage, and Customer Vault for secure intake. It is PCI DSS Level 1 certified and SOC 2 Type II attested, distributed on AWS Marketplace.</div>
+        </details>
+        <details>
+          <summary>How does Card Vault reduce PCI scope?</summary>
+          <div class="np-acc__body">Cards are captured on hosted or iframe forms and never touch your servers. Your systems store tokens, which can even pass Luhn validation so existing checkout code keeps working, and charges route through a signed proxy to the payment gateway you choose. CVVs are held ephemerally and purged automatically after 30 minutes. Your PCI footprint shrinks to nearly nothing, and you keep gateway choice.</div>
+        </details>
+        <details>
+          <summary>How can data be encrypted and still searchable?</summary>
+          <div class="np-acc__body">Data Vault encrypts at the field level with AES-256 and keeps fields queryable while encrypted, and its deterministic tokens preserve your lookups and joins. You query your data without decrypting the whole table, so protection does not break the workflows that depend on it.</div>
+        </details>
+        <details>
+          <summary>Where do my files actually live?</summary>
+          <div class="np-acc__body">In File Vault, encrypted with AES-GCM envelope encryption, up to 5GB per file. Your application holds a reference, never the contents, and access happens through presigned URLs that expire on your schedule. The file stays out of your servers and your backups.</div>
+        </details>
+        <details>
+          <summary>Can a non-technical team use it?</summary>
+          <div class="np-acc__body">Yes. Customer Vault is a turnkey, branded web app that replaces fax and email for secure intake: no-login links, a staff inbox, expiring file sharing, WebAuthn passkeys, and enforced MFA. No developers and no integration to go live the same day, with webhooks available when you want to connect it to your systems.</div>
+        </details>
+        <details>
+          <summary>How fast is integration for developers?</summary>
+          <div class="np-acc__body">Two lines. The vault is a versioned REST API (currently v1.13) your developers hit from any language. A live Swagger UI at api.enigmavault.io and examples on GitHub mean most teams ship in a day, not a quarter.</div>
+        </details>
+        <details>
+          <summary>How are the keys and tokens handled?</summary>
+          <div class="np-acc__body">Keys live in managed KMS with per-tenant isolation and automatic rotation with no downtime, so you never manage a key. Tokens are generated by a CSPRNG and encoded in Base64URL: 128 bits of entropy in 22 characters, with no structure to reverse.</div>
+        </details>
+        <details>
+          <summary>How does it reduce compliance scope?</summary>
+          <div class="np-acc__body">By moving sensitive data out of your systems and into a certified vault, the data in scope for your audit shrinks, and a breach of your systems yields ciphertext and tokens that reference nothing. One trust layer also means one compliance boundary instead of three from a stitched-together stack.</div>
+        </details>
+        <details>
+          <summary>Does it help with right-to-erasure?</summary>
+          <div class="np-acc__body">Yes. Because values are tokenized at capture and the real data lives only in the vault, deletion resolves at the vault level. Tokens left behind in your systems reference nothing, so GDPR, CCPA, and DPDP requests become an operation rather than an excavation.</div>
+        </details>
+        <details>
+          <summary>What does it cost to start?</summary>
+          <div class="np-acc__body">The Lite tier is free forever, per vault, on AWS Marketplace, with core encryption and tokenization and the same certified infrastructure as every paid tier. Paid tiers scale by request volume and storage, with enterprise plans available. Full details, including overage rates and a per-vault comparison, are on the <a href="../pricing.html#vault">pricing page</a>. No contract to begin.</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="np-section np-ctaband np-rule-top" id="aws">
+    <div class="np-container">
+      <div class="np-ctaband__inner">
+        <h2 class="np-h2">Spin up a vault. <em>Watch your audit scope shrink</em>.</h2>
+        <div class="np-ctaband__ctas">
+          <a class="np-btn np-btn--primary" href="https://aws.amazon.com/marketplace/seller-profile?id=c77b8db1-5511-48b7-8ce5-9a8d4a1a8018" target="_blank" rel="noopener"><span>Free on AWS Marketplace</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
+          <a class="np-btn np-btn--secondary" href="../pricing.html#vault"><span>See pricing</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="hp-footer" data-site-footer data-base="../"></footer>
+
+<script src="../site-nav.js"></script>
+<script src="../site-footer.js"></script>
+</body>
+</html>

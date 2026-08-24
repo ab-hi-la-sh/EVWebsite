@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- SEO -->
+<title>File Vault | Encrypted File Storage with Expiring Access</title>
+<meta name="description" content="Store files up to 5GB under AES-GCM envelope encryption. Presigned URLs that expire, real-time status over WebSocket, and a full audit trail.">
+<link rel="canonical" href="https://www.enigmavault.io/vault/file-vault.html">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Enigma Vault">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="File Vault | Encrypted File Storage with Expiring Access">
+<meta property="og:description" content="Store files up to 5GB under AES-GCM envelope encryption. Presigned URLs that expire, real-time status over WebSocket, and a full audit trail.">
+<meta property="og:url" content="https://www.enigmavault.io/vault/file-vault.html">
+<meta property="og:image" content="https://www.enigmavault.io/assets/og/vault-file.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Store any file. Hand out access that expires. — Enigma Vault">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="File Vault | Encrypted File Storage with Expiring Access">
+<meta name="twitter:description" content="Store files up to 5GB under AES-GCM envelope encryption. Presigned URLs that expire, real-time status over WebSocket, and a full audit trail.">
+<meta name="twitter:image" content="https://www.enigmavault.io/assets/og/vault-file.jpg">
+<meta name="twitter:image:alt" content="Store any file. Hand out access that expires. — Enigma Vault">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="../assets/favicon-16.png" sizes="16x16" type="image/png">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<link rel="manifest" href="../site.webmanifest">
+<meta name="theme-color" content="#0F3D56">
+<!-- /SEO -->
+<script>document.documentElement.className += ' np-js';</script>
+
+<link rel="stylesheet" href="../_ds/enigma-vault-design-system-c6ec97e5-9180-4fd4-ac22-cbb8ea807d04/tokens/fonts.css">
+<link rel="stylesheet" href="../_ds/enigma-vault-design-system-c6ec97e5-9180-4fd4-ac22-cbb8ea807d04/tokens/colors.css">
+<link rel="stylesheet" href="../_ds/enigma-vault-design-system-c6ec97e5-9180-4fd4-ac22-cbb8ea807d04/tokens/palette.css">
+<link rel="stylesheet" href="../_ds/enigma-vault-design-system-c6ec97e5-9180-4fd4-ac22-cbb8ea807d04/tokens/typography.css">
+<link rel="stylesheet" href="../_ds/enigma-vault-design-system-c6ec97e5-9180-4fd4-ac22-cbb8ea807d04/tokens/spacing.css">
+<link rel="stylesheet" href="../_ds/enigma-vault-design-system-c6ec97e5-9180-4fd4-ac22-cbb8ea807d04/tokens/base.css">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
+<link rel="stylesheet" href="../nopii/nopii.css">
+<link rel="stylesheet" href="vaults.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+ {"@type":"ListItem","position":1,"name":"The Vault","item":"https://www.enigmavault.io/vault/overview.html"},
+ {"@type":"ListItem","position":2,"name":"File Vault","item":"https://www.enigmavault.io/vault/file-vault.html"}]}
+</script>
+</head>
+<body>
+
+<header class="hp-nav">
+  <div class="hp-nav__inner">
+    <a class="hp-nav__brandlink" href="../index.html" aria-label="Enigma Vault home">
+      <img class="hp-nav__logo" src="../assets/logo/lockup-transparent.png" alt="Enigma Vault">
+    </a>
+    <div class="hp-nav__links" data-site-nav data-base="../"></div>
+    <div class="hp-nav__actions" data-site-nav-actions data-base="../"></div>
+  </div>
+</header>
+
+<main data-screen-label="File Vault">
+
+  <!-- SECTION 1 · Hero -->
+  <header class="np-hero vp-hero">
+    <div class="np-container np-hero__inner">
+      <div class="np-hero__copy">
+        <nav class="vp-crumb" aria-label="Breadcrumb"><a href="overview.html">The Vault</a><span class="vp-crumb__sep">/</span><span aria-current="page">File Vault</span></nav>
+        <h1 class="np-h1">Store any file. <em>Hand out access that expires</em>.</h1>
+        <p class="np-lead">File Vault is encrypted object storage for documents, images, and any sensitive file, from kilobytes to 5GB. The file lives in the vault. Your app holds a reference, never the contents. Access happens through presigned URLs that expire on your schedule.</p>
+        <div class="np-hero__ctas">
+          <a class="np-btn np-btn--primary" href="https://aws.amazon.com/marketplace/seller-profile?id=c77b8db1-5511-48b7-8ce5-9a8d4a1a8018" target="_blank" rel="noopener"><span>Get started free</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
+          <a class="np-btn np-btn--secondary" href="https://docs.enigmavault.io" target="_blank" rel="noopener"><span>View API docs</span></a>
+        </div>
+        <div class="vp-badges"><span class="vp-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>PCI DSS Level 1</span><span class="vp-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>SOC 2 Type II</span><span class="vp-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>AWS Partner</span></div>
+      </div>
+      <div class="np-hero__visual vp-hero__art">
+        <figure class="vp-plate"><img src="../assets/vault/hero-file.png" alt="File Vault, encrypted file storage"></figure>
+      </div>
+    </div>
+  </header>
+
+  <!-- SECTION 2 · The problem -->
+  <section class="np-section np-rule-top">
+    <div class="np-container">
+      <div class="vp-split">
+        <div>
+          <p class="vp-eyebrow">The problem</p>
+          <h2 class="np-h2">A file on your servers is a file <em>in your breach scope</em>. Forever.</h2>
+          <p class="vp-prose">Every sensitive document on your infrastructure is also in your backups, your logs, and your incident report, indefinitely. Retention policies do not reach the copies.</p>
+          <ul class="vp-list">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Backups keep a copy long after the record is deleted</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Logs and error reports leak file paths and contents</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Shared drives grant access nobody remembers granting</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Every copy is one more thing to disclose</span></li>
+          </ul>
+        </div>
+        <div class="vp-split__art"><figure class="vp-plate"><img src="../assets/vault/hourglass.png" alt="" loading="lazy"></figure></div>
+      </div>
+      <div class="vp-note"><span class="vp-note__lbl">Instead</span><p>File Vault takes the document out of your stack entirely. Your application stores a handle, requests a time-limited URL when someone needs the file, and never holds the bytes.</p></div>
+    </div>
+  </section>
+
+  <!-- CTA rail -->
+  <section class="vp-cta">
+    <div class="vp-cta__inner">
+      <div class="vp-cta__tx"><p class="vp-cta__k">Free tier</p><p class="vp-cta__h">Five gigabytes of encrypted storage, free forever.</p></div>
+      <div class="vp-cta__btns">
+        <a class="np-btn np-btn--primary" href="https://aws.amazon.com/marketplace/seller-profile?id=c77b8db1-5511-48b7-8ce5-9a8d4a1a8018" target="_blank" rel="noopener"><span>Get started free</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
+        <a class="np-btn np-btn--secondary" href="../pricing.html#vault"><span>See pricing</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3 · How a file moves (animated) -->
+  <section class="np-section np-bg-cloud">
+    <div class="np-container">
+      <div style="max-width:760px"><p class="vp-eyebrow">The lifecycle</p><h2 class="np-h2">How <em>a file moves</em>.</h2>
+      <p class="vp-prose">Four stages, and your servers appear in none of them.</p></div>
+      <div class="vp-flow">
+        <div class="vp-flow__track" aria-hidden="true"><span class="vp-flow__pulse"></span></div>
+        <div class="vp-flow__row vp-flow__row--4">
+          <div class="vp-flow__node">
+            <div class="vp-flow__dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>
+            <p class="vp-flow__n">01</p><h3 class="vp-flow__t">Upload by presigned URL.</h3>
+            <p class="vp-flow__b">Your app requests an upload URL and the client sends the file straight to the vault. The bytes never transit your servers.</p>
+          </div>
+          <div class="vp-flow__node">
+            <div class="vp-flow__dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+            <p class="vp-flow__n">02</p><h3 class="vp-flow__t">Sealed on arrival.</h3>
+            <p class="vp-flow__b">AES-GCM envelope encryption: a unique data key per object, wrapped by per-tenant keys in managed KMS. Tampering is detectable, not just prevented.</p>
+          </div>
+          <div class="vp-flow__node">
+            <div class="vp-flow__dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h.01"/><path d="M8.5 16.429a5 5 0 0 1 7 0"/><path d="M5 12.859a10 10 0 0 1 14 0"/><path d="M2 8.82a15 15 0 0 1 20 0"/></svg></div>
+            <p class="vp-flow__n">03</p><h3 class="vp-flow__t">Track in real time.</h3>
+            <p class="vp-flow__b">File status streams over WebSocket, so your application knows the moment an upload completes or a download happens, without polling.</p>
+          </div>
+          <div class="vp-flow__node">
+            <div class="vp-flow__dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+            <p class="vp-flow__n">04</p><h3 class="vp-flow__t">Download by expiring link.</h3>
+            <p class="vp-flow__b">Access goes through presigned URLs with expirations you set. When the link dies, so does access.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4 · Sharing and audit (dark) -->
+  <section class="np-section vp-dark">
+    <div class="vp-dark__bg" style="background-image:url('../assets/vault/dark-panels.png')"></div>
+    <div class="np-container">
+      <div style="max-width:820px"><p class="vp-eyebrow">Access and evidence</p><h2 class="np-h2">Sharing without standing access. <em>And a record of every touch</em>.</h2></div>
+      <div class="vp-icards">
+        <article class="vp-icard"><div class="vp-icard__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></div><h3 class="vp-icard__t">Ephemeral keys.</h3><p class="vp-icard__b">Share specific files across clients, teams, or outside counsel with one-time-use, time-limited keys that expire and self-destruct after use. The recipient gets the file. Nobody gets a permanent door.</p></article>
+        <article class="vp-icard"><div class="vp-icard__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><h3 class="vp-icard__t">Every touch on the record.</h3><p class="vp-icard__b">Upload, access, and download events all logged with client ID, IP, and response status, with full distributed tracing. When a regulator or customer asks who opened a document and when, the answer is a query, not an investigation.</p></article>
+      </div>
+      <div class="np-ctas" style="margin-top:40px">
+        <a class="np-btn np-btn--primary" href="https://aws.amazon.com/marketplace/seller-profile?id=c77b8db1-5511-48b7-8ce5-9a8d4a1a8018" target="_blank" rel="noopener"><span>Get started free</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
+        <a class="np-btn np-btn--secondary" href="../platform/data-security.html"><span>Read the security detail</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5 · Where teams point it first -->
+  <section class="np-section np-rule-top">
+    <div class="np-container">
+      <div style="max-width:820px"><p class="vp-eyebrow">Where it lands</p><h2 class="np-h2">Where teams <em>point it first</em>.</h2>
+      <p class="vp-prose">Any document that moves between you and somebody outside your building.</p></div>
+      <div class="vp-icards vp-icards--3">
+        <article class="vp-icard"><div class="vp-icard__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></div><h3 class="vp-icard__t">Contracts and signed documents.</h3><p class="vp-icard__b">Retainers, agreements, and filings stored encrypted with a complete access history.</p></article>
+        <article class="vp-icard"><div class="vp-icard__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 10a2 2 0 0 0-2 2c0 1.02-.1 2.51-.26 4"/><path d="M14 13.12c0 2.38 0 6.38-1 8.88"/><path d="M2 12a10 10 0 0 1 18-6"/><path d="M21.8 16c.2-2 .131-5.354 0-6"/><path d="M5 19.5C5.5 18 6 15 6 12a6 6 0 0 1 .34-2"/><path d="M9 6.8a6 6 0 0 1 9 5.2v2"/></svg></div><h3 class="vp-icard__t">Identity documents.</h3><p class="vp-icard__b">Passports, licenses, and KYC files that should never sit in an application bucket.</p></article>
+        <article class="vp-icard"><div class="vp-icard__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l7.78 7.78a1 1 0 0 0 1.41 0l7.78-7.78a5.5 5.5 0 0 0 0-7.78z"/><path d="M3.5 12h3l1.5-3 3 6 1.5-3h3"/></svg></div><h3 class="vp-icard__t">Medical and claims records.</h3><p class="vp-icard__b">Mixed-sensitivity documents held under authenticated encryption with expiring, trackable access.</p></article>
+        <article class="vp-icard"><div class="vp-icard__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><h3 class="vp-icard__t">Transcripts and HR files.</h3><p class="vp-icard__b">Student records and personnel documents shared across departments through ephemeral keys instead of email.</p></article>
+        <article class="vp-icard"><div class="vp-icard__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h5"/></svg></div><h3 class="vp-icard__t">Large media and evidence.</h3><p class="vp-icard__b">Files up to 5GB each, uploaded direct-to-vault so nothing large ever passes through your application tier.</p></article>
+        <article class="vp-icard"><div class="vp-icard__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div><h3 class="vp-icard__t">Customer deliverables.</h3><p class="vp-icard__b">Reports and returns handed back through expiring links instead of email attachments.</p></article>
+      </div>
+
+      <!-- Platform role -->
+      <div class="vp-split" style="margin-top:72px;padding-top:56px;border-top:1px solid var(--border-hairline)">
+        <div>
+          <p class="vp-eyebrow">Platform role</p>
+          <h2 class="np-h2" style="font-size:32px">File Vault carries <em>the file side of the whole platform</em>.</h2>
+          <p class="vp-prose">It is not only a standalone product. Two other products already run on it, which is why its encryption and audit model is the same one your assessor will see everywhere else.</p>
+          <ul class="vp-list">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Customer Vault stores every intake document here</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>NoPII uses the same infrastructure for document processing</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>One encryption model, one audit trail, one compliance boundary</span></li>
+          </ul>
+          <div class="np-ctas" style="margin-top:30px">
+            <a class="np-btn np-btn--secondary" href="customer-vault.html"><span>See Customer Vault</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
+          </div>
+        </div>
+        <div class="vp-split__art"><figure class="vp-plate"><img src="../assets/vault/foundation-stack.png" alt="Diagram: the Enigma Vault platform architecture, from API to encrypted storage" loading="lazy"></figure></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 6 · Pricing banner -->
+  <section class="vp-banner">
+    <div class="vp-banner__inner">
+      <div>
+        <p class="vp-eyebrow">Pricing</p>
+        <h2 class="np-h2" style="font-size:34px">Start free, <em>scale when your storage does</em>.</h2>
+        <p class="vp-banner__b">Five gigabytes free forever, 150GB on Plus, a full terabyte on Premium. Same AES-GCM encryption and audit trail on every tier, billed through the AWS Marketplace account you already have.</p>
+        <div class="np-ctas" style="margin-top:30px">
+          <a class="np-btn np-btn--primary" href="../pricing.html#vault"><span>See pricing</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
+          <a class="np-btn np-btn--secondary" href="https://aws.amazon.com/marketplace/seller-profile?id=c77b8db1-5511-48b7-8ce5-9a8d4a1a8018" target="_blank" rel="noopener"><span>Get started free</span></a>
+        </div>
+      </div>
+      <div class="vp-banner__art"><img src="../assets/vault/panels-cascade.png" alt="" loading="lazy"></div>
+    </div>
+  </section>
+
+  <!-- SECTION 7 · Closing -->
+  <section class="np-section np-ctaband np-rule-top">
+    <div class="np-container">
+      <div class="np-ctaband__inner">
+        <h2 class="np-h2">Your app holds a reference. <em>The vault holds the risk</em>.</h2>
+        <div class="np-ctaband__ctas">
+          <a class="np-btn np-btn--primary" href="https://aws.amazon.com/marketplace/seller-profile?id=c77b8db1-5511-48b7-8ce5-9a8d4a1a8018" target="_blank" rel="noopener"><span>Get started free</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
+          <a class="np-btn np-btn--secondary" href="https://docs.enigmavault.io" target="_blank" rel="noopener"><span>Read the docs</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The other vaults -->
+  <section class="vp-others">
+    <div class="np-container">
+      <p class="vp-others__h">The other vaults</p>
+      <div class="vp-others__grid">
+        <a class="vp-other" href="card-vault.html"><span class="vp-other__art"><img src="../assets/vault/hero-card.png" alt="Card Vault, payment card tokenization" loading="lazy"></span><span class="vp-other__tx"><strong>Card Vault</strong><em>Payments without card custody</em></span></a>
+        <a class="vp-other" href="data-vault.html"><span class="vp-other__art"><img src="../assets/vault/hero-data.png" alt="Data Vault, searchable field-level encryption" loading="lazy"></span><span class="vp-other__tx"><strong>Data Vault</strong><em>Searchable field encryption</em></span></a>
+        <a class="vp-other" href="customer-vault.html"><span class="vp-other__art"><img src="../assets/vault/hero-customer.png" alt="Customer Vault, secure customer intake" loading="lazy"></span><span class="vp-other__tx"><strong>Customer Vault</strong><em>Secure intake, no code</em></span></a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="hp-footer" data-site-footer data-base="../"></footer>
+
+<script src="../site-nav.js"></script>
+<script src="../site-footer.js"></script>
+</body>
+</html>

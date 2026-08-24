@@ -1,0 +1,52 @@
+# Netlify configuration for the Enigma Vault site.
+# This is a static site (no build step) — the whole repo root is published as-is.
+# Every page shares site-nav.js, nopii.css, blog.css, _ds/ and assets/, so one
+# deploy ships every page at its latest version.
+
+[build]
+  publish = "."
+  command = ""
+
+# Canonical homepage: redirect /index.html to the clean root URL.
+[[redirects]]
+  from = "/index.html"
+  to = "/"
+  status = 301
+  force = true
+
+# Canonical industries URL: redirect the file path to the directory URL.
+[[redirects]]
+  from = "/solutions/industries/index.html"
+  to = "/solutions/industries/"
+  status = 301
+  force = true
+
+# Retired per-product pricing pages now live as sections of /pricing.
+[[redirects]]
+  from = "/nopii/pricing.html"
+  to = "/pricing.html#nopii"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/vault/pricing.html"
+  to = "/pricing.html#vault"
+  status = 301
+  force = true
+
+# Long-cache fingerprinted static assets (images, fonts, design-system bundle).
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"
+
+[[headers]]
+  for = "/_ds/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"
+
+# HTML should always re-validate so a publish is reflected immediately.
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"

@@ -1,0 +1,19 @@
+{
+ "name": "Enigma Vault",
+ "short_name": "Enigma Vault",
+ "icons": [
+  {
+   "src": "/assets/icon-192.png",
+   "sizes": "192x192",
+   "type": "image/png"
+  },
+  {
+   "src": "/assets/icon-512.png",
+   "sizes": "512x512",
+   "type": "image/png"
+  }
+ ],
+ "theme_color": "#0F3D56",
+ "background_color": "#FAFAFB",
+ "display": "browser"
+}

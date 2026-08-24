@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- SEO -->
+<title>Login | Enigma Vault</title>
+<meta name="description" content="Sign in to Triplets, NoPII, or the Vault. Access is granted to provisioned organizations.">
+<link rel="canonical" href="https://www.enigmavault.io/login.html">
+<meta name="robots" content="noindex, follow">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Enigma Vault">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="Login | Enigma Vault">
+<meta property="og:description" content="Sign in to Triplets, NoPII, or the Vault. Access is granted to provisioned organizations.">
+<meta property="og:url" content="https://www.enigmavault.io/login.html">
+<meta property="og:image" content="https://www.enigmavault.io/assets/og/login.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Sign in to the trust layer. — Enigma Vault">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Login | Enigma Vault">
+<meta name="twitter:description" content="Sign in to Triplets, NoPII, or the Vault. Access is granted to provisioned organizations.">
+<meta name="twitter:image" content="https://www.enigmavault.io/assets/og/login.jpg">
+<meta name="twitter:image:alt" content="Sign in to the trust layer. — Enigma Vault">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="assets/favicon-16.png" sizes="16x16" type="image/png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta name="theme-color" content="#0F3D56">
+<!-- /SEO -->
+<script>document.documentElement.className += ' np-js';</script>
+
+<link rel="stylesheet" href="_ds/enigma-vault-design-system-c6ec97e5-9180-4fd4-ac22-cbb8ea807d04/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/enigma-vault-design-system-c6ec97e5-9180-4fd4-ac22-cbb8ea807d04/tokens/colors.css">
+<link rel="stylesheet" href="_ds/enigma-vault-design-system-c6ec97e5-9180-4fd4-ac22-cbb8ea807d04/tokens/palette.css">
+<link rel="stylesheet" href="_ds/enigma-vault-design-system-c6ec97e5-9180-4fd4-ac22-cbb8ea807d04/tokens/typography.css">
+<link rel="stylesheet" href="_ds/enigma-vault-design-system-c6ec97e5-9180-4fd4-ac22-cbb8ea807d04/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/enigma-vault-design-system-c6ec97e5-9180-4fd4-ac22-cbb8ea807d04/tokens/base.css">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
+<link rel="stylesheet" href="nopii/nopii.css">
+<style>
+  /* ---- Login hero ---- */
+  .lg-hero__inner{max-width:840px;margin:0 auto;text-align:center;padding:104px 0 28px;}
+  .lg-eyebrow{font-family:var(--ev-font-sans);font-size:11px;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--ev-mineral-blue);margin:0 0 22px;}
+  .lg-sub{font-family:var(--font-display);font-weight:300;font-size:clamp(20px,2.4vw,30px);line-height:1.3;letter-spacing:-0.012em;color:var(--ev-slate);margin:20px 0 0;}
+  .lg-sub b{font-weight:600;color:var(--ev-mineral-blue);}
+
+  /* ---- Product tiles ---- */
+  .lg-tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin:60px 0 0;}
+  .lg-tile{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;
+    background:#fff;border:1px solid var(--border-hairline);border-radius:14px;padding:42px 30px 34px;
+    cursor:pointer;
+    transition:border-color .22s var(--np-ease),box-shadow .22s var(--np-ease),transform .22s var(--np-ease);}
+  .lg-tile:hover{border-color:var(--border-emphasis);box-shadow:0 16px 38px rgba(42,51,64,.08);transform:translateY(-4px);}
+  .lg-tile:focus-visible{outline:2px solid var(--ev-mineral-blue);outline-offset:3px;}
+  .lg-tile__art{width:138px;height:138px;display:flex;align-items:center;justify-content:center;margin-bottom:24px;}
+  .lg-tile__art img{max-width:100%;max-height:100%;mix-blend-mode:multiply;}
+  .lg-tile__name{font-family:var(--font-display);font-size:24px;font-weight:500;letter-spacing:-0.012em;color:var(--text-heading);margin:0;}
+  .lg-tile__desc{font-size:14.5px;line-height:1.55;color:var(--ev-slate);margin:10px 0 0;max-width:26ch;}
+  .lg-tile__cta{font-family:var(--ev-font-sans);font-size:14px;font-weight:600;color:var(--ev-mineral-blue);margin-top:24px;display:inline-flex;align-items:center;gap:8px;}
+  .lg-tile__demo{margin-top:18px;padding-top:18px;border-top:1px solid var(--border-hairline);width:100%;display:flex;justify-content:center;}
+  .lg-tile.is-open .lg-tile__demo{display:none;}
+  .lg-tile:hover .lg-tile__cta__arrow{transform:translateX(3px);}
+  .lg-tile__cta__arrow{transition:transform .2s var(--np-ease);}
+  .lg-tile__tag{position:absolute;top:18px;left:18px;font-family:var(--ev-font-sans);font-size:10.5px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--ev-slate-75);}
+
+  /* ---- Inline "request access" message (revealed on click) ---- */
+  .lg-tile__gate{overflow:hidden;max-height:0;opacity:0;width:100%;margin-top:0;
+    transition:max-height .3s var(--np-ease),opacity .25s var(--np-ease),margin-top .3s var(--np-ease);}
+  .lg-tile.is-open .lg-tile__gate{max-height:200px;opacity:1;margin-top:22px;}
+  .lg-tile.is-open .lg-tile__cta{display:none;}
+  .lg-gate{border-top:1px solid var(--border-hairline);padding-top:20px;display:flex;flex-direction:column;align-items:center;gap:14px;}
+  .lg-gate__msg{font-family:var(--ev-font-sans);font-size:14px;line-height:1.5;color:var(--ev-ink);}
+  .lg-gate__msg b{font-weight:600;color:var(--ev-mineral-blue);}
+
+  .lg-note{text-align:center;font-family:var(--ev-font-sans);font-size:13.5px;color:var(--ev-slate);margin:40px 0 0;}
+  .lg-note a{color:var(--ev-mineral-blue);text-decoration:none;}
+  .lg-note a:hover{text-decoration:underline;text-underline-offset:3px;}
+
+  @media (max-width:900px){ .lg-tiles{grid-template-columns:1fr;max-width:440px;margin-left:auto;margin-right:auto;} }
+</style>
+</head>
+<body>
+
+<header class="hp-nav">
+  <div class="hp-nav__inner">
+    <a class="hp-nav__brandlink" href="index.html" aria-label="Enigma Vault home">
+      <img class="hp-nav__logo" src="assets/logo/lockup-transparent.png" alt="Enigma Vault">
+    </a>
+    <div class="hp-nav__links" data-site-nav data-base=""></div>
+    <div class="hp-nav__actions" data-site-nav-actions data-base=""></div>
+  </div>
+</header>
+
+<main>
+
+  <!-- Hero -->
+  <header class="np-hero">
+    <div class="np-container lg-hero__inner">
+      <p class="lg-eyebrow">Login</p>
+      <h1 class="np-h1">Sign in to the trust layer.</h1>
+      <p class="lg-sub">Choose your <b>product</b> to continue.</p>
+    </div>
+  </header>
+
+  <!-- Tiles -->
+  <section class="np-section" style="padding-top:8px">
+    <div class="np-container">
+      <div class="lg-tiles">
+
+        <!-- Triplets -->
+        <div class="lg-tile" role="button" tabindex="0" data-product="Triplets">
+          <span class="lg-tile__tag">Trust the output</span>
+          <div class="lg-tile__art"><img src="assets/glyphs/triplets-3d.png" alt="Triplets"></div>
+          <h2 class="lg-tile__name">Triplets</h2>
+          <p class="lg-tile__desc">Grounded answers and refusal logic for RAG and agents.</p>
+          <span class="lg-tile__cta">Log in <span class="lg-tile__cta__arrow" aria-hidden="true">&#8594;</span></span>
+          <div class="lg-tile__demo"><a class="np-btn np-btn--secondary np-btn--sm" href="request-demo.html"><span>Request a demo</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a></div>
+          <div class="lg-tile__gate">
+            <div class="lg-gate">
+              <p class="lg-gate__msg"><b>Request access to log in.</b><br>Triplets is provisioned per organization.</p>
+              <a class="np-btn np-btn--primary np-btn--sm" href="request-demo.html"><span>Request a demo</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- NoPII -->
+        <div class="lg-tile" role="button" tabindex="0" data-product="NoPII">
+          <span class="lg-tile__tag">Trust the input</span>
+          <div class="lg-tile__art"><img src="assets/glyphs/nopii-3d.png" alt="NoPII"></div>
+          <h2 class="lg-tile__name">NoPII</h2>
+          <p class="lg-tile__desc">Tokenize prompts before they leave, restore them on return.</p>
+          <span class="lg-tile__cta">Log in <span class="lg-tile__cta__arrow" aria-hidden="true">&#8594;</span></span>
+          <div class="lg-tile__demo"><a class="np-btn np-btn--secondary np-btn--sm" href="request-demo.html"><span>Request a demo</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a></div>
+          <div class="lg-tile__gate">
+            <div class="lg-gate">
+              <p class="lg-gate__msg"><b>Request access to log in.</b><br>NoPII is provisioned per organization.</p>
+              <a class="np-btn np-btn--primary np-btn--sm" href="request-demo.html"><span>Request a demo</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Vault -->
+        <div class="lg-tile" role="button" tabindex="0" data-product="Enigma Vault">
+          <span class="lg-tile__tag">Trust the data</span>
+          <div class="lg-tile__art"><img src="assets/glyphs/vault-3d.png" alt="Enigma Vault"></div>
+          <h2 class="lg-tile__name">Enigma Vault</h2>
+          <p class="lg-tile__desc">Tokenization and encryption APIs for cards, files, and records.</p>
+          <span class="lg-tile__cta">Log in <span class="lg-tile__cta__arrow" aria-hidden="true">&#8594;</span></span>
+          <div class="lg-tile__demo"><a class="np-btn np-btn--secondary np-btn--sm" href="request-demo.html"><span>Request a demo</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a></div>
+          <div class="lg-tile__gate">
+            <div class="lg-gate">
+              <p class="lg-gate__msg"><b>Request access to log in.</b><br>The Vault is provisioned per organization.</p>
+              <a class="np-btn np-btn--primary np-btn--sm" href="request-demo.html"><span>Request a demo</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <p class="lg-note">Already provisioned and can't get in? Email <a href="mailto:hello@enigmavault.io">hello@enigmavault.io</a></p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="hp-footer" data-site-footer data-base=""></footer>
+
+<script src="site-nav.js"></script>
+<script src="site-footer.js"></script>
+<script>
+(function(){
+  var tiles = document.querySelectorAll('.lg-tile');
+  function toggle(tile){
+    var open = tile.classList.contains('is-open');
+    tiles.forEach(function(t){ t.classList.remove('is-open'); });
+    if (!open) tile.classList.add('is-open');
+  }
+  tiles.forEach(function(tile){
+    tile.addEventListener('click', function(){ toggle(tile); });
+    tile.addEventListener('keydown', function(e){
+      if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); toggle(tile); }
+    });
+  });
+})();
+</script>
+</body>
+</html>

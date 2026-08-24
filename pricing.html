@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- SEO -->
+<title>Pricing | Enigma Vault, NoPII, and Triplets Plans</title>
+<meta name="description" content="One pricing page for all three products. Vault from free on AWS Marketplace, NoPII from free with a million protected tokens, Triplets scoped to your corpus.">
+<link rel="canonical" href="https://www.enigmavault.io/pricing.html">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Enigma Vault">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="Pricing | Enigma Vault, NoPII, and Triplets Plans">
+<meta property="og:description" content="One pricing page for all three products. Vault from free on AWS Marketplace, NoPII from free with a million protected tokens, Triplets scoped to your corpus.">
+<meta property="og:url" content="https://www.enigmavault.io/pricing.html">
+<meta property="og:image" content="https://www.enigmavault.io/assets/og/pricing.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Priced to the data you protect. — Enigma Vault">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Pricing | Enigma Vault, NoPII, and Triplets Plans">
+<meta name="twitter:description" content="One pricing page for all three products. Vault from free on AWS Marketplace, NoPII from free with a million protected tokens, Triplets scoped to your corpus.">
+<meta name="twitter:image" content="https://www.enigmavault.io/assets/og/pricing.jpg">
+<meta name="twitter:image:alt" content="Priced to the data you protect. — Enigma Vault">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="assets/favicon-16.png" sizes="16x16" type="image/png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta name="theme-color" content="#0F3D56">
+<!-- /SEO -->
+<script>document.documentElement.className += ' np-js';</script>
+
+<link rel="stylesheet" href="_ds/enigma-vault-design-system-c6ec97e5-9180-4fd4-ac22-cbb8ea807d04/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/enigma-vault-design-system-c6ec97e5-9180-4fd4-ac22-cbb8ea807d04/tokens/colors.css">
+<link rel="stylesheet" href="_ds/enigma-vault-design-system-c6ec97e5-9180-4fd4-ac22-cbb8ea807d04/tokens/palette.css">
+<link rel="stylesheet" href="_ds/enigma-vault-design-system-c6ec97e5-9180-4fd4-ac22-cbb8ea807d04/tokens/typography.css">
+<link rel="stylesheet" href="_ds/enigma-vault-design-system-c6ec97e5-9180-4fd4-ac22-cbb8ea807d04/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/enigma-vault-design-system-c6ec97e5-9180-4fd4-ac22-cbb8ea807d04/tokens/base.css">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
+<link rel="stylesheet" href="nopii/nopii.css">
+<style>
+  .pr-hero .np-hero__inner{grid-template-columns:1fr;padding:88px 64px 76px;}
+  .pr-hero .np-hero__copy{max-width:880px;}
+  @media (max-width:1023px){.pr-hero .np-hero__inner{padding:64px 40px 56px;}}
+  @media (max-width:600px){.pr-hero .np-hero__inner{padding:52px 22px 44px;}}
+  .pr-floor{display:flex;gap:14px;align-items:flex-start;margin-top:38px;padding:22px 26px;background:var(--ev-warm-cloud);border-radius:12px;border-left:3px solid var(--ev-mineral-blue);max-width:74ch;}
+  .pr-floor svg{width:19px;height:19px;flex:none;margin-top:2px;color:var(--ev-mineral-blue);}
+  .pr-floor p{margin:0;font-size:15.5px;line-height:1.6;color:var(--ev-ink);}
+
+  /* Tab rail */
+  .pr-rail{position:sticky;top:0;z-index:90;background:rgba(250,250,251,0.9);backdrop-filter:saturate(160%) blur(12px);border-top:1px solid var(--border-hairline);border-bottom:1px solid var(--border-hairline);}
+  .pr-rail__inner{max-width:1280px;margin:0 auto;padding:0 64px;display:flex;gap:8px;}
+  .pr-tab{appearance:none;background:transparent;border:0;border-bottom:2px solid transparent;cursor:pointer;padding:20px 18px;font-family:var(--ev-font-sans);font-size:15px;font-weight:500;color:var(--ev-slate);transition:color .15s ease-out,border-color .15s ease-out;}
+  .pr-tab:hover{color:var(--ev-ink);}
+  .pr-tab.is-active{color:var(--ev-mineral-blue);border-bottom-color:var(--ev-mineral-blue);}
+  @media (max-width:1023px){.pr-rail__inner{padding:0 32px;overflow-x:auto;}.pr-tab{padding:16px 12px;font-size:14px;white-space:nowrap;}}
+
+  /* Panels */
+  .pr-panel{display:none;}
+  .pr-panel.is-active{display:block;}
+  .pr-lead{font-size:17.5px;line-height:1.64;color:var(--text-body);margin:20px 0 0;max-width:74ch;text-wrap:pretty;}
+
+  /* Product header block */
+  .pr-phead{display:flex;align-items:center;gap:22px;padding-bottom:26px;border-bottom:1px solid var(--border-hairline);}
+  .pr-phead__art{width:96px;height:96px;flex:none;display:flex;align-items:center;justify-content:center;background:var(--ev-warm-cloud);border:1px solid var(--border-hairline);border-radius:14px;}
+  .pr-phead__art img{max-width:74%;max-height:74%;mix-blend-mode:multiply;}
+  .pr-phead__tx{min-width:0;}
+  .pr-phead__tag{font-family:var(--ev-font-sans);font-size:10.5px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--ev-mineral-blue);margin:0 0 10px;}
+  .pr-phead h2{margin:0;}
+  @media (max-width:640px){.pr-phead{gap:16px;}.pr-phead__art{width:68px;height:68px;border-radius:11px;}}
+
+  /* Tab icons */
+  .pr-tab{display:inline-flex;align-items:center;gap:9px;}
+  .pr-tab img{width:20px;height:20px;object-fit:contain;mix-blend-mode:multiply;opacity:.62;transition:opacity .15s ease-out;}
+  .pr-tab.is-active img{opacity:1;}
+
+  /* Get started row */
+  .pr-table td.pr-go{padding-top:20px;padding-bottom:22px;}
+  .pr-gobtn{display:inline-flex;align-items:center;gap:8px;font-family:var(--ev-font-sans);font-size:13px;font-weight:600;letter-spacing:0.01em;color:#fff;background:var(--ev-mineral-blue);border:1px solid var(--ev-mineral-blue);border-radius:4px;padding:10px 16px;text-decoration:none;transition:background .15s ease-out,border-color .15s ease-out;}
+  .pr-gobtn:hover{background:#0C3348;border-color:#0C3348;}
+  .pr-gobtn--alt{color:var(--ev-mineral-blue);background:#fff;}
+  .pr-gobtn--alt:hover{background:var(--ev-warm-cloud);border-color:var(--ev-mineral-blue);color:var(--ev-mineral-blue);}
+
+  /* Pricing tables */
+  .pr-tname{font-family:var(--font-display);font-size:26px;font-weight:500;letter-spacing:-0.016em;color:var(--text-heading);margin:56px 0 0;}
+  .pr-scroll{overflow-x:auto;margin-top:20px;}
+  .pr-table{width:100%;min-width:720px;border-collapse:separate;border-spacing:0;font-family:var(--ev-font-sans);}
+  .pr-table th,.pr-table td{text-align:left;padding:16px 20px;font-size:14.5px;line-height:1.5;vertical-align:top;border-bottom:1px solid var(--border-hairline);}
+  .pr-table thead th{font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--ev-slate);border-bottom:1px solid var(--ev-cool-stone);padding-bottom:12px;}
+  .pr-table thead th.is-pop{color:#fff;background:var(--ev-mineral-blue);border-radius:10px 10px 0 0;border-bottom:0;}
+  .pr-table td.is-pop{background:var(--ev-mineral-25);color:var(--ev-ink);border-bottom-color:#fff;}
+  .pr-table tr:last-child td.is-pop{border-radius:0 0 10px 10px;border-bottom:0;}
+  .pr-table th.pr-rowh{width:132px;font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--ev-slate);}
+  .pr-table .pr-price{font-family:var(--font-display);font-size:22px;font-weight:500;letter-spacing:-0.015em;color:var(--text-heading);font-variant-numeric:tabular-nums;}
+  .pr-table td.is-pop .pr-price{color:var(--ev-mineral-blue);}
+
+  .pr-cards{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:44px;}
+  .pr-card{background:#fff;border:1px solid var(--border-hairline);border-radius:12px;padding:28px 30px;box-shadow:0 1px 2px rgba(42,51,64,.04);}
+  .pr-card__t{font-family:var(--font-display);font-size:20px;font-weight:500;letter-spacing:-0.012em;color:var(--text-heading);margin:0 0 12px;}
+  .pr-card__b{font-size:15px;line-height:1.6;color:var(--text-body);margin:0 0 18px;}
+  @media (max-width:767px){.pr-cards{grid-template-columns:1fr;}}
+
+  .pr-faqh{font-family:var(--font-display);font-size:24px;font-weight:500;letter-spacing:-0.014em;color:var(--text-heading);margin:56px 0 4px;}
+
+  /* Triplets form */
+  .pr-form{background:#fff;border:1px solid var(--border-hairline);border-radius:14px;padding:34px 36px;margin-top:36px;max-width:720px;box-shadow:0 1px 2px rgba(42,51,64,.04);}
+  .pr-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  .pr-field{display:flex;flex-direction:column;gap:6px;}
+  .pr-field--full{grid-column:1 / -1;}
+  .pr-field label{font-family:var(--ev-font-sans);font-size:12.5px;font-weight:600;letter-spacing:0.02em;color:var(--ev-ink);}
+  .pr-req{color:var(--ev-mineral-blue);}
+  .pr-field input,.pr-field select,.pr-field textarea{font-family:var(--ev-font-sans);font-size:15px;color:var(--ev-ink);background:var(--ev-porcelain);border:1px solid var(--ev-cool-stone);border-radius:6px;padding:12px 14px;outline:none;transition:border-color .15s ease-out,box-shadow .15s ease-out;}
+  .pr-field textarea{min-height:96px;resize:vertical;line-height:1.55;}
+  .pr-field input:focus,.pr-field select:focus,.pr-field textarea:focus{border-color:var(--ev-mineral-blue);box-shadow:0 0 0 2px rgba(15,61,86,0.16);}
+  .pr-form__cta{margin-top:24px;}
+  .pr-form__note{font-family:var(--ev-font-sans);font-size:12.5px;line-height:1.55;color:var(--ev-slate);margin:16px 0 0;}
+  .pr-form__note a{color:var(--ev-mineral-blue);text-decoration:none;}
+  .pr-form__note a:hover{text-decoration:underline;text-underline-offset:3px;}
+  @media (max-width:640px){.pr-grid{grid-template-columns:1fr;}.pr-form{padding:26px 22px;}}
+</style>
+</head>
+<body>
+
+<header class="hp-nav">
+  <div class="hp-nav__inner">
+    <a class="hp-nav__brandlink" href="index.html" aria-label="Enigma Vault home">
+      <img class="hp-nav__logo" src="assets/logo/lockup-transparent.png" alt="Enigma Vault">
+    </a>
+    <div class="hp-nav__links" data-site-nav data-base=""></div>
+    <div class="hp-nav__actions" data-site-nav-actions data-base=""></div>
+  </div>
+</header>
+
+<main data-screen-label="Pricing">
+
+  <!-- SECTION 1 · Hero -->
+  <header class="np-hero pr-hero">
+    <div class="np-container np-hero__inner">
+      <div class="np-hero__copy">
+        <h1 class="np-h1">The most expensive thing here is <em>the data breach you did not price in</em>.</h1>
+        <p class="np-lead">Every product starts free or starts with a conversation. Vault tiers are free forever on AWS Marketplace, NoPII protects your first million tokens a month at no cost, and Triplets comes back with a scoped proposal in two business days. What you are pricing against is the exposure you already carry.</p>
+        <div class="np-hero__ctas">
+          <a class="np-btn np-btn--primary" href="#vault" data-jump="vault"><span>The Vault</span></a>
+          <a class="np-btn np-btn--secondary" href="#nopii" data-jump="nopii"><span>NoPII</span></a>
+          <a class="np-btn np-btn--secondary" href="#triplets" data-jump="triplets"><span>Triplets</span></a>
+        </div>
+        <div class="pr-floor">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v6c0 4-3 6.6-7 9-4-2.4-7-5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg>
+          <p>Security is never a tier on any product. PCI DSS Level 1 and SOC 2 Type II infrastructure, AES-256 encryption, per-tenant key isolation, and full audit logging are the floor on every plan, including free.</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Tab rail -->
+  <nav class="pr-rail" aria-label="Pricing by product">
+    <div class="pr-rail__inner" role="tablist">
+      <button class="pr-tab is-active" type="button" role="tab" data-tab="vault" aria-selected="true"><img src="assets/glyphs/vault-3d.png" alt="Enigma Vault product mark">The Vault</button>
+      <button class="pr-tab" type="button" role="tab" data-tab="nopii" aria-selected="false"><img src="assets/glyphs/nopii-3d.png" alt="NoPII product mark">NoPII</button>
+      <button class="pr-tab" type="button" role="tab" data-tab="triplets" aria-selected="false"><img src="assets/glyphs/triplets-3d.png" alt="Triplets product mark">Triplets</button>
+    </div>
+  </nav>
+
+  <!-- PANEL · The Vault -->
+  <section class="np-section pr-panel is-active" id="vault" data-panel="vault" role="tabpanel">
+    <div class="np-container">
+      <div class="pr-phead"><span class="pr-phead__art"><img src="assets/glyphs/vault-3d.png" alt="Enigma Vault product mark"></span><div class="pr-phead__tx"><p class="pr-phead__tag">Trust the data</p><h2 class="np-h2">The <em>Vault</em>.</h2></div></div>
+      <p class="pr-lead">Each vault is priced independently, so you pay only for the data shapes you actually protect. Billed through the AWS Marketplace account you already have. Comparable tokenization platforms start near $1,000 a month. Start at zero.</p>
+
+      <h3 class="pr-tname">Card Vault</h3>
+      <div class="pr-scroll">
+        <table class="pr-table">
+          <thead><tr><th class="pr-rowh"></th><th>Lite</th><th class="is-pop">Plus &middot; most popular</th><th>Premium</th></tr></thead>
+          <tbody>
+            <tr><th class="pr-rowh">Price</th><td><span class="pr-price">$0</span><br>per month, free forever</td><td class="is-pop"><span class="pr-price">$49.99</span><br>per month</td><td><span class="pr-price">$249.99</span><br>per month</td></tr>
+            <tr><th class="pr-rowh">Volume</th><td>1,000 requests per month</td><td class="is-pop">20,000 requests, roughly 200 to 300 daily transactions</td><td>250,000 requests, roughly 2,000 daily transactions</td></tr>
+            <tr><th class="pr-rowh">Overage</th><td>$0.08 per request</td><td class="is-pop">$0.04 per request</td><td>$0.02 per request</td></tr>
+            <tr><th class="pr-rowh">Includes</th><td>Tokenization and gateway proxy, community support</td><td class="is-pop">Ephemeral key sharing, email support</td><td>Dedicated encryption keys, priority support</td></tr>
+            <tr><th class="pr-rowh"></th><td class="pr-go"><a class="pr-gobtn pr-gobtn--alt" href="https://aws.amazon.com/marketplace/seller-profile?id=c77b8db1-5511-48b7-8ce5-9a8d4a1a8018" target="_blank" rel="noopener">Get started free<span aria-hidden="true">&#8594;</span></a></td><td class="pr-go is-pop"><a class="pr-gobtn" href="https://aws.amazon.com/marketplace/seller-profile?id=c77b8db1-5511-48b7-8ce5-9a8d4a1a8018" target="_blank" rel="noopener">Get started<span aria-hidden="true">&#8594;</span></a></td><td class="pr-go"><a class="pr-gobtn pr-gobtn--alt" href="https://aws.amazon.com/marketplace/seller-profile?id=c77b8db1-5511-48b7-8ce5-9a8d4a1a8018" target="_blank" rel="noopener">Get started<span aria-hidden="true">&#8594;</span></a></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="pr-tname">Data Vault</h3>
+      <div class="pr-scroll">
+        <table class="pr-table">
+          <thead><tr><th class="pr-rowh"></th><th>Lite</th><th class="is-pop">Plus &middot; most popular</th><th>Premium</th></tr></thead>
+          <tbody>
+            <tr><th class="pr-rowh">Price</th><td><span class="pr-price">$0</span><br>per month, free forever</td><td class="is-pop"><span class="pr-price">$49.99</span><br>per month</td><td><span class="pr-price">$249.99</span><br>per month</td></tr>
+            <tr><th class="pr-rowh">Volume</th><td>1,500 requests per month</td><td class="is-pop">30,000 requests, small to mid-scale encryption</td><td>400,000 requests, large-scale requirements</td></tr>
+            <tr><th class="pr-rowh">Overage</th><td>$0.06 per request</td><td class="is-pop">$0.03 per request</td><td>$0.01 per request</td></tr>
+            <tr><th class="pr-rowh">Includes</th><td>AES-256 field encryption, community support</td><td class="is-pop">Ephemeral key sharing, email support</td><td>Dedicated encryption keys, priority support</td></tr>
+            <tr><th class="pr-rowh"></th><td class="pr-go"><a class="pr-gobtn pr-gobtn--alt" href="https://aws.amazon.com/marketplace/seller-profile?id=c77b8db1-5511-48b7-8ce5-9a8d4a1a8018" target="_blank" rel="noopener">Get started free<span aria-hidden="true">&#8594;</span></a></td><td class="pr-go is-pop"><a class="pr-gobtn" href="https://aws.amazon.com/marketplace/seller-profile?id=c77b8db1-5511-48b7-8ce5-9a8d4a1a8018" target="_blank" rel="noopener">Get started<span aria-hidden="true">&#8594;</span></a></td><td class="pr-go"><a class="pr-gobtn pr-gobtn--alt" href="https://aws.amazon.com/marketplace/seller-profile?id=c77b8db1-5511-48b7-8ce5-9a8d4a1a8018" target="_blank" rel="noopener">Get started<span aria-hidden="true">&#8594;</span></a></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="pr-tname">File Vault</h3>
+      <div class="pr-scroll">
+        <table class="pr-table">
+          <thead><tr><th class="pr-rowh"></th><th>Lite</th><th class="is-pop">Plus &middot; most popular</th><th>Premium</th></tr></thead>
+          <tbody>
+            <tr><th class="pr-rowh">Price</th><td><span class="pr-price">$0</span><br>per month, free forever</td><td class="is-pop"><span class="pr-price">$49.99</span><br>per month</td><td><span class="pr-price">$249.99</span><br>per month</td></tr>
+            <tr><th class="pr-rowh">Storage</th><td>5GB per month</td><td class="is-pop">150GB, standard capacity</td><td>1TB, enterprise-grade storage</td></tr>
+            <tr><th class="pr-rowh">Includes</th><td>AES-GCM encryption, presigned URL upload, community support</td><td class="is-pop">Ephemeral key sharing, real-time file status, email support</td><td>Dedicated encryption keys, envelope encryption, priority support</td></tr>
+            <tr><th class="pr-rowh"></th><td class="pr-go"><a class="pr-gobtn pr-gobtn--alt" href="https://aws.amazon.com/marketplace/seller-profile?id=c77b8db1-5511-48b7-8ce5-9a8d4a1a8018" target="_blank" rel="noopener">Get started free<span aria-hidden="true">&#8594;</span></a></td><td class="pr-go is-pop"><a class="pr-gobtn" href="https://aws.amazon.com/marketplace/seller-profile?id=c77b8db1-5511-48b7-8ce5-9a8d4a1a8018" target="_blank" rel="noopener">Get started<span aria-hidden="true">&#8594;</span></a></td><td class="pr-go"><a class="pr-gobtn pr-gobtn--alt" href="https://aws.amazon.com/marketplace/seller-profile?id=c77b8db1-5511-48b7-8ce5-9a8d4a1a8018" target="_blank" rel="noopener">Get started<span aria-hidden="true">&#8594;</span></a></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pr-cards">
+        <article class="pr-card">
+          <h3 class="pr-card__t">Customer Vault and Agent Vault</h3>
+          <p class="pr-card__b">Customer Vault is a turnkey deployment with tenant setup, branding, and staff onboarding, priced by engagement. Agent Vault is a fixed-scope eight-week package for card-on-file operations in aviation, cruise, clubs, dental, and home services.</p>
+          <a class="np-btn np-btn--secondary np-btn--sm" href="mailto:hello@enigmavault.io"><span>Contact sales</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
+        </article>
+        <article class="pr-card">
+          <h3 class="pr-card__t">Enterprise</h3>
+          <p class="pr-card__b">For custom volume, dedicated infrastructure, or enterprise requirements, contact our team for a tailored plan.</p>
+          <a class="np-btn np-btn--secondary np-btn--sm" href="mailto:hello@enigmavault.io"><span>Contact sales</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
+        </article>
+      </div>
+
+      <h3 class="pr-faqh">Vault pricing FAQ</h3>
+      <div class="np-acc" style="max-width:840px">
+        <details open>
+          <summary>What does "per vault" mean?</summary>
+          <div class="np-acc__body">Each vault is priced independently. Running Card Vault on Premium and Data Vault on Lite is a perfectly normal setup, and you can add a vault later without touching the ones you have.</div>
+        </details>
+        <details>
+          <summary>Is the infrastructure different on Lite?</summary>
+          <div class="np-acc__body">No. Every tier runs on the same certified infrastructure with the same encryption and per-tenant key isolation. Tiers change limits and support, never security.</div>
+        </details>
+        <details>
+          <summary>What happens when I exceed my plan?</summary>
+          <div class="np-acc__body">Overage is metered per request at the rates above, with no hard stop. If you exceed consistently, the next tier up is almost always cheaper.</div>
+        </details>
+        <details>
+          <summary>How does billing work?</summary>
+          <div class="np-acc__body">Through AWS Marketplace, on your existing AWS account and invoice. No new vendor onboarding for finance, and no contract to start.</div>
+        </details>
+        <details>
+          <summary>Is there a free trial of Plus or Premium features?</summary>
+          <div class="np-acc__body">The Lite tier is not a trial; it is free forever. For evaluating tier-specific features like dedicated keys, contact sales and we will set up an evaluation.</div>
+        </details>
+      </div>
+      <div class="np-ctas" style="margin-top:36px">
+        <a class="np-btn np-btn--primary" href="https://aws.amazon.com/marketplace/seller-profile?id=c77b8db1-5511-48b7-8ce5-9a8d4a1a8018" target="_blank" rel="noopener"><span>Start free on AWS Marketplace</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PANEL · NoPII -->
+  <section class="np-section pr-panel" id="nopii" data-panel="nopii" role="tabpanel">
+    <div class="np-container">
+      <div class="pr-phead"><span class="pr-phead__art"><img src="assets/glyphs/nopii-3d.png" alt="NoPII product mark"></span><div class="pr-phead__tx"><p class="pr-phead__tag">Trust the input</p><h2 class="np-h2"><em>NoPII</em>.</h2></div></div>
+      <p class="pr-lead">Protection for AI traffic should not need a procurement cycle to try. The free tier is real, and it does not expire.</p>
+      <div class="pr-scroll">
+        <table class="pr-table">
+          <thead><tr><th class="pr-rowh"></th><th>Free</th><th class="is-pop">Pro &middot; most popular</th><th>Enterprise</th></tr></thead>
+          <tbody>
+            <tr><th class="pr-rowh">Price</th><td><span class="pr-price">$0</span><br>per month</td><td class="is-pop"><span class="pr-price">$50</span><br>per month</td><td><span class="pr-price">Custom</span></td></tr>
+            <tr><th class="pr-rowh">Protected tokens</th><td>1M per month</td><td class="is-pop">50M included, then $1 per additional million, no hard cap</td><td>Volume pricing</td></tr>
+            <tr><th class="pr-rowh">Retention</th><td>1 day</td><td class="is-pop">Configurable, 1 day to permanent</td><td>Configurable</td></tr>
+            <tr><th class="pr-rowh">Includes</th><td>All 9+ providers, 35+ entity categories, deterministic tokenization, fail-safe blocking, audit logging, admin console, no credit card</td><td class="is-pop">Everything in Free, plus multi-tenancy and roles, custom detection rules, priority support</td><td>Everything in Pro, plus SSO, SLA guarantees, custom deployment, volume discounts, dedicated account manager, BAA for healthcare</td></tr>
+            <tr><th class="pr-rowh"></th><td class="pr-go"><a class="pr-gobtn pr-gobtn--alt" href="https://app.nopii.co" target="_blank" rel="noopener">Get started free<span aria-hidden="true">&#8594;</span></a></td><td class="pr-go is-pop"><a class="pr-gobtn" href="https://app.nopii.co" target="_blank" rel="noopener">Get started<span aria-hidden="true">&#8594;</span></a></td><td class="pr-go"><a class="pr-gobtn pr-gobtn--alt" href="mailto:hello@enigmavault.io">Talk to sales<span aria-hidden="true">&#8594;</span></a></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="pr-faqh">NoPII pricing FAQ</h3>
+      <div class="np-acc" style="max-width:840px">
+        <details open>
+          <summary>What counts as a protected token?</summary>
+          <div class="np-acc__body">All input and output processed through the proxy: user prompts, model responses, and full API content. If it flows through NoPII, it is protected and it is counted.</div>
+        </details>
+        <details>
+          <summary>Is the free tier a trial?</summary>
+          <div class="np-acc__body">No. One million protected tokens a month is free indefinitely, with every provider and the full detection engine included. It exists so you can prove the architecture on your own traffic before anyone signs anything.</div>
+        </details>
+        <details>
+          <summary>What happens when I exceed my plan?</summary>
+          <div class="np-acc__body">On Pro, overage is metered at $1 per additional million tokens with no hard stop. On Free, you will be prompted to upgrade, and upgrading requires no re-integration.</div>
+        </details>
+        <details>
+          <summary>Are all providers available on every plan?</summary>
+          <div class="np-acc__body">Yes. All 9+ supported model providers are available on every plan, including Free. Provider access is never a paywall.</div>
+        </details>
+        <details>
+          <summary>Do you offer a BAA?</summary>
+          <div class="np-acc__body">Yes, for healthcare workloads on Enterprise, with the audit trail HIPAA programs expect.</div>
+        </details>
+      </div>
+      <div class="np-ctas" style="margin-top:36px">
+        <a class="np-btn np-btn--primary" href="https://app.nopii.co" target="_blank" rel="noopener"><span>Start free at app.nopii.co</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PANEL · Triplets -->
+  <section class="np-section pr-panel" id="triplets" data-panel="triplets" role="tabpanel">
+    <div class="np-container">
+      <div class="pr-phead"><span class="pr-phead__art"><img src="assets/glyphs/triplets-3d.png" alt="Triplets product mark"></span><div class="pr-phead__tx"><p class="pr-phead__tag">Trust the output</p><h2 class="np-h2"><em>Triplets</em>.</h2></div></div>
+      <p class="pr-lead">Triplets is not priced from a rate card, because the two things that drive cost are yours: the size and shape of your evidence corpus, and the engagement model you need. The 48-hour Trust Baseline, a certified evidence corpus for a full therapeutic area, and embedded certification under your brand are scoped differently, so the honest answer starts with a conversation.</p>
+      <div class="np-ctas" style="margin-top:28px"><a class="np-btn np-btn--primary" href="#pr-form"><span>Get started</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a></div>
+      <p class="pr-lead" style="margin-top:34px"><strong style="color:var(--ev-ink);font-weight:600">How it works.</strong> Tell us about your corpus and the decisions you cannot afford to get wrong. We come back with a scoped proposal, typically within two business days. The Baseline requires no integration work on your side, and the certificate is yours either way.</p>
+
+      <h3 class="pr-faqh" style="margin-top:48px">Talk to us about Triplets pricing</h3>
+      <form class="pr-form" id="pr-form" name="triplets-pricing" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+        <input type="hidden" name="form-name" value="triplets-pricing">
+        <p hidden aria-hidden="true"><label>Leave this field empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+        <div class="pr-grid">
+          <div class="pr-field">
+            <label for="pr-name">Full name <span class="pr-req">*</span></label>
+            <input type="text" id="pr-name" name="Full Name" autocomplete="name" placeholder="Jordan Avery" required>
+          </div>
+          <div class="pr-field">
+            <label for="pr-email">Work email <span class="pr-req">*</span></label>
+            <input type="email" id="pr-email" name="Email" autocomplete="email" placeholder="jordan@acme.com" spellcheck="false" required>
+          </div>
+          <div class="pr-field">
+            <label for="pr-org">Organization <span class="pr-req">*</span></label>
+            <input type="text" id="pr-org" name="Organization" autocomplete="organization" placeholder="Acme Health" required>
+          </div>
+          <div class="pr-field">
+            <label for="pr-role">Role <span class="pr-req">*</span></label>
+            <input type="text" id="pr-role" name="Role" autocomplete="organization-title" placeholder="Head of medical information" required>
+          </div>
+          <div class="pr-field pr-field--full">
+            <label for="pr-fit">Which engagement fits best?</label>
+            <select id="pr-fit" name="Engagement">
+              <option>AI deployment certification</option>
+              <option>Certified evidence corpus</option>
+              <option>Embedded certification</option>
+              <option selected>Not sure yet</option>
+            </select>
+          </div>
+          <div class="pr-field pr-field--full">
+            <label for="pr-corpus">Tell us about your corpus</label>
+            <textarea id="pr-corpus" name="Corpus" placeholder="Rough document count, domains covered, and the questions it needs to answer"></textarea>
+          </div>
+        </div>
+        <div class="pr-form__cta">
+          <button type="submit" class="np-btn np-btn--primary"><span>Request a scoped proposal</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></button>
+        </div>
+        <p class="pr-form__note">We respond within two business days. Prefer email? <a href="mailto:hello@enigmavault.io">hello@enigmavault.io</a>.</p>
+      </form>
+
+      <h3 class="pr-faqh">Triplets pricing FAQ</h3>
+      <div class="np-acc" style="max-width:840px">
+        <details open>
+          <summary>Why is there no price list?</summary>
+          <div class="np-acc__body">Because scope drives the number. A Baseline on a focused corpus and continuous certification across a full therapeutic area are different engagements, and quoting one number for both would mislead in one direction or the other. A scoped proposal is faster than it sounds: two business days from your form to our number.</div>
+        </details>
+        <details>
+          <summary>What determines the cost?</summary>
+          <div class="np-acc__body">Corpus size and entity volume, the engagement model, and whether certification is one-time or continuous. Continuous certification is an annual subscription because the certificate has to be kept green as evidence changes.</div>
+        </details>
+        <details>
+          <summary>Is there a way to evaluate before committing?</summary>
+          <div class="np-acc__body">Yes, and it is the recommended path. The Trust Baseline is a fixed-scope, 48-hour engagement on a representative slice of your corpus, with no integration work on your side. Nobody fails a Baseline; its output is a map of your evidence boundary, and the report is yours either way.</div>
+        </details>
+        <details>
+          <summary>Is any of the architecture tier-gated?</summary>
+          <div class="np-acc__body">No. The full architecture, including the tri-state partition, provenance, and reproducible certificates, is present in every engagement. Scope changes the corpus covered, never the machinery.</div>
+        </details>
+        <details>
+          <summary>How does the cost compare to what we spend today?</summary>
+          <div class="np-acc__body">One manual systematic review costs roughly $141,000 in labor, and large research organizations run dozens to over a hundred per year. A certified corpus is scoped to cost less than one manual review while de-risking all of them, and we will show that math in your proposal.</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION · Closing -->
+  <section class="np-section np-ctaband np-rule-top">
+    <div class="np-container">
+      <div class="np-ctaband__inner">
+        <h2 class="np-h2">Not sure which product <em>you are pricing</em>?</h2>
+        <p class="np-ctaband__body">Start with the exposure that worries you most. AI answers you cannot verify: Triplets. Sensitive data in AI prompts: NoPII. Sensitive data at rest: the Vault. Or request a demo and we will map all three to your stack in one conversation.</p>
+        <div class="np-ctaband__ctas">
+          <a class="np-btn np-btn--primary" href="request-demo.html"><span>Request a demo</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="hp-footer" data-site-footer data-base=""></footer>
+
+<script src="site-nav.js"></script>
+<script src="site-footer.js"></script>
+<script>
+(function(){
+  var tabs = [].slice.call(document.querySelectorAll('.pr-tab'));
+  var panels = [].slice.call(document.querySelectorAll('.pr-panel'));
+  var VALID = { vault:1, nopii:1, triplets:1 };
+
+  function show(id, push){
+    if (!VALID[id]) id = 'vault';
+    tabs.forEach(function(t){
+      var on = t.getAttribute('data-tab') === id;
+      t.classList.toggle('is-active', on);
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+    });
+    panels.forEach(function(p){ p.classList.toggle('is-active', p.getAttribute('data-panel') === id); });
+    if (push && history.replaceState) history.replaceState(null, '', '#' + id);
+  }
+
+  tabs.forEach(function(t){
+    t.addEventListener('click', function(){ show(t.getAttribute('data-tab'), true); });
+  });
+  [].slice.call(document.querySelectorAll('[data-jump]')).forEach(function(a){
+    a.addEventListener('click', function(e){
+      e.preventDefault();
+      var id = a.getAttribute('data-jump');
+      show(id, true);
+      var rail = document.querySelector('.pr-rail');
+      if (rail) window.scrollTo({ top: rail.offsetTop, behavior: 'smooth' });
+    });
+  });
+  window.addEventListener('hashchange', function(){ show(location.hash.replace('#',''), false); });
+  show(location.hash.replace('#','') || 'vault', false);
+})();
+</script>
+</body>
+</html>

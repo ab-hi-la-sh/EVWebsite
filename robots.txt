@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /login.html
+Disallow: /_archive/
+Disallow: /export-home/
+Disallow: /export-split/
+
+Sitemap: https://www.enigmavault.io/sitemap.xml

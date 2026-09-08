@@ -1,0 +1,40 @@
+{{- /*
+  One fingerprinted CSS bundle per page-family, built with Hugo Pipes.
+
+  Order matches the old pages' link order so the cascade is unchanged:
+    tokens -> global (was nopii.css) -> page extras -> nav -> footer
+  nav/footer come last because they used to be injected into <head> at runtime
+  by site-nav.js / site-footer.js, which put them after everything else.
+
+  A page opts into extra stylesheets with frontmatter:
+    styles: ["vaults.css"]
+*/ -}}
+{{- $tokens := slice
+  "css/tokens/fonts.css"
+  "css/tokens/colors.css"
+  "css/tokens/palette.css"
+  "css/tokens/typography.css"
+  "css/tokens/spacing.css"
+  "css/tokens/base.css" -}}
+
+{{- $paths := $tokens | append "css/global.css" -}}
+{{- range .Params.styles }}{{ $paths = $paths | append (printf "css/%s" .) }}{{ end -}}
+{{- $paths = $paths | append "css/nav.css" "css/footer.css" -}}
+
+{{- $res := slice -}}
+{{- range $paths -}}
+  {{- with resources.Get . -}}
+    {{- $res = $res | append . -}}
+  {{- else -}}
+    {{- errorf "styles.html: missing stylesheet %q" . -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $bundleName := printf "css/bundle-%d.css" (delimit $paths "|" | hash.FNV32a) -}}
+{{- $css := $res | resources.Concat $bundleName -}}
+{{- if hugo.IsProduction -}}
+  {{- $css = $css | minify | fingerprint -}}
+{{- end -}}
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
+<link rel="stylesheet" href="{{ $css.RelPermalink }}"{{ with $css.Data.Integrity }} integrity="{{ . }}" crossorigin="anonymous"{{ end }}>

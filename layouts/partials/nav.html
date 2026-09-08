@@ -1,0 +1,37 @@
+{{- /*
+  Site header. Ported from site-nav.js — markup that used to be built by string
+  concatenation in the browser is now rendered at build time from data/nav.yml.
+  The mobile panel is rendered here too (the old code built it lazily on first
+  tap), leaving nav.js with just the toggle behaviour.
+*/ -}}
+{{- $nav := hugo.Data.nav -}}
+<header class="hp-nav">
+  <div class="hp-nav__inner">
+    <a class="hp-nav__brandlink" href="{{ "/" | relURL }}" aria-label="Enigma Vault home">
+      <img class="hp-nav__logo" src="{{ site.Params.logo | relURL }}" alt="Enigma Vault">
+    </a>
+
+    <div class="hp-nav__links">
+      {{- range $nav.items }}
+      <div class="hp-nav__item{{ if .panel }} hp-nav__item--rel{{ end }}">
+        <a class="hp-nav__link" href="{{ .topHref | default "#" }}">{{ .label }}
+          {{- if or .panel .mega }}<span class="hp-nav__caret" aria-hidden="true">&#9662;</span>{{ end -}}
+        </a>
+        {{- if .panel }}{{ partial "nav/panel.html" . }}{{ end }}
+        {{- if .mega }}{{ partial "nav/mega.html" . }}{{ end }}
+      </div>
+      {{- end }}
+    </div>
+
+    <div class="hp-nav__actions">
+      <a class="hp-nav__login" href="{{ $nav.actions.login }}">Login</a>
+      <a class="hp-nav__contact" href="{{ $nav.actions.contact }}">Contact</a>
+      <button class="hp-nav__burger" type="button" data-nav-burger aria-expanded="false" aria-label="Open menu" aria-controls="hp-mnav">
+        <svg class="b" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        <svg class="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+  </div>
+
+  {{ partial "nav/mobile.html" $nav }}
+</header>

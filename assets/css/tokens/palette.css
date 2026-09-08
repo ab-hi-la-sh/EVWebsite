@@ -1,0 +1,22 @@
+/* Enigma Vault — full palette ramps (100 / 75 / 50 / 25) for every primary and
+   functional color, formalized from the brand palette board. Tints blend toward white.
+   Layer on top of tokens/colors.css. */
+:root {
+  /* ── Primary palette ramps ───────────────────────── */
+  --ev-porcelain-100: #FAFAFB; --ev-porcelain-75: #FBFBFC; --ev-porcelain-50: #FDFDFD; --ev-porcelain-25: #FEFEFF;
+  --ev-warm-cloud-100: #F0F2F5; --ev-warm-cloud-75: #F4F5F8; --ev-warm-cloud-50: #F8F9FA; --ev-warm-cloud-25: #FBFBFC;
+  --ev-cool-stone-100: #E2E6EB; --ev-cool-stone-75: #E9ECF0; --ev-cool-stone-50: #F1F2F5; --ev-cool-stone-25: #F8F9FA;
+  --ev-slate-100: #6B7280; --ev-slate-75: #909AA6; --ev-slate-50: #B5BCC4; --ev-slate-25: #DADDE2;
+  --ev-mineral-100: #0F3D56; --ev-mineral-75: #4B6E81; --ev-mineral-50: #879EAB; --ev-mineral-25: #C3CFD5;
+  --ev-silver-100: #C8CCD3; --ev-silver-75: #D6D9DE; --ev-silver-50: #E3E5E9; --ev-silver-25: #F1F2F4;
+
+  /* ── Functional palette ramps ────────────────────── */
+  --ev-success-100: #16A34A; --ev-success-75: #50BA77; --ev-success-50: #8BD1A5; --ev-success-25: #C5E8D2;
+  --ev-warning-100: #F59E0B; --ev-warning-75: #F8B648; --ev-warning-50: #FACF85; --ev-warning-25: #FDE7C2;
+  --ev-error-100: #EF4444; --ev-error-75: #F37373; --ev-error-50: #F7A2A2; --ev-error-25: #FBD0D0;
+
+  /* ── Headline tones (palette-driven) ─────────────── */
+  --headline-base: var(--ev-ink, #2A3340);
+  --headline-accent: var(--ev-mineral-100);
+  --headline-accent-on-dark: #9FC4D6;
+}

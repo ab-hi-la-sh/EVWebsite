@@ -1,0 +1,83 @@
+/* Enigma Vault — base element styles. */
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--ev-font-sans);
+  font-size: var(--ev-text-body);
+  font-weight: var(--ev-weight-regular);
+  line-height: var(--ev-leading-body);
+  color: var(--text-body);
+  background: var(--surface-page);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  color: var(--text-heading);
+  text-wrap: pretty;
+}
+h1 { font-size: var(--ev-text-headline); font-weight: var(--ev-weight-semibold); letter-spacing: var(--ev-tracking-headline); line-height: var(--ev-leading-headline); }
+h2 { font-size: var(--ev-text-section); font-weight: var(--ev-weight-medium); line-height: var(--ev-leading-section); }
+h3 { font-size: var(--ev-text-subsection); font-weight: var(--ev-weight-medium); line-height: var(--ev-leading-section); }
+
+p { margin: 0; }
+
+a {
+  color: var(--text-link);
+  text-decoration: none;
+  transition: color var(--ev-duration-fast) var(--ev-ease);
+}
+a:hover { text-decoration: underline; text-underline-offset: 3px; }
+a:focus-visible { outline: 1px dotted var(--focus-ring); outline-offset: 3px; }
+
+button, input, select, textarea { font: inherit; color: inherit; }
+
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+::selection {
+  background: var(--ev-mineral-25);
+  color: var(--ev-ink);
+}
+
+table { border-collapse: collapse; }
+td.ev-num, th.ev-num { text-align: right; font-variant-numeric: tabular-nums; }
+
+hr, .ev-hairline {
+  border: none;
+  border-top: var(--ev-hairline);
+  margin: 0;
+}
+
+/* Raster brand art (assets/motifs/, assets/glyphs/) — sits on light surfaces.
+   multiply removes the baked background; the slight brightness lift clips the
+   near-white background to pure white so no rectangle edge shows. */
+.ev-art {
+  mix-blend-mode: multiply;
+  filter: brightness(1.045);
+}
+
+code, pre {
+  font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+  font-size: 0.92em;
+  background: var(--ev-warm-cloud);
+  border-radius: var(--ev-radius-input);
+}
+code { padding: 1px 5px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

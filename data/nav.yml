@@ -1,0 +1,109 @@
+# Main navigation — ported 1:1 from the old site-nav.js NAV array.
+# Hrefs are now clean URLs; the old data-base="../" prefixing is gone.
+#
+# Each item is one of:
+#   panel:  product dropdown (.hp-prod), optional `group` makes it two-column
+#   mega:   row of icon+description cards (.hp-mega), variant picks the modifier
+#   (neither): a plain top-level link
+
+items:
+  - label: Platform
+    topHref: /platform/overview/
+    mega:
+      variant: platform
+      items:
+        - label: Overview
+          href: /platform/overview/
+          icon: /assets/nav/plat-overview.jpg
+          desc: The platform that powers the Enigma Vault suite
+        - label: Data Security
+          href: /platform/data-security/
+          icon: /assets/nav/plat-security.jpg
+          desc: Protecting your data. We take it seriously
+        - label: Integrations
+          href: /platform/integrations/
+          icon: /assets/nav/plat-integrations.jpg
+          desc: Wide ecosystem of partners and products
+
+  - label: Triplets
+    topHref: /triplets/overview/
+    tag: Trust the output
+    icon: /assets/nav/triplets.jpg
+    panel:
+      - [Overview, /triplets/overview/]
+      - [How it works, /triplets/how-it-works/]
+      - [Use cases, /triplets/use-cases/]
+      - [FAQs, /triplets/faqs/]
+
+  - label: NoPII
+    topHref: /nopii/overview/
+    tag: Trust the input
+    icon: /assets/nav/nopii.jpg
+    panel:
+      - [Overview, /nopii/overview/]
+      - [How it works, /nopii/how-it-works/]
+      - [Use cases, /nopii/use-cases/]
+      - [FAQs, /nopii/faqs/]
+
+  - label: The Vault
+    topHref: /vault/overview/
+    tag: Trust the data
+    icon: /assets/nav/vault.jpg
+    panel:
+      - [Overview, /vault/overview/]
+      - [How it works, /vault/how-it-works/]
+      - [Use cases, /vault/use-cases/]
+      - [FAQs, /vault/faqs/]
+    group:
+      title: The four vaults
+      links:
+        - [Card Vault, /vault/card-vault/]
+        - [Data Vault, /vault/data-vault/]
+        - [File Vault, /vault/file-vault/]
+        - [Customer Vault, /vault/customer-vault/]
+
+  - label: Pricing
+    topHref: /pricing/
+
+  - label: Industries
+    topHref: /solutions/industries/
+    mega:
+      variant: industries
+      allLink:
+        label: All industries →
+        href: /solutions/industries/
+      items:
+        - label: Healthcare
+          href: /solutions/industries/#healthcare
+          icon: /assets/industries/healthcare.png
+          desc: Safe AI answers, protected PHI
+        - label: Financial services
+          href: /solutions/industries/#financial-services
+          icon: /assets/industries/financial.png
+          desc: AI features without the scope
+        - label: Legal
+          href: /solutions/industries/#legal
+          icon: /assets/industries/legal.png
+          desc: Protect privilege, ground every answer
+        - label: Insurance
+          href: /solutions/industries/#insurance
+          icon: /assets/industries/insurance.png
+          desc: Accurate coverage answers, secured claims
+
+  - label: Resources
+    mega:
+      variant: resources
+      items:
+        - label: Blog
+          href: /resources/blog/
+          icon: /assets/nav/res-blogs.png
+          desc: Perspectives, trends & updates
+        - label: Docs
+          href: /resources/docs/
+          icon: /assets/nav/res-docs.png
+          desc: Product documentation & APIs
+
+actions:
+  login: /login/
+  contact: /contact/
+  demo: /request-demo/

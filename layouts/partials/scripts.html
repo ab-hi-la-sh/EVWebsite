@@ -1,0 +1,11 @@
+{{- /* Site JS bundle. A page adds its own with frontmatter: scripts: ["foo.js"] */ -}}
+{{- $paths := slice "js/nav.js" -}}
+{{- range .Params.scripts }}{{ $paths = $paths | append (printf "js/%s" .) }}{{ end -}}
+{{- $res := slice -}}
+{{- range $paths -}}
+  {{- with resources.Get . -}}{{ $res = $res | append . -}}
+  {{- else -}}{{ errorf "scripts.html: missing script %q" . }}{{- end -}}
+{{- end -}}
+{{- $js := $res | resources.Concat (printf "js/bundle-%d.js" (delimit $paths "|" | hash.FNV32a)) -}}
+{{- if hugo.IsProduction }}{{ $js = $js | minify | fingerprint }}{{ end -}}
+<script src="{{ $js.RelPermalink }}"{{ with $js.Data.Integrity }} integrity="{{ . }}" crossorigin="anonymous"{{ end }} defer></script>

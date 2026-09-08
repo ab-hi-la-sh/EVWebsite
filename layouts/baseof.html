@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{{ partial "analytics/gtm-head.html" . }}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+{{ partial "head/seo.html" . }}
+{{ partial "head/favicons.html" . }}
+<script>document.documentElement.className += ' np-js';</script>
+{{ partial "head/styles.html" . }}
+{{ block "head" . }}{{ end }}
+</head>
+<body{{ with .Params.bodyClass }} class="{{ . }}"{{ end }}>
+{{ partial "analytics/gtm-body.html" . }}
+
+{{ block "header" . }}{{ partial "nav.html" . }}{{ end }}
+
+{{ block "main" . }}<main>{{ .Content }}</main>{{ end }}
+
+{{ block "footer" . }}{{ partial "footer.html" . }}{{ end }}
+
+{{ partial "scripts.html" . }}
+{{ block "scripts" . }}{{ end }}
+</body>
+</html>

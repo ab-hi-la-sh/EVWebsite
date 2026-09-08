@@ -1,0 +1,45 @@
+/* vault/overview.html — page-scoped styles */
+/* ---- Hero: copy left, animated prism right ---- */
+  .vault-hero{display:flex;align-items:center;justify-content:center;min-width:0;}
+  .vault-hero__art{position:relative;width:100%;max-width:580px;}
+  .vault-hero__img{width:100%;height:auto;mix-blend-mode:multiply;transform-origin:50% 50%;
+    animation:vaultHeroIn 1.15s var(--np-ease) both, vaultHeroFloat 10s ease-in-out 1.15s infinite;}
+  @keyframes vaultHeroIn{0%{opacity:0;transform:translateY(20px) scale(1.05);}100%{opacity:1;transform:none;}}
+  @keyframes vaultHeroFloat{0%,100%{transform:translateY(0) rotate(0deg);}50%{transform:translateY(-15px) rotate(-0.5deg);}}
+  @media (prefers-reduced-motion: reduce){.vault-hero__img{animation:none;}}
+
+  /* ---- Sticky-left / scroll-reveal-right (merged API + value section) ---- */
+  /* The DS stylesheet puts overflow-x:hidden on <body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5CQ69BW2"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->, which (via axis
+     coercion) makes <body> a scroll container that never actually scrolls —
+     that silently disables position:sticky on its descendants. Letting <html>
+     keep scrolling + horizontal clipping and giving <body> visible overflow
+     restores sticky without reintroducing a horizontal scrollbar. */
+  body{overflow-x:visible;}
+  .vault-stick__grid{display:grid;grid-template-columns:0.86fr 1.14fr;gap:56px;align-items:start;}
+  .vault-stick__left{position:sticky;top:calc(50vh - 120px);align-self:start;}
+  .vault-stick__right{display:flex;flex-direction:column;gap:68px;padding:40px 0;}
+  .vault-line{padding-top:22px;border-top:2px solid var(--ev-mineral-blue);transition:transform .3s var(--np-ease);}
+  .vault-line:hover{transform:translateY(-6px);}
+  .vault-line .np-col__title{transition:color .2s var(--np-ease);}
+  .vault-line:hover .np-col__title{color:var(--ev-mineral-blue);}
+  .np-js .vault-line{opacity:0;transform:translateY(30px);transition:opacity .7s var(--np-ease),transform .7s var(--np-ease);}
+  .np-js .vault-line.is-in{opacity:1;transform:none;}
+  @media (prefers-reduced-motion: reduce){.np-js .vault-line{opacity:1 !important;transform:none !important;}}
+  @media (max-width:760px){
+    .vault-stick__grid{grid-template-columns:1fr;gap:36px;}
+    .vault-stick__left{position:static;transform:none;padding-top:0;}
+    .vault-stick__right{gap:36px;padding:8px 0 0;}
+  }
+  /* ---- Overview hero spacing (more room above + inset from left) ---- */
+  .vault-overview-hero .np-hero__inner{padding-top:132px;padding-bottom:100px;}
+  .vault-overview-hero .np-hero__copy{padding-left:18px;}
+  @media (max-width:1023px){
+    .vault-overview-hero .np-hero__inner{padding-top:76px;padding-bottom:56px;}
+    .vault-overview-hero .np-hero__copy{padding-left:0;}
+  }
+  /* ---- One API: CTA row + nudge sticky text lower ---- */
+  .vault-stick__cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px;}

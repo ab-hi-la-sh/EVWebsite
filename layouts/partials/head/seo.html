@@ -1,0 +1,39 @@
+{{- /*
+  Replaces the ~25 lines of SEO boilerplate that were copy-pasted into all 29 pages.
+
+  Frontmatter:
+    metaTitle    full <title> verbatim (falls back to "Title | Enigma Vault")
+    description  meta description
+    ogImage      path under /assets/og/ (falls back to the site default)
+    ogImageAlt   image alt
+    ogType       defaults to "website"
+    noindex      true to emit "noindex, follow"
+*/ -}}
+{{- $title := .Params.metaTitle | default (printf "%s | %s" .Title site.Title) -}}
+{{- if .IsHome }}{{ $title = .Params.metaTitle | default site.Title }}{{ end -}}
+{{- $desc := .Description | default site.Params.description -}}
+{{- $img := absURL (.Params.ogImage | default site.Params.og.image) -}}
+{{- $alt := .Params.ogImageAlt | default "" -}}
+<!-- SEO -->
+<title>{{ $title }}</title>
+<meta name="description" content="{{ $desc }}">
+<link rel="canonical" href="{{ .Permalink }}">
+<meta name="robots" content="{{ if .Params.noindex }}noindex, follow{{ else }}index, follow{{ end }}">
+<meta property="og:type" content="{{ .Params.ogType | default "website" }}">
+<meta property="og:site_name" content="{{ site.Params.og.siteName }}">
+<meta property="og:locale" content="{{ site.Params.og.locale }}">
+<meta property="og:title" content="{{ $title }}">
+<meta property="og:description" content="{{ $desc }}">
+<meta property="og:url" content="{{ .Permalink }}">
+<meta property="og:image" content="{{ $img }}">
+<meta property="og:image:width" content="{{ site.Params.og.imageWidth }}">
+<meta property="og:image:height" content="{{ site.Params.og.imageHeight }}">
+{{ with $alt }}<meta property="og:image:alt" content="{{ . }}">
+{{ end -}}
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ $title }}">
+<meta name="twitter:description" content="{{ $desc }}">
+<meta name="twitter:image" content="{{ $img }}">
+{{ with $alt }}<meta name="twitter:image:alt" content="{{ . }}">
+{{ end -}}
+<!-- /SEO -->

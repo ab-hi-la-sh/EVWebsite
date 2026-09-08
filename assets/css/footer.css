@@ -1,0 +1,23 @@
+/* Footer styles.
+   Was injected at runtime by site-footer.js; now a real stylesheet. */
+.hp-footer{background:var(--surface-page);border-top:1px solid var(--border-hairline);padding:72px 0 36px;}
+.hp-footer__inner{max-width:1280px;margin:0 auto;padding:0 64px;}
+.hp-footer__grid{display:grid;grid-template-columns:1.35fr repeat(6,minmax(0,1fr));gap:26px;}
+.hp-footer__brandtag{font-family:var(--ev-font-sans);font-size:14px;color:var(--text-secondary);margin-top:18px;max-width:250px;line-height:1.55;}
+.hp-footer__logolink{display:inline-block;line-height:0;}
+.hp-footer__logo{height:58px;width:auto;max-width:none;object-fit:contain;display:block;}
+.hp-footer__col h4{font-family:var(--ev-font-sans);font-size:12px;font-weight:500;letter-spacing:0.05em;text-transform:uppercase;color:var(--ev-slate);margin:0 0 16px;}
+.hp-footer__col ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:11px;}
+.hp-footer__col a{font-family:var(--ev-font-sans);font-size:14px;color:var(--ev-ink);text-decoration:none;}
+.hp-footer__col a:hover{color:var(--ev-mineral-blue);text-decoration:underline;text-underline-offset:3px;}
+.hp-footer__bottom{font-family:var(--ev-font-sans);display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-top:52px;padding-top:26px;border-top:1px solid var(--border-hairline);font-size:12px;color:var(--text-secondary);}
+.hp-footer__legal{display:flex;align-items:center;gap:22px;flex-wrap:wrap;}
+.hp-footer__policies{display:flex;align-items:center;gap:18px;flex-wrap:wrap;}
+.hp-footer__policies a{color:var(--ev-slate);text-decoration:none;}
+.hp-footer__policies a:hover{color:var(--ev-mineral-blue);text-decoration:underline;text-underline-offset:3px;}
+.hp-footer__social{display:flex;gap:18px;}
+.hp-footer__social a{color:var(--ev-slate);text-decoration:none;}
+.hp-footer__social a:hover{color:var(--ev-mineral-blue);}
+@media (max-width:1200px){.hp-footer__grid{grid-template-columns:1fr repeat(3,minmax(0,1fr));row-gap:38px;}}
+@media (max-width:1023px){.hp-footer__inner{padding:0 32px;}.hp-footer__grid{grid-template-columns:1fr 1fr 1fr;row-gap:38px;}}
+@media (max-width:600px){.hp-footer__inner{padding:0 20px;}.hp-footer__grid{grid-template-columns:1fr;}}

@@ -1,0 +1,28 @@
+{{- /* Product dropdown (.hp-prod). Context: one nav item with .panel.
+       A .group makes it the two-column wide variant. */ -}}
+{{- $wide := .group -}}
+<div class="hp-prod{{ if $wide }} hp-prod--wide{{ end }}">
+  <div class="hp-prod__head">
+    <span class="hp-prod__ic"><img src="{{ .icon }}" alt="" loading="lazy"></span>
+    <span class="hp-prod__ht">
+      <span class="hp-prod__name">{{ .label }}</span>
+      <span class="hp-prod__tag">{{ .tag }}</span>
+    </span>
+  </div>
+  <div class="hp-prod__cols">
+    <div>
+      {{- if $wide }}<p class="hp-prod__colh">The product</p>{{ end }}
+      <div class="hp-prod__links">
+        {{- range .panel }}<a href="{{ index . 1 }}">{{ index . 0 }}</a>{{ end }}
+      </div>
+    </div>
+    {{- with $wide }}
+    <div class="hp-prod__div">
+      <p class="hp-prod__colh">{{ .title }}</p>
+      <div class="hp-prod__links">
+        {{- range .links }}<a href="{{ index . 1 }}">{{ index . 0 }}</a>{{ end }}
+      </div>
+    </div>
+    {{- end }}
+  </div>
+</div>

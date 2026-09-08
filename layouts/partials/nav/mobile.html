@@ -1,0 +1,27 @@
+{{- /* Mobile panel, built from the same nav data as the desktop nav.
+       Rendered at build time; nav.js only toggles .is-open. Context: site.Data.nav */ -}}
+<div class="hp-mnav" id="hp-mnav">
+  <div class="hp-mnav__inner">
+    {{- range .items }}
+    {{- $item := . -}}
+    {{- $links := slice -}}
+    {{- with .topHref }}{{ $links = $links | append (dict "label" (printf "%s overview" $item.label) "href" . "top" true) }}{{ end -}}
+    {{- range .panel }}{{ $links = $links | append (dict "label" (index . 0) "href" (index . 1)) }}{{ end -}}
+    {{- with .group }}{{ range .links }}{{ $links = $links | append (dict "label" (index . 0) "href" (index . 1)) }}{{ end }}{{ end -}}
+    {{- with .mega }}{{ range .items }}{{ $links = $links | append (dict "label" .label "href" .href) }}{{ end }}{{ end -}}
+    {{- if $links }}
+    <div class="hp-mnav__grp">
+      <p class="hp-mnav__h">{{ .label }}</p>
+      <div class="hp-mnav__links">
+        {{- range $links }}<a{{ if .top }} class="is-top"{{ end }} href="{{ .href }}">{{ .label }}</a>{{ end }}
+      </div>
+    </div>
+    {{- end }}
+    {{- end }}
+    <div class="hp-mnav__cta">
+      <a class="np-btn np-btn--primary np-btn--sm" href="{{ .actions.demo }}"><span>Request a demo</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
+      <a class="np-btn np-btn--secondary np-btn--sm" href="{{ .actions.login }}"><span>Login</span></a>
+      <a class="np-btn np-btn--secondary np-btn--sm" href="{{ .actions.contact }}"><span>Contact</span></a>
+    </div>
+  </div>
+</div>

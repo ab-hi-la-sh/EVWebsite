@@ -1,0 +1,92 @@
+/* Enigma Vault — typography (brandbook §4.0).
+   One family. Weights create hierarchy. Tabular numerals for all data.
+   Sentence case everywhere; UPPERCASE reserved for tracked technical annotations. */
+
+:root {
+  /* Weights */
+  --ev-weight-thin: 100;       /* technical annotations */
+  --ev-weight-light: 300;      /* captions */
+  --ev-weight-regular: 400;    /* body */
+  --ev-weight-medium: 500;     /* section headings */
+  --ev-weight-semibold: 600;   /* headlines */
+
+  /* Web scale (px) */
+  --ev-text-headline: 64px;          /* 56–72 */
+  --ev-text-headline-sm: 56px;
+  --ev-text-headline-lg: 72px;
+  --ev-text-section: 30px;           /* 28–32 */
+  --ev-text-subsection: 22px;
+  --ev-text-body-lg: 18px;
+  --ev-text-body: 16px;
+  --ev-text-caption: 13px;           /* 12–14 */
+  --ev-text-annotation: 11px;        /* 10–11 */
+
+  /* Slide scale (px, 1920×1080) */
+  --ev-slide-headline: 60px;         /* 44–60 (top of range at 1920) */
+  --ev-slide-section: 28px;
+  --ev-slide-body: 18px;
+  --ev-slide-caption: 13px;
+  --ev-slide-annotation: 12px;
+
+  /* Tracking */
+  --ev-tracking-headline: -0.005em;  /* −0.5% */
+  --ev-tracking-normal: 0;
+  --ev-tracking-annotation: 0.04em;  /* +4% */
+  --ev-tracking-wordmark: 0.32em;
+
+  /* Line heights */
+  --ev-leading-headline: 1.12;
+  --ev-leading-section: 1.25;
+  --ev-leading-body: 1.55;
+  --ev-leading-caption: 1.45;
+
+  /* Numerals */
+  --ev-numeric: tabular-nums; /* @kind other */
+}
+
+/* ── Role classes ──────────────────────────────────── */
+.ev-headline {
+  font-family: var(--ev-font-sans);
+  font-size: var(--ev-text-headline);
+  font-weight: var(--ev-weight-semibold);
+  letter-spacing: var(--ev-tracking-headline);
+  line-height: var(--ev-leading-headline);
+  color: var(--text-heading);
+  text-wrap: pretty;
+}
+.ev-section-heading {
+  font-family: var(--ev-font-sans);
+  font-size: var(--ev-text-section);
+  font-weight: var(--ev-weight-medium);
+  line-height: var(--ev-leading-section);
+  color: var(--text-heading);
+  text-wrap: pretty;
+}
+.ev-body {
+  font-family: var(--ev-font-sans);
+  font-size: var(--ev-text-body);
+  font-weight: var(--ev-weight-regular);
+  line-height: var(--ev-leading-body);
+  color: var(--text-body);
+}
+.ev-caption {
+  font-family: var(--ev-font-sans);
+  font-size: var(--ev-text-caption);
+  font-weight: var(--ev-weight-light);
+  line-height: var(--ev-leading-caption);
+  color: var(--text-secondary);
+}
+/* Tracked uppercase technical annotation — eyebrows, figure labels, metadata */
+.ev-annotation {
+  font-family: var(--ev-font-sans);
+  font-size: var(--ev-text-annotation);
+  font-weight: var(--ev-weight-light);
+  letter-spacing: var(--ev-tracking-annotation);
+  text-transform: uppercase;
+  color: var(--text-annotation);
+}
+/* Data — metrics, table numerals */
+.ev-numeric {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum';
+}

@@ -1,0 +1,41 @@
+baseURL = "https://www.enigmavault.io/"
+locale = "en-us"
+defaultContentLanguage = "en"
+title = "Enigma Vault"
+
+# Clean URLs (decision: /pricing/ not /pricing.html). Phase 6 adds the 301 map.
+uglyURLs = false
+canonifyURLs = false
+enableEmoji = false
+
+# The old site had no RSS anywhere; Phase 5 turns it back on for the blog only.
+disableKinds = ["rss", "taxonomy", "term", "section"]
+
+[permalinks]
+  # Blog articles move from /resources/article.html to /resources/blog/<slug>/
+  "resources/blog" = "/resources/blog/:slug/"
+
+[params]
+  description = "Protect sensitive data in your applications and AI workflows. Explore PII tokenization, secure data storage and evidence-grounded answers with Enigma Vault."
+  themeColor = "#0F3D56"
+  gtmId = "GTM-5CQ69BW2"
+  awsMarketplace = "https://aws.amazon.com/marketplace/seller-profile?id=c77b8db1-5511-48b7-8ce5-9a8d4a1a8018"
+  docsUrl = "https://docs.enigmavault.io"
+  logo = "/assets/logo/lockup-transparent.png"
+
+  [params.og]
+    siteName = "Enigma Vault"
+    locale = "en_US"
+    image = "/assets/og/home.jpg"
+    imageWidth = "1200"
+    imageHeight = "630"
+
+[markup.goldmark.renderer]
+  # Content pages carry designed markup, not prose. Raw HTML must pass through.
+  unsafe = true
+
+[build]
+  writeStats = false
+
+[minify]
+  disableHTML = true

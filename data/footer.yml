@@ -1,0 +1,58 @@
+# Site footer — ported 1:1 from the old site-footer.js FOOTER object.
+# Hrefs are now clean URLs. External links get target=_blank in the partial.
+
+tagline: The trust layer for AI and data. Clarity. Control. Confidence.
+legal: © 2026 Enigma Vault. All rights reserved.
+
+columns:
+  - title: Products
+    links:
+      - [Triplets, /triplets/overview/]
+      - [NoPII, /nopii/overview/]
+      - [The Vault, /vault/overview/]
+      - [Pricing, /pricing/]
+
+  - title: Vaults
+    links:
+      - [Card Vault, /vault/card-vault/]
+      - [Data Vault, /vault/data-vault/]
+      - [File Vault, /vault/file-vault/]
+      - [Customer Vault, /vault/customer-vault/]
+
+  - title: Platform
+    links:
+      - [Overview, /platform/overview/]
+      - [Data Security, /platform/data-security/]
+      - [Integrations, /platform/integrations/]
+
+  - title: Industries
+    links:
+      - [All industries, /solutions/industries/]
+      - [Healthcare, /solutions/industries/#healthcare]
+      - [Financial services, /solutions/industries/#financial-services]
+      - [Legal, /solutions/industries/#legal]
+      - [Insurance, /solutions/industries/#insurance]
+
+  - title: Developers
+    links:
+      - [API docs, "https://docs.enigmavault.io"]
+      - [Swagger UI, "https://api.enigmavault.io"]
+      - [AWS Marketplace, "https://aws.amazon.com/marketplace/seller-profile?id=c77b8db1-5511-48b7-8ce5-9a8d4a1a8018"]
+      - [Postman collection, "https://docs.enigmavault.io"]
+      - [Status page, "https://enigmavault.statuspage.io/"]
+
+  - title: Company
+    links:
+      - [About, /company/about/]
+      - [Blog, /resources/blog/]
+      - [Docs, /resources/docs/]
+      - [Request a demo, /request-demo/]
+      - [Login, /login/]
+
+policies:
+  - [Security Policy, "https://www.enigmavault.io/compliance/Enigma+Vault+Security+Policy.pdf"]
+  - [Privacy Policy, "https://www.enigmavault.io/compliance/Enigma+Vault+Privacy+Policy.pdf"]
+
+social:
+  - [LinkedIn, "https://www.linkedin.com/company/enigma-vault/"]
+  - [X, "https://x.com/NoPII_HQ"]

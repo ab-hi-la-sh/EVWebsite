@@ -1,0 +1,70 @@
+/* Enigma Vault — color system (brandbook §3.0, §11.8).
+   "Trust expressed through light, precision, and restraint."
+   Porcelain carries 60–70% of any layout; Mineral Blue never exceeds 5–10%. */
+
+:root {
+  /* ── Primary palette ─────────────────────────────── */
+  --ev-porcelain: #FAFAFB;      /* backgrounds, surfaces, whitespace (60–70%) */
+  --ev-warm-cloud: #F0F2F5;     /* secondary backgrounds, subtle fills (10–15%) */
+  --ev-cool-stone: #E2E6EB;     /* borders, dividers, disabled states (8–12%) */
+  --ev-slate: #6B7280;          /* secondary text, icons (10–15%) */
+  --ev-mineral-blue: #0F3D56;   /* links, key actions, brand accents (5–10%, never more) */
+  --ev-silver: #C8CCD3;         /* subtle UI elements, neutral accents (2–5%) */
+
+  /* Ink — how headlines render in every brandbook mockup */
+  --ev-ink: #2A3340;
+
+  /* Tints (75/50/25) */
+  --ev-slate-75: #909AA6;  --ev-slate-50: #B5BCC4;  --ev-slate-25: #DADDE2;
+  --ev-mineral-75: #4B6E81;  --ev-mineral-50: #879EAB;  --ev-mineral-25: #C3CFD5;
+  --ev-silver-75: #D6D9DE;  --ev-silver-50: #E3E5E9;  --ev-silver-25: #F1F2F4;
+
+  /* Interaction ramp for Mineral Blue */
+  --ev-mineral-hover: #0C3348;
+  --ev-mineral-active: #092A3B;
+
+  /* ── Functional palette (feedback only) ──────────── */
+  --ev-success: #16A34A;
+  --ev-warning: #F59E0B;
+  --ev-error: #EF4444;
+  --ev-success-soft: #E8F5EC;
+  --ev-warning-soft: #FDF3E1;
+  --ev-error-soft: #FDEAEA;
+
+  /* ── Vault sub-brand ramp (brandbook §11.8) ──────── */
+  --ev-vault-core-blue: #153A57;
+  --ev-vault-mineral: #6D8399;
+  --ev-vault-slate: #2F3A44;
+  --ev-vault-silver: #C8CED6;
+  --ev-vault-fog: #E7EBF0;
+  --ev-vault-porcelain: #FAFBFC;
+
+  /* ── Semantic aliases ────────────────────────────── */
+  --surface-page: var(--ev-porcelain);
+  --surface-secondary: var(--ev-warm-cloud);
+  --surface-card: #FFFFFF;
+  --surface-inverse: var(--ev-mineral-blue);
+
+  --text-heading: var(--ev-ink);
+  --text-body: #3D4654;
+  --text-secondary: var(--ev-slate);
+  --text-annotation: var(--ev-slate);
+  --text-on-inverse: #F4F6F8;
+  --text-link: var(--ev-mineral-blue);
+
+  --border-hairline: var(--ev-cool-stone);
+  --border-emphasis: var(--ev-silver);
+  --border-strong: var(--ev-mineral-50);
+
+  --icon-default: #4B5563;
+  --icon-hover: var(--ev-mineral-blue);
+  --icon-disabled: var(--ev-silver);
+
+  --action-primary: var(--ev-mineral-blue);
+  --action-primary-hover: var(--ev-mineral-hover);
+  --action-primary-active: var(--ev-mineral-active);
+  --action-disabled-bg: var(--ev-cool-stone);
+  --action-disabled-text: var(--ev-slate-50);
+
+  --focus-ring: var(--ev-mineral-blue);
+}

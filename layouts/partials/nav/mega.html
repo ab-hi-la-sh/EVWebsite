@@ -1,0 +1,17 @@
+{{- /* Icon+description card row (.hp-mega). Context: one nav item with .mega.
+       variant: platform | industries | resources */ -}}
+{{- $m := .mega -}}
+{{- $class := "hp-mega hp-mega--row hp-mega--platform" -}}
+{{- if eq $m.variant "industries" }}{{ $class = "hp-mega hp-mega--row hp-mega--industries" }}{{ end -}}
+{{- if eq $m.variant "resources" }}{{ $class = "hp-mega hp-mega--row hp-mega--platform hp-mega--resources" }}{{ end -}}
+<div class="{{ $class }}">
+  {{- range $m.items }}
+  <a class="hp-mega__item" href="{{ .href }}">
+    <span class="hp-mega__ic"><img src="{{ .icon }}" alt="" loading="lazy"></span>
+    <span class="hp-mega__itxt"><strong>{{ .label }}</strong><em>{{ .desc }}</em></span>
+  </a>
+  {{- end }}
+  {{- with $m.allLink }}
+  <a class="hp-mega__item hp-mega__item--all" href="{{ .href }}">{{ .label }}</a>
+  {{- end }}
+</div>

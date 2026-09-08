@@ -1,0 +1,43 @@
+{{- /* Site footer. Ported from site-footer.js; content lives in data/footer.yml.
+       External links open in a new tab, as they did before. */ -}}
+{{- $f := hugo.Data.footer -}}
+<footer class="hp-footer">
+  <div class="hp-footer__inner">
+    <div class="hp-footer__grid">
+      <div>
+        <a class="hp-footer__logolink" href="{{ "/" | relURL }}" aria-label="Enigma Vault home">
+          <img class="hp-footer__logo" src="{{ site.Params.logo | relURL }}" alt="Enigma Vault">
+        </a>
+        <p class="hp-footer__brandtag">{{ $f.tagline }}</p>
+      </div>
+      {{- range $f.columns }}
+      <div class="hp-footer__col">
+        <h4>{{ .title }}</h4>
+        <ul>
+          {{- range .links }}
+          {{- $href := index . 1 }}
+          <li><a href="{{ $href }}"{{ if strings.HasPrefix $href "http" }} target="_blank" rel="noopener"{{ end }}>{{ index . 0 }}</a></li>
+          {{- end }}
+        </ul>
+      </div>
+      {{- end }}
+    </div>
+    <div class="hp-footer__bottom">
+      <div class="hp-footer__legal">
+        <span>{{ $f.legal }}</span>
+        <nav class="hp-footer__policies">
+          {{- range $f.policies }}
+          {{- $href := index . 1 }}
+          <a href="{{ $href }}"{{ if strings.HasPrefix $href "http" }} target="_blank" rel="noopener"{{ end }}>{{ index . 0 }}</a>
+          {{- end }}
+        </nav>
+      </div>
+      <div class="hp-footer__social">
+        {{- range $f.social }}
+        {{- $href := index . 1 }}
+        <a href="{{ $href }}"{{ if strings.HasPrefix $href "http" }} target="_blank" rel="noopener"{{ end }}>{{ index . 0 }}</a>
+        {{- end }}
+      </div>
+    </div>
+  </div>
+</footer>

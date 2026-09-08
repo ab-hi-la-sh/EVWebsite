@@ -1,0 +1,46 @@
+/* Enigma Vault — spacing, radii, hairlines, shadows, motion (brandbook §6.1, §6.2).
+   Every measurement is a multiple of 8; 4 allowed for micro-spacing. */
+
+:root {
+  /* Spacing scale */
+  --ev-space-xs: 4px;     /* tight spacing, micro UI */
+  --ev-space-sm: 8px;     /* small gaps, inner spacing */
+  --ev-space-md: 16px;    /* component spacing */
+  --ev-space-lg: 24px;    /* section padding (mobile) */
+  --ev-space-xl: 32px;    /* section padding (tablet) */
+  --ev-space-2xl: 48px;   /* section padding (desktop) */
+  --ev-space-3xl: 64px;   /* generous sections */
+  --ev-space-4xl: 96px;   /* hero / visual emphasis */
+  --ev-space-5xl: 128px;  /* breaks / transitions */
+
+  /* Layout */
+  --ev-container-max: 1280px;
+  --ev-page-margin: 64px;
+  --ev-gutter: 24px;
+  --ev-section-pad-desktop: 96px;
+  --ev-section-pad-tablet: 64px;
+  --ev-section-pad-mobile: 24px;
+
+  /* Corner radii — crisp, subtle; nothing pill-shaped except status dots/seals */
+  --ev-radius-input: 4px;
+  --ev-radius-card: 6px;
+  --ev-radius-shell: 10px;
+
+  /* Hairlines — definition comes from hairlines, not shadows */
+  --ev-hairline: 1px solid var(--ev-cool-stone);
+  --ev-hairline-emphasis: 1px solid var(--ev-silver);
+
+  /* Shadows — barely perceptible; never heavy */
+  --ev-shadow-card: 0 1px 2px rgba(42, 51, 64, 0.04);
+  --ev-shadow-raised: 0 2px 6px rgba(42, 51, 64, 0.06);
+
+  /* Motion — ease-out only; nothing flashy, nothing looping */
+  --ev-ease: cubic-bezier(0.16, 1, 0.3, 1); /* @kind other */
+  --ev-duration-fast: 100ms; /* @kind other */
+  --ev-duration-standard: 200ms; /* @kind other */
+  --ev-duration-emphasis: 300ms; /* @kind other */
+  --ev-duration-system: 400ms; /* @kind other */
+
+  /* Touch */
+  --ev-touch-target: 44px;
+}

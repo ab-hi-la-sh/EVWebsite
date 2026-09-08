@@ -11,7 +11,12 @@ and rewrites every old .html link / relative asset path to the new clean URL.
 Usage:
   port_page.py <old-html-relative-path> <content-dest> [--styles a.css,b.css]
 
-  port_page.py vault/overview.html vault/overview.md --styles vaults.css
+  port_page.py vault/overview.html vault/overview.html --styles vaults.css
+
+Destinations are .html, not .md: these pages are designed markup, and Hugo
+passes .html content files through verbatim. Writing them as markdown made
+Goldmark treat the indented HTML after a blank line as a code block and
+escape it into visible text.
 """
 import argparse
 import html
@@ -149,12 +154,26 @@ def main():
         out.write_text(f"/* {args.source} — page-scoped styles */\n{body}\n")
         styles.append(f"pages/{name}.css")
 
-    # <main> body
-    m = re.search(r"<main>(.*?)</main>", raw, re.S)
+    # <main> body. 13 pages carry <main data-screen-label="..."> — a design-tool
+    # artifact with no behaviour, so the attribute is dropped.
+    m = re.search(r"<main[^>]*>(.*?)</main>", raw, re.S)
     if not m:
         sys.exit(f"{args.source}: no <main> block found")
-    body = rewrite(m.group(1).strip(), page_dir)
+    body = m.group(1).strip()
+
+    # Some pages define an inline SVG sprite sheet BEFORE <main>; the icons
+    # inside <main> reference it via <use href="#ic-...">. Dropping it would
+    # silently blank every icon on the page, so carry it across.
+    pre = raw.split("<body", 1)[1].split(">", 1)[1][: raw.index("<main")]
+    sprites = re.findall(
+        r'<svg width="0" height="0"[^>]*>.*?</svg>', pre, re.S
+    )
+    if sprites:
+        body = "\n".join(s.strip() for s in sprites) + "\n\n" + body
+
+    body = rewrite(body, page_dir)
     body, n_imgs = imgs_to_shortcodes(body)
+    n_sprites = len(sprites)
 
     # page-scoped inline <script> from <body> (skip GTM, which the partial owns)
     after_main = raw.split("</main>", 1)[1]
@@ -172,6 +191,11 @@ def main():
         )
         scripts.append(f"pages/{name}.js")
 
+    # External <script src="https://..."> (HubSpot form embeds). These are not
+    # inline blocks, so they need carrying across explicitly or the forms break.
+    ext_scripts = re.findall(r'<script[^>]*\bsrc="(https?://[^"]+)"[^>]*>', raw)
+    ext_scripts = [s for s in ext_scripts if "googletagmanager" not in s]
+
     def yq(s):
         return '"' + s.replace('\\', '\\\\').replace('"', '\\"') + '"'
 
@@ -187,6 +211,8 @@ def main():
         fm.append("styles: [" + ", ".join(yq(s) for s in styles) + "]")
     if scripts:
         fm.append("scripts: [" + ", ".join(yq(s) for s in scripts) + "]")
+    if ext_scripts:
+        fm.append("externalScripts: [" + ", ".join(yq(s) for s in ext_scripts) + "]")
     fm.append("---")
 
     dest = DST / "content" / args.dest
@@ -197,6 +223,10 @@ def main():
     print(f"  styles:  {styles or '-'}")
     print(f"  scripts: {scripts or '-'}")
     print(f"  images:  {n_imgs} routed through Hugo Pipes")
+    if ext_scripts:
+        print(f"  extjs:   {ext_scripts}")
+    if n_sprites:
+        print(f"  sprites: {n_sprites} inline SVG sprite sheet(s) carried over")
 
 
 if __name__ == "__main__":

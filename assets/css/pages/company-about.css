@@ -1,0 +1,133 @@
+/* company/about.html — page-scoped styles */
+/* ---- Hero ---- */
+  .ab-hero__inner{max-width:860px;margin:0 auto;text-align:center;padding:108px 0 92px;}
+  .ab-hero .np-h1{max-width:14ch;margin-left:auto;margin-right:auto;}
+
+  /* ---- Mission + pull quote ---- */
+  .ab-narrow{max-width:760px;}
+  .ab-body{font-size:19px;line-height:1.62;color:var(--text-body);margin:22px 0 0;text-wrap:pretty;}
+  .ab-pull{margin:48px 0 0;padding:32px 0 8px 34px;border-left:2px solid var(--ev-mineral-blue);
+    font-family:var(--font-display);font-weight:300;font-size:clamp(24px,2.8vw,34px);line-height:1.32;
+    letter-spacing:-0.018em;color:var(--headline-base);text-wrap:balance;}
+
+  /* ---- Who built it ---- */
+  .ab-chips{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px;}
+  .ab-chip{display:flex;gap:16px;align-items:flex-start;background:#fff;border:1px solid var(--border-hairline);
+    border-radius:12px;padding:20px 22px;transition:border-color .22s var(--np-ease),box-shadow .22s var(--np-ease);}
+  .ab-chip:hover{border-color:var(--border-emphasis);box-shadow:0 10px 26px rgba(42,51,64,.06);}
+  .ab-chip__ic{width:40px;height:40px;border-radius:10px;background:var(--ev-mineral-25);color:var(--ev-mineral-blue);
+    display:grid;place-items:center;flex:none;}
+  .ab-chip__ic svg{width:21px;height:21px;}
+  .ab-chip__t{font-family:var(--ev-font-sans);font-size:15.5px;font-weight:500;line-height:1.45;color:var(--ev-ink);padding-top:8px;}
+
+  /* ---- Values ---- */
+  .ab-valhead{max-width:720px;}
+  .ab-intro{font-size:17px;line-height:1.6;color:var(--ev-slate);margin:18px 0 0;max-width:60ch;}
+  .ab-val__n{font-family:var(--ev-font-sans);font-size:12px;font-weight:500;letter-spacing:0.14em;color:var(--ev-mineral-50);}
+  .ab-val__t{font-family:var(--font-display);font-size:21px;font-weight:500;letter-spacing:-0.01em;line-height:1.2;color:var(--text-heading);margin:12px 0 12px;}
+  .ab-val__b{font-size:15.5px;line-height:1.6;color:var(--text-body);margin:0;}
+  .ab-val__proof{margin:18px 0 0;padding:16px 0 0;border-top:1px solid var(--border-hairline);
+    font-size:14.5px;line-height:1.55;color:var(--ev-slate);}
+  .ab-val__proof b{font-family:var(--ev-font-sans);font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--ev-mineral-blue);display:block;margin-bottom:6px;}
+
+  /* ---- Trust band ---- */
+  .ab-trust{text-align:center;}
+  .ab-trust__badges{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:14px 0;margin:36px 0 26px;}
+  .ab-trust__badge{font-family:var(--ev-font-sans);font-size:14px;font-weight:600;letter-spacing:0.01em;color:var(--ev-ink);padding:0 26px;}
+  .ab-trust__badge + .ab-trust__badge{border-left:1px solid var(--ev-cool-stone);}
+  .ab-trust__line{font-size:16.5px;line-height:1.6;color:var(--ev-slate);margin:0 auto;max-width:62ch;}
+
+  @media (max-width:900px){
+    .ab-trust__badge{padding:0 16px;}
+    .ab-trust__badge + .ab-trust__badge{border-left:none;}
+  }
+
+  /* ---- Hero grid + rising beams (brand-adapted "grid") ---- */
+  .np-hero{position:relative;overflow:hidden;}
+  .ab-hero__inner{position:relative;z-index:1;}
+  .ab-grid{position:absolute;inset:0;pointer-events:none;overflow:hidden;}
+  .ab-grid__floor{position:absolute;left:-30%;right:-30%;bottom:0;height:66%;
+    background-image:
+      linear-gradient(to right, rgba(15,61,86,0.13) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(15,61,86,0.13) 1px, transparent 1px);
+    background-size:46px 46px;
+    transform:perspective(440px) rotateX(64deg);
+    transform-origin:bottom center;
+    -webkit-mask-image:linear-gradient(to top,#000 0%,rgba(0,0,0,0.5) 44%,transparent 88%);
+            mask-image:linear-gradient(to top,#000 0%,rgba(0,0,0,0.5) 44%,transparent 88%);
+    animation:abGridMove 9s linear infinite;}
+  .ab-grid__beams{position:absolute;inset:0;}
+  .ab-beam{position:absolute;bottom:6%;width:1px;height:36%;border-radius:1px;opacity:0;
+    background:linear-gradient(to top, transparent, var(--ev-mineral-blue));
+    will-change:transform,opacity;
+    animation:abRise var(--d,6s) ease-in-out infinite;animation-delay:var(--delay,0s);}
+  .ab-beam.is-accent{background:linear-gradient(to top, transparent, #8FB2C4);}
+  @keyframes abGridMove{from{background-position:0 0;}to{background-position:0 46px;}}
+  @keyframes abRise{
+    0%{transform:translateY(45%);opacity:0;}
+    14%{opacity:.5;}
+    80%{opacity:.16;}
+    100%{transform:translateY(-60%);opacity:0;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .ab-grid__floor{animation:none;}
+    .ab-beam{display:none;}
+  }
+
+  /* ---- Dark section ---- */
+  .ab-dark{position:relative;overflow:hidden;background:var(--ev-mineral-blue);}
+  .ab-dark::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+    background-image:linear-gradient(rgba(255,255,255,0.07) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.07) 1px,transparent 1px);
+    background-size:48px 48px;
+    -webkit-mask-image:radial-gradient(ellipse 92% 86% at 74% 50%,#000 0%,transparent 76%);
+            mask-image:radial-gradient(ellipse 92% 86% at 74% 50%,#000 0%,transparent 76%);}
+  .ab-dark::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+    background:radial-gradient(ellipse 48% 60% at 80% 50%, rgba(143,178,196,0.14), transparent 70%);}
+  .ab-dark .np-container{position:relative;z-index:1;}
+  .ab-dark .np-h2{color:#fff;}
+  .ab-dark .ab-body{color:rgba(244,246,248,0.84);}
+
+  /* ---- Value card icons (numbering + proof removed) ---- */
+  .ab-val__ic{width:46px;height:46px;border-radius:11px;background:var(--ev-mineral-25);color:var(--ev-mineral-blue);display:grid;place-items:center;margin-bottom:18px;}
+  .ab-val__ic svg{width:23px;height:23px;}
+  .np-card:hover .ab-val__ic{background:var(--ev-mineral-blue);color:#fff;transition:background .22s var(--np-ease),color .22s var(--np-ease);}
+
+  /* ---- Product glyphs in the three-product band ---- */
+  .ab-prodic{width:62px;height:62px;margin-bottom:18px;}
+  .ab-prodic img{width:100%;height:100%;object-fit:contain;}
+
+  /* ---- Certification pills ---- */
+  .ab-pills{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:38px 0 26px;}
+  .ab-pill{display:inline-flex;align-items:center;gap:10px;font-family:var(--ev-font-sans);font-size:14px;font-weight:600;letter-spacing:0.01em;color:var(--ev-ink);background:#fff;border:1px solid var(--border-hairline);border-radius:999px;padding:11px 22px;}
+  .ab-pill svg{width:15px;height:15px;color:var(--ev-mineral-blue);flex:none;}
+
+  /* ---- Hero subhead legibility wash ---- */
+  .ab-hero__inner::before{content:"";position:absolute;left:50%;top:52%;transform:translate(-50%,-50%);
+    width:76%;height:120%;z-index:-1;pointer-events:none;
+    background:radial-gradient(ellipse at center, rgba(255,255,255,0.97) 0%, rgba(250,250,251,0.8) 46%, rgba(250,250,251,0) 72%);
+    filter:blur(6px);}
+
+  /* ---- Mission back-right art (feathered, gradated) ---- */
+  .ab-mission{position:relative;overflow:hidden;}
+  .ab-mission .np-container{position:relative;z-index:1;}
+  .ab-mission-art{position:absolute;top:50%;right:-5%;transform:translateY(-50%);width:48%;max-width:700px;z-index:0;pointer-events:none;
+    mix-blend-mode:multiply;opacity:0.92;
+    -webkit-mask-image:radial-gradient(ellipse 82% 88% at 72% 50%, #000 24%, transparent 76%);
+            mask-image:radial-gradient(ellipse 82% 88% at 72% 50%, #000 24%, transparent 76%);}
+  .ab-mission-art img{width:100%;height:auto;display:block;}
+  @media (max-width:900px){ .ab-mission-art{display:none;} }
+
+  /* ---- Dark-section headline accent ---- */
+  .ab-dark .np-h2 em{color:#8FB2C4;font-style:normal;font-weight:600;}
+
+  /* ---- "Built by..." headline shine effect ---- */
+  .ab-builthead{
+    background:linear-gradient(100deg, var(--headline-base) 0%, var(--headline-base) 40%, var(--ev-mineral-blue) 50%, var(--headline-base) 60%, var(--headline-base) 100%);
+    background-size:240% 100%;
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;color:transparent;
+    animation:abShine 7s ease-in-out infinite;}
+  @keyframes abShine{0%{background-position:130% 0;}100%{background-position:-30% 0;}}
+  @media (prefers-reduced-motion:reduce){
+    .ab-builthead{animation:none;-webkit-text-fill-color:var(--headline-base);color:var(--headline-base);}
+  }

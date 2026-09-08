@@ -75,19 +75,19 @@ items:
       items:
         - label: Healthcare
           href: /solutions/industries/#healthcare
-          icon: /assets/industries/healthcare.png
+          icon: /assets/industries/healthcare.jpg
           desc: Safe AI answers, protected PHI
         - label: Financial services
           href: /solutions/industries/#financial-services
-          icon: /assets/industries/financial.png
+          icon: /assets/industries/financial.jpg
           desc: AI features without the scope
         - label: Legal
           href: /solutions/industries/#legal
-          icon: /assets/industries/legal.png
+          icon: /assets/industries/legal.jpg
           desc: Protect privilege, ground every answer
         - label: Insurance
           href: /solutions/industries/#insurance
-          icon: /assets/industries/insurance.png
+          icon: /assets/industries/insurance.jpg
           desc: Accurate coverage answers, secured claims
 
   - label: Resources

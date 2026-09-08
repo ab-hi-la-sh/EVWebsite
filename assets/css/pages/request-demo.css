@@ -1,0 +1,39 @@
+/* request-demo.html — page-scoped styles */
+.rd-wrap{display:grid;grid-template-columns:1fr 1.05fr;gap:72px;align-items:start;}
+  .rd-wrap .np-container{max-width:1180px;}
+
+  /* ---- Left rail ---- */
+  .rd-left{position:sticky;top:120px;}
+  .rd-eyebrow{font-family:var(--ev-font-sans);font-size:11px;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--ev-mineral-blue);margin:0 0 22px;}
+  .rd-left .np-h1{font-size:clamp(36px,4vw,52px);}
+  .rd-lead{font-size:18px;line-height:1.6;color:var(--text-body);margin:22px 0 0;max-width:42ch;text-wrap:pretty;}
+  .rd-points{list-style:none;margin:36px 0 0;padding:0;display:flex;flex-direction:column;gap:16px;}
+  .rd-point{display:flex;gap:14px;align-items:flex-start;}
+  .rd-point__ic{width:26px;height:26px;border-radius:7px;background:var(--ev-mineral-25);color:var(--ev-mineral-blue);display:grid;place-items:center;flex:none;margin-top:1px;}
+  .rd-point__ic svg{width:15px;height:15px;}
+  .rd-point__t{font-size:15.5px;line-height:1.5;color:var(--ev-ink);}
+  .rd-trust{margin:40px 0 0;padding:18px 0 0;border-top:1px solid var(--border-hairline);font-family:var(--ev-font-sans);font-size:12.5px;letter-spacing:0.02em;color:var(--ev-slate);display:flex;flex-wrap:wrap;gap:10px 18px;}
+  .rd-trust span{display:inline-flex;align-items:center;gap:7px;}
+  .rd-trust span::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--ev-mineral-blue);}
+
+  /* ---- Form card ---- */
+  .rd-card{background:#fff;border:1px solid var(--border-hairline);border-radius:14px;padding:40px;box-shadow:0 1px 2px rgba(42,51,64,.04);}
+  .rd-card__h{font-family:var(--font-display);font-size:26px;font-weight:500;letter-spacing:-0.014em;color:var(--text-heading);margin:0;}
+  .rd-card__s{font-size:15.5px;line-height:1.6;color:var(--text-body);margin:10px 0 30px;}
+  /* HubSpot embed: renders in a cross-origin iframe, so field styling is set in
+     HubSpot > Forms > Style. Page CSS only owns the container. The min-height is a
+     floor so the frame cannot clip in preview; HubSpot's resize drives it live. */
+  .rd-formslot{width:100%;min-height:820px;}
+  .rd-formslot iframe{display:block;width:100%!important;height:100%;min-height:820px;border:0;background:transparent;}
+  .rd-formslot:empty::after{content:"Loading form\2026";display:block;font-family:var(--ev-font-sans);font-size:14px;color:var(--ev-slate);padding:24px 0;}
+  .rd-privacy{font-family:var(--ev-font-sans);font-size:12.5px;line-height:1.5;color:var(--ev-slate);margin:16px 0 0;text-align:center;}
+  a{color:var(--ev-mineral-blue);}
+  a:hover{color:#0C3348;}
+
+  @media (max-width:980px){
+    .rd-wrap{grid-template-columns:1fr;gap:44px;}
+    .rd-left{position:static;}
+  }
+  @media (max-width:560px){
+    .rd-card{padding:26px;}
+  }

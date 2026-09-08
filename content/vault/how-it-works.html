@@ -1,0 +1,133 @@
+---
+title: "How Data Tokenization Works"
+metaTitle: "How Data Tokenization Works | Enigma Vault API"
+description: "Follow the Vault API flow from authentication to tokenization and authorized retrieval. Explore field encryption, file storage and secure intake."
+ogImage: "/assets/og/vault-how-it-works.jpg"
+ogImageAlt: "Sensitive data in. Tokens and references everywhere else. — Enigma Vault"
+styles: ["vaults.css"]
+---
+
+<!-- SECTION 1 · Hero -->
+  <header class="np-hero vp-hero">
+    <div class="np-container np-hero__inner">
+      <div class="np-hero__copy">
+        <nav class="vp-crumb" aria-label="Breadcrumb"><a href="/vault/overview/">The Vault</a><span class="vp-crumb__sep">/</span><span aria-current="page">How it works</span></nav>
+        <h1 class="np-h1">How the Vault <em>tokenizes and protects your data</em>.</h1>
+        <p class="np-lead">The real values live in the vault. Your systems hold tokens, references, and audit logs. This page covers the mechanics every vault shares; each vault&rsquo;s own page covers its specifics.</p>
+        <div class="np-hero__ctas">
+          <a class="np-btn np-btn--primary" href="https://aws.amazon.com/marketplace/seller-profile?id=c77b8db1-5511-48b7-8ce5-9a8d4a1a8018" target="_blank" rel="noopener"><span>Get started free</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
+          <a class="np-btn np-btn--secondary" href="/request-demo/"><span>Request a demo</span></a>
+        </div>
+        <div class="vp-badges"><span class="vp-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>PCI DSS Level 1</span><span class="vp-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>SOC 2 Type II</span><span class="vp-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="8" x="2" y="2" rx="2"/><rect width="20" height="8" x="2" y="14" rx="2"/><path d="M6 6h.01M6 18h.01"/></svg>REST v1.13</span></div>
+      </div>
+      <div class="np-hero__visual vp-hero__art">
+        <figure class="vp-plate">{{< img src="/assets/vault/foundation-stack.png" alt="Diagram: the Enigma Vault platform architecture, from API to encrypted storage" loading="eager" >}}</figure>
+      </div>
+    </div>
+  </header>
+
+  <!-- SECTION 2 · Three steps -->
+  <section class="np-section np-rule-top">
+    <div class="np-container">
+      <div style="max-width:760px">
+        <p class="vp-eyebrow">The integration</p>
+        <h2 class="np-h2">How the Vault <em>tokenization API works</em>.</h2>
+        <p class="vp-prose">A straightforward REST API from any language or platform. No SDK required.</p>
+      </div>
+      <div class="vp-flow">
+        <div class="vp-flow__track" aria-hidden="true"><span class="vp-flow__pulse"></span></div>
+        <div class="vp-flow__row vp-flow__row--3">
+          <div class="vp-flow__node"><div class="vp-flow__dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15.5 7.5 2.3 2.3a1 1 0 0 0 1.4 0l2.1-2.1a1 1 0 0 0 0-1.4L18.9 4"/><path d="m21 2-9.6 9.6"/><circle cx="7.5" cy="15.5" r="5.5"/></svg></div><p class="vp-flow__n">01</p><h3 class="vp-flow__t">Authenticate.</h3><p class="vp-flow__b">Get an OAuth2 access token with your client credentials and per-vault scopes.</p></div>
+          <div class="vp-flow__node"><div class="vp-flow__dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div><p class="vp-flow__n">02</p><h3 class="vp-flow__t">Store and tokenize.</h3><p class="vp-flow__b">Send your sensitive data to the vault. We encrypt it with AES-256 and return a token you can safely store anywhere.</p></div>
+          <div class="vp-flow__node"><div class="vp-flow__dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="19" r="3"/><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/><circle cx="18" cy="5" r="3"/></svg></div><p class="vp-flow__n">03</p><h3 class="vp-flow__t">Retrieve and proxy.</h3><p class="vp-flow__b">Use tokens to retrieve data, search by plaintext, or charge cards through your gateway without ever touching raw data.</p></div>
+        </div>
+      </div>
+      <div class="vp-code">
+        <div class="vp-code__bar"><span class="vp-code__dots"><span class="vp-code__dot"></span><span class="vp-code__dot"></span><span class="vp-code__dot"></span></span><span class="vp-code__file">enigmavault &mdash; curl</span></div>
+        <p class="vp-code__step">Step 1 &middot; Authenticate</p>
+<pre>TOKEN=$(curl -s -X POST https://api-auth.enigmavault.io/oauth2/token \
+  -d <span class="s">"grant_type=client_credentials"</span> \
+  -d <span class="s">"scope=io.enigmavault/datavault"</span> | jq -r .access_token)</pre>
+        <p class="vp-code__step">Step 2 &middot; Store a secret</p>
+<pre>curl -X POST https://api.enigmavault.io/datavault/secrets \
+  -H <span class="s">"Authorization: Bearer $TOKEN"</span> \
+  -H <span class="s">"Content-Type: application/json"</span> \
+  -d <span class="s">'[{"plaintext":"123-45-6789"}]'</span></pre>
+        <div class="vp-code__out"><span class="vp-code__outk">200 OK</span><code>[{ <span class="k">"token"</span>: <span class="s">"Ry0Ixd1qP8vKmN3aBcDeFg"</span> }]</code></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA rail -->
+  <section class="vp-cta">
+    <div class="vp-cta__inner">
+      <div class="vp-cta__tx"><p class="vp-cta__k">Free tier</p><p class="vp-cta__h">Every vault has a free-forever tier on AWS Marketplace.</p></div>
+      <div class="vp-cta__btns">
+        <a class="np-btn np-btn--primary" href="https://aws.amazon.com/marketplace/seller-profile?id=c77b8db1-5511-48b7-8ce5-9a8d4a1a8018" target="_blank" rel="noopener"><span>Get started free</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
+        <a class="np-btn np-btn--secondary" href="/pricing/#vault"><span>See pricing</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3 · The four vaults at a glance -->
+  <section class="np-section np-bg-cloud">
+    <div class="np-container">
+      <div style="max-width:760px"><p class="vp-eyebrow">The suite</p><h2 class="np-h2">The four vaults, <em>at a glance</em>.</h2></div>
+      <div class="vp-imgcards">
+        <a class="vp-imgcard" href="/vault/card-vault/"><span class="vp-imgcard__art">{{< img src="/assets/vault/hero-card.jpg" alt="Card Vault, payment card tokenization" loading="lazy" >}}</span><span class="vp-imgcard__body"><h3 class="vp-imgcard__t">Card Vault</h3><p class="vp-imgcard__b">Tokenize payment cards through hosted forms, Twilio Pay IVR, or the API, and charge through any REST gateway via signed proxy. Luhn-passable tokens, ephemeral CVV with 30-minute purge.</p></span></a>
+        <a class="vp-imgcard" href="/vault/data-vault/"><span class="vp-imgcard__art">{{< img src="/assets/vault/hero-data.jpg" alt="Data Vault, searchable field-level encryption" loading="lazy" >}}</span><span class="vp-imgcard__body"><h3 class="vp-imgcard__t">Data Vault</h3><p class="vp-imgcard__b">AES-256 field-level encryption that stays searchable, deterministic tokens, batch operations to 5,000 secrets, custom identifiers.</p></span></a>
+        <a class="vp-imgcard" href="/vault/file-vault/"><span class="vp-imgcard__art">{{< img src="/assets/vault/hero-file.jpg" alt="File Vault, encrypted file storage" loading="lazy" >}}</span><span class="vp-imgcard__body"><h3 class="vp-imgcard__t">File Vault</h3><p class="vp-imgcard__b">Files to 5GB under AES-GCM envelope encryption, presigned URLs, real-time status over WebSocket.</p></span></a>
+        <a class="vp-imgcard" href="/vault/customer-vault/"><span class="vp-imgcard__art">{{< img src="/assets/vault/hero-customer.jpg" alt="Customer Vault, secure customer intake" loading="lazy" >}}</span><span class="vp-imgcard__body"><h3 class="vp-imgcard__t">Customer Vault</h3><p class="vp-imgcard__b">Turnkey branded intake with a staff inbox, file sharing, e-signatures, and a full lifecycle API with signed webhooks.</p></span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4 · The foundation -->
+  <section class="np-section np-rule-top">
+    <div class="np-container">
+      <div style="max-width:760px"><p class="vp-eyebrow">The foundation</p><h2 class="np-h2">Encryption, keys <em>and access controls</em>.</h2></div>
+      <div class="vp-icards vp-icards--3">
+        <article class="vp-icard"><div class="vp-icard__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div><h3 class="vp-icard__t">Encryption you do not manage.</h3><p class="vp-icard__b">AES-256-CBC for fields with unique per-field initialization vectors, AES-GCM envelope encryption for files. You never touch a key.</p></article>
+        <article class="vp-icard"><div class="vp-icard__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg></div><h3 class="vp-icard__t">Managed KMS.</h3><p class="vp-icard__b">Customer-isolated key hierarchies with automatic rotation and no downtime.</p></article>
+        <article class="vp-icard"><div class="vp-icard__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="9" x2="20" y2="9"/><line x1="4" y1="15" x2="20" y2="15"/><line x1="10" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="14" y2="21"/></svg></div><h3 class="vp-icard__t">Tokens with nothing inside.</h3><p class="vp-icard__b">CSPRNG, Base64URL, 128 bits of entropy in a 22-character token. No structure to reverse.</p></article>
+        <article class="vp-icard"><div class="vp-icard__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></div><h3 class="vp-icard__t">Ephemeral keys.</h3><p class="vp-icard__b">One-time-use, time-limited keys for cross-client sharing that expire and self-destruct after use.</p></article>
+        <article class="vp-icard"><div class="vp-icard__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></div><h3 class="vp-icard__t">Zero-trust access.</h3><p class="vp-icard__b">OAuth2 machine-to-machine authentication on every surface, per-tenant IP whitelist validation, and multi-tenancy isolation by client ID.</p></article>
+        <article class="vp-icard"><div class="vp-icard__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><h3 class="vp-icard__t">Full audit logging.</h3><p class="vp-icard__b">Every request logged with client ID, IP address, resource path, and response status, with distributed tracing end to end.</p></article>
+      </div>
+      <div class="np-ctas" style="margin-top:44px">
+        <a class="np-btn np-btn--secondary" href="/platform/data-security/"><span>Read the security detail</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
+        <a class="np-btn np-btn--secondary" href="/vault/faqs/"><span>Vault FAQs</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5 · See it before you build it (dark) -->
+  <section class="np-section vp-dark">
+    <div class="vp-dark__bg" style="background-image:url('../assets/vault/dark-panels.png')"></div>
+    <div class="np-container">
+      <div style="max-width:820px"><p class="vp-eyebrow">Before you write code</p><h2 class="np-h2">See it <em>before you build it</em>.</h2>
+      <p class="vp-prose">Nothing here is a mock. The Swagger UI is the running API, and the card demo tokenizes a real test card in your browser.</p></div>
+      <div class="vp-icards vp-icards--3">
+        <article class="vp-icard"><div class="vp-icard__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="8" x="2" y="2" rx="2"/><rect width="20" height="8" x="2" y="14" rx="2"/><path d="M6 6h.01M6 18h.01"/></svg></div><h3 class="vp-icard__t">Live Swagger UI.</h3><p class="vp-icard__b">Every endpoint of REST v1.13, browsable and callable at api.enigmavault.io.</p></article>
+        <article class="vp-icard"><div class="vp-icard__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><h3 class="vp-icard__t">Video walkthroughs.</h3><p class="vp-icard__b">Short recordings of the Card Vault redirect flow, Data Vault encryption, and proxying a payment to a gateway.</p></article>
+        <article class="vp-icard"><div class="vp-icard__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 7l-5 5 5 5"/><path d="M15 7l5 5-5 5"/></svg></div><h3 class="vp-icard__t">Integration examples.</h3><p class="vp-icard__b">Working code on GitHub and a Postman collection, so the first call is copy-paste rather than guesswork.</p></article>
+      </div>
+      <div class="np-ctas" style="margin-top:44px">
+        <a class="np-btn np-btn--primary" href="https://docs.enigmavault.io" target="_blank" rel="noopener"><span>Open the docs</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
+        <a class="np-btn np-btn--secondary" href="https://api.enigmavault.io" target="_blank" rel="noopener"><span>Explore the API</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 6 · Closing -->
+  <section class="np-section np-ctaband np-rule-top">
+    <div class="np-container">
+      <div class="np-ctaband__inner">
+        <h2 class="np-h2">The Swagger UI is live right now. <em>So is the free tier</em>.</h2>
+        <div class="np-ctaband__ctas">
+          <a class="np-btn np-btn--primary" href="https://aws.amazon.com/marketplace/seller-profile?id=c77b8db1-5511-48b7-8ce5-9a8d4a1a8018" target="_blank" rel="noopener"><span>Get started free</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
+          <a class="np-btn np-btn--secondary" href="/vault/use-cases/"><span>See the use cases</span></a>
+        </div>
+      </div>
+    </div>
+  </section>

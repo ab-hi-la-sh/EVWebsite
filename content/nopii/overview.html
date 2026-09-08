@@ -1,0 +1,306 @@
+---
+title: "PII Protection for LLMs"
+metaTitle: "PII Protection for LLMs | NoPII by Enigma Vault"
+description: "Keep detected PII out of LLM API requests with NoPII. Tokenize sensitive values before model calls and restore them in responses to your application."
+ogImage: "/assets/og/nopii-overview.jpg"
+ogImageAlt: "What the model never sees, it can never leak. — Enigma Vault"
+styles: ["pages/nopii-overview.css"]
+scripts: ["pages/nopii-overview.js"]
+---
+
+<!-- SECTION 1 · Hero -->
+  <header class="np-hero np-hero--banner">
+    <div class="np-container">
+      <div class="np-hero__copy np-reveal">
+        <p class="np-eyebrow np-eyebrow--pii">PII protection for LLMs</p><h1 class="np-h1">Use customer data in AI <em>without sending the identifiers</em>.</h1>
+        <p class="np-lead">NoPII is an LLM privacy proxy that detects and tokenizes sensitive values before your application calls a model, then restores those values in the response.</p>
+        <div class="np-hero__ctas">
+          <a class="np-btn np-btn--primary" href="https://app.nopii.co"><span>Start free</span><span class="np-btn__arrow" aria-hidden="true">→</span></a>
+          <a class="np-btn np-btn--secondary" href="/request-demo/"><span>Request a demo</span></a>
+        </div>
+        <p class="np-note"><span class="np-note__dot"></span>One million protected tokens a month. No credit card. Live in minutes.</p>
+      </div>
+      <div class="np-hero__banner np-reveal">
+        <div class="np-scroll" data-scroll-tilt>
+          <div class="np-scroll__card">
+            <div class="np-scroll__inner">
+              {{< img src="/assets/nopii-hero.jpg" alt="NoPII sits between your application and the model provider: real data is tokenized through the NoPII proxy so the provider receives tokens only." loading="eager" >}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- SECTION 2 · Statement band -->
+  <section class="np-statement np-statement--media np-rule-top">
+    <div class="np-container np-reveal">
+      <p class="np-statement__line"><span class="np-hl" style="animation-delay:0s">Real data</span> goes into your application.</p>
+      <p class="np-statement__line"><span class="np-hl" style="animation-delay:0.45s">Tokens</span> go to the model provider.</p>
+      <p class="np-statement__line"><span class="np-hl" style="animation-delay:0.9s">Your users</span> never see the difference.</p>
+    </div>
+  </section>
+
+  <!-- SECTION 3a · Problem -->
+  <section class="np-section np-rule-top">
+    <div class="np-container np-promptsplit np-reveal">
+      <div class="np-promptsplit__media np-vlines-wrap">
+        <div class="np-vlines"><i style="left:10%"></i><i style="left:27%"></i><i style="left:44%"></i><i style="left:61%"></i><i style="left:78%"></i><i style="left:93%"></i></div>
+      </div>
+      <div class="np-editorial" style="margin:0;max-width:none">
+        <h2 class="np-h2">Every prompt is a <em>data transfer</em>. Almost no one treats it like one.</h2>
+        <p>The fastest-growing data flow in your company is the one with the least oversight: the prompts. Names, account numbers, clinical notes, and salary figures leave your environment thousands of times a day, bound for third-party model providers, because that is what makes the AI features work. Their logs. Their retention. Their jurisdictions. Your liability under HIPAA, GDPR, and every contract you have signed.</p>
+        <p>Compliance responds the only way it can: it says no. The roadmap stalls, or it routes around them. So engineers reach for redaction, stripping the sensitive values out before the prompt goes. And redaction breaks the model. Replace a customer's name with [REDACTED] in sentence one and the model can no longer connect it to the account in sentence three. You protected the data by removing the intelligence you shipped the feature for.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3b · Resolution -->
+  <section class="np-section np-rule-top">
+    <div class="np-container np-splitmedia np-reveal">
+      <div class="np-editorial" style="margin:0;max-width:none">
+        <h2 class="np-h2">The model never needed the real values. It needed <em>consistent ones</em>.</h2>
+        <p>The dilemma is false. Swap every sensitive value for a stable token before the prompt leaves, restore it when the response returns, and the model reasons exactly as before while the provider never holds a single real identifier. That is NoPII, and it deploys in the time it takes to change a base URL.</p>
+        <div class="np-ctas" style="margin-top:32px">
+          <a class="np-btn np-btn--secondary" href="/nopii/how-it-works/"><span>See how it works</span><span class="np-btn__arrow" aria-hidden="true">→</span></a>
+        </div>
+      </div>
+      <div class="np-splitmedia__media">{{< img src="/assets/np-prompt-transfer.jpg" alt="Many sources converging into a single point — every prompt is a data transfer." loading="eager" >}}</div>
+    </div>
+  </section>
+
+  <!-- SECTION 4 · Solution highlights -->
+  <section class="np-section np-rule-top np-bg-cloud np-grid">
+    <div class="np-container">
+      <div class="np-reveal" style="max-width:760px">
+        <h2 class="np-h2">Built for <em>LLM traffic</em>, not retrofitted from a data-loss tool.</h2>
+      </div>
+      <div class="np-cards np-cards--4">
+        <article class="np-card np-reveal">
+          <div class="np-card__n">01</div>
+          <h3 class="np-card__title">Tokenization, not redaction</h3>
+          <p class="np-card__body">Redaction and masking destroy the context a model needs to reason. Deterministic tokens preserve it: same value, same token, full output quality.</p>
+        </article>
+        <article class="np-card np-reveal">
+          <div class="np-card__n">02</div>
+          <h3 class="np-card__title">Round-trip detokenization</h3>
+          <p class="np-card__body">Responses come back with real data restored. Your application behaves exactly as before. Users never see a token.</p>
+        </article>
+        <article class="np-card np-reveal">
+          <div class="np-card__n">03</div>
+          <h3 class="np-card__title">Fail-safe by default</h3>
+          <p class="np-card__body">If tokenization ever fails, the request is blocked. Sensitive data never leaks on a best-effort basis. That is not a setting, it is the architecture.</p>
+        </article>
+        <article class="np-card np-reveal">
+          <div class="np-card__n">04</div>
+          <h3 class="np-card__title">Context phrase neutralization</h3>
+          <p class="np-card__body">Phrases that trigger model safety refusals on tokenized data are neutralized in the proxy. A real failure mode that an in-house build rarely anticipates.</p>
+        </article>
+        <article class="np-card np-reveal">
+          <div class="np-card__n">05</div>
+          <h3 class="np-card__title">Secret and API key detection</h3>
+          <p class="np-card__body">Fourteen pattern families of credentials, from cloud keys to database connection strings to private keys, caught in the same pass as PII detection, on every request including streaming.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5 · Benefits -->
+  <section class="np-section np-rule-top">
+    <div class="np-container">
+      <div class="np-reveal" style="max-width:760px">
+        <h2 class="np-h2">What two lines of code <em>buys you</em>.</h2>
+      </div>
+      <div class="np-cols">
+        <div class="np-col np-reveal">
+          <h3 class="np-col__title">The launch unblocked</h3>
+          <p class="np-col__body">Compliance gets architecture instead of assurances: tokenized traffic, per-request audit logs, block-by-default failure, BAA available. The &ldquo;no&rdquo; becomes &ldquo;yes, through the proxy.&rdquo; NoPII is not just a privacy layer; it is an AI adoption layer, built for teams navigating HIPAA, GDPR, CCPA, PCI DSS, SOX, and the EU AI Act.</p>
+        </div>
+        <div class="np-col np-reveal">
+          <h3 class="np-col__title">Model freedom kept</h3>
+          <p class="np-col__body">One proxy fronts 9+ providers. Switch models, run several at once, test next week's release. Your privacy controls do not reset when your model choice changes.</p>
+        </div>
+        <div class="np-col np-reveal">
+          <h3 class="np-col__title">Intelligence preserved</h3>
+          <p class="np-col__body">Deterministic tokens keep multi-turn conversations coherent and multi-step reasoning intact. You shipped an AI feature. NoPII does not lobotomize it at the proxy.</p>
+        </div>
+      </div>
+      <div class="np-ctas np-reveal" style="margin-top:44px">
+        <a class="np-btn np-btn--secondary" href="/pricing/#nopii"><span>See pricing</span></a>
+        <a class="np-btn np-btn--primary" href="https://app.nopii.co"><span>Get started for free</span><span class="np-btn__arrow" aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 6 · Differentiation -->
+  <section class="np-section np-rule-top np-bg-cloud">
+    <div class="np-container">
+      <div class="np-split">
+        <div class="np-reveal">
+          <h2 class="np-h2">Tokenization is <em>not masking</em>. The difference decides whether your AI still works.</h2>
+          <p class="np-split__body">Most tools that touch sensitive data in the AI path redact: they replace values with placeholders or scrub them entirely. The data is protected and the reasoning is destroyed, in one move, and nothing can be restored in the response. NoPII tokenizes deterministically and round-trips, which protects the data and preserves the reasoning.</p>
+          <p class="np-split__body">Broader data-loss suites and AI gateways are useful for their jobs; inline masking inside them is a feature. For NoPII, compliance-grade tokenization of LLM traffic is the entire product.</p>
+          <p class="np-honesty"><span class="np-tick">↳</span><span>If your problem is employees pasting data into consumer chatbots across hundreds of SaaS apps, you need endpoint data-loss prevention, and we will tell you so. NoPII protects the LLM traffic your applications generate.</span></p>
+        </div>
+        <div class="np-reveal">
+          <table class="np-ctable np-ctable--wide">
+            <thead>
+              <tr><th>Redaction and masking</th><th class="is-np">NoPII tokenization</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Placeholders destroy entity relationships</td><td class="is-np">Deterministic tokens preserve them</td></tr>
+              <tr><td>Placeholder redaction leaves nothing to restore</td><td class="is-np">NoPII restores its own tokens, so your app gets real data back</td></tr>
+              <tr><td>Models often refuse scrubbed prompts</td><td class="is-np">Context neutralization prevents refusals</td></tr>
+              <tr><td>Best effort on failure</td><td class="is-np">Block-by-default on failure</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 6b · Under the hood (accordion) -->
+  <section class="np-section np-rule-top">
+    <div class="np-container">
+      <p class="np-eyebrow">Under the Hood</p>
+      <div style="max-width:760px"><h2 class="np-h2">The details an <em>engineer or auditor</em> will ask for.</h2></div>
+      <div class="np-acc">
+        <details open>
+          <summary>Deterministic tokenization</summary>
+          <div class="np-acc__body">The same plaintext always produces the same token. &ldquo;John Smith&rdquo; in message 1 and message 10 map to the same <code>[NAME: Ry0Ixd1]</code> token, preserving cross-message context without ever exposing real data to the model.</div>
+        </details>
+        <details>
+          <summary>Context phrase neutralization</summary>
+          <div class="np-acc__body">NoPII does not just mask values. It neutralizes data-type labels that could trigger model safety refusals or re-identify sensitive categories. <code>Social security number</code> becomes <code>ID number</code>, <code>credit card number</code> becomes <code>account number</code>, <code>date of birth</code> becomes <code>date</code>, so the model processes tokens without recognizing the underlying data type.</div>
+        </details>
+        <details>
+          <summary>Fail-safe architecture</summary>
+          <div class="np-acc__body">If detection encounters an error, the proxy blocks the request rather than letting unprotected data through. Every decision is logged for audit.</div>
+        </details>
+        <details>
+          <summary>Streaming support</summary>
+          <div class="np-acc__body">Standard and streaming <code>SSE</code> responses are both supported. Token replacement happens on the fly as chunks arrive, so latency impact is minimal even for long streaming completions.</div>
+        </details>
+        <details>
+          <summary>Configurable token retention</summary>
+          <div class="np-acc__body">Vault tokens carry a time-to-live that controls how long tokenized data is stored. Free tier tokens expire after one day. Pro and Enterprise can set retention from one day to permanent. When a token expires, the underlying data is permanently deleted from the vault.</div>
+        </details>
+        <details>
+          <summary>Secret and API key detection</summary>
+          <div class="np-acc__body">Cloud provider keys, model API keys, payment and code-platform tokens, database connection strings, private keys, and auth tokens are detected across 14 pattern families, replaced with vault tokens, restored in the response, and logged in the audit trail. On by default for new accounts.</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 6c · Admin console (tabs) -->
+  <section class="np-section np-rule-top np-bg-cloud">
+    <div class="np-container">
+      <p class="np-eyebrow">Admin Console</p>
+      <div style="max-width:760px"><h2 class="np-h2">One dashboard for <em>three teams</em>.</h2><p class="np-lead">Security, compliance, and engineering share one admin console.</p></div>
+      <div class="np-tabs">
+        <div class="np-tabs__list" role="tablist" aria-label="Admin console areas">
+          <button class="np-tab is-active" data-tab="t1" role="tab" aria-selected="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>Dashboard</button>
+          <button class="np-tab" data-tab="t2" role="tab" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3"/><circle cx="4" cy="12" r="2"/><circle cx="12" cy="6" r="2"/><circle cx="20" cy="15" r="2"/></svg>PII settings</button>
+          <button class="np-tab" data-tab="t3" role="tab" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V15z"/></svg>Configuration</button>
+          <button class="np-tab" data-tab="t4" role="tab" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Live chat playground</button>
+          <button class="np-tab" data-tab="t5" role="tab" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="11" width="3" height="6"/><rect x="12" y="7" width="3" height="10"/><rect x="17" y="13" width="3" height="4"/></svg>Usage analytics</button>
+          <button class="np-tab" data-tab="t6" role="tab" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h4"/></svg>Audit log</button>
+          <button class="np-tab" data-tab="t7" role="tab" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>Token purge</button>
+        </div>
+        <div class="np-tabs__panels">
+          <div class="np-tabpanel is-active" data-panel="t1" role="tabpanel"><h3 class="np-tabpanel__title">Dashboard</h3><p class="np-tabpanel__body">A real-time view of your deployment: total requests, detections, entity-type distribution, provider breakdown.</p></div>
+          <div class="np-tabpanel" data-panel="t2" role="tabpanel"><h3 class="np-tabpanel__title">PII settings</h3><p class="np-tabpanel__body">Choose which entity types to detect, set sensitivity thresholds, per tenant.</p></div>
+          <div class="np-tabpanel" data-panel="t3" role="tabpanel"><h3 class="np-tabpanel__title">Configuration</h3><p class="np-tabpanel__body">Manage provider keys, configure behavior, connect Langfuse for per-tenant observability.</p></div>
+          <div class="np-tabpanel" data-panel="t4" role="tabpanel"><h3 class="np-tabpanel__title">Live chat playground</h3><p class="np-tabpanel__body">See the raw input, the tokenized version sent to the model, and the restored response, side by side.</p></div>
+          <div class="np-tabpanel" data-panel="t5" role="tabpanel"><h3 class="np-tabpanel__title">Usage analytics</h3><p class="np-tabpanel__body">API volume, detection rates, and token usage with exportable reports.</p></div>
+          <div class="np-tabpanel" data-panel="t6" role="tabpanel"><h3 class="np-tabpanel__title">Audit log</h3><p class="np-tabpanel__body">Every detection and tokenization event logged with timestamp, entity type, and tenant context.</p></div>
+          <div class="np-tabpanel" data-panel="t7" role="tabpanel"><h3 class="np-tabpanel__title">Token purge</h3><p class="np-tabpanel__body">Delete every tokenized value tied to one individual to fulfill a GDPR erasure request. One click, and the proof is in the log.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 6d · Supported entity types (pills) -->
+  <section class="np-section np-rule-top">
+    <div class="np-container">
+      <p class="np-eyebrow">Supported Entity Types</p>
+      <div style="max-width:760px"><h2 class="np-h2">35+ entity types, across <em>five categories</em>.</h2></div>
+      <div class="np-cats">
+        <div class="np-cat">
+          <div class="np-cat__name">Identity</div>
+          <div class="np-pills">
+            <span class="np-pill">Person names</span>
+            <span class="np-pill">Email addresses</span>
+            <span class="np-pill">Phone numbers</span>
+            <span class="np-pill">Physical addresses</span>
+            <span class="np-pill">Dates of birth</span>
+          </div>
+        </div>
+        <div class="np-cat">
+          <div class="np-cat__name">Government IDs</div>
+          <div class="np-pills">
+            <span class="np-pill">Social Security numbers</span>
+            <span class="np-pill">Passport numbers</span>
+            <span class="np-pill">Driver's license numbers</span>
+            <span class="np-pill">Tax identification numbers</span>
+          </div>
+        </div>
+        <div class="np-cat">
+          <div class="np-cat__name">Financial</div>
+          <div class="np-pills">
+            <span class="np-pill">Credit card numbers</span>
+            <span class="np-pill">Bank account numbers</span>
+            <span class="np-pill">Routing numbers</span>
+            <span class="np-pill">IBAN and SWIFT codes</span>
+          </div>
+        </div>
+        <div class="np-cat">
+          <div class="np-cat__name">Technical</div>
+          <div class="np-pills">
+            <span class="np-pill">IP addresses</span>
+            <span class="np-pill">MAC addresses</span>
+            <span class="np-pill">Crypto wallet addresses</span>
+            <span class="np-pill">URLs carrying sensitive parameters</span>
+          </div>
+        </div>
+        <div class="np-cat">
+          <div class="np-cat__name">Security</div>
+          <div class="np-pills">
+            <span class="np-pill">API keys and secrets</span>
+            <span class="np-pill">Database connection strings</span>
+            <span class="np-pill">Private keys and certificates</span>
+            <span class="np-pill">JWTs and auth tokens</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 7 · Proof band -->
+  <section class="np-section np-proof">
+    <div class="np-container">
+      <div style="max-width:760px"><h2 class="np-h2">The numbers.</h2></div>
+      <div class="np-stats np-reveal">
+        <div class="np-stat"><div class="np-stat__num">2 lines</div><div class="np-stat__label">total code change to deploy</div></div>
+        <div class="np-stat"><div class="np-stat__num">&lt;5 min</div><div class="np-stat__label">from signup to protected traffic</div></div>
+        <div class="np-stat"><div class="np-stat__num">9+ LLMs</div><div class="np-stat__label">supported under one proxy</div></div>
+        <div class="np-stat"><div class="np-stat__num">109 tests</div><div class="np-stat__label">published detection benchmark</div></div>
+      </div>
+      <div class="np-cert np-reveal">PCI DSS Level 1 &middot; SOC 2 Type II &middot; BAA available &middot; Patent Pending</div>
+    </div>
+  </section>
+
+  <!-- SECTION 8 · Final CTA -->
+  <section class="np-section np-ctaband">
+    <div class="np-container np-reveal">
+      <div class="np-ctaband__inner">
+        <h2 class="np-h2">Ship the AI feature. <em>Keep the data</em>.</h2>
+        <p class="np-ctaband__body">Start free with one million protected tokens a month, or talk to us about enterprise deployment.</p>
+        <div class="np-ctaband__ctas">
+          <a class="np-btn np-btn--primary" href="https://app.nopii.co"><span>Start free at app.nopii.co</span><span class="np-btn__arrow" aria-hidden="true">→</span></a>
+          <a class="np-btn np-btn--secondary" href="/nopii/how-it-works/"><span>How NoPII works</span></a>
+        </div>
+      </div>
+    </div>
+  </section>

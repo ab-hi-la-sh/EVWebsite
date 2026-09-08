@@ -1,0 +1,7 @@
+/* The img partial wraps images in <picture> for the WebP source. That inserts a
+   box between the image and its original parent, which breaks two things in the
+   ported CSS: selectors written for <img> as a direct child, and mix-blend-mode
+   (the wrapper changes what the image blends against — vault/use-cases' hero
+   diagram rendered blank because of it). display:contents removes the wrapper's
+   box so the image lays out and blends exactly as an unwrapped <img> did. */
+picture { display: contents; }

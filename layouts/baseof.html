@@ -8,6 +8,7 @@
 {{ partial "head/favicons.html" . }}
 <script>document.documentElement.className += ' np-js';</script>
 {{ partial "head/styles.html" . }}
+{{ partial "head/schema.html" . }}
 {{ block "head" . }}{{ end }}
 </head>
 <body{{ with .Params.bodyClass }} class="{{ . }}"{{ end }}>

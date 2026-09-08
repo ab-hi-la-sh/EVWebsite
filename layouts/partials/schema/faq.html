@@ -1,0 +1,32 @@
+{{- /*
+  FAQPage schema derived from the page's own visible <details> accordion.
+
+  The old site hand-maintained this JSON separately and it had already drifted:
+  nopii/faqs listed 14 questions but only 12 in schema (and one schema entry
+  matched no question on the page); vault/faqs had 10 visible, 9 in schema.
+  Google requires schema to match visible content, so this reads the rendered
+  content instead — one source, no drift possible.
+*/ -}}
+{{- /* Opt-in: not every <details> accordion is an FAQ. nopii/overview's
+       "Under the Hood" list is feature descriptions ("Deterministic
+       tokenization"), which must not be published as Questions. */ -}}
+{{- if .Params.faqSchema -}}
+{{- $qa := slice -}}
+{{- range findRE `(?s)<details.*?</details>` .Content -}}
+  {{- $block := . -}}
+  {{- $q := "" -}}{{- $a := "" -}}
+  {{- range first 1 (findRE `(?s)<summary[^>]*>.*?</summary>` $block) -}}
+    {{- $q = . | replaceRE `<[^>]*>` "" | htmlUnescape | strings.TrimSpace -}}
+  {{- end -}}
+  {{- range first 1 (findRE `(?s)<div class="np-acc__body">.*?</div>` $block) -}}
+    {{- $a = . | replaceRE `<[^>]*>` "" | htmlUnescape | strings.TrimSpace -}}
+  {{- end -}}
+  {{- if and $q $a -}}
+    {{- $qa = $qa | append (dict "@type" "Question" "name" $q
+          "acceptedAnswer" (dict "@type" "Answer" "text" $a)) -}}
+  {{- end -}}
+{{- end -}}
+{{- with $qa -}}
+<script type="application/ld+json">{{ (dict "@context" "https://schema.org" "@type" "FAQPage" "mainEntity" .) | jsonify | safeJS }}</script>
+{{- end -}}
+{{- end -}}

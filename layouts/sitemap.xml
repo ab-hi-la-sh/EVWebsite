@@ -1,0 +1,13 @@
+{{- /* The old hand-written sitemap listed 28 of 29 pages, deliberately omitting
+       login.html. Honour that with an explicit frontmatter flag. */ -}}
+{{ printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  {{- range site.Pages }}
+  {{- if not .Params.excludeFromSitemap }}
+  <url>
+    <loc>{{ .Permalink }}</loc>
+    {{- with .Lastmod }}<lastmod>{{ .Format "2006-01-02" }}</lastmod>{{ end }}
+  </url>
+  {{- end }}
+  {{- end }}
+</urlset>

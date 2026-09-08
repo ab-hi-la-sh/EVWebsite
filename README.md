@@ -19,11 +19,15 @@ Plan: `~/Desktop/enigma-hugo-migration-plan.md`.
     layouts/partials/img.html + shortcodes/img.html   responsive <picture>
     scripts/port_page.py   ports one old .html page into content/ + assets/
 
+Content pages are .html, not .md: they are designed markup, and Hugo passes
+.html content through verbatim. As markdown, Goldmark treated the indented
+HTML after a blank line as a code block and escaped it into visible text.
+
 ## Migration status
 
 - [x] Phase 1 — shell, nav, footer
 - [x] Phase 2 — CSS + image pipeline
-- [ ] Phase 3 — 28 static pages
+- [x] Phase 3 — 26 static pages (index -> Phase 4, blog -> Phase 5)
 - [ ] Phase 4 — homepage de-React
 - [ ] Phase 5 — blog
 - [ ] Phase 6 — SEO + redirects

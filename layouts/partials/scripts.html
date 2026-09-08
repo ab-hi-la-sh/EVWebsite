@@ -9,3 +9,7 @@
 {{- $js := $res | resources.Concat (printf "js/bundle-%d.js" (delimit $paths "|" | hash.FNV32a)) -}}
 {{- if hugo.IsProduction }}{{ $js = $js | minify | fingerprint }}{{ end -}}
 <script src="{{ $js.RelPermalink }}"{{ with $js.Data.Integrity }} integrity="{{ . }}" crossorigin="anonymous"{{ end }} defer></script>
+{{- /* External embeds declared per page (HubSpot form loader). */ -}}
+{{- range .Params.externalScripts }}
+<script src="{{ . }}" defer></script>
+{{- end }}

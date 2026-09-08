@@ -1,0 +1,10 @@
+{{- /* BreadcrumbList from frontmatter. The old pages hardcoded this JSON with
+       .html URLs, which would all 301 after the move to clean URLs. */ -}}
+{{- with .Params.breadcrumb -}}
+{{- $items := slice -}}
+{{- range $i, $c := . -}}
+  {{- $items = $items | append (dict "@type" "ListItem" "position" (add $i 1)
+        "name" $c.name "item" (absURL $c.url)) -}}
+{{- end -}}
+<script type="application/ld+json">{{ (dict "@context" "https://schema.org" "@type" "BreadcrumbList" "itemListElement" $items) | jsonify | safeJS }}</script>
+{{- end -}}

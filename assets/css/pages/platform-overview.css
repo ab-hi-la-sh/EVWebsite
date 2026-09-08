@@ -1,0 +1,81 @@
+/* platform/overview.html — page-scoped styles */
+/* Foundation stack visual (hero) */
+  .pf-stack{display:flex;flex-direction:column;gap:14px;width:100%;max-width:460px;margin:0 auto;}
+  .pf-layer{background:#fff;border:1px solid var(--border-hairline);border-radius:12px;padding:20px 24px;box-shadow:0 8px 24px rgba(42,51,64,.06);}
+  .pf-layer__t{font-family:var(--ev-font-sans);font-size:15px;font-weight:600;color:var(--ev-ink);}
+  .pf-layer__s{font-family:var(--ev-font-sans);font-size:12px;letter-spacing:0.04em;text-transform:uppercase;color:var(--ev-slate);margin-top:4px;}
+  .pf-base{background:linear-gradient(150deg,#155277,#0F3D56);border:none;color:#fff;border-radius:14px;padding:26px 24px;box-shadow:0 24px 50px rgba(15,61,86,0.28);margin-top:6px;}
+  .pf-base .pf-layer__t{color:#fff;}
+  .pf-base .pf-layer__s{color:#9FC4D6;}
+  .pf-conn{height:18px;width:2px;background:var(--ev-cool-stone);margin:-8px auto;}
+
+  /* Product card bullets + role */
+  .pf-role{font-family:var(--ev-font-sans);font-size:13.5px;line-height:1.5;color:var(--ev-slate);margin:6px 0 0;}
+  .pf-role b{color:var(--ev-ink);font-weight:600;}
+  .pf-list{list-style:none;margin:18px 0 0;padding:18px 0 0;border-top:1px solid var(--border-hairline);display:flex;flex-direction:column;gap:11px;}
+  .pf-list li{display:flex;gap:11px;align-items:flex-start;font-size:15px;line-height:1.5;color:var(--text-body);}
+  .pf-list .np-tick{color:var(--ev-mineral-blue);flex:none;margin-top:1px;font-weight:600;}
+  .pf-card__link{margin-top:22px;}
+
+  /* Shared-foundation diagram */
+  .pf-found{display:flex;flex-direction:column;gap:14px;}
+  .pf-found__rail{background:linear-gradient(135deg,#155277,#0F3D56);color:#fff;border-radius:12px;padding:18px 22px;display:flex;align-items:center;gap:12px;}
+  .pf-found__rail svg{width:22px;height:22px;color:#9FC4D6;flex:none;}
+  .pf-found__rail b{font-family:var(--ev-font-sans);font-size:14px;font-weight:600;}
+  .pf-found__rail span{font-family:var(--ev-font-sans);font-size:12.5px;color:rgba(226,236,244,0.78);display:block;margin-top:2px;}
+  .pf-found__tags{display:flex;gap:10px;}
+  .pf-found__tag{flex:1;text-align:center;background:#fff;border:1px solid var(--border-hairline);border-radius:10px;padding:12px 8px;font-family:var(--ev-font-sans);font-size:13px;font-weight:600;color:var(--ev-ink);}
+
+  .pf-bullets{list-style:none;margin:26px 0 0;padding:0;display:flex;flex-direction:column;gap:14px;}
+  .pf-bullets li{display:flex;gap:12px;align-items:flex-start;font-size:15px;line-height:1.5;color:var(--text-body);}
+  .pf-bullets .np-tick{color:var(--ev-mineral-blue);flex:none;font-weight:600;margin-top:1px;}
+
+  /* (1) Hero stack layer icons */
+  .pf-layer{display:flex;align-items:center;gap:16px;}
+  .pf-layer__ic{width:48px;height:48px;border-radius:11px;overflow:hidden;flex:none;background:var(--ev-warm-cloud);border:1px solid var(--border-hairline);}
+  .pf-layer__ic img{width:100%;height:100%;object-fit:cover;display:block;mix-blend-mode:multiply;}
+  .pf-layer__tx{min-width:0;}
+  .pf-base .pf-layer__ic{background:#fff;border-color:rgba(255,255,255,0.35);}
+
+  /* (2) Section 2 statement — weight play + staggered reveal */
+  .pf-stmts{max-width:none;}
+  .pf-stmt{font-family:var(--font-display);font-size:clamp(26px,3.6vw,44px);font-weight:300;line-height:1.28;letter-spacing:-0.022em;color:var(--ev-slate);margin:0;}
+  .pf-stmt + .pf-stmt{margin-top:12px;}
+  .pf-stmt b{font-weight:700;color:var(--ev-mineral-blue);}
+  .pf-stmt em{font-style:normal;font-weight:600;color:var(--text-heading);}
+  .np-js .pf-stmt{opacity:0;transform:translateY(18px);transition:opacity .6s var(--np-ease),transform .6s var(--np-ease);}
+  .np-js .pf-stmts.is-shown .pf-stmt{opacity:1;transform:none;}
+  .pf-stmts.is-shown .pf-stmt:nth-child(1){transition-delay:.05s;}
+  .pf-stmts.is-shown .pf-stmt:nth-child(2){transition-delay:.22s;}
+  .pf-stmts.is-shown .pf-stmt:nth-child(3){transition-delay:.39s;}
+  @media (prefers-reduced-motion:reduce){.np-js .pf-stmt{opacity:1!important;transform:none!important;}}
+
+  /* (3) Section 3 cards — product icon in each box */
+  .pf-cardhead{display:flex;align-items:center;gap:13px;margin-bottom:6px;}
+  .pf-cardic{width:50px;height:50px;border-radius:12px;overflow:hidden;flex:none;background:var(--ev-warm-cloud);border:1px solid var(--border-hairline);}
+  .pf-cardic img{width:100%;height:100%;object-fit:cover;display:block;mix-blend-mode:multiply;}
+  .pf-cardhead .np-card__title{margin:0;}
+
+  /* (4) Competitive table — Enigma Vault column stands out */
+  .pf-ctable{border-collapse:separate;border-spacing:0;}
+  .pf-ctable th,.pf-ctable td{border-bottom:none;}
+  .pf-ctable thead th{padding-bottom:12px;}
+  .pf-ctable th.is-np{color:#fff;background:var(--ev-mineral-blue);text-align:left;padding:14px 20px;border-radius:12px 12px 0 0;}
+  .pf-ctable td{border-bottom:1px solid var(--border-hairline);}
+  .pf-ctable td.is-np{background:var(--ev-mineral-25);color:var(--ev-ink);font-weight:600;border-bottom:1px solid #fff;position:relative;padding-left:42px;}
+  .pf-ctable td.is-np::before{content:"";position:absolute;left:18px;top:19px;width:15px;height:15px;border-radius:50%;background:var(--ev-mineral-blue);
+    -webkit-mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='white' d='M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z'/></svg>") center/13px no-repeat;
+            mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='white' d='M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z'/></svg>") center/13px no-repeat;}
+  .pf-ctable tr:last-child td.is-np{border-radius:0 0 12px 12px;border-bottom:none;}
+  .pf-ctable td.is-np{box-shadow:1px 0 0 rgba(15,61,86,0.08), -1px 0 0 rgba(15,61,86,0.08);}
+
+  /* (5) Certified spine — fine-rule grid background */
+  .pf-spine{position:relative;overflow:hidden;}
+  .pf-spine::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:0.6;
+    background-image:linear-gradient(var(--border-hairline) 1px,transparent 1px),linear-gradient(90deg,var(--border-hairline) 1px,transparent 1px);
+    background-size:48px 48px;
+    -webkit-mask-image:radial-gradient(ellipse 78% 72% at 50% 38%, #000 0%, rgba(0,0,0,0.4) 58%, transparent 82%);
+            mask-image:radial-gradient(ellipse 78% 72% at 50% 38%, #000 0%, rgba(0,0,0,0.4) 58%, transparent 82%);}
+  .pf-spine::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+    background:radial-gradient(ellipse 60% 50% at 50% 30%, rgba(15,61,86,0.05), transparent 70%);}
+  .pf-spine > .np-container{position:relative;z-index:1;}

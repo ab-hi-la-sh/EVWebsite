@@ -1,0 +1,200 @@
+---
+title: "Searchable Field-Level Encryption API"
+metaTitle: "Searchable Field-Level Encryption API | Data Vault"
+description: "Encrypt sensitive fields and use tokens in your applications. Explore Data Vault searchable encryption, batch operations and access controls."
+ogImage: "/assets/og/vault-data.jpg"
+ogImageAlt: "Encrypt any field. Still search it. — Enigma Vault"
+styles: ["vaults.css"]
+breadcrumb:
+  - name: "The Vault"
+    url: "/vault/overview/"
+  - name: "Data Vault"
+    url: "/vault/data-vault/"
+---
+
+<!-- SECTION 1 · Hero -->
+  <header class="np-hero vp-hero">
+    <div class="np-container np-hero__inner">
+      <div class="np-hero__copy">
+        <nav class="vp-crumb" aria-label="Breadcrumb"><a href="/vault/overview/">The Vault</a><span class="vp-crumb__sep">/</span><span aria-current="page">Data Vault</span></nav>
+        <h1 class="np-h1">Encrypt any field. <em>Still search it</em>.</h1>
+        <p class="np-lead">Data Vault is a searchable field-level encryption API. It encrypts personal data, secrets, and identifiers with AES-256 and keeps them queryable while encrypted. Your database holds tokens. Your queries keep working. The plaintext lives in the vault.</p>
+        <div class="np-hero__ctas">
+          <a class="np-btn np-btn--primary" href="https://aws.amazon.com/marketplace/seller-profile?id=c77b8db1-5511-48b7-8ce5-9a8d4a1a8018" target="_blank" rel="noopener"><span>Get started free</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
+          <a class="np-btn np-btn--secondary" href="https://docs.enigmavault.io" target="_blank" rel="noopener"><span>View API docs</span></a>
+        </div>
+        <div class="vp-badges"><span class="vp-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>PCI DSS Level 1</span><span class="vp-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>SOC 2 Type II</span><span class="vp-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>AWS Partner</span></div>
+      </div>
+      <div class="np-hero__visual vp-hero__art">
+        <figure class="vp-plate">{{< img src="/assets/vault/hero-data.jpg" alt="Data Vault, searchable field-level encryption" loading="eager" >}}</figure>
+      </div>
+    </div>
+  </header>
+
+  <!-- SECTION 2 · The trade-off -->
+  <section class="np-section np-rule-top">
+    <div class="np-container">
+      <div style="max-width:820px"><p class="vp-eyebrow">The trade-off</p><h2 class="np-h2">Everyone else makes you <em>pick two</em>.</h2></div>
+      <div class="vp-fblocks">
+        <article class="vp-fblock">
+          <div class="vp-fblock__art"><span class="vp-fblock__n">The usual</span>{{< img src="/assets/vault/bowtie.jpg" alt="" loading="lazy" >}}</div>
+          <div class="vp-fblock__body">
+            <h3 class="vp-fblock__t">Encrypt the field, lose the query.</h3>
+            <p class="vp-fblock__b">Full-field encryption usually kills search, so teams encrypt the disk instead, leave the fields readable, and hope access controls hold. That protects against a stolen hard drive and nothing else.</p>
+            <ul class="vp-list vp-list--2">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Disk encryption only: fields stay readable</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Application-side crypto breaks lookups and joins</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Search forces a plaintext column back into the schema</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Every workaround widens the blast radius</span></li>
+            </ul>
+          </div>
+        </article>
+        <article class="vp-fblock vp-fblock--swap">
+          <div class="vp-fblock__art"><span class="vp-fblock__n">Data Vault</span>{{< img src="/assets/vault/core-nucleus.jpg" alt="" loading="lazy" >}}</div>
+          <div class="vp-fblock__body">
+            <h3 class="vp-fblock__t">Encrypt the field, keep the query.</h3>
+            <p class="vp-fblock__b">Fields are encrypted with AES-256 using unique per-field initialization vectors, and they stay searchable, so the workflows that depend on those fields never break.</p>
+            <ul class="vp-list vp-list--2">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>AES-256 at the field level, per-field IVs</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Search by plaintext without decrypting</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Deterministic tokens preserve joins and dedup</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>No schema change, no query rewrite</span></li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA rail -->
+  <section class="vp-cta">
+    <div class="vp-cta__inner">
+      <div class="vp-cta__tx"><p class="vp-cta__k">Free tier</p><p class="vp-cta__h">Encrypt your first fifteen hundred fields without a contract.</p></div>
+      <div class="vp-cta__btns">
+        <a class="np-btn np-btn--primary" href="https://aws.amazon.com/marketplace/seller-profile?id=c77b8db1-5511-48b7-8ce5-9a8d4a1a8018" target="_blank" rel="noopener"><span>Get started free</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
+        <a class="np-btn np-btn--secondary" href="/pricing/#vault"><span>See pricing</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3 · What a request looks like -->
+  <section class="np-section np-bg-cloud">
+    <div class="np-container">
+      <div style="max-width:760px"><p class="vp-eyebrow">The API</p><h2 class="np-h2">Send plaintext. <em>Get back a token</em>.</h2>
+      <p class="vp-prose">Two calls. Store the token anywhere, because it contains nothing.</p></div>
+      <div class="vp-code">
+        <div class="vp-code__bar"><span class="vp-code__dots"><span class="vp-code__dot"></span><span class="vp-code__dot"></span><span class="vp-code__dot"></span></span><span class="vp-code__file">datavault &mdash; curl</span></div>
+        <p class="vp-code__step">Step 1 &middot; Authenticate</p>
+<pre>TOKEN=$(curl -s -X POST https://api-auth.enigmavault.io/oauth2/token \
+  -d <span class="s">"grant_type=client_credentials"</span> \
+  -d <span class="s">"scope=io.enigmavault/datavault"</span> | jq -r .access_token)</pre>
+        <p class="vp-code__step">Step 2 &middot; Store a secret</p>
+<pre>curl -X POST https://api.enigmavault.io/datavault/secrets \
+  -H <span class="s">"Authorization: Bearer $TOKEN"</span> \
+  -H <span class="s">"Content-Type: application/json"</span> \
+  -d <span class="s">'[{"plaintext":"123-45-6789"}]'</span></pre>
+        <div class="vp-code__out"><span class="vp-code__outk">200 OK</span><code>[{ <span class="k">"token"</span>: <span class="s">"Ry0Ixd1qP8vKmN3aBcDeFg"</span>, <span class="k">"customIdentifier"</span>: null }]</code></div>
+      </div>
+      <div class="vp-note" style="max-width:900px"><span class="vp-note__lbl">Then what</span><p>Store that token in the column where the SSN used to be. Retrieve it, search by plaintext, or batch up to 5,000 secrets in a single request. Nothing else in your schema changes.</p></div>
+    </div>
+  </section>
+
+  <!-- SECTION 4 · Built for real databases -->
+  <section class="np-section np-rule-top">
+    <div class="np-container">
+      <div style="max-width:820px"><p class="vp-eyebrow">Capabilities</p><h2 class="np-h2">Searchable encryption <em>for application data</em>.</h2>
+<p class="np-lead" style="max-width:74ch">New to tokenization? Start with the <a href="/vault/overview/">Vault overview</a>.</p></div>
+      <div class="vp-icards vp-icards--3">
+        <article class="vp-icard"><div class="vp-icard__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></div><h3 class="vp-icard__t">Search without decrypting.</h3><p class="vp-icard__b">Look up records by plaintext value while the stored data stays ciphertext. A breach of your database yields a table of tokens that reference nothing.</p></article>
+        <article class="vp-icard"><div class="vp-icard__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 10a2 2 0 0 0-2 2c0 1.02-.1 2.51-.26 4"/><path d="M14 13.12c0 2.38 0 6.38-1 8.88"/><path d="M2 12a10 10 0 0 1 18-6"/><path d="M21.8 16c.2-2 .131-5.354 0-6"/><path d="M5 19.5C5.5 18 6 15 6 12a6 6 0 0 1 .34-2"/><path d="M9 6.8a6 6 0 0 1 9 5.2v2"/></svg></div><h3 class="vp-icard__t">Deterministic tokens.</h3><p class="vp-icard__b">The same value always produces the same token, so lookups, joins, and deduplication keep working. It is also the property that lets NoPII keep AI reasoning coherent, because NoPII runs on this infrastructure.</p></article>
+        <article class="vp-icard"><div class="vp-icard__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/></svg></div><h3 class="vp-icard__t">Batch to 5,000 per request.</h3><p class="vp-icard__b">Migrations and enrollment surges run as batch calls, not scripts that run all weekend.</p></article>
+        <article class="vp-icard"><div class="vp-icard__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/><circle cx="7.5" cy="7.5" r=".8" fill="currentColor"/></svg></div><h3 class="vp-icard__t">Custom identifiers.</h3><p class="vp-icard__b">Attach your own record IDs to every secret, so vault entries map cleanly onto your existing data model.</p></article>
+        <article class="vp-icard"><div class="vp-icard__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></div><h3 class="vp-icard__t">Ephemeral key sharing.</h3><p class="vp-icard__b">Share specific secrets across clients with one-time-use, time-limited keys that expire and self-destruct after use. No standing access to revoke later.</p></article>
+        <article class="vp-icard"><div class="vp-icard__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></div><h3 class="vp-icard__t">Deletion in one place.</h3><p class="vp-icard__b">Because the real value lives only in the vault, erasure resolves there. Tokens left behind in your systems reference nothing.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA rail -->
+  <section class="vp-cta">
+    <div class="vp-cta__inner">
+      <div class="vp-cta__tx"><p class="vp-cta__k">Integration</p><p class="vp-cta__h">One REST call from any language. No SDK required.</p></div>
+      <div class="vp-cta__btns">
+        <a class="np-btn np-btn--primary" href="https://docs.enigmavault.io" target="_blank" rel="noopener"><span>View API docs</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
+        <a class="np-btn np-btn--secondary" href="/request-demo/"><span>Request a demo</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5 · Security posture (dark) -->
+  <section class="np-section vp-dark">
+    <div class="vp-dark__bg" style="background-image:url('../assets/vault/dark-wave.png')"></div>
+    <div class="np-container">
+      <div style="max-width:820px"><p class="vp-eyebrow">Security posture</p><h2 class="np-h2">In plain terms, <em>for the review you are about to have</em>.</h2></div>
+      <div class="vp-defs">
+        <div class="vp-def"><div class="vp-def__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div><h3 class="vp-def__t">Encryption.</h3><p class="vp-def__b">AES-256-CBC at the field level, with a unique initialization vector per field. Nothing is encrypted twice the same way.</p></div>
+        <div class="vp-def"><div class="vp-def__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg></div><h3 class="vp-def__t">Keys.</h3><p class="vp-def__b">Held in managed KMS with per-tenant isolation and automatic rotation, with no downtime and no re-encryption drill. You never touch a key.</p></div>
+        <div class="vp-def"><div class="vp-def__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="9" x2="20" y2="9"/><line x1="4" y1="15" x2="20" y2="15"/><line x1="10" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="14" y2="21"/></svg></div><h3 class="vp-def__t">Tokens.</h3><p class="vp-def__b">128 bits of entropy in 22 Base64URL characters, generated by a CSPRNG. No structure to reverse, no algorithm to attack.</p></div>
+        <div class="vp-def"><div class="vp-def__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><h3 class="vp-def__t">Audit.</h3><p class="vp-def__b">Every request authenticated with OAuth2 machine-to-machine credentials and logged with client ID, IP, resource path, and response status, with full distributed tracing.</p></div>
+      </div>
+      <div class="np-ctas" style="margin-top:44px">
+        <a class="np-btn np-btn--primary" href="/platform/data-security/"><span>Read the security detail</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
+        <a class="np-btn np-btn--secondary" href="https://aws.amazon.com/marketplace/seller-profile?id=c77b8db1-5511-48b7-8ce5-9a8d4a1a8018" target="_blank" rel="noopener"><span>Get started free</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 6 · Where teams point it first -->
+  <section class="np-section np-rule-top">
+    <div class="np-container">
+      <div style="max-width:820px"><p class="vp-eyebrow">Where it lands</p><h2 class="np-h2">Where teams <em>point it first</em>.</h2>
+      <p class="vp-prose">The pattern is always the same: a column your application needs to search, holding a value you would rather not be holding.</p></div>
+      <div class="vp-imgcards">
+        <article class="vp-imgcard"><span class="vp-imgcard__art">{{< img src="/assets/vault/core-nucleus.jpg" alt="" loading="lazy" >}}</span><span class="vp-imgcard__body"><h3 class="vp-imgcard__t">Personal data in production.</h3><p class="vp-imgcard__b">SSNs, account numbers, and identifiers your application still needs to search.</p></span></article>
+        <article class="vp-imgcard"><span class="vp-imgcard__art">{{< img src="/assets/vault/core-glass.png" alt="" loading="lazy" >}}</span><span class="vp-imgcard__body"><h3 class="vp-imgcard__t">Secrets and credentials.</h3><p class="vp-imgcard__b">Values that should never sit in plaintext next to application data.</p></span></article>
+        <article class="vp-imgcard"><span class="vp-imgcard__art">{{< img src="/assets/vault/core-scales.jpg" alt="" loading="lazy" >}}</span><span class="vp-imgcard__body"><h3 class="vp-imgcard__t">Right-to-erasure programs.</h3><p class="vp-imgcard__b">Tokenize at capture and GDPR, CCPA, and DPDP deletion resolves at the vault instead of across every backup.</p></span></article>
+        <article class="vp-imgcard"><span class="vp-imgcard__art">{{< img src="/assets/vault/core-luminous.png" alt="" loading="lazy" >}}</span><span class="vp-imgcard__body"><h3 class="vp-imgcard__t">HIPAA-regulated fields.</h3><p class="vp-imgcard__b">Diagnoses, prescriptions, and lab results encrypted at the API level while non-sensitive metadata stays searchable.</p></span></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 7 · Pricing banner -->
+  <section class="vp-banner">
+    <div class="vp-banner__inner">
+      <div>
+        <p class="vp-eyebrow">Pricing</p>
+        <h2 class="np-h2" style="font-size:34px">Start free, <em>scale when your volume does</em>.</h2>
+        <p class="vp-banner__b">Fifteen hundred requests a month free forever, then per-request plans that fall to a penny at volume. Billed through the AWS Marketplace account you already have.</p>
+        <div class="np-ctas" style="margin-top:30px">
+          <a class="np-btn np-btn--primary" href="/pricing/#vault"><span>See pricing</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
+          <a class="np-btn np-btn--secondary" href="https://aws.amazon.com/marketplace/seller-profile?id=c77b8db1-5511-48b7-8ce5-9a8d4a1a8018" target="_blank" rel="noopener"><span>Get started free</span></a>
+        </div>
+      </div>
+      <div class="vp-banner__art">{{< img src="/assets/vault/radial-burst.jpg" alt="" loading="lazy" >}}</div>
+    </div>
+  </section>
+
+  <!-- SECTION 8 · Closing -->
+  <section class="np-section np-ctaband np-rule-top">
+    <div class="np-container">
+      <div class="np-ctaband__inner">
+        <h2 class="np-h2">Your queries keep working. <em>Your breach story changes completely</em>.</h2>
+        <div class="np-ctaband__ctas">
+          <a class="np-btn np-btn--primary" href="https://aws.amazon.com/marketplace/seller-profile?id=c77b8db1-5511-48b7-8ce5-9a8d4a1a8018" target="_blank" rel="noopener"><span>Get started free</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
+          <a class="np-btn np-btn--secondary" href="https://docs.enigmavault.io" target="_blank" rel="noopener"><span>Read the docs</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The other vaults -->
+  <section class="vp-others">
+    <div class="np-container">
+      <p class="vp-others__h">The other vaults</p>
+      <div class="vp-others__grid">
+        <a class="vp-other" href="/vault/card-vault/"><span class="vp-other__art">{{< img src="/assets/vault/hero-card.jpg" alt="Card Vault, payment card tokenization" loading="lazy" >}}</span><span class="vp-other__tx"><strong>Card Vault</strong><em>Payments without card custody</em></span></a>
+        <a class="vp-other" href="/vault/file-vault/"><span class="vp-other__art">{{< img src="/assets/vault/hero-file.jpg" alt="File Vault, encrypted file storage" loading="lazy" >}}</span><span class="vp-other__tx"><strong>File Vault</strong><em>Encrypted files, expiring access</em></span></a>
+        <a class="vp-other" href="/vault/customer-vault/"><span class="vp-other__art">{{< img src="/assets/vault/hero-customer.jpg" alt="Customer Vault, secure customer intake" loading="lazy" >}}</span><span class="vp-other__tx"><strong>Customer Vault</strong><em>Secure intake, no code</em></span></a>
+      </div>
+    </div>
+  </section>

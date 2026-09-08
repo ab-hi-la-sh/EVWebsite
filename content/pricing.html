@@ -1,0 +1,267 @@
+---
+title: "Pricing"
+metaTitle: "Pricing | Enigma Vault, NoPII & Triplets"
+description: "Compare Vault and NoPII plans, included usage and overages. Get scoped pricing for Customer Vault and Triplets based on your workflow and requirements."
+ogImage: "/assets/og/pricing.jpg"
+ogImageAlt: "Priced to the data you protect. — Enigma Vault"
+styles: ["pages/pricing.css"]
+scripts: ["pages/pricing.js"]
+faqSchema: true
+---
+
+<!-- SECTION 1 · Hero -->
+  <header class="np-hero pr-hero">
+    <div class="np-container np-hero__inner">
+      <div class="np-hero__copy">
+        <h1 class="np-h1">Choose the right plan <em>for the data you protect</em>.</h1>
+        <p class="np-lead">Every product starts free or starts with a conversation. Vault tiers are free forever on AWS Marketplace, NoPII protects your first million tokens a month at no cost, and Triplets comes back with a scoped proposal in two business days. What you are pricing against is the exposure you already carry.</p>
+        <div class="np-hero__ctas">
+          <a class="np-btn np-btn--primary" href="#vault" data-jump="vault"><span>The Vault</span></a>
+          <a class="np-btn np-btn--secondary" href="#nopii" data-jump="nopii"><span>NoPII</span></a>
+          <a class="np-btn np-btn--secondary" href="#triplets" data-jump="triplets"><span>Triplets</span></a>
+        </div>
+        <div class="pr-floor">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v6c0 4-3 6.6-7 9-4-2.4-7-5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg>
+          <p>Security is never a tier on any product. PCI DSS Level 1 and SOC 2 Type II infrastructure, AES-256 encryption, per-tenant key isolation, and full audit logging are the floor on every plan, including free.</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Tab rail -->
+  <nav class="pr-rail" aria-label="Pricing by product">
+    <div class="pr-rail__inner" role="tablist">
+      <button class="pr-tab is-active" type="button" role="tab" data-tab="vault" aria-selected="true">{{< img src="/assets/glyphs/vault-3d.png" alt="Enigma Vault product mark" loading="eager" >}}The Vault</button>
+      <button class="pr-tab" type="button" role="tab" data-tab="nopii" aria-selected="false">{{< img src="/assets/glyphs/nopii-3d.png" alt="NoPII product mark" loading="eager" >}}NoPII</button>
+      <button class="pr-tab" type="button" role="tab" data-tab="triplets" aria-selected="false">{{< img src="/assets/glyphs/triplets-3d.png" alt="Triplets product mark" loading="eager" >}}Triplets</button>
+    </div>
+  </nav>
+
+  <!-- PANEL · The Vault -->
+  <section class="np-section pr-panel is-active" id="vault" data-panel="vault" role="tabpanel">
+    <div class="np-container">
+      <div class="pr-phead"><span class="pr-phead__art">{{< img src="/assets/glyphs/vault-3d.png" alt="Enigma Vault product mark" loading="eager" >}}</span><div class="pr-phead__tx"><p class="pr-phead__tag">Trust the data</p><h2 class="np-h2">Vault <em>API pricing</em>.</h2></div></div>
+      <p class="pr-lead">Each vault is priced independently, so you pay only for the data shapes you actually protect. Billed through the AWS Marketplace account you already have. Comparable tokenization platforms start near $1,000 a month. Start at zero.</p>
+
+      <h3 class="pr-tname">Card Vault</h3>
+      <div class="pr-scroll">
+        <table class="pr-table">
+          <thead><tr><th class="pr-rowh"></th><th>Lite</th><th class="is-pop">Plus &middot; most popular</th><th>Premium</th></tr></thead>
+          <tbody>
+            <tr><th class="pr-rowh">Price</th><td><span class="pr-price">$0</span><br>per month, free forever</td><td class="is-pop"><span class="pr-price">$49.99</span><br>per month</td><td><span class="pr-price">$249.99</span><br>per month</td></tr>
+            <tr><th class="pr-rowh">Volume</th><td>1,000 requests per month</td><td class="is-pop">20,000 requests, roughly 200 to 300 daily transactions</td><td>250,000 requests, roughly 2,000 daily transactions</td></tr>
+            <tr><th class="pr-rowh">Overage</th><td>$0.08 per request</td><td class="is-pop">$0.04 per request</td><td>$0.02 per request</td></tr>
+            <tr><th class="pr-rowh">Includes</th><td>Tokenization and gateway proxy, community support</td><td class="is-pop">Ephemeral key sharing, email support</td><td>Dedicated encryption keys, priority support</td></tr>
+            <tr><th class="pr-rowh"></th><td class="pr-go"><a class="pr-gobtn pr-gobtn--alt" href="https://aws.amazon.com/marketplace/seller-profile?id=c77b8db1-5511-48b7-8ce5-9a8d4a1a8018" target="_blank" rel="noopener">Get started free<span aria-hidden="true">&#8594;</span></a></td><td class="pr-go is-pop"><a class="pr-gobtn" href="https://aws.amazon.com/marketplace/seller-profile?id=c77b8db1-5511-48b7-8ce5-9a8d4a1a8018" target="_blank" rel="noopener">Get started<span aria-hidden="true">&#8594;</span></a></td><td class="pr-go"><a class="pr-gobtn pr-gobtn--alt" href="https://aws.amazon.com/marketplace/seller-profile?id=c77b8db1-5511-48b7-8ce5-9a8d4a1a8018" target="_blank" rel="noopener">Get started<span aria-hidden="true">&#8594;</span></a></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="pr-tname">Data Vault</h3>
+      <div class="pr-scroll">
+        <table class="pr-table">
+          <thead><tr><th class="pr-rowh"></th><th>Lite</th><th class="is-pop">Plus &middot; most popular</th><th>Premium</th></tr></thead>
+          <tbody>
+            <tr><th class="pr-rowh">Price</th><td><span class="pr-price">$0</span><br>per month, free forever</td><td class="is-pop"><span class="pr-price">$49.99</span><br>per month</td><td><span class="pr-price">$249.99</span><br>per month</td></tr>
+            <tr><th class="pr-rowh">Volume</th><td>1,500 requests per month</td><td class="is-pop">30,000 requests, small to mid-scale encryption</td><td>400,000 requests, large-scale requirements</td></tr>
+            <tr><th class="pr-rowh">Overage</th><td>$0.06 per request</td><td class="is-pop">$0.03 per request</td><td>$0.01 per request</td></tr>
+            <tr><th class="pr-rowh">Includes</th><td>AES-256 field encryption, community support</td><td class="is-pop">Ephemeral key sharing, email support</td><td>Dedicated encryption keys, priority support</td></tr>
+            <tr><th class="pr-rowh"></th><td class="pr-go"><a class="pr-gobtn pr-gobtn--alt" href="https://aws.amazon.com/marketplace/seller-profile?id=c77b8db1-5511-48b7-8ce5-9a8d4a1a8018" target="_blank" rel="noopener">Get started free<span aria-hidden="true">&#8594;</span></a></td><td class="pr-go is-pop"><a class="pr-gobtn" href="https://aws.amazon.com/marketplace/seller-profile?id=c77b8db1-5511-48b7-8ce5-9a8d4a1a8018" target="_blank" rel="noopener">Get started<span aria-hidden="true">&#8594;</span></a></td><td class="pr-go"><a class="pr-gobtn pr-gobtn--alt" href="https://aws.amazon.com/marketplace/seller-profile?id=c77b8db1-5511-48b7-8ce5-9a8d4a1a8018" target="_blank" rel="noopener">Get started<span aria-hidden="true">&#8594;</span></a></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="pr-tname">File Vault</h3>
+      <div class="pr-scroll">
+        <table class="pr-table">
+          <thead><tr><th class="pr-rowh"></th><th>Lite</th><th class="is-pop">Plus &middot; most popular</th><th>Premium</th></tr></thead>
+          <tbody>
+            <tr><th class="pr-rowh">Price</th><td><span class="pr-price">$0</span><br>per month, free forever</td><td class="is-pop"><span class="pr-price">$49.99</span><br>per month</td><td><span class="pr-price">$249.99</span><br>per month</td></tr>
+            <tr><th class="pr-rowh">Storage</th><td>5GB per month</td><td class="is-pop">150GB, standard capacity</td><td>1TB, enterprise-grade storage</td></tr>
+            <tr><th class="pr-rowh">Includes</th><td>AES-GCM encryption, presigned URL upload, community support</td><td class="is-pop">Ephemeral key sharing, real-time file status, email support</td><td>Dedicated encryption keys, envelope encryption, priority support</td></tr>
+            <tr><th class="pr-rowh"></th><td class="pr-go"><a class="pr-gobtn pr-gobtn--alt" href="https://aws.amazon.com/marketplace/seller-profile?id=c77b8db1-5511-48b7-8ce5-9a8d4a1a8018" target="_blank" rel="noopener">Get started free<span aria-hidden="true">&#8594;</span></a></td><td class="pr-go is-pop"><a class="pr-gobtn" href="https://aws.amazon.com/marketplace/seller-profile?id=c77b8db1-5511-48b7-8ce5-9a8d4a1a8018" target="_blank" rel="noopener">Get started<span aria-hidden="true">&#8594;</span></a></td><td class="pr-go"><a class="pr-gobtn pr-gobtn--alt" href="https://aws.amazon.com/marketplace/seller-profile?id=c77b8db1-5511-48b7-8ce5-9a8d4a1a8018" target="_blank" rel="noopener">Get started<span aria-hidden="true">&#8594;</span></a></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pr-cards">
+        <article class="pr-card" id="customer-vault">
+          <h3 class="pr-card__t">Customer Vault pricing</h3>
+          <p class="pr-card__b">Secure intake deployment, priced by engagement. A turnkey Customer Vault tenant with branding, staff onboarding, and secure-link setup. No API integration is required.</p>
+          <a class="np-btn np-btn--secondary np-btn--sm" href="/contact/"><span>Contact sales</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
+        </article>
+        <article class="pr-card" id="agent-vault">
+          <h3 class="pr-card__t">Agent Vault pricing</h3>
+          <p class="pr-card__b">A fixed-scope eight-week operational engagement for card-on-file migration, built for aviation, cruise, clubs, dental, and home services. Priced by engagement.</p>
+          <a class="np-btn np-btn--secondary np-btn--sm" href="/contact/"><span>Contact sales</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
+        </article>
+        <article class="pr-card">
+          <h3 class="pr-card__t">Enterprise</h3>
+          <p class="pr-card__b">For custom volume, dedicated infrastructure, or enterprise requirements, contact our team for a tailored plan.</p>
+          <a class="np-btn np-btn--secondary np-btn--sm" href="mailto:hello@enigmavault.io"><span>Contact sales</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
+        </article>
+      </div>
+
+      <h3 class="pr-faqh">Vault pricing FAQ</h3>
+      <div class="np-acc" style="max-width:840px">
+        <details open>
+          <summary>What does "per vault" mean?</summary>
+          <div class="np-acc__body">Each vault is priced independently. Running Card Vault on Premium and Data Vault on Lite is a perfectly normal setup, and you can add a vault later without touching the ones you have.</div>
+        </details>
+        <details>
+          <summary>Is the infrastructure different on Lite?</summary>
+          <div class="np-acc__body">No. Every tier runs on the same certified infrastructure with the same encryption and per-tenant key isolation. Tiers change limits and support, never security.</div>
+        </details>
+        <details>
+          <summary>What happens when I exceed my plan?</summary>
+          <div class="np-acc__body">Overage is metered per request at the rates above, with no hard stop. If you exceed consistently, the next tier up is almost always cheaper.</div>
+        </details>
+        <details>
+          <summary>How does billing work?</summary>
+          <div class="np-acc__body">Through AWS Marketplace, on your existing AWS account and invoice. No new vendor onboarding for finance, and no contract to start.</div>
+        </details>
+        <details>
+          <summary>Is there a free trial of Plus or Premium features?</summary>
+          <div class="np-acc__body">The Lite tier is not a trial; it is free forever. For evaluating tier-specific features like dedicated keys, contact sales and we will set up an evaluation.</div>
+        </details>
+      </div>
+      <div class="np-ctas" style="margin-top:36px">
+        <a class="np-btn np-btn--primary" href="https://aws.amazon.com/marketplace/seller-profile?id=c77b8db1-5511-48b7-8ce5-9a8d4a1a8018" target="_blank" rel="noopener"><span>Start free on AWS Marketplace</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PANEL · NoPII -->
+  <section class="np-section pr-panel" id="nopii" data-panel="nopii" role="tabpanel">
+    <div class="np-container">
+      <div class="pr-phead"><span class="pr-phead__art">{{< img src="/assets/glyphs/nopii-3d.png" alt="NoPII product mark" loading="eager" >}}</span><div class="pr-phead__tx"><p class="pr-phead__tag">Trust the input</p><h2 class="np-h2">NoPII <em>pricing</em>.</h2></div></div>
+      <p class="pr-lead">Protection for AI traffic should not need a procurement cycle to try. The free tier is real, and it does not expire.</p>
+      <div class="pr-scroll">
+        <table class="pr-table">
+          <thead><tr><th class="pr-rowh"></th><th>Free</th><th class="is-pop">Pro &middot; most popular</th><th>Enterprise</th></tr></thead>
+          <tbody>
+            <tr><th class="pr-rowh">Price</th><td><span class="pr-price">$0</span><br>per month</td><td class="is-pop"><span class="pr-price">$50</span><br>per month</td><td><span class="pr-price">Custom</span></td></tr>
+            <tr><th class="pr-rowh">Protected tokens</th><td>1M per month</td><td class="is-pop">50M included, then $1 per additional million, no hard cap</td><td>Volume pricing</td></tr>
+            <tr><th class="pr-rowh">Retention</th><td>1 day</td><td class="is-pop">Configurable, 1 day to permanent</td><td>Configurable</td></tr>
+            <tr><th class="pr-rowh">Includes</th><td>All 9+ providers, 35+ entity categories, deterministic tokenization, fail-safe blocking, audit logging, admin console, no credit card</td><td class="is-pop">Everything in Free, plus multi-tenancy and roles, custom detection rules, priority support</td><td>Everything in Pro, plus SSO, SLA guarantees, custom deployment, volume discounts, dedicated account manager, BAA for healthcare</td></tr>
+            <tr><th class="pr-rowh"></th><td class="pr-go"><a class="pr-gobtn pr-gobtn--alt" href="https://app.nopii.co" target="_blank" rel="noopener">Get started free<span aria-hidden="true">&#8594;</span></a></td><td class="pr-go is-pop"><a class="pr-gobtn" href="https://app.nopii.co" target="_blank" rel="noopener">Get started<span aria-hidden="true">&#8594;</span></a></td><td class="pr-go"><a class="pr-gobtn pr-gobtn--alt" href="/contact/">Talk to sales<span aria-hidden="true">&#8594;</span></a></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="pr-faqh">NoPII pricing FAQ</h3>
+      <div class="np-acc" style="max-width:840px">
+        <details open>
+          <summary>What counts as a protected token?</summary>
+          <div class="np-acc__body">All input and output processed through the proxy: user prompts, model responses, and full API content. If it flows through NoPII, it is protected and it is counted.</div>
+        </details>
+        <details>
+          <summary>Is the free tier a trial?</summary>
+          <div class="np-acc__body">No. One million protected tokens a month is free indefinitely, with every provider and the full detection engine included. It exists so you can prove the architecture on your own traffic before anyone signs anything.</div>
+        </details>
+        <details>
+          <summary>What happens when I exceed my plan?</summary>
+          <div class="np-acc__body">On Pro, overage is metered at $1 per additional million tokens with no hard stop. On Free, you will be prompted to upgrade, and upgrading requires no re-integration.</div>
+        </details>
+        <details>
+          <summary>Are all providers available on every plan?</summary>
+          <div class="np-acc__body">Yes. All 9+ supported model providers are available on every plan, including Free. Provider access is never a paywall.</div>
+        </details>
+        <details>
+          <summary>Do you offer a BAA?</summary>
+          <div class="np-acc__body">Yes, for healthcare workloads on Enterprise, with the audit trail HIPAA programs expect.</div>
+        </details>
+      </div>
+      <div class="np-ctas" style="margin-top:36px">
+        <a class="np-btn np-btn--primary" href="https://app.nopii.co" target="_blank" rel="noopener"><span>Start free at app.nopii.co</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PANEL · Triplets -->
+  <section class="np-section pr-panel" id="triplets" data-panel="triplets" role="tabpanel">
+    <div class="np-container">
+      <div class="pr-phead"><span class="pr-phead__art">{{< img src="/assets/glyphs/triplets-3d.png" alt="Triplets product mark" loading="eager" >}}</span><div class="pr-phead__tx"><p class="pr-phead__tag">Trust the output</p><h2 class="np-h2">Triplets <em>pricing</em>.</h2></div></div>
+      <p class="pr-lead">Triplets is not priced from a rate card, because the two things that drive cost are yours: the size and shape of your evidence corpus, and the engagement model you need. The 48-hour Trust Baseline, a certified evidence corpus for a full therapeutic area, and embedded certification under your brand are scoped differently, so the honest answer starts with a conversation.</p>
+      <div class="np-ctas" style="margin-top:28px"><a class="np-btn np-btn--primary" href="#pr-form"><span>Get started</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a></div>
+      <p class="pr-lead" style="margin-top:34px"><strong style="color:var(--ev-ink);font-weight:600">How it works.</strong> Tell us about your corpus and the decisions you cannot afford to get wrong. We come back with a scoped proposal, typically within two business days. The Baseline requires no integration work on your side, and the certificate is yours either way.</p>
+
+      <h3 class="pr-faqh" style="margin-top:48px">Talk to us about Triplets pricing</h3>
+      <form class="pr-form" id="pr-form" name="triplets-pricing" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+        <input type="hidden" name="form-name" value="triplets-pricing">
+        <p hidden aria-hidden="true"><label>Leave this field empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+        <div class="pr-grid">
+          <div class="pr-field">
+            <label for="pr-name">Full name <span class="pr-req">*</span></label>
+            <input type="text" id="pr-name" name="Full Name" autocomplete="name" placeholder="Jordan Avery" required>
+          </div>
+          <div class="pr-field">
+            <label for="pr-email">Work email <span class="pr-req">*</span></label>
+            <input type="email" id="pr-email" name="Email" autocomplete="email" placeholder="jordan@acme.com" spellcheck="false" required>
+          </div>
+          <div class="pr-field">
+            <label for="pr-org">Organization <span class="pr-req">*</span></label>
+            <input type="text" id="pr-org" name="Organization" autocomplete="organization" placeholder="Acme Health" required>
+          </div>
+          <div class="pr-field">
+            <label for="pr-role">Role <span class="pr-req">*</span></label>
+            <input type="text" id="pr-role" name="Role" autocomplete="organization-title" placeholder="Head of medical information" required>
+          </div>
+          <div class="pr-field pr-field--full">
+            <label for="pr-fit">Which engagement fits best?</label>
+            <select id="pr-fit" name="Engagement">
+              <option>AI deployment certification</option>
+              <option>Certified evidence corpus</option>
+              <option>Embedded certification</option>
+              <option selected>Not sure yet</option>
+            </select>
+          </div>
+          <div class="pr-field pr-field--full">
+            <label for="pr-corpus">Tell us about your corpus</label>
+            <textarea id="pr-corpus" name="Corpus" placeholder="Rough document count, domains covered, and the questions it needs to answer"></textarea>
+          </div>
+        </div>
+        <div class="pr-form__cta">
+          <button type="submit" class="np-btn np-btn--primary"><span>Request a scoped proposal</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></button>
+        </div>
+        <p class="pr-form__note">We respond within two business days. Prefer email? <a href="mailto:hello@enigmavault.io">hello@enigmavault.io</a>.</p>
+      </form>
+
+      <h3 class="pr-faqh">Triplets pricing FAQ</h3>
+      <div class="np-acc" style="max-width:840px">
+        <details open>
+          <summary>Why is there no price list?</summary>
+          <div class="np-acc__body">Because scope drives the number. A Baseline on a focused corpus and continuous certification across a full therapeutic area are different engagements, and quoting one number for both would mislead in one direction or the other. A scoped proposal is faster than it sounds: two business days from your form to our number.</div>
+        </details>
+        <details>
+          <summary>What determines the cost?</summary>
+          <div class="np-acc__body">Corpus size and entity volume, the engagement model, and whether certification is one-time or continuous. Continuous certification is an annual subscription because the certificate has to be kept green as evidence changes.</div>
+        </details>
+        <details>
+          <summary>Is there a way to evaluate before committing?</summary>
+          <div class="np-acc__body">Yes, and it is the recommended path. The Trust Baseline is a fixed-scope, 48-hour engagement on a representative slice of your corpus, with no integration work on your side. Nobody fails a Baseline; its output is a map of your evidence boundary, and the report is yours either way.</div>
+        </details>
+        <details>
+          <summary>Is any of the architecture tier-gated?</summary>
+          <div class="np-acc__body">No. The full architecture, including the tri-state partition, provenance, and reproducible certificates, is present in every engagement. Scope changes the corpus covered, never the machinery.</div>
+        </details>
+        <details>
+          <summary>How does the cost compare to what we spend today?</summary>
+          <div class="np-acc__body">One manual systematic review costs roughly $141,000 in labor, and large research organizations run dozens to over a hundred per year. A certified corpus is scoped to cost less than one manual review while de-risking all of them, and we will show that math in your proposal.</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION · Closing -->
+  <section class="np-section np-ctaband np-rule-top">
+    <div class="np-container">
+      <div class="np-ctaband__inner">
+        <h2 class="np-h2">Not sure which product <em>you are pricing</em>?</h2>
+        <p class="np-ctaband__body">Start with the exposure that worries you most. AI answers you cannot verify: Triplets. Sensitive data in AI prompts: NoPII. Sensitive data at rest: the Vault. Or request a demo and we will map all three to your stack in one conversation.</p>
+        <div class="np-ctaband__ctas">
+          <a class="np-btn np-btn--primary" href="/request-demo/"><span>Request a demo</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
+        </div>
+      </div>
+    </div>
+  </section>

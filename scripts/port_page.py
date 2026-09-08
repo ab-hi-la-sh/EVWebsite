@@ -78,6 +78,38 @@ def rewrite(markup: str, page_dir: str) -> str:
     return re.sub(r'\b(href|src|poster|data-bg)=(["\'])([^"\']*)\2', sub, markup)
 
 
+ATTR_RE = re.compile(r'([\w:-]+)\s*=\s*"([^"]*)"')
+
+
+def imgs_to_shortcodes(markup: str) -> tuple[str, int]:
+    """Replace <img> tags whose source lives in assets/images/ with the img
+    shortcode, so they go through Hugo Pipes (WebP + srcset). Images that stay
+    at fixed URLs (og/, favicons, svg) are left as plain tags."""
+    count = 0
+
+    def sub(m):
+        nonlocal count
+        attrs = dict(ATTR_RE.findall(m.group(0)))
+        src = attrs.get("src", "")
+        if not src.startswith("/assets/"):
+            return m.group(0)
+        rel = src[len("/assets/"):]
+        if not (DST / "assets/images" / rel).exists():
+            return m.group(0)
+        count += 1
+        parts = [f'src="{src}"', f'alt="{attrs.get("alt", "")}"']
+        for a in ("class", "id", "style", "sizes", "fetchpriority"):
+            if attrs.get(a):
+                parts.append(f'{a}="{attrs[a]}"')
+        # Match the source exactly: an <img> with no loading attribute was
+        # eager, so keep it eager. Lazy-loading an above-the-fold hero that
+        # used to be eager would regress LCP.
+        parts.append(f'loading="{attrs.get("loading", "eager")}"')
+        return "{{< img " + " ".join(parts) + " >}}"
+
+    return re.sub(r"<img\b[^>]*>", sub, markup), count
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("source")
@@ -122,6 +154,7 @@ def main():
     if not m:
         sys.exit(f"{args.source}: no <main> block found")
     body = rewrite(m.group(1).strip(), page_dir)
+    body, n_imgs = imgs_to_shortcodes(body)
 
     # page-scoped inline <script> from <body> (skip GTM, which the partial owns)
     after_main = raw.split("</main>", 1)[1]
@@ -163,6 +196,7 @@ def main():
     print(f"{args.source} -> content/{args.dest}")
     print(f"  styles:  {styles or '-'}")
     print(f"  scripts: {scripts or '-'}")
+    print(f"  images:  {n_imgs} routed through Hugo Pipes")
 
 
 if __name__ == "__main__":

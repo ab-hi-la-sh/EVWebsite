@@ -1,0 +1,74 @@
+{{- /*
+  Responsive image via Hugo Pipes. Emits <picture> with a WebP srcset and a
+  same-format fallback, both fingerprinted and resized. On these renders WebP
+  lands ~95% under the source PNG (2120KB -> 96KB), which is the whole point.
+
+  Params (dict):
+    src      required. Path under assets/images/, with or without the leading
+             "/assets/" of the old site — both forms resolve.
+    alt      required (pass "" for decorative images)
+    class    class attribute on the <img>
+    sizes    sizes attribute; default "100vw"
+    widths   slice of ints; default 768 + native. Never upscales.
+    loading  "lazy" (default) or "eager"
+    fetchpriority, id, style  passed through
+
+  Hugo cannot encode AVIF, so WebP + fallback is the best available pair.
+*/ -}}
+{{- $src := .src -}}
+{{- $src = strings.TrimPrefix "/" $src -}}
+{{- $src = strings.TrimPrefix "assets/" $src -}}
+{{- $src = strings.TrimPrefix "images/" $src -}}
+{{- $r := resources.Get (printf "images/%s" $src) -}}
+
+{{- if not $r -}}
+  {{- warnf "img.html: no image at assets/images/%s — emitting plain <img> to /assets/%s" $src $src -}}
+  <img src="/assets/{{ $src }}" alt="{{ .alt }}"{{ with .class }} class="{{ . }}"{{ end }} loading="{{ .loading | default "lazy" }}" decoding="async">
+{{- else -}}
+  {{- $ext := strings.TrimPrefix "." (path.Ext $src) -}}
+  {{- if eq $ext "jpeg" }}{{ $ext = "jpg" }}{{ end -}}
+
+  {{- if .width -}}
+    {{- /* Fixed-size mode: one image at an exact width, no srcset. For icons
+           rendered at a known CSS size (nav thumbnails at 44px, etc.). */ -}}
+    {{- $w := cond (lt (int .width) $r.Width) (int .width) $r.Width -}}
+    {{- $a := $r.Process (printf "resize %dx webp q80" $w) -}}
+    {{- $b := $r.Process (printf "resize %dx %s q82" $w $ext) -}}
+<picture>
+  <source type="image/webp" srcset="{{ $a.RelPermalink }}">
+  <img src="{{ $b.RelPermalink }}" width="{{ $b.Width }}" height="{{ $b.Height }}" alt="{{ .alt }}"
+       {{- with .class }} class="{{ . }}"{{ end }}
+       loading="{{ .loading | default "lazy" }}" decoding="async">
+</picture>
+  {{- else -}}
+
+  {{- /* candidate widths, capped at the source width so we never upscale */ -}}
+  {{- $widths := .widths | default (slice 768 $r.Width) -}}
+  {{- $ws := slice -}}
+  {{- range (sort $widths) -}}
+    {{- if lt . $r.Width }}{{ $ws = $ws | append . }}{{ end -}}
+  {{- end -}}
+  {{- $ws = $ws | append $r.Width -}}
+
+  {{- $webp := slice -}}
+  {{- $fall := slice -}}
+  {{- range $ws -}}
+    {{- $w := . -}}
+    {{- $a := $r.Process (printf "resize %dx webp q80" $w) -}}
+    {{- $webp = $webp | append (printf "%s %dw" $a.RelPermalink $w) -}}
+    {{- $b := $r.Process (printf "resize %dx %s q82" $w $ext) -}}
+    {{- $fall = $fall | append (printf "%s %dw" $b.RelPermalink $w) -}}
+  {{- end -}}
+  {{- $largest := $r.Process (printf "resize %dx %s q82" (index (last 1 $ws) 0) $ext) -}}
+<picture>
+  <source type="image/webp" srcset="{{ delimit $webp ", " }}" sizes="{{ .sizes | default "100vw" }}">
+  <img src="{{ $largest.RelPermalink }}" srcset="{{ delimit $fall ", " }}" sizes="{{ .sizes | default "100vw" }}"
+       width="{{ $largest.Width }}" height="{{ $largest.Height }}" alt="{{ .alt }}"
+       {{- with .class }} class="{{ . }}"{{ end }}
+       {{- with .id }} id="{{ . }}"{{ end }}
+       {{- with .style }} style="{{ . | safeCSS }}"{{ end }}
+       {{- with .fetchpriority }} fetchpriority="{{ . }}"{{ end }}
+       loading="{{ .loading | default "lazy" }}" decoding="async">
+</picture>
+  {{- end -}}
+{{- end -}}

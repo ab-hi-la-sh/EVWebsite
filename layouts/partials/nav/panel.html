@@ -3,7 +3,7 @@
 {{- $wide := .group -}}
 <div class="hp-prod{{ if $wide }} hp-prod--wide{{ end }}">
   <div class="hp-prod__head">
-    <span class="hp-prod__ic"><img src="{{ .icon }}" alt="" loading="lazy"></span>
+    <span class="hp-prod__ic">{{ partial "img.html" (dict "src" .icon "alt" "" "width" 132) }}</span>
     <span class="hp-prod__ht">
       <span class="hp-prod__name">{{ .label }}</span>
       <span class="hp-prod__tag">{{ .tag }}</span>

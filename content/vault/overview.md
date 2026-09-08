@@ -22,7 +22,7 @@ scripts: ["pages/vault-overview.js"]
       </div>
       <div class="np-hero__visual vault-hero">
         <div class="vault-hero__art">
-          <img class="vault-hero__img" src="/assets/vault-hero-prism.png" alt="" aria-hidden="true">
+          {{< img src="/assets/vault-hero-prism.png" alt="" class="vault-hero__img" loading="eager" >}}
         </div>
       </div>
     </div>

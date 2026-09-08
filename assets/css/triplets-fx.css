@@ -1,0 +1,49 @@
+/* ============================================================
+   Triplets — shared depth/motion layer
+   Reveal-on-scroll, parallax dark bands, count-up, hero float.
+   Loaded after nopii.css on every Triplets page.
+   ============================================================ */
+
+/* Reveal on scroll (only when JS is present) */
+.np-js .np-reveal{opacity:0;transform:translateY(18px);
+  transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1);}
+.np-js .np-reveal.is-in{opacity:1;transform:none;}
+.np-js .np-reveal[data-d="1"]{transition-delay:.08s;}
+.np-js .np-reveal[data-d="2"]{transition-delay:.16s;}
+.np-js .np-reveal[data-d="3"]{transition-delay:.24s;}
+.np-js .np-reveal[data-d="4"]{transition-delay:.32s;}
+
+/* Parallax background layer inside a dark band. The layer is oversized
+   so the scroll translate never exposes an edge. */
+.tr-px{position:relative;overflow:hidden;}
+.tr-px__bg{position:absolute;inset:-16% 0;z-index:0;background-size:cover;background-position:center right;
+  background-repeat:no-repeat;will-change:transform;}
+.tr-px > .np-container{position:relative;z-index:1;}
+
+/* Hero glass: land, then breathe */
+.tr-hero-float{animation:trLand 1.2s cubic-bezier(.22,.61,.36,1) both, trFloat 7s ease-in-out 1.2s infinite;}
+@keyframes trFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-12px);}}
+
+/* Faint motif behind a light hero */
+.tr-heromotif{position:relative;overflow:hidden;}
+.tr-heromotif__bg{position:absolute;top:-6%;right:-4%;width:64%;height:120%;z-index:0;pointer-events:none;
+  background-position:right center;background-repeat:no-repeat;background-size:contain;
+  mix-blend-mode:multiply;opacity:0.5;will-change:transform;}
+.tr-heromotif > .np-container{position:relative;z-index:1;}
+@media (max-width:900px){.tr-heromotif__bg{display:none;}}
+
+/* Animated hovering data-fragment dots (brand motif) — for dark heroes */
+.tr-dots{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
+.tr-dot{position:absolute;background:#9FC4D6;will-change:transform,opacity;
+  animation:trDotFloat var(--dur,9s) ease-in-out var(--delay,0s) infinite;}
+@keyframes trDotFloat{
+  0%,100%{transform:translate3d(0,0,0);opacity:var(--o1,0.25);}
+  50%{transform:translate3d(var(--dx,0),var(--dy,-16px),0);opacity:var(--o2,0.7);}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .np-js .np-reveal{opacity:1;transform:none;transition:none;}
+  .tr-hero-float{animation:none;}
+  .tr-px__bg,.tr-heromotif__bg{transform:none !important;}
+  .tr-dot{animation:none;opacity:var(--o1,0.3);}
+}

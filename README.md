@@ -12,14 +12,17 @@ Plan: `~/Desktop/enigma-hugo-migration-plan.md`.
     data/footer.yml    footer model, ported from site-footer.js
     layouts/baseof.html + partials/   the shell every page shares
     assets/css/        tokens/, global.css (was nopii.css), nav.css, footer.css,
-                       pages/<page>.css for page-scoped blocks
+                       per-family sheets, pages/<page>.css for page-scoped blocks
     assets/js/         nav.js, pages/<page>.js
+    assets/images/     content images, processed to WebP by Hugo Pipes
+    static/assets/     fixed-URL files only: og/, favicons, logo, CSS backgrounds
+    layouts/partials/img.html + shortcodes/img.html   responsive <picture>
     scripts/port_page.py   ports one old .html page into content/ + assets/
 
 ## Migration status
 
 - [x] Phase 1 — shell, nav, footer
-- [ ] Phase 2 — CSS + image pipeline
+- [x] Phase 2 — CSS + image pipeline
 - [ ] Phase 3 — 28 static pages
 - [ ] Phase 4 — homepage de-React
 - [ ] Phase 5 — blog

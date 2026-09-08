@@ -1,0 +1,12 @@
+{{- /* Content-facing wrapper for partials/img.html.
+       {{< img src="/assets/vault/hero-card.png" alt="" class="foo" >}} */ -}}
+{{- partial "img.html" (dict
+      "src" (.Get "src")
+      "alt" (.Get "alt" | default "")
+      "class" (.Get "class")
+      "id" (.Get "id")
+      "style" (.Get "style")
+      "sizes" (.Get "sizes")
+      "loading" (.Get "loading")
+      "fetchpriority" (.Get "fetchpriority")
+) -}}

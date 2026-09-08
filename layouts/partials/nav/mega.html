@@ -7,7 +7,7 @@
 <div class="{{ $class }}">
   {{- range $m.items }}
   <a class="hp-mega__item" href="{{ .href }}">
-    <span class="hp-mega__ic"><img src="{{ .icon }}" alt="" loading="lazy"></span>
+    <span class="hp-mega__ic">{{ partial "img.html" (dict "src" .icon "alt" "" "width" 132) }}</span>
     <span class="hp-mega__itxt"><strong>{{ .label }}</strong><em>{{ .desc }}</em></span>
   </a>
   {{- end }}

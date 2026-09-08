@@ -20,15 +20,21 @@ escape it into visible text.
 """
 import argparse
 import html
+import os
 import pathlib
 import re
 import sys
 
-SRC = pathlib.Path(
-    "/private/tmp/claude-501/-Users-omarsheriff-Desktop-piperocket-site/"
-    "e7aac88f-51d0-40b6-9119-1fe0e57b1bfa/scratchpad/enigma/site-export"
-)
-DST = pathlib.Path("/Users/omarsheriff/Desktop/enigma-hugo")
+# The migration is finished, so this script is kept for reference and for
+# re-porting a page if the original export is ever consulted again.
+#
+#   SRC  the unpacked "Enigma Website 2 (4).zip" site-export/ directory
+#   DST  this Hugo project
+#
+# Point SRC at your copy of the export via the environment:
+#   EV_EXPORT=~/Downloads/site-export python3 scripts/port_page.py <page> <dest>
+SRC = pathlib.Path(os.environ.get("EV_EXPORT", "../site-export")).expanduser()
+DST = pathlib.Path(__file__).resolve().parent.parent
 
 # Old path -> new clean URL. Anything not listed keeps its resolved path.
 URL_MAP = {

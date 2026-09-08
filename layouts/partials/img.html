@@ -21,7 +21,10 @@
 {{- $src = strings.TrimPrefix "images/" $src -}}
 {{- $r := resources.Get (printf "images/%s" $src) -}}
 
-{{- if not $r -}}
+{{- if hasSuffix $src ".svg" -}}
+  {{- /* SVGs are not raster-processed; they stay in static/ and are emitted as-is. */ -}}
+  <img src="/assets/{{ $src }}" alt="{{ .alt }}"{{ with .class }} class="{{ . }}"{{ end }} loading="{{ .loading | default "lazy" }}" decoding="async">
+{{- else if not $r -}}
   {{- warnf "img.html: no image at assets/images/%s — emitting plain <img> to /assets/%s" $src $src -}}
   <img src="/assets/{{ $src }}" alt="{{ .alt }}"{{ with .class }} class="{{ . }}"{{ end }} loading="{{ .loading | default "lazy" }}" decoding="async">
 {{- else -}}

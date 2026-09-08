@@ -1,0 +1,3 @@
+{{- /* Design-system TextLink, markup copied from TextLink.jsx. Arrow defaults on. */ -}}
+<a class="ev-textlink{{ if eq (.size | default "md") "sm" }} ev-textlink--sm{{ end }}" href="{{ .href }}"><span>{{ .label }}</span>
+{{- if ne .arrow false }}<span class="ev-textlink__arrow" aria-hidden="true">&#8594;</span>{{ end }}</a>

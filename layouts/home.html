@@ -1,5 +1,14 @@
 {{ define "main" }}
 <main>
-{{ .Content }}
+  {{ partial "home/hero.html" . }}
+  {{ partial "home/trustbar.html" . }}
+  {{ partial "home/suite.html" . }}
+  {{ partial "home/stack.html" . }}
+  {{ partial "home/proof.html" . }}
+  {{ partial "home/who.html" . }}
+  {{ partial "home/industry.html" . }}
+  {{ partial "home/compete.html" . }}
+  {{ partial "home/resources.html" . }}
+  {{ partial "home/closing.html" . }}
 </main>
 {{ end }}

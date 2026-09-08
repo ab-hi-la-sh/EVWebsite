@@ -1,0 +1,25 @@
+{{- /* Banner hero. hero-banner.jsx overrode window.Hero with this, so the
+       Hero()/HeroArt in home-parts1.jsx and home-art.jsx never rendered.
+       The art is a CSS background (.hp-bhero__art), not an <img>. */ -}}
+{{- $h := hugo.Data.home.hero -}}
+<header class="hp-bhero" id="top">
+  <div class="hp-bhero__art" role="img" aria-label="Layered translucent panels converging to a mineral-blue focal passage, dissolving into sparse data fragments"></div>
+  <div class="hp-bhero__veil"></div>
+  <div class="hp-container hp-bhero__inner">
+    <div class="hp-bhero__copy">
+      <span class="hp-bhero__eyebrow" style="font-weight:400;text-transform:none;letter-spacing:0.01em;font-size:15px">{{ $h.eyebrow }}</span>
+      <h1>Protect your data. <span class="hp-em">Ground your AI answers.</span></h1>
+      <p class="hp-bhero__sub">{{ $h.sub }}</p>
+      <div class="hp-bhero__ctas">
+        {{ partial "ds/button.html" (dict "label" $h.cta1 "href" "/request-demo/" "size" "lg" "arrow" true) }}
+        {{ partial "ds/button.html" (dict "label" $h.cta2 "href" site.Params.awsMarketplace "size" "lg" "variant" "secondary" "arrow" true "blank" true) }}
+      </div>
+    </div>
+  </div>
+  <div class="hp-bhero__rail">
+    <div class="hp-container hp-bhero__rail-inner">
+      <span class="hp-bhero__annot" style="font-weight:500">TRUST, MADE VISIBLE.</span>
+      <div class="hp-bhero__values"><span>Clarity</span><span>Control</span><span>Confidence</span></div>
+    </div>
+  </div>
+</header>

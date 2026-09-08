@@ -1,0 +1,22 @@
+{{- $p := hugo.Data.home.proof -}}
+<section class="hp-section hp-bg-dark" id="proof">
+  <div class="hp-container">
+    <div class="hp-reveal">
+      <p class="hp-proof__eyebrow">Proof</p>
+      <h2 class="hp-h2"><span class="hp-em">Proof,</span> not promises.</h2>
+      <p class="hp-lead">{{ $p.sub }}</p>
+    </div>
+    <div class="hp-grid3">
+      {{- range $i, $it := $p.items }}
+      <div class="hp-reveal"{{ if $i }} style="animation-delay:{{ mul $i 90 }}ms"{{ end }}>
+        <div class="ev-card ev-card--marketing ev-card--hover" style="height:100%">
+          <p class="hp-proofcard__prod">{{ $it.prod }}</p>
+          <div class="hp-proofcard__val">{{ $it.value }}{{ with $it.unit }}<span>{{ . }}</span>{{ end }}</div>
+          <div class="hp-proofcard__rule"></div>
+          <p class="hp-proofcard__body">{{ $it.body }}</p>
+        </div>
+      </div>
+      {{- end }}
+    </div>
+  </div>
+</section>

@@ -10,6 +10,7 @@ Plan: `~/Desktop/enigma-hugo-migration-plan.md`.
 
     data/nav.yml       nav model, ported from the old site-nav.js NAV array
     data/footer.yml    footer model, ported from site-footer.js
+    data/home.yml      homepage content (was window.HP in home-data.js)
     data/authors.yml   blog authors
     data/blog_backlog.yml  the 13 articles that never had a page
     layouts/baseof.html + partials/   the shell every page shares
@@ -20,6 +21,7 @@ Plan: `~/Desktop/enigma-hugo-migration-plan.md`.
     static/assets/     fixed-URL files only: og/, favicons, logo, CSS backgrounds
     layouts/partials/img.html + shortcodes/img.html   responsive <picture>
     scripts/port_page.py   ports one old .html page into content/ + assets/
+    scripts/gen_home_art.py  regenerates the homepage SVG art partials
 
 Content pages are .html, not .md: they are designed markup, and Hugo passes
 .html content through verbatim. As markdown, Goldmark treated the indented
@@ -30,7 +32,7 @@ HTML after a blank line as a code block and escaped it into visible text.
 - [x] Phase 1 — shell, nav, footer
 - [x] Phase 2 — CSS + image pipeline
 - [x] Phase 3 — 26 static pages (index -> Phase 4, blog -> Phase 5)
-- [ ] Phase 4 — homepage de-React
+- [x] Phase 4 — homepage de-React
 - [x] Phase 5 — blog
 - [ ] Phase 6 — SEO + redirects
 - [ ] Phase 7 — verification + cutover

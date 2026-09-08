@@ -1,0 +1,188 @@
+# Homepage content model, ported 1:1 from window.HP in the old home-data.js.
+# Links are now clean URLs. The nav and footer keys were dropped: they are
+# already in data/nav.yml and data/footer.yml (the React SiteFooter was never
+# rendered -- index.html used the shared site-footer.js).
+
+hero:
+  eyebrow: The trust layer between your data and AI.
+  title: Protect your data. Ground your AI answers.
+  sub: Enigma Vault provides AI data security through PII tokenization, secure storage and answers grounded
+    in your evidence.
+  cta1: Request a demo
+  cta2: Start free on AWS Marketplace
+trust:
+- PCI DSS Level 1
+- SOC 2 Type II
+- 99.99% uptime SLA
+- AWS Partner
+trustSub: AES-256 encryption standard. Millions of secrets encrypted. Zero plaintext stored.
+suite:
+  eyebrow: One foundation. Three products.
+  title: Protect the input. Trust the output.
+  intro: Secure everything in between.
+  products:
+  - prod: The Vault
+    art: /assets/suite/vault-art.png
+    tag: Collect data. Keep it private.
+    body: Tokenize payment details, files and customer records before they reach your systems.
+    rows:
+    - icon: card
+      text: Secure payment capture
+    - icon: form
+      text: Custom intake forms
+    - icon: db
+      text: Tokenized files and records
+    link: Explore the Vault
+    href: /vault/overview/
+  - prod: NoPII
+    art: /assets/suite/nopii-art.png
+    tag: Use AI. Protect PII.
+    body: Tokenize and protect PII in your AI application before it reaches an LLM, while preserving the
+      context it needs.
+    rows:
+    - icon: wave
+      text: PII stays outside the model
+    - icon: dots
+      text: Works with your existing LLM
+    - icon: code
+      text: One-line integration
+    link: Explore NoPII
+    href: /nopii/overview/
+  - prod: Triplets
+    art: /assets/suite/triplets-art.svg
+    tag: Answers backed by evidence.
+    body: Ground every answer in compiled evidence, with conclusions that update as sources change.
+    rows:
+    - icon: layers
+      text: Whole-corpus grounding
+    - icon: refuse
+      text: Refuses unsupported answers
+    - icon: refresh
+      text: Updates with your evidence
+    link: Explore Triplets
+    href: /triplets/overview/
+stack:
+  title: Three layers of trust. One foundation.
+  intro: 'Every AI feature has three places where trust can break: the answer it gives, the prompt it
+    sends, and the data underneath. Each layer is a product you can buy on its own. Together, they share
+    one foundation, one set of keys, and one audit trail.'
+  layers:
+  - n: '01'
+    prod: Triplets
+    head: 'Triplets: evidence-grounded AI answers.'
+    lead: Confidently wrong ends here.
+    body: Triplets checks every AI answer against evidence you approve, and refuses when the evidence
+      cannot support one. A confident wrong answer never reaches your user, because it never gets generated.
+    proof: compile, verify, refuse when unsupported.
+    link: Explore Triplets
+    href: /triplets/overview/
+  - n: '02'
+    prod: NoPII
+    head: 'NoPII: PII protection for LLMs.'
+    lead: What the model never sees, it can never leak.
+    body: Every prompt is scanned for sensitive data and tokenized before it leaves your environment,
+      then restored in the response. The model reasons normally. The provider never sees a real identifier.
+    proof: detect, tokenize, restore.
+    link: Explore NoPII
+    href: /nopii/overview/
+  - n: '03'
+    prod: The Vault
+    head: 'The Vault: data tokenization and encryption.'
+    lead: Take sensitive data off your books.
+    body: Cards, fields, files, and customer records are tokenized and encrypted on certified infrastructure.
+      Your systems hold tokens that still work. The real values live in the vault.
+    proof: capture, vault, reference.
+    link: Explore the Vault
+    href: /vault/overview/
+    also:
+      text: Need secure customer intake instead?
+      link: Customer Vault
+      href: /vault/customer-vault/
+proof:
+  title: Proof, not promises.
+  sub: Each layer earns trust with a hard fact, measured on your own data.
+  items:
+  - prod: Triplets
+    value: Every
+    unit: answer checked against your compiled evidence
+    body: Triplets checks whether answers are supported by your compiled evidence and flags conflicts
+      or missing support. Refusals and gaps are logged and reported. Evidence support does not establish
+      universal truth, medical correctness or regulatory approval.
+  - prod: NoPII
+    value: 35+
+    unit: categories of sensitive data tokenized
+    body: Before prompts leave your environment, validated against a published 109-test benchmark, across
+      9+ LLM providers. Live in under five minutes.
+  - prod: The Vault
+    value: AES-256
+    unit: encryption with per-tenant key isolation
+    body: Full audit logging, on PCI DSS Level 1 and SOC 2 Type II infrastructure. Free to start on AWS
+      Marketplace.
+who:
+  title: Built for teams shipping AI they have to stand behind.
+  body: 'For the people who own the consequences when AI gets it wrong:'
+  personas:
+  - icon: cpu
+    text: Heads of AI and platform, whose product cannot give a confident wrong answer.
+  - icon: git-branch
+    text: Engineering and compliance, who cannot let customer data leave the building.
+  - icon: lock
+    text: CISOs, who answer for every record at rest.
+industry:
+  title: The same three exposures, in every regulated industry.
+  intro: 'Healthcare, financial services, legal, insurance, and every other regulated sector carry the
+    same three liabilities: wrong answers, leaked identifiers, and stored data. The acronyms change. The
+    exposures do not.'
+  sectors:
+  - - Healthcare
+    - /assets/industries/healthcare.jpg
+    - /solutions/industries/#healthcare
+  - - Financial services
+    - /assets/industries/financial.jpg
+    - /solutions/industries/#financial-services
+  - - Legal
+    - /assets/industries/legal.jpg
+    - /solutions/industries/#legal
+  - - Insurance
+    - /assets/industries/insurance.jpg
+    - /solutions/industries/#insurance
+  cta: Find your industry
+  ctaHref: /solutions/industries/
+compete:
+  title: You can’t build your way out of this. Or prompt your way out of it.
+  blocks:
+  - h: The build trap.
+    body: Stitch together a reliability library, a redaction proxy, a token vault, and the glue between
+      them. Three integrations, three audits, three bills, and the seams are where trust leaks.
+  - h: The prompt trap.
+    body: Prompt it, fine-tune it, force it deterministic. A prompt is a request, not a constraint, and
+      a model cannot police its own output.
+  resolveLead: Trust has to be enforced as infrastructure, outside the application and outside the model.
+  resolveStrong: That is what the trust layer is.
+resources:
+  title: Go deeper before you have to.
+  featured:
+    tag: Published guide
+    title: Why confident AI hallucinations become business risks.
+    body: Why confident but unsupported AI answers create business risk, and how evidence grounding, refusal
+      boundaries and audit trails help teams respond.
+    href: /resources/blog/confident-wrong-answer/
+  postsLead: 'Also worth reading:'
+  posts:
+  - tag: Docs
+    title: NoPII setup documentation and Vault API reference.
+    href: /resources/docs/
+  - tag: Platform
+    title: Shared security infrastructure across data and AI.
+    href: /platform/overview/
+  - tag: Security
+    title: Encryption, tenant isolation, keys and audit logging.
+    href: /platform/data-security/
+  all: Browse all resources
+  allHref: /resources/blog/
+closing:
+  title: Start with the layer you cannot afford to get wrong.
+  body: Pick the exposure that is most urgent today. Add the next layer when you need it. The foundation,
+    the keys, and the audit trail are already there.
+  cta1: Request a demo
+  cta2: Start free on AWS Marketplace

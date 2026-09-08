@@ -1,0 +1,18 @@
+{{- $i := hugo.Data.home.industry -}}
+<section class="hp-section hp-rule-top hp-bg-cloud" id="industries">
+  <div class="hp-container">
+    <div class="hp-reveal">
+      <h2 class="hp-h2">The same three exposures, in <span class="hp-em">every regulated industry.</span></h2>
+      <p class="hp-lead">{{ $i.intro }}</p>
+    </div>
+    <div class="hp-reveal hp-sectors" style="animation-delay:80ms">
+      {{- range $i.sectors }}
+      <a class="hp-sector" href="{{ index . 2 }}">
+        <span class="hp-sector__ic">{{ partial "img.html" (dict "src" (index . 1) "alt" "" "width" 132 "loading" "lazy") }}</span>
+        <span class="hp-sector__name">{{ index . 0 }}</span>
+      </a>
+      {{- end }}
+    </div>
+    <div class="hp-reveal hp-ind__cta">{{ partial "ds/button.html" (dict "label" $i.cta "href" $i.ctaHref "variant" "secondary" "arrow" true) }}</div>
+  </div>
+</section>

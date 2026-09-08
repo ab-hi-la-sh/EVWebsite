@@ -1,0 +1,17 @@
+{{- $w := hugo.Data.home.who -}}
+<section class="hp-section hp-rule-top" id="who">
+  <div class="hp-container hp-who">
+    <div class="hp-reveal">
+      <h2 class="hp-h2">Built for teams shipping AI they have to <span class="hp-em">stand behind.</span></h2>
+      <p class="hp-who__body">{{ $w.body }}</p>
+    </div>
+    <div class="hp-reveal hp-personas" style="animation-delay:80ms">
+      {{- range $w.personas }}
+      <div class="hp-persona">
+        <div class="hp-persona__ic">{{ partial "ds/icon.html" (dict "name" .icon "size" 22) }}</div>
+        <div class="hp-persona__txt">{{ .text }}</div>
+      </div>
+      {{- end }}
+    </div>
+  </div>
+</section>

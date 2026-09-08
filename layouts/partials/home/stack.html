@@ -1,0 +1,36 @@
+{{- $s := hugo.Data.home.stack -}}
+{{- $g := dict "Triplets" "/assets/glyphs/triplets-3d.png" "NoPII" "/assets/glyphs/nopii-3d.png" "The Vault" "/assets/glyphs/vault-3d.png" -}}
+<section class="hp-section hp-rule-top" id="platform">
+  <div class="hp-container">
+    <div class="hp-reveal hp-stack__head">
+      <h2 class="hp-h2">Three layers of trust. <span class="hp-em">One foundation.</span></h2>
+      <p class="hp-lead">{{ $s.intro }}</p>
+    </div>
+    <div class="hp-stack__split">
+      <div class="hp-reveal hp-stack__rows">
+        {{- range $s.layers }}
+        <div class="hp-layer">
+          {{- /* ProductGlyph rendered an <img>, not an SVG. */ -}}
+          <div class="hp-layer__tile">{{ partial "img.html" (dict "src" (index $g .prod | default (index $g "Triplets")) "alt" "" "width" 150 "loading" "lazy" "class" "hp-layer__glyph") }}</div>
+          <div class="hp-layer__copy">
+            <p class="hp-layer__prod"><span>{{ .n }}</span>{{ .prod }}</p>
+            <h3 class="hp-layer__head">{{ .head }}</h3>
+            <p class="hp-layer__body"><strong class="hp-layer__lead">{{ .lead }}</strong> {{ .body }}</p>
+            <div class="hp-layer__meta">
+              <span class="hp-layer__proof"><span>How it works, in one line:</span>{{ .proof }}</span>
+              {{ partial "ds/textlink.html" (dict "label" .link "href" .href "size" "sm") }}
+            </div>
+            {{- with .also }}
+            <p class="hp-layer__also">{{ .text }} <a href="{{ .href }}">{{ .link }}</a></p>
+            {{- end }}
+          </div>
+        </div>
+        {{- end }}
+      </div>
+      <div class="hp-stack__figure">
+        {{ partial "home/art/stack-diagram.html" (dict "class" "") }}
+        <div class="hp-stack__cap">output at the top &#183; data at the foundation</div>
+      </div>
+    </div>
+  </div>
+</section>

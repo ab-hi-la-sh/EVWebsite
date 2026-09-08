@@ -1,0 +1,37 @@
+{{- $r := hugo.Data.home.resources -}}
+<section class="hp-section hp-rule-top hp-bg-cloud" id="resources">
+  <div class="hp-container">
+    <div class="hp-reveal"><h2 class="hp-h2"><span class="hp-em">Go deeper</span> before you have to.</h2></div>
+    <div class="hp-res">
+      <div class="hp-reveal">
+        <a class="hp-reslink" href="{{ $r.featured.href }}">
+          {{- /* The old <Card className="hp-resfeat"> lost its ev-card classes: React
+       spread the passed className over the component's own, so this rendered
+       as a plain hp-resfeat div. Reproduced as rendered. */ -}}
+          <div class="hp-resfeat" style="overflow:hidden">
+            <div class="hp-resfeat__art">{{ partial "home/art/resource-art.html" (dict "class" "" "style" "width:78%;height:auto") }}</div>
+            <div class="hp-resfeat__body">
+              <span class="hp-tag"><span class="hp-tag__dot"></span>{{ $r.featured.tag }}</span>
+              <h3 class="hp-resfeat__title">{{ $r.featured.title }}</h3>
+              <p class="hp-resfeat__desc">{{ $r.featured.body }}</p>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="hp-reveal" style="animation-delay:80ms">
+        <p class="hp-reslist__lead">{{ $r.postsLead }}</p>
+        <div class="hp-reslist">
+          {{- range $r.posts }}
+          <a class="hp-reslink" href="{{ .href }}">
+            <div class="hp-respost">
+              <div class="hp-respost__meta"><span class="hp-respost__tag">{{ .tag }}</span></div>
+              <h4 class="hp-respost__title">{{ .title }}</h4>
+            </div>
+          </a>
+          {{- end }}
+        </div>
+        <div class="hp-res__all">{{ partial "ds/textlink.html" (dict "label" $r.all "href" $r.allHref) }}</div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,66 @@
+/* Design-system component CSS, extracted from _ds_bundle.js.
+   The bundle injected these at runtime via injectEvStyle(id, css); the
+   homepage was the only page loading its 170KB, largely to get them. Only
+   the components the homepage actually uses are kept: Button, Card,
+   TextLink (Icon injects no CSS).
+   Source of truth remains the bundle -- re-extract if the DS is updated. */
+
+/* --- Button.jsx --- */
+.ev-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  font-family: var(--ev-font-sans); font-weight: 500; cursor: pointer;
+  border-radius: var(--ev-radius-input, 4px); border: 1px solid transparent;
+  transition: background-color var(--ev-duration-fast,100ms) var(--ev-ease,ease-out),
+              border-color var(--ev-duration-fast,100ms) var(--ev-ease,ease-out),
+              color var(--ev-duration-fast,100ms) var(--ev-ease,ease-out);
+  text-decoration: none; white-space: nowrap; user-select: none;
+}
+.ev-btn:hover { text-decoration: none; }
+.ev-btn--md { font-size: 15px; padding: 10px 20px; min-height: 40px; }
+.ev-btn--sm { font-size: 13px; padding: 6px 14px; min-height: 32px; }
+.ev-btn--lg { font-size: 16px; padding: 13px 26px; min-height: 48px; }
+.ev-btn--primary { background: var(--action-primary, #0F3D56); color: #FFFFFF; }
+.ev-btn--primary:hover { background: var(--action-primary-hover, #0C3348); }
+.ev-btn--primary:active { background: var(--action-primary-active, #092A3B); }
+.ev-btn--secondary { background: transparent; color: var(--ev-ink, #2A3340); border-color: var(--ev-silver, #C8CCD3); }
+.ev-btn--secondary:hover { background: var(--ev-warm-cloud, #F0F2F5); border-color: var(--ev-slate-50, #B5BCC4); }
+.ev-btn--secondary:active { background: var(--ev-cool-stone, #E2E6EB); }
+.ev-btn--ghost { background: transparent; color: var(--ev-mineral-blue, #0F3D56); }
+.ev-btn--ghost:hover { background: var(--ev-warm-cloud, #F0F2F5); }
+.ev-btn--ghost:active { background: var(--ev-cool-stone, #E2E6EB); }
+.ev-btn[disabled], .ev-btn--disabled {
+  background: var(--action-disabled-bg, #E2E6EB) !important;
+  border-color: transparent !important;
+  color: var(--action-disabled-text, #B5BCC4) !important;
+  cursor: not-allowed; pointer-events: none;
+}
+.ev-btn:focus-visible { outline: 2px solid var(--focus-ring, #0F3D56); outline-offset: 2px; }
+.ev-btn__arrow { font-weight: 400; transform: translateY(-0.5px); }
+
+/* --- Card.jsx --- */
+.ev-card {
+  background: var(--surface-card, #FFFFFF);
+  border: 1px solid var(--border-hairline, #E2E6EB);
+  border-radius: var(--ev-radius-card, 6px);
+  box-shadow: var(--ev-shadow-card, 0 1px 2px rgba(42,51,64,0.04));
+  transition: border-color var(--ev-duration-standard,200ms) var(--ev-ease,ease-out);
+}
+.ev-card--default { padding: 24px; }
+.ev-card--marketing { padding: 32px; }
+.ev-card--dense { padding: 16px; }
+.ev-card--flush { padding: 0; }
+.ev-card--hover:hover { border-color: var(--border-emphasis, #C8CCD3); }
+.ev-card--cloud { background: var(--surface-secondary, #F0F2F5); border-color: transparent; box-shadow: none; }
+
+/* --- TextLink.jsx --- */
+.ev-textlink {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--ev-font-sans); font-size: 15px; font-weight: 500;
+  color: var(--text-link, #0F3D56); text-decoration: none; cursor: pointer;
+  background: none; border: none; padding: 0;
+}
+.ev-textlink:hover { text-decoration: underline; text-underline-offset: 3px; }
+.ev-textlink:focus-visible { outline: 1px dotted var(--focus-ring, #0F3D56); outline-offset: 3px; }
+.ev-textlink--sm { font-size: 13px; }
+.ev-textlink__arrow { font-weight: 400; }
+

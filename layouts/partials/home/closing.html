@@ -1,0 +1,12 @@
+{{- $c := hugo.Data.home.closing -}}
+<section class="hp-closing hp-bg-dark" id="get-started">
+  {{ partial "home/art/closing-art.html" (dict "class" "hp-closing__art") }}
+  <div class="hp-closing__inner">
+    <h2 class="hp-reveal">Start with the layer you <span class="hp-em">cannot afford to get wrong.</span></h2>
+    <p class="hp-reveal hp-closing__body" style="animation-delay:60ms">{{ $c.body }}</p>
+    <div class="hp-reveal hp-closing__ctas" style="animation-delay:120ms">
+      {{ partial "ds/button.html" (dict "label" $c.cta1 "href" "/request-demo/" "size" "lg" "arrow" true) }}
+      {{ partial "ds/button.html" (dict "label" $c.cta2 "href" site.Params.awsMarketplace "size" "lg" "variant" "secondary" "arrow" true "blank" true) }}
+    </div>
+  </div>
+</section>

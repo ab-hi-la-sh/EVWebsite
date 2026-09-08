@@ -1,0 +1,8 @@
+{{- /* Design-system Button, markup copied from Button.jsx in _ds_bundle.js.
+       Params: label, href, variant (primary|secondary|ghost), size (sm|md|lg),
+               arrow (bool), blank (bool) */ -}}
+{{- $v := .variant | default "primary" -}}
+{{- $s := .size | default "md" -}}
+<a class="ev-btn ev-btn--{{ $v }} ev-btn--{{ $s }}" href="{{ .href }}"
+   {{- if .blank }} target="_blank" rel="noopener"{{ end }}><span>{{ .label }}</span>
+   {{- if .arrow }}<span class="ev-btn__arrow" aria-hidden="true">&#8594;</span>{{ end }}</a>

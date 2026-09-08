@@ -1,0 +1,10 @@
+{{- $d := hugo.Data.home -}}
+<section class="hp-trust">
+  <div class="hp-trust__inner">
+    <span class="hp-trust__lead">Certified &amp; audited</span>
+    {{- range $d.trust }}
+    <span class="hp-trust__item"><svg class="hp-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>{{ . }}</span>
+    {{- end }}
+  </div>
+  <p class="hp-trust__sub">{{ $d.trustSub }}</p>
+</section>

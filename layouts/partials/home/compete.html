@@ -1,0 +1,25 @@
+{{- $c := hugo.Data.home.compete -}}
+<section class="hp-section hp-rule-top" id="compete">
+  <div class="hp-container">
+    <div class="hp-reveal">
+      <h2 class="hp-h2" style="max-width:18ch">You <span class="hp-em">can&#8217;t build</span> your way out of this. Or <span class="hp-em">prompt</span> your way out of it.</h2>
+    </div>
+    <div class="hp-compete__grid">
+      {{- range $i, $b := $c.blocks }}
+      <div class="hp-reveal"{{ if $i }} style="animation-delay:{{ mul $i 90 }}ms"{{ end }}>
+        <div class="ev-card ev-card--marketing ev-card--hover" style="height:100%">
+          <div class="hp-cb__head">
+            <span class="hp-cb__x"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></span>
+            <h3 class="hp-cb__h">{{ $b.h }}</h3>
+          </div>
+          <p class="hp-cb__body">{{ $b.body }}</p>
+        </div>
+      </div>
+      {{- end }}
+    </div>
+    <div class="hp-reveal hp-resolve" style="animation-delay:60ms">
+      <span class="hp-resolve__tick">&#8627;</span>
+      <p>{{ $c.resolveLead }} <strong>{{ $c.resolveStrong }}</strong></p>
+    </div>
+  </div>
+</section>

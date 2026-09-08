@@ -10,6 +10,8 @@ Plan: `~/Desktop/enigma-hugo-migration-plan.md`.
 
     data/nav.yml       nav model, ported from the old site-nav.js NAV array
     data/footer.yml    footer model, ported from site-footer.js
+    data/authors.yml   blog authors
+    data/blog_backlog.yml  the 13 articles that never had a page
     layouts/baseof.html + partials/   the shell every page shares
     assets/css/        tokens/, global.css (was nopii.css), nav.css, footer.css,
                        per-family sheets, pages/<page>.css for page-scoped blocks
@@ -29,6 +31,6 @@ HTML after a blank line as a code block and escaped it into visible text.
 - [x] Phase 2 — CSS + image pipeline
 - [x] Phase 3 — 26 static pages (index -> Phase 4, blog -> Phase 5)
 - [ ] Phase 4 — homepage de-React
-- [ ] Phase 5 — blog
+- [x] Phase 5 — blog
 - [ ] Phase 6 — SEO + redirects
 - [ ] Phase 7 — verification + cutover

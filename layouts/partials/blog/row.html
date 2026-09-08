@@ -1,0 +1,11 @@
+{{- /* Archive row. Markup matches the old rowHTML() in blog-data.js. */ -}}
+<a class="bl-row bl-fade" href="{{ .RelPermalink }}" data-cat="{{ .Params.category }}"
+   data-search="{{ lower (printf "%s %s %s %s" .Title .Params.excerpt .Params.category (delimit .Params.tags " ")) }}">
+  <div class="bl-row__thumb">{{ partial "img.html" (dict "src" .Params.heroImage "alt" "" "loading" "lazy" "width" 240) }}</div>
+  <div class="bl-row__body">
+    <div class="bl-row__meta">{{ partial "blog/meta.html" . }}</div>
+    <h3 class="bl-row__title">{{ .Title }}</h3>
+    {{- with .Params.excerpt }}<p class="bl-row__excerpt">{{ . }}</p>{{ end }}
+  </div>
+  <span class="bl-row__arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+</a>

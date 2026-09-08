@@ -1,0 +1,19 @@
+# Blog authors, ported from the AUTHORS map in the old blog-data.js.
+
+amara:
+  name: "Amara Okafor"
+  role: "Principal Research Engineer"
+  initials: "AO"
+  bio: "Amara leads correctness research at Enigma Vault, focused on routing, constrained generation and the self-healing loop behind Triplets."
+
+daniel:
+  name: "Daniel Reyes"
+  role: "Head of Product"
+  initials: "DR"
+  bio: "Daniel works with regulated teams shipping AI into production, translating compliance requirements into product the trust layer can guarantee."
+
+priya:
+  name: "Priya Nair"
+  role: "Security Architect"
+  initials: "PN"
+  bio: "Priya designs the tokenization and key infrastructure beneath the Enigma Vault platform, from PCI scope reduction to audit trails."

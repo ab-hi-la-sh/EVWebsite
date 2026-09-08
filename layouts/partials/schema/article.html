@@ -1,0 +1,17 @@
+{{- /* BlogPosting for blog articles. The old site had no article schema at all. */ -}}
+{{- if eq .Type "blog" -}}{{- if .IsPage -}}
+{{- $a := index hugo.Data.authors .Params.author -}}
+<script type="application/ld+json">{{ (dict
+  "@context" "https://schema.org" "@type" "BlogPosting"
+  "headline" .Title
+  "description" (.Params.excerpt | default .Description)
+  "image" (absURL .Params.heroImage)
+  "datePublished" (.Date.Format "2006-01-02")
+  "dateModified" (.Lastmod.Format "2006-01-02")
+  "author" (dict "@type" "Person" "name" $a.name "jobTitle" $a.role)
+  "publisher" (dict "@type" "Organization" "name" site.Title "logo" (dict "@type" "ImageObject" "url" (absURL site.Params.logo)))
+  "mainEntityOfPage" (dict "@type" "WebPage" "@id" .Permalink)
+  "articleSection" .Params.category
+  "keywords" (delimit .Params.tags ", ")
+) | jsonify | safeJS }}</script>
+{{- end -}}{{- end -}}

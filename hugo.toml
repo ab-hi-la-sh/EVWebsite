@@ -8,8 +8,26 @@ uglyURLs = false
 canonifyURLs = false
 enableEmoji = false
 
-# The old site had no RSS anywhere; Phase 5 turns it back on for the blog only.
-disableKinds = ["rss", "taxonomy", "term", "section"]
+# Taxonomies stay off: with one published article, category and author term
+# pages would be a set of near-empty thin pages, and the old site had no
+# category URLs either. Revisit once the backlog is written.
+disableKinds = ["taxonomy", "term"]
+
+# Sections are re-enabled for the blog list, but the old site had no /vault/,
+# /platform/ etc. landing pages -- so every section is off by default and the
+# blog opts back in from its own frontmatter.
+[[cascade]]
+  [cascade.build]
+    render = "never"
+    list = "never"
+  [cascade.target]
+    kind = "section"
+
+# RSS only where a page asks for it (the blog); nothing else outputs it.
+[outputs]
+  home = ["HTML"]
+  section = ["HTML"]
+  page = ["HTML"]
 
 [permalinks]
   # Blog articles move from /resources/article.html to /resources/blog/<slug>/

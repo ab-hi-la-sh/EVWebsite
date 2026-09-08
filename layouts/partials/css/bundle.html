@@ -1,0 +1,15 @@
+{{- /* Build one CSS bundle. Always call through partialCached: Hugo renders
+       pages concurrently, and having many goroutines hit resources.Concat with
+       the same target path raced -- a few pages came out linking the
+       unfingerprinted /css/core.css instead of the fingerprinted file, and
+       which pages varied between builds. partialCached collapses it to one
+       evaluation per key.
+
+       Params: paths (slice of asset paths), name (target basename). */ -}}
+{{- $res := slice -}}
+{{- range .paths -}}
+  {{- with resources.Get . }}{{ $res = $res | append . }}{{ else }}{{ errorf "css/bundle: missing %q" . }}{{ end -}}
+{{- end -}}
+{{- $out := $res | resources.Concat (printf "css/%s.css" .name) -}}
+{{- if hugo.IsProduction }}{{ $out = $out | minify | fingerprint }}{{ end -}}
+{{- return $out -}}

@@ -1,0 +1,9 @@
+{{- /* Featured card. Markup matches the old cardHTML() in blog-data.js exactly,
+       so blog.css applies unchanged. Context: a page. */ -}}
+<a class="bl-card bl-fade" href="{{ .RelPermalink }}" data-cat="{{ .Params.category }}"
+   data-search="{{ lower (printf "%s %s %s %s" .Title .Params.excerpt .Params.category (delimit .Params.tags " ")) }}">
+  <div class="bl-card__media">{{ partial "img.html" (dict "src" .Params.heroImage "alt" "" "loading" "lazy" "sizes" "(max-width: 700px) 100vw, 380px") }}</div>
+  <div class="bl-card__meta">{{ partial "blog/meta.html" . }}</div>
+  <h3 class="bl-card__title">{{ .Title }}</h3>
+  {{- with .Params.excerpt }}<p class="bl-card__excerpt">{{ . }}</p>{{ end }}
+</a>

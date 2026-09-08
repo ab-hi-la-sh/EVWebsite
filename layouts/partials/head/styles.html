@@ -1,7 +1,7 @@
 {{- /*
   CSS is split so the bulk of it stays cacheable across every page:
 
-    1. core     tokens + global.css           identical on all 27 pages
+    1. core     tokens + global.css           identical on all pages
     2. family   page-family sheets            shared within a family
     3. page     the page's own <style> block  inlined (avg 3KB, page-unique)
     4. navfoot  nav.css + footer.css          identical on all pages
@@ -11,6 +11,9 @@
   after every <link>, and 11 of their selectors are also defined in global.css,
   so moving them earlier would change which rule wins.
 
+  Every bundle goes through partialCached -- see partials/css/bundle.html for
+  why a plain resources.Concat raced under concurrent page rendering.
+
   Frontmatter:  styles: ["vaults.css", "pages/vault-overview.css"]
   Entries under pages/ are inlined rather than linked.
 */ -}}
@@ -18,12 +21,8 @@
   "css/tokens/fonts.css" "css/tokens/colors.css" "css/tokens/palette.css"
   "css/tokens/typography.css" "css/tokens/spacing.css" "css/tokens/base.css"
   "css/global.css" "css/picture.css" -}}
-{{- $cr := slice -}}
-{{- range $core -}}
-  {{- with resources.Get . }}{{ $cr = $cr | append . }}{{ else }}{{ errorf "styles: missing %q" . }}{{ end -}}
-{{- end -}}
-{{- $coreCSS := $cr | resources.Concat "css/core.css" -}}
-{{- if hugo.IsProduction }}{{ $coreCSS = $coreCSS | minify | fingerprint }}{{ end -}}
+{{- $coreCSS := partialCached "css/bundle.html" (dict "paths" $core "name" "core") "core" -}}
+{{- $nfCSS := partialCached "css/bundle.html" (dict "paths" (slice "css/nav.css" "css/footer.css") "name" "navfoot") "navfoot" -}}
 {{- $fam := slice -}}
 {{- $inline := slice -}}
 {{- range .Params.styles -}}
@@ -37,30 +36,13 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
 <link rel="stylesheet" href="{{ $coreCSS.RelPermalink }}"{{ with $coreCSS.Data.Integrity }} integrity="{{ . }}" crossorigin="anonymous"{{ end }}>
 {{- with $fam }}
-{{- $fr := slice -}}
-{{- range . -}}
-  {{- with resources.Get . }}{{ $fr = $fr | append . }}{{ else }}{{ errorf "styles: missing %q" . }}{{ end -}}
-{{- end -}}
-{{- $famCSS := $fr | resources.Concat (printf "css/family-%d.css" (delimit . "|" | hash.FNV32a)) -}}
-{{- if hugo.IsProduction }}{{ $famCSS = $famCSS | minify | fingerprint }}{{ end }}
+{{- $key := delimit . "|" -}}
+{{- $famCSS := partialCached "css/bundle.html" (dict "paths" . "name" (printf "family-%d" ($key | hash.FNV32a))) $key -}}
 <link rel="stylesheet" href="{{ $famCSS.RelPermalink }}"{{ with $famCSS.Data.Integrity }} integrity="{{ . }}" crossorigin="anonymous"{{ end }}>
 {{- end }}
 {{- with $inline }}
-{{- $ir := slice -}}
-{{- range . -}}
-  {{- with resources.Get . }}{{ $ir = $ir | append . }}{{ else }}{{ errorf "styles: missing %q" . }}{{ end -}}
-{{- end -}}
-{{- /* The target name MUST be unique per page: Hugo caches resources by
-       target path, so a fixed name would serve the first page's CSS to
-       every other page. */ -}}
-{{- $pageCSS := $ir | resources.Concat (printf "css/page-%d.css" (delimit $inline "|" | hash.FNV32a)) -}}
-{{- if hugo.IsProduction }}{{ $pageCSS = $pageCSS | minify }}{{ end }}
+{{- $key := delimit . "|" -}}
+{{- $pageCSS := partialCached "css/bundle.html" (dict "paths" . "name" (printf "page-%d" ($key | hash.FNV32a))) $key -}}
 <style>{{ $pageCSS.Content | safeCSS }}</style>
 {{- end }}
-{{- $nf := slice -}}
-{{- range (slice "css/nav.css" "css/footer.css") -}}
-  {{- with resources.Get . }}{{ $nf = $nf | append . }}{{ else }}{{ errorf "styles: missing %q" . }}{{ end -}}
-{{- end -}}
-{{- $nfCSS := $nf | resources.Concat "css/navfoot.css" -}}
-{{- if hugo.IsProduction }}{{ $nfCSS = $nfCSS | minify | fingerprint }}{{ end }}
 <link rel="stylesheet" href="{{ $nfCSS.RelPermalink }}"{{ with $nfCSS.Data.Integrity }} integrity="{{ . }}" crossorigin="anonymous"{{ end }}>

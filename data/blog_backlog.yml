@@ -1,0 +1,122 @@
+# The 14 articles listed in the old blog-data.js that never had a page.
+# The landing page rendered cards for them that linked nowhere; they are parked
+# here so nothing is lost, and are not published until a body exists.
+
+articles:
+  - slug: "trust-stack-outside-the-model"
+    title: "The trust stack: enforcing correctness and data governance outside the model"
+    category: "Company"
+    iso: "2026-06-24"
+    author: "daniel"
+    image: "img-01.png"
+    readTime: 24
+    tags: ["architecture", "trust", "platform"]
+    excerpt: "A reference architecture for teams putting regulated AI into production: where each layer sits, what it enforces, and how the three compose on one foundation."
+  - slug: "vault-in-an-afternoon"
+    title: "Starting on AWS Marketplace: the Vault in an afternoon"
+    category: "Product"
+    iso: "2026-06-20"
+    author: "priya"
+    image: "img-12.png"
+    readTime: 9
+    tags: ["vault", "aws", "onboarding"]
+    excerpt: "From subscription to protected data before the day ends."
+  - slug: "trust-layer-thesis"
+    title: "The trust layer: our thesis for AI and data"
+    category: "Company"
+    iso: "2026-06-18"
+    author: "daniel"
+    image: "img-01.png"
+    readTime: 9
+    tags: ["strategy", "trust", "platform"]
+    excerpt: "Why the defensible position is not a runtime guardrail but a lifecycle trust layer that proves every answer and every record."
+  - slug: "trust-certificate-auditor"
+    title: "The Trust Certificate: reproducible proof your auditor can re-run"
+    category: "Compliance"
+    iso: "2026-05-29"
+    author: "daniel"
+    image: "img-03.png"
+    readTime: 8
+    tags: ["certificate", "audit", "compliance"]
+    excerpt: "Fingerprinted, reproducible evidence that an answer was grounded, what was refused, and why. The artifact a vendor claim can never be."
+  - slug: "three-layer-model"
+    title: "Inside the three-layer answering model"
+    category: "Engineering"
+    iso: "2026-05-20"
+    author: "amara"
+    image: "img-04.png"
+    readTime: 11
+    tags: ["architecture", "routing", "retrieval"]
+    excerpt: "Deterministic lookup, relationship traversal, constrained generation: how Triplets routes each question to its strongest correctness guarantee."
+  - slug: "tokenizing-prompts-benchmark"
+    title: "Tokenizing prompts: the NoPII benchmark, explained"
+    category: "Privacy"
+    iso: "2026-05-12"
+    author: "priya"
+    image: "img-05.png"
+    readTime: 18
+    tags: ["nopii", "privacy", "llm"]
+    excerpt: "How a tokenizing reverse proxy strips personal data from prompts before they leave, and restores it on the way back, with measured overhead."
+  - slug: "reconciling-sources"
+    title: "Reconciling contradictory sources at query time"
+    category: "Data Protection"
+    iso: "2026-05-02"
+    author: "amara"
+    image: "img-06.png"
+    readTime: 6
+    tags: ["reconciliation", "data", "provenance"]
+    excerpt: "Two documents, two answers. Most systems quietly pick one. The trust layer surfaces the conflict and shows which source governs."
+  - slug: "hallucination-architecture"
+    title: "Hallucination is an architecture problem, not an obedience problem"
+    category: "LLMs"
+    iso: "2026-04-22"
+    author: "amara"
+    image: "img-07.png"
+    readTime: 10
+    tags: ["llm", "hallucination", "prompting"]
+    excerpt: "Four obvious fixes, and where each one breaks. Correctness has to be enforced by a system outside the model."
+  - slug: "designing-refusal"
+    title: "Designing refusal: when \"I don\\u2019t know\" is the right answer"
+    category: "Product"
+    iso: "2026-04-09"
+    author: "daniel"
+    image: "img-08.png"
+    readTime: 7
+    tags: ["product", "ux", "refusal"]
+    excerpt: "A refusal is not the model giving up. It is the system declining to guess, telling you why, and closing the gap."
+  - slug: "regulated-buyers-ask"
+    title: "What regulated buyers actually ask before AI ships"
+    category: "Compliance"
+    iso: "2026-03-28"
+    author: "daniel"
+    image: "img-09.png"
+    readTime: 6
+    tags: ["compliance", "risk", "buyers"]
+    excerpt: "The technical buyer signs off on capability. The compliance stakeholder signs off on evidence. Both need the same thing: proof."
+  - slug: "build-vs-buy-stack"
+    title: "Build vs. buy: the real cost of the stitched-together stack"
+    category: "Engineering"
+    iso: "2026-03-15"
+    author: "priya"
+    image: "img-10.png"
+    readTime: 6
+    tags: ["engineering", "cost", "platform"]
+    excerpt: "Per-team prompt patches and eval firefighting have a price. So does one governed trust layer. We do the math."
+  - slug: "certifications-explained"
+    title: "PCI DSS, ISO 27001, SOC 2: what each actually proves"
+    category: "AI Security"
+    iso: "2026-03-03"
+    author: "priya"
+    image: "img-11.png"
+    readTime: 9
+    tags: ["security", "certifications", "audit"]
+    excerpt: "Three certifications, three different promises. A plain-language guide to what each one covers and what it does not."
+  - slug: "corpus-to-certificate-48h"
+    title: "From corpus to certificate in 48 hours"
+    category: "Product"
+    iso: "2026-02-19"
+    author: "daniel"
+    image: "img-12.png"
+    readTime: 5
+    tags: ["proof", "onboarding", "product"]
+    excerpt: "Scope a slice, run the hard questions, read the certificate. How the free 48-hour proof works, end to end."

@@ -7,6 +7,7 @@ title = "Enigma Vault"
 uglyURLs = false
 canonifyURLs = false
 enableEmoji = false
+enableRobotsTXT = true
 
 # Taxonomies stay off: with one published article, category and author term
 # pages would be a set of near-empty thin pages, and the old site had no
@@ -24,8 +25,14 @@ disableKinds = ["taxonomy", "term"]
     kind = "section"
 
 # RSS only where a page asks for it (the blog); nothing else outputs it.
+[outputFormats.LLMS]
+  mediaType = "text/plain"
+  baseName = "llms"
+  isPlainText = true
+  notAlternative = true
+
 [outputs]
-  home = ["HTML"]
+  home = ["HTML", "LLMS"]
   section = ["HTML"]
   page = ["HTML"]
 

@@ -7,6 +7,11 @@
   "logo" (absURL site.Params.logo)
   "sameAs" (slice "https://www.linkedin.com/company/enigma-vault/" "https://x.com/NoPII_HQ")
 ) | jsonify | safeJS }}</script>
+<script type="application/ld+json">{{ (dict
+  "@context" "https://schema.org" "@type" "WebSite"
+  "name" site.Title "url" site.BaseURL
+  "publisher" (dict "@type" "Organization" "name" site.Title)
+) | jsonify | safeJS }}</script>
 {{- end -}}
 {{ partial "schema/breadcrumb.html" . }}
 {{ partial "schema/article.html" . }}

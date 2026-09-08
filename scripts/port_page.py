@@ -141,6 +141,7 @@ def main():
     desc = meta(r'<meta name="description" content="(.*?)">')
     og_image = meta(r'<meta property="og:image" content="(.*?)">')
     og_alt = meta(r'<meta property="og:image:alt" content="(.*?)">')
+    robots = meta(r'<meta name="robots" content="(.*?)">')
     if og_image:
         og_image = re.sub(r"^https?://[^/]+", "", og_image)
 
@@ -207,6 +208,8 @@ def main():
         fm.append(f"ogImage: {yq(og_image)}")
     if og_alt:
         fm.append(f"ogImageAlt: {yq(og_alt)}")
+    if "noindex" in robots.lower():
+        fm.append("noindex: true")
     if styles:
         fm.append("styles: [" + ", ".join(yq(s) for s in styles) + "]")
     if scripts:

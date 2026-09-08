@@ -7,6 +7,9 @@ ogImageAlt: "Sign in to the trust layer. — Enigma Vault"
 styles: ["pages/login.css"]
 scripts: ["pages/login.js"]
 excludeFromSitemap: true
+# The old login.html carried <meta name="robots" content="noindex, follow">;
+# port_page.py did not carry robots meta across, so it is restored here.
+noindex: true
 ---
 
 <!-- Hero -->

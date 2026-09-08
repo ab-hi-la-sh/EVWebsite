@@ -1,0 +1,32 @@
+{{- /*
+  llms.txt, generated from data/llms.yml.
+
+  The old file was hand-written and its links were all .html, so after the URL
+  change every one of them would have 301'd. Prose stays editorial in the data
+  file; the URLs are validated here against real pages, and the build fails if
+  one does not resolve.
+*/ -}}
+{{- $d := hugo.Data.llms -}}
+{{- /* Exact set of URLs this build actually publishes. site.GetPage is lenient
+       about extensions -- it happily resolves /pricing.html to /pricing/ -- so
+       membership of this set is the only check that catches a stale link. */ -}}
+{{- $live := slice -}}
+{{- range site.Pages }}{{ $live = $live | append .RelPermalink }}{{ end -}}
+{{- range $d.sections -}}{{- range .items -}}
+  {{- if not (hasPrefix .url "http") -}}
+    {{- if not (in $live .url) -}}
+      {{- errorf "llms.txt: %q points at %q, which this build does not publish" .label .url -}}
+    {{- end -}}
+  {{- end -}}
+{{- end }}{{ end -}}
+# {{ $d.title }}
+
+> {{ $d.summary }}
+
+{{ $d.intro }}
+{{ range $d.sections }}
+## {{ .title }}
+{{ range .items }}
+- [{{ .label }}]({{ .url | absURL }}): {{ .desc }}
+{{- end }}
+{{ end -}}

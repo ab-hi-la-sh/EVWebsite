@@ -1,0 +1,212 @@
+# Netlify configuration for the Enigma Vault site (Hugo).
+#
+# The old site was published as-is with no build step. Hugo now builds it, and
+# every URL moved from /page.html to /page/ -- so the redirect block below is
+# the complete old-URL surface, one 301 per page.
+
+[build]
+  publish = "public"
+  command = "hugo --gc --minify"
+
+[build.environment]
+  HUGO_VERSION = "0.161.1"
+  # Hugo needs the extended build for WebP encoding in the image pipeline.
+  HUGO_ENV = "production"
+
+# ---------------------------------------------------------------------------
+# Redirects: every URL the old site served, mapped to its clean-URL equivalent.
+# ---------------------------------------------------------------------------
+
+# Netlify serves /index.html implicitly, so this one needs force.
+[[redirects]]
+  from = "/index.html"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/company/about.html"
+  to = "/company/about/"
+  status = 301
+[[redirects]]
+  from = "/contact.html"
+  to = "/contact/"
+  status = 301
+[[redirects]]
+  from = "/login.html"
+  to = "/login/"
+  status = 301
+[[redirects]]
+  from = "/nopii/faqs.html"
+  to = "/nopii/faqs/"
+  status = 301
+[[redirects]]
+  from = "/nopii/how-it-works.html"
+  to = "/nopii/how-it-works/"
+  status = 301
+[[redirects]]
+  from = "/nopii/overview.html"
+  to = "/nopii/overview/"
+  status = 301
+[[redirects]]
+  from = "/nopii/use-cases.html"
+  to = "/nopii/use-cases/"
+  status = 301
+[[redirects]]
+  from = "/platform/data-security.html"
+  to = "/platform/data-security/"
+  status = 301
+[[redirects]]
+  from = "/platform/integrations.html"
+  to = "/platform/integrations/"
+  status = 301
+[[redirects]]
+  from = "/platform/overview.html"
+  to = "/platform/overview/"
+  status = 301
+[[redirects]]
+  from = "/pricing.html"
+  to = "/pricing/"
+  status = 301
+[[redirects]]
+  from = "/request-demo.html"
+  to = "/request-demo/"
+  status = 301
+[[redirects]]
+  from = "/resources/article.html"
+  to = "/resources/blog/confident-wrong-answer/"
+  status = 301
+[[redirects]]
+  from = "/resources/blog.html"
+  to = "/resources/blog/"
+  status = 301
+[[redirects]]
+  from = "/resources/docs.html"
+  to = "/resources/docs/"
+  status = 301
+# Hugo publishes this exact file, so without force Netlify would serve it
+# directly and the canonical URL would have a duplicate.
+[[redirects]]
+  from = "/solutions/industries/index.html"
+  to = "/solutions/industries/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/triplets/faqs.html"
+  to = "/triplets/faqs/"
+  status = 301
+[[redirects]]
+  from = "/triplets/how-it-works.html"
+  to = "/triplets/how-it-works/"
+  status = 301
+[[redirects]]
+  from = "/triplets/overview.html"
+  to = "/triplets/overview/"
+  status = 301
+[[redirects]]
+  from = "/triplets/use-cases.html"
+  to = "/triplets/use-cases/"
+  status = 301
+[[redirects]]
+  from = "/vault/card-vault.html"
+  to = "/vault/card-vault/"
+  status = 301
+[[redirects]]
+  from = "/vault/customer-vault.html"
+  to = "/vault/customer-vault/"
+  status = 301
+[[redirects]]
+  from = "/vault/data-vault.html"
+  to = "/vault/data-vault/"
+  status = 301
+[[redirects]]
+  from = "/vault/faqs.html"
+  to = "/vault/faqs/"
+  status = 301
+[[redirects]]
+  from = "/vault/file-vault.html"
+  to = "/vault/file-vault/"
+  status = 301
+[[redirects]]
+  from = "/vault/how-it-works.html"
+  to = "/vault/how-it-works/"
+  status = 301
+[[redirects]]
+  from = "/vault/overview.html"
+  to = "/vault/overview/"
+  status = 301
+[[redirects]]
+  from = "/vault/use-cases.html"
+  to = "/vault/use-cases/"
+  status = 301
+# Retired pages that the old netlify.toml already redirected. Their targets
+# were .html URLs, so they are re-pointed at the clean equivalents.
+[[redirects]]
+  from = "/nopii/pricing.html"
+  to = "/pricing/#nopii"
+  status = 301
+[[redirects]]
+  from = "/vault/pricing.html"
+  to = "/pricing/#vault"
+  status = 301
+[[redirects]]
+  from = "/solutions/industries/healthcare-life-sciences.html"
+  to = "/solutions/industries/#healthcare"
+  status = 301
+[[redirects]]
+  from = "/solutions/industries/financial-services-fintech.html"
+  to = "/solutions/industries/#financial-services"
+  status = 301
+[[redirects]]
+  from = "/solutions/industries/legal.html"
+  to = "/solutions/industries/#legal"
+  status = 301
+[[redirects]]
+  from = "/solutions/industries/insurance.html"
+  to = "/solutions/industries/#insurance"
+  status = 301
+
+# ---------------------------------------------------------------------------
+# Caching. The catch-all comes FIRST and the immutable rules after it: when
+# several header rules match a path, the more specific/later rule is the one
+# that must win, so ordering general -> specific keeps HTML revalidating while
+# fingerprinted assets stay immutable.
+#
+# Hugo fingerprints the CSS/JS bundles and every processed image, so those are
+# immutable. /assets/ holds fixed-URL files (og images, favicons, CSS
+# backgrounds) which are NOT fingerprinted -- long cache, but not immutable.
+#
+# netlify dev does not apply these locally; they take effect at the edge, so
+# confirm them on the first deploy preview.
+# ---------------------------------------------------------------------------
+
+# HTML always re-validates so a publish is reflected immediately.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"
+
+[[headers]]
+  for = "/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

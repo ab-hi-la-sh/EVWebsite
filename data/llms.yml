@@ -1,0 +1,113 @@
+# llms.txt content, ported from the hand-written file in the old export.
+# The prose and link labels are editorial and stay hand-maintained here; the
+# URLs are checked against real pages at build time (see layouts/home.llms.txt),
+# so the .html links in the old file cannot come back.
+
+title: Enigma Vault
+summary: 'Enigma Vault is an AI data security company. Three products protect sensitive data across the AI lifecycle: the
+  Vault tokenizes and encrypts stored data, NoPII keeps personal data out of LLM prompts, and Triplets grounds AI answers
+  in compiled evidence.'
+intro: 'Enigma Vault products run on shared infrastructure: the same encryption, tenant isolation, key management, and audit
+  logging. Free allowances are available for Card Vault, Data Vault, File Vault, and NoPII. Customer Vault, Agent Vault, and
+  Triplets are priced by engagement.'
+sections:
+- title: Platform
+  items:
+  - label: Platform overview
+    url: /platform/overview/
+    desc: How Triplets, NoPII, and the Vault work independently and share one security foundation.
+  - label: Security and encryption
+    url: /platform/data-security/
+    desc: Encryption, tenant isolation, key management, access controls, and audit logging.
+  - label: Integrations
+    url: /platform/integrations/
+    desc: Supported LLM APIs, payment gateways, and REST/webhook integration paths.
+- title: The Vault
+  items:
+  - label: Vault overview
+    url: /vault/overview/
+    desc: Data tokenization and encryption across cards, records, files, and customer intake.
+  - label: Card Vault
+    url: /vault/card-vault/
+    desc: Credit card tokenization API with a payment gateway proxy.
+  - label: Data Vault
+    url: /vault/data-vault/
+    desc: Searchable field-level encryption for application data.
+  - label: File Vault
+    url: /vault/file-vault/
+    desc: Encrypted file storage with expiring access links.
+  - label: Customer Vault
+    url: /vault/customer-vault/
+    desc: Secure document collection and intake through branded links.
+  - label: How the Vault works
+    url: /vault/how-it-works/
+    desc: API flow from authentication through tokenization to authorized retrieval.
+  - label: Vault use cases
+    url: /vault/use-cases/
+    desc: Card-on-file payments, searchable records, secure document exchange, intake.
+  - label: Vault FAQs
+    url: /vault/faqs/
+    desc: Tokenization, encryption, intake, setup, and pricing questions.
+- title: NoPII
+  items:
+  - label: NoPII overview
+    url: /nopii/overview/
+    desc: LLM privacy proxy that tokenizes PII before model calls and restores it in responses.
+  - label: How NoPII works
+    url: /nopii/how-it-works/
+    desc: Detection, tokenization, streaming, and response restoration.
+  - label: NoPII use cases
+    url: /nopii/use-cases/
+    desc: Clinical notes, legal documents, financial copilots, claims, and support AI.
+  - label: NoPII FAQs
+    url: /nopii/faqs/
+    desc: Providers, streaming, detection, retention, scope, and integration.
+- title: Triplets
+  items:
+  - label: Triplets overview
+    url: /triplets/overview/
+    desc: AI grounding and evidence verification with inspectable sources.
+  - label: How Triplets works
+    url: /triplets/how-it-works/
+    desc: Corpus compilation, claim states, source conflicts, and evidence monitoring.
+  - label: Triplets use cases
+    url: /triplets/use-cases/
+    desc: Workflows where AI answers depend on evidence that changes.
+  - label: Triplets FAQs
+    url: /triplets/faqs/
+    desc: What the Trust Certificate does and does not prove, refusals, and pricing.
+- title: Solutions and pricing
+  items:
+  - label: Industries
+    url: /solutions/industries/
+    desc: AI data security for healthcare, financial services, legal, insurance, and ten more sectors.
+  - label: Pricing
+    url: /pricing/
+    desc: Vault API pricing, NoPII pricing, and engagement pricing for Triplets, Customer Vault, and Agent Vault.
+- title: Resources
+  items:
+  - label: Documentation
+    url: /resources/docs/
+    desc: NoPII setup guides and Vault API reference.
+  - label: Blog
+    url: /resources/blog/
+    desc: Guides on PII protection, tokenization, and evidence-grounded AI.
+  - label: Why confident AI hallucinations become business risks
+    url: /resources/blog/confident-wrong-answer/
+    desc: How unsupported AI answers create risk, and what grounding and refusal boundaries change.
+- title: Company
+  items:
+  - label: About
+    url: /company/about/
+    desc: Why Enigma Vault builds for sensitive data protection and grounded AI.
+  - label: Contact
+    url: /contact/
+    desc: Sales, support, partnership, and press enquiries.
+  - label: Request a demo
+    url: /request-demo/
+    desc: Book a session on Triplets, NoPII, or the Vault.
+- title: Optional
+  items:
+  - label: Log in
+    url: /login/
+    desc: Product sign-in. Not indexed.

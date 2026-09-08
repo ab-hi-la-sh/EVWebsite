@@ -1,0 +1,10 @@
+{{- /* Ported from the old static robots.txt. The three Disallow paths do not
+       exist in this build; kept as-is pending confirmation, since removing a
+       Disallow is the change that can expose something. */ -}}
+User-agent: *
+Allow: /
+Disallow: /_archive/
+Disallow: /export-home/
+Disallow: /export-split/
+
+Sitemap: {{ "sitemap.xml" | absURL }}

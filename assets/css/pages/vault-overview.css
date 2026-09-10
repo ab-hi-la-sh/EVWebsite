@@ -43,3 +43,5 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   }
   /* ---- One API: CTA row + nudge sticky text lower ---- */
   .vault-stick__cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px;}
+  /* ---- Merged-page anchor offset (sticky-nav height), matches .im-sec/.trp/.vu-case 118px ---- */
+  #overview,#how-it-works,#use-cases,#faqs{scroll-margin-top:118px;}

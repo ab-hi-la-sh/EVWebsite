@@ -25,8 +25,8 @@ sections:
 - title: The Vault
   items:
   - label: Vault overview
-    url: /vault/overview/
-    desc: Data tokenization and encryption across cards, records, files, and customer intake.
+    url: /vault/
+    desc: Data tokenization and encryption across cards, records, files, and customer intake -- how the Vault works, use cases, and setup FAQs.
   - label: Card Vault
     url: /vault/card-vault/
     desc: Credit card tokenization API with a payment gateway proxy.
@@ -39,43 +39,16 @@ sections:
   - label: Customer Vault
     url: /vault/customer-vault/
     desc: Secure document collection and intake through branded links.
-  - label: How the Vault works
-    url: /vault/how-it-works/
-    desc: API flow from authentication through tokenization to authorized retrieval.
-  - label: Vault use cases
-    url: /vault/use-cases/
-    desc: Card-on-file payments, searchable records, secure document exchange, intake.
-  - label: Vault FAQs
-    url: /vault/faqs/
-    desc: Tokenization, encryption, intake, setup, and pricing questions.
 - title: NoPII
   items:
   - label: NoPII overview
-    url: /nopii/overview/
-    desc: LLM privacy proxy that tokenizes PII before model calls and restores it in responses.
-  - label: How NoPII works
-    url: /nopii/how-it-works/
-    desc: Detection, tokenization, streaming, and response restoration.
-  - label: NoPII use cases
-    url: /nopii/use-cases/
-    desc: Clinical notes, legal documents, financial copilots, claims, and support AI.
-  - label: NoPII FAQs
-    url: /nopii/faqs/
-    desc: Providers, streaming, detection, retention, scope, and integration.
+    url: /nopii/
+    desc: LLM privacy proxy that tokenizes PII before model calls and restores it in responses -- how it works, use cases across clinical, legal, financial and support AI, and setup FAQs.
 - title: Triplets
   items:
-  - label: Triplets overview
-    url: /triplets/overview/
-    desc: AI grounding and evidence verification with inspectable sources.
-  - label: How Triplets works
-    url: /triplets/how-it-works/
-    desc: Corpus compilation, claim states, source conflicts, and evidence monitoring.
-  - label: Triplets use cases
-    url: /triplets/use-cases/
-    desc: Workflows where AI answers depend on evidence that changes.
-  - label: Triplets FAQs
-    url: /triplets/faqs/
-    desc: What the Trust Certificate does and does not prove, refusals, and pricing.
+  - label: Triplets
+    url: /triplets/
+    desc: AI grounding and evidence verification with inspectable sources -- compilation and claim states, source-conflict handling, use cases across regulated industries, and Trust Certificate FAQs.
 - title: Solutions and pricing
   items:
   - label: Industries

@@ -16,10 +16,16 @@
           <input id="bl-search" type="text" placeholder="Search articles..." autocomplete="off" aria-label="Search articles">
           <button id="bl-clear" class="bl-search__clear" type="button" aria-label="Clear search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"></path></svg></button>
         </div>
-        {{- /* Chips are server-rendered from the categories actually present,
-               not the old fixed list of 9 -- an empty filter is a dead end. */ -}}
+        {{- /* Chips: the fixed set from the blog section's `chipCategories`
+               frontmatter (the old site's full list), so every category shows
+               even before it has posts. Falls back to categories actually
+               present if the frontmatter list is absent. */ -}}
         {{- $cats := slice "All" -}}
-        {{- range $arts }}{{ if not (in $cats .Params.category) }}{{ $cats = $cats | append .Params.category }}{{ end }}{{ end }}
+        {{- with .Params.chipCategories -}}
+          {{- $cats = $cats | append . -}}
+        {{- else -}}
+          {{- range $arts }}{{ if not (in $cats .Params.category) }}{{ $cats = $cats | append .Params.category }}{{ end }}{{ end -}}
+        {{- end -}}
         <div class="bl-chips" id="bl-chips" role="tablist" aria-label="Filter by category">
           {{- range $i, $c := $cats }}
           <button class="bl-chip{{ if eq $i 0 }} is-active{{ end }}" type="button" data-cat="{{ $c }}">{{ $c }}</button>

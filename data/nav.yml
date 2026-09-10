@@ -26,34 +26,34 @@ items:
           desc: Wide ecosystem of partners and products
 
   - label: Triplets
-    topHref: /triplets/overview/
+    topHref: /triplets/
     tag: Trust the output
     icon: /assets/nav/triplets.jpg
     panel:
-      - [Overview, /triplets/overview/]
-      - [How it works, /triplets/how-it-works/]
-      - [Use cases, /triplets/use-cases/]
-      - [FAQs, /triplets/faqs/]
+      - [Overview, /triplets/]
+      - [How it works, /triplets/#how-it-works]
+      - [Use cases, /triplets/#use-cases]
+      - [FAQs, /triplets/#faqs]
 
   - label: NoPII
-    topHref: /nopii/overview/
+    topHref: /nopii/
     tag: Trust the input
     icon: /assets/nav/nopii.jpg
     panel:
-      - [Overview, /nopii/overview/]
-      - [How it works, /nopii/how-it-works/]
-      - [Use cases, /nopii/use-cases/]
-      - [FAQs, /nopii/faqs/]
+      - [Overview, /nopii/]
+      - [How it works, /nopii/#how-it-works]
+      - [Use cases, /nopii/#use-cases]
+      - [FAQs, /nopii/#faqs]
 
   - label: The Vault
-    topHref: /vault/overview/
+    topHref: /vault/
     tag: Trust the data
     icon: /assets/nav/vault.jpg
     panel:
-      - [Overview, /vault/overview/]
-      - [How it works, /vault/how-it-works/]
-      - [Use cases, /vault/use-cases/]
-      - [FAQs, /vault/faqs/]
+      - [Overview, /vault/]
+      - [How it works, /vault/#how-it-works]
+      - [Use cases, /vault/#use-cases]
+      - [FAQs, /vault/#faqs]
     group:
       title: The four vaults
       links:

@@ -8,7 +8,7 @@
     <div class="hp-reveal hp-sectors" style="animation-delay:80ms">
       {{- range $i.sectors }}
       <a class="hp-sector" href="{{ index . 2 }}">
-        <span class="hp-sector__ic">{{ partial "img.html" (dict "src" (index . 1) "alt" "" "width" 132 "loading" "lazy") }}</span>
+        <span class="hp-sector__ic">{{ partial "img.html" (dict "src" (index . 1) "alt" "" "width" 540 "loading" "lazy") }}</span>
         <span class="hp-sector__name">{{ index . 0 }}</span>
       </a>
       {{- end }}

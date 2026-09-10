@@ -38,19 +38,19 @@
   status = 301
 [[redirects]]
   from = "/nopii/faqs.html"
-  to = "/nopii/faqs/"
+  to = "/nopii/#faqs"
   status = 301
 [[redirects]]
   from = "/nopii/how-it-works.html"
-  to = "/nopii/how-it-works/"
+  to = "/nopii/#how-it-works"
   status = 301
 [[redirects]]
   from = "/nopii/overview.html"
-  to = "/nopii/overview/"
+  to = "/nopii/"
   status = 301
 [[redirects]]
   from = "/nopii/use-cases.html"
-  to = "/nopii/use-cases/"
+  to = "/nopii/#use-cases"
   status = 301
 [[redirects]]
   from = "/platform/data-security.html"
@@ -93,19 +93,19 @@
   force = true
 [[redirects]]
   from = "/triplets/faqs.html"
-  to = "/triplets/faqs/"
+  to = "/triplets/#faqs"
   status = 301
 [[redirects]]
   from = "/triplets/how-it-works.html"
-  to = "/triplets/how-it-works/"
+  to = "/triplets/#how-it-works"
   status = 301
 [[redirects]]
   from = "/triplets/overview.html"
-  to = "/triplets/overview/"
+  to = "/triplets/"
   status = 301
 [[redirects]]
   from = "/triplets/use-cases.html"
-  to = "/triplets/use-cases/"
+  to = "/triplets/#use-cases"
   status = 301
 [[redirects]]
   from = "/vault/card-vault.html"
@@ -121,7 +121,7 @@
   status = 301
 [[redirects]]
   from = "/vault/faqs.html"
-  to = "/vault/faqs/"
+  to = "/vault/#faqs"
   status = 301
 [[redirects]]
   from = "/vault/file-vault.html"
@@ -129,15 +129,15 @@
   status = 301
 [[redirects]]
   from = "/vault/how-it-works.html"
-  to = "/vault/how-it-works/"
+  to = "/vault/#how-it-works"
   status = 301
 [[redirects]]
   from = "/vault/overview.html"
-  to = "/vault/overview/"
+  to = "/vault/"
   status = 301
 [[redirects]]
   from = "/vault/use-cases.html"
-  to = "/vault/use-cases/"
+  to = "/vault/#use-cases"
   status = 301
 # Retired pages that the old netlify.toml already redirected. Their targets
 # were .html URLs, so they are re-pointed at the clean equivalents.
@@ -164,6 +164,68 @@
 [[redirects]]
   from = "/solutions/industries/insurance.html"
   to = "/solutions/industries/#insurance"
+  status = 301
+
+# The 4 Triplets pages were consolidated into one page with anchored sections
+# (content/triplets/how-it-works.html, use-cases.html and faqs.html no longer
+# exist as separate content -- their content now lives on /triplets/
+# as #how-it-works, #use-cases and #faqs). Same pattern as the industries
+# sub-page consolidation above, just not force'd: Hugo no longer emits these
+# paths at all once the content files are gone, so there is no local file for
+# Netlify to prefer over the redirect.
+[[redirects]]
+  from = "/triplets/how-it-works/"
+  to = "/triplets/#how-it-works"
+  status = 301
+[[redirects]]
+  from = "/triplets/use-cases/"
+  to = "/triplets/#use-cases"
+  status = 301
+[[redirects]]
+  from = "/triplets/faqs/"
+  to = "/triplets/#faqs"
+  status = 301
+[[redirects]]
+  from = "/triplets/overview/"
+  to = "/triplets/"
+  status = 301
+
+# NoPII consolidated the same way: overview/how-it-works/use-cases/faqs now
+# live on /nopii/ as anchored sections.
+[[redirects]]
+  from = "/nopii/how-it-works/"
+  to = "/nopii/#how-it-works"
+  status = 301
+[[redirects]]
+  from = "/nopii/use-cases/"
+  to = "/nopii/#use-cases"
+  status = 301
+[[redirects]]
+  from = "/nopii/faqs/"
+  to = "/nopii/#faqs"
+  status = 301
+[[redirects]]
+  from = "/nopii/overview/"
+  to = "/nopii/"
+  status = 301
+
+# The Vault consolidated its overview/how-it-works/use-cases/faqs onto /vault/.
+# The four named vault products (card/data/file/customer) stay separate pages.
+[[redirects]]
+  from = "/vault/how-it-works/"
+  to = "/vault/#how-it-works"
+  status = 301
+[[redirects]]
+  from = "/vault/use-cases/"
+  to = "/vault/#use-cases"
+  status = 301
+[[redirects]]
+  from = "/vault/faqs/"
+  to = "/vault/#faqs"
+  status = 301
+[[redirects]]
+  from = "/vault/overview/"
+  to = "/vault/"
   status = 301
 
 # ---------------------------------------------------------------------------

@@ -1,2 +1,7 @@
-/* triplets/overview.html — page-scoped styles */
+/* triplets/overview.html — page-scoped styles
+   Now the single merged Triplets page (overview + how-it-works + use-cases +
+   faqs sections). The scroll-margin-top rule below matches the 118px sticky-nav
+   offset used elsewhere (.im-sec, .trp, .vu-case) so the nav dropdown's anchor
+   links land with the section heading clear of the fixed header. */
 .np-eyebrow{font-size:12px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--ev-mineral-blue);margin:0 0 14px;}.tr-descriptor{color:#7FA6BF;}
+#overview,#how-it-works,#use-cases,#faqs{scroll-margin-top:118px;}

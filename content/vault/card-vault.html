@@ -7,7 +7,7 @@ ogImageAlt: "Accept payments. Never touch a card. — Enigma Vault"
 styles: ["vaults.css", "pages/vault-card-vault.css"]
 breadcrumb:
   - name: "The Vault"
-    url: "/vault/overview/"
+    url: "/vault/"
   - name: "Card Vault"
     url: "/vault/card-vault/"
 ---
@@ -16,7 +16,7 @@ breadcrumb:
   <header class="np-hero vp-hero">
     <div class="np-container np-hero__inner">
       <div class="np-hero__copy">
-        <nav class="vp-crumb" aria-label="Breadcrumb"><a href="/vault/overview/">The Vault</a><span class="vp-crumb__sep">/</span><span aria-current="page">Card Vault</span></nav>
+        <nav class="vp-crumb" aria-label="Breadcrumb"><a href="/vault/">The Vault</a><span class="vp-crumb__sep">/</span><span aria-current="page">Card Vault</span></nav>
         <p class="np-eyebrow">Credit card tokenization API</p><h1 class="np-h1">Accept payments <em>without storing card numbers</em>.</h1>
         <p class="np-lead">Card Vault is a credit card tokenization API with a payment gateway proxy. It tokenizes payment cards the moment they are captured and charges them through the payment gateway you already use. One way in, and no way out except through the proxy. Your PCI scope collapses to nearly nothing, and your gateway choice stays yours.</p>
         <div class="np-hero__ctas">
@@ -130,7 +130,7 @@ breadcrumb:
 
   <!-- SECTION 5 · Gateway proxy (dark) -->
   <section class="np-section vp-dark">
-    <div class="vp-dark__bg" style="background-image:url('../assets/vault/dark-corridor.png')"></div>
+    <div class="vp-dark__bg" style="background-image:url('/assets/vault-dark-corridor.jpg')"></div>
     <div class="np-container">
       <div style="max-width:820px"><p class="vp-eyebrow">The proxy</p><h2 class="np-h2">Process tokenized payments <em>through your gateway</em>.</h2>
       <p class="vp-prose">The payment proxy sends charges to your gateway with real card data substituted inside the vault, so raw values never touch your servers.</p></div>
@@ -141,7 +141,7 @@ breadcrumb:
       </div>
       <div class="np-ctas" style="margin-top:40px">
         <a class="np-btn np-btn--primary" href="https://aws.amazon.com/marketplace/seller-profile?id=c77b8db1-5511-48b7-8ce5-9a8d4a1a8018" target="_blank" rel="noopener"><span>Get started free</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
-        <a class="np-btn np-btn--secondary" href="/vault/use-cases/"><span>See the use cases</span></a>
+        <a class="np-btn np-btn--secondary" href="/vault/#use-cases"><span>See the use cases</span></a>
       </div>
     </div>
   </section>

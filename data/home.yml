@@ -33,7 +33,7 @@ suite:
     - icon: db
       text: Tokenized files and records
     link: Explore the Vault
-    href: /vault/overview/
+    href: /vault/
   - prod: NoPII
     art: /assets/suite/nopii-art.png
     tag: Use AI. Protect PII.
@@ -47,7 +47,7 @@ suite:
     - icon: code
       text: One-line integration
     link: Explore NoPII
-    href: /nopii/overview/
+    href: /nopii/
   - prod: Triplets
     art: /assets/suite/triplets-art.svg
     tag: Answers backed by evidence.
@@ -60,7 +60,7 @@ suite:
     - icon: refresh
       text: Updates with your evidence
     link: Explore Triplets
-    href: /triplets/overview/
+    href: /triplets/
 stack:
   title: Three layers of trust. One foundation.
   intro: 'Every AI feature has three places where trust can break: the answer it gives, the prompt it
@@ -75,7 +75,7 @@ stack:
       cannot support one. A confident wrong answer never reaches your user, because it never gets generated.
     proof: compile, verify, refuse when unsupported.
     link: Explore Triplets
-    href: /triplets/overview/
+    href: /triplets/
   - n: '02'
     prod: NoPII
     head: 'NoPII: PII protection for LLMs.'
@@ -84,7 +84,7 @@ stack:
       then restored in the response. The model reasons normally. The provider never sees a real identifier.
     proof: detect, tokenize, restore.
     link: Explore NoPII
-    href: /nopii/overview/
+    href: /nopii/
   - n: '03'
     prod: The Vault
     head: 'The Vault: data tokenization and encryption.'
@@ -93,7 +93,7 @@ stack:
       Your systems hold tokens that still work. The real values live in the vault.
     proof: capture, vault, reference.
     link: Explore the Vault
-    href: /vault/overview/
+    href: /vault/
     also:
       text: Need secure customer intake instead?
       link: Customer Vault

@@ -7,9 +7,9 @@ legal: © 2026 Enigma Vault. All rights reserved.
 columns:
   - title: Products
     links:
-      - [Triplets, /triplets/overview/]
-      - [NoPII, /nopii/overview/]
-      - [The Vault, /vault/overview/]
+      - [Triplets, /triplets/]
+      - [NoPII, /nopii/]
+      - [The Vault, /vault/]
       - [Pricing, /pricing/]
 
   - title: Vaults

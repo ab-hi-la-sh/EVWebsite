@@ -6,6 +6,12 @@
       "runtimeExecutable": "hugo",
       "runtimeArgs": ["server", "--port", "1313", "--disableFastRender"],
       "port": 1313
+    },
+    {
+      "name": "enigmavault-static-legacy",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8743", "--directory", "site-export"],
+      "port": 8743
     }
   ]
 }

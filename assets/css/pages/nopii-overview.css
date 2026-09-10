@@ -31,3 +31,7 @@
   .np-pill:hover{border-color:var(--ev-mineral-blue);color:var(--ev-mineral-blue);transform:translateY(-2px);box-shadow:0 6px 16px rgba(15,61,86,0.10);}
   .np-pill:hover::before{background:var(--ev-mineral-blue);}
   @media (max-width:767px){.np-cat{grid-template-columns:1fr;gap:14px;}}
+
+/* Merged NoPII page (overview + how-it-works + use-cases + faqs sections).
+   Anchor links from the nav dropdown land below the 118px sticky nav. */
+#overview,#how-it-works,#use-cases,#faqs{scroll-margin-top:118px;}

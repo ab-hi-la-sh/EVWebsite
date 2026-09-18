@@ -44,10 +44,13 @@ columns:
   - title: Company
     links:
       - [About, /company/about/]
+      - [Contact, /contact/]
       - [Blog, /resources/blog/]
       - [Docs, /resources/docs/]
       - [Request a demo, /request-demo/]
       - [Login, /login/]
+      - ["(877) 977-2083", "tel:+18779772083"]
+      - [support@enigmavault.io, "mailto:support@enigmavault.io"]
 
 policies:
   - [Security Policy, "https://www.enigmavault.io/compliance/Enigma+Vault+Security+Policy.pdf"]

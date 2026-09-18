@@ -55,6 +55,16 @@ disableKinds = ["taxonomy", "term"]
     imageWidth = "1200"
     imageHeight = "630"
 
+  # Company NAP — used by the Organization JSON-LD in head/schema.html.
+  [params.org]
+    telephone = "+1-877-977-2083"
+    email = "hello@enigmavault.io"
+    streetAddress = "30 Broad St., Suite 14114"
+    addressLocality = "New York"
+    addressRegion = "NY"
+    postalCode = "10004"
+    addressCountry = "US"
+
 [markup.goldmark.renderer]
   # Content pages carry designed markup, not prose. Raw HTML must pass through.
   unsafe = true

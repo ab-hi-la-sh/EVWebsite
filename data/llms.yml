@@ -63,10 +63,10 @@ sections:
     url: /resources/docs/
     desc: NoPII setup guides and Vault API reference.
   - label: Blog
-    url: /resources/blog/
+    url: /blog/
     desc: Guides on PII protection, tokenization, and evidence-grounded AI.
   - label: Why confident AI hallucinations become business risks
-    url: /resources/blog/confident-wrong-answer/
+    url: /blog/confident-wrong-answer/
     desc: How unsupported AI answers create risk, and what grounding and refusal boundaries change.
 - title: Company
   items:

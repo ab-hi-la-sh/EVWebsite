@@ -60,7 +60,7 @@ sections:
 - title: Resources
   items:
   - label: Documentation
-    url: /resources/docs/
+    url: /docs/
     desc: NoPII setup guides and Vault API reference.
   - label: Blog
     url: /blog/

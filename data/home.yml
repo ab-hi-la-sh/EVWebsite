@@ -171,7 +171,7 @@ resources:
   posts:
   - tag: Docs
     title: NoPII setup documentation and Vault API reference.
-    href: /resources/docs/
+    href: /docs/
   - tag: Platform
     title: Shared security infrastructure across data and AI.
     href: /platform/overview/
@@ -179,7 +179,7 @@ resources:
     title: Encryption, tenant isolation, keys and audit logging.
     href: /platform/data-security/
   all: Browse all resources
-  allHref: /resources/blog/
+  allHref: /blog/
 closing:
   title: Start with the layer you cannot afford to get wrong.
   body: Pick the exposure that is most urgent today. Add the next layer when you need it. The foundation,

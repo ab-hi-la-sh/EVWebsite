@@ -99,7 +99,7 @@ items:
           icon: /assets/nav/res-blogs.png
           desc: Perspectives, trends & updates
         - label: Docs
-          href: /resources/docs/
+          href: /docs/
           icon: /assets/nav/res-docs.png
           desc: Product documentation & APIs
 

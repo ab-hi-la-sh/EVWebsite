@@ -82,7 +82,7 @@
   status = 301
 [[redirects]]
   from = "/resources/docs.html"
-  to = "/resources/docs/"
+  to = "/docs/"
   status = 301
 # Hugo publishes this exact file, so without force Netlify would serve it
 # directly and the canonical URL would have a duplicate.

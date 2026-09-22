@@ -95,7 +95,7 @@ items:
       variant: resources
       items:
         - label: Blog
-          href: /resources/blog/
+          href: /blog/
           icon: /assets/nav/res-blogs.png
           desc: Perspectives, trends & updates
         - label: Docs

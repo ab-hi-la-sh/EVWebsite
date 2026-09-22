@@ -166,7 +166,7 @@ resources:
     title: Why confident AI hallucinations become business risks.
     body: Why confident but unsupported AI answers create business risk, and how evidence grounding, refusal
       boundaries and audit trails help teams respond.
-    href: /resources/blog/confident-wrong-answer/
+    href: /blog/confident-wrong-answer/
   postsLead: 'Also worth reading:'
   posts:
   - tag: Docs

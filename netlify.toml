@@ -74,11 +74,11 @@
   status = 301
 [[redirects]]
   from = "/resources/article.html"
-  to = "/resources/blog/confident-wrong-answer/"
+  to = "/blog/confident-wrong-answer/"
   status = 301
 [[redirects]]
   from = "/resources/blog.html"
-  to = "/resources/blog/"
+  to = "/blog/"
   status = 301
 [[redirects]]
   from = "/resources/docs.html"

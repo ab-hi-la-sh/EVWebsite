@@ -37,8 +37,7 @@ disableKinds = ["taxonomy", "term"]
   page = ["HTML"]
 
 [permalinks]
-  # Blog articles move from /resources/article.html to /resources/blog/<slug>/
-  "resources/blog" = "/resources/blog/:slug/"
+  "blog" = "/blog/:slug/"
 
 [params]
   description = "Protect sensitive data in your applications and AI workflows. Explore PII tokenization, secure data storage and evidence-grounded answers with Enigma Vault."

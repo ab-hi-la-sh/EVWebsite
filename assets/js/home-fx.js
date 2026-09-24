@@ -22,6 +22,26 @@
     });
   }
 
+  /* Vault section cards: arm-then-reveal, ported from VaultCard in
+     home-parts1.jsx. A card already in view at load is never armed, so it
+     never flashes hidden; one that is below the fold fades up, runs the scan
+     line and staggers its rows in. The 1500ms timer is the same safety net the
+     React version had for browsers that never fire the observer. */
+  (function () {
+    if (reduce || !('IntersectionObserver' in window)) return;
+    [].slice.call(document.querySelectorAll('.hp-vs__card')).forEach(function (el) {
+      var r = el.getBoundingClientRect();
+      if (r.top < (window.innerHeight || 800) && r.bottom > 0) return;
+      el.classList.add('is-armed');
+      var on = function () { el.classList.add('is-on'); };
+      var io = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { if (e.isIntersecting) { on(); io.disconnect(); } });
+      }, { threshold: 0.2 });
+      io.observe(el);
+      setTimeout(on, 1500);
+    });
+  })();
+
   /* Parallax */
   var pxEls = [].slice.call(document.querySelectorAll('[data-px]'));
   function applyPx() {

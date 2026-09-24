@@ -150,7 +150,7 @@ img{max-width:100%;display:block;}
 .np-ctable--wide td{width:50%;}
 
 /* ---------- Proof band ---------- */
-.np-proof{position:relative;overflow:hidden;background:#0A2236 url('/assets/proof-bg.jpg') center/cover no-repeat;}
+.np-proof{position:relative;overflow:hidden;background:#0A2236 url('/assets/proof-bg-j.webp') center/cover no-repeat;}
 .np-proof::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,26,44,0.7),rgba(8,26,44,0.5));pointer-events:none;}
 .np-proof .np-container{position:relative;z-index:1;}
 .np-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;}
@@ -361,7 +361,7 @@ img{max-width:100%;display:block;}
 @media (prefers-reduced-motion: reduce){.np-lines i::before{animation:none;}}
 
 /* ---------- Statement band with media + pulsing highlights ---------- */
-.np-statement--media{position:relative;overflow:hidden;background:#0A1A2E url('/assets/nopii-statement.jpg') center/cover no-repeat;}
+.np-statement--media{position:relative;overflow:hidden;background:#0A1A2E url('/assets/nopii-statement.webp') center/cover no-repeat;}
 .np-statement--media::before{content:"";position:absolute;inset:0;pointer-events:none;
   background:linear-gradient(90deg,rgba(8,20,38,0.86) 0%,rgba(8,20,38,0.52) 58%,rgba(8,20,38,0.72) 100%);}
 .np-statement--media .np-container{position:relative;z-index:1;}
@@ -428,7 +428,7 @@ img{max-width:100%;display:block;}
 
 /* ---------- Parallax (engineer section) ---------- */
 .np-parallax{position:relative;overflow:hidden;background:#0A1A2E;}
-.np-parallax__bg{position:absolute;left:0;right:0;top:-18%;height:136%;background:url('/assets/np-engineer-bg.jpg') center/cover no-repeat;will-change:transform;z-index:0;}
+.np-parallax__bg{position:absolute;left:0;right:0;top:-18%;height:136%;background:url('/assets/np-engineer-bg.webp') center/cover no-repeat;will-change:transform;z-index:0;}
 .np-parallax__bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,26,46,0.55),rgba(10,26,46,0.4));}
 .np-parallax > .np-container{position:relative;z-index:1;}
 .np-parallax .np-h2{color:#fff;}
@@ -514,7 +514,7 @@ img{max-width:100%;display:block;}
 
 /* Three guarantees: dark parallax bg + liquid-glass cards */
 .tr-guarantees{position:relative;overflow:hidden;background:#0A1A2E;}
-.tr-guarantees__bg{position:absolute;left:0;right:0;top:-28%;height:156%;background:#0A1A2E url('/assets/tr-guarantees-bg.jpg') center/cover no-repeat;z-index:0;will-change:transform;}
+.tr-guarantees__bg{position:absolute;left:0;right:0;top:-28%;height:156%;background:#0A1A2E url('/assets/tr-guarantees-bg.webp') center/cover no-repeat;z-index:0;will-change:transform;}
 .tr-guarantees__bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,20,38,0.52),rgba(8,20,38,0.42));}
 .tr-guarantees > .np-container{position:relative;z-index:1;}
 .tr-guarantees .np-h2{color:#fff;}
@@ -598,7 +598,7 @@ img{max-width:100%;display:block;}
 
 /* Section 2: dark glass + parallax */
 .tr-darkglass{position:relative;overflow:hidden;background:#05080F;}
-.tr-darkglass__bg{position:absolute;left:0;right:0;top:-28%;height:156%;background:#05080F url('/assets/tr-hiw-dark.jpg') center/cover no-repeat;z-index:0;will-change:transform;}
+.tr-darkglass__bg{position:absolute;left:0;right:0;top:-28%;height:156%;background:#05080F url('/assets/tr-hiw-dark.webp') center/cover no-repeat;z-index:0;will-change:transform;}
 .tr-darkglass__bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,8,15,0.42),rgba(5,8,15,0.36));}
 .tr-darkglass > .np-container{position:relative;z-index:1;}
 .tr-darkglass .np-h2{color:#fff;}
@@ -647,7 +647,7 @@ img{max-width:100%;display:block;}
 .tr-heur--strip b{font-weight:600;color:#fff;}
 
 /* Not-the-right-tool — dark prism bg, professional */
-.tr-notfit{position:relative;overflow:hidden;background:#070D17 url('/assets/tr-prism-bg.jpg') center/cover no-repeat;}
+.tr-notfit{position:relative;overflow:hidden;background:#070D17 url('/assets/tr-prism-bg-j.webp') center/cover no-repeat;}
 .tr-notfit::before{content:"";position:absolute;inset:0;background:linear-gradient(105deg,rgba(7,13,23,0.92) 0%,rgba(7,13,23,0.66) 55%,rgba(7,13,23,0.5) 100%);}
 .tr-notfit > .np-container{position:relative;z-index:1;}
 .tr-notfit .np-h2{color:#fff;}

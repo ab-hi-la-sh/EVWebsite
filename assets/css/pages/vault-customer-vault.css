@@ -1,0 +1,11 @@
+/* "For developers" on Customer Vault: the three API capabilities read as a
+   rule-separated list beside the wider code sample, not as a 3-up grid. */
+.cv-devsplit{align-items:start;grid-template-columns:minmax(0,0.9fr) minmax(0,1.1fr);}
+.cv-devrows{display:flex;flex-direction:column;gap:0;margin-top:36px;border-bottom:1px solid var(--border-hairline);}
+.cv-devrows .vp-def{display:grid;grid-template-columns:44px minmax(0,1fr);column-gap:20px;align-items:start;padding:22px 0;}
+.cv-devrows .vp-def__ic{grid-row:1 / span 2;width:44px;height:44px;margin:0;display:grid;place-items:center;border-radius:6px;background:#fff;border:1px solid var(--border-hairline);transition:border-color .2s ease-out;}
+.cv-devrows .vp-def__ic svg{width:22px;height:22px;}
+.cv-devrows .vp-def:hover .vp-def__ic{border-color:var(--ev-silver);}
+.cv-devrows .vp-def__t{font-size:18px;margin:2px 0 6px;}
+.cv-devrows .vp-def__b{font-size:15px;}
+@media (max-width:1023px){.cv-devsplit{grid-template-columns:1fr;}}

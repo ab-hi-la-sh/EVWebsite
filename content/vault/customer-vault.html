@@ -4,7 +4,7 @@ metaTitle: "Secure Document Collection & Intake | Customer Vault"
 description: "Collect documents, signatures and sensitive customer information through branded secure links. Manage submissions and share files securely with Customer Vault."
 ogImage: "/assets/og/vault-customer.jpg"
 ogImageAlt: "Stop collecting sensitive data through email. — Enigma Vault"
-styles: ["vaults.css"]
+styles: ["vaults.css", "pages/vault-customer-vault.css"]
 breadcrumb:
   - name: "The Vault"
     url: "/vault/"
@@ -136,7 +136,7 @@ software:
 
   <!-- SECTION 6 · Security (dark) -->
   <section class="np-section vp-dark">
-    <div class="vp-dark__bg" style="background-image:url('/assets/vault-dark-corridor.jpg')"></div>
+    <div class="vp-dark__bg" style="background-image:url('/assets/vault-dark-corridor.webp')"></div>
     <div class="np-container">
       <div style="max-width:820px"><p class="vp-eyebrow">Security</p><h2 class="np-h2">Security <em>your assessor will recognize</em>.</h2></div>
       <div class="vp-icards vp-icards--3">
@@ -187,12 +187,12 @@ software:
   <!-- SECTION 8 · For developers -->
   <section class="np-section np-bg-cloud">
     <div class="np-container">
-      <div class="vp-split">
+      <div class="vp-split cv-devsplit">
         <div>
           <p class="vp-eyebrow">For developers</p>
           <h2 class="np-h2">Embed it in <em>your own application</em>.</h2>
           <p class="vp-prose">Everything the app does is available through the Enigma Vault API. Create customers, generate branded intake links, and receive real-time notifications the moment a customer submits.</p>
-          <div class="vp-defs vp-defs--3" style="margin-top:34px;gap:22px 26px">
+          <div class="vp-defs cv-devrows">
             <div class="vp-def"><div class="vp-def__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 16.98h-5.99c-1.1 0-1.95.94-2.48 1.9A4 4 0 0 1 2 17c.01-.7.2-1.4.57-2"/><path d="m6 17 3.13-5.78c.53-.97.1-2.18-.5-3.1a4 4 0 1 1 6.89-4.06"/><path d="m12 6 3.13 5.73C15.66 12.7 16.9 13 18 13a4 4 0 0 1 0 8"/></svg></div><h3 class="vp-def__t">Signed webhooks.</h3><p class="vp-def__b">File uploaded, card submitted, signature captured, field saved. Every payload signed with HMAC-SHA256.</p></div>
             <div class="vp-def"><div class="vp-def__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></div><h3 class="vp-def__t">Status polling.</h3><p class="vp-def__b">Lightweight counts or full detail mode, with lookups by your own external IDs.</p></div>
             <div class="vp-def"><div class="vp-def__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15.5 7.5 2.3 2.3a1 1 0 0 0 1.4 0l2.1-2.1a1 1 0 0 0 0-1.4L18.9 4"/><path d="m21 2-9.6 9.6"/><circle cx="7.5" cy="15.5" r="5.5"/></svg></div><h3 class="vp-def__t">Self-service config.</h3><p class="vp-def__b">Set your webhook URL and signing secret through the API. The secret is write-only and never readable.</p></div>
@@ -204,15 +204,34 @@ software:
         <div>
           <div class="vp-code" style="margin-top:0">
             <div class="vp-code__bar"><span class="vp-code__dots"><span class="vp-code__dot"></span><span class="vp-code__dot"></span><span class="vp-code__dot"></span></span><span class="vp-code__file">customervault &mdash; curl</span></div>
-            <p class="vp-code__step">Create a customer</p>
-<pre>curl -X POST https://api.enigmavault.io/customervault/customers \
+            <pre><span class="c"># Authenticate</span>
+TOKEN=$(curl -s -X POST \
+  https://api-auth.enigmavault.io/oauth2/token \
+  -d <span class="s">"grant_type=client_credentials"</span> \
+  -d <span class="s">"scope=io.enigmavault/customervault"</span> \
+  | jq -r .access_token)
+
+<span class="c"># Create a customer and get their intake link</span>
+curl -X POST \
+  https://api.enigmavault.io/customervault/customers \
   -H <span class="s">"Authorization: Bearer $TOKEN"</span> \
   -H <span class="s">"x-api-version: 1.12"</span> \
   -H <span class="s">"Content-Type: application/json"</span> \
-  -d <span class="s">'{"externalId":"cust-001",
-       "firstName":"Jane","lastName":"Doe",
-       "email":"jane@example.com"}'</span></pre>
-            <div class="vp-code__out"><span class="vp-code__outk">201</span><code>{ <span class="k">"intakeUrl"</span>: <span class="s">"https://intake.enigmavault.io/a1b2c3"</span> }</code></div>
+  -d <span class="s">'{"externalId":"cust-001","firstName":"Jane","lastName":"Doe","email":"jane@example.com"}'</span>
+
+<span class="c"># Response:</span>
+<span class="c"># {</span>
+<span class="c">#   "customerId": "a1b2c3...",</span>
+<span class="c">#   "intakeUrl": "https://app.customervault.io/intake?customerId=a1b2c3...&amp;tenant=acme"</span>
+<span class="c"># }</span>
+
+<span class="c"># Check intake status</span>
+curl -X GET \
+  https://api.enigmavault.io/customervault/customers/cust-001 \
+  -H <span class="s">"Authorization: Bearer $TOKEN"</span> \
+  -H <span class="s">"x-api-version: 1.12"</span>
+
+<span class="c"># Response: { "status": { "fileCount": 2, "cardCount": 1, ... } }</span></pre>
           </div>
         </div>
       </div>

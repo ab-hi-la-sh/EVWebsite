@@ -61,6 +61,62 @@ suite:
       text: Updates with your evidence
     link: Explore Triplets
     href: /triplets/
+vaultSec:
+  eyebrow: The Vault
+  title: Secure your cards, files, and data.
+  titleEm: Without the heavy burden of compliance.
+  intro: Enigma’s Vault is a PCI Level 1 and SOC 2 Type II compliant platform for encryption, tokenization,
+    and secure customer data management
+  badges:
+  - PCI DSS Level 1
+  - SOC 2 Type II
+  products:
+  - name: Enigma Vault API
+    art: /assets/vaultsec/api-art.webp
+    kicker: For developers
+    body: A developer-first REST API for encrypting, tokenizing, and managing sensitive data. Three purpose-built
+      vaults for cards, data, and files.
+    rows:
+    - icon: card
+      text: 'Card Vault: tokenize payment cards and proxy to gateways'
+    - icon: db
+      text: 'Data Vault: AES-256 field encryption, searchable, batch up to 5,000'
+    - icon: file
+      text: 'File Vault: encrypted cloud storage up to 5 GB with presigned URLs'
+    - icon: key
+      text: OAuth2 M2M authentication
+    - icon: cloud
+      text: Available on AWS Marketplace
+    - icon: phone
+      text: Twilio Pay integration for IVR card capture
+    cta1:
+      label: Explore the Vault API
+      href: /vault/
+    cta2:
+      label: Get it on AWS Marketplace
+      aws: true
+  - name: Customer Vault
+    art: /assets/vaultsec/customer-art.webp
+    kicker: For your team
+    body: A secure web application for managing customer data, capturing intake submissions, sharing files,
+      and collecting electronic signatures.
+    rows:
+    - icon: form
+      text: Branded public intake forms, no customer account needed
+    - icon: user
+      text: Customer profile management with cards, files, and signatures
+    - icon: inbox
+      text: Staff inbox workflow for reviewing and assigning submissions
+    - icon: link
+      text: Secure file sharing with expiring links and password protection
+    - icon: fingerprint
+      text: WebAuthn passkeys and TOTP MFA enforcement
+    cta1:
+      label: Explore Customer Vault
+      href: /vault/customer-vault/
+    cta2:
+      label: Request a demo
+      href: /request-demo/
 stack:
   title: Three layers of trust. One foundation.
   intro: 'Every AI feature has three places where trust can break: the answer it gives, the prompt it

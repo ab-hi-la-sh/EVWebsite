@@ -1,0 +1,63 @@
+{{- /* "Secure your cards, files, and data" — the two Vault products, between
+       the suite grid and the stack. Ported from VaultSection in home-parts1.jsx;
+       the card reveal (armed/on, scan line, staggered rows) lives in home-fx.js. */ -}}
+{{- $s := hugo.Data.home.vaultSec -}}
+{{- $icons := dict
+  "card" `<rect x="2.5" y="5.5" width="19" height="13" rx="2"/><path d="M2.5 10h19M6 15h4"/>`
+  "db" `<ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/>`
+  "file" `<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><rect x="9" y="12.5" width="6" height="5" rx="1"/><path d="M10.5 12.5v-1a1.5 1.5 0 0 1 3 0v1"/>`
+  "key" `<circle cx="7.5" cy="15.5" r="4"/><path d="M10.4 12.6L20 3M16 7l3 3M14 9l2 2"/>`
+  "cloud" `<path d="M7 18a4.5 4.5 0 0 1-.6-8.96A6 6 0 0 1 18 9.5a4 4 0 0 1-.5 8.5z"/>`
+  "phone" `<path d="M21 16.5v3a2 2 0 0 1-2.2 2A19.8 19.8 0 0 1 2.5 5.2 2 2 0 0 1 4.5 3h3a2 2 0 0 1 2 1.7c.13 1 .37 1.9.7 2.8a2 2 0 0 1-.45 2.1L8.5 10.9a16 16 0 0 0 4.6 4.6l1.3-1.3a2 2 0 0 1 2.1-.45c.9.33 1.8.57 2.8.7a2 2 0 0 1 1.7 2z"/>`
+  "form" `<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/>`
+  "user" `<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>`
+  "inbox" `<path d="M3 13h5l2 3h4l2-3h5"/><path d="M5.5 5h13L21 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-6z"/>`
+  "link" `<path d="M10 14a4.5 4.5 0 0 0 6.4 0l3-3a4.5 4.5 0 0 0-6.4-6.4l-1 1"/><path d="M14 10a4.5 4.5 0 0 0-6.4 0l-3 3a4.5 4.5 0 0 0 6.4 6.4l1-1"/>`
+  "fingerprint" `<path d="M12 11v4a6 6 0 0 1-1 3.3"/><path d="M8.5 7.5A5 5 0 0 1 17 11v2"/><path d="M7 11v2a9 9 0 0 1-1 4"/><path d="M16.8 16a13 13 0 0 1-1.3 4"/><path d="M5 8a8 8 0 0 1 14 3.5"/>`
+-}}
+<section class="hp-section hp-vs" id="vault">
+  <div class="hp-container">
+    <div class="hp-vs__head">
+      <div class="hp-reveal hp-vs__headcopy">
+        <p class="hp-suite__eyebrow">{{ $s.eyebrow }}</p>
+        <h2 class="hp-suite__h2">{{ $s.title }} <span class="hp-vs__em">{{ $s.titleEm }}</span></h2>
+      </div>
+      <div class="hp-reveal hp-vs__headside" style="animation-delay:80ms">
+        <p class="hp-vs__intro">{{ $s.intro }}</p>
+        <div class="hp-vs__badges">
+          {{- range $s.badges }}
+          <span class="hp-vs__badge"><svg class="hp-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>{{ . }}</span>
+          {{- end }}
+        </div>
+      </div>
+    </div>
+    <div class="hp-vs__grid">
+      {{- range $i, $item := $s.products }}
+      <article class="hp-vs__card" style="--vs-d:{{ mul $i 140 }}ms">
+        <div class="hp-vs__art">
+          {{ partial "img.html" (dict "src" $item.art "alt" "" "loading" "lazy" "width" 760) }}
+          <span class="hp-vs__scan" aria-hidden="true"></span>
+        </div>
+        <div class="hp-vs__bodywrap">
+          <p class="hp-vs__kicker">{{ $item.kicker }}</p>
+          <h3 class="hp-vs__name">{{ $item.name }}</h3>
+          <p class="hp-vs__body">{{ $item.body }}</p>
+          <ul class="hp-vs__rows">
+            {{- range $j, $r := $item.rows }}
+            <li style="--vs-i:{{ $j }}"><span class="hp-vs__ictile"><svg class="hp-vs__ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{{ index $icons $r.icon | safeHTML }}</svg></span><span>{{ $r.text }}</span></li>
+            {{- end }}
+          </ul>
+          <div class="hp-vs__ctas">
+            {{ partial "ds/button.html" (dict "label" $item.cta1.label "href" $item.cta1.href "arrow" true) }}
+            {{- if $item.cta2.aws }}
+            {{ partial "ds/button.html" (dict "label" $item.cta2.label "href" site.Params.awsMarketplace "variant" "secondary" "blank" true) }}
+            {{- else }}
+            {{ partial "ds/button.html" (dict "label" $item.cta2.label "href" $item.cta2.href "variant" "secondary") }}
+            {{- end }}
+          </div>
+        </div>
+      </article>
+      {{- end }}
+    </div>
+  </div>
+</section>

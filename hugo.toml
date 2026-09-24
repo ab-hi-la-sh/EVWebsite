@@ -68,6 +68,11 @@ disableKinds = ["taxonomy", "term"]
   # Content pages carry designed markup, not prose. Raw HTML must pass through.
   unsafe = true
 
+[security]
+  # Newer Hugo denies text/html page sources by default; this site's content
+  # pages are authored locally as verbatim .html (see README), so allow it.
+  allowContent = ['.*']
+
 [build]
   writeStats = false
 

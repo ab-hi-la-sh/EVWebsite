@@ -7,4 +7,4 @@ resources/
 .netlify
 
 # Legacy static-site export, kept locally as a reference only — not part of the Hugo project
-site-export/
+site-export

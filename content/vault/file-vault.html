@@ -18,7 +18,7 @@ breadcrumb:
       <div class="np-hero__copy">
         <nav class="vp-crumb" aria-label="Breadcrumb"><a href="/vault/">The Vault</a><span class="vp-crumb__sep">/</span><span aria-current="page">File Vault</span></nav>
         <h1 class="np-h1">Store any file. <em>Hand out access that expires</em>.</h1>
-        <p class="np-lead">File Vault is an encrypted file storage API for documents, images, and any sensitive file. The file lives in the vault. Your app holds a reference, never the contents. Access happens through presigned URLs that expire on your schedule.</p>
+        <p class="np-lead">File Vault is an encrypted file storage API for documents, images, and any sensitive file. The file lives in the vault. Your app holds a reference, never the contents. Access happens through short-lived presigned URLs.</p>
         <div class="np-hero__ctas">
           <a class="np-btn np-btn--primary" href="https://aws.amazon.com/marketplace/seller-profile?id=c77b8db1-5511-48b7-8ce5-9a8d4a1a8018" target="_blank" rel="noopener"><span>Get started free</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
           <a class="np-btn np-btn--secondary" href="https://docs.enigmavault.io" target="_blank" rel="noopener"><span>View API docs</span></a>
@@ -79,8 +79,8 @@ breadcrumb:
           </div>
           <div class="vp-flow__node">
             <div class="vp-flow__dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
-            <p class="vp-flow__n">02</p><h3 class="vp-flow__t">Sealed on arrival.</h3>
-            <p class="vp-flow__b">AES-GCM envelope encryption: a unique data key per object, wrapped by per-tenant keys in managed KMS. Tampering is detectable, not just prevented.</p>
+            <p class="vp-flow__n">02</p><h3 class="vp-flow__t">Encrypted at rest.</h3>
+            <p class="vp-flow__b">AES-GCM envelope encryption: a unique data key per file, wrapped by your account's own encryption key. Tampering is detectable, not just prevented.</p>
           </div>
           <div class="vp-flow__node">
             <div class="vp-flow__dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h.01"/><path d="M8.5 16.429a5 5 0 0 1 7 0"/><path d="M5 12.859a10 10 0 0 1 14 0"/><path d="M2 8.82a15 15 0 0 1 20 0"/></svg></div>
@@ -90,7 +90,7 @@ breadcrumb:
           <div class="vp-flow__node">
             <div class="vp-flow__dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
             <p class="vp-flow__n">04</p><h3 class="vp-flow__t">Download by expiring link.</h3>
-            <p class="vp-flow__b">Access goes through presigned URLs with expirations you set. When the link dies, so does access.</p>
+            <p class="vp-flow__b">Access goes through short-lived presigned URLs. When the link dies, so does access.</p>
           </div>
         </div>
       </div>
@@ -132,10 +132,9 @@ breadcrumb:
         <div>
           <p class="vp-eyebrow">Platform role</p>
           <h2 class="np-h2" style="font-size:32px">File Vault carries <em>the file side of the whole platform</em>.</h2>
-          <p class="vp-prose">It is not only a standalone product. Two other products already run on it, which is why its encryption and audit model is the same one your assessor will see everywhere else.</p>
+          <p class="vp-prose">It is not only a standalone product. Customer Vault already runs on it, which is why its encryption and audit model is the same one your assessor will see everywhere else.</p>
           <ul class="vp-list">
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Customer Vault stores every intake document here</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>NoPII uses the same infrastructure for document processing</span></li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>One encryption model, one audit trail, one compliance boundary</span></li>
           </ul>
           <div class="np-ctas" style="margin-top:30px">

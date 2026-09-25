@@ -65,7 +65,7 @@ vaultSec:
   eyebrow: The Vault
   title: Secure your cards, files, and data.
   titleEm: Without the heavy burden of compliance.
-  intro: Enigma’s Vault is a PCI Level 1 and SOC 2 Type II compliant platform for encryption, tokenization,
+  intro: Enigma’s Vault is a PCI DSS Level 1 Service Provider and SOC 2 Type II audited platform for encryption, tokenization,
     and secure customer data management
   badges:
   - PCI DSS Level 1
@@ -106,11 +106,11 @@ vaultSec:
     - icon: user
       text: Customer profile management with cards, files, and signatures
     - icon: inbox
-      text: Staff inbox workflow for reviewing and assigning submissions
+      text: Shared inbox where staff assign submissions to customer profiles
     - icon: link
       text: Secure file sharing with expiring links and password protection
     - icon: fingerprint
-      text: WebAuthn passkeys and TOTP MFA enforcement
+      text: Passkey or TOTP sign-in, with MFA tenants can require
     cta1:
       label: Explore Customer Vault
       href: /vault/customer-vault/
@@ -136,7 +136,7 @@ stack:
     prod: NoPII
     head: 'NoPII: PII protection for LLMs.'
     lead: What the model never sees, it can never leak.
-    body: Every prompt is scanned for sensitive data and tokenized before it leaves your environment,
+    body: Every prompt is scanned for sensitive data and tokenized before it reaches the model provider,
       then restored in the response. The model reasons normally. The provider never sees a real identifier.
     proof: detect, tokenize, restore.
     link: Explore NoPII
@@ -165,13 +165,13 @@ proof:
       or missing support. Refusals and gaps are logged and reported. Evidence support does not establish
       universal truth, medical correctness or regulatory approval.
   - prod: NoPII
-    value: 35+
-    unit: categories of sensitive data tokenized
-    body: Before prompts leave your environment, validated against a published 109-test benchmark, across
+    value: 30+
+    unit: configurable entity types tokenized
+    body: Before prompts reach the model provider, validated in a published 109-test report, across
       9+ LLM providers. Live in under five minutes.
   - prod: The Vault
     value: AES-256
-    unit: encryption with per-tenant key isolation
+    unit: encryption with per-customer keys
     body: Full audit logging, on PCI DSS Level 1 and SOC 2 Type II infrastructure. Free to start on AWS
       Marketplace.
 who:
@@ -181,7 +181,7 @@ who:
   - icon: cpu
     text: Heads of AI and platform, whose product cannot give a confident wrong answer.
   - icon: git-branch
-    text: Engineering and compliance, who cannot let customer data leave the building.
+    text: Engineering and compliance, who cannot let customer data leak.
   - icon: lock
     text: CISOs, who answer for every record at rest.
 industry:

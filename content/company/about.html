@@ -10,13 +10,10 @@ scripts: ["pages/company-about.js"]
 
 <!-- SECTION 1 · Hero -->
   <header class="np-hero">
-    <div class="ab-grid" aria-hidden="true">
-      <div class="ab-grid__floor"></div>
-      <div class="ab-grid__beams"></div>
-    </div>
+    <canvas class="ab-sonar" aria-hidden="true"></canvas>
     <div class="np-container ab-hero__inner">
       <h1 class="np-h1">Why we built <em>Enigma Vault</em>.</h1>
-      <p class="np-lead" style="margin-left:auto;margin-right:auto;">Enigma Vault is an AI data security company and the trust layer for AI and data. We exist to remove a trade-off that should never have existed.</p>
+      <p class="np-lead" style="margin-left:auto;margin-right:auto;">Enigma Vault is a data security company building the trust layer for AI and sensitive data. We exist so teams never have to choose between putting data and AI to work and being able to trust them.</p>
       <div class="np-hero__ctas" style="justify-content:center;">
         <a class="np-btn np-btn--primary" href="/platform/overview/"><span>See the products</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
       </div>
@@ -30,7 +27,7 @@ scripts: ["pages/company-about.js"]
       <div class="ab-narrow">
         <h2 class="np-h2">Our <em>mission</em>.</h2>
         <p class="ab-body">Enterprises should not have to choose between AI capability and data privacy. Enigma Vault exists to remove that trade-off, so every organization can harness the full power of generative AI without the fear of a false answer or the risk of exposing the data underneath.</p>
-        <blockquote class="ab-pull">Capability and safety were never supposed to be a choice. We build the layer that proves it.</blockquote>
+        <p class="ab-statement"><span class="ab-statement__line">Answers you can <strong>prove.</strong></span><span class="ab-statement__line">Data you never <strong>expose.</strong></span></p>
       </div>
     </div>
   </section>
@@ -40,8 +37,9 @@ scripts: ["pages/company-about.js"]
     <div class="np-container">
       <div class="ab-narrow">
         <h2 class="np-h2">AI moved <em>faster</em> than anyone's ability to <em>trust it</em>.</h2>
-        <p class="ab-body">We started Enigma Vault because adoption outran trust on every front at once. Teams could not trust the output, could not safeguard the input, and could not protect the data underneath. Everyone was shipping AI. Almost no one could prove it was safe.</p>
-        <p class="ab-body">We had spent careers on both sides of that gap, building the AI and answering for the breach, and we were done watching good teams forced to choose between moving fast and staying safe.</p>
+        <p class="ab-body">Adoption outran trust on every front at once. Answers shipped that no one could verify. Prompts carried customer data and secrets straight to model providers. And the data underneath, the cards, files, and records, was exposed to every new system that touched it.</p>
+        <p class="ab-body">Everyone was shipping AI. Few could prove it was safe.</p>
+        <p class="ab-body">That&rsquo;s why we built Enigma Vault: to verify the output, protect the input, and secure the data underneath. Because trust you can&rsquo;t prove isn&rsquo;t trust.</p>
       </div>
     </div>
   </section>
@@ -83,33 +81,33 @@ scripts: ["pages/company-about.js"]
         <article class="np-card">
           <div class="ab-val__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
           <h3 class="ab-val__t">Trust is infrastructure, not a promise.</h3>
-          <p class="ab-val__b">Reliability and privacy have to be enforced outside the application and outside the model, where they can be proven.</p>
+          <p class="ab-val__b">Privacy and reliability have to be enforced outside the application and outside the model, where they hold even when either one gets it wrong.</p>
         </article>
         <article class="np-card">
           <div class="ab-val__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg></div>
           <h3 class="ab-val__t">Refusal is a feature.</h3>
-          <p class="ab-val__b">A system that declines to guess, in writing, is worth more than a system that always answers.</p>
+          <p class="ab-val__b">A system that declines to guess, and says so in writing, is worth more than one that always answers.</p>
         </article>
         <article class="np-card">
           <div class="ab-val__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
           <h3 class="ab-val__t">The safest data is the data you never hold.</h3>
-          <p class="ab-val__b">Custody, not encryption alone, is what decides your breach story.</p>
+          <p class="ab-val__b">Custody, not encryption alone, decides your breach story.</p>
         </article>
         <article class="np-card">
           <div class="ab-val__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21.8 10A10 10 0 1 1 17 3.3"/><path d="m9 11 3 3L22 4"/></svg></div>
-          <h3 class="ab-val__t">Proof beats trust.</h3>
-          <p class="ab-val__b">Every claim we make should be checkable: on your corpus, in your logs, by your auditor.</p>
+          <h3 class="ab-val__t">If we can&rsquo;t prove it, we don&rsquo;t claim it.</h3>
+          <p class="ab-val__b">Every claim we make is checkable: in the output, in the audit trail, by your auditor.</p>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- SECTION 6 · Talk to us -->
+  <!-- SECTION 6 · Check it -->
   <section class="np-section np-ctaband np-ctaband--dark np-rule-top">
     <div class="np-container">
       <div class="np-ctaband__inner">
-        <h2 class="np-h2">Contact <em>Enigma Vault</em>.</h2>
-        <p class="np-ctaband__body">Enigma Vault, 30 Broad St., Suite 14114, New York, NY 10004. (877) 977-2083. <a href="mailto:hello@enigmavault.io">hello@enigmavault.io</a> for sales, <a href="mailto:support@enigmavault.io">support@enigmavault.io</a> for support.</p>
+        <h2 class="np-h2">Don&rsquo;t take our word for it. <em>Check it.</em></h2>
+        <p class="np-ctaband__body">Bring us the AI answers you can&rsquo;t afford to get wrong, the data you can&rsquo;t expose, or the records you can&rsquo;t risk holding.</p>
         <div class="np-ctaband__ctas">
           <a class="np-btn np-btn--on-dark np-btn--primary" href="/request-demo/"><span>Request a demo</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
           <a class="np-btn np-btn--on-dark np-btn--secondary" href="https://aws.amazon.com/marketplace/seller-profile?id=c77b8db1-5511-48b7-8ce5-9a8d4a1a8018" target="_blank" rel="noopener"><span>Start free on AWS Marketplace</span></a>

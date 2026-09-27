@@ -1,0 +1,4 @@
+Contact: mailto:support@enigmavault.io
+Canonical: https://www.enigmavault.io/.well-known/security.txt
+Preferred-Languages: en
+Expires: 2027-09-27T00:00:00Z

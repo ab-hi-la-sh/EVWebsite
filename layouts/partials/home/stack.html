@@ -21,7 +21,7 @@
               {{ partial "ds/textlink.html" (dict "label" .link "href" .href "size" "sm") }}
             </div>
             {{- with .also }}
-            <p class="hp-layer__also">{{ .text }} <a href="{{ .href }}">{{ .link }}</a></p>
+            <p class="hp-layer__also"><span>{{ .text }}</span> {{ partial "ds/textlink.html" (dict "label" .link "href" .href "size" "sm") }}</p>
             {{- end }}
           </div>
         </div>

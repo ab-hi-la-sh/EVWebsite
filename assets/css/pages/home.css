@@ -29,7 +29,8 @@
 
   /* ---- Suite: one foundation, three products ---- */
   .hp-reslink{display:block;text-decoration:none;color:inherit;}
-  .hp-layer__also{font-size:14px;font-weight:300;line-height:1.5;color:var(--ev-slate);margin:12px 0 0;}
+  /* Mild callout so the Customer Vault pointer is not lost in the body copy. */
+  .hp-layer__also{display:flex;flex-wrap:wrap;align-items:center;gap:4px 10px;font-size:14px;line-height:1.5;color:var(--text-body);margin:16px 0 0;padding:12px 16px;background:rgba(15,61,86,0.05);border-left:2px solid var(--ev-mineral-blue);border-radius:0 8px 8px 0;}
   .hp-suite{background:#F7F8FA;border-top:1px solid var(--border-hairline);}
   .hp-suite__head{max-width:900px;}
   .hp-suite__eyebrow{font-size:11px;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--ev-slate);margin:0 0 26px;}
@@ -246,7 +247,7 @@
   .hp-layer__head{font-size:22px;font-weight:600;letter-spacing:-0.01em;line-height:1.2;color:var(--text-heading);margin:5px 0 0;}
   .hp-layer__body{font-size:15px;line-height:1.6;color:var(--text-body);margin:10px 0 0;}
   .hp-layer__lead{font-weight:600;color:var(--text-heading);}
-  .hp-layer__meta{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-top:14px;}
+  .hp-layer__meta{display:flex;flex-direction:column;align-items:flex-start;gap:12px;margin-top:14px;}
   .hp-layer__proof{font-size:13.5px;font-weight:500;color:var(--ev-ink);}
   .hp-layer__proof span{color:var(--ev-slate);font-weight:400;margin-right:7px;}
   .hp-foundation{margin-top:36px;background:var(--surface-card);border:1px solid var(--border-hairline);border-radius:14px;padding:24px 32px;display:flex;align-items:center;justify-content:center;gap:14px;text-align:center;}

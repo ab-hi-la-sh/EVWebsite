@@ -1,0 +1,95 @@
+---
+title: "Security Policy"
+metaTitle: "Security Policy | Enigma Vault"
+description: "How Enigma Vault secures the Enigma Vault API and your data: application, portal, data and infrastructure security, key protection, disaster recovery, compliance and data retention."
+styles: ["pages/compliance-policy.css"]
+---
+
+<header class="np-hero lp-hero">
+  <div class="np-container lp-hero__inner">
+    <h1 class="np-h1">Enigma Vault <em>Security Policy</em></h1>
+    <p class="lp-updated">Last updated: September 27, 2026</p>
+  </div>
+</header>
+
+<section class="np-section lp-body">
+  <div class="np-container">
+    <article class="lp-doc">
+      <p class="lp-intro">This security policy describes how we secure our Enigma Vault API services and your data.</p>
+
+      <h2>Overview</h2>
+      <p>Our primary responsibility at Enigma Vault is to secure your sensitive data. Our services were built from the ground up with privacy and security in mind. To learn more about our privacy practices, please review our <a href="/compliance/privacy-policy/">privacy policy</a>.</p>
+
+      <h2>Application security</h2>
+      <h3>Static application security testing</h3>
+      <p>The Enigma Vault API undergoes static application security testing (SAST) every time there&rsquo;s a code change. If a vulnerability is identified by the SAST service, the build fails, and all other development efforts are halted until resolution. Ensuring that code commits are high quality and defect free provides the cornerstone of our protection against cyber criminals and data loss.</p>
+
+      <h3>Dynamic application security testing</h3>
+      <p>Every three months the Enigma Vault API undergoes dynamic application security testing (DAST) by a trusted third-party assessor. A trusted third-party assessor also performs an annual penetration test using various security tools.</p>
+
+      <h3>Web application firewall</h3>
+      <p>A web application firewall (WAF) protects the Enigma Vault API during runtime. It is in block mode and stops malicious web requests. Its efficacy is continuously monitored, and all blocks are promptly investigated.</p>
+
+      <h3>Authentication</h3>
+      <p>We have chosen OAuth2/OpenID Connect as the Enigma Vault API authentication mechanism. All protected endpoints require a valid bearer token.</p>
+
+      <h2>Developer Portal security</h2>
+      <h3>Multi-factor authentication</h3>
+      <p>To access the developer portal where client credentials and reporting reside, the developer must configure multi-factor authentication (MFA). We have chosen time based one time passwords (TOTP) MFA using apps such as Google Authenticator or Cisco Duo instead of SMS. TOTP doesn&rsquo;t rely on cellular networks and has far fewer risks than SMS.</p>
+
+      <h3>Advanced authentication security</h3>
+      <p>While MFA provides a very strong layer of security, we didn&rsquo;t stop there. Passwords are checked against compromised lists and if the password has been involved in a previous breach, the developer will have to use a different password to login. We also use adaptive authentication techniques that determine if the login is of low/medium/high risk based on a multitude of factors.</p>
+
+      <h3>Email notices</h3>
+      <p>Whenever you login to the portal, you&rsquo;ll receive an email stating you just logged in. We can&rsquo;t imagine a scenario where a bad actor could gain control of your password, MFA TOTP, and slip by our advanced authentication security, but if they do, you will know with the email notice.</p>
+
+      <h2>Data security</h2>
+      <h3>Encryption in motion</h3>
+      <p>All traffic between the API and the client occurs over TLS 1.2 or higher. All internal traffic within our services uses TLS 1.2 or higher as well.</p>
+
+      <h3>Encryption at rest</h3>
+      <p>Besides disk and table level encryption, we take it one step further and use AES-256 client level encryption. All of the data provided to the API gets encrypted prior to being stored with our cloud services provider, AWS.</p>
+
+      <h2>Infrastructure security</h2>
+      <p>Enigma Vault&rsquo;s API operates on AWS&rsquo; serverless compute, database, and storage offerings. They&rsquo;re responsible for OS/platform level updates, patch management, etc. This allows us to focus on code and high-level AWS management and provides you the most modern, secure data storage and processing API out there. We take advantage of AWS Security Hub to map to various security frameworks and to identify any potential issues. We use AWS GuardDuty to alert us of any malicious account level activity.</p>
+
+      <h2>Encryption key protection</h2>
+      <p>Enigma Vault keys are using AES methods. The keys are stored within an encrypted enclave managed by our cloud services provider, AWS. The keys are rotated annually.</p>
+
+      <h2>Disaster recovery</h2>
+      <h3>Multiple availability zones</h3>
+      <p>We utilize AWS&rsquo; multiple availability zones within a region. Think of an availability zone as a data center operating on its own power, network, and other resources. Barring something short of an apocalypse, multiple availability zones provide baked in high availability. Four horsemen appearing? No big deal, see multiple regions below.</p>
+
+      <h3>Multiple regions</h3>
+      <p>While we highly doubt something bad will happen to one of AWS&rsquo; primary regions, we&rsquo;ve planned for it. In the event of a catastrophe where one of the primary regions goes down, your data is safe. We replicate data and card vault data real time to another region. File vault replication happens near real time.</p>
+
+      <h2>Compliance</h2>
+      <p>We understand that security does not equal compliance, but we also understand the importance of assurance and attestation to you.</p>
+
+      <h3>PCI compliance</h3>
+      <p>Enigma Vault&rsquo;s card vault, data vault, and file vault have achieved PCI-DSS level 1 certification. The attestation of compliance (AOC) is available on request.</p>
+
+      <h3>ISO 27001 compliance</h3>
+      <p>We are currently in the process of obtaining ISO 27001 compliance certification.</p>
+
+      <h2>Shared responsibility</h2>
+      <p>We eat and breathe security, and we hope you do too. It is our job to protect your data and keep it safe. You have the responsibility of protecting your portal login credentials, API client credentials, and the systems and services that use Enigma Vault.</p>
+
+      <h2>Reporting a potential issue</h2>
+      <p>If you come across a potential vulnerability, please reach out to us immediately at <a href="mailto:support@enigmavault.io">support@enigmavault.io</a>.</p>
+
+      <h2>Data retention and secure disposal</h2>
+      <h3>Card Vault</h3>
+      <p>Within the card vault, card tokens utilize a concept called time to live (TTL). The TTL is configurable by the app client up to 15 minutes. After 15 minutes, and the client app has not extended the TTL, the card is purged. If the user checks the box that they want their card saved, the card is saved permanently. For permanent cards, they can be deleted by the app client using the delete endpoint. Card data is point-in-time backed up for 35 days. While handled together through the API, the CVV is treated much differently behind the scenes because it is sensitive authentication data (SAD). The CVV has a static TTL of 15 minutes; it cannot be changed. If the card TTL is increased, the CVV TTL remains as it was. If the card TTL is decreased, the CVV TTL changes to the lesser TTL. When authorization occurs, the TTL is purged from the table. There are no backups taken of the CVV table.</p>
+
+      <h3>Data and File Vaults</h3>
+      <p>The data and file vaults require the app client to purge items using the delete endpoint. Deleted data will reside for 35 days.</p>
+
+      <h3>Usage and application logs</h3>
+      <p>Application and network level logs are stored for a minimum of 1 year per PCI-DSS. Usage logs related to billing are kept for 60 days.</p>
+
+      <h2>Companywide commitment</h2>
+      <p>Nothing is more important to us than ensuring the privacy and security of your data. Each employee takes a pledge of excellence to ensure quality, reliability, privacy, and security.</p>
+    </article>
+  </div>
+</section>

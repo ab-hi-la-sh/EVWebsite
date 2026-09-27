@@ -45,7 +45,7 @@ items:
       - [Use cases, /nopii/#use-cases]
       - [FAQs, /nopii/#faqs]
 
-  - label: The Vault
+  - label: Vault
     topHref: /vault/
     tag: Trust the data
     icon: /assets/nav/vault.jpg

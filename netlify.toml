@@ -17,6 +17,17 @@
 # Redirects: every URL the old site served, mapped to its clean-URL equivalent.
 # ---------------------------------------------------------------------------
 
+# netlify.app copy of the site. DO NOT enable until www.enigmavault.io points
+# at Netlify: until then the real domain still serves the old S3 site, and this
+# would send visitors (and you) there. Until the switch, the noindex edge
+# function (netlify/edge-functions/noindex-netlify-app.ts) keeps this copy out
+# of search. On cutover day: uncomment this, then delete that edge function.
+# [[redirects]]
+#   from = "https://evmarketingsite.netlify.app/*"
+#   to = "https://www.enigmavault.io/:splat"
+#   status = 301
+#   force = true
+
 # Netlify serves /index.html implicitly, so this one needs force.
 [[redirects]]
   from = "/index.html"
@@ -228,6 +239,18 @@
   to = "/vault/"
   status = 301
 
+# Old policy PDF URLs: both policies are now pages on the site.
+[[redirects]]
+  from = "/compliance/Enigma+Vault+Security+Policy.pdf"
+  to = "/compliance/security-policy/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/compliance/Enigma+Vault+Privacy+Policy.pdf"
+  to = "/compliance/privacy-policy/"
+  status = 301
+  force = true
+
 # ---------------------------------------------------------------------------
 # Caching. The catch-all comes FIRST and the immutable rules after it: when
 # several header rules match a path, the more specific/later rule is the one
@@ -243,10 +266,20 @@
 # ---------------------------------------------------------------------------
 
 # HTML always re-validates so a publish is reflected immediately.
+# The security headers ride on the same catch-all so every response gets them.
+# CSP allows any https: origin for scripts/styles/frames because GTM, HubSpot
+# forms and Google Fonts load from several hosts; 'unsafe-inline' covers the
+# inline GTM snippet and per-page <style> blocks.
 [[headers]]
   for = "/*"
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: blob: https:; font-src 'self' data: https:; connect-src 'self' https:; frame-src 'self' https:; object-src 'none'; base-uri 'self'; frame-ancestors 'self';"
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains"
 
 [[headers]]
   for = "/assets/*"

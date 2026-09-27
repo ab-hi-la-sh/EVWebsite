@@ -16,7 +16,7 @@
 *{box-sizing:border-box;}
 html{scroll-behavior:smooth;overflow-x:hidden;}
 body{
-  margin:0;overflow-x:visible;background:var(--surface-page);color:var(--text-body);
+  margin:0;overflow-x:visible;overflow-x:clip;background:var(--surface-page);color:var(--text-body);
   font-family:var(--font-display);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
 }
 ::selection{background:var(--ev-mineral-25);}
@@ -267,6 +267,8 @@ img{max-width:100%;display:block;}
 .np-hero--banner .np-container{padding-top:88px;padding-bottom:84px;}
 .np-hero--banner .np-hero__copy{max-width:840px;margin:0 auto;text-align:center;}
 .np-hero--banner .np-lead{margin-left:auto;margin-right:auto;}
+/* Sub headline under the H1: section-heading scale (brandbook: Medium, 28-32px), brand blue. */
+.np-subhead{font-family:var(--font-display);font-size:clamp(22px,2.3vw,30px);font-weight:500;line-height:1.25;letter-spacing:-0.015em;color:var(--ev-mineral-blue);margin:20px 0 0;text-wrap:balance;}
 .np-hero--banner .np-hero__ctas{justify-content:center;}
 .np-hero--banner .np-note{justify-content:center;}
 .np-hero__banner{margin-top:54px;}
@@ -686,6 +688,10 @@ img{max-width:100%;display:block;}
 
 /* ---------- Responsive ---------- */
 @media (max-width:1023px){
+  /* Single-column grids: let children shrink below their content width
+     (code blocks, rails) instead of widening the page. */
+  .np-hero__inner>*,.np-split>*,.vp-split>*,.im-shell>*,.trs>*{min-width:0;}
+  .np-hero--center .np-code{width:100%;}
   .np-container{padding:0 40px;}
   .np-section{padding:72px 0;}
   .np-hero__inner{grid-template-columns:1fr;gap:40px;padding:64px 40px 56px;}
@@ -702,6 +708,7 @@ img{max-width:100%;display:block;}
   .np-def{grid-template-columns:1fr;gap:6px;}
 }
 @media (max-width:600px){
+  .np-btn{max-width:100%;white-space:normal;text-align:center;}
   .np-container{padding:0 22px;}
   .np-hero__inner{padding:56px 22px 48px;}
   .np-cards--4,.np-cards--3,.np-cards--2{grid-template-columns:1fr;}

@@ -1,5 +1,5 @@
 /* vault/overview.html — page-scoped styles */
-/* ---- Hero: copy left, animated prism right ---- */
+/* ---- Hero: copy left, secure-cell render right (brand Vault device) ---- */
   .vault-hero{display:flex;align-items:center;justify-content:center;min-width:0;}
   .vault-hero__art{position:relative;width:100%;max-width:580px;}
   .vault-hero__img{width:100%;height:auto;mix-blend-mode:multiply;transform-origin:50% 50%;

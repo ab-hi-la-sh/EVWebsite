@@ -17,16 +17,14 @@
 # Redirects: every URL the old site served, mapped to its clean-URL equivalent.
 # ---------------------------------------------------------------------------
 
-# netlify.app copy of the site. DO NOT enable until www.enigmavault.io points
-# at Netlify: until then the real domain still serves the old S3 site, and this
-# would send visitors (and you) there. Until the switch, the noindex edge
-# function (netlify/edge-functions/noindex-netlify-app.ts) keeps this copy out
-# of search. On cutover day: uncomment this, then delete that edge function.
-# [[redirects]]
-#   from = "https://evmarketingsite.netlify.app/*"
-#   to = "https://www.enigmavault.io/:splat"
-#   status = 301
-#   force = true
+# The netlify.app copy of the site 301s to the production domain so there is
+# one indexable address. Deploy previews (<id>--evmarketingsite.netlify.app)
+# are a different host and are unaffected.
+[[redirects]]
+  from = "https://evmarketingsite.netlify.app/*"
+  to = "https://www.enigmavault.io/:splat"
+  status = 301
+  force = true
 
 # Netlify serves /index.html implicitly, so this one needs force.
 [[redirects]]

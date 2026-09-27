@@ -133,7 +133,7 @@ build:
       </div>
       <div class="vault-stick__right">
         <div class="np-col vault-line"><h3 class="np-col__title">Encryption you do not manage</h3><p class="np-col__body">AES-256-CBC fields with unique per-field initialization vectors, AES-GCM envelope encryption for files, and per-customer AES-256 keys in a managed secrets store, rolled over after a specified time.</p></div>
-        <div class="np-col vault-line"><h3 class="np-col__title">Access locked down</h3><p class="np-col__body">OAuth2 machine-to-machine auth, per-tenant IP whitelisting, full audit logging with distributed tracing, CSPRNG tokens with 128-bit entropy.</p></div>
+        <div class="np-col vault-line"><h3 class="np-col__title">Access locked down</h3><p class="np-col__body">OAuth2 machine-to-machine auth, full audit logging with distributed tracing, and CSPRNG tokens with 128-bit entropy. Opt-in IP allowlisting and gateway domain allowlisting when you want them.</p></div>
         <div class="np-col vault-line"><h3 class="np-col__title">Sharing without standing access</h3><p class="np-col__body">One-time-use ephemeral keys that expire and self-destruct.</p></div>
         <div class="np-col vault-line"><h3 class="np-col__title">Built to integrate fast</h3><p class="np-col__body">A versioned REST API, a live Swagger UI at api.enigmavault.io, and <a href="https://github.com/Enigma-Vault/card-vault-integration-examples" target="_blank" rel="noopener">examples on GitHub</a>.</p></div>
         <div class="np-col vault-line"><h3 class="np-col__title">Your systems stay clean</h3><p class="np-col__body">The sensitive data lives in the vault, not your database.</p></div>
@@ -528,7 +528,7 @@ build:
         </details>
 <details>
           <summary>Where do my files actually live?</summary>
-          <div class="np-acc__body">In File Vault, encrypted with AES-GCM envelope encryption, up to 5GB per file. Your application holds a reference, never the contents, and access happens through short-lived presigned URLs. The file stays out of your servers and your backups.</div>
+          <div class="np-acc__body">In File Vault, encrypted with AES-GCM envelope encryption, up to 5GB per file. Your application holds a reference, never the contents, and access happens through short-lived presigned URLs. The file stays out of your servers and your backups. The Vault API runs in EU and US regions.</div>
         </details>
 <details>
           <summary>How are the keys and tokens handled?</summary>
@@ -540,7 +540,7 @@ build:
         </details>
 <details>
           <summary>Does it help with right-to-erasure?</summary>
-          <div class="np-acc__body">Yes. Because values are tokenized at capture and the real data lives only in the vault, deletion resolves at the vault level. Tokens left behind in your systems reference nothing, so GDPR, CCPA, and DPDP requests become an operation rather than an excavation.</div>
+          <div class="np-acc__body">Yes. Because values are tokenized at capture and the real data lives only in the vault, deletion resolves at the vault level. Tokens left behind in your systems reference nothing, so GDPR, CCPA, and DPDP requests become an operation rather than an excavation. You can also set an expiry on any card or secret, from 60 seconds to 7 years, and expired records are deleted automatically.</div>
         </details></div><h2 class="np-h2 faq-group">Customer intake</h2>
 <div class="np-acc np-acc--faq"><details>
           <summary>Can a non-technical team use it?</summary>

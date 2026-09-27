@@ -67,7 +67,10 @@ styles: ["pages/compliance-policy.css"]
       <p>We understand that security does not equal compliance, but we also understand the importance of assurance and attestation to you.</p>
 
       <h3>PCI compliance</h3>
-      <p>Enigma Vault&rsquo;s card vault, data vault, and file vault have achieved PCI-DSS level 1 certification. The attestation of compliance (AOC) is available on request.</p>
+      <p>Enigma Vault is a PCI DSS Level 1 Service Provider, and Card Vault, Data Vault, and File Vault are in scope. The attestation of compliance (AOC) is available on request.</p>
+
+      <h3>SOC 2 Type II</h3>
+      <p>Enigma Vault is SOC 2 Type II audited for security and availability. The report is available on request.</p>
 
       <h3>ISO 27001 compliance</h3>
       <p>We are currently in the process of obtaining ISO 27001 compliance certification.</p>
@@ -80,7 +83,7 @@ styles: ["pages/compliance-policy.css"]
 
       <h2>Data retention and secure disposal</h2>
       <h3>Card Vault</h3>
-      <p>Within the card vault, card tokens utilize a concept called time to live (TTL). The TTL is configurable by the app client up to 15 minutes. After 15 minutes, and the client app has not extended the TTL, the card is purged. If the user checks the box that they want their card saved, the card is saved permanently. For permanent cards, they can be deleted by the app client using the delete endpoint. Card data is point-in-time backed up for 35 days. While handled together through the API, the CVV is treated much differently behind the scenes because it is sensitive authentication data (SAD). The CVV has a static TTL of 15 minutes; it cannot be changed. If the card TTL is increased, the CVV TTL remains as it was. If the card TTL is decreased, the CVV TTL changes to the lesser TTL. When authorization occurs, the TTL is purged from the table. There are no backups taken of the CVV table.</p>
+      <p>Within the card vault, card tokens utilize a concept called time to live (TTL). The TTL is configurable by the app client up to 15 minutes. After 15 minutes, and the client app has not extended the TTL, the card is purged. If the user checks the box that they want their card saved, the card is saved permanently. For permanent cards, they can be deleted by the app client using the delete endpoint. Card data is point-in-time backed up for 35 days. While handled together through the API, the CVV is treated much differently behind the scenes because it is sensitive authentication data (SAD). The CVV is held encrypted for at most 30 minutes, then deleted, and no backups are taken of it.</p>
 
       <h3>Data and File Vaults</h3>
       <p>The data and file vaults require the app client to purge items using the delete endpoint. Deleted data will reside for 35 days.</p>

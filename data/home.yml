@@ -127,8 +127,8 @@ stack:
     prod: Triplets
     head: 'Triplets: evidence-grounded AI answers.'
     lead: Confidently wrong ends here.
-    body: Triplets checks every AI answer against evidence you approve, and refuses when the evidence
-      cannot support one. A confident wrong answer never reaches your user, because it never gets generated.
+    body: Triplets checks every AI answer against evidence you approve, and is designed to refuse
+      when the evidence can't support an answer.
     proof: compile, verify, refuse when unsupported.
     link: Explore Triplets
     href: /triplets/

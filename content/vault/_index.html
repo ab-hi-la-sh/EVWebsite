@@ -513,13 +513,12 @@ build:
 
   <section class="np-section np-rule-top" style="padding-top:24px">
     <div class="np-container">
-      <div class="np-acc" style="max-width:860px;margin:0 auto;">
-        </div><h2 class="np-h2 faq-group faq-group--first">Card tokenization and payments</h2>
-<div class="np-acc" style="max-width:860px;margin:0 auto;"><details>
+      <h2 class="np-h2 faq-group faq-group--first">Card tokenization and payments</h2>
+<div class="np-acc np-acc--faq"><details open>
           <summary>How does Card Vault reduce PCI scope?</summary>
           <div class="np-acc__body">Cards are captured on hosted or iframe forms and never touch your servers. Your systems store tokens, which can optionally pass Luhn validation so existing checkout code keeps working, and charges route through our proxy to the payment gateway you choose. CVVs are held encrypted for at most 30 minutes, then deleted. Your PCI footprint shrinks to nearly nothing, and you keep gateway choice.</div>
         </details></div><h2 class="np-h2 faq-group">Encrypted records and files</h2>
-<div class="np-acc" style="max-width:860px;margin:0 auto;"><details open>
+<div class="np-acc np-acc--faq"><details>
           <summary>What is Enigma Vault?</summary>
           <div class="np-acc__body">Enigma Vault is an encryption and tokenization platform that holds your most sensitive data, so a breach of your systems exposes nothing worth stealing. It offers four vaults through one API: Card Vault for payment tokenization, Data Vault for searchable field encryption, File Vault for encrypted storage, and Customer Vault for secure intake. It is a PCI DSS Level 1 Service Provider and SOC 2 Type II attested, distributed on AWS Marketplace.</div>
         </details>
@@ -543,11 +542,11 @@ build:
           <summary>Does it help with right-to-erasure?</summary>
           <div class="np-acc__body">Yes. Because values are tokenized at capture and the real data lives only in the vault, deletion resolves at the vault level. Tokens left behind in your systems reference nothing, so GDPR, CCPA, and DPDP requests become an operation rather than an excavation.</div>
         </details></div><h2 class="np-h2 faq-group">Customer intake</h2>
-<div class="np-acc" style="max-width:860px;margin:0 auto;"><details>
+<div class="np-acc np-acc--faq"><details>
           <summary>Can a non-technical team use it?</summary>
           <div class="np-acc__body">Yes. Customer Vault is a turnkey, branded web app that replaces fax and email for secure intake: no-login links, a staff inbox, expiring file sharing, and passkey or TOTP staff sign-in. No developers and no integration to go live the same day, with webhooks available when you want to connect it to your systems.</div>
         </details></div><h2 class="np-h2 faq-group">Setup and pricing</h2>
-<div class="np-acc" style="max-width:860px;margin:0 auto;"><details>
+<div class="np-acc np-acc--faq"><details>
           <summary>How fast is integration for developers?</summary>
           <div class="np-acc__body">Two lines. The vault is a versioned REST API your developers hit from any language. A live Swagger UI at api.enigmavault.io and <a href="https://github.com/Enigma-Vault/card-vault-integration-examples" target="_blank" rel="noopener">examples on GitHub</a> mean most teams ship in a day, not a quarter.</div>
         </details>

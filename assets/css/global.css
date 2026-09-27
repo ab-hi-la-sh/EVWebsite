@@ -153,6 +153,10 @@ img{max-width:100%;display:block;}
 .np-proof{position:relative;overflow:hidden;background:#0A2236 url('/assets/proof-bg-j.webp') center/cover no-repeat;}
 .np-proof::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,26,44,0.7),rgba(8,26,44,0.5));pointer-events:none;}
 .np-proof .np-container{position:relative;z-index:1;}
+/* Headings on the dark proof band: porcelain type, and room before the stats. */
+.np-proof .np-h2{color:#fff;}
+.np-proof .np-h2 + .np-stats,.np-proof div:has(> .np-h2) + .np-stats{margin-top:48px;}
+@media (max-width:600px){.np-proof .np-h2 + .np-stats,.np-proof div:has(> .np-h2) + .np-stats{margin-top:32px;}}
 .np-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;}
 .np-stat{border-left:1px solid rgba(255,255,255,0.16);padding-left:22px;}
 .np-stat__num{font-family:var(--ev-font-sans);font-size:clamp(34px,4vw,52px);font-weight:500;letter-spacing:-0.03em;line-height:1;color:#fff;font-variant-numeric:tabular-nums;}
@@ -228,6 +232,13 @@ img{max-width:100%;display:block;}
 
 /* ---------- Accordion ---------- */
 .np-acc{margin-top:44px;border-top:1px solid var(--border-hairline);}
+/* FAQ lists: one width and one heading rhythm on every page. Group heading ->
+   list 20px, between groups 56px. Centered by default; Pricing keeps them
+   left-aligned with its tables. */
+.np-acc--faq{max-width:860px;margin:0 auto;}
+.np-acc--faq.np-acc--left{margin-left:0;margin-right:0;}
+.faq-group{max-width:860px;margin:56px auto 20px;font-size:24px;}
+.faq-group--first{margin-top:0;}
 .np-acc details{border-bottom:1px solid var(--border-hairline);}
 .np-acc summary{list-style:none;cursor:pointer;padding:24px 44px 24px 0;position:relative;
   font-family:var(--font-display);font-size:19px;font-weight:500;letter-spacing:-0.01em;color:var(--text-heading);}
@@ -267,6 +278,25 @@ img{max-width:100%;display:block;}
 .np-hero--banner .np-container{padding-top:88px;padding-bottom:84px;}
 .np-hero--banner .np-hero__copy{max-width:840px;margin:0 auto;text-align:center;}
 .np-hero--banner .np-lead{margin-left:auto;margin-right:auto;}
+/* Provider logo grid (NoPII): hairline-ruled 3x3 of monochrome marks.
+   Definition comes from hairlines, not shadows; colour only on hover. */
+.np-providers-sec__head{text-align:center;max-width:720px;margin:0 auto;}
+.np-providers-sec__head .np-lead{margin-left:auto;margin-right:auto;}
+.np-providers{list-style:none;margin:48px auto 0;padding:0;max-width:960px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  border-top:1px solid var(--border-hairline);border-left:1px solid var(--border-hairline);}
+.np-provider{display:flex;align-items:center;justify-content:center;gap:14px;padding:30px 20px;min-height:104px;
+  border-right:1px solid var(--border-hairline);border-bottom:1px solid var(--border-hairline);
+  color:var(--ev-slate);transition:color .2s var(--np-ease),background-color .2s var(--np-ease);}
+.np-provider:hover{color:var(--ev-mineral-blue);background:var(--surface-card,#fff);}
+.np-provider__logo{display:inline-flex;flex:none;width:28px;height:28px;}
+.np-provider__logo svg{width:100%;height:100%;display:block;}
+.np-provider__name{font-family:var(--ev-font-sans);font-size:17px;font-weight:500;letter-spacing:-0.005em;color:var(--headline-base);white-space:nowrap;}
+@media (max-width:600px){
+  .np-providers{margin-top:36px;}
+  .np-provider{flex-direction:column;gap:10px;padding:22px 8px;min-height:0;}
+  .np-provider__logo{width:24px;height:24px;}
+  .np-provider__name{font-size:13px;white-space:normal;text-align:center;}
+}
 /* Sub headline under the H1: section-heading scale (brandbook: Medium, 28-32px), brand blue. */
 .np-subhead{font-family:var(--font-display);font-size:clamp(22px,2.3vw,30px);font-weight:500;line-height:1.25;letter-spacing:-0.015em;color:var(--ev-mineral-blue);margin:20px 0 0;text-wrap:balance;}
 .np-hero--banner .np-hero__ctas{justify-content:center;}

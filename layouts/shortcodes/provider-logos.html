@@ -1,0 +1,21 @@
+{{- /* Monochrome provider logo grid. SVGs live in assets/logos/providers/ and are
+       inlined so they inherit currentColor (Slate at rest, Mineral Blue on hover).
+       Logo marks: LobeHub Icons (MIT); trademarks belong to their owners. */ -}}
+{{- $providers := slice
+      (dict "name" "OpenAI"        "file" "openai")
+      (dict "name" "Anthropic"     "file" "anthropic")
+      (dict "name" "Google Gemini" "file" "gemini")
+      (dict "name" "xAI"           "file" "xai")
+      (dict "name" "DeepSeek"      "file" "deepseek")
+      (dict "name" "Mistral"       "file" "mistral")
+      (dict "name" "Groq"          "file" "groq")
+      (dict "name" "Together"      "file" "together")
+      (dict "name" "Fireworks"     "file" "fireworks") -}}
+<ul class="np-providers" aria-label="Supported model providers">
+  {{- range $providers }}
+  {{- $svg := resources.Get (printf "logos/providers/%s.svg" .file) }}
+  <li class="np-provider">
+    {{- with $svg }}<span class="np-provider__logo">{{ .Content | safeHTML }}</span>{{ end -}}
+    <span class="np-provider__name">{{ .name }}</span></li>
+  {{- end }}
+</ul>

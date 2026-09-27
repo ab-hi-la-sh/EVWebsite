@@ -51,6 +51,17 @@ software:
     </div>
   </section>
 
+  <!-- SECTION 2b · Provider coverage -->
+  <section class="np-section np-rule-top np-providers-sec">
+    <div class="np-container np-reveal">
+      <div class="np-providers-sec__head">
+        <h2 class="np-h2">One proxy. <em>Every provider.</em></h2>
+        <p class="np-lead">Switch providers without reconfiguring your security.</p>
+      </div>
+      {{< provider-logos >}}
+    </div>
+  </section>
+
   <!-- SECTION 3a · Problem -->
   <section class="np-section np-rule-top">
     <div class="np-container np-promptsplit np-reveal">
@@ -219,13 +230,27 @@ software:
           <button class="np-tab" data-tab="t7" role="tab" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>Token purge</button>
         </div>
         <div class="np-tabs__panels">
-          <div class="np-tabpanel is-active" data-panel="t1" role="tabpanel"><h3 class="np-tabpanel__title">Dashboard</h3><p class="np-tabpanel__body">A real-time view of your deployment: total requests, detections, entity-type distribution, provider breakdown.</p></div>
-          <div class="np-tabpanel" data-panel="t2" role="tabpanel"><h3 class="np-tabpanel__title">PII settings</h3><p class="np-tabpanel__body">Choose which entity types to detect and adjust detection sensitivity, per tenant.</p></div>
-          <div class="np-tabpanel" data-panel="t3" role="tabpanel"><h3 class="np-tabpanel__title">Configuration</h3><p class="np-tabpanel__body">Manage provider keys, configure behavior, connect Langfuse for per-tenant observability.</p></div>
-          <div class="np-tabpanel" data-panel="t4" role="tabpanel"><h3 class="np-tabpanel__title">Live chat playground</h3><p class="np-tabpanel__body">See the raw input, the tokenized version sent to the model, and the restored response, side by side.</p></div>
-          <div class="np-tabpanel" data-panel="t5" role="tabpanel"><h3 class="np-tabpanel__title">Usage dashboard</h3><p class="np-tabpanel__body">API volume, detection rates, and token usage, plus exportable audit and request logs.</p></div>
-          <div class="np-tabpanel" data-panel="t6" role="tabpanel"><h3 class="np-tabpanel__title">Audit log</h3><p class="np-tabpanel__body">Every detection and tokenization event logged with timestamp, entity type, and tenant context.</p></div>
-          <div class="np-tabpanel" data-panel="t7" role="tabpanel"><h3 class="np-tabpanel__title">Token purge</h3><p class="np-tabpanel__body">Delete every token for a list of values in one request, to fulfill a GDPR erasure request. The proof is in the log.</p></div>
+          <div class="np-tabpanel is-active" data-panel="t1" role="tabpanel"><h3 class="np-tabpanel__title">Dashboard</h3><p class="np-tabpanel__body">A real-time view of your deployment: total requests, detections, entity-type distribution, provider breakdown.</p>
+            <figure class="np-shot np-shot--fit"><div class="np-shot__bar" aria-hidden="true"><i></i><i></i><i></i><span>app.nopii.co</span></div>{{< img src="/assets/nopii-console/dashboard.png" alt="NoPII dashboard: API calls, PII entities detected, protected tokens, latency, entity distribution and provider breakdown" sizes="(max-width: 767px) calc(100vw - 90px), 780px" >}}</figure>
+          </div>
+          <div class="np-tabpanel" data-panel="t2" role="tabpanel"><h3 class="np-tabpanel__title">PII settings</h3><p class="np-tabpanel__body">Choose which entity types to detect and adjust detection sensitivity, per tenant.</p>
+            <figure class="np-shot"><div class="np-shot__bar" aria-hidden="true"><i></i><i></i><i></i><span>app.nopii.co</span></div>{{< img src="/assets/nopii-console/pii-settings.png" alt="PII detection settings: entity types toggled on or off, confidence threshold, custom context replacements and a detection preview" sizes="(max-width: 767px) calc(100vw - 90px), 780px" >}}</figure>
+          </div>
+          <div class="np-tabpanel" data-panel="t3" role="tabpanel"><h3 class="np-tabpanel__title">Configuration</h3><p class="np-tabpanel__body">Manage provider keys, configure behavior, connect Langfuse for per-tenant observability.</p>
+            <figure class="np-shot"><div class="np-shot__bar" aria-hidden="true"><i></i><i></i><i></i><span>app.nopii.co</span></div>{{< img src="/assets/nopii-console/configuration.png" alt="Configuration: LLM provider keys, deterministic tokens and debug options, and Langfuse observability settings" sizes="(max-width: 767px) calc(100vw - 90px), 780px" >}}</figure>
+          </div>
+          <div class="np-tabpanel" data-panel="t4" role="tabpanel"><h3 class="np-tabpanel__title">Live chat playground</h3><p class="np-tabpanel__body">See the raw input, the tokenized version sent to the model, and the restored response, side by side.</p>
+            <figure class="np-shot np-shot--fit"><div class="np-shot__bar" aria-hidden="true"><i></i><i></i><i></i><span>app.nopii.co</span></div>{{< img src="/assets/nopii-console/playground.png" alt="Playground: a chat message with names and locations, and the tokenized version sent to the model" sizes="(max-width: 767px) calc(100vw - 90px), 780px" >}}</figure>
+          </div>
+          <div class="np-tabpanel" data-panel="t5" role="tabpanel"><h3 class="np-tabpanel__title">Usage dashboard</h3><p class="np-tabpanel__body">API volume, detection rates, and token usage, plus exportable audit and request logs.</p>
+            <figure class="np-shot np-shot--fit"><div class="np-shot__bar" aria-hidden="true"><i></i><i></i><i></i><span>app.nopii.co</span></div>{{< img src="/assets/nopii-console/usage.png" alt="Usage and billing: protected tokens, estimated cost, free tier usage, API calls and protected tokens over time" sizes="(max-width: 767px) calc(100vw - 90px), 780px" >}}</figure>
+          </div>
+          <div class="np-tabpanel" data-panel="t6" role="tabpanel"><h3 class="np-tabpanel__title">Audit log</h3><p class="np-tabpanel__body">Every detection and tokenization event logged with timestamp, entity type, and tenant context.</p>
+            <figure class="np-shot np-shot--fit"><div class="np-shot__bar" aria-hidden="true"><i></i><i></i><i></i><span>app.nopii.co</span></div>{{< img src="/assets/nopii-console/audit-log.png" alt="Audit and compliance log: PII detections with timestamp, session, entity type, token, masked value, confidence, provider and model" sizes="(max-width: 767px) calc(100vw - 90px), 780px" >}}</figure>
+          </div>
+          <div class="np-tabpanel" data-panel="t7" role="tabpanel"><h3 class="np-tabpanel__title">Token purge</h3><p class="np-tabpanel__body">Delete every token for a list of values in one request, to fulfill a GDPR erasure request. The proof is in the log.</p>
+            <figure class="np-shot np-shot--fit"><div class="np-shot__bar" aria-hidden="true"><i></i><i></i><i></i><span>app.nopii.co</span></div>{{< img src="/assets/nopii-console/token-purge.png" alt="Token purge: enter PII values one per line to permanently delete their vault tokens for GDPR erasure requests" sizes="(max-width: 767px) calc(100vw - 90px), 780px" >}}</figure>
+          </div>
         </div>
       </div>
     </div>
@@ -976,7 +1001,7 @@ client = OpenAI(
   <section class="np-section np-rule-top" style="padding-top:24px">
     <div class="np-container">
       <h2 class="np-h2 faq-group faq-group--first">Privacy and tokenization</h2>
-<div class="np-acc" style="max-width:860px;margin:0 auto;"><details open>
+<div class="np-acc np-acc--faq"><details open>
           <summary>What is NoPII?</summary>
           <div class="np-acc__body">NoPII is a PII-tokenizing reverse proxy for LLM APIs, built by Enigma Vault. It sits between your application and model providers, detects sensitive data across 30+ configurable entity types, tokenizes it before it reaches the model provider, and detokenizes responses on the way back. Your application works with real data; the provider only ever sees tokens.</div>
         </details>
@@ -1005,13 +1030,13 @@ client = OpenAI(
 <div class="np-acc__body">No. NoPII protects application traffic that is routed through its proxy. If your application calls an LLM API through the NoPII base URL, every request and response on that path is covered. Traffic that never passes through the proxy, such as an employee pasting data into a consumer chatbot website in their browser, is outside its scope.</div>
 </details>
 </div><h2 class="np-h2 faq-group">Providers and integration</h2>
-<div class="np-acc" style="max-width:860px;margin:0 auto;"><details>
+<div class="np-acc np-acc--faq"><details>
           <summary>How long does integration take?</summary>
           <div class="np-acc__body">Two lines of code. Point your existing SDK at the NoPII base URL, <code>https://api.nopii.co</code>. No new SDK, no middleware, no application logic changes. Most teams go from signup to protected traffic in under five minutes.</div>
         </details>
 <details>
           <summary>Which model providers does it support?</summary>
-          <div class="np-acc__body">OpenAI, Anthropic, Google Gemini, DeepSeek, and any OpenAI-compatible API, 9+ providers under one proxy. It also works with LangChain, LangGraph, LlamaIndex, LiteLLM, and the Vercel AI SDK, with Langfuse tracing available. Switching providers does not reset your privacy controls.</div>
+          <div class="np-acc__body">OpenAI, Anthropic, Google Gemini, xAI, DeepSeek, Mistral, Groq, Together, and Fireworks, all under one proxy, plus any OpenAI-compatible API. It also works with LangChain, LangGraph, LlamaIndex, LiteLLM, and the Vercel AI SDK, with Langfuse tracing available. Switching providers does not reset your privacy controls.</div>
         </details>
 <details>
           <summary>Does it work with streaming responses?</summary>
@@ -1027,7 +1052,7 @@ client = OpenAI(
         </details>
 </div>
 <h2 class="np-h2 faq-group">Retention and pricing</h2>
-<div class="np-acc" style="max-width:860px;margin:0 auto;"><details>
+<div class="np-acc np-acc--faq"><details>
           <summary>What is the security and certification posture?</summary>
           <div class="np-acc__body">NoPII is built on the Enigma Vault, which is PCI DSS Level 1 and SOC 2 Type II. Tokenized values are stored in the Vault with AES-256 encryption and per-customer keys.</div>
         </details>

@@ -49,6 +49,59 @@ faqSchema: true
     </div>
   </section>
 
+  <!-- SECTION · The double cost -->
+  <section class="np-section np-rule-top trx">
+    <div class="np-container">
+      <div class="trx__head np-reveal">
+        <h2 class="np-h2">AI hallucinations cost you twice. <em>Trust and dollars.</em></h2>
+        <p class="np-lead">The demo never hallucinates. Production always does. RAG works in the room, then it ships, retrieval comes back thin, and the model fills the gap with a confident, fluent, wrong answer.</p>
+      </div>
+      <div class="trx__grid">
+        <article class="trx__card np-reveal">
+          <figure class="trx__viz" aria-hidden="true">
+            <svg viewBox="0 0 400 170" fill="none">
+              <line class="trx__rule" x1="20" y1="150" x2="380" y2="150"/>
+              <line class="trx__gl" x1="20" y1="40" x2="380" y2="40"/>
+              <line class="trx__gl" x1="20" y1="95" x2="380" y2="95"/>
+              <path class="trx__area" d="M20 150 L20 58 C80 50 140 46 200 42 C230 40 250 40 262 40 L262 150 Z"/>
+              <path class="trx__line" d="M20 58 C80 50 140 46 200 42 C230 40 250 40 262 40"/>
+              <path class="trx__drop" d="M262 40 C270 110 282 136 380 140"/>
+              <line class="trx__mark" x1="262" y1="22" x2="262" y2="150"/>
+              <circle class="trx__dot" cx="262" cy="40" r="5"/>
+              <text class="trx__lbl trx__lbl--k" x="270" y="26">ONE WRONG ANSWER</text>
+              <text class="trx__lbl" x="20" y="166">MONTHS OF TRUST</text>
+              <text class="trx__lbl" x="380" y="166" text-anchor="end">AFTER</text>
+            </svg>
+          </figure>
+          <p class="trx__k"><b>01</b>Trust</p>
+          <h3 class="trx__t">It undoes trust.</h3>
+          <p class="trx__b">One confident, wrong answer can undo months of user trust. The product that felt magical in the demo becomes the product nobody believes.</p>
+        </article>
+        <article class="trx__card np-reveal" data-d="1">
+          <figure class="trx__viz" aria-hidden="true">
+            <svg viewBox="0 0 400 170" fill="none">
+              <line class="trx__rule" x1="20" y1="150" x2="380" y2="150"/>
+              <line class="trx__gl" x1="20" y1="40" x2="380" y2="40"/>
+              <line class="trx__gl" x1="20" y1="95" x2="380" y2="95"/>
+              <line class="trx__mark" x1="60" y1="22" x2="60" y2="150"/>
+              <circle class="trx__dot" cx="60" cy="150" r="5"/>
+              <text class="trx__lbl trx__lbl--k" x="68" y="26">THE WRONG ANSWER</text>
+              <rect class="trx__bar trx__bar--1" x="112" y="112" width="64" height="38" rx="2"/>
+              <rect class="trx__bar trx__bar--2" x="208" y="80" width="64" height="70" rx="2"/>
+              <rect class="trx__bar trx__bar--3" x="304" y="44" width="64" height="106" rx="2"/>
+              <text class="trx__lbl" x="144" y="166" text-anchor="middle">TICKETS</text>
+              <text class="trx__lbl" x="240" y="166" text-anchor="middle">ESCALATIONS</text>
+              <text class="trx__lbl" x="336" y="166" text-anchor="middle">CHURN</text>
+            </svg>
+          </figure>
+          <p class="trx__k"><b>02</b>Dollars</p>
+          <h3 class="trx__t">Then it costs money.</h3>
+          <p class="trx__b">The support tickets, escalations, and churn that follow a wrong answer cost real money, long after the trust is already gone.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <!-- SECTION · The six faces -->
   <section class="np-section np-rule-top" id="faces">
     <div class="np-container">
@@ -110,9 +163,11 @@ faqSchema: true
     <div class="tr-dark__bg" data-px="0.16" aria-hidden="true"></div>
     <div class="np-container">
       <div style="max-width:840px">
-        <h2 class="np-h2">Continuous Trust Certification is the category. <em>Triplets is the compiler</em>.</h2>
-        <p class="tr-dark__body">A certified AI system is not one that scored well on a benchmark. It is one with a reproducible record of what it can answer from the evidence, what it must refuse, what is in conflict, and whether all of that is still true today. A certificate that is not kept green is a photograph of a moving object, which is why "continuous" is in the name.</p>
-        <p class="tr-dark__body">Triplets is the compiler behind the category. Documents in. Monitored decisions out. Everything in between reproducible.</p>
+        <h2 class="np-h2">Continuous Trust Certification is what <em>Triplets enables</em>.</h2>
+        <p class="tr-dark__body">Continuous Trust Certification is about knowing what an AI system can support from the evidence you have today. That means having a record of what it can answer, what it should refuse to answer, where the underlying sources disagree, and whether those conclusions still hold as the evidence changes.</p>
+        <p class="tr-dark__body">A one-time certificate is not enough. The moment the source material changes, the certification can start to drift from reality. That is why it has to be continuous.</p>
+        <p class="tr-dark__lead">Triplets is the compiler that makes this possible.</p>
+        <p class="tr-dark__body">You give it the documents and evidence. It turns them into monitored decisions, with a reproducible path showing how each result was reached.</p>
       </div>
     </div>
   </section>
@@ -717,31 +772,27 @@ faqSchema: true
       <div style="max-width:760px"><h2 class="np-h2">Where Triplets <em>does not belong</em>.</h2></div>
       <div class="trbound">
         <div class="trbound__c np-reveal">
-          <p class="trbound__k">The boundary</p>
-          <p class="trbound__b">A product whose premise is refusing to overclaim should be precise about its own boundary. Wrong tool for: narrative and creative content, where there is no verifiable fact to constrain against; math and code generation, which need different correctness machinery; real-time streams and very short or non-text corpora. And the qualifier cuts both ways: conflict density, change rate, and consequence of error are what make a fit, not data volume. A small corpus that changes weekly is a better candidate than a huge static archive.</p>
+          <h3 class="trbound__t">Know the boundary</h3>
+          <p class="trbound__b">Triplets is not the right tool for every kind of AI output.</p>
+          <p class="trbound__b">It is not designed for narrative or creative content, where there may be no underlying fact to verify. It is also not intended to validate mathematics or generated code, which require their own methods of testing and verification. The same applies to real-time data streams and very small or short-lived text sources.</p>
+          <p class="trbound__b">What matters is not how much data you have. It is how often that information changes, how much it conflicts, and what happens when the answer is wrong.</p>
+          <p class="trbound__b trbound__b--key">A small body of evidence that changes every week can be a much stronger fit for Triplets than a massive archive that rarely changes.</p>
         </div>
         <div class="trbound__c np-reveal" data-d="1">
-          <p class="trbound__k">Why certification renews</p>
-          <p class="trbound__b">The certificate was true the day it was issued. The evidence moved the day after. Keep the asset alive, or keep a photograph: the renewal logic is structural, not commercial, and it is the reason "continuous" is in the category name.</p>
+          <h3 class="trbound__t">Why certification needs to renew</h3>
+          <p class="trbound__b">A certificate reflects the evidence available at the time it was issued. But the evidence does not stand still.</p>
+          <p class="trbound__b">Sources change. New information appears. Existing claims are updated or contradicted. Once that happens, an old certificate can only tell you what was supported at an earlier point in time.</p>
+          <p class="trbound__b">Renewal keeps the certification tied to the current evidence. Without it, you have a snapshot. With it, you have a continuously maintained asset.</p>
+          <p class="trbound__b trbound__b--key">That is why continuity is fundamental to the category, rather than simply a commercial feature.</p>
         </div>
       </div>
-      <div class="trfine">
-        <p><b>The fine print that is actually load-bearing.</b> Patent claims filed across 18 provisional families, Patent Pending. Triplets is built on the Enigma Vault, which is PCI DSS Level 1 and SOC 2 Type II. The certificate proves support within your compiled evidence, reproducibly; it does not claim truth, and we will say that before your lawyer does.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- SECTION · Closing -->
-  <section class="np-section np-ctaband np-rule-top">
-    <div class="np-container">
-      <div class="np-ctaband__inner">
-        <h2 class="np-h2">Bring us the decisions you <em>cannot afford to get wrong</em>.</h2>
-        <p class="np-ctaband__body">Start with the proof that fits your pattern: a supersession compile in one session, a staleness sweep on one corpus, or the full Trust Baseline with your first certificate in 48 hours. No integration work on your side, and the report is yours either way.</p>
-        <div class="np-ctaband__ctas">
-          <a class="np-btn np-btn--primary" href="/request-demo/"><span>Start the Trust Baseline</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
-          <a class="np-btn np-btn--secondary" href="/request-demo/"><span>Request a supersession compile</span></a>
-          <a class="np-btn np-btn--secondary" href="/pricing/#triplets"><span>hello@enigmavault.io</span></a>
-        </div>
+      <div class="trfine np-reveal">
+        <h3 class="trfine__t">What the certificate actually proves</h3>
+        <p>Triplets is deliberately narrow about what it certifies.</p>
+        <p>The certificate shows that a claim or output is supported by the compiled evidence, and that the result can be reproduced from that evidence. It does not claim that the underlying information is universally true.</p>
+        <p>That distinction matters, particularly in environments where evidence may be incomplete, disputed, or change over time.</p>
+        <p>Triplets has patent claims filed across 18 provisional patent families and is Patent Pending. It is built on Enigma Vault infrastructure, which is PCI DSS Level 1 and SOC 2 Type II compliant.</p>
+        <p class="trfine__key">The promise is not absolute truth. It is something more defensible: a reproducible record of what the available evidence supports.</p>
       </div>
     </div>
   </section>
@@ -763,9 +814,8 @@ faqSchema: true
 
   <section class="np-section np-rule-top" style="padding-top:24px">
     <div class="np-container">
-      <div class="np-acc" style="max-width:860px;margin:0 auto;">
-        </div><h2 class="np-h2 faq-group faq-group--first">Evidence and the Trust Certificate</h2>
-<div class="np-acc" style="max-width:860px;margin:0 auto;"><details open>
+      <h2 class="np-h2 faq-group faq-group--first">Evidence and the Trust Certificate</h2>
+<div class="np-acc np-acc--faq"><details open>
           <summary>What is Triplets?</summary>
           <div class="np-acc__body">Triplets is the compiler behind Continuous Trust Certification, built by Enigma Vault. It compiles your evidence into traceable, certified knowledge, monitors whether standing answers remain supported as evidence changes, refuses questions the evidence cannot support, reconciles conflicts, and produces a reproducible certificate showing what is supported, what is not, and why.</div>
         </details>
@@ -797,7 +847,7 @@ faqSchema: true
           <summary>Is the technology protected?</summary>
           <div class="np-acc__body">Yes. Patent claims have been filed across 18 provisional families, and the product is Patent Pending. Triplets is built on the Enigma Vault, which is PCI DSS Level 1 and SOC 2 Type II.</div>
         </details></div><h2 class="np-h2 faq-group">Changes, conflicts and version history</h2>
-<div class="np-acc" style="max-width:860px;margin:0 auto;"><details>
+<div class="np-acc np-acc--faq"><details>
           <summary>What happens when the evidence changes?</summary>
           <div class="np-acc__body">The compiled state is compared continuously. When a label updates, a finding is superseded, or a source is corrected, Triplets re-evaluates the standing decisions it touches and alerts you when, and only when, a decision's support changes. That is the difference between a certificate and a photograph of one.</div>
         </details>
@@ -821,7 +871,7 @@ faqSchema: true
           <summary>Where is Triplets not the right tool?</summary>
           <div class="np-acc__body">Narrative and creative content, math and code generation, real-time streams, and very short or non-text corpora. Each needs different correctness machinery. If your corpus is a poor match, the Baseline shows it before you commit further.</div>
         </details></div><h2 class="np-h2 faq-group">Getting started and pricing</h2>
-<div class="np-acc" style="max-width:860px;margin:0 auto;"><details>
+<div class="np-acc np-acc--faq"><details>
           <summary>What is the Trust Baseline?</summary>
           <div class="np-acc__body">The first compilation of your corpus, delivered in 48 hours. You pick a representative slice and your hardest questions. Triplets compiles it, runs your questions side by side against your current stack, and issues your first certificate: supported, refused, conflicted, fingerprinted. It creates the compiled asset that continuous certification keeps alive, and it is scoped as a fixed-price engagement; request a proposal from the pricing page.</div>
         </details>

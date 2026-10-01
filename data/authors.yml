@@ -17,3 +17,43 @@ priya:
   role: "Security Architect"
   initials: "PN"
   bio: "Priya designs the tokenization and key infrastructure beneath the Enigma Vault platform, from PCI scope reduction to audit trails."
+
+# --- Real author roster (added for the /authors/ pages). ------------------
+# Optional fields used by the author page: credentials, linkedin, website,
+# photo. The byline on blog articles uses name/role/initials/bio as before.
+
+tony-alex:
+  name: "Dr. Tony Alex"
+  role: "Chief Executive Officer"
+  initials: "TA"
+  credentials: ""
+  bio: ""
+  bioParas:
+    - "Dr. Tony Alex is Chief Executive Officer of Enigma Vault and a technology entrepreneur with more than two decades of experience building enterprise software businesses. His background spans engineering, product development, and company leadership, including founding US eDirect and leading the business through its acquisition by Tyler Technologies in 2022."
+    - "At Enigma Vault, Tony leads the company's work in encryption, tokenization, and sensitive-data protection. The platform helps businesses protect card information, customer data, and files through services that integrate with their applications. His focus builds on years of developing software for organizations where transaction reliability, information security, and ease of use are central to daily operations."
+    - "Tony founded US eDirect in 1999 to develop software for parks, campgrounds, and recreation agencies. Its Recreation Dynamics platform brought reservations, payments, memberships, passes, rentals, and other operational transactions into a single enterprise cloud system. By the time Tyler Technologies acquired the company, US eDirect served 40 customers across the United States, Canada, Australia, and New Zealand. Customers included Florida, Ohio, Minnesota, and Missouri state park systems, alongside Queensland Parks and Wildlife Service in Australia."
+    - "His broader experience includes serving as President of Yodel Pass and as a board member at Litmoves.io. He is also an advisor at LANDED, which supports companies entering the US market, where his areas of expertise include engineering, product innovation, and cybersecurity."
+    - "Tony holds a Ph.D. in Chemical and Biomolecular Engineering from Rutgers University and studied at the Indian Institute of Technology, Roorkee. His advisor profile at LANDED credits him with 17 patents. He brings this combination of scientific training, software development experience, and business leadership to Enigma Vault's product direction and company strategy."
+  linkedin: "https://www.linkedin.com/in/tony-alex-enigma-vault/"
+  website: ""
+  # TODO: add headshot, e.g. "/assets/images/authors/tony-alex.jpg"
+  photo: ""
+
+abhilash-kumar:
+  name: "Abhilash Kumar"
+  role: "Chief Growth Officer"
+  initials: "AK"
+  # TODO: replace with the real one-line credentials summary.
+  credentials: ""
+  bio: ""
+  bioParas:
+    - "Abhilash Kumar is Chief Growth Officer at Enigma Vault, where he leads growth strategy, market positioning, and partnership development. He brings experience across B2B SaaS marketing, product marketing, brand building, and demand generation, with a career spanning technology companies and communications agencies."
+    - "At Enigma Vault, Abhilash works on bringing the company's privacy infrastructure to businesses that collect, store, and use sensitive information. His remit includes identifying markets, developing customer and partner relationships, and translating technical capabilities into clear business value. He works across product positioning and commercial development, helping customers understand how Enigma Vault fits into their applications and operations."
+    - "Before joining Enigma Vault, Abhilash served as Head of Marketing at Amnic and Element5, and as Marketing Director at KenSci. These roles built on earlier experience at HARMAN International, Aditi Technologies, and Text100. His career has covered both strategic and hands-on marketing responsibilities, from defining product narratives and developing content to building demand and leading marketing teams."
+    - "At Amnic and Element5, he held responsibility for the marketing function. His earlier role at KenSci added experience at the director level, while his work at HARMAN International focused on content marketing. At Aditi Technologies, his responsibilities spanned marketing, public relations, and communications. Together, these roles give him a broad understanding of how brand, product messaging, and customer acquisition work together within technology businesses."
+    - "Abhilash began his communications career in agency roles at Text100, working directly with clients before moving into in-house marketing. That foundation in public relations and corporate communications informs his approach to positioning: understanding the audience, making the product's relevance clear, and maintaining a consistent story across customer-facing channels. His experience combines communications expertise with the commercial demands of B2B software marketing."
+    - "He holds a master's degree from the University of Leeds and a bachelor's degree from Christ University, Bengaluru. His postgraduate studies included consumer behaviour, marketing communications, brand management, and research. At Enigma Vault, he applies this background to market development, customer engagement, and partnerships, connecting the company's product offering with opportunities for adoption and growth."
+  linkedin: "https://www.linkedin.com/in/abhilashkumar15/"
+  website: ""
+  # TODO: add headshot, e.g. "/assets/images/authors/abhilash-kumar.jpg"
+  photo: ""

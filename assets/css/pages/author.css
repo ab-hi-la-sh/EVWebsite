@@ -1,0 +1,85 @@
+/* Author page (/authors/<slug>/). Pairs with blog.css, which supplies the
+   article grid (.bl-grid / .bl-card) and section heading (.bl-sechead). */
+
+/* --- Hero: branded backdrop with a floating profile card ----------------- */
+.au-hero{
+  position:relative;
+  padding:clamp(48px,6vw,88px) 0 clamp(36px,4vw,56px);
+  background:
+    radial-gradient(900px 320px at 15% -10%, rgba(15,61,86,.07), transparent 60%),
+    linear-gradient(180deg, var(--ev-warm-cloud) 0%, var(--surface-page) 72%);
+}
+
+/* Widen both sections so the content uses more of the viewport. */
+.au-hero .np-container,
+#au-guides-sec .np-container{max-width:1320px;}
+
+.au-card{
+  margin:0 auto;
+  display:flex;gap:clamp(28px,4vw,56px);align-items:flex-start;
+  background:var(--surface-card);
+  border:1px solid var(--border-hairline);
+  border-radius:22px;
+  padding:clamp(28px,4vw,48px);
+  box-shadow:0 1px 2px rgba(15,61,86,.04), 0 18px 48px -24px rgba(15,61,86,.22);
+}
+
+/* Left column: avatar with the social links stacked beneath it */
+.au-aside{flex:none;display:flex;flex-direction:column;align-items:center;gap:20px;
+  width:clamp(160px,18vw,196px);}
+
+/* Avatar: ring + soft shadow */
+.au-avatar{position:relative;}
+.au-photo{width:128px;height:128px;border-radius:50%;object-fit:cover;display:block;
+  background:var(--ev-warm-cloud);}
+.au-initials{width:128px;height:128px;font-size:42px;}
+.au-photo,.au-initials{
+  box-shadow:0 0 0 6px var(--surface-card), 0 0 0 7px var(--ev-cool-stone),
+    0 14px 30px -14px rgba(15,61,86,.45);
+}
+
+.au-head__tx{min-width:0;flex:1;}
+.au-eyebrow{display:inline-flex;align-items:center;gap:7px;
+  font-family:var(--ev-font-sans);font-size:11px;font-weight:600;
+  letter-spacing:0.1em;text-transform:uppercase;color:var(--ev-mineral-blue);
+  margin:0 0 12px;padding:4px 11px;border-radius:999px;
+  background:var(--ev-warm-cloud);border:1px solid var(--border-hairline);}
+.au-name{font-family:var(--font-display);font-size:clamp(30px,4vw,46px);font-weight:500;
+  letter-spacing:-0.025em;color:var(--text-heading);margin:0;line-height:1.05;}
+.au-role{font-family:var(--ev-font-sans);font-size:16px;font-weight:600;
+  color:var(--ev-mineral-blue);margin:8px 0 0;}
+.au-cred{font-family:var(--ev-font-sans);font-size:14px;color:var(--ev-slate);margin:8px 0 0;}
+
+.au-bio{margin:20px 0 0;padding:20px 0 0;border-top:1px solid var(--border-hairline);max-width:76ch;}
+.au-bio p{font-size:15.5px;line-height:1.68;color:var(--text-body);margin:0 0 14px;}
+.au-bio p:last-child{margin-bottom:0;}
+
+.au-social{display:flex;flex-direction:column;gap:10px;margin:0;width:100%;}
+.au-social__link{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 15px;
+  border:1px solid var(--border-hairline);border-radius:10px;background:var(--surface-card);
+  font-family:var(--ev-font-sans);font-size:13.5px;font-weight:600;color:var(--text-heading);
+  text-decoration:none;transition:border-color .16s ease,color .16s ease,background .16s ease,box-shadow .16s ease,transform .16s ease;}
+.au-social__link svg{width:16px;height:16px;flex:none;color:var(--ev-slate);transition:color .16s ease;}
+.au-social__link:hover{border-color:var(--ev-mineral-50);color:var(--ev-mineral-blue);
+  background:var(--ev-warm-cloud-50);box-shadow:0 6px 16px -10px rgba(15,61,86,.4);transform:translateY(-1px);}
+.au-social__link:hover svg{color:var(--ev-mineral-blue);}
+
+/* --- Guides section ------------------------------------------------------ */
+#au-guides-sec{padding-top:clamp(40px,5vw,64px);}
+
+/* Empty state: dashed panel, centered */
+.au-empty{display:flex;flex-direction:column;align-items:center;text-align:center;
+  gap:6px;padding:52px 24px;border:1.5px dashed var(--ev-cool-stone-100);
+  border-radius:18px;background:var(--ev-warm-cloud-50);}
+.au-empty svg{width:34px;height:34px;color:var(--ev-mineral-50);margin-bottom:6px;}
+.au-empty__title{font-family:var(--font-display);font-size:18px;font-weight:500;
+  color:var(--text-heading);margin:0;}
+.au-empty__sub{font-family:var(--ev-font-sans);font-size:14px;color:var(--ev-slate);margin:0;}
+
+@media (max-width:720px){
+  .au-card{flex-direction:column;align-items:flex-start;gap:20px;text-align:left;}
+}
+@media (max-width:640px){
+  .au-photo,.au-initials{width:100px;height:100px;}
+  .au-initials{font-size:34px;}
+}

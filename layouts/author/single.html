@@ -1,0 +1,100 @@
+{{ define "head" }}
+{{- /* ProfilePage schema for the author. */ -}}
+{{- $key := .Params.authorKey | default .File.ContentBaseName -}}
+{{- $a := index hugo.Data.authors $key -}}
+{{- with $a }}
+{{- $same := slice -}}
+{{- with .linkedin }}{{ $same = $same | append . }}{{ end -}}
+{{- with .website }}{{ $same = $same | append . }}{{ end -}}
+<script type="application/ld+json">
+{{- dict
+  "@context" "https://schema.org"
+  "@type" "ProfilePage"
+  "mainEntity" (dict
+    "@type" "Person"
+    "name" .name
+    "jobTitle" .role
+    "worksFor" (dict "@type" "Organization" "name" site.Title)
+    "url" $.Permalink
+    "sameAs" $same)
+  | jsonify (dict "indent" "  ") | safeJS }}
+</script>
+{{- end }}
+{{ end }}
+
+{{ define "main" }}
+{{- /* Author page: header (photo/initials, name, role, credentials, bio,
+       social) then a grid of this author's blog posts. Reuses the blog card
+       partial and bl-* styles. Author record comes from data/authors.yml,
+       keyed by `authorKey` frontmatter; posts match on their `author` key. */ -}}
+{{- $key := .Params.authorKey | default .File.ContentBaseName -}}
+{{- $a := index hugo.Data.authors $key -}}
+{{- $arts := where (where .Site.RegularPages "Type" "blog") "Params.author" $key -}}
+{{- $arts = sort $arts "Date" "desc" -}}
+<main>
+
+  <section class="au-hero np-section">
+    <div class="np-container">
+      <div class="au-card">
+        <div class="au-aside">
+          <div class="au-avatar">
+            {{- if $a.photo }}
+            <img class="au-photo" src="{{ $a.photo }}" alt="{{ $a.name }}" width="120" height="120" loading="eager">
+            {{- else }}
+            <span class="bl-avatar au-initials">{{ $a.initials }}</span>
+            {{- end }}
+          </div>
+          <div class="au-social">
+            {{- with $a.linkedin }}
+            <a class="au-social__link" href="{{ . }}" target="_blank" rel="noopener noreferrer" aria-label="{{ $a.name }} on LinkedIn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+              <span>LinkedIn</span>
+            </a>
+            {{- end }}
+            <a class="au-social__link" href="{{ site.Home.RelPermalink }}" aria-label="Enigma Vault website">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.5 2.7 2.5 15.3 0 18M12 3c-2.5 2.7-2.5 15.3 0 18"></path></svg>
+              <span>Enigma Vault</span>
+            </a>
+            {{- with $a.website }}
+            <a class="au-social__link" href="{{ . }}" target="_blank" rel="noopener noreferrer" aria-label="{{ $a.name }} website">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.5 2.7 2.5 15.3 0 18M12 3c-2.5 2.7-2.5 15.3 0 18"></path></svg>
+              <span>Website</span>
+            </a>
+            {{- end }}
+          </div>
+        </div>
+        <div class="au-head__tx">
+          <p class="au-eyebrow">Author</p>
+          <h1 class="au-name">{{ $a.name }}</h1>
+          <p class="au-role">{{ $a.role }}</p>
+          {{- with $a.credentials }}<p class="au-cred">{{ . }}</p>{{ end }}
+          {{- with $a.bioParas }}
+          <div class="au-bio">{{ range . }}<p>{{ . }}</p>{{ end }}</div>
+          {{- else }}{{ with $a.bio }}<div class="au-bio"><p>{{ . }}</p></div>{{ end }}{{ end }}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="np-section np-rule-top" id="au-guides-sec">
+    <div class="np-container">
+      <div class="bl-sechead">
+        <h2>Guides by {{ $a.name }}</h2>
+        <span class="bl-sechead__count">{{ len $arts }} article{{ if ne (len $arts) 1 }}s{{ end }}</span>
+      </div>
+      {{- if $arts }}
+      <div class="bl-grid">
+        {{- range $arts }}{{ partial "blog/card.html" . }}{{ end }}
+      </div>
+      {{- else }}
+      <div class="au-empty">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4h9A1.5 1.5 0 0 1 16 5.5V20l-6-3-6 3V5.5Z"></path><path d="M20 8v12l-4-2"></path></svg>
+        <p class="au-empty__title">No articles published yet</p>
+        <p class="au-empty__sub">New guides from {{ $a.name }} will appear here.</p>
+      </div>
+      {{- end }}
+    </div>
+  </section>
+
+</main>
+{{ end }}

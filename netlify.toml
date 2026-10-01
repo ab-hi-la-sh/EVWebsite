@@ -91,6 +91,26 @@
   to = "/solutions/industries/"
   status = 301
   force = true
+# Same issue, found on the other three long-form pages during this audit:
+# Hugo's index.html is directly reachable alongside the clean trailing-slash
+# URL. Each page's own canonical tag already points at the clean URL, so this
+# was never a duplicate-content risk, just an unnecessary second reachable
+# path -- forced for consistency with the industries page above.
+[[redirects]]
+  from = "/triplets/index.html"
+  to = "/triplets/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/vault/index.html"
+  to = "/vault/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/nopii/index.html"
+  to = "/nopii/"
+  status = 301
+  force = true
 [[redirects]]
   from = "/triplets/faqs.html"
   to = "/triplets/#faqs"
@@ -138,6 +158,45 @@
 [[redirects]]
   from = "/vault/use-cases.html"
   to = "/vault/#use-cases"
+  status = 301
+# The block above assumed the old site nested its four named vault products
+# under /vault/, matching this repo's local content/vault/ folder layout.
+# Wayback Machine snapshots and Ahrefs' own crawl of the live domain (last
+# crawled 2026-09-25, one day before cutover) show the real production URLs
+# were flat at the root instead -- confirmed 200 for /customer-vault.html and
+# /enigma-vault-api.html right up to launch, and all four now 404 live.
+# These are the actual old-site URLs; the /vault/*.html block above is kept
+# because it's harmless, not because it was ever a real historical path.
+[[redirects]]
+  from = "/customer-vault.html"
+  to = "/vault/customer-vault/"
+  status = 301
+[[redirects]]
+  from = "/card-vault.html"
+  to = "/vault/card-vault/"
+  status = 301
+[[redirects]]
+  from = "/data-vault.html"
+  to = "/vault/data-vault/"
+  status = 301
+[[redirects]]
+  from = "/file-vault.html"
+  to = "/vault/file-vault/"
+  status = 301
+# General Vault API/REST overview page (PCI Level 1 tokenization + field-level
+# encryption + encrypted file storage) -- maps to the Vault product overview,
+# which now covers all four sub-products.
+[[redirects]]
+  from = "/enigma-vault-api.html"
+  to = "/vault/"
+  status = 301
+# Ahrefs saw this 403 (bot-blocked) on 2026-03-05 and it has no Wayback
+# snapshot, so its original content isn't confirmed -- routed to the
+# homepage rather than guessed at. Revisit if analytics show real traffic
+# landing on the homepage via this path.
+[[redirects]]
+  from = "/ai-vault.html"
+  to = "/"
   status = 301
 # Retired pages that the old netlify.toml already redirected. Their targets
 # were .html URLs, so they are re-pointed at the clean equivalents.

@@ -2,44 +2,45 @@
 {{- $a := index hugo.Data.authors .Params.author -}}
 <div class="bl-progress" id="bl-progress"></div>
 <main>
-<div id="bl-article">
+<div id="bl-article" class="bl-article--sky">
 
-  <header class="bl-ahead">
+  <!-- Hero: title only, centered, on a solid band -- matches the reference
+       exactly (no breadcrumb, no subtitle, no meta inside the band). -->
+  <header class="bl-sky-hero">
     <div class="np-container">
-      <div class="bl-ahead__inner">
-        <a class="bl-ahead__back" href="/blog/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg> Insights & Resources</a>
-        <p class="bl-ahead__cat">{{ .Params.category }}</p>
-        <h1>{{ .Title }}</h1>
-        <p class="bl-ahead__sub">{{ .Params.subtitle }}</p>
-        <div class="bl-ameta">
-          {{ partial "blog/authorcard.html" (dict "ctx" . "compact" false) }}
-          <span class="bl-ameta__sep"></span>
-          <span class="bl-ameta__v">{{ .Date.Format "Jan 2, 2006" }}</span>
-          <span class="bl-ameta__sep"></span>
-          <span class="bl-ameta__v">{{ .Params.readTime }} min read</span>
-        </div>
-        <div class="bl-ahead__rule"></div>
-      </div>
-    </div>
-    <div class="np-container">
-      <div class="bl-ahero">{{ partial "img.html" (dict "src" .Params.heroImage "alt" .Params.heroAlt "loading" "eager" "fetchpriority" "high") }}</div>
+      <h1>{{ .Title }}</h1>
     </div>
   </header>
 
   <div class="np-container">
+    <div class="bl-sky-meta">
+      <a href="/blog/">Insights &amp; Resources</a>
+      <span class="bl-sky-meta__dot"></span>
+      <span>{{ .Params.category }}</span>
+      <span class="bl-sky-meta__dot"></span>
+      <span>{{ .Date.Format "Jan 2, 2006" }}</span>
+      <span class="bl-sky-meta__dot"></span>
+      <span>{{ .Params.readTime }} min read</span>
+      <span class="bl-sky-meta__dot"></span>
+      {{ partial "blog/authorcard.html" (dict "ctx" . "compact" true) }}
+    </div>
+
     <div class="bl-toc-m">
       <details>
         <summary>On this page</summary>
         <ul class="bl-toc-m__list" id="bl-toc-list-m"></ul>
       </details>
     </div>
-    <div class="bl-layout">
-      <aside class="bl-toc">
-        <p class="bl-toc__label">On this page</p>
-        <ul class="bl-toc__list" id="bl-toc-list"></ul>
+    <div class="bl-sky-layout">
+      <aside class="bl-sky-toc">
+        <div class="bl-sky-toc__inner">
+          <p class="bl-toc__label">On this page</p>
+          <ul class="bl-toc__list" id="bl-toc-list"></ul>
+        </div>
       </aside>
       <div class="bl-maincol">
-        <article class="bl-content" id="bl-content">
+        {{- with .Params.subtitle }}<p class="bl-sky-lead">{{ . }}</p>{{ end }}
+        <article class="bl-content bl-content--sky" id="bl-content">
 {{ .Content }}
         </article>
 
@@ -63,7 +64,6 @@
         <h2 class="bl-tail__h">Frequently asked questions</h2>
         <div class="np-acc">
           {{- range $i, $f := . }}
-          {{- /* The original had the first item expanded. */ -}}
           <details{{ if eq $i 0 }} open{{ end }}>
             <summary>{{ $f.q }}</summary>
             <div class="np-acc__body">{{ $f.a }}</div>
@@ -75,8 +75,6 @@
   </section>
   {{- end }}
 
-  {{- /* Related: same category first, then anything else -- matching the old
-         controller's fallback. Hidden entirely when nothing else is published. */ -}}
   {{- $others := where (where site.RegularPages "Type" "blog") "Permalink" "!=" .Permalink -}}
   {{- $rel := (where $others "Params.category" .Params.category) | append (where $others "Params.category" "!=" .Params.category) -}}
   {{- with first 3 $rel }}

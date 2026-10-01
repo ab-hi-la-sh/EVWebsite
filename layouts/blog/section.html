@@ -41,7 +41,20 @@
       <div class="bl-sechead"><h2>Start here</h2></div>
       <div class="bl-start">
         {{- range $i, $s := . }}
-        <a class="bl-startrow" href="{{ $s.url }}">
+        {{- /* Category pulled live from the actual post (not duplicated here
+               by hand) so this stays correct if a post's category ever
+               changes, and so data-cat can feed the same filter chips the
+               cards below use -- this row list used to ignore the active
+               chip entirely and always show every entry regardless of
+               category. */ -}}
+        {{- $sp := site.GetPage $s.url }}
+        {{- /* Posts with a `url:` front-matter override (e.g. /what-is-pii/,
+               /pii-tokenization-for-ai/) are not found by GetPage, which
+               resolves logical content paths, not output URLs. Fall back to
+               matching the post whose RelPermalink equals this row's url, so
+               the row still carries the right data-cat for the filter. */ -}}
+        {{- if not $sp }}{{ range site.RegularPages }}{{ if eq .RelPermalink $s.url }}{{ $sp = . }}{{ end }}{{ end }}{{ end }}
+        <a class="bl-startrow" href="{{ $s.url }}" data-cat="{{ with $sp }}{{ .Params.category }}{{ end }}">
           <span class="bl-startrow__n">{{ printf "%02d" (add $i 1) }}</span>
           <span class="bl-startrow__tx"><strong>{{ $s.title }}</strong><em>{{ $s.note }}</em></span>
           <span class="bl-startrow__arr" aria-hidden="true">&#8594;</span>

@@ -1,0 +1,639 @@
+---
+title: "Card Vault Tokenization: Enterprise Guide to Secure Card Storage"
+titleEmphasis: "Secure Card Storage"
+slug: "card-vault-tokenization"
+layout: "pii-style"
+metaTitle: "Card Vault Tokenization Guide: How It Works & How Far It Cuts PCI Scope"
+description: "Learn how card vault tokenization replaces card numbers with tokens, how charges run without exposing the PAN, how far it reduces PCI scope and how to choose a vault."
+subtitle: "Card vault tokenization replaces a payment card number with a random token and locks the real number in an isolated, encrypted vault, so your apps, CRM and databases store only tokens that are useless if stolen."
+date: 2026-10-01
+category: "Card Vault"
+author: "abhilash-kumar"
+readTime: 16
+heroImage: "/assets/blog/img-05.png"
+heroAlt: "Layered translucent panels representing a card number locked inside an isolated vault"
+excerpt: "Card vault tokenization replaces a card number with a random token and locks the real number in an isolated, encrypted vault. Here is how it works, how far it cuts PCI scope and how to choose a provider."
+tags: ["tokenization", "card-vault", "pci", "payments"]
+ogImage: "/assets/og/vault-card.jpg"
+ogImageAlt: "Card Vault Tokenization: Enterprise Guide to Secure Card Storage | Enigma Vault"
+ogType: article
+styles: ["blog.css", "pages/blog-pii-hero.css", "tr-pages.css"]
+scripts: ["blog-article.js"]
+faqSchema: true
+faqs:
+  - q: "How does card tokenization work?"
+    a: "A secure form, phone line or API sends the card to a vault, which encrypts it and returns a token for your systems. In card vault tokenization, the vault inserts the real card into gateway requests only when you charge."
+  - q: "How do I tokenize my debit card?"
+    a: "As a cardholder, adding it to Apple Pay or Google Pay tokenizes it automatically. As a business, you tokenize debit cards exactly like credit cards, through your vault or gateway."
+  - q: "Is a card token considered cardholder data?"
+    a: "Generally not, if it cannot recover the PAN without the vault. The vault and any system receiving a detokenized card stay in scope, and your QSA makes the final call."
+  - q: "Does card tokenization qualify my business for SAQ A?"
+    a: "It can help. Card-not-present merchants that fully outsource capture to a hosted form and store no card data often qualify. Your acquirer or QSA confirms eligibility."
+  - q: "Can a card vault store CVV?"
+    a: "Not after authorization, even encrypted. A vault may hold it briefly and encrypted before authorization, then must delete it."
+  - q: "Can one card token work across multiple payment gateways?"
+    a: "Yes, with an independent vault, which forwards the card to whichever supported gateway you choose. PSP tokens work only with the processor that issued them."
+  - q: "Can staff view the full card number without it passing through our servers?"
+    a: "Yes, through controlled retrieval: an authorized user views the card in a logged session served from the vault. You still need customer authorization and supplier approval."
+  - q: "Is vaultless tokenization more secure than a card vault?"
+    a: "Neither is automatically more secure. Vaultless removes the card database and concentrates risk in the keys, while a vault keeps random tokens with no reversible link. Choose by gateways, portability and staff access needs."
+---
+
+<p>A finance team exports a "customers" table for a churn analysis. One column still holds full card numbers from an old billing integration, and by lunch the file sits in three inboxes and a shared drive.</p>
+
+<p>Card data spreads like this in many businesses, into CRM notes, call recordings, tickets and exports. Holding cards puts your whole stack in scope: every server the data touches, every database it lands in and every backup it survives in.</p>
+
+<p>Card vault tokenization changes where the card number lives. In this guide, we cover how it works, how the architectures compare, how far it cuts PCI scope and how to choose a provider.</p>
+
+<h2>What is card vault tokenization?</h2>
+<p><strong>Card vault tokenization is a payment security method that swaps a card's PAN for a random token and stores the real number in a separate, encrypted vault that only authorized services can reach.</strong></p>
+<p>Your systems keep the token, and the vault keeps the card. When a payment needs the real number, the vault supplies it inside its own environment.</p>
+
+<h3>What is a card vault?</h3>
+<p>A card vault is a hardened store built to hold card numbers and release them only under strict rules. What sets it apart from an encrypted database column:</p>
+<ul>
+  <li><strong>Isolation:</strong> it runs as a separate service, apart from your application.</li>
+  <li><strong>Key management:</strong> keys sit apart from the data, often per customer and backed by hardware security modules (HSMs).</li>
+  <li><strong>Access policy:</strong> only named services, with scoped credentials, can request a card.</li>
+  <li><strong>Audit:</strong> every tokenize, detokenize and forward request is logged.</li>
+</ul>
+
+<h3>What does a card token look like? Formats and types explained</h3>
+<p>The right format depends on what your existing systems expect.</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Format</th><th>Example (test values)</th><th>When to use it</th></tr></thead>
+    <tbody>
+      <tr><td>Original PAN</td><td>4111 1111 1111 1111</td><td>Never stored in your systems</td></tr>
+      <tr><td>Random token</td><td>tok_8fK2mQ9xZrT4vB</td><td>New systems</td></tr>
+      <tr><td>Format-preserving token</td><td>4111 1187 4420 1111</td><td>Legacy fields that expect 16 digits</td></tr>
+      <tr><td>Luhn-passable token</td><td>Passes the card checksum</td><td>Code that validates card numbers</td></tr>
+      <tr><td>Deterministic token</td><td>Same card, same token</td><td>Matching and card-on-file logic</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>Format-preserving tokens often keep the first six and last four digits, so staff still see the brand and "ending in 1111". The vault also returns safe display metadata: brand, last four and expiry.</p>
+
+<h3>Why is a stolen card token useless to attackers?</h3>
+<p>A random token has no mathematical relationship to the card number, and no key converts it back. Three more barriers block a charge:</p>
+<ol>
+  <li><strong>The vault is the only way back:</strong> Detokenizing needs authenticated vault access.</li>
+  <li><strong>Credentials are scoped:</strong> A client can use only the actions it was granted.</li>
+  <li><strong>Destinations are allowlisted:</strong> Card data goes only to approved gateway domains.</li>
+</ol>
+<p>The vault itself becomes the target, so your provider's isolation and key handling matter as much as the token.</p>
+
+<h3>What is detokenization?</h3>
+<p>Detokenization is the reverse step: the vault retrieves the real card number for an approved purpose.</p>
+<p>In a well-designed setup, detokenization rarely returns the PAN to you. The vault inserts the card into an outbound gateway request, and you receive only the response. When a person must see the card, it happens in a controlled, logged session.</p>
+
+<h2>Why businesses are moving card data into a token vault</h2>
+<p><strong>Businesses move card data into a token vault because stored card numbers spread across apps, inboxes and recordings, and every system that touches them adds breach exposure and PCI audit work.</strong></p>
+
+<h3>Why stored card numbers are a breach and audit liability</h3>
+<p>PCI DSS applies to every system that stores, processes or transmits card data, plus connected systems. Store a PAN in your billing database, and its backups, admin tools and network all join your cardholder data environment (CDE). What that means in practice:</p>
+<ul>
+  <li>Each in-scope system needs yearly PCI controls, evidence and testing.</li>
+  <li>A breach of any one exposes usable card numbers.</li>
+  <li>Backups and exports outlive the original record.</li>
+</ul>
+
+<h3>Why remote card collection (phone, email, links) makes it worse</h3>
+<p>Card-not-present collection multiplies where numbers land.</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Channel</th><th>Where the card number ends up</th></tr></thead>
+    <tbody>
+      <tr><td>Phone</td><td>Agent notes, call recordings, transcripts, screen recordings</td></tr>
+      <tr><td>Email</td><td>Inboxes, forwards, archives, mobile devices</td></tr>
+      <tr><td>Chat</td><td>Chat history, support tools, exported logs</td></tr>
+      <tr><td>Generic web forms</td><td>Form vendor storage, notification emails, spreadsheets</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>Each copy sits outside your payment controls, often for years.</p>
+
+<h3>Why card-on-file workflows need a safer storage model</h3>
+<p>Subscriptions, deposits, balances and no-show fees all need the card again later, which without a vault means keeping it somewhere.</p>
+<p>A token gives you reuse without custody: it sits on the customer record while the card stays in the vault.</p>
+
+<h2>Card vault tokenization vs encryption: what's the difference?</h2>
+<p><strong>Encryption scrambles the card number with a key and stores the result in your systems, whereas vault tokenization removes the number entirely and leaves only a token with no mathematical link to it.</strong></p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Factor</th><th>Encryption</th><th>Vault tokenization</th></tr></thead>
+    <tbody>
+      <tr><td>What you store</td><td>Ciphertext of the PAN</td><td>A token</td></tr>
+      <tr><td>Reversible by</td><td>Anyone with the key</td><td>Only the vault, through an authorized request</td></tr>
+      <tr><td>Where the PAN lives</td><td>Inside your systems, encrypted</td><td>Inside the vault, outside your systems</td></tr>
+      <tr><td>PCI treatment</td><td>Encrypted PAN is still cardholder data</td><td>Tokens that cannot recover the PAN are generally not</td></tr>
+      <tr><td>Main risk</td><td>Key theft exposes every record</td><td>Vault compromise, so provider security matters</td></tr>
+      <tr><td>Best fit</td><td>Data in transit and at rest</td><td>Card numbers you must reuse</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>The practical difference: encrypted PANs keep your databases in PCI scope, while tokens can take them out. Most vaults use both: encryption inside, tokens outside.</p>
+
+<h2>How card vault tokenization works: a 7-step payment flow</h2>
+<p><strong>Card vault tokenization works by capturing the card outside your servers, encrypting it in a vault, returning a token you store, then injecting the card into gateway requests when a charge is due.</strong></p>
+<p>Let's follow a subscription software company that charges a customer's card monthly.</p>
+
+<h3>Step 1: Capture the card without touching your servers</h3>
+<p>The customer types the card into a hosted or embedded form, often an iframe, which posts it straight to the vault. Other capture options:</p>
+<ul>
+  <li>IVR phone payments, with keyed digits going directly to the vault.</li>
+  <li>A direct API call for server-to-server flows.</li>
+</ul>
+<p><strong>E-commerce example:</strong> a WooCommerce or Magento store embeds the vault's form in its checkout and receives only a token.</p>
+
+<h3>Step 2: Encrypt and store the PAN in an isolated vault</h3>
+<p>The vault encrypts the card with AES-256 or similar, ideally with per-customer keys, in an environment isolated from other tenants and your application.</p>
+<p><strong>Why per-customer keys matter:</strong> one compromised key leaves every other tenant's cards protected.</p>
+
+<h3>Step 3: Return a token and store it against your records</h3>
+<p>The vault returns a token and safe metadata. The company saves the token against the customer's account, with a record of consent to future charges.</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Where it lives</th><th>What it holds</th></tr></thead>
+    <tbody>
+      <tr><td>Your application and CRM</td><td>Token, brand, last four, expiry, consent record</td></tr>
+      <tr><td>The vault</td><td>Encrypted PAN, mapped to the token</td></tr>
+      <tr><td>Your logs</td><td>Request IDs and tokens, never the PAN</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h3>Step 4: Handle CVV separately and temporarily</h3>
+<p>PCI DSS prohibits storing the CVV after authorization, even encrypted. A good vault holds it encrypted just long enough for the first authorization, then deletes it.</p>
+<p>Later card-on-file charges run without CVV, as is normal for merchant-initiated transactions.</p>
+
+<h3>Step 5: Send a tokenized charge request to the proxy</h3>
+<p>On billing day, the company builds a normal gateway charge request with a placeholder where the card number would go, and sends it to the vault's payment proxy. The proxy checks three things first:</p>
+<ol>
+  <li>Scoped OAuth2 credentials on the caller.</li>
+  <li>A valid request signature.</li>
+  <li>An allowlisted gateway domain as the destination.</li>
+</ol>
+
+<h3>Step 6: Inject the card number and forward it to the gateway</h3>
+<p>Inside the vault, the proxy swaps in the real card number and forwards the request to Stripe, Authorize.net, Braintree, PayPal or another gateway. The gateway's response returns through the proxy, without the card number in it.</p>
+
+<h3>Step 7: Log every access and enforce retention rules</h3>
+<p>Every tokenize, forward and retrieval request is logged with who made it and the result. Retention rules to set:</p>
+<ul>
+  <li>Delete cards when customers cancel or request it.</li>
+  <li>Purge expired cards on a schedule.</li>
+  <li>Document legal hold exceptions.</li>
+</ul>
+
+<h2>What are the core architectures for card tokenization?</h2>
+<p><strong>The core architectures for card tokenization are vault-based lookup, vaultless cryptographic tokens, network tokens issued by card brands and gateway tokens held by your payment processor.</strong></p>
+<p>Each answers one question differently: where does the token-to-card link live?</p>
+
+<h3>Vault-based tokenization: how the lookup model works</h3>
+<p>A vault stores each PAN encrypted with a token-to-PAN mapping table, so detokenizing is a secure lookup.</p>
+<p><strong>Strengths:</strong> random tokens cannot be reversed, and the vault can forward cards to any gateway.</p>
+<p><strong>Trade-offs:</strong> the vault must be secured and scaled, and each lookup adds a small step.</p>
+
+<h3>Vaultless tokenization: how FPE and HSM keys replace the vault</h3>
+<p>Vaultless systems skip the mapping table and generate tokens with format-preserving encryption (FPE), such as NIST-approved FF1, using HSM-held keys.</p>
+<ul>
+  <li>No database of PANs to protect.</li>
+  <li>Fast, because tokens are computed rather than looked up.</li>
+  <li>Key compromise is the central risk, since the keys can reverse every token.</li>
+  <li>Cards needed later by a person still get decrypted somewhere.</li>
+</ul>
+
+<h3>Network tokenization: how Visa and Mastercard tokens work</h3>
+<p>Card networks issue tokens through Visa Token Service and Mastercard Digital Enablement Service (MDES). Each is bound to a merchant or device, and each transaction carries a one-time cryptogram. What they add:</p>
+<ul>
+  <li><strong>Lifecycle updates:</strong> when a bank reissues a card, the network token keeps working.</li>
+  <li><strong>Higher trust:</strong> issuers see a cryptogram-backed charge from a known merchant.</li>
+  <li><strong>Domain controls:</strong> a token bound to one merchant fails anywhere else.</li>
+</ul>
+<p>Network tokens are requested through a token requestor, usually your gateway or vault provider.</p>
+
+<h3>PSP gateway tokens: how processor-held tokens work</h3>
+<p>Save a card with a payment service provider (PSP), and it returns a token that works only with that PSP.</p>
+<p>It is the simplest start, with no extra vendor. The catch is portability: a second or new processor means a card migration.</p>
+
+<h2>Vault vs vaultless vs network tokens: architecture comparison</h2>
+<p><strong>Vault tokens stay portable across gateways and allow controlled retrieval, whereas vaultless tokens swap stored cards for key risk and network tokens add automatic card updates on brand rails.</strong></p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Factor</th><th>Vault-based</th><th>Vaultless</th><th>Network tokens</th><th>PSP tokens</th></tr></thead>
+    <tbody>
+      <tr><td>Where the PAN lives</td><td>Encrypted in the vault</td><td>Nowhere, derived from keys</td><td>With the card network</td><td>With the processor</td></tr>
+      <tr><td>Token mapping</td><td>Lookup table</td><td>FPE with HSM keys</td><td>Network token service</td><td>Processor database</td></tr>
+      <tr><td>Gateway portability</td><td>Any gateway the vault can forward to</td><td>Depends on implementation</td><td>Depends on the token requestor setup</td><td>One processor only</td></tr>
+      <tr><td>Card lifecycle updates</td><td>Needs account updater or network tokens</td><td>Same</td><td>Automatic</td><td>Processor dependent</td></tr>
+      <tr><td>Card retrieval for staff</td><td>Possible under strict controls</td><td>Possible with decryption</td><td>No</td><td>No</td></tr>
+      <tr><td>PCI scope effect</td><td>Strong for systems holding tokens</td><td>Strong, keys stay in scope</td><td>Strong for merchant systems</td><td>Strong, locked to one PSP</td></tr>
+      <tr><td>Best fit</td><td>Multi-gateway, card-on-file, human workflows</td><td>High-volume, low-latency internal systems</td><td>Recurring and stored-credential charges</td><td>Single-processor merchants</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h3>Why vaults and network tokens work best together</h3>
+<p>Many enterprises run both. The vault holds the card and stays portable, while network tokens handle charges that benefit from lifecycle updates and cryptograms.</p>
+<p><strong>Example:</strong> a subscription company keeps cards in its vault and uses network tokens for recurring billing. If it adds a processor, the vault still holds the source card.</p>
+
+<h2>How far does card vault tokenization reduce PCI DSS scope?</h2>
+<p><strong>Card vault tokenization reduces PCI DSS scope by taking card numbers out of systems that hold only tokens, such as apps and CRMs, while capture pages and connected systems stay in scope.</strong></p>
+
+<p>It reduces scope a lot without removing it, so be wary of anyone promising "no more PCI".</p>
+
+<h3>Which systems drop out of scope and which stay in</h3>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Usually out of scope</th><th>Usually still in scope</th></tr></thead>
+    <tbody>
+      <tr><td>CRM and customer records holding tokens</td><td>Web pages that load or host the payment form</td></tr>
+      <tr><td>Billing and booking databases</td><td>Any system that receives a detokenized PAN</td></tr>
+      <tr><td>Data warehouses and analytics</td><td>Staff workstations used for card retrieval</td></tr>
+      <tr><td>Support tools and ticketing</td><td>Your vault provider, through its own AOC</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>PCI guidance treats tokens that cannot recover the PAN as outside cardholder data, while the tokenization system stays in scope. Tokens that can directly initiate charges, called high-value tokens, may get closer scrutiny, so confirm how yours are treated.</p>
+
+<h3>What determines your SAQ: SAQ A vs SAQ A-EP vs SAQ D</h3>
+<p>Your Self-Assessment Questionnaire (SAQ) depends mostly on how cards are captured.</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>SAQ</th><th>Typical setup</th><th>Relative effort</th></tr></thead>
+    <tbody>
+      <tr><td>SAQ A</td><td>Card-not-present merchant that fully outsources capture, such as a vault-hosted iframe or redirect, with no card data on its systems</td><td>Lightest</td></tr>
+      <tr><td>SAQ A-EP</td><td>E-commerce site that controls the payment page or scripts, even if the card goes straight to a third party</td><td>Moderate</td></tr>
+      <tr><td>SAQ D</td><td>Merchant that stores, processes or transmits card data itself</td><td>Heaviest</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>A hosted capture form plus a vault can support SAQ A eligibility for many card-not-present businesses. Under PCI DSS v4.0.1, SAQ A merchants also confirm their site is protected against script attacks that could affect the payment page.</p>
+
+<h3>What pulls systems back into scope</h3>
+<p>Scope stays reduced only while card numbers stay out. Common leaks:</p>
+<ul>
+  <li>Staff pasting card numbers into email, chat or CRM notes.</li>
+  <li>Call recordings that capture spoken card numbers.</li>
+  <li>Application logs that record raw request bodies.</li>
+  <li>Screenshots and screen recordings during support sessions.</li>
+  <li>A "temporary" export that becomes permanent.</li>
+</ul>
+
+<h3>Who confirms your scope: acquirer, QSA and your vault's AOC</h3>
+<p>Nobody can promise your SAQ in advance, including us. Three parties decide:</p>
+<ol>
+  <li><strong>Acquirer:</strong> sets which validation applies to your merchant level.</li>
+  <li><strong>QSA:</strong> if you use one, assesses your actual data flows.</li>
+  <li><strong>Vault provider:</strong> supplies its PCI DSS Attestation of Compliance (AOC), which covers its side.</li>
+</ol>
+
+<h2>What are the business benefits of card vault tokenization?</h2>
+<p><strong>The business benefits of tokenizing cards in a vault are smaller breach impact, lighter PCI work, gateway freedom, safe card reuse, remote capture without custody and one shared security layer.</strong></p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Benefit</th><th>What changes</th></tr></thead>
+    <tbody>
+      <tr><td>Smaller breach impact</td><td>Attackers find tokens in place of card numbers</td></tr>
+      <tr><td>Lighter PCI effort</td><td>Fewer systems to control, test and document</td></tr>
+      <tr><td>Gateway freedom</td><td>Tokens are not tied to one processor</td></tr>
+      <tr><td>Safe card reuse</td><td>Charge again without storing the PAN</td></tr>
+      <tr><td>Remote capture</td><td>Phone and link payments without agents handling cards</td></tr>
+      <tr><td>One security layer</td><td>The same vault model for cards, data and files</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h3>Smaller breach impact: stolen tokens expose nothing</h3>
+<p>If an attacker reaches your CRM or billing database, they find tokens with no value outside your vault.</p>
+<p><strong>In an incident:</strong> you investigate token access, a far smaller problem than exposed cards.</p>
+
+<h3>Lighter PCI compliance effort and audit cost</h3>
+<p>Every system that leaves scope removes controls, evidence and tests. You feel it most at assessment time, when the in-scope list is shorter. Where the savings show up:</p>
+<ul>
+  <li>Fewer systems to scan, test and harden.</li>
+  <li>Less evidence per requirement.</li>
+  <li>A smaller network segment to monitor.</li>
+</ul>
+
+<h3>Freedom to change or add payment gateways</h3>
+<p>An independent vault forwards cards to any supported gateway, so you can add a processor, route by region or renegotiate without re-collecting cards.</p>
+<p><strong>Example:</strong> a retailer adds a European processor, and stored cards work there from day one.</p>
+
+<h3>Reusing cards safely for repeat, recurring and card-on-file payments</h3>
+<p>Deterministic tokens map one card to one token, so every repeat charge references the same value and the card is entered once.</p>
+<p><strong>Where it shows up:</strong> travel balances, hotel incidentals, membership renewals and patient payment plans.</p>
+
+<h3>Taking cards by phone and payment link without holding them</h3>
+<p>IVR capture sends keypad digits straight to the vault, and a payment link does the same for customers who would otherwise email their card.</p>
+<p><strong>Result:</strong> call recordings, agent desktops and CRM notes stay free of card numbers.</p>
+
+<h3>One security layer across cards, data and files</h3>
+<p>The same vault model can protect SSNs, bank account numbers and documents, so security teams review one pattern.</p>
+<p><strong>Practical upside:</strong> one vendor review and one audit trail for every sensitive data type.</p>
+
+<h2>PSP tokens vs independent card vault: who controls your cards?</h2>
+<p><strong>PSP tokens keep your stored cards inside one processor's system, whereas an independent card vault holds cards on your behalf and forwards them to whichever gateway you choose to charge through.</strong></p>
+
+<h3>How PSP tokens lock cards to one processor</h3>
+<p>A processor holds the PAN and gives you its own token, which works until you want options. Where lock-in shows up:</p>
+<ul>
+  <li>Adding a second processor means new tokens for new customers only.</li>
+  <li>Switching processors needs a card data migration between providers.</li>
+  <li>Routing by region, cost or approval rate is limited to one provider's network.</li>
+</ul>
+
+<h3>How an independent vault keeps tokens portable</h3>
+<p>An independent vault keeps the PAN and issues its own tokens. When you charge, its proxy forwards the card to the gateway you choose.</p>
+<p>Switching or adding a gateway becomes a configuration change, while records, tokens and cards stay put.</p>
+
+<h3>When one processor is enough</h3>
+<p>One processor's tokens are usually enough when:</p>
+<ol>
+  <li>Sales run through one checkout channel.</li>
+  <li>Adding or switching processors is not on the roadmap.</li>
+  <li>No person ever needs to use a stored card outside the gateway.</li>
+</ol>
+<p>If any of those change, revisit the decision early.</p>
+
+<h2>When does an enterprise need an independent card vault?</h2>
+<p><strong>An enterprise needs an independent card vault when it routes across several gateways, stores cards for later charges, collects cards remotely, lets staff use cards or is migrating processors.</strong></p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Situation</th><th>PSP tokens</th><th>Network tokens alone</th><th>Independent vault</th></tr></thead>
+    <tbody>
+      <tr><td>Several gateways or regions</td><td>Weak fit</td><td>Partial</td><td>Strong fit</td></tr>
+      <tr><td>Card-on-file and deferred charges</td><td>Works with one PSP</td><td>Strong fit</td><td>Strong fit</td></tr>
+      <tr><td>Phone, agent or link capture</td><td>Depends on PSP</td><td>No</td><td>Strong fit</td></tr>
+      <tr><td>Staff need the real card</td><td>No</td><td>No</td><td>Possible with controls</td></tr>
+      <tr><td>Processor migration</td><td>Painful</td><td>Partial</td><td>Strong fit</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h3>You route payments across multiple gateways or regions</h3>
+<p>Different acquirers by region, or a backup processor for outages, can all charge the same stored card.</p>
+<p><strong>Signal:</strong> your payments team talks about routing, failover or local acquiring.</p>
+
+<h3>You store cards for recurring, card-on-file or deferred charges</h3>
+<p>Balances, incidentals, renewals and installments charge after capture, and the vault holds the card until each amount is known.</p>
+<p><strong>You'll recognize it when:</strong> charges land weeks or months after capture.</p>
+
+<h3>You collect cards remotely through agents, phone or links</h3>
+<p>Call centers, reservation desks and field teams take cards off-site. IVR and link capture keep those cards away from agents.</p>
+<p><strong>Watch for:</strong> card numbers showing up in call recordings, emails or agent notes.</p>
+
+<h3>Staff or partners need controlled access to the real card</h3>
+<p>Some suppliers have no payment API, so a person must use the card. A vault can support controlled retrieval, which PSP and network tokens cannot.</p>
+<p><strong>Typical sign:</strong> staff re-type cards into supplier portals or read them out over the phone.</p>
+
+<h3>You are migrating processors or consolidating platforms</h3>
+<p>During a migration or merger, cards sit in several systems. One vault gives you a single, portable source before you switch.</p>
+<p><strong>Common trigger:</strong> a processor change, or two payment stacks merging after an acquisition.</p>
+
+<h2>How can staff use stored cards without exposing the full PAN?</h2>
+<p><strong>Staff can use stored cards without exposing the PAN to your systems through controlled retrieval, where an authorized user views the card in a secure, logged session that skips your servers.</strong></p>
+<p>Travel agencies and other businesses paying suppliers for clients often ask us this.</p>
+
+<h3>Why some suppliers still need a human to enter the card</h3>
+<p>Many hotels, cruise lines and wholesalers have no payment API, so an agent types the card into a portal or reads it out by phone.</p>
+<p>The goal is keeping that step without the card landing in your booking platform, CRM or email.</p>
+
+<h3>How controlled retrieval works</h3>
+<ol>
+  <li>Clients enter their card once through a vault-hosted form, and your system stores only the token.</li>
+  <li>An authorized staff member signs in to a controlled agent application with SSO and MFA.</li>
+  <li>Policy checks their role and permitted purpose before showing anything.</li>
+  <li>The vault displays the card in that session, without it passing through your servers.</li>
+  <li>Access is time-limited, and every view is logged with the user, time and token.</li>
+</ol>
+<p>Where a supplier accepts API calls, proxy injection is safer, since no one sees the card.</p>
+
+<h3>What stays your responsibility</h3>
+<p>Controlled retrieval reduces exposure, while these obligations stay with you:</p>
+<ul>
+  <li><strong>Customer authorization:</strong> record what each client approved, for which supplier and until when.</li>
+  <li><strong>Supplier terms:</strong> some restrict third-party card use or require evidence.</li>
+  <li><strong>Staff rules:</strong> no card numbers in email, chat, notes or screenshots.</li>
+  <li><strong>PCI scope:</strong> retrieval workstations may stay in scope, so confirm with your QSA.</li>
+</ul>
+
+<h2>Which industries benefit most from card vault tokenization?</h2>
+<p><strong>The industries that benefit most from card vault tokenization collect cards remotely or charge later, such as travel, hospitality, fintech, healthcare, insurance, legal, SaaS and contact centers.</strong></p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Industry</th><th>Common trigger</th><th>Vault pattern</th></tr></thead>
+    <tbody>
+      <tr><td>Travel and hospitality</td><td>Cards arrive by phone and email, then go to suppliers</td><td>Hosted intake, token on booking, controlled retrieval</td></tr>
+      <tr><td>Financial services and fintech</td><td>Card data flows to issuers, processors and network APIs</td><td>Signed proxy requests to allowlisted partners</td></tr>
+      <tr><td>Healthcare and insurance</td><td>Patient balances and premiums on file</td><td>Card-on-file tokens apart from clinical records</td></tr>
+      <tr><td>Legal and professional services</td><td>Retainers and recurring fees</td><td>Payment link capture, token on the matter</td></tr>
+      <tr><td>SaaS and platforms</td><td>Merchants' customers share one database</td><td>Vault carries custody, platform stores tokens</td></tr>
+      <tr><td>Contact centers</td><td>Agents hear cards on calls</td><td>IVR capture through Twilio Pay straight to the vault</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h3>Travel and hospitality</h3>
+<p>A travel agency books suppliers for clients who want to enter their card once:</p>
+<ol>
+  <li>A branded, secure capture link goes to the client, who enters the card on a vault-hosted form.</li>
+  <li>The vault returns a token and safe display details, stored against the client ID.</li>
+  <li>Client authorization, permitted purposes and expiry are recorded separately.</li>
+  <li>Integrated suppliers are charged through the gateway proxy, with no PAN in the agency's systems.</li>
+  <li>For a supplier with no payment API, an authorized agent views the card in a controlled, logged session.</li>
+</ol>
+<p>Hotels use the same pattern for deposits and third-party card authorizations.</p>
+
+<h3>Financial services and fintech</h3>
+<p>Card programs, payout platforms and lenders send card data to issuers, processors and network APIs. A signing proxy that forwards only to allowlisted domains keeps the PAN in the vault.</p>
+<p><strong>Example:</strong> a payout platform calling Mastercard APIs signs requests with OAuth 1.0a RSA-SHA256 inside the proxy, so its own services hold only tokens.</p>
+
+<h3>Healthcare and insurance</h3>
+<p>Patient payment plans and insurance premiums run on stored cards.</p>
+<ul>
+  <li><strong>Clinics and billing teams:</strong> store the token against the patient account and charge each installment on schedule.</li>
+  <li><strong>Insurers and agencies:</strong> keep the premium card as a token, apart from policy and claims systems.</li>
+</ul>
+<p><strong>Keep in mind:</strong> if the vault will also hold health data, ask whether the provider signs a Business Associate Agreement.</p>
+
+<h3>Legal and professional services</h3>
+<p>Law firms and accountants take retainers and recurring fees, often by phone or email.</p>
+<p><strong>Example:</strong> a firm sends a retainer payment link. The card goes to the vault, the token sits on the client matter, and later invoices are charged without asking again.</p>
+
+<h3>SaaS and platforms</h3>
+<p>Platforms offering payments to their merchants face a custody problem: one database, many merchants' customers.</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Without a vault</th><th>With a vault</th></tr></thead>
+    <tbody>
+      <tr><td>The platform's codebase stores card numbers</td><td>The vault carries the custody</td></tr>
+      <tr><td>The whole platform sits in PCI scope</td><td>The codebase holds tokens and can stay out of scope, subject to assessment</td></tr>
+      <tr><td>Each new gateway means new card handling</td><td>The proxy forwards to the gateway each merchant uses</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>Deterministic tokens also keep customer records coherent, since the same card always maps to the same token.</p>
+
+<h3>Contact centers and phone payments</h3>
+<p>Agents who hear card numbers on calls put audio, desktops and notes in scope.</p>
+<p><strong>Example:</strong> a billing call center moves to IVR capture through Twilio Pay. Callers key in the card, agents never hear or see a number, and the CRM shows only the token and card type.</p>
+
+<h2>What card vault tokenization solves and what it doesn't</h2>
+<p><strong>Vault tokenization solves card custody, capture and reuse, and gives you charging without the PAN, whereas consent, fraud, processing fees and your remaining PCI duties stay with your business.</strong></p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>What it solves</th><th>What it doesn't solve</th></tr></thead>
+    <tbody>
+      <tr><td>Card numbers kept out of apps, CRMs, inboxes and recordings</td><td>Customer authorization for each use</td></tr>
+      <tr><td>Secure capture by form, phone or link</td><td>Fraud and chargebacks on card-not-present sales</td></tr>
+      <tr><td>Reusable tokens for repeat and recurring charges</td><td>Your acquirer relationship and processing fees</td></tr>
+      <tr><td>Charging through your gateway without seeing the PAN</td><td>Remaining PCI DSS duties and SAQ validation</td></tr>
+      <tr><td>Logged, controlled staff access</td><td>Supplier acceptance of third-party card use</td></tr>
+      <tr><td>Smaller PCI scope and a full audit trail</td><td>Weak practices such as shared logins</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h3>What it solves</h3>
+<p>Capture, storage, reuse and charging all happen without your systems holding a PAN.</p>
+<p><strong>In short:</strong> the card number exists in one place, and every use of it is recorded.</p>
+
+<h3>What it doesn't solve (and what you still own)</h3>
+<p><strong>Fraud:</strong> a vault does not authenticate the cardholder.</p>
+<p><strong>Fees:</strong> vault charges sit on top of your processing fees.</p>
+<p><strong>Compliance:</strong> you still validate PCI DSS for in-scope systems and own consent and retention.</p>
+
+<h2>Should you build a card vault in-house or use a provider?</h2>
+<p><strong>Building a card vault in-house gives full control, whereas a provider gives you certified infrastructure, key management and gateway integrations ready to use, with far less PCI work on your side.</strong></p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Factor</th><th>Build in-house</th><th>Use a provider</th></tr></thead>
+    <tbody>
+      <tr><td>Time to launch</td><td>Design, build, security review and PCI assessment</td><td>Integration work only, with no vault to build</td></tr>
+      <tr><td>PCI burden</td><td>Your vault is fully in your scope</td><td>Provider's AOC covers the vault</td></tr>
+      <tr><td>Key management</td><td>You run HSMs, rotation and access</td><td>Provider runs them</td></tr>
+      <tr><td>Gateway support</td><td>You build and maintain each integration</td><td>Proxy supports many gateways</td></tr>
+      <tr><td>Ongoing cost</td><td>Engineers, audits, monitoring, on-call</td><td>Subscription or usage fees</td></tr>
+      <tr><td>Control</td><td>Total</td><td>Defined by the provider's features</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><strong>When building makes sense:</strong> very high volume, payments as your core product and a mature PCI program. Otherwise, we recommend a provider.</p>
+
+<h2>How to evaluate and choose a card vault tokenization provider</h2>
+<p><strong>Evaluating a card vault provider is a process of checking its compliance proof, capture and token options, gateway support, CVV and staff access controls, token portability and pricing at your volume.</strong></p>
+<p>These are the twelve questions we would ask before signing:</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Criterion</th><th>Why it matters</th><th>Question to ask</th></tr></thead>
+    <tbody>
+      <tr><td>PCI DSS Level 1 AOC</td><td>The vault becomes part of your compliance chain</td><td>Can we see your current AOC?</td></tr>
+      <tr><td>SOC 2 Type II</td><td>Independent proof of controls over time</td><td>Is the report available under NDA?</td></tr>
+      <tr><td>Capture options</td><td>Cards arrive through more than one channel</td><td>Do you support iframe, IVR and API capture?</td></tr>
+      <tr><td>Token formats</td><td>Legacy systems may need card-shaped values</td><td>Which formats do you offer?</td></tr>
+      <tr><td>Gateway proxy</td><td>Lets you charge without touching the PAN</td><td>Which gateways and signing methods?</td></tr>
+      <tr><td>CVV handling</td><td>CVV cannot be stored after authorization</td><td>How long is CVV kept, and how is it deleted?</td></tr>
+      <tr><td>Staff access</td><td>Some workflows need a human</td><td>Can staff view cards without the PAN touching our servers?</td></tr>
+      <tr><td>Key management</td><td>Limits damage from any breach</td><td>Are keys unique per customer?</td></tr>
+      <tr><td>Audit logs</td><td>Evidence for audits and investigations</td><td>What is logged, and for how long?</td></tr>
+      <tr><td>Portability</td><td>Avoids lock-in</td><td>Can we export cards to another provider?</td></tr>
+      <tr><td>Pricing</td><td>Predictable cost at scale</td><td>Per request or per card, and what are overage rates?</td></tr>
+      <tr><td>Developer tools</td><td>Speed to launch</td><td>Is there a sandbox, API reference and sample code?</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h3>Which security and compliance proof should you ask for?</h3>
+<p>A current PCI DSS Level 1 AOC and SOC 2 Type II report are the baseline. If you also handle health data, ask about a Business Associate Agreement.</p>
+<p><strong>Warning sign:</strong> a website badge with no current AOC to share.</p>
+
+<h3>Which capture and token options do you need?</h3>
+<p>List every channel where cards reach you, then match token formats to your systems: format-preserving for legacy screens, deterministic for card-on-file logic.</p>
+<p><strong>Quick test:</strong> any channel without a capture option will keep sending cards to email.</p>
+
+<h3>Can it charge through your existing gateways?</h3>
+<p>Confirm the proxy supports your gateway and its authentication method, and ask whether adding a second processor is configuration or a new project.</p>
+<p><strong>Ask for proof:</strong> a working sandbox charge through your own gateway account.</p>
+
+<h3>How does it handle CVV and staff access?</h3>
+<p>Look for a stated CVV deletion window. For staff access, ask how retrieval is authenticated, timed and logged.</p>
+<p><strong>Watch out for:</strong> staff access that relies on shared logins or has no time limit.</p>
+
+<h3>Can you take your tokens with you?</h3>
+<p>Ask for a written, PCI DSS compliant export process with a clear format and timeline.</p>
+<p><strong>Why it matters:</strong> without one, leaving means asking every customer to re-enter their card.</p>
+
+<h3>Is the pricing transparent at your volume?</h3>
+<p>Get a quote on your real monthly requests, including tokenization, proxy charges and retrievals. Published prices and a free tier are good signs.</p>
+<p><strong>Model it:</strong> take last month's orders, refunds and retries, and count each one as a request.</p>
+
+<h2>How much does card vault tokenization cost?</h2>
+<p><strong>Card vault pricing is usually per request, per stored card or a flat monthly tier, and real cost depends on how many tokenize, charge and retrieval calls your workflows generate each month.</strong></p>
+
+<h3>Common pricing models</h3>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Model</th><th>How you pay</th><th>Fits when</th></tr></thead>
+    <tbody>
+      <tr><td>Per request</td><td>Each tokenize, proxy or retrieval call</td><td>Volume varies month to month</td></tr>
+      <tr><td>Per stored card</td><td>A monthly fee for each card held</td><td>Many cards, charged rarely</td></tr>
+      <tr><td>Flat tier</td><td>A fixed fee up to a request limit</td><td>Steady, predictable volume</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>One order can generate a tokenize call, a charge and a refund.</p>
+
+<h3>Hidden costs to watch for</h3>
+<ul>
+  <li>Overage rates above your tier.</li>
+  <li>Separate fees for network tokens or account updater.</li>
+  <li>Export charges if you leave.</li>
+  <li>Paid support for production incidents.</li>
+  <li>Engineering time for unsupported integrations.</li>
+</ul>
+
+<h3>Why vault fees sit on top of processor fees</h3>
+<p>A vault does not replace your acquirer or gateway, so interchange, network and processor fees still apply. Any savings from routing or rate negotiation depend on your own volumes and contracts.</p>
+<p><strong>Budget line:</strong> weigh vault fees against the PCI work and engineering time they remove.</p>
+
+<h2>How Enigma Card Vault tokenizes, stores and charges cards</h2>
+<p>We built <a class="bl-link" href="https://www.enigmavault.io/vault/card-vault/">Enigma Card Vault</a> as a tokenization API with a payment gateway proxy, so you accept and reuse cards without storing them.</p>
+
+<h3>Capture options: hosted forms, embedded forms, IVR and API</h3>
+<ul>
+  <li><strong>Hosted and embedded forms:</strong> iframe embed in 13 languages with your branding, returning the token through a postMessage callback.</li>
+  <li><strong>E-commerce storefronts:</strong> forms that fit Magento and WooCommerce checkouts.</li>
+  <li><strong>Phone payments:</strong> direct IVR-to-vault tokenization through Twilio Pay, with automatic card type detection.</li>
+  <li><strong>Direct API:</strong> one call, one token, with OAuth2 machine-to-machine auth.</li>
+</ul>
+
+<h3>Token options and ephemeral CVV</h3>
+<p>Tokens are random by default, with no structure to reverse. You can choose format-preserving, Luhn-passable tokens that keep the first six and last four digits, deterministic tokens for card-on-file logic and a per-request TTL. CVV is held encrypted for at most 30 minutes, then deleted.</p>
+<p><strong>Why Luhn-passable matters:</strong> checkout code, fraud rules and legacy systems that expect a valid-looking card number keep working unchanged.</p>
+
+<h3>Gateway-agnostic payment proxy</h3>
+<p>Card Vault forwards charges to Authorize.net, Stripe, Braintree, PayPal, Mastercard APIs and any REST-based gateway. Placeholders for card number, CVV and expiry are filled inside the vault, requests are signed with HMAC-SHA256 or OAuth 1.0a RSA-SHA256 for Mastercard, and destinations can be limited to an allowlist of gateway domains.</p>
+<p><strong>To switch gateways:</strong> you change the destination and request template, while tokens and stored cards stay where they are.</p>
+
+<h3>What integration looks like: two API calls to a token</h3>
+<ol>
+  <li><strong>Authenticate:</strong> request an access token with OAuth2 client credentials.</li>
+  <li><strong>Tokenize:</strong> send the card, or let the hosted form send it, and receive the token with safe metadata.</li>
+</ol>
+<p>Every request is audit logged, with API docs, Swagger UI and GitHub examples for developers.</p>
+
+<h3>Security, compliance and pricing</h3>
+<p>Card Vault runs on PCI DSS Level 1 and SOC 2 Type II certified infrastructure with AES-256 encryption and per-customer keys, and Enigma is an AWS Partner. Pricing is published and billed through AWS Marketplace:</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Plan</th><th>Price</th><th>Included requests</th><th>Overage</th></tr></thead>
+    <tbody>
+      <tr><td>Lite</td><td>Free forever</td><td>1,000 a month</td><td>$0.08 per request</td></tr>
+      <tr><td>Plus</td><td>$49.99 a month</td><td>20,000 a month</td><td>$0.04 per request</td></tr>
+      <tr><td>Premium</td><td>$249.99 a month</td><td>250,000 a month</td><td>$0.02 per request</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>Every tier runs on the same certified infrastructure, with Plus adding ephemeral key sharing and email support. <a class="bl-link" href="https://www.enigmavault.io/vault/card-vault/">Start free with Enigma Card Vault</a>: your checkout keeps working, and your auditor gets a shorter list.</p>

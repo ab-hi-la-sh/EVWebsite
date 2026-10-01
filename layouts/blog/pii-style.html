@@ -1,0 +1,144 @@
+{{ define "main" }}
+{{- $a := index hugo.Data.authors .Params.author -}}
+<div class="bl-progress" id="bl-progress"></div>
+<main>
+<div id="bl-article" class="bl-article--pii">
+
+  <!-- Plain light hero -- the site's own default .bl-ahead component
+       (layouts/blog/page.html, styled in blog.css), not a bespoke one.
+       Was the dark .tr-hdark banner (the /triplets/ component, background
+       art + canvas grid). That's gone: a heavier, product-marketing-page
+       hero never belonged on a blog post, and .bl-ahead already gives this
+       exact back-link/category/title/meta shape with zero extra CSS or JS
+       beyond what every other post on the site already loads. No hero
+       image block (.bl-ahero) -- this post never rendered one and nothing
+       asked for one now. -->
+  <!-- Trying the breadcrumb moved up into the hero itself (replacing the
+       plain "Insights & Resources" back-link) in place of the separate
+       sticky utility bar below -- experimental, per a direct ask to see how
+       it reads. The utility bar's own CTA ("Start a conversation") is
+       dropped entirely rather than relocated.
+       bl-ahead--accent: a blue band behind the hero text, per a direct ask
+       for "the contact us colour" (the nav's Contact button / .np-btn--primary
+       blue, --ev-mineral-blue) behind white title text -- scoped to this one
+       page's own stylesheet, not the shared .bl-ahead every other post uses. -->
+  <header class="bl-ahead bl-ahead--accent">
+    <div class="np-container">
+      <div class="bl-ahead__inner">
+        <nav class="bl-pii-crumb bl-pii-crumb--hero" aria-label="Breadcrumb">
+          <a href="/">Home</a>
+          <span class="bl-pii-crumb__sep">/</span>
+          <a href="/blog/">Blog</a>
+          <span class="bl-pii-crumb__sep">/</span>
+          <span class="bl-pii-crumb__current">{{ .Title }}</span>
+        </nav>
+        <p class="bl-ahead__cat">{{ .Params.category }}</p>
+        <h1>{{ .Title }}</h1>
+        {{- with .Params.subtitle }}<p class="bl-ahead__sub">{{ . }}</p>{{ end }}
+        <div class="bl-ameta">
+          {{ partial "blog/authorcard.html" (dict "ctx" . "compact" false) }}
+          <span class="bl-ameta__sep"></span>
+          <span class="bl-ameta__v">{{ .Date.Format "Jan 2, 2006" }}</span>
+          <span class="bl-ameta__sep"></span>
+          <span class="bl-ameta__v">{{ .Params.readTime }} min read</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="np-container">
+    <div class="bl-toc-m">
+      <details>
+        <summary>On this page</summary>
+        <ul class="bl-toc-m__list" id="bl-toc-list-m"></ul>
+      </details>
+    </div>
+    <div class="bl-pii-layout">
+      <div class="bl-pii-sidebar">
+        <aside class="bl-pii-toc">
+          <div class="bl-pii-toc__nav">
+            <p class="bl-toc__label">On this page</p>
+            <ul class="bl-toc__list" id="bl-toc-list"></ul>
+          </div>
+
+          <div class="bl-pii-toc__rule"></div>
+          <div class="bl-share bl-share--toc">
+            <span class="bl-share__label">Share</span>
+            <a class="bl-share__btn" id="sh-li" href="#" target="_blank" rel="noopener" aria-label="Share on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5A2.5 2.5 0 1 1 0 3.5a2.5 2.5 0 0 1 4.98 0zM.24 8.02h4.5V24H.24zM8.5 8.02h4.3v2.18h.06c.6-1.14 2.07-2.34 4.26-2.34 4.56 0 5.4 3 5.4 6.9V24h-4.5v-6.34c0-1.51-.03-3.46-2.1-3.46-2.11 0-2.43 1.65-2.43 3.35V24H8.5z"/></svg></a>
+            <a class="bl-share__btn" id="sh-x" href="#" target="_blank" rel="noopener" aria-label="Share on X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.41l-5.8-7.58-6.64 7.58H.46l8.6-9.83L0 1.15h7.59l5.24 6.93zm-1.3 19.5h2.04L6.49 3.24H4.3z"/></svg></a>
+            <a class="bl-share__btn" id="sh-em" href="#" aria-label="Share by email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></a>
+            <button class="bl-share__btn" id="sh-cp" type="button" aria-label="Copy link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button>
+          </div>
+        </aside>
+
+        <!-- Separate card, its own surface, with real space above it --
+             matches the reference's two-card layout (TOC+Share, then a
+             gap, then a second standalone card) instead of one long
+             stacked card. -->
+        <div class="bl-pii-contact">
+          <p class="bl-pii-contact__t">Contact us</p>
+          <!-- Was a generic "we'll route it to the right team" line, then
+               "See how Triplets grounds..." -- naming one product line is
+               too narrow (request-demo/ covers all three) and doesn't move
+               fast enough. Reframed as pain point + what we do, matching
+               the FinStackk reference's "Don't let a missed filing cost
+               you." pattern, phrased with the homepage's own "Ground your
+               AI answers" language (data/home.yml hero.title) rather than
+               inventing new wording. -->
+          <p class="bl-pii-contact__s">Stop shipping unprovable AI answers. Ground them in evidence.</p>
+          <!-- Dropped the email field (and the form wrapper it needed) --
+               a single CTA straight to /request-demo/ does the same job as
+               the reference's compact "FREE DEMO" card without a field that
+               was never wired to a submission endpoint anyway, and frees up
+               the vertical room the sidebar needed to keep the TOC and this
+               card both fully visible together. -->
+          <a class="np-btn np-btn--primary np-btn--sm bl-pii-contact__btn" href="/request-demo/">Request a demo</a>
+        </div>
+      </div>
+      <div class="bl-maincol bl-maincol--pii2">
+      <article class="bl-content" id="bl-content">
+{{ .Content }}
+      </article>
+
+      {{ partial "blog/authorbio.html" . }}
+      </div>
+    </div>
+  </div>
+
+  {{- with .Params.faqs }}
+  <section class="np-section np-rule-top">
+    <div class="np-container">
+      <div class="bl-tail">
+        <h2 class="bl-tail__h">Frequently asked questions</h2>
+        <div class="np-acc">
+          {{- range $i, $f := . }}
+          {{- /* The original had the first item expanded. */ -}}
+          <details{{ if eq $i 0 }} open{{ end }}>
+            <summary>{{ $f.q }}</summary>
+            <div class="np-acc__body">{{ $f.a }}</div>
+          </details>
+          {{- end }}
+        </div>
+      </div>
+    </div>
+  </section>
+  {{- end }}
+
+  {{- /* Related: same category first, then anything else -- matching the old
+         controller's fallback. Hidden entirely when nothing else is published. */ -}}
+  {{- $others := where (where site.RegularPages "Type" "blog") "Permalink" "!=" .Permalink -}}
+  {{- $rel := (where $others "Params.category" .Params.category) | append (where $others "Params.category" "!=" .Params.category) -}}
+  {{- with first 3 $rel }}
+  <section class="np-section np-rule-top">
+    <div class="np-container">
+      <h2 class="bl-tail__h">You might also like</h2>
+      <div class="bl-grid bl-related" id="bl-related-grid">
+        {{- range . }}{{ partial "blog/card.html" . }}{{ end }}
+      </div>
+    </div>
+  </section>
+  {{- end }}
+
+</div>
+</main>
+{{ end }}

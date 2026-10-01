@@ -11,6 +11,7 @@
   var clear   = document.getElementById('bl-clear');
   var empty   = document.getElementById('bl-empty');
   var reset   = document.getElementById('bl-reset');
+  var startSec = document.getElementById('bl-start-sec');
   var featSec = document.getElementById('bl-featured-sec');
   var archSec = document.getElementById('bl-archive-sec');
   var featCt  = document.getElementById('bl-feat-count');
@@ -18,6 +19,14 @@
   var moreBtn = document.getElementById('bl-more-btn');
   var more    = document.getElementById('bl-more');
 
+  /* "Start here" is a hand-curated list (content/blog/_index.html's
+     startHere front matter), not generated from $arts like the grid/archive
+     below -- it had no data-cat at all and never responded to the chips,
+     so picking "Tokenization" still showed the AI-hallucination post here
+     even though the grid below correctly filtered it out. Each row does
+     carry a real data-cat now (layouts/blog/section.html), so it can use
+     the same matches()/category logic as everything else. */
+  var startRows = [].slice.call(document.querySelectorAll('#bl-start-sec .bl-startrow'));
   var cards = [].slice.call(document.querySelectorAll('#bl-featured .bl-card'));
   var rows  = [].slice.call(document.querySelectorAll('#bl-archive .bl-row'));
   var ARCH_STEP = 4;
@@ -30,6 +39,20 @@
   }
 
   function render() {
+    var nStart = 0;
+    startRows.forEach(function (s) {
+      var on = matches(s);
+      s.style.display = on ? '' : 'none';
+      if (on) {
+        nStart++;
+        /* Renumber the visible rows so each filter restarts at 01, instead
+           of keeping each row's position in the full list (07, 08, ...). */
+        var n = s.querySelector('.bl-startrow__n');
+        if (n) n.textContent = (nStart < 10 ? '0' : '') + nStart;
+      }
+    });
+    if (startSec) startSec.style.display = nStart ? '' : 'none';
+
     var nFeat = 0, nArch = 0;
     cards.forEach(function (c) {
       var on = matches(c);

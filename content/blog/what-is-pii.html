@@ -1,0 +1,409 @@
+---
+title: "A Guide to Personally Identifiable Information (PII) Types & Uses"
+titleEmphasis: "Types & Uses"
+slug: "what-is-pii"
+url: "/what-is-pii/"
+layout: "pii-style"
+metaTitle: "What Is PII? Definition, Types, Examples & How to Protect It"
+description: "Learn how personally identifiable information is defined, the main types of PII with examples, the laws that govern it, and how businesses protect it."
+subtitle: "Personally identifiable information is any data that can identify a specific person, alone or combined with other details. Here is how PII is classified, where it hides in a business, and how to protect it."
+date: 2026-10-01
+category: "PII"
+author: "abhilash-kumar"
+readTime: 15
+heroImage: "/assets/blog/img-01.png"
+heroAlt: "Layered translucent panels representing identifiers that together point to one person"
+excerpt: "Personally identifiable information is any data that can identify a specific person, alone or combined with other details. Here is how PII is classified, where it hides in a business, the laws that govern it, and how to protect it."
+tags: ["pii", "data-privacy", "compliance", "tokenization"]
+ogImage: "/assets/og/vault-overview.jpg"
+ogImageAlt: "A Guide to Personally Identifiable Information (PII) Types & Uses | Enigma Vault"
+ogType: article
+styles: ["blog.css", "pages/blog-pii-hero.css", "tr-pages.css"]
+scripts: ["blog-article.js"]
+faqSchema: true
+faqs:
+  - q: "Is an email address considered PII under US and EU privacy laws?"
+    a: "Yes. A personal email is PII in the US and personal data under GDPR. A work email that includes a person's name, such as jane.doe@company.com, is also personal data under GDPR."
+  - q: "Is an IP address considered personal information under GDPR and CCPA?"
+    a: "In most cases, yes. GDPR treats an IP address as personal data when it can be linked to a person, and the CCPA lists IP addresses as personal information."
+  - q: "Can a person's name alone be considered PII?"
+    a: "It depends on the name and context. A common name alone may not single anyone out, but a rare name, or one paired with an address or employer, usually does."
+  - q: "What's the difference between direct and indirect identifiers?"
+    a: "Direct identifiers, such as an SSN, identify a person on their own, whereas indirect identifiers, such as ZIP code and birth date, identify a person only when combined."
+  - q: "Is anonymized or pseudonymized data still considered PII?"
+    a: "Truly anonymized data is not PII. Pseudonymized data, including tokenized, encrypted or hashed values, is still personal data because someone with the key or vault can re-identify it."
+  - q: "What's the difference between PII and \"Sensitive Personal Information\" under CPRA?"
+    a: "PII is a broad term for identifying data, while sensitive personal information is a CPRA subset covering SSNs, account logins, precise geolocation and health data that consumers can limit."
+  - q: "How long can a business legally keep customer PII?"
+    a: "Only as long as the purpose requires. GDPR and the CPRA expect defined retention periods, while tax, medical and financial rules may set minimums."
+  - q: "Is it safe to share PII with ChatGPT or other AI tools?"
+    a: "Not in raw form. Tokenize PII before it reaches the model, use enterprise accounts with clear data terms and review the provider's retention settings."
+---
+
+<p>Businesses cannot book a trip, process a payment or treat a patient without collecting personal information. A traveler emails a passport scan to confirm a tour. A patient types an insurance ID into an intake form. A shopper saves a card for the next order.</p>
+
+<p>Each of these routine steps puts personally identifiable information into a company's systems. This guide explains what is PII, how it is classified, where it hides inside a business, the laws that govern it and the practical steps that keep it safe.</p>
+
+<h2>What is PII (personally identifiable information)?</h2>
+<p><strong>PII (personally identifiable information) is any data that can identify a specific person, alone or combined with other details, such as a name, Social Security number, email or card number.</strong></p>
+<p>Personally identifiable information is collected every time someone opens an account, buys a product, fills out a form or visits a doctor. It covers obvious identifiers, such as a passport number, and less obvious ones, such as the IP address of the device used to place an order.</p>
+<p>The US National Institute of Standards and Technology (<a class="bl-link" href="https://csrc.nist.gov/pubs/sp/800/122/final">NIST SP 800-122</a>) splits PII into two groups:</p>
+<ul>
+  <li><strong>Distinguishing information:</strong> Data that tells one individual apart from everyone else, such as a Social Security number or fingerprint.</li>
+  <li><strong>Traceable information:</strong> Data that links activity back to one person, such as login history or location data.</li>
+</ul>
+<p>Consider a single online order. The name, shipping address, email, card number and IP address all land in one record, and together they show who the customer is, where they live and how they pay. GDPR calls this "personal data," while California's CCPA uses "personal information," but the core question is the same: can this data be linked to a real person?</p>
+
+<h2>What are the main categories of PII? Direct vs. indirect identifiers</h2>
+<p><strong>Direct identifiers are data that identify a person on their own, such as a passport number, whereas indirect identifiers identify a person only when combined with other data, such as a ZIP code.</strong></p>
+
+<h3>Direct identifiers (linked data)</h3>
+<p>Direct identifiers point to one individual without any extra context. If a support agent sees a Social Security number in a ticket, there is no doubt whose record it belongs to. In most businesses, they show up as:</p>
+<ul>
+  <li>Full name, in most contexts</li>
+  <li>Social Security number or national ID number</li>
+  <li>Passport and driver's license numbers</li>
+  <li>Biometric data, such as fingerprints or face scans</li>
+  <li>Personal email address and mobile number</li>
+</ul>
+
+<h3>Indirect identifiers (linkable data)</h3>
+<p>Indirect identifiers, also called quasi-identifiers, describe a person without naming them. A ZIP code, job title, date of birth, gender, IP address or cookie ID could each belong to thousands of people. Inside a customer database, though, they sit side by side in the same row.</p>
+
+<h3>How indirect identifiers become direct</h3>
+<p>Put a few of them together and the picture sharpens quickly. "Female, 34, pediatric nurse, lives in a town of 8,000" may describe only one person, even though no single detail names her. This is why removing names from a dataset does not make it anonymous.</p>
+
+<h2>Sensitive vs. non-sensitive PII: what's the difference?</h2>
+<p><strong>Sensitive PII is data that can cause serious harm if exposed, such as an SSN, card number or medical record, whereas non-sensitive PII, such as a name or ZIP code, carries low risk on its own.</strong></p>
+
+<h3>Sensitive PII</h3>
+<p>Sensitive PII could lead to identity theft, financial loss or discrimination if it reaches the wrong person. Social Security and passport numbers, card and bank account numbers, medical records and biometrics all belong here. A criminal with a stolen SSN and date of birth can open credit lines in someone else's name, so this data needs encryption or tokenization and strict access rules.</p>
+
+<h3>Non-sensitive PII</h3>
+<p>A first name, work email or business phone number rarely harms anyone on its own. Much of it already appears on company websites and social profiles, but attackers still use it to write convincing phishing emails.</p>
+
+<h3>When non-sensitive PII becomes sensitive</h3>
+<p>Context changes the risk. Names in a newsletter list are low-risk, yet the same names on a clinic's appointment list reveal who is receiving treatment. A phone number on a business card is harmless, but the same number used for two-factor codes becomes a target for SIM-swap fraud.</p>
+
+<h3>PII risk matrix: how identifiability and sensitivity work together</h3>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Group</th><th>Examples</th><th>Protection level</th></tr></thead>
+    <tbody>
+      <tr><td>Direct and sensitive</td><td>SSN, passport number, fingerprints</td><td>Highest: tokenize or encrypt, need-to-know access</td></tr>
+      <tr><td>Indirect and sensitive</td><td>Diagnosis, salary, precise location</td><td>High: encrypt and store apart from identifiers</td></tr>
+      <tr><td>Direct and non-sensitive</td><td>Full name, personal email</td><td>Moderate: role-based access</td></tr>
+      <tr><td>Indirect and non-sensitive</td><td>ZIP code, job title</td><td>Baseline: minimize, watch combinations</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>A record takes the risk level of its most sensitive field, so a patient file holding a name, ZIP code and diagnosis needs top-tier protection.</p>
+
+<h2>What are common examples of PII?</h2>
+<p><strong>PII examples range from full names and home addresses to Social Security numbers, passport numbers, card numbers, medical record numbers, fingerprints, IP addresses and online login details.</strong></p>
+<p>PII shows up in almost every system a business runs, from the checkout page to the HR portal.</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Category</th><th>PII examples</th></tr></thead>
+    <tbody>
+      <tr><td>Identity</td><td>Full name, date of birth, photo, signature</td></tr>
+      <tr><td>Government IDs</td><td>Social Security number, passport, driver's license, tax ID</td></tr>
+      <tr><td>Financial</td><td>Card number (PAN), bank account and routing number</td></tr>
+      <tr><td>Contact</td><td>Home address, personal email, mobile number</td></tr>
+      <tr><td>Health</td><td>Medical record number, diagnosis, health insurance ID</td></tr>
+      <tr><td>Biometric</td><td>Fingerprints, face scans, voiceprints</td></tr>
+      <tr><td>Digital</td><td>IP address, device ID, cookie IDs, precise geolocation</td></tr>
+      <tr><td>Employment</td><td>Employee ID, salary, background check results</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>These fields pile up quickly. One travel booking can hold a traveler's name, date of birth, passport number, address, phone number and payment card. Onboarding a new employee adds an SSN, payroll bank details and a driver's license scan, and that file then feeds payroll, benefits and IT systems.</p>
+
+<h2>What is not PII? Common misconceptions</h2>
+<p><strong>Non-PII is data that cannot be used on its own to identify, contact or trace a specific person, such as aggregated statistics or anonymized records, while pseudonymous data still counts as PII.</strong></p>
+<p>When it is fully detached from any one person's record, the following usually falls outside PII:</p>
+<ul>
+  <li><strong>Aggregated data:</strong> Totals and trends, such as "500 visitors viewed this page today"</li>
+  <li><strong>Anonymized records:</strong> Data with every identifier removed and no way to restore it</li>
+  <li><strong>Generic device data:</strong> Browser type or operating system not tied to a user profile</li>
+  <li><strong>Business data:</strong> A company name, head office address or main phone line</li>
+</ul>
+<p>The confusion starts with data that only looks anonymous:</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Misconception</th><th>Reality</th></tr></thead>
+    <tbody>
+      <tr><td>"No name means no PII."</td><td>IP addresses, device IDs and location history can be traced to a person.</td></tr>
+      <tr><td>"ZIP code, birth date and gender are safe."</td><td>Together they can single out one individual.</td></tr>
+      <tr><td>"Public data isn't PII."</td><td>Names in public profiles are still protected under GDPR.</td></tr>
+      <tr><td>"Tokenized data isn't PII."</td><td>The vault can re-identify it, so it is pseudonymous personal data.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h2>PII vs. personal data vs. PHI: what's the difference?</h2>
+<p><strong>PII is data that identifies a person under US frameworks, while personal data is GDPR's broader term, whereas PHI is identifiable health data held by HIPAA-covered entities and their partners.</strong></p>
+<p>These terms overlap, and teams often use them interchangeably. The difference matters, because it decides which rules apply to a record.</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Aspect</th><th>PII</th><th>Personal data</th><th>PHI</th></tr></thead>
+    <tbody>
+      <tr><td>Main source</td><td>NIST, US federal and state laws</td><td>GDPR, UK GDPR</td><td>HIPAA</td></tr>
+      <tr><td>Scope</td><td>Data that identifies or links to a person</td><td>Any information about an identifiable person</td><td>Identifiable health data held by covered entities or business associates</td></tr>
+      <tr><td>Online identifiers</td><td>Depends on context</td><td>Yes, including cookie and device IDs</td><td>Yes, when linked to health data</td></tr>
+      <tr><td>Example</td><td>Name and SSN in a bank record</td><td>Cookie ID tied to a user profile</td><td>Diagnosis in a hospital record</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>PHI is not simply "more sensitive PII." A name in a travel CRM is PII but not PHI. The same name on a treatment record at a covered clinic is PHI, while a medical note in an employer's HR file often is not, because HIPAA excludes employment records.</p>
+
+<h2>Where does PII live inside a business?</h2>
+<p><strong>Data sprawl is the process by which PII spreads from one database into CRMs, inboxes, support tickets, shared drives, spreadsheets, analytics tools, logs, backups, vendor systems and AI prompts.</strong></p>
+<p>PII rarely stays where it was first collected. A customer's details might start in a CRM, get copied into a data warehouse for reporting, move into a test environment for developers and appear in a support ticket when the customer calls.</p>
+<p>Everyday shortcuts add even more copies:</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Everyday shortcut</th><th>Where the PII ends up</th></tr></thead>
+    <tbody>
+      <tr><td>"Email us your passport"</td><td>Mailboxes, forwards, phones, archives</td></tr>
+      <tr><td>Send it on WhatsApp</td><td>Personal phones, cloud backups, screenshots</td></tr>
+      <tr><td>Paste it into CRM notes</td><td>Broad staff access, exports, plugins</td></tr>
+      <tr><td>Paste it into an AI assistant</td><td>Third-party processing, logs, retention</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>Every copy is another place an attacker can reach, and another place to find when a customer asks to be deleted under GDPR or CCPA.</p>
+
+<h2>How to identify and classify PII in your organization</h2>
+<p><strong>PII classification is a process of discovering where personal data lives, sorting each field into a sensitivity tier and applying security controls that match the risk level of each tier.</strong></p>
+<p>A business cannot encrypt, restrict or delete data it does not know it has, which makes classification the starting point for every other control.</p>
+
+<h3>Map your data sources</h3>
+<p>List every system that collects or stores personal data: CRMs, billing and HR platforms, but also PDFs, spreadsheets, email threads, ticketing tools and test environments. Talk to each department, because shadow tools often hold more PII than approved systems.</p>
+
+<h3>Inventory PII fields</h3>
+<p>Record which fields each system holds, where they came from, where they are copied and who can read them. Automated discovery tools help find PII buried in free text, such as a card number typed into a support chat.</p>
+
+<h3>Classify by sensitivity</h3>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Tier</th><th>Examples</th><th>Minimum controls</th></tr></thead>
+    <tbody>
+      <tr><td>Restricted</td><td>SSNs, card numbers, medical records</td><td>Tokenization or encryption, MFA</td></tr>
+      <tr><td>Confidential</td><td>Home address, date of birth, IP address</td><td>Encryption, role-based access</td></tr>
+      <tr><td>Internal</td><td>Job titles, work email lists</td><td>Standard access control</td></tr>
+      <tr><td>Public</td><td>Company address, press releases</td><td>Approval before publishing</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>Pay attention to combinations. A birth date, ZIP code and gender may each be Confidential, but stored together they carry Restricted-level risk.</p>
+
+<h3>Assign owners and retention rules</h3>
+<p>Every dataset needs a named owner who approves access and a deletion date tied to its purpose.</p>
+
+<h3>Keep labels and the inventory current</h3>
+<p>Tag columns and files with their tier so the label travels with the data, and revisit the inventory whenever a new system or vendor is added.</p>
+
+<h2>Which industries handle the most sensitive PII?</h2>
+<p><strong>The industries handling the most sensitive PII are healthcare, financial services, insurance, legal, travel and HR, which collect medical records, account numbers, government IDs and passports.</strong></p>
+<p>Attackers target these sectors most. In the Identity Theft Resource Center's <a class="bl-link" href="https://www.idtheftcenter.org/post/2025-annual-data-breach-report-record-number-compromises/">2025 Annual Data Breach Report</a>, financial services recorded the most compromises (739), followed by healthcare (534) and professional services (478).</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Industry</th><th>Sensitive PII they hold</th><th>Key rules</th></tr></thead>
+    <tbody>
+      <tr><td>Healthcare</td><td>Medical records, insurance IDs</td><td>HIPAA</td></tr>
+      <tr><td>Financial services</td><td>Account numbers, SSNs, KYC documents</td><td>GLBA, PCI DSS</td></tr>
+      <tr><td>Insurance</td><td>Claims, medical and driving history</td><td>GLBA, state laws</td></tr>
+      <tr><td>Legal</td><td>Case files, IDs, financial statements</td><td>Client confidentiality</td></tr>
+      <tr><td>Travel and hospitality</td><td>Passports, payment cards</td><td>PCI DSS, GDPR</td></tr>
+      <tr><td>HR and staffing</td><td>SSNs, payroll, background checks</td><td>FCRA, state laws</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>How these industries collect data adds to the risk. Law firms receive IDs before a client is formally engaged, and travel agencies take card and passport details over email or phone to book suppliers.</p>
+
+<h2>Why protecting PII matters: risks, costs, and real breaches</h2>
+<p><strong>Protecting PII is essential because breaches are costly and common. IBM's 2026 report puts the average breach at $4.99 million globally and $11.5 million in the US, before fines and lost trust.</strong></p>
+<p>According to the Identity Theft Resource Center, US organizations reported 3,322 data compromises in 2025, the highest number on record, resulting in nearly 279 million victim notices.</p>
+<p>The cost per incident is rising too. IBM's <a class="bl-link" href="https://www.ibm.com/reports/data-breach">Cost of a Data Breach Report 2026</a> found that the global average reached $4.99 million, up 12% on the previous year, while the US average rose to <a class="bl-link" href="https://securityboulevard.com/2026/08/how-much-does-a-data-breach-cost-ibms-2026-report-puts-the-us-average-at-11-5-million/">$11.5 million</a>. Verizon's <a class="bl-link" href="https://www.verizon.com/about/news/breach-industry-wide-dbir-finds">2026 DBIR</a> found third parties involved in 48% of breaches.</p>
+<p>Criminals want PII because it turns into money in several ways:</p>
+<ul>
+  <li><strong>Identity theft:</strong> Opening credit cards or loans in a victim's name</li>
+  <li><strong>Account takeover:</strong> Using leaked details to reset passwords</li>
+  <li><strong>Targeted phishing:</strong> Writing emails that reference real names and orders</li>
+  <li><strong>Extortion:</strong> Threatening to publish stolen records unless a ransom is paid</li>
+</ul>
+<p>For the business, the fallout includes fines, lawsuits, notification costs, lost customers and higher insurance premiums.</p>
+
+<h2>Who is responsible for protecting PII in an organization?</h2>
+<p><strong>PII protection is a shared responsibility: executives own the risk, security teams run the controls, privacy officers manage compliance, engineers build safeguards and employees handle data safely.</strong></p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Role</th><th>What they own</th></tr></thead>
+    <tbody>
+      <tr><td>Executives and board</td><td>Accountability, budget and risk appetite</td></tr>
+      <tr><td>CISO and security team</td><td>Encryption, access control, monitoring, incident response</td></tr>
+      <tr><td>Privacy officer or DPO</td><td>Policies, impact assessments, data subject requests</td></tr>
+      <tr><td>Engineering and data teams</td><td>Minimization, tokenization and secure design</td></tr>
+      <tr><td>Legal and procurement</td><td>Vendor contracts and breach notices</td></tr>
+      <tr><td>Every employee</td><td>Keeping PII out of email, chat and AI tools</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>Vendors that process PII also carry obligations, but outsourcing does not move the accountability. Under GDPR, the business that decides why data is processed (the controller) stays responsible, even when a vendor (the processor) handles it.</p>
+
+<h2>What laws and regulations govern PII?</h2>
+<p><strong>PII regulation is a mix of regional and sector laws, including GDPR in the EU, CCPA/CPRA and HIPAA in the US, India's DPDP Act, China's PIPL, Brazil's LGPD and the PCI DSS standard for card data.</strong></p>
+<p>No single law answers what is PII the same way, so businesses with customers in several regions usually follow the strictest rule that applies.</p>
+
+<h3>United States</h3>
+<p>Protection comes from sector laws rather than one federal privacy law:</p>
+<ul>
+  <li><strong>HIPAA</strong> for health information held by providers, health plans and their business associates</li>
+  <li><strong>GLBA</strong> for customer financial data</li>
+  <li><strong>COPPA</strong> for data collected online from children under 13</li>
+  <li><strong>CCPA/CPRA</strong> for California residents, with rights to access, delete and opt out</li>
+</ul>
+<p>States such as Virginia, Colorado and Texas have passed similar laws, and all 50 states require breach notification.</p>
+
+<h3>European Union and UK</h3>
+<p>GDPR and UK GDPR protect any data about an identifiable person. Fines can reach €20 million or 4% of global annual turnover, whichever is higher.</p>
+
+<h3>Asia-Pacific</h3>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Country</th><th>Law</th><th>Main focus</th></tr></thead>
+    <tbody>
+      <tr><td>India</td><td>DPDP Act</td><td>Consent, purpose limits</td></tr>
+      <tr><td>China</td><td>PIPL</td><td>Consent, cross-border transfers</td></tr>
+      <tr><td>Japan</td><td>APPI</td><td>Purpose of use, third-party sharing</td></tr>
+      <tr><td>Singapore</td><td>PDPA</td><td>Consent, breach notification</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h3>Other regions</h3>
+<p>Canada's PIPEDA, Brazil's LGPD and South Africa's POPIA follow the same core principles of purpose, security and individual rights.</p>
+
+<h3>Industry standards</h3>
+<p>PCI DSS governs cardholder data, while SOC 2 and ISO/IEC 27001 give security programs a structure auditors recognize.</p>
+
+<h2>How to protect PII: best practices for businesses</h2>
+<p><strong>PII protection is a process of collecting less data, encrypting and tokenizing sensitive fields, limiting access, monitoring use, deleting data on schedule, training staff and checking vendors.</strong></p>
+
+<h3>Data minimization</h3>
+<p>The safest PII is the data a business never collects. A newsletter signup can usually work with a name and email, without a birth date or home address.</p>
+
+<h3>Encryption in transit and at rest</h3>
+<ul>
+  <li>TLS for traffic between apps, APIs and services</li>
+  <li>AES-256 for databases, files and backups</li>
+  <li>A separate key management system, with keys rotated on schedule</li>
+</ul>
+
+<h3>Tokenization</h3>
+<p>Replace SSNs, card numbers and bank details with tokens and keep the originals in a secured vault, so most systems never hold the real value.</p>
+
+<h3>Access control, least privilege and MFA</h3>
+<p>A support agent may only need the last four digits of a card, while billing staff need more. Grant access by role, require MFA for sensitive data and review permissions every quarter.</p>
+
+<h3>Monitoring and data loss prevention</h3>
+<p>Log every access to sensitive records and alert on behavior that looks wrong, such as one account exporting thousands of records. DLP tools can also block PII from leaving through email, cloud storage or AI prompts.</p>
+
+<h3>Audits and privacy impact assessments</h3>
+<p>Test controls regularly. Before launching a new product or vendor, complete a privacy impact assessment (a DPIA under GDPR).</p>
+
+<h3>Secure retention and deletion</h3>
+<p>Give every data type an end date, then delete it from live systems, backups and archives.</p>
+
+<h3>Employee training and limited sharing</h3>
+<p>Most leaks start with an ordinary mistake, such as a passport scan forwarded to the wrong address. Short, regular training on phishing and safe sharing does more than an annual slideshow.</p>
+
+<h3>Vendor management</h3>
+<p>Before any vendor receives PII, ask:</p>
+<ol>
+  <li>Which certifications do they hold, such as SOC 2?</li>
+  <li>How quickly will they report a breach?</li>
+  <li>Can they delete your data on request?</li>
+</ol>
+
+<h2>How to protect PII across its lifecycle</h2>
+<p><strong>The PII lifecycle is the path personal data follows from collection to storage, access, sharing, use and deletion, and each stage needs its own security control to keep the data protected.</strong></p>
+
+<h3>Collect only what you need</h3>
+<p>Collection is where most sprawl begins. Ask only for required fields, record consent where the law requires it and capture sensitive data through secure intake forms instead of email attachments or PDFs.</p>
+
+<h3>Store it securely</h3>
+<p>Tokenize or encrypt sensitive fields so the main database never holds raw SSNs or card numbers. Backups need the same protection, because an unencrypted copy on a shared drive undoes the rest.</p>
+
+<h3>Limit access</h3>
+<p>Picture a customer calling about a billing issue. The agent sees a card ending in 4242, which is enough to help. If a supervisor needs the full number, the reveal is logged with their name and the time.</p>
+
+<h3>Share it safely</h3>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Instead of</th><th>Use</th></tr></thead>
+    <tbody>
+      <tr><td>Email attachments</td><td>Expiring, password-protected links</td></tr>
+      <tr><td>Copying full records into other tools</td><td>Tokens that point to the secure record</td></tr>
+      <tr><td>Informal transfers to vendors</td><td>Encrypted transfers under a data processing agreement</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h3>Keep it out of logs and AI prompts</h3>
+<p>Developers log full requests while debugging, and staff paste customer details into AI tools. Tokenizing values first keeps both useful:</p>
+<div class="bl-code">
+  <div class="bl-code__bar"><span class="bl-code__lang">text</span></div>
+  <pre><code>Before: payment failed for jane.doe@example.com
+After:  payment failed for [EMAIL: 7hQ2x]</code></pre>
+</div>
+
+<h3>Delete it on schedule</h3>
+<ol>
+  <li>Automate deletion when retention periods end.</li>
+  <li>Respond to deletion requests within legal deadlines.</li>
+  <li>Remove data from backups and vendor systems, and keep a record that it happened.</li>
+</ol>
+
+<h2>How tokenization and data privacy vaults protect PII</h2>
+<p><strong>Tokenization is a process that replaces sensitive values with random tokens and keeps the originals in a secure vault, whereas encryption scrambles data but leaves it inside your own systems.</strong></p>
+<p>Encrypted PII still sits in the application database, and anyone who gets both the data and the key can read it. Tokenization moves the real value into a separate data privacy vault instead.</p>
+<ol>
+  <li>A customer enters an SSN in a form.</li>
+  <li>The vault encrypts and stores it, then returns a token such as tok_7Hq2Lx9.</li>
+  <li>Your app, CRM and warehouse store only the token.</li>
+  <li>Authorized services request the real value when needed, and every request is logged.</li>
+</ol>
+<p>If an attacker breaches the app database or logs, they find tokens instead of real values. Deterministic tokens still allow search and matching, and deleting the original from the vault handles erasure requests in one place. Tokenized data remains pseudonymous, because the vault can map tokens back.</p>
+
+<h2>How to protect PII in ChatGPT, Claude, and other LLMs</h2>
+<p><strong>Protecting PII in LLMs is a process of detecting personal data in prompts, replacing it with tokens before it reaches ChatGPT or Claude, and restoring the real values in the model's response.</strong></p>
+<p>Large language models add a new route for PII to leave a business. Support teams send tickets to AI assistants, legal teams summarize contracts and developers connect customer records to LLM APIs. Verizon's 2026 DBIR found that 45% of employees now use AI tools regularly at work.</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Stage</th><th>Prompt text</th></tr></thead>
+    <tbody>
+      <tr><td>Original</td><td>"Refund John Smith, email john@acme.com"</td></tr>
+      <tr><td>Sent to the model</td><td>"Refund [NAME: Ry0Ixd1], email [EMAIL: m4Tz9]"</td></tr>
+      <tr><td>Returned to the agent</td><td>The reply, with the real name and email restored</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>For company AI apps and LLM API calls, <a class="bl-link" href="/pii-tokenization-for-ai/">this step can run automatically before every request</a>. Consumer chat tools need approved enterprise accounts and clear usage rules instead, because API-level controls do not reach a personal account.</p>
+
+<h2>What to do after a PII breach: a response checklist</h2>
+<p><strong>A PII breach response is a process of containing the incident, scoping the exposed data, preserving evidence, notifying regulators and affected individuals on time and fixing the root cause.</strong></p>
+<ol>
+  <li><strong>Contain the incident:</strong> Revoke compromised credentials and isolate affected systems.</li>
+  <li><strong>Scope the exposure:</strong> Identify which fields and people were affected.</li>
+  <li><strong>Preserve evidence:</strong> Keep logs and access records for forensic review.</li>
+  <li><strong>Report to regulators:</strong> GDPR requires notice within 72 hours; US state deadlines vary.</li>
+  <li><strong>Tell the people affected:</strong> Explain what happened and what they should do.</li>
+  <li><strong>Fix the root cause:</strong> Close the gap and update controls and training.</li>
+</ol>
+<p>The checklist works best when it is written in advance, with named owners, legal contacts and draft notices tested in a tabletop exercise. Businesses that tokenize sensitive fields often have far less to report, because stolen tokens reveal nothing on their own.</p>
+
+<h2>How Enigma protects PII: across the vault and in AI</h2>
+<p>Enigma is a trust layer between your data and AI that keeps raw PII out of your systems by tokenizing cards, files and customer records, and by tokenizing PII before prompts reach LLM providers.</p>
+<p>Enigma keeps the real values in a secure vault and gives your systems tokens instead: <a class="bl-link" href="https://www.enigmavault.io/vault/data-vault/">Data Vault</a> encrypts any field while keeping it searchable, Card Vault lets you accept payments without storing card numbers, Customer Vault replaces email with secure intake links for IDs, cards and documents, and <a class="bl-link" href="https://www.enigmavault.io/nopii/">NoPII</a> tokenizes PII in prompts before they reach LLM providers, all on PCI DSS Level 1 and SOC 2 Type II certified infrastructure.</p>

@@ -1,0 +1,37 @@
+{{- /*
+  End-of-article author box (see the finstackk reference): bordered card with
+  a larger avatar, name + role + LinkedIn, the author's bio, and a
+  "View full profile" button linking to the /authors/<key>/ page.
+  Context: the article page. Shared by every article layout.
+*/ -}}
+{{- $key := .Params.author -}}
+{{- $a := index hugo.Data.authors $key -}}
+{{- $profile := .Site.GetPage (printf "/authors/%s" $key) -}}
+{{- $bio := $a.bio -}}
+{{- if not $bio }}{{ with $a.bioParas }}{{ $bio = index . 0 }}{{ end }}{{ end -}}
+<div class="bl-authorbio">
+  <div class="bl-authorbio__av">
+    {{- if $a.photo }}
+    <img class="bl-authorbio__img" src="{{ $a.photo }}" alt="{{ $a.name }}" width="104" height="104" loading="lazy">
+    {{- else }}
+    <span class="bl-avatar bl-authorbio__initials">{{ $a.initials }}</span>
+    {{- end }}
+  </div>
+  <div class="bl-authorbio__body">
+    <div class="bl-authorbio__head">
+      <span class="bl-authorbio__namerow">
+        <span class="bl-authorbio__name">{{ $a.name }}</span>
+        {{- with $a.linkedin }}
+        <a class="bl-authorbio__li" href="{{ . }}" target="_blank" rel="noopener noreferrer" aria-label="{{ $a.name }} on LinkedIn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+        </a>
+        {{- end }}
+      </span>
+      <span class="bl-authorbio__role">{{ $a.role }}</span>
+    </div>
+    {{- with $bio }}<p class="bl-authorbio__bio">{{ . }}</p>{{ end }}
+    {{- with $profile }}
+    <a class="bl-authorbio__btn" href="{{ .RelPermalink }}">View full profile</a>
+    {{- end }}
+  </div>
+</div>

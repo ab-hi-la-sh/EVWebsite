@@ -1,0 +1,659 @@
+---
+title: "Data Privacy Vault: Encrypt Every PII Field and Still Search It"
+titleEmphasis: "Still Search It"
+slug: "data-privacy-vault"
+layout: "pii-style"
+metaTitle: "What Is a Data Privacy Vault? Secure PII, Keep Queries Working"
+description: "Learn what a data privacy vault is, which PII belongs in one, how it encrypts and tokenizes fields while keeping them searchable, and how to choose the right vault."
+subtitle: "A data privacy vault is an isolated, encrypted system that stores sensitive customer data such as Social Security numbers, account numbers and health fields, and gives your applications tokens to use in place of the real values."
+date: 2026-10-01
+category: "Data Vault"
+author: "abhilash-kumar"
+readTime: 17
+heroImage: "/assets/blog/img-08.png"
+heroAlt: "Layered translucent panels representing encrypted PII fields replaced by tokens"
+excerpt: "A data privacy vault stores sensitive PII such as SSNs, account numbers and health fields in encrypted form and gives your applications tokens to use in place of the real values. Here is how it works and how to choose one."
+tags: ["data-privacy", "pii", "tokenization", "encryption"]
+ogImage: "/assets/og/vault-data.jpg"
+ogImageAlt: "Data Privacy Vault: Encrypt Every PII Field and Still Search It | Enigma Vault"
+ogType: article
+styles: ["blog.css", "pages/blog-pii-hero.css", "tr-pages.css"]
+scripts: ["blog-article.js"]
+faqSchema: true
+faqs:
+  - q: "Is a data privacy vault the same as encryption?"
+    a: "No. Encryption is one part of a vault. A data privacy vault also isolates sensitive fields from your application databases, replaces them with tokens, controls who can reveal them and logs every access."
+  - q: "Do I need a data privacy vault if I already use encryption and RBAC?"
+    a: "Often, yes. Database encryption protects storage, and RBAC controls application roles, yet anyone who can query the database still reads plaintext. A vault keeps sensitive fields out of the database entirely and adds per-field access rules."
+  - q: "Is tokenized data still considered PII?"
+    a: "For the organization that holds the vault, usually yes. Tokenized data is pseudonymised under GDPR, so it stays personal data for anyone who can re-identify it. A recipient with no means of re-identification may be treated differently."
+  - q: "Can you search encrypted SSNs without decrypting them?"
+    a: "Yes, with exact-match lookup. The vault processes the search value the same way it processed the stored value and compares the results, so it finds the matching record without decrypting the stored SSNs."
+  - q: "What's the difference between a data privacy vault and a secrets manager?"
+    a: "A secrets manager stores application credentials such as API keys, whereas a data privacy vault stores customer data at scale with tokens, search, masking, sharing and per-record access rules. Many vaults can also hold secrets."
+  - q: "Is a data privacy vault the same as a data vault?"
+    a: "No. Data Vault, or Data Vault 2.0, is a data warehouse modeling method. A data privacy vault is a security system for sensitive fields. A warehouse built on Data Vault modeling can store tokens from a data privacy vault."
+  - q: "How does a vault support the right to be forgotten?"
+    a: "When every system stores tokens, deleting a person's values in the vault leaves those tokens pointing to nothing. The erasure request resolves in one place, with no separate cleanup in databases, exports or backups."
+---
+
+<p>A lending platform asks for a Social Security number on its loan application. Within a week, that number sits in the underwriting service, the CRM, the data warehouse, support tickets and every nightly backup. Each team needed the field once and kept a copy.</p>
+
+<p>That spread is what attackers count on. In 2025, the FBI received <a class="bl-link" href="https://www.ic3.gov/AnnualReport/Reports/2025_IC3Report.pdf">67,456 personal data breach complaints</a> with more than $1.3 billion in reported losses.</p>
+
+<p>A data privacy vault reverses the spread. In this guide, we explain what a vault is, which fields belong in it, how it keeps data searchable and how to choose one.</p>
+
+<h2>What is a data privacy vault?</h2>
+<p><strong>A data privacy vault is a separate, hardened system that stores sensitive PII fields in encrypted form, returns tokens to your applications and enforces policies on who can see the real values.</strong></p>
+<p>Think of it as a control plane for sensitive data. Your applications keep their records and workflows, while the vault takes over the few fields that would cause real damage if leaked.</p>
+<p>Here is what changes in a production database:</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Field</th><th>Without a vault</th><th>With a vault</th></tr></thead>
+    <tbody>
+      <tr><td>Customer name</td><td>Dana Whitfield</td><td>Dana Whitfield</td></tr>
+      <tr><td>SSN</td><td>123-45-6789</td><td>q7Xv2LmN9pR4tW8yZ1aB3c</td></tr>
+      <tr><td>Bank account</td><td>004417829356</td><td>Hk3Rt9WqZ2nLp8Xm4Ys7Ve</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>The real values live in the vault, encrypted. Your database holds tokens that reveal nothing on their own, and your app still finds Dana and pays her refunds.</p>
+
+<h3>What is a PII data privacy vault?</h3>
+<p>A PII data privacy vault focuses on fields that identify a person on their own: SSNs, passport and driver's license numbers, dates of birth, bank details and health identifiers. Most teams leave names and emails in the main database and move these high-risk identifiers first.</p>
+
+<h3>The 5 core principles: isolate, encrypt, tokenize, control, audit</h3>
+<p>Every well-built vault rests on the same five ideas:</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Principle</th><th>What it means</th><th>What it looks like in practice</th></tr></thead>
+    <tbody>
+      <tr><td>Isolate</td><td>Sensitive fields live apart from your application databases</td><td>A CRM breach reaches tokens and nothing more</td></tr>
+      <tr><td>Encrypt</td><td>Each field is encrypted on its own, with keys the vault manages</td><td>Copying the vault's storage still yields ciphertext</td></tr>
+      <tr><td>Tokenize</td><td>Applications receive a token in place of the value</td><td>Services pass tokens between each other freely</td></tr>
+      <tr><td>Control</td><td>Only approved users and services can reveal a value</td><td>Support sees the last four digits while underwriting sees the full number</td></tr>
+      <tr><td>Audit</td><td>Every read, write, reveal and deletion is logged</td><td>You can show who accessed a customer's SSN last quarter in minutes</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h3>Data privacy vault vs data vault modeling: what's the difference?</h3>
+<p>A data privacy vault is a security system that isolates and protects sensitive fields, whereas Data Vault modeling is a data warehouse design method built around hubs, links and satellites.</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Factor</th><th>Data privacy vault</th><th>Data Vault modeling (Data Vault 2.0)</th></tr></thead>
+    <tbody>
+      <tr><td>Main job</td><td>Encrypt, tokenize and control access to PII</td><td>Track history and load data from many sources</td></tr>
+      <tr><td>Who uses it</td><td>Engineering, security and compliance teams</td><td>Data engineers and analytics teams</td></tr>
+      <tr><td>Protects PII?</td><td>Yes, that is its purpose</td><td>No, it has no encryption or tokenization of its own</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>The two can work together: a Data Vault warehouse can store tokens in its satellites.</p>
+
+<h2>What sensitive data should you store in a PII data vault?</h2>
+<p><strong>The sensitive data you should store in a PII data vault is any regulated or high-risk field that identifies a person on its own, such as SSNs, account numbers, health identifiers and secrets.</strong></p>
+<p>A field belongs in the vault if any of these is true:</p>
+<ul>
+  <li>Exposing it would trigger a breach notification on its own</li>
+  <li>Someone could open an account, file a claim or pass identity checks with it</li>
+  <li>It unlocks other systems, as an API key or password does</li>
+</ul>
+
+<h3>Personal identifiers: SSNs, government IDs and dates of birth</h3>
+<ul>
+  <li>Social Security numbers and national ID numbers</li>
+  <li>Driver's license and passport numbers</li>
+  <li>Dates of birth, especially alongside a name and ZIP code</li>
+</ul>
+<p>An HR platform that stores SSNs for payroll often finds them again in onboarding PDFs and benefits feeds. Vault each identifier once, and every downstream system receives a token.</p>
+
+<h3>Financial identifiers: bank, account and tax numbers</h3>
+<p>Lenders, payroll providers and accounting firms all hold these, and financial institutions protect them under safeguard rules such as GLBA.</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Field</th><th>Where it shows up</th><th>When the real value is needed</th></tr></thead>
+    <tbody>
+      <tr><td>Bank account and routing numbers</td><td>Payroll, refunds, loan disbursements</td><td>At the moment of payment</td></tr>
+      <tr><td>Tax IDs</td><td>Onboarding, 1099 and W-2 workflows</td><td>During tax filing and verification</td></tr>
+      <tr><td>Loan and brokerage account numbers</td><td>Servicing, statements, support</td><td>When the account is opened or verified</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>Outside those moments, a token does the job.</p>
+
+<h3>Regulated health fields: member IDs, diagnoses and lab results</h3>
+<p>Picture a clinic network. Billing needs diagnosis codes, while scheduling and marketing tools do not.</p>
+<p><strong>Keep in the vault:</strong> member IDs, diagnoses, prescriptions and lab results</p>
+<p><strong>Leave in everyday tools:</strong> appointment times, provider names and the patient's token</p>
+<p>PHI stays in one controlled system.</p>
+
+<h3>Secrets and credentials: API keys, passwords and identity answers</h3>
+<p>One leaked secret can open every system it connects to. Common examples:</p>
+<ul>
+  <li>Integration keys for payment processors and background check vendors</li>
+  <li>Messaging and email provider tokens</li>
+  <li>Customers' security question answers</li>
+</ul>
+<p>They deserve the same encryption, access policy and audit trail as an SSN.</p>
+
+<h3>What belongs elsewhere: card numbers and files</h3>
+<ul>
+  <li><strong>Card numbers:</strong> PCI DSS sets rules on capture, CVV handling and charging, so a card vault with hosted forms and gateway forwarding fits better.</li>
+  <li><strong>Files:</strong> scanned IDs, signed contracts and medical records need encrypted storage with expiring download links.</li>
+</ul>
+
+<h2>Why do organizations need a data privacy vault? Key PII pain points</h2>
+<p><strong>Organizations need a data privacy vault because sensitive PII spreads into every system, standard encryption breaks search and erasure, and every plaintext copy widens breach exposure and audit scope.</strong></p>
+<p>Most teams have had to pick two of three: strong encryption, working queries and a short list of systems holding real data. A vault removes that trade-off.</p>
+
+<h3>Pain 1: SSNs and account numbers copied into every system</h3>
+<p>One customer signup can leave an SSN in:</p>
+<ul>
+  <li>The application database</li>
+  <li>The CRM, after the nightly sync</li>
+  <li>The data warehouse</li>
+  <li>Support tickets and chat transcripts</li>
+</ul>
+<p>Each copy has its own chance of leaking, and nobody owns the full list.</p>
+<h4>Fix: store each field once, pass tokens everywhere else</h4>
+<p>Vault the SSN at capture and store the token. Only services that need the full value can request it.</p>
+
+<h3>Pain 2: database encryption protects disks, not individual fields</h3>
+<p>Database encryption guards against a stolen disk. Anyone who can run a query still reads the SSN column in plaintext.</p>
+<h4>Fix: encrypt every field with per-customer keys</h4>
+<p>A vault encrypts each value on its own, with keys kept separate for each organization.</p>
+<ul>
+  <li>Reading a field requires a call to the vault</li>
+  <li>The vault checks who is asking and why</li>
+  <li>An attacker with database access gets tokens</li>
+</ul>
+
+<h3>Pain 3: encrypting a field breaks search, matching and lookups</h3>
+<p>Once the SSN column is ciphertext:</p>
+<ol>
+  <li>Support can no longer find a customer by SSN.</li>
+  <li>Fraud teams cannot spot the same SSN on two applications.</li>
+  <li>Joins between tables stop working.</li>
+</ol>
+<h4>Fix: exact-match lookup on encrypted values</h4>
+<p>The vault searches without decrypting stored records. An agent types the SSN a caller reads out, and the right record opens.</p>
+
+<h3>Pain 4: erasure requests mean hunting PII across every backup</h3>
+<p>GDPR, CCPA and India's DPDP Act give people a right to deletion. With copies everywhere, each request becomes a search:</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Where the copy lives</th><th>Why it is hard to delete</th></tr></thead>
+    <tbody>
+      <tr><td>Production databases</td><td>Several services, several owners</td></tr>
+      <tr><td>Exports and spreadsheets</td><td>Nobody tracks where they went</td></tr>
+      <tr><td>Logs and tickets</td><td>Free text, hard to search</td></tr>
+      <tr><td>Backups</td><td>Often cannot be edited at all</td></tr>
+    </tbody>
+  </table>
+</div>
+<h4>Fix: tokenize at capture and delete once at the vault</h4>
+<p>Delete the value in the vault, and every token pointing to it goes dark. Old backups only ever held tokens.</p>
+
+<h3>Pain 5: secrets and credentials sit in plaintext beside app data</h3>
+<p>Vendor API keys and customers' security answers often share a database with everything else. One SQL injection exposes both.</p>
+<h4>Fix: vault secrets with the same encryption and audit trail</h4>
+<p>Services fetch secrets from the vault at runtime, every access is logged and rotation becomes one update.</p>
+
+<h3>Pain 6: sensitive records get shared over email and spreadsheets</h3>
+<ul>
+  <li>An insurer emails a claimant's details to an outside adjuster.</li>
+  <li>A lender shares an applicant's bank details with a verification partner in a spreadsheet.</li>
+</ul>
+<p>Neither copy ever expires.</p>
+<h4>Fix: share records through time-limited ephemeral keys</h4>
+<p>A one-time key unlocks one record for a short window. The key expires, and the access is logged.</p>
+
+<h3>Pain 7: every plaintext copy widens breach and audit scope</h3>
+<p>Every system that stores real PII joins your breach exposure, your audit scope and your notification obligations.</p>
+<h4>Fix: fewer systems hold real data, fewer systems in scope</h4>
+<p>With a vault, that list shrinks to one, and a breach of a token-only system exposes nothing an attacker can use.</p>
+
+<h2>How a data privacy vault works to protect sensitive customer PII</h2>
+<p><strong>A data privacy vault works by taking a sensitive field through an API, encrypting it, returning a token, allowing search and authorized reveals, and expiring, deleting and auditing every record.</strong></p>
+<p>Follow Maria through a regional insurer's onboarding. She enters her SSN and the bank account for her premiums.</p>
+
+<h3>Step 1: Send the sensitive field to the vault through an API</h3>
+<p>The insurer's backend authenticates with OAuth2 machine-to-machine credentials and posts both fields before saving anything. A REST API means no SDK is required.</p>
+
+<h3>Step 2: Encrypt the field with per-customer AES-256 keys</h3>
+<p>Each field is encrypted with AES-256 and a unique initialization vector, so identical values never produce the same ciphertext. Keys are kept per organization and rotated on a schedule.</p>
+
+<h3>Step 3: Return a token to your application instead of plaintext</h3>
+<p>A simplified exchange:</p>
+<div class="bl-code">
+  <div class="bl-code__bar"><span class="bl-code__lang">http</span></div>
+  <pre><code>POST /vault/records
+{ "ssn": "123-45-6789", "bank_account": "004417829356", "customer_id": "POL-20931" }
+
+200 OK
+{ "ssn": "q7Xv2LmN9pR4tW8yZ1aB3c", "bank_account": "Hk3Rt9WqZ2nLp8Xm4Ys7Ve" }</code></pre>
+</div>
+<p>Each token is random, carries around 128 bits of entropy and has no link to the value.</p>
+
+<h3>Step 4: Search encrypted records with exact-match lookup</h3>
+<p>When Maria calls about a claim, the agent types her SSN, the vault runs an exact-match lookup and her policy opens. The SSN never appears on screen.</p>
+
+<h3>Step 5: Detokenize only for authorized users and services</h3>
+<p>When a premium is due, the payments service asks for the account number. The vault:</p>
+<ul>
+  <li>Checks the service's credentials and access policy</li>
+  <li>Returns the value for that one request</li>
+  <li>Logs who asked, when and from where</li>
+</ul>
+<p>The support tool has no policy for full account numbers, so it gets a masked value ending in 9356.</p>
+
+<h3>Step 6: Share records temporarily with ephemeral keys</h3>
+<p>An outside adjuster gets a one-time key to Maria's claim that expires in 24 hours.</p>
+
+<h3>Step 7: Expire, delete and audit every record</h3>
+<p>Records can expire automatically, from seconds to years. If Maria asks to be erased, one deletion in the vault leaves every token referencing nothing.</p>
+<p>After all seven steps, here is where Maria's data sits:</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Data</th><th>Insurer's systems</th><th>Vault</th><th>Adjuster</th></tr></thead>
+    <tbody>
+      <tr><td>SSN</td><td>Token only</td><td>Encrypted value</td><td>Never received</td></tr>
+      <tr><td>Bank account</td><td>Token, masked last four in support</td><td>Encrypted value</td><td>Never received</td></tr>
+      <tr><td>Claim details</td><td>Full record</td><td>Shared through a one-time key</td><td>Viewed once, then access ends</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h2>How a PII tokenization vault keeps encrypted data searchable</h2>
+<p><strong>A PII tokenization vault keeps encrypted data searchable by using deterministic tokens or keyed lookups, so an exact value can be matched without decrypting stored records or exposing plaintext.</strong></p>
+
+<h3>Random vs deterministic tokens: when to use each</h3>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Factor</th><th>Random token</th><th>Deterministic token</th></tr></thead>
+    <tbody>
+      <tr><td>Same value entered twice</td><td>Two different tokens</td><td>The same token both times</td></tr>
+      <tr><td>Search and joins</td><td>Lookups go through the vault</td><td>Tokens can be matched and joined directly</td></tr>
+      <tr><td>What an observer learns</td><td>Nothing, not even repeats</td><td>That two records share a value</td></tr>
+      <tr><td>Best for</td><td>Fields you display or reveal, with no need to match</td><td>SSNs and account numbers used for deduplication, fraud checks and joins</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>A lender checking one SSN across two loan applications benefits from deterministic tokens, while a field only shown back to its owner is safer as a random token.</p>
+
+<h3>How exact-match lookup works without decrypting data</h3>
+<p>The vault processes your search value the same way it processed the stored one, commonly with a keyed hash called a blind index, then compares the results. No stored ciphertext is decrypted.</p>
+<p>The trade-off is scope: it answers exact questions only. Partial or fuzzy search needs a separate masked field.</p>
+
+<h3>Why tokenized PII is useless to attackers</h3>
+<p>A random token has no formula to reverse and no key in your app to steal. A stolen database holds strings only the vault can resolve, for valid credentials only.</p>
+<p>That makes the vault itself the target, so its key management and access controls carry the weight.</p>
+
+<h3>Is tokenized data still personal data under GDPR?</h3>
+<p>Usually, yes, for the business holding the vault. GDPR treats tokenization as pseudonymisation, and Recital 26 keeps it in scope when you can re-identify the data.</p>
+<p>For partners, the picture shifts. In EDPS v SRB (September 2025), the EU Court of Justice found pseudonymised data may not be personal data for a recipient with no reasonable way to re-identify it.</p>
+
+<h2>What are the core features of a data privacy vault?</h2>
+<p><strong>The core features of a data privacy vault are isolation, field-level encryption with key rotation, tokenization and masking, zero-trust access control, granular audit logs and batch operations.</strong></p>
+
+<h3>Isolation from application databases</h3>
+<p>The vault runs as its own service:</p>
+<ul>
+  <li>Separate storage and network boundaries</li>
+  <li>Credentials that differ from your app's database users</li>
+  <li>Access only through an authenticated API, with no direct connection to its storage</li>
+</ul>
+<p>For SaaS products, each customer's records and keys also stay separate.</p>
+
+<h3>Field-level encryption and key rotation</h3>
+<p>What to expect from a strong AES-256 design:</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Control</th><th>Why it matters</th></tr></thead>
+    <tbody>
+      <tr><td>A unique initialization vector per field</td><td>The same SSN never produces the same ciphertext twice</td></tr>
+      <tr><td>Keys scoped to each organization</td><td>One compromised key exposes a limited slice of data</td></tr>
+      <tr><td>Scheduled rotation</td><td>Old keys stop being useful over time</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>A good design rotates keys without breaking existing tokens or lookups.</p>
+
+<h3>Tokenization and data masking</h3>
+<p>Masking decides what each person sees. One SSN, three views:</p>
+<ul>
+  <li><strong>Call center agent:</strong> the last four digits</li>
+  <li><strong>Compliance analyst:</strong> the full number, logged</li>
+  <li><strong>Reporting dashboard:</strong> the token only</li>
+</ul>
+<p>Format-preserving tokens keep the original shape, such as nine digits, so older systems keep working.</p>
+
+<h3>Zero-trust access control (RBAC and ABAC)</h3>
+<p>Zero trust means every request is checked on its own merits, even from services inside your network.</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Model</th><th>Decides access by</th><th>Example rule</th></tr></thead>
+    <tbody>
+      <tr><td>RBAC</td><td>Job role</td><td>Underwriters may reveal SSNs</td></tr>
+      <tr><td>ABAC</td><td>Role plus context such as purpose, time or region</td><td>Underwriters may reveal SSNs only for applications in review</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h3>Granular audit logging</h3>
+<p>When someone asks who saw a person's SSN, the log answers. Each entry should capture:</p>
+<ul>
+  <li>The calling client or user</li>
+  <li>Its IP address</li>
+  <li>The record or resource touched</li>
+  <li>The result of the request</li>
+</ul>
+<p>Alert on reveal spikes, or on reveals from services that never needed them before.</p>
+
+<h3>Batch operations and custom identifiers</h3>
+<p>Batches make migrating millions of existing SSNs practical. Custom identifiers let you look up, audit or erase records by your own customer ID.</p>
+
+<h2>What are the business benefits of a PII data vault?</h2>
+<p><strong>The business benefits of a PII data vault are lower breach exposure, a narrower audit scope, searchable encrypted data, faster erasure, controlled sharing, managed keys and safer analytics on tokens.</strong></p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Benefit</th><th>What changes</th><th>Team that feels it first</th></tr></thead>
+    <tbody>
+      <tr><td>Reduced breach exposure</td><td>CRM, warehouse and support tools hold tokens</td><td>Security</td></tr>
+      <tr><td>Narrower audit scope</td><td>Fewer systems store or process sensitive data</td><td>Compliance</td></tr>
+      <tr><td>Searchable encrypted data</td><td>Lookups keep working on encrypted fields</td><td>Support and operations</td></tr>
+      <tr><td>Faster erasure requests</td><td>One deletion resolves the request everywhere</td><td>Privacy</td></tr>
+      <tr><td>Controlled data sharing</td><td>Partners get expiring access to single records</td><td>Operations and legal</td></tr>
+      <tr><td>Managed encryption keys</td><td>Generation, storage and rotation handled by the vault</td><td>Engineering</td></tr>
+      <tr><td>Safer analytics on tokens</td><td>Joins and counts run on deterministic tokens</td><td>Data and analytics</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><strong>Reduced breach exposure:</strong> After an incident, the question shifts from "how many SSNs were exposed?" to "were any vault credentials involved?"</p>
+<p><strong>Narrower audit scope:</strong> When most of your stack holds tokens, the deepest review narrows to the vault and the few services allowed to reveal values.</p>
+<p><strong>Searchable encrypted data:</strong> You get field-level encryption without giving up lookups, fraud matching and joins.</p>
+<p><strong>Faster erasure and controlled sharing:</strong> Privacy teams stop chasing copies through backups, and operations teams stop emailing spreadsheets to partners.</p>
+<p>To show the benefits to leadership, track a few numbers before and after rollout:</p>
+<ul>
+  <li>Systems that store a plaintext SSN or account number</li>
+  <li>Days taken to close an erasure request</li>
+  <li>People and services with permission to reveal full values</li>
+</ul>
+<p>Each figure should fall.</p>
+
+<h2>Data privacy vault vs encryption, tokenization, DLP and KMS</h2>
+<p><strong>A data privacy vault isolates, encrypts and controls access to sensitive fields in one service, whereas encryption, tokenization, DLP and KMS each solve one piece of that problem on their own.</strong></p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Approach</th><th>What it protects</th><th>Where it falls short</th><th>How it works with a vault</th></tr></thead>
+    <tbody>
+      <tr><td>Database and disk encryption</td><td>Stolen disks and backups</td><td>Anyone with query access reads plaintext</td><td>Keep it on as a baseline under the vault</td></tr>
+      <tr><td>Standalone tokenization</td><td>Values in downstream systems</td><td>Often lacks search, access policies and erasure</td><td>A vault includes tokenization plus those controls</td></tr>
+      <tr><td>DLP tools</td><td>Data leaving through email, uploads and endpoints</td><td>Finds and blocks leaks without storing or protecting the data</td><td>DLP catches stray copies, and the vault removes the need for them</td></tr>
+      <tr><td>Secrets managers and KMS</td><td>Keys and application secrets</td><td>Built for keys and credentials, with no tokens, search or per-record rules for customer data</td><td>A vault relies on a KMS for its own keys</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h3>Data privacy vault vs database and disk encryption</h3>
+<p>Disk encryption protects storage media, whereas a vault protects each field from people who can query the database.</p>
+<ul>
+  <li><strong>Disk encryption stops:</strong> a stolen drive, a lost backup tape, a copied storage volume</li>
+  <li><strong>Disk encryption misses:</strong> a compromised app server, a rogue query, an over-privileged analyst</li>
+  <li><strong>A vault adds:</strong> per-field encryption and a policy check on every read</li>
+</ul>
+<p>Keep both.</p>
+
+<h3>Data privacy vault vs standalone tokenization</h3>
+<p>A vault covers the rest of the data's life:</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Capability</th><th>Standalone tokenization</th><th>Data privacy vault</th><th>Why it matters</th></tr></thead>
+    <tbody>
+      <tr><td>Search on protected values</td><td>Rarely</td><td>Exact-match lookup</td><td>Support and fraud teams keep their queries</td></tr>
+      <tr><td>Per-record access policies</td><td>Limited</td><td>Role and attribute rules</td><td>Only the right people see full values</td></tr>
+      <tr><td>Sharing, expiry and erasure</td><td>Usually missing</td><td>Built in</td><td>Partners, retention and deletion handled in one place</td></tr>
+      <tr><td>Audit of every reveal</td><td>Varies</td><td>Every request logged</td><td>You can prove who saw what</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h3>Data privacy vault vs DLP tools</h3>
+<p>DLP alerts when an SSN leaves in an email. A vault works earlier, so fewer SSNs exist to leak. Together:</p>
+<ol>
+  <li>The vault keeps SSNs and account numbers out of your apps, warehouse and tickets.</li>
+  <li>DLP catches the stray copy someone still pastes into an email or uploads to a shared drive.</li>
+</ol>
+
+<h3>Data privacy vault vs secrets manager and KMS</h3>
+<p><strong>Key management service:</strong> creates, stores and rotates encryption keys</p>
+<p><strong>Secrets manager:</strong> stores credentials your applications need, such as API keys and database passwords</p>
+<p><strong>Data privacy vault:</strong> stores millions of customer records with tokens, search and per-record access rules</p>
+<p>Most vaults use a KMS underneath, so you rarely choose one over the other.</p>
+
+<h3>Vaulted vs vaultless tokenization</h3>
+<p>Vaulted tokenization stores the original value and maps it to a random token, whereas vaultless tokenization generates the token with an algorithm such as format-preserving encryption and stores nothing.</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Factor</th><th>Vaulted tokenization</th><th>Vaultless tokenization</th><th>What it means for you</th></tr></thead>
+    <tbody>
+      <tr><td>How tokens are made</td><td>Random, mapped to the stored value</td><td>Calculated from the value with a key</td><td>Random tokens have no formula to reverse</td></tr>
+      <tr><td>If the key leaks</td><td>Tokens stay meaningless</td><td>Every token can be reversed</td><td>The blast radius differs sharply</td></tr>
+      <tr><td>Deleting one customer</td><td>Remove their record in the vault</td><td>No record exists to remove</td><td>Erasure requests are simpler with a vault</td></tr>
+      <tr><td>Per-record access and expiry</td><td>Supported</td><td>Hard to enforce</td><td>Fine-grained control needs stored records</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>For most PII programs, simpler erasure outweighs the extra lookup.</p>
+
+<h2>Where does a data privacy vault fit in your application stack?</h2>
+<p><strong>A data privacy vault fits between your applications and production database, inside intake and contact-center workflows, ahead of data pipelines and wherever data reaches third parties.</strong></p>
+<p>Most teams roll the vault out from the point where data is created, outward to everywhere it travels.</p>
+
+<h3>Between your application and production database</h3>
+<ul>
+  <li><strong>Writes:</strong> your backend sends sensitive fields to the vault, then stores the returned tokens.</li>
+  <li><strong>Reads that need the real value:</strong> call the vault.</li>
+  <li><strong>Everything else:</strong> reads tokens straight from the database.</li>
+</ul>
+<p>For an existing system, teams usually migrate one column at a time:</p>
+<ol>
+  <li>A batch job sends existing values to the vault and writes the tokens to a new column.</li>
+  <li>New writes go to the vault first.</li>
+  <li>Reads switch from the old column to the token.</li>
+  <li>The plaintext column is dropped once nothing reads it.</li>
+</ol>
+
+<h3>In customer intake, onboarding and contact-center workflows</h3>
+<p>Tokenizing at intake keeps data out of everything downstream.</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Channel</th><th>What happens</th></tr></thead>
+    <tbody>
+      <tr><td>Online onboarding form</td><td>The backend vaults the SSN before saving the application</td></tr>
+      <tr><td>Contact center verification</td><td>The agent's lookup queries the vault, so the full number never lands in call notes</td></tr>
+      <tr><td>Partner or batch imports</td><td>Incoming records are tokenized before they reach your database</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h3>In data pipelines, warehouses and reporting</h3>
+<p>When source tables hold tokens, the warehouse inherits tokens. Analysts then:</p>
+<ul>
+  <li>Join and count with deterministic tokens</li>
+  <li>Build dashboards without ever touching a raw SSN</li>
+  <li>Request a logged reveal for the rare report that needs real values</li>
+</ul>
+
+<h3>With third-party services</h3>
+<p>For identity checks, screening and payments, the safest pattern:</p>
+<ol>
+  <li>Your service holds only the token until the outbound call.</li>
+  <li>It retrieves the real value from the vault at the last possible moment.</li>
+  <li>The value goes straight to the provider and never lands in queues or logs.</li>
+</ol>
+<p>Partners who read records directly get ephemeral keys.</p>
+
+<h3>In AI and LLM workflows</h3>
+<p>AI features pull PII into prompts and logs. The same principle applies:</p>
+<ul>
+  <li>Replace sensitive values with tokens before the text reaches a model</li>
+  <li>Keep the mapping in the vault</li>
+  <li>Restore real values only in the response your authorized user sees</li>
+</ul>
+
+<h2>How does a data privacy vault support GDPR, CCPA and HIPAA?</h2>
+<p><strong>A data privacy vault supports GDPR, CCPA and HIPAA by pseudonymizing personal data, encrypting regulated fields, logging every access and letting you erase a person's data from one place.</strong></p>
+
+<h3>GDPR, CCPA and DPDP: pseudonymization and the right to erasure</h3>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Law</th><th>What the vault helps with</th><th>Erasure timeline</th></tr></thead>
+    <tbody>
+      <tr><td>GDPR (EU)</td><td>Pseudonymisation under Article 4(5), data protection by design under Article 25, security under Article 32 and erasure under Article 17</td><td>One month, extendable by two more for complex requests</td></tr>
+      <tr><td>CCPA and CPRA (California)</td><td>Deletion requests and reasonable security for personal information</td><td>45 days, extendable by another 45</td></tr>
+      <tr><td>DPDP Act (India)</td><td>Erasure when the purpose ends or consent is withdrawn, plus reasonable security safeguards</td><td>Rules notified in November 2025, with most duties phasing in over 18 months</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>The erasure benefit is the same under every law: delete once at the vault and every token goes dark.</p>
+<p>If you serve several regions, ask whether the vault can keep data in specific locations.</p>
+
+<h3>HIPAA: encrypting PHI fields and the role of a BAA</h3>
+<p>Encryption of ePHI is an addressable HIPAA safeguard, and properly encrypted PHI counts as secured under HHS guidance. Field-level encryption and audit logs support both.</p>
+<p>Any vendor storing PHI for you needs a signed Business Associate Agreement.</p>
+
+<h3>PCI DSS: keeping payment data out of your systems</h3>
+<p>Token-only systems can often fall outside the cardholder data environment. A card vault with hosted forms keeps card numbers out of your stack, and your acquirer or QSA confirms final scope.</p>
+
+<h2>Who needs a data privacy vault? Signs, teams and industries</h2>
+<p><strong>Organizations that need a data privacy vault are those storing SSNs, account numbers or health fields in production, especially in healthcare, financial services, insurance and legal firms.</strong></p>
+
+<h3>5 signs your application needs a PII data vault</h3>
+<ul>
+  <li>Your production database has a column of SSNs, tax IDs or bank account numbers in plaintext</li>
+  <li>Support or operations teams search customers by a sensitive identifier</li>
+  <li>Deletion requests take days because nobody is sure where every copy lives</li>
+  <li>Partners receive customer data by email, SFTP drop or spreadsheet</li>
+  <li>Your last audit asked which systems can read sensitive PII, and the answer was a long list</li>
+</ul>
+<p>If two or more sound familiar, a vault is worth evaluating now.</p>
+
+<h3>Healthcare: encrypt diagnoses, prescriptions and lab results</h3>
+<p><strong>Fields to vault:</strong> member IDs, diagnoses, prescriptions, lab results</p>
+<p><strong>Where PHI travels today:</strong> scheduling, billing, patient messaging, analytics</p>
+<p>A breach of the scheduling tool then reveals appointments and nothing clinical.</p>
+
+<h3>Financial services: protect SSNs and account numbers you search</h3>
+<p>Lenders, fintechs and payroll providers search sensitive identifiers all day. A vault keeps those searches working:</p>
+<ul>
+  <li><strong>KYC checks:</strong> match an applicant's SSN with exact-match lookup</li>
+  <li><strong>Fraud checks:</strong> spot one SSN across several applications with deterministic tokens</li>
+  <li><strong>Support:</strong> find a customer by account number without exposing it on screen</li>
+</ul>
+
+<h3>Insurance: tokenize member, policy and claimant identifiers</h3>
+<p>Insurers share claim records with adjusters, repair networks and medical reviewers.</p>
+<p>Identifiers become tokens inside, and each outside party gets a one-time key in place of an email attachment, with every view logged.</p>
+
+<h3>Legal: secure client identifiers and sensitive case data</h3>
+<p>Law firms hold client SSNs, financial records and case details across case management, billing and document tools.</p>
+<ul>
+  <li>Vaulted identifiers stay protected in every tool</li>
+  <li>Attorneys keep finding matters by client</li>
+  <li>When retention rules allow deletion, one erasure at the vault clears every tool's copy</li>
+</ul>
+
+<h3>Which teams own it: engineering, compliance and the CISO</h3>
+<p>Vault projects move fastest when the owners are clear before any code is written.</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Decision</th><th>Usually owned by</th></tr></thead>
+    <tbody>
+      <tr><td>Which fields move into the vault</td><td>Engineering with privacy</td></tr>
+      <tr><td>Who may reveal full values</td><td>Compliance and the CISO</td></tr>
+      <tr><td>Retention and expiry periods</td><td>Privacy and legal</td></tr>
+      <tr><td>Vendor selection and contract</td><td>CISO with procurement</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h2>What are the limits of a data privacy vault?</h2>
+<p><strong>The limits of a data privacy vault are that it protects only the fields you send to it, does not make you compliant on its own and still depends on your classification and access policies.</strong></p>
+
+<h3>What a vault doesn't make you compliant with</h3>
+<p>No vault makes you GDPR, HIPAA or PCI DSS compliant by itself. Consent, notices, training and incident response remain your program.</p>
+
+<h3>Why classification and access policies still matter</h3>
+<p>If staff paste SSNs into a free-text notes field, the vault never sees them. A policy giving every engineer full reveal access protects very little.</p>
+<p>Inventory sensitive fields, vault the riskiest first and review reveal permissions every quarter.</p>
+
+<h3>What stays your responsibility</h3>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Area</th><th>What you still own</th></tr></thead>
+    <tbody>
+      <tr><td>Credentials</td><td>Securing the keys your services use to call the vault</td></tr>
+      <tr><td>Monitoring</td><td>Reviewing audit logs and acting on unusual reveal activity</td></tr>
+      <tr><td>Hygiene</td><td>Keeping sensitive values out of logs, error messages and free-text fields</td></tr>
+      <tr><td>Contracts</td><td>Signing the right agreements, such as a BAA for health data</td></tr>
+      <tr><td>Resilience</td><td>Timeouts, retries and fallbacks if the vault is briefly unreachable</td></tr>
+      <tr><td>Performance</td><td>Batching reads and showing masked values by default on busy pages</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>With a hosted vault, the provider manages the keys, so ask how they are stored and who can access them.</p>
+
+<h2>Should you build or buy a PII data privacy vault?</h2>
+<p><strong>Building a PII data privacy vault is a multi-quarter engineering project covering encryption, keys, search and audit, whereas buying one gets you those controls with certifications in place.</strong></p>
+<p>The idea looks simple. A production-grade vault needs every piece below, maintained for as long as you hold customer data.</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Component</th><th>What building it involves</th></tr></thead>
+    <tbody>
+      <tr><td>Encryption and key management</td><td>Per-field encryption, unique IVs, per-tenant keys, scheduled rotation, secure key storage</td></tr>
+      <tr><td>Encrypted search</td><td>Keyed lookup indexes that stay in sync with every write and deletion</td></tr>
+      <tr><td>Access control</td><td>Role and attribute policies, service identities, masking rules</td></tr>
+      <tr><td>Audit and monitoring</td><td>Tamper-resistant logs, tracing, SIEM integration</td></tr>
+      <tr><td>Assurance</td><td>Penetration tests plus SOC 2 Type II and PCI DSS assessments, renewed every year</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><strong>When building makes sense:</strong> You have a dedicated security engineering team, requirements no vendor meets or a rule that sensitive data can never leave your own infrastructure.</p>
+<p><strong>When buying makes sense:</strong> You want the controls working this quarter, you need certifications to show customers and auditors, and you would rather your engineers spend their time on your product.</p>
+<p>Price the build in full, including on-call coverage and yearly assessments. Hidden costs follow too: every enterprise security review asks for evidence your team must produce.</p>
+<p>Before deciding, settle a few questions as a team:</p>
+<ul>
+  <li>How many fields and records will the vault hold in year one, and in year three?</li>
+  <li>Which certifications do your customers and auditors expect to see?</li>
+  <li>How soon do you need the first field protected?</li>
+</ul>
+<p>A middle path: buy the vault and wrap it in a thin internal service for your own masking rules.</p>
+
+<h2>How to choose a data privacy vault: 10-point evaluation checklist</h2>
+<p><strong>Choosing a data privacy vault is a process of checking its compliance proof, encrypted search, key management, token options, lifecycle controls, product coverage and pricing for your use.</strong></p>
+<p>These are the questions we would ask before signing:</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>#</th><th>Check</th><th>Question to ask the vendor</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Security certifications</td><td>Can we see your current PCI DSS Level 1 Attestation of Compliance and SOC 2 Type II report?</td></tr>
+      <tr><td>2</td><td>Health data</td><td>Will you sign a BAA for PHI?</td></tr>
+      <tr><td>3</td><td>Encrypted search</td><td>Do you support exact-match lookup on encrypted values without decryption?</td></tr>
+      <tr><td>4</td><td>Key management</td><td>Are keys unique to our organization, where are they stored and how often do they rotate?</td></tr>
+      <tr><td>5</td><td>Token options</td><td>Do you offer random and deterministic tokens, and how much entropy do tokens carry?</td></tr>
+      <tr><td>6</td><td>Batch limits and custom identifiers</td><td>How many records fit in one request, and can we attach our own record IDs?</td></tr>
+      <tr><td>7</td><td>Erasure and expiry</td><td>Can we set a time to live per record and delete by customer ID in one call?</td></tr>
+      <tr><td>8</td><td>Temporary sharing</td><td>Can we share a record through a one-time, expiring key?</td></tr>
+      <tr><td>9</td><td>Product coverage</td><td>Can the same platform protect card numbers and files as well as data fields?</td></tr>
+      <tr><td>10</td><td>Pricing</td><td>Is there a free tier, and what does a typical month cost at our request volume?</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><strong>Compliance proof:</strong> Ask for the documents themselves, which a reputable vendor shares under NDA.</p>
+<p><strong>Search and keys:</strong> Test lookup and key rotation in a sandbox with your own data.</p>
+<p><strong>Coverage and pricing:</strong> One API for cards, data and files saves separate integrations. Model costs on request volume.</p>
+
+<h2>Enigma Data Vault: protect customer PII without losing a query</h2>
+<p><a class="bl-link" href="https://www.enigmavault.io/vault/data-vault/">Enigma Data Vault</a> encrypts every field with AES-256 and per-customer keys, returns tokens to your application and still lets you find records through exact-match lookup on encrypted values. You get deterministic tokens for joins and deduplication, batches of up to 5,000 records per request, custom identifiers, one-time ephemeral keys for sharing, expiry from 60 seconds to 7 years and a full audit trail, all on PCI DSS Level 1 and SOC 2 Type II certified infrastructure. Your first 1,500 requests each month are free. <a class="bl-link" href="https://www.enigmavault.io/vault/data-vault/">Start free with Enigma Data Vault</a>: your queries keep working, and your breach story changes completely.</p>

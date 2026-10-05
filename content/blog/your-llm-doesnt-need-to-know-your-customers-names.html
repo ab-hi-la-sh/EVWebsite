@@ -1,0 +1,92 @@
+---
+title: "Your LLM Doesn't Need to Know Your Customers' Names"
+titleEmphasis: "Your Customers' Names"
+slug: "your-llm-doesnt-need-to-know-your-customers-names"
+layout: "pii-style"
+metaTitle: "Your LLM Doesn't Need to Know Your Customers' Names"
+description: "Enterprises can't send customer PII to third-party LLMs without breaking compliance rules. NoPII is a drop-in reverse proxy that tokenizes sensitive data before it reaches any LLM provider, with one line of code to set up."
+subtitle: "Every enterprise wants to use AI. Most can't - because the data they need to send is the data they're required to protect."
+date: 2026-10-05
+category: "AI Security"
+author: "abhilash-kumar"
+readTime: 3
+heroImage: "/assets/blog/img-07.png"
+heroAlt: "Stacked translucent layers representing a proxy that tokenizes personal data before it reaches an LLM provider"
+excerpt: "Enterprises can't send customer PII to third-party LLMs without breaking compliance rules. NoPII is a drop-in reverse proxy that tokenizes sensitive data before it reaches any LLM provider, with one line of code to set up."
+tags: ["nopii", "pii", "llm", "proxy", "tokenization"]
+ogImage: "/assets/og/nopii-use-cases.jpg"
+ogImageAlt: "Your LLM Doesn't Need to Know Your Customers' Names | Enigma Vault"
+ogType: article
+styles: ["blog.css", "pages/blog-pii-hero.css", "tr-pages.css"]
+scripts: ["blog-article.js"]
+---
+
+<p>Every enterprise wants to use AI. Most can't - because the data they need to send is the data they're required to protect.</p>
+
+<p>Patient records. Account numbers. Social security numbers. The moment that information hits a third-party LLM, you've got a compliance problem. HIPAA. GDPR. SOX. PCI-DSS. Pick your acronym - the answer is the same: sensitive data can't leave your environment.</p>
+
+<p>Until now, the workarounds have been painful. Build custom middleware. Manually redact documents. Or just avoid AI entirely and watch your competitors move faster.</p>
+
+<p>Today, we're introducing NoPII.</p>
+
+<h2>One Line of Code. Zero PII Exposure.</h2>
+
+<p>NoPII is a PII-tokenizing reverse proxy that sits between your application and any LLM provider. It automatically detects sensitive data, replaces it with secure tokens, and forwards a sanitized request to the LLM. When the response comes back, NoPII swaps the tokens for real values before your application receives them.</p>
+
+<p>The LLM never sees real data. Your application never knows the difference.</p>
+
+<p>Getting started looks like this:</p>
+
+<div class="bl-code">
+  <div class="bl-code__bar"><span class="bl-code__lang">python</span></div>
+  <pre><code># Before - PII goes straight to OpenAI
+client = OpenAI(api_key="sk-...")
+
+# After - PII is intercepted and tokenized
+client = OpenAI(api_key="sk-...", base_url="https://api.nopii.co/v1")</code></pre>
+</div>
+
+<p>That's it. No SDK. No middleware rewrite. No changes to your application logic. Change the <code>base_url</code>, and every request is protected.</p>
+
+<h2>Smart Tokenization, Not Dumb Redaction</h2>
+
+<p>Most approaches to PII protection strip data and leave gaps. NoPII does something different.</p>
+
+<p>Its tokenization is deterministic - the same value always produces the same token. That means the LLM can reason consistently across a multi-turn conversation. It can recognize that "Customer A" in message one is the same "Customer A" in message five, without ever seeing a real name.</p>
+
+<p>NoPII detects 10+ entity types out of the box: names, emails, phone numbers, SSNs, passport numbers, credit cards, bank accounts, IBANs, IP addresses, and more. Admins can toggle entity types on or off and fine-tune detection confidence thresholds to match their risk profile.</p>
+
+<h2>Fail-Safe, Not Fail-Open</h2>
+
+<p>If tokenization fails for any reason, NoPII blocks the request. Period. There is no scenario where PII leaks through to an LLM provider. This isn't a best-effort filter - it's a hard gate.</p>
+
+<h2>One Proxy. Nine Providers.</h2>
+
+<p>NoPII works with OpenAI, Anthropic, Google Gemini, xAI, DeepSeek, Mistral, Groq, Together, and Fireworks. One configuration protects your traffic across every provider, with full streaming support for both OpenAI and Anthropic APIs.</p>
+
+<p>Switch models. Switch providers. Your PII protection stays exactly the same.</p>
+
+<h2>Full Visibility for Compliance Teams</h2>
+
+<p>Every PII detection is logged with the entity type, confidence score, session, provider, model, and timestamp. The admin console gives you real-time analytics on API call volume, entities detected, and token usage - plus a searchable audit log that exports to CSV.</p>
+
+<p>When the auditors come knocking, you'll have the receipts.</p>
+
+<h2>Built for Regulated Industries</h2>
+
+<p>NoPII was designed for environments where data protection isn't optional:</p>
+
+<ul>
+  <li><strong>Healthcare</strong> - Protect patient names, SSNs, and medical identifiers in AI-assisted clinical workflows. Supports HIPAA compliance requirements without slowing down care teams.</li>
+  <li><strong>Financial services</strong> - Mask account numbers, credit cards, and routing numbers in AI-powered reporting. Built for SOX and PCI-DSS regulated environments.</li>
+  <li><strong>Legal</strong> - Redact client names and case details before AI-assisted document review.</li>
+  <li><strong>Customer support</strong> - Use AI for ticket routing, summarization, and response drafting without exposing customer data.</li>
+</ul>
+
+<h2>Get Started Free</h2>
+
+<p>NoPII offers a free tier with 1M protected tokens per month - enough to test, prototype, and validate the integration in your environment. When you're ready to scale, the Pro tier starts at $50/month with 50M protected tokens included.</p>
+
+<p>Your customers trust you with their data. NoPII makes sure that trust extends to every AI interaction.</p>
+
+<p><a class="bl-link" href="https://app.nopii.co">Get started at app.nopii.co</a></p>

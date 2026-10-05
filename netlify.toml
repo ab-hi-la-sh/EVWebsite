@@ -93,6 +93,10 @@
   from = "/resources/docs.html"
   to = "/docs/"
   status = 301
+[[redirects]]
+  from = "/blog/confident-wrong-answer-skyflow/"
+  to = "/blog/confident-wrong-answer/"
+  status = 301
 # Hugo publishes this exact file, so without force Netlify would serve it
 # directly and the canonical URL would have a duplicate.
 [[redirects]]

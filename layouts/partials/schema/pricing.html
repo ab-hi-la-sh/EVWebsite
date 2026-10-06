@@ -1,0 +1,17 @@
+{{- /* One Product per priced plan family, with an Offer per tier, driven by
+       frontmatter `pricing:`. Prices are the ones shown in the page tables.
+       Tiers with no public price (Custom) are omitted rather than guessed. */ -}}
+{{- with .Params.pricing -}}
+{{- $items := slice -}}
+{{- range . -}}
+  {{- $offers := slice -}}
+  {{- range .tiers -}}
+    {{- $offers = $offers | append (dict "@type" "Offer" "name" .name "price" (printf "%v" .price) "priceCurrency" "USD"
+          "url" (absURL $.Params.pricingUrl | default (absURL "/pricing/"))
+          "priceSpecification" (dict "@type" "UnitPriceSpecification" "price" (printf "%v" .price) "priceCurrency" "USD" "billingDuration" 1 "unitCode" "MON")) -}}
+  {{- end -}}
+  {{- $items = $items | append (dict "@type" "Product" "name" .name "description" .description
+        "brand" (dict "@type" "Brand" "name" site.Title) "offers" $offers) -}}
+{{- end -}}
+<script type="application/ld+json">{{ (dict "@context" "https://schema.org" "@graph" $items) | jsonify | safeJS }}</script>
+{{- end -}}

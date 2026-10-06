@@ -6,7 +6,7 @@
     <div class="hp-footer__grid">
       <div>
         <a class="hp-footer__logolink" href="{{ "/" | relURL }}" aria-label="Enigma Vault home">
-          <img class="hp-footer__logo" src="{{ site.Params.logo | relURL }}" alt="Enigma Vault">
+          {{ partial "img.html" (dict "src" "logo/lockup-transparent.png" "alt" "Enigma Vault" "class" "hp-footer__logo" "width" 350 "loading" "lazy") }}
         </a>
         <p class="hp-footer__brandtag">{{ $f.tagline }}</p>
       </div>

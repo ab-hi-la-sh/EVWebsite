@@ -104,6 +104,52 @@
   to = "/solutions/industries/"
   status = 301
   force = true
+# Old production URLs were flat at the root (/card-vault.html), not nested
+# under /vault/. Found by cross-checking Wayback and Ahrefs crawl history.
+[[redirects]]
+  from = "/customer-vault.html"
+  to = "/vault/customer-vault/"
+  status = 301
+[[redirects]]
+  from = "/card-vault.html"
+  to = "/vault/card-vault/"
+  status = 301
+[[redirects]]
+  from = "/file-vault.html"
+  to = "/vault/file-vault/"
+  status = 301
+[[redirects]]
+  from = "/data-vault.html"
+  to = "/vault/data-vault/"
+  status = 301
+[[redirects]]
+  from = "/enigma-vault-api.html"
+  to = "/vault/"
+  status = 301
+# Low confidence: no Wayback snapshot, Ahrefs only saw a 403. Sent to the
+# homepage rather than guessed at; revisit if analytics show real traffic.
+[[redirects]]
+  from = "/ai-vault.html"
+  to = "/"
+  status = 301
+
+# Hugo publishes these index.html files, so without force Netlify serves them
+# directly and each clean URL has a reachable duplicate.
+[[redirects]]
+  from = "/triplets/index.html"
+  to = "/triplets/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/vault/index.html"
+  to = "/vault/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/nopii/index.html"
+  to = "/nopii/"
+  status = 301
+  force = true
 [[redirects]]
   from = "/triplets/faqs.html"
   to = "/triplets/#faqs"

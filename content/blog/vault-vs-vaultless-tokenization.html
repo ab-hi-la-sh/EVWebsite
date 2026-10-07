@@ -1,0 +1,342 @@
+---
+title: "What Is Vault vs Vaultless Tokenization? Key Differences Explained"
+titleEmphasis: "Key Differences Explained"
+slug: "vault-vs-vaultless-tokenization"
+layout: "pii-style"
+metaTitle: "Vault vs Vaultless Tokenization: Key Differences and How to Choose"
+description: "Vault vs vaultless tokenization compared: how each model works, which is more secure, how they affect PCI DSS scope and how to choose the right one for you."
+subtitle: "Vault-based tokenization stores the original data in an encrypted, central vault and maps it to random tokens, whereas vaultless tokenization uses an algorithm and a secret key to create tokens without storing the raw value anywhere."
+date: 2026-10-07
+category: "Data Vault"
+allOnly: true
+author: "abhilash-kumar"
+readTime: 16
+heroImage: "/assets/blog/img-04.png"
+heroAlt: "Layered translucent panels comparing a central vault with key-based tokenization"
+excerpt: "Vault-based tokenization stores originals in an encrypted vault and maps them to random tokens, while vaultless tokenization derives tokens with a key and stores nothing. Here is how they differ and how to choose."
+tags: ["tokenization", "vault", "vaultless", "pci"]
+ogImage: "/assets/og/vault-data.jpg"
+ogImageAlt: "Vault vs Vaultless Tokenization: Key Differences and How to Choose | Enigma Vault"
+ogType: article
+styles: ["blog.css", "pages/blog-pii-hero.css", "tr-pages.css"]
+scripts: ["blog-article.js"]
+faqSchema: true
+faqs:
+  - q: "Do We Need to Collect Cards or Customer Data Again When Moving to a Vault?"
+    a: "No. Existing vaultless tokens can be decrypted in a secure, short-lived environment and re-tokenized into the vault in batches. Customers never re-enter their details, and new records can flow into the vault from day one."
+  - q: "Will Migrating From Vaultless to Vault Tokenization Cause Downtime?"
+    a: "It shouldn't. Running both systems in parallel, with old tokens still readable while new writes go to the vault, lets each application switch over on its own schedule without a hard cutover."
+  - q: "Will Vault Lookups Slow Down Our Payments or Applications?"
+    a: "For most workloads, no. A detokenization lookup typically adds milliseconds, and batch requests handle bulk jobs. Only latency-critical flows with very high real-time volumes tend to notice the difference."
+  - q: "Can Stored Cards Still Be Charged Through Multiple Payment Gateways After the Switch?"
+    a: "Yes, if the vault can forward cards to the gateway. The application sends a token, the vault injects the card number into the outgoing request and the gateway processes the payment, so card numbers never reach application servers."
+  - q: "How Does Moving to a Vault Change Our PCI DSS Scope?"
+    a: "Systems that hold only random vault tokens and can't detokenize are usually easier to keep outside the cardholder data environment. Capture pages and anything that touches raw card numbers stay in scope, and the QSA confirms the final boundary."
+---
+
+<h2>Vault vs Vaultless Tokenization: What Is the Difference?</h2>
+<p><strong>Vault tokenization stores original data in a central vault and maps it to a random token, whereas vaultless tokenization uses format-preserving encryption to create tokens without storing raw data.</strong></p>
+<p>In vault vs vaultless tokenization, the core difference is where reversal happens: a vault looks the token up in a protected database, while a vaultless system reverses it mathematically with a key.</p>
+<p>Both models swap a sensitive value, such as an SSN, bank account number or card number, for a token that applications can store and pass around safely. They part ways on how that token is created, how the original comes back and what an attacker would need to steal.</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Factor</th><th>Vault-based tokenization</th><th>Vaultless tokenization</th></tr></thead>
+    <tbody>
+      <tr><td>Data storage</td><td>Original values and token mappings are kept, encrypted, in a central vault</td><td>No original values or mappings are stored anywhere</td></tr>
+      <tr><td>Token generation</td><td>Random values from a cryptographically secure generator</td><td>Calculated from the value with format-preserving encryption (FPE) and a key</td></tr>
+      <tr><td>Data format</td><td>Random by default, with deterministic or format-preserving options</td><td>Keeps the original length and character set by design</td></tr>
+      <tr><td>Reversibility</td><td>Authorized lookup in the vault; no mathematical path back</td><td>Decryption with the secret key, often inside an HSM</td></tr>
+      <tr><td>Security and breach risk</td><td>The vault is a high-value target; stolen tokens are useless</td><td>No store to breach; a leaked key reverses every token</td></tr>
+      <tr><td>Performance and scale</td><td>One network lookup per detokenization; capacity grows with the vault</td><td>Computed locally; throughput grows with compute</td></tr>
+      <tr><td>Infrastructure and maintenance</td><td>Vault storage, backups, replication and recovery</td><td>HSMs or a key management service, plus key operations</td></tr>
+      <tr><td>Key management</td><td>Handled behind the vault's API, with keys never exposed to applications</td><td>Central to security; rotation and access control are critical</td></tr>
+      <tr><td>Compliance scope</td><td>Token-only systems are usually easier to keep out of PCI DSS scope</td><td>Systems that can reach the key stay in scope</td></tr>
+      <tr><td>Deletion and data residency</td><td>Delete one record to retire its tokens; originals can stay in regional vaults</td><td>No record to delete; keys and algorithms must exist in every region</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>In short, vault vs vaultless tokenization comes down to trust. One model relies on a well-guarded store, and the other relies on a well-guarded key. Here's what each factor means in practice.</p>
+
+<h3>Data Storage</h3>
+<p>A vault keeps every original value, encrypted, in one protected store, alongside the mapping that links each value to its token. That store sits outside the applications that use the tokens and needs backups, replication and strict access rules.</p>
+<p>Nothing is stored in a vaultless system. The original value exists only at the moment of tokenization and again whenever an authorized system decrypts a token. With no database of raw records, there's no central repository for an attacker to target, which is the main reason teams consider vaultless designs.</p>
+
+<h3>Token Generation</h3>
+<p>Vault tokens come from a cryptographically secure random number generator. Two tokens reveal nothing about each other or about the values behind them, and no amount of computing power can derive the original from the token alone.</p>
+<p>Calculation replaces randomness in vaultless designs. A format-preserving encryption algorithm, usually NIST's FF1 mode, takes the value and a secret key and produces the token. The same input with the same key always gives the same output, so vaultless tokens are deterministic by nature.</p>
+
+<h3>Data Format</h3>
+<p>Format matters most to teams with rigid legacy databases. Vaultless tokens keep the original structure automatically:</p>
+<ul>
+  <li>A 16-digit card number becomes another 16-digit string.</li>
+  <li>A 9-digit SSN stays 9 digits.</li>
+  <li>Fields with fixed lengths and validation rules accept the token without code changes.</li>
+</ul>
+<p>Vault tokens are random strings by default. Many vaults can also issue format-preserving or deterministic tokens when a field or a matching workflow requires them.</p>
+
+<h3>Reversibility</h3>
+<p>Reversing a vault token is a lookup. An authorized service sends the token, the vault checks the request against its access policies and returns the original or forwards it to an approved destination. Because the token is random, there's no other way back.</p>
+<p>Vaultless reversal is decryption. Any system that can use the key, usually through an HSM or key management service, can turn the token back into the original value on the spot. Control therefore depends entirely on who can reach the key.</p>
+
+<h3>Security and Breach Risk</h3>
+<p>Each model has a different worst case.</p>
+<p><strong>Vault-based:</strong> the vault holds every original value, so it's a high-value target. The scenario to defend against is a breach of the vault itself or of credentials with broad access to it, which well-run vaults manage with encryption, isolation, scoped access and monitoring.</p>
+<p><strong>Vaultless:</strong> there's no store to breach, so the risk moves to the key. If the key is mismanaged or compromised, every token created with it can be reversed, including copies sitting in backups, logs and partner systems.</p>
+
+<h3>Performance and Scale</h3>
+<p>Vault-based tokenization needs a network call for each detokenization request, and the vault has to scale and replicate as data grows. For most business workloads, batch requests and fast lookups keep latency well within acceptable limits.</p>
+<p>Throughput works differently without a vault. Tokens are created and reversed locally, with no shared store to query, so throughput grows with compute. That advantage matters most for payment processors and platforms handling thousands of real-time transactions per second.</p>
+
+<h3>Infrastructure and Maintenance</h3>
+<p>Neither model is maintenance-free. The work sits in different places:</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Area</th><th>Vault-based</th><th>Vaultless</th></tr></thead>
+    <tbody>
+      <tr><td>Core infrastructure</td><td>Vault storage, backups, replication, disaster recovery</td><td>HSMs or a key management service</td></tr>
+      <tr><td>Ongoing tasks</td><td>Capacity planning, access reviews, recovery testing</td><td>Key rotation, key access reviews, algorithm updates</td></tr>
+      <tr><td>Typical owner</td><td>The provider, when the vault is a managed service</td><td>Often an internal team, unless keys are fully managed</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h3>Key Management</h3>
+<p>Encryption keys inside a vault protect the stored values and never leave the vault's boundary. Applications only handle tokens, so a compromised application server exposes no keys.</p>
+<p>For vaultless systems, the key is the security model. It has to be stored in protected hardware, rotated on a schedule and limited to the smallest possible set of services. Algorithm choice matters too: NIST's revised draft of SP 800-38G, published in January 2025, drops the FF3 mode and keeps FF1, so systems built on FF3 or FF3-1 face a migration.</p>
+
+<h3>Compliance Scope</h3>
+<p>Both models aim to keep cardholder data and other regulated values out of as many systems as possible. Systems that hold only random vault tokens and can't detokenize are generally easier to place outside PCI DSS scope. With vaultless tokens, assessors also look at which systems can reach the key, because the token and the key together reveal the original value.</p>
+
+<h3>Deletion and Data Residency</h3>
+<p>Privacy laws such as GDPR, CCPA and DPDP give people the right to have their data erased. In a vault, deleting one record retires every token that points to it, wherever those tokens live. A vaultless design has no record to remove, so erasure means finding every copy of a person's tokens or rotating keys.</p>
+<p>Residency follows the same pattern. A vault can keep originals in regional stores while tokens travel freely. A vaultless system has to deploy its keys and algorithms in every region where data must stay.</p>
+
+<h2>What Is Vault-Based Tokenization and How Does It Work?</h2>
+<p><strong>Vault-based tokenization is a method that stores each original value in an encrypted token vault and returns a randomly generated token that has no mathematical relationship to the value it replaces.</strong></p>
+<p>Picture an HR platform onboarding a new employee. The SSN goes straight to the vault, the platform's database stores a token, and recruiters and analysts work with that token for years. Only the payroll service can ever resolve it, and every request is logged.</p>
+<p>The vault itself is a separate, hardened service. It encrypts and stores originals, issues tokens and enforces who may get a value back. Here's the full flow:</p>
+<ol>
+  <li><strong>Data submission:</strong> a user enters a sensitive value, such as a 16-digit card number or an SSN, into an application.</li>
+  <li><strong>Transmission to the vault:</strong> the application forwards the raw value over an authenticated connection to the isolated token vault.</li>
+  <li><strong>Token generation:</strong> the vault creates a random token, or a deterministic one when records need to be matched.</li>
+  <li><strong>Database mapping:</strong> the vault encrypts the original and saves it with a record linking it to the new token.</li>
+  <li><strong>Token return:</strong> only the non-sensitive token goes back to the application for everyday processing and storage.</li>
+  <li><strong>Detokenization:</strong> when the original is needed again, an authorized service sends the token to the vault, which checks permissions, returns or forwards the value and logs the request.</li>
+</ol>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>At a glance</th><th>Vault-based tokenization</th></tr></thead>
+    <tbody>
+      <tr><td>Best for</td><td>Long-lived, regulated data reused across many systems</td></tr>
+      <tr><td>Key capabilities</td><td>Random or deterministic tokens, exact-match search, expiry, per-record deletion, scoped access</td></tr>
+      <tr><td>Main strength</td><td>Tokens can't be reversed without the vault's permission</td></tr>
+      <tr><td>Main limitation</td><td>Every detokenization depends on the vault being available and responsive</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h2>What Is Vaultless Tokenization and How Does It Work?</h2>
+<p><strong>Vaultless tokenization is a method that generates tokens on demand with a cryptographic algorithm and a secret key, so it never stores the original value or a mapping between tokens and values.</strong></p>
+<p>Most implementations rely on format-preserving encryption, usually the FF1 mode described in NIST SP 800-38G, with the key held in a hardware security module (HSM) or a cloud key management service. In effect, the token is the original value transformed, and the key is what turns it back.</p>
+<p>A value moves through five stages:</p>
+<ol>
+  <li><strong>Data submission:</strong> a user enters a sensitive value into an application or payment terminal.</li>
+  <li><strong>Algorithmic computation:</strong> the system runs the value through a cryptographic algorithm without saving it to a database.</li>
+  <li><strong>Key integration:</strong> the algorithm applies a secret key held inside an HSM or key management service.</li>
+  <li><strong>Token output:</strong> the calculation produces a token that keeps the original length and format, and no lookup record is created.</li>
+  <li><strong>Detokenization:</strong> an authorized system reverses the calculation with the same key and algorithm to recover the original on demand.</li>
+</ol>
+<p>A high-volume checkout is the classic case: each node tokenizes card numbers at the edge and passes tokens downstream without querying a central store.</p>
+<p><strong>Best for:</strong> high-volume, latency-sensitive and distributed workloads.</p>
+<p><strong>Key capability:</strong> format-preserving tokens computed locally, with no stored originals.</p>
+<p><strong>Main strength:</strong> no central database of raw values to breach or replicate.</p>
+<p><strong>Main limitation:</strong> a leaked key reverses every token created with it, which is why critics describe vaultless tokenization as reversible encryption.</p>
+
+<h2>What Are the Advantages and Disadvantages of Each Model?</h2>
+<p><strong>The advantages and disadvantages of vault vs vaultless tokenization mirror each other: vaults offer random tokens, central control and easy deletion, while vaultless offers speed and no stored data.</strong></p>
+
+<h3>Vault-Based Tokenization: Advantages and Disadvantages</h3>
+<p><strong>Advantages:</strong></p>
+<ul>
+  <li><strong>No mathematical link:</strong> random tokens can't be reversed by brute force or with any key, so stolen tokens stay useless.</li>
+  <li><strong>Central control:</strong> access rules, logging and access reviews all happen in one place.</li>
+  <li><strong>Simpler scoping:</strong> systems that hold only tokens are often easier to keep out of PCI DSS and other audit scopes.</li>
+  <li><strong>Record-level deletion:</strong> removing one vault record retires every token that points to it, which suits GDPR, CCPA and DPDP requests.</li>
+  <li><strong>Richer data controls:</strong> expiry, controlled sharing, exact-match search and staff access to real values can all be managed at the vault.</li>
+</ul>
+<p><strong>Disadvantages:</strong></p>
+<ul>
+  <li><strong>High-value target:</strong> the vault holds every original value and needs strong encryption, isolation and monitoring.</li>
+  <li><strong>Lookup latency:</strong> each detokenization request needs a network call to the vault.</li>
+  <li><strong>Availability dependency:</strong> if the vault is slow or offline, every flow that needs real values waits with it.</li>
+  <li><strong>Operational overhead:</strong> backups, replication and recovery have to run reliably.</li>
+</ul>
+
+<h3>Vaultless Tokenization: Advantages and Disadvantages</h3>
+<p><strong>Advantages:</strong></p>
+<ul>
+  <li><strong>No central store:</strong> there's no database of original values to breach, back up or replicate.</li>
+  <li><strong>Speed at scale:</strong> tokens are computed locally, which suits very high transaction volumes.</li>
+  <li><strong>Format preservation:</strong> tokens keep the original length and character set, so legacy fields accept them.</li>
+  <li><strong>Distributed use:</strong> systems in many regions or at the edge can tokenize without calling a central service.</li>
+</ul>
+<p><strong>Disadvantages:</strong></p>
+<ul>
+  <li><strong>Key dependency:</strong> a compromised key exposes every token created with it, wherever those tokens live.</li>
+  <li><strong>Closer to encryption:</strong> because tokens are reversible with a key, assessors review key access closely, much as they would for encrypted data.</li>
+  <li><strong>Harder deletion:</strong> with no stored record, removing one person's data means finding every copy of their tokens or rotating keys.</li>
+  <li><strong>Algorithm risk:</strong> security depends on the FPE mode in use, and NIST has already dropped FF3 from its revised standard.</li>
+</ul>
+
+<h2>What Are the Use Cases for Vault and Vaultless Tokenization?</h2>
+<p><strong>Vault and vaultless tokenization use cases split by data lifespan and volume: vaults suit long-lived, regulated records, while vaultless suits high-volume, real-time and distributed workloads.</strong></p>
+
+<h3>Vault-Based Tokenization Use Cases</h3>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Use case</th><th>Who it's for</th><th>Why a vault fits</th></tr></thead>
+    <tbody>
+      <tr><td>Card-on-file across payment gateways</td><td>Subscription platforms, marketplaces, card issuers, payout providers</td><td>The vault forwards card data to any connected gateway, so stored cards aren't tied to one processor</td></tr>
+      <tr><td>Staff-assisted payments</td><td>Travel agencies, hotels, contact centers</td><td>Authorized staff can view a card in a controlled, logged session while application servers hold only tokens</td></tr>
+      <tr><td>Long-lived personal identifiers</td><td>HR, payroll, lending, wealth management</td><td>SSNs and account numbers kept for years stay as tokens in every downstream system</td></tr>
+      <tr><td>HIPAA-regulated fields</td><td>Health insurers, benefits administrators</td><td>Member IDs, diagnoses and lab results are tokenized across claims and case systems</td></tr>
+      <tr><td>Erasure and retention programs</td><td>Any business under GDPR, CCPA or DPDP</td><td>Deleting one vault record retires every token linked to that person</td></tr>
+      <tr><td>Secrets and credentials</td><td>Managed service providers, IT teams</td><td>Passwords and API keys live in the vault, and tickets hold only references</td></tr>
+      <tr><td>Multi-tenant SaaS platforms</td><td>Vertical SaaS and platform teams</td><td>Sensitive fields leave the application database, shrinking the blast radius of any breach</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h3>Vaultless Tokenization Use Cases</h3>
+<ul>
+  <li><strong>High-volume checkout and digital wallets:</strong> retailers and payment apps tokenize card data at transaction speed, where even short lookups would add up across millions of payments.</li>
+  <li><strong>Cloud-native data pipelines:</strong> data engineering teams tokenize records as they stream into data lakes and warehouses, and deterministic tokens keep tables joinable for analytics.</li>
+  <li><strong>Globally distributed services:</strong> microservices running in many regions tokenize locally, avoiding replication lag between data centers.</li>
+  <li><strong>Legacy systems with fixed schemas:</strong> older banking and processing platforms accept format-preserving tokens without database changes.</li>
+</ul>
+
+<h2>Which Is More Secure: Vault or Vaultless Tokenization?</h2>
+<p><strong>In vault vs vaultless tokenization, neither model is secure by default: a vault concentrates risk in a protected store, whereas vaultless concentrates it in a key that reverses every token.</strong></p>
+<p>A vault holds every original value, which makes it both a high-value target and a dependency for every flow that needs real data. Well-run vaults manage that risk with encryption at rest, per-customer keys, isolated infrastructure, strict access scopes and detailed audit logs. An attacker who steals tokens from an application database still gets nothing, because random tokens can't be reversed outside the vault.</p>
+<p>Vaultless systems remove the central store, which shrinks one attack surface. The risk moves to the key. If that key leaks through a misconfiguration, a compromised service account or an insider, every token created with it can be reversed, wherever those tokens live. Rotating the key afterward doesn't protect tokens already copied elsewhere.</p>
+<p>Here's how the two compare across common threat scenarios:</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Scenario</th><th>Vault-based tokenization</th><th>Vaultless tokenization</th></tr></thead>
+    <tbody>
+      <tr><td>Tokens stolen from an app database</td><td>Useless without vault access</td><td>Useless without the key</td></tr>
+      <tr><td>Key or vault credentials compromised</td><td>Exposure limited by access scopes and monitoring</td><td>Every token made with that key is reversible</td></tr>
+      <tr><td>Insider with broad access</td><td>Every detokenization request is logged and attributable</td><td>Depends on who can reach the key and whether use is logged</td></tr>
+      <tr><td>Tokens copied to a partner or backup</td><td>Still random and useless outside the vault</td><td>Reversible anywhere the key can be used</td></tr>
+      <tr><td>Future advances in cryptanalysis</td><td>Random tokens have no formula to break</td><td>Depends on the strength of the FPE mode</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><strong>What decides real-world security:</strong> how tightly access is scoped, whether keys rotate, whether every request is logged and how quickly access can be revoked after an incident. A well-run vault and a well-run vaultless system can both be strong, and a poorly run version of either is weak.</p>
+
+<h2>How Do Vault and Vaultless Tokenization Affect PCI DSS Scope?</h2>
+<p><strong>Vault and vaultless tokenization can both reduce PCI DSS scope, though random vault tokens usually leave fewer systems in scope, while any system that can reach a vaultless key stays in scope.</strong></p>
+<p>PCI DSS scope covers every system that stores, processes or transmits cardholder data, plus systems connected to or able to affect them. Tokenization helps by removing card numbers from as many of those systems as possible, which shortens the list of controls, evidence and testing a business owns.</p>
+<p>The PCI Security Standards Council's tokenization guidelines separate reversible tokens into two kinds:</p>
+<ul>
+  <li><strong>Non-cryptographic tokens:</strong> random values mapped to the original through a lookup, which is how vault-based tokenization works.</li>
+  <li><strong>Cryptographic tokens:</strong> values generated from the original with a key, which is how vaultless tokenization works.</li>
+</ul>
+<p>That distinction shows up during an assessment. With cryptographic tokens, auditors look closely at where the key lives and which systems could use it, since the token and key together reveal the card number. With random vault tokens, systems that hold only tokens and can't detokenize are usually easier to place outside the cardholder data environment.</p>
+<p>A few points apply to both models:</p>
+<ul>
+  <li>Systems that can detokenize remain in scope.</li>
+  <li>Capture pages, payment forms and any service that touches the raw card number stay in scope.</li>
+  <li>Card verification codes can't be stored after authorization, tokenized or not.</li>
+</ul>
+<p>Whichever side of the vault vs vaultless tokenization choice a business lands on, the final boundary is a customer-specific decision. The QSA or acquirer confirms which systems stay in scope and which Self-Assessment Questionnaire applies.</p>
+
+<h2>Vault or Vaultless Tokenization: Which Should You Choose?</h2>
+<p><strong>Choose vault-based tokenization for random tokens, per-record deletion and controlled access to real values, and choose vaultless tokenization when ultra-low latency at high volume matters most.</strong></p>
+
+<h3>When Should You Choose Vault-Based Tokenization?</h3>
+<p>Choose a vault if:</p>
+<ul>
+  <li>Sensitive data in your systems is long-lived and reused across many applications.</li>
+  <li>Deletion requests must remove one person's data on demand.</li>
+  <li>Authorized staff need controlled access to real values.</li>
+  <li>Security policy calls for random tokens with no mathematical link to the original.</li>
+  <li>Volumes are low to moderate, or batch requests cover your bulk work.</li>
+  <li>Running key management in-house isn't something your team wants to own.</li>
+</ul>
+
+<h3>When Should You Choose Vaultless Tokenization?</h3>
+<p>Choose vaultless if:</p>
+<ul>
+  <li>Thousands of real-time transactions per second pass through your platform.</li>
+  <li>Applications run across many regions or at the edge.</li>
+  <li>Legacy fields must keep the exact format of the original.</li>
+  <li>Each value is used once and never needs per-record deletion.</li>
+  <li>Your team already runs HSMs and rotates keys on a schedule.</li>
+</ul>
+<p>If your answers split between both lists, a vault usually gives you more control over deletion, access and audit for the same compliance effort.</p>
+
+<h2>How to Migrate From Vaultless to Vault-Based Tokenization</h2>
+<p><strong>Migrating from vaultless to vault-based tokenization means decrypting existing tokens in a controlled environment, re-tokenizing values in batches and updating every system that stores them.</strong></p>
+<p>Teams usually move for one of three reasons: they need to honor deletion requests record by record, they want to stop running key operations themselves or they need features such as controlled staff access and expiry. A clean migration follows a clear order:</p>
+<ol>
+  <li><strong>Inventory the tokens:</strong> list every database, warehouse, log store and service that holds vaultless tokens, and note which ones also detokenize.</li>
+  <li><strong>Plan the mapping:</strong> decide how each old token will map to its new vault token. Attaching existing record IDs to each vault entry makes the switch far easier to track and verify.</li>
+  <li><strong>Re-tokenize in batches:</strong> decrypt the original values inside a secure, short-lived environment and send them to the vault in bulk requests, never writing plaintext to disk.</li>
+  <li><strong>Run both systems briefly:</strong> keep the old key available for reads while new writes go to the vault, then move reads over one system at a time.</li>
+  <li><strong>Verify and clean up:</strong> confirm every system now stores vault tokens and check logs for any remaining calls to the old key.</li>
+  <li><strong>Retire the old key:</strong> revoke and destroy it, so the old tokens can never be reversed again.</li>
+</ol>
+<p><strong>Common pitfalls to plan for:</strong></p>
+<ul>
+  <li>Old tokens sitting in backups, exports or partner systems that nobody listed</li>
+  <li>Fields with fixed lengths that reject the new token format</li>
+  <li>Cutover windows that are too short for the batch volume</li>
+</ul>
+<p>Rehearse the whole sequence in a test environment with real field formats and production-sized batches before touching live data.</p>
+
+<h2>How to Choose Between Vault and Vaultless Tokenization</h2>
+<p><strong>Choose vault-based tokenization for strict data isolation and central compliance boundaries, and choose vaultless tokenization for high-speed, low-latency processing across distributed cloud systems.</strong></p>
+<p>Four criteria decide most projects.</p>
+
+<h3>1. Volume and Performance</h3>
+<ul>
+  <li><strong>Choose vaultless</strong> if the application processes thousands of real-time transactions per second and lookups would create a bottleneck.</li>
+  <li><strong>Choose a vault</strong> if volume is low to moderate and a few milliseconds per lookup is acceptable, or if batch requests cover the bulk work.</li>
+</ul>
+
+<h3>2. Infrastructure and Data Distribution</h3>
+<ul>
+  <li><strong>Choose vaultless</strong> if the architecture is cloud-native, multi-region or serverless and nodes must tokenize independently.</li>
+  <li><strong>Choose a vault</strong> if data must stay in defined regions, or if one controlled store simplifies governance.</li>
+</ul>
+
+<h3>3. Reversibility and Token Isolation</h3>
+<ul>
+  <li><strong>Choose vaultless</strong> if tokens must match the exact format of the original to fit strict database schemas.</li>
+  <li><strong>Choose a vault</strong> if security policy requires tokens with zero mathematical relationship to the original, ruling out algorithmic recovery.</li>
+</ul>
+
+<h3>4. Regulatory and Audit Goals</h3>
+<ul>
+  <li><strong>Choose a vault</strong> if the goal is to keep raw data inside one tightly controlled boundary, honor deletion requests record by record and keep a central audit trail.</li>
+  <li><strong>Choose vaultless</strong> if the goal is to avoid storing original data entirely and the team can enforce strict key access.</li>
+</ul>
+<p><strong>Quick decision matrix:</strong></p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Factor</th><th>Favor vault-based</th><th>Favor vaultless</th></tr></thead>
+    <tbody>
+      <tr><td>Primary goal</td><td>Secure central storage and control</td><td>High-speed processing at scale</td></tr>
+      <tr><td>Data volume</td><td>Low to moderate</td><td>Extremely high, global</td></tr>
+      <tr><td>Latency tolerance</td><td>Accepts brief lookups</td><td>Needs instant computation</td></tr>
+      <tr><td>Architecture</td><td>Centralized or hybrid</td><td>Distributed, cloud-native, edge</td></tr>
+      <tr><td>Token format</td><td>Random, with optional format-preserving tokens</td><td>Format-preserving by design</td></tr>
+      <tr><td>Data deletion</td><td>Required at record level</td><td>Rarely needed</td></tr>
+      <tr><td>Key management</td><td>Handled by the vault</td><td>Run by a mature internal team</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h2>Why Enigma Vault for Vault-Based Tokenization</h2>
+<p><a class="bl-link" href="https://www.enigmavault.io/vault/data-vault/">Enigma Vault</a> is a vault-based tokenization platform for structured data and payment cards. Data Vault encrypts each field under per-customer keys, takes batches of up to 5,000 records tagged with your own record IDs and supports deterministic tokens, exact-match lookup and per-record deletion. Card Vault forwards stored cards to your payment gateway through its proxy. Both run on PCI DSS Level 1 and SOC 2 Type II certified infrastructure, with a free monthly tier to start.</p>

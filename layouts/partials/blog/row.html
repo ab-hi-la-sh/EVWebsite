@@ -1,5 +1,5 @@
 {{- /* Archive row. Markup matches the old rowHTML() in blog-data.js. */ -}}
-<a class="bl-row bl-fade" href="{{ .RelPermalink }}" data-cat="{{ .Params.category }}"
+<a class="bl-row bl-fade" href="{{ .RelPermalink }}" data-cat="{{ if not .Params.allOnly }}{{ .Params.category }}{{ end }}"
    data-search="{{ lower (printf "%s %s %s %s" .Title .Params.excerpt .Params.category (delimit .Params.tags " ")) }}">
   <div class="bl-row__thumb">{{ partial "img.html" (dict "src" .Params.heroImage "alt" "" "loading" "lazy" "width" 240) }}</div>
   <div class="bl-row__body">

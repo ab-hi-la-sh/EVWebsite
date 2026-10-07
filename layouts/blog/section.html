@@ -24,7 +24,7 @@
         {{- with .Params.chipCategories -}}
           {{- $cats = $cats | append . -}}
         {{- else -}}
-          {{- range $arts }}{{ if not (in $cats .Params.category) }}{{ $cats = $cats | append .Params.category }}{{ end }}{{ end -}}
+          {{- range $arts }}{{ if and (not .Params.allOnly) (not (in $cats .Params.category)) }}{{ $cats = $cats | append .Params.category }}{{ end }}{{ end -}}
         {{- end -}}
         <div class="bl-chips" id="bl-chips" role="tablist" aria-label="Filter by category">
           {{- range $i, $c := $cats }}
@@ -54,7 +54,7 @@
                matching the post whose RelPermalink equals this row's url, so
                the row still carries the right data-cat for the filter. */ -}}
         {{- if not $sp }}{{ range site.RegularPages }}{{ if eq .RelPermalink $s.url }}{{ $sp = . }}{{ end }}{{ end }}{{ end }}
-        <a class="bl-startrow" href="{{ $s.url }}" data-cat="{{ with $sp }}{{ .Params.category }}{{ end }}">
+        <a class="bl-startrow" href="{{ $s.url }}" data-cat="{{ with $sp }}{{ if not .Params.allOnly }}{{ .Params.category }}{{ end }}{{ end }}">
           <span class="bl-startrow__n">{{ printf "%02d" (add $i 1) }}</span>
           <span class="bl-startrow__tx"><strong>{{ $s.title }}</strong><em>{{ $s.note }}</em></span>
           <span class="bl-startrow__arr" aria-hidden="true">&#8594;</span>

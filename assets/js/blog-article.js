@@ -7,6 +7,40 @@
   var content = document.getElementById('bl-content');
   if (!content) return;
 
+  /* Sticky header height, measured rather than guessed: the global nav plus,
+     on layouts that add one (pii-style), the utility bar underneath it. A
+     hardcoded offset here was fine while every article shared one fixed nav
+     height, but it left TOC clicks landing headings partly behind the bar
+     on any layout that stacks a second sticky element under the nav. */
+  function headerOffset() {
+    var h = 0;
+    var nav = document.querySelector('.hp-nav');
+    var bar = document.querySelector('.bl-utilbar');
+    if (nav) h += nav.getBoundingClientRect().height;
+    if (bar) h += bar.getBoundingClientRect().height;
+    return h + 20;
+  }
+
+  /* Same problem headerOffset() solves, but for CSS: .bl-utilbar and
+     .bl-pii-sidebar need to stick exactly below the nav, and the nav's real
+     height changes by breakpoint (92px+border desktop vs 80px+border under
+     1024px -- see .hp-nav__inner in global.css). A hardcoded top in CSS was
+     only ever correct at one width, and being wrong is what made the bar
+     stick a few pixels above the nav's actual bottom edge -- the nav's
+     higher z-index then cut off that sliver of the bar on scroll. Exposing
+     the measured heights as custom properties lets CSS keep ownership of
+     the actual positioning while using numbers that are correct at whatever
+     width the page is currently at. */
+  function syncStickyOffsets() {
+    var nav = document.querySelector('.hp-nav');
+    var utilbar = document.querySelector('.bl-utilbar');
+    document.documentElement.style.setProperty('--bl-nav-h', (nav ? nav.getBoundingClientRect().height : 0) + 'px');
+    if (utilbar) document.documentElement.style.setProperty('--bl-bar-h', utilbar.getBoundingClientRect().height + 'px');
+  }
+  syncStickyOffsets();
+  window.addEventListener('resize', syncStickyOffsets);
+  window.addEventListener('load', syncStickyOffsets);
+
   var bar = document.getElementById('bl-progress');
   function progress() {
     if (!bar) return;
@@ -34,14 +68,14 @@
     a.addEventListener('click', function (e) {
       e.preventDefault();
       var t = document.getElementById(a.getAttribute('data-tg'));
-      if (t) window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - 84, behavior: 'smooth' });
+      if (t) window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - headerOffset(), behavior: 'smooth' });
       var dm = a.closest('details'); if (dm) dm.open = false;
     });
   });
 
   function spy() {
     if (!heads.length) return;
-    var cur = heads[0].id, y = window.scrollY + 110;
+    var cur = heads[0].id, y = window.scrollY + headerOffset() + 10;
     heads.forEach(function (h) { if (h.offsetTop <= y) cur = h.id; });
     [].forEach.call(document.querySelectorAll('[data-tg]'), function (a) {
       a.classList.toggle('is-active', a.getAttribute('data-tg') === cur);

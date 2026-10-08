@@ -1,6 +1,7 @@
 {{- /* Content-facing wrapper for partials/img.html.
-       {{< img src="/assets/vault/hero-card.png" alt="" class="foo" >}} */ -}}
-{{- partial "img.html" (dict
+       {{< img src="/assets/vault/hero-card.png" alt="" class="foo" >}}
+       Optional widths="800,1200" sets the srcset candidates (source width is always added). */ -}}
+{{- $p := dict
       "src" (.Get "src")
       "alt" (.Get "alt" | default "")
       "class" (.Get "class")
@@ -8,5 +9,6 @@
       "style" (.Get "style")
       "sizes" (.Get "sizes")
       "loading" (.Get "loading")
-      "fetchpriority" (.Get "fetchpriority")
-) -}}
+      "fetchpriority" (.Get "fetchpriority") -}}
+{{- with .Get "widths" }}{{ $p = merge $p (dict "widths" (apply (split . ",") "int" ".")) }}{{ end -}}
+{{- partial "img.html" $p -}}

@@ -1,0 +1,53 @@
+{{- /*
+  Byline author with a hover/focus profile card (see the finstackk reference).
+  Used by every article layout, so all posts get it automatically.
+
+  Call with a dict:
+    {{ partial "blog/authorcard.html" (dict "ctx" . "compact" false) }}
+  ctx      the article page (supplies .Params.author + .Site)
+  compact  true -> name-only trigger (no inline avatar), for tight meta rows
+
+  The card degrades gracefully: the LinkedIn row shows only when the author has
+  a `linkedin`, and "Full profile" only when an /authors/<key>/ page exists.
+*/ -}}
+{{- $p := .ctx -}}
+{{- $compact := .compact -}}
+{{- $key := $p.Params.author -}}
+{{- $a := index hugo.Data.authors $key -}}
+{{- $profile := $p.Site.GetPage (printf "/authors/%s" $key) -}}
+{{- $bio := $a.bio -}}
+{{- if not $bio }}{{ with $a.bioParas }}{{ $bio = index . 0 }}{{ end }}{{ end -}}
+<span class="bl-acard">
+  {{- if $profile -}}
+  <a class="bl-ameta__author bl-acard__trigger" href="{{ $profile.RelPermalink }}">
+  {{- else -}}
+  <span class="bl-ameta__author bl-acard__trigger" tabindex="0">
+  {{- end -}}
+    {{- if not $compact }}
+    {{- if $a.photo }}<img class="bl-avatar bl-avatar--img" src="{{ $a.photo }}" alt="{{ $a.name }}" width="34" height="34" loading="lazy">{{ else }}<span class="bl-avatar">{{ $a.initials }}</span>{{ end }}
+    {{- end }}
+    <span class="bl-acard__name">{{ $a.name }}</span>
+  {{- if $profile }}</a>{{ else }}</span>{{ end }}
+
+  <span class="bl-acard__pop" role="tooltip" aria-hidden="true">
+    <span class="bl-acard__head">
+      {{- if $a.photo }}<img class="bl-acard__av bl-avatar--img" src="{{ $a.photo }}" alt="{{ $a.name }}" width="48" height="48" loading="lazy">{{ else }}<span class="bl-avatar bl-acard__av">{{ $a.initials }}</span>{{ end }}
+      <span class="bl-acard__id">
+        <span class="bl-acard__h">{{ $a.name }}</span>
+        <span class="bl-acard__role">{{ $a.role }}</span>
+      </span>
+    </span>
+    {{- with $bio }}<span class="bl-acard__bio">{{ . | truncate 150 }}</span>{{ end }}
+    {{- if or $a.linkedin $profile }}
+    <span class="bl-acard__foot">
+      {{- with $a.linkedin }}
+      <a class="bl-acard__li" href="{{ . }}" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+        <span>LinkedIn</span>
+      </a>
+      {{- end }}
+      {{- with $profile }}<a class="bl-acard__full" href="{{ .RelPermalink }}">Full profile &#8594;</a>{{ end }}
+    </span>
+    {{- end }}
+  </span>
+</span>

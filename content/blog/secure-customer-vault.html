@@ -1,0 +1,701 @@
+---
+title: "Secure Customer Vault: PCI-Compliant Storage for Customer Data"
+titleEmphasis: "PCI-Compliant Storage for Customer Data"
+slug: "secure-customer-vault"
+layout: "pii-style"
+metaTitle: "What Is a Secure Customer Vault? How It Works and Key Benefits"
+description: "Learn what a secure customer vault is, how it stores cards, IDs and signatures as encrypted tokens, what it replaces and how to choose the right one for your team."
+subtitle: "A secure customer vault is an encrypted system that collects and stores customer payment cards, IDs, documents and signatures, and replaces them with tokens so your staff and tools never hold the raw data in email or files."
+date: 2026-10-01
+category: "Customer Vault"
+author: "abhilash-kumar"
+readTime: 19
+heroImage: "/assets/blog/img-09.png"
+heroAlt: "Layered translucent panels representing cards, IDs and documents held in one encrypted vault"
+excerpt: "A secure customer vault collects and stores customer cards, IDs, documents and signatures as encrypted tokens, so staff and tools never hold the raw data in email or files. Here is how it works and how to choose one."
+tags: ["customer-vault", "data-privacy", "pci", "intake"]
+ogImage: "/assets/og/vault-customer.jpg"
+ogImageAlt: "Secure Customer Vault: PCI-Compliant Storage for Customer Data | Enigma Vault"
+ogType: article
+styles: ["blog.css", "pages/blog-pii-hero.css", "tr-pages.css"]
+scripts: ["blog-article.js"]
+faqSchema: true
+faqs:
+  - q: "What is a customer vault ID?"
+    a: "A customer vault ID is the unique reference a vault gives each customer record. Your systems store the ID and use it for later actions, so the card number or document never has to be stored or sent again."
+  - q: "Can a customer vault store CVV?"
+    a: "No. PCI DSS does not allow the card security code to be stored after authorization, even encrypted. A compliant vault stores the card number as a token and discards the CVV."
+  - q: "Do customers need an account to submit data?"
+    a: "Not with a well-designed intake vault. Customers open a secure link, submit what you asked for and leave, with no login to create."
+  - q: "Can stored cards work with different payment providers?"
+    a: "It depends on the vault. Gateway vaults usually tie cards to one processor, while independent vaults can forward card data to the processor you choose. Ask the vendor how cards reach your gateway."
+  - q: "Can I move cards from another vault?"
+    a: "Usually, yes, through a provider-to-provider transfer that follows PCI DSS. Both the current and new vendors must support it, so confirm the process before switching."
+  - q: "Is a customer vault the same as a payment vault?"
+    a: "Not always. A payment vault stores cards for charging, while a secure customer vault also collects IDs, documents, signatures and sensitive fields on one profile."
+---
+
+<p>A travel agency books a family trip to Lisbon. The client emails four passport scans, reads a card number over the phone and sends a signed waiver as a photo. By Friday, those files sit in two inboxes, a shared drive, a WhatsApp chat and the CRM notes field.</p>
+
+<p>Each item arrived through whatever channel the client found easiest, and each copy stays where it landed:</p>
+<ul>
+  <li>Four passport scans live in every inbox the email reached</li>
+  <li>One card number sits on a call note anyone in the office can open</li>
+  <li>A waiver photo stays on an agent's personal phone and its cloud backup</li>
+</ul>
+<p>Multiply that by a season of bookings, and the agency holds an archive of IDs and card data it never meant to keep. A secure customer vault gives that data one protected place to land.</p>
+<p>In this guide, we explain how a secure customer vault works, what it stores and how to choose one.</p>
+
+<h2>What is a secure customer vault?</h2>
+<p><strong>A secure customer vault is a protected store that holds customer cards, identity documents and sensitive fields in encrypted form, links them to one profile and hands your systems tokens to work with.</strong></p>
+<p>The idea started with payment gateways, which save a card once so merchants can charge it later. Modern customer vaults collect everything a regulated business asks its clients for, from cards to signed consent forms, and keep it out of the tools where it usually leaks.</p>
+<p>A secure customer vault does two jobs in one system:</p>
+<ol>
+  <li><strong>Collection:</strong> a branded, secure link replaces the email or phone call your client would otherwise use.</li>
+  <li><strong>Custody:</strong> the vault encrypts or tokenizes what arrives, stores it on one customer profile and controls who can see it.</li>
+</ol>
+<p>Here is what changes for one client record:</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Item</th><th>Without a vault</th><th>With a secure customer vault</th></tr></thead>
+    <tbody>
+      <tr><td>Card</td><td>Number in an email or call notes</td><td>Token on the profile, card held encrypted</td></tr>
+      <tr><td>Passport</td><td>Scan in a staff inbox</td><td>Encrypted file on the profile</td></tr>
+      <tr><td>Signed waiver</td><td>Photo in a chat app</td><td>Signature captured and logged</td></tr>
+      <tr><td>SSN or tax ID</td><td>Typed into the CRM</td><td>Tokenized field, revealed only when needed</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h3>How a customer vault stores payment data</h3>
+<p>A card entered through the vault is tokenized at capture. The vault keeps the card number encrypted and returns a token that stands in for it on the customer's profile.</p>
+<ul>
+  <li>Tokens have no value outside the vault, so a stolen copy cannot be used to make a purchase</li>
+  <li>Staff see the card brand and last four digits by default</li>
+  <li>Authorized roles can reveal the full number for a specific task, and each reveal is logged</li>
+  <li>CVV is discarded after authorization, because PCI DSS prohibits storing the security code, even encrypted</li>
+</ul>
+
+<h3>How it stores documents and sensitive fields</h3>
+<p>Files and signatures are sealed with envelope encryption: each file gets its own data key, which is itself encrypted by a master key the vault manages. Sensitive fields, such as an SSN typed into a form, are tokenized the same way a card is.</p>
+<p><strong>What this means for your team:</strong> a CRM export or a lost staff laptop holds references to the data, while the data itself stays in the vault.</p>
+
+<h3>What is a customer vault ID?</h3>
+<p>A customer vault ID is the unique reference a vault assigns to one customer record. Your CRM or billing system stores that ID, so later actions never need the card number or file itself.</p>
+<p>In practice, that looks like this:</p>
+<ul>
+  <li>Repeat charges reference the vault ID and the card token</li>
+  <li>Document lookups open the profile by its ID</li>
+  <li>API calls match the profile to your own system's customer number, often called an external ID</li>
+</ul>
+
+<h3>What it stores</h3>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Data type</th><th>Examples</th></tr></thead>
+    <tbody>
+      <tr><td>Payment data</td><td>Credit and debit cards on file</td></tr>
+      <tr><td>Identity documents</td><td>Passports, driver's licenses, national IDs</td></tr>
+      <tr><td>Files</td><td>Tax returns, bank statements, contracts, medical forms</td></tr>
+      <tr><td>Signatures</td><td>Retainers, waivers, authorization and consent forms</td></tr>
+      <tr><td>Sensitive fields</td><td>SSNs, dates of birth, tax IDs, policy numbers</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h2>How does a secure customer vault work?</h2>
+<p><strong>A secure customer vault works by sending customers a branded intake link, encrypting and tokenizing what they submit, routing it to a staff inbox and keeping it on one profile for later use.</strong></p>
+<p>Follow the travel agency's next booking through the five steps.</p>
+
+<h3>Step 1: Create a branded intake link</h3>
+<p>An agent creates a secure link for the Costa family's trip. The link carries the agency's logo and asks only for what this booking needs:</p>
+<ul>
+  <li>Passport scans for four travelers</li>
+  <li>One card for the deposit</li>
+  <li>A signed travel waiver</li>
+</ul>
+<p>Agents create links in the web app, or the booking system generates one automatically through the API.</p>
+
+<h3>Step 2: Customer submits without an account</h3>
+<p>Mrs. Costa opens the link on her phone. She uploads the passports and enters the card, then signs the waiver with her finger on the same page.</p>
+<p><strong>What she does not need:</strong> an app download, an account, a password or a separate e-signature tool.</p>
+<p>The agency's name and logo on the page tell her who is asking, which matters when clients distrust unexpected requests for passport scans.</p>
+
+<h3>Step 3: Data is encrypted and tokenized</h3>
+<p>As she submits, the vault does the protective work:</p>
+<ol>
+  <li>The card is tokenized at capture.</li>
+  <li>Files and signatures are encrypted in transit and at rest.</li>
+  <li>Sensitive fields, such as passport numbers, are tokenized.</li>
+</ol>
+<p>Nothing lands in an email inbox or on the agency's own server.</p>
+
+<h3>Step 4: Staff review in a shared inbox</h3>
+<p>The submission appears in the agency's secure inbox. An agent checks that all four passports arrived and assigns the submission to the Costa family's profile. If something is missing, a new link goes out in seconds.</p>
+<p>Shared review means no single agent's inbox becomes the archive, and colleagues can pick up work when someone is on leave.</p>
+
+<h3>Step 5: Use or share data from one profile</h3>
+<p>When the agent books flights, the passport details are revealed for that task and the reveal is logged. When the hotel needs a copy of the signed waiver, it goes out through an expiring link with an optional password.</p>
+<p>Every step is written to the audit log. Next year, the agency starts from the same profile and requests only new or expired documents.</p>
+
+<h2>What are the key benefits of a secure customer vault?</h2>
+<p><strong>The key benefits of a secure customer vault are reduced PCI scope, lower breach exposure, faster repeat billing and onboarding, an end to email attachments and a full audit trail of who accessed what.</strong></p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Benefit</th><th>What changes for your team</th></tr></thead>
+    <tbody>
+      <tr><td>Reduced PCI scope</td><td>Card numbers stay out of your inboxes, CRM and servers</td></tr>
+      <tr><td>Lower breach exposure</td><td>A stolen laptop or hacked inbox holds no passports or cards</td></tr>
+      <tr><td>Faster repeat billing</td><td>Cards on file stay ready as tokens</td></tr>
+      <tr><td>Faster onboarding</td><td>One link collects everything, with fewer follow-ups</td></tr>
+      <tr><td>No more attachments</td><td>Files are requested and shared through secure links</td></tr>
+      <tr><td>Full audit trail</td><td>Every view, reveal and share is recorded</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h3>Reduced PCI scope</h3>
+<p>PCI DSS applies to every system that stores, processes or transmits card data. When cards are tokenized at capture, these systems typically stop touching card numbers:</p>
+<ul>
+  <li>Staff email and shared inboxes</li>
+  <li>CRM and booking software</li>
+  <li>Call notes and spreadsheets</li>
+</ul>
+<p>Fewer systems in scope means fewer controls to evidence. Your acquirer or QSA confirms the final scope.</p>
+
+<h3>Lower breach exposure</h3>
+<p>Most leaks start with an ordinary account, such as a phished inbox or a laptop left in a taxi.</p>
+<p><strong>Before a vault:</strong> a phished inbox exposes years of passport scans and card details.</p>
+<p><strong>After a vault:</strong> the same inbox holds intake notifications and nothing an attacker can use.</p>
+
+<h3>Faster repeat and recurring billing</h3>
+<p>A tokenized card is ready the next time the client books or renews.</p>
+<p><strong>Example:</strong> a catering company serving the same corporate client every month keeps that card on file and bills each order without another call to the client's finance team.</p>
+
+<h3>Faster client onboarding</h3>
+<p>One link replaces the back-and-forth of "please also send…" emails.</p>
+<ul>
+  <li>Each client gets a link with only the fields they need to complete</li>
+  <li>Clients finish on a phone in one sitting</li>
+  <li>Staff see at a glance which submissions are complete and which need a follow-up</li>
+</ul>
+
+<h3>No more email attachments</h3>
+<p>Documents arrive through the vault and leave through expiring links. That removes the forwarded attachment, one of the easiest ways for files to reach the wrong person.</p>
+<p><strong>Both directions:</strong> a tax firm collects W-2s through the vault and sends the completed return back through a protected link.</p>
+
+<h3>Full audit trail</h3>
+<p>Every action is logged with the user ID, action type, time and affected record, so hard questions become quick lookups:</p>
+<ul>
+  <li>Who revealed this client's card number last quarter?</li>
+  <li>Was the signed retainer downloaded, and by whom?</li>
+  <li>Which staff accounts opened this profile before it was deleted?</li>
+</ul>
+
+<h2>What can you store in a secure customer vault besides cards?</h2>
+<p><strong>Besides cards, you can store government IDs and passports, legal and tax files, medical intake forms, e-signatures and consent records, and custom sensitive fields such as SSNs and policy numbers.</strong></p>
+<p>This is where you will see the biggest difference between a customer vault and a payment gateway vault, which stops at cards.</p>
+
+<h3>Government IDs and passports</h3>
+<p>Travel agencies and property managers collect ID scans almost daily. In a vault, each scan is an encrypted file tied to the right person, and the passport number can sit in its own tokenized field for quick, logged reveals.</p>
+<p><strong>Common uses:</strong> identity checks for rental applicants, passport details for international bookings and ID verification before a law firm opens a new matter.</p>
+
+<h3>Legal and tax files</h3>
+<p><strong>Typical files:</strong> tax returns, W-2s and 1099s, bank statements, evidence bundles, signed engagement letters</p>
+<p><strong>Why it matters:</strong> these documents carry account numbers and income details, and they tend to pile up in inboxes during busy seasons.</p>
+<p><strong>How a vault helps:</strong> each client gets their own link, staff see which files have arrived, and finished work goes back through a protected, expiring link.</p>
+
+<h3>Medical intake forms</h3>
+<p>Clinics collect these before the first visit:</p>
+<ul>
+  <li>Medical history forms</li>
+  <li>Insurance card images</li>
+  <li>Signed consent</li>
+</ul>
+<p>A vault keeps them encrypted and away from scheduling tools that only need the appointment time, and patients finish at home, which shortens check-in.</p>
+
+<h3>E-signatures and consent</h3>
+<p>Signatures captured on the intake page are stored encrypted, with a record of when they were given. Typical documents:</p>
+<ul>
+  <li>Retainers and engagement letters</li>
+  <li>Card authorization forms</li>
+  <li>Leases and event contracts</li>
+  <li>Waivers and consent forms</li>
+</ul>
+
+<h3>Custom sensitive fields</h3>
+<p>Some of your most sensitive data is a single number. A good vault offers presets and custom fields, with validation that stops a client from submitting an eight-digit SSN.</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Field</th><th>Typical use</th></tr></thead>
+    <tbody>
+      <tr><td>SSN</td><td>Tax preparation, tenant screening</td></tr>
+      <tr><td>Driver's license</td><td>Rental applications, vehicle hire</td></tr>
+      <tr><td>Passport number</td><td>International travel bookings</td></tr>
+      <tr><td>Date of birth</td><td>Patient records, insurance quotes</td></tr>
+      <tr><td>Tax ID</td><td>Business clients, vendor onboarding</td></tr>
+      <tr><td>Custom pattern</td><td>Policy, member or loyalty numbers</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>Each field is tokenized on save, with the same reveal, hide and delete controls as a card.</p>
+
+<h2>Why do businesses need a secure customer vault?</h2>
+<p><strong>Businesses need a secure customer vault because cards and IDs arrive through email, phone and chat, sit in inboxes and shared drives, get chased manually and leave no record of who accessed them.</strong></p>
+<p>If you run an intake desk, you will likely recognize at least three of these six problems.</p>
+
+<h3>Card details arrive by email, phone and fax</h3>
+<p>An agent writes a number on a sticky note during a call, a fax lands in a shared tray and an email with "card details" sits unencrypted in three mailboxes.</p>
+<p>Each copy is in PCI scope, and none can be deleted with confidence.</p>
+
+<h3>IDs and passports sit in staff inboxes</h3>
+<p>Nobody decided to build an archive of identity documents, yet most offices have one.</p>
+<p><strong>Where a single passport scan ends up:</strong></p>
+<ul>
+  <li>The receiving inbox and sent folder</li>
+  <li>Every colleague's inbox it was forwarded to</li>
+  <li>Mail apps on each person's phone</li>
+  <li>Backups of all of the above</li>
+</ul>
+
+<h3>Staff chase missing documents manually</h3>
+<p><strong>The usual loop:</strong> request, wait, remind, receive half, remind again.</p>
+<p>Each round trip delays onboarding and adds another thread of sensitive files. In tax season, the chasing alone can take hours every week.</p>
+
+<h3>Every copy widens PCI and privacy risk</h3>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Where the copy lives</th><th>Why it matters</th></tr></thead>
+    <tbody>
+      <tr><td>Inboxes and archives</td><td>Kept for years, searchable by anyone with access</td></tr>
+      <tr><td>Laptops and phones</td><td>Downloaded attachments travel with the device</td></tr>
+      <tr><td>Shared drives</td><td>Links get forwarded, and permissions drift</td></tr>
+      <tr><td>CRM notes</td><td>Broad staff access, exports and backups</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h3>Sharing files means sending attachments</h3>
+<p>When a lender or co-counsel needs a document, staff attach it to an email. That copy never expires and can be forwarded by anyone who receives it.</p>
+<p><strong>What staff need:</strong> a way to send the file that expires on its own, with a record of who downloaded it.</p>
+
+<h3>No record of who accessed customer data</h3>
+<p>Email and shared drives were never designed to answer "who opened this passport?"</p>
+<p>Without that record, incident reviews become guesswork, and a deletion request under laws such as the CCPA turns into a manual search of every inbox.</p>
+
+<h2>Secure customer vault vs email, forms and shared drives</h2>
+<p><strong>A secure customer vault encrypts, tokenizes and logs every submission in one controlled place, whereas email, generic forms and shared drives spread copies that are hard to track, expire or delete.</strong></p>
+<p>Each channel below moves the file. The risk starts once it arrives, so here is how each compares with a secure customer vault.</p>
+
+<h3>Secure customer vault vs email attachments</h3>
+<p>Every email recipient holds a permanent copy, and one wrong autocomplete can send a passport to a stranger.</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Factor</th><th>Email attachments</th><th>Secure customer vault</th></tr></thead>
+    <tbody>
+      <tr><td>Encryption</td><td>Depends on both mail servers, files sit readable in mailboxes</td><td>Encrypted in transit and at rest</td></tr>
+      <tr><td>Forwarding</td><td>Anyone can forward to anyone</td><td>Files leave only through controlled links</td></tr>
+      <tr><td>Retention</td><td>Copies stay in inboxes and backups for years</td><td>One copy, deleted from the profile when no longer needed</td></tr>
+      <tr><td>Audit</td><td>No record of who opened the file</td><td>Every view, reveal and download logged</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h3>Secure customer vault vs fax</h3>
+<p>A faxed page sits in a tray until someone collects it, and many fax lines now land in a shared inbox anyway.</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Factor</th><th>Fax</th><th>Secure customer vault</th></tr></thead>
+    <tbody>
+      <tr><td>Who can see it</td><td>Anyone near the machine or with inbox access</td><td>Only staff with the right role</td></tr>
+      <tr><td>Card handling</td><td>Card number on paper or a scanned PDF</td><td>Card tokenized at capture</td></tr>
+      <tr><td>Filing</td><td>Manual scanning and naming</td><td>Assigned to the customer profile from the inbox</td></tr>
+      <tr><td>Client effort</td><td>Find a fax machine or app</td><td>Open a link on a phone</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h3>Secure customer vault vs generic web forms</h3>
+<p>A form can use HTTPS and still create an unsafe workflow. Submissions often get copied into notification emails and spreadsheets the moment they arrive.</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Factor</th><th>Generic web forms</th><th>Secure customer vault</th></tr></thead>
+    <tbody>
+      <tr><td>Card data</td><td>Stored with other form answers unless a payment add-on is used</td><td>Tokenized the moment it is entered</td></tr>
+      <tr><td>Copies</td><td>Notification emails, spreadsheet exports, connected apps</td><td>One encrypted record on the profile</td></tr>
+      <tr><td>Sensitive fields</td><td>Free text with little validation</td><td>SSN, passport and tax ID presets with validation</td></tr>
+      <tr><td>Access control</td><td>Anyone with the form account login</td><td>Role-based access with logged reveals</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h3>Secure customer vault vs shared drives</h3>
+<p>Over time, shared links get forwarded and access piles up, so a folder of client IDs can stay visible to people who left the project months ago.</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Factor</th><th>Shared drives</th><th>Secure customer vault</th></tr></thead>
+    <tbody>
+      <tr><td>Link lifetime</td><td>Links often stay live until someone revokes them</td><td>Links expire on their own, for example after 24 hours</td></tr>
+      <tr><td>Passwords</td><td>Rarely set on shared links</td><td>Optional password on each link</td></tr>
+      <tr><td>Tracking</td><td>Limited view of who downloaded what</td><td>Download tracking on every link</td></tr>
+      <tr><td>Organization</td><td>Folders built by hand for each client</td><td>One profile per customer</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h3>Secure customer vault vs CRM notes and spreadsheets</h3>
+<p>A card or SSN typed into a CRM notes field is visible to every user with record access and copied into every export.</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Factor</th><th>CRM notes and spreadsheets</th><th>Secure customer vault</th></tr></thead>
+    <tbody>
+      <tr><td>Visibility</td><td>Every user with access to the record</td><td>Masked by default, revealed by role</td></tr>
+      <tr><td>Exports and backups</td><td>Raw values copied into each one</td><td>Only tokens leave the vault</td></tr>
+      <tr><td>PCI scope</td><td>The CRM joins your cardholder data environment</td><td>The CRM holds tokens and can often stay out of scope</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><strong>A cleaner pattern:</strong> keep the customer vault ID in the CRM, and open the profile when someone needs the real value.</p>
+
+<h3>Secure customer vault vs messaging apps</h3>
+<p>Clients like sending photos by chat. Those images then live on staff phones and personal backups that the business cannot manage or wipe.</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Factor</th><th>Messaging apps</th><th>Secure customer vault</th></tr></thead>
+    <tbody>
+      <tr><td>Where data lives</td><td>Staff phones and personal cloud backups</td><td>Your own isolated tenant in the vault</td></tr>
+      <tr><td>Business control</td><td>None once the photo is sent</td><td>Reveal, hide and delete controls</td></tr>
+      <tr><td>Staff offboarding</td><td>Photos leave with the employee's phone</td><td>Access ends when the staff account is removed</td></tr>
+      <tr><td>Client experience</td><td>Quick and unbranded</td><td>Just as quick on a phone, under your brand</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h2>What features should a secure customer vault include?</h2>
+<p><strong>A secure customer vault should include branded intake forms, customer profiles, a staff inbox, secure file sharing, e-signatures, passkeys and MFA, tenant isolation, audit logs and an API.</strong></p>
+<p>Here is what we would look for in each feature before shortlisting a vendor.</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Feature</th><th>What to look for</th></tr></thead>
+    <tbody>
+      <tr><td>Branded intake forms</td><td>Your logo and colors, no customer account needed</td></tr>
+      <tr><td>Customer profiles</td><td>Cards, files, signatures and fields on one record</td></tr>
+      <tr><td>Shared staff inbox</td><td>Review, assign and follow up on submissions</td></tr>
+      <tr><td>Secure file sharing</td><td>Expiring links, passwords and download tracking</td></tr>
+      <tr><td>Electronic signatures</td><td>Captured on the form and stored with an audit trail</td></tr>
+      <tr><td>Passkeys and MFA</td><td>Phishing-resistant staff sign-in that admins can require</td></tr>
+      <tr><td>Tenant isolation and audit logs</td><td>Your data kept apart, every action recorded</td></tr>
+      <tr><td>API and webhooks</td><td>Create customers and links, get notified on new submissions</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h3>Branded intake forms</h3>
+<p>Clients trust a link that looks like your business, and branding eases phishing worries.</p>
+<ul>
+  <li>Your logo and brand colors on every link</li>
+  <li>Public links that need no customer account</li>
+  <li>One form that mixes cards, file uploads, signatures and sensitive fields</li>
+</ul>
+
+<h3>Customer profiles</h3>
+<p>One profile per client ends the search across inboxes. From a single dashboard, staff can search and page through customer records and see each one's stored data and recent activity at a glance. Every sensitive value on a profile should carry three controls:</p>
+<ul>
+  <li><strong>Reveal:</strong> shows the full value to an authorized user, and the reveal is logged</li>
+  <li><strong>Hide:</strong> masks it again when the task is done</li>
+  <li><strong>Delete:</strong> removes it once you no longer need it</li>
+</ul>
+
+<h3>Shared staff inbox</h3>
+<p>New submissions land in one place, where the team assigns them to profiles and spots what is missing.</p>
+<p><strong>Why it matters:</strong> if the agent who sent the link is out, a colleague picks up the submission.</p>
+
+<h3>Secure file sharing</h3>
+<p>When a file has to leave, it should leave on your terms:</p>
+<ul>
+  <li>Links that expire, for example after 24 hours</li>
+  <li>Optional passwords</li>
+  <li>Download tracking</li>
+</ul>
+<p>Files should be encrypted with a strong standard such as AES-256-GCM, and every download should be logged.</p>
+
+<h3>Electronic signatures</h3>
+<p>Signing during intake saves a second tool and a second email. Look for:</p>
+<ul>
+  <li>Canvas-based capture, so clients sign with a finger or mouse on the intake page</li>
+  <li>Encrypted storage linked to the right customer record</li>
+  <li>A timestamp and audit entry for every signature</li>
+</ul>
+
+<h3>Passkeys and MFA</h3>
+<p>Staff accounts are the keys to the vault. Passkeys on WebAuthn and FIDO2 replace the password with a cryptographic key on the staff member's device, so there is no password for an attacker to phish.</p>
+<p><strong>Also check for:</strong></p>
+<ul>
+  <li>Authenticator app (TOTP) codes as a second sign-in option</li>
+  <li>An admin setting that requires MFA on every staff account</li>
+</ul>
+
+<h3>Tenant isolation and audit logs</h3>
+<p>Your data should be separated from every other customer of the vault, with clear limits inside your own team.</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Control</th><th>What to look for</th></tr></thead>
+    <tbody>
+      <tr><td>Tenant isolation</td><td>Data, credentials and branding scoped to your organization</td></tr>
+      <tr><td>Role-based access</td><td>Reveal rights limited to the roles that need them</td></tr>
+      <tr><td>Audit log</td><td>User ID, action type, timestamp and affected record for every action</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h3>API and webhooks</h3>
+<p>Engineering teams can create customers and intake links through an API and receive webhooks for events such as:</p>
+<ul>
+  <li>File uploaded</li>
+  <li>Card submitted</li>
+  <li>Signature captured</li>
+  <li>Field saved</li>
+</ul>
+<p>Each payload should be signed, commonly with HMAC-SHA256, so your system can verify it.</p>
+
+<h2>Who needs a secure customer vault? Industries and use cases</h2>
+<p><strong>Businesses that need a secure customer vault are intake-heavy teams such as clinics, law firms, tax practices, clubs, hospitality, travel, property and insurance firms that collect client data daily.</strong></p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Industry</th><th>What clients send</th><th>Typical first use</th></tr></thead>
+    <tbody>
+      <tr><td>Health clinics</td><td>Intake forms, insurance cards, consent</td><td>Pre-visit intake without email or fax</td></tr>
+      <tr><td>Law firms</td><td>IDs, evidence, signed retainers</td><td>New-matter intake before a workspace exists</td></tr>
+      <tr><td>Accounting and tax firms</td><td>Tax returns, SSNs, bank statements</td><td>Seasonal document requests</td></tr>
+      <tr><td>Membership clubs</td><td>Cards on file, waivers, family details</td><td>Member onboarding and renewals</td></tr>
+      <tr><td>Restaurants and hospitality</td><td>Deposits, event contracts</td><td>Private events and group bookings</td></tr>
+      <tr><td>Travel agencies</td><td>Passports, cards, traveler details</td><td>Booking intake for groups and families</td></tr>
+      <tr><td>Property management</td><td>Rental applications, IDs, income proof</td><td>Applicant screening</td></tr>
+      <tr><td>Insurance agencies</td><td>Applications, claims evidence, signatures</td><td>New policies and claims</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h3>Health clinics: patient intake, insurance cards and consent</h3>
+<p>Patients complete history forms and sign consent before they arrive, with insurance cards uploaded alongside. PHI stays out of email.</p>
+<p><strong>Share back:</strong> test results and care summaries go back to patients through expiring, password-protected links. Confirm a Business Associate Agreement with the vendor first.</p>
+
+<h3>Law firms: client IDs, evidence and signed retainers</h3>
+<p>Prospective clients often send documents before a conflict check, so a vault keeps them restricted until the matter is accepted. Typical new-matter intake:</p>
+<ul>
+  <li>Signed retainers and engagement letters</li>
+  <li>Sensitive case documents and evidence</li>
+  <li>Payment details for the retainer</li>
+</ul>
+<p>Filings go out through expiring links, with a download record for each.</p>
+
+<h3>Accounting and tax firms: tax returns, SSNs and bank statements</h3>
+<p>Client-specific links collect each document once, and staff can see which clients are complete.</p>
+<p><strong>Collect:</strong> W-2s, 1099s, bank statements and prior-year returns</p>
+<p><strong>Deliver:</strong> completed returns through protected, expiring links</p>
+
+<h3>Membership clubs: cards on file, waivers and family details</h3>
+<p>Clubs keep a card for dues and paperwork for every family member. One onboarding link can carry:</p>
+<ol>
+  <li>The dues card, stored as a token</li>
+  <li>A signed membership agreement</li>
+  <li>ID documents</li>
+  <li>Waivers for each family member</li>
+</ol>
+
+<h3>Restaurants and hospitality: deposits and event contracts</h3>
+<p>Private events need a deposit card and a signed contract, and both arrive through one link.</p>
+<p><strong>Catering:</strong> a corporate client's card stays on file for recurring orders, and invoices go out through secure links.</p>
+
+<h3>Travel agencies: passports, cards and traveler details</h3>
+<p>Group trips mean many passports and at least one card.</p>
+<ul>
+  <li><strong>Booking:</strong> passport numbers are revealed only when tickets are issued</li>
+  <li><strong>Travel documents:</strong> itineraries and visas go out through time-limited links</li>
+</ul>
+
+<h3>Property management: rental applications, IDs and income proof</h3>
+<p>A vault keeps applicant files out of leasing agents' inboxes and makes deletion simple once screening ends.</p>
+<ul>
+  <li>Rental applications and ID copies</li>
+  <li>Signed leases</li>
+  <li>Deposit payments</li>
+  <li>Renewal documents, kept on the tenant's profile</li>
+</ul>
+
+<h3>Insurance agencies: applications, claims evidence and signatures</h3>
+<p>New policies bring signed disclosures, IDs and payment cards.</p>
+<p><strong>Claims:</strong> correspondence goes out through auditable links, so the agency can show who received what and when.</p>
+<p>If the first step of your process is asking a client to send something sensitive, a secure customer vault belongs at that step, whatever your industry.</p>
+
+<h2>Payment gateway vault vs secure customer intake vault</h2>
+<p><strong>A payment gateway vault stores cards so one processor can charge them again, whereas a secure customer intake vault collects cards, documents, signatures and sensitive fields on one profile.</strong></p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Factor</th><th>Payment gateway vault</th><th>Secure customer intake vault</th></tr></thead>
+    <tbody>
+      <tr><td>Main job</td><td>Save cards for repeat charges</td><td>Collect and protect all sensitive client data</td></tr>
+      <tr><td>What it holds</td><td>Cards</td><td>Cards, IDs, files, signatures, sensitive fields</td></tr>
+      <tr><td>Who uses it</td><td>Billing and finance</td><td>Intake, operations and client services teams</td></tr>
+      <tr><td>Customer experience</td><td>Card form at checkout</td><td>Branded link for cards, files and signatures</td></tr>
+      <tr><td>Sharing files out</td><td>Outside its purpose</td><td>Expiring, password-protected links</td></tr>
+      <tr><td>Tied to</td><td>One payment processor</td><td>Your workflow, across channels</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h3>Gateway vaults: stored cards for repeat charges</h3>
+<p>A gateway vault saves a card and gives you a customer vault ID for future charges through that processor.</p>
+<p><strong>Works well for:</strong> subscriptions and saved cards at checkout.</p>
+<p><strong>Limits to know:</strong></p>
+<ul>
+  <li>It holds cards only</li>
+  <li>Cards often stay with that processor, so switching can require a migration</li>
+  <li>IDs, contracts and signatures need a separate home</li>
+</ul>
+
+<h3>Intake vaults: cards, documents and signatures in one profile</h3>
+<p>An intake vault solves the step before billing: collecting what clients send, safely, and keeping it organized for your staff.</p>
+<p>Picture a law firm onboarding a new client. The retainer is signed, the ID is uploaded and the card for the retainer fee is tokenized, all through one link and all on one profile.</p>
+
+<h3>Which one your business needs</h3>
+<ul>
+  <li><strong>Only recurring card charges?</strong> A gateway vault may be enough.</li>
+  <li><strong>Cards plus documents, signatures and IDs?</strong> You need an intake vault.</li>
+  <li><strong>Both?</strong> Many teams use an intake vault for collection and a gateway or card vault for charging.</li>
+</ul>
+<p>Our quick test: list everything your team asks clients to send. If the list has more than cards on it, a gateway vault alone will leave the rest in email.</p>
+
+<h2>Is a secure customer vault PCI and HIPAA compliant?</h2>
+<p><strong>A secure customer vault supports PCI DSS and HIPAA requirements through tokenization, encryption and audit logs, while compliance still depends on vendor certifications, contracts and your own use.</strong></p>
+<p>No tool makes a business compliant on its own. Here is how we see the split between the vault and your team.</p>
+
+<h3>PCI DSS Level 1 infrastructure</h3>
+<p>Look for PCI DSS Level 1 certified infrastructure, the highest tier for service providers, assessed annually by a Qualified Security Assessor. Ask for the current Attestation of Compliance.</p>
+<p><strong>What tokenization changes for you:</strong></p>
+<ul>
+  <li>Staff tools no longer store card numbers</li>
+  <li>Card data is captured directly into the vault</li>
+  <li>Reveals are limited to authorized roles and logged</li>
+</ul>
+<p>That can shrink your own scope. Your acquirer or QSA confirms which SAQ applies to your setup.</p>
+
+<h3>HIPAA and health data</h3>
+<p>If you are a covered entity or business associate, any vendor that stores PHI for you must sign a Business Associate Agreement.</p>
+<p>Encryption and audit logs support the HIPAA Security Rule's safeguards, and collecting only the minimum necessary fields supports its privacy expectations.</p>
+<p><strong>Questions to ask before storing PHI:</strong></p>
+<ul>
+  <li>Will you sign a BAA?</li>
+  <li>Where is the data stored, and who at the vendor can access it?</li>
+  <li>How are access logs kept and exported?</li>
+</ul>
+
+<h3>Your remaining responsibilities</h3>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>The vault provides</th><th>Your team provides</th></tr></thead>
+    <tbody>
+      <tr><td>Encryption and tokenization</td><td>Choosing which fields to collect</td></tr>
+      <tr><td>Role-based access controls</td><td>Deciding who gets reveal rights</td></tr>
+      <tr><td>Audit logging</td><td>Reviewing logs and acting on them</td></tr>
+      <tr><td>Delete controls</td><td>Retention and deletion schedules</td></tr>
+      <tr><td>Certified infrastructure</td><td>Staff training and vendor agreements</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>The program around the tool, from training to incident response, stays yours.</p>
+
+<h2>Turnkey app or API: how to deploy a secure customer vault</h2>
+<p><strong>You can deploy a secure customer vault as a turnkey web app your operations team uses the same day, or embed it in your own systems through an API and webhooks, and many teams use both.</strong></p>
+
+<h3>Turnkey web app for operations teams</h3>
+<p>A turnkey app needs no developer, migration or database changes, so it runs standalone from day one.</p>
+<p><strong>What a same-day rollout looks like:</strong></p>
+<ol>
+  <li>Set up your branding and staff accounts</li>
+  <li>Require MFA for every user</li>
+  <li>Send the first intake link to a real client</li>
+  <li>Assign the submission to a profile</li>
+</ol>
+<p><strong>Best for:</strong> clinics and small firms without an engineering team, or any team that wants results this week.</p>
+
+<h3>Embedded via API and webhooks</h3>
+<p>Engineering teams can wire the vault into their own software. A full API lets you:</p>
+<ul>
+  <li>Create a customer and receive their intake URL in one call</li>
+  <li>Receive signed webhooks when a file, card, signature or field arrives</li>
+  <li>Poll status for quick counts or full detail, using your own external ID</li>
+  <li>Set the webhook URL and signing secret, with the secret kept write-only</li>
+</ul>
+<p><strong>Best for:</strong> SaaS platforms and larger firms that want intake to start automatically from their CRM or client portal.</p>
+
+<h3>Using both</h3>
+<p>We usually suggest starting with the web app, then adding API calls. A property manager might send links by hand in its first leasing season, then connect its applicant portal so every application triggers a link.</p>
+<p>Records collected by hand are already waiting behind the API, so the switch needs no retraining.</p>
+
+<h2>How to choose a secure customer vault</h2>
+<p><strong>Choosing a secure customer vault is a process of checking its certifications, supported data types, payment compatibility, migration path, trial options and pricing against your intake workflow.</strong></p>
+<p>These are the questions we would ask before signing:</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Check</th><th>Question to ask the vendor</th></tr></thead>
+    <tbody>
+      <tr><td>Security certifications</td><td>Can we see your PCI DSS Level 1 Attestation of Compliance and SOC 2 report?</td></tr>
+      <tr><td>Supported data types</td><td>Can one link collect cards, files, signatures and custom fields?</td></tr>
+      <tr><td>Payment provider compatibility</td><td>How can stored cards be used with our processor?</td></tr>
+      <tr><td>Migration</td><td>Can you receive cards from our current vault through a PCI DSS compliant transfer?</td></tr>
+      <tr><td>Trial, sandbox or demo</td><td>Can our team test a real intake flow before we commit?</td></tr>
+      <tr><td>Pricing model</td><td>Is pricing per user, per submission or by engagement?</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h3>Security certifications</h3>
+<p>Ask for documents your auditors will accept:</p>
+<ul>
+  <li>PCI DSS Attestation of Compliance</li>
+  <li>SOC 2 Type II report, if the vendor has one</li>
+  <li>A written summary of encryption and key management</li>
+</ul>
+
+<h3>Supported data types</h3>
+<p>Map one real client journey, such as onboarding a new tax client, and check each item against the vault:</p>
+<ol>
+  <li>Cards and payment details</li>
+  <li>Files and ID scans</li>
+  <li>Signatures</li>
+  <li>Custom fields such as SSN or policy number</li>
+</ol>
+<p>Anything it cannot handle will drift back into email.</p>
+
+<h3>Payment provider compatibility</h3>
+<p>Some vaults work only with their own gateway, while others pass cards to the processor you already use.</p>
+<p><strong>Ask directly:</strong></p>
+<ul>
+  <li>Can stored cards be used with the processor we have today?</li>
+  <li>Are there fees or contract terms tied to using our own gateway?</li>
+</ul>
+
+<h3>Migration from your current vault</h3>
+<p>Cards move provider to provider through an encrypted transfer that follows PCI DSS. Ask both vendors how they handle it.</p>
+<p>Plan for three things:</p>
+<ol>
+  <li>The export format your current provider supports</li>
+  <li>Who handles the encrypted transfer</li>
+  <li>A cut-over date after which new cards go to the new vault</li>
+</ol>
+
+<h3>Free trial, sandbox or demo</h3>
+<p>Run one real workflow end to end: send a link, submit as a client, review in the inbox and share a file out.</p>
+<p><strong>Test with real staff:</strong> the people who answer the phone and chase documents will spot gaps that a polished demo hides.</p>
+
+<h3>Pricing model</h3>
+<p>Model your busiest month, especially if you are a seasonal business.</p>
+<ul>
+  <li><strong>Seat-based:</strong> predictable for small teams with steady headcount</li>
+  <li><strong>Per submission:</strong> suits low or uneven volume</li>
+  <li><strong>By engagement:</strong> quoted around your workflow and volume</li>
+</ul>
+
+<h2>Enigma Customer Vault: collect and share customer data securely</h2>
+<p><a class="bl-link" href="https://www.enigmavault.io/vault/customer-vault/">Enigma Customer Vault</a> replaces email, fax and shared drives with branded intake links your clients use without an account. Cards are tokenized at capture, files and signatures are encrypted with AES-256-GCM, and everything lands in a shared staff inbox and one customer profile, with every reveal logged. Staff sign in with passkeys and enforceable MFA, files go out through expiring links, and it all runs on PCI DSS Level 1 infrastructure with tenant isolation and a full audit log. Your team can go live the same day, and when engineering is ready, the same records are available through the API and signed webhooks. <a class="bl-link" href="https://www.enigmavault.io/vault/customer-vault/">Request a demo of Enigma Customer Vault</a> and stop collecting sensitive data through email.</p>

@@ -162,7 +162,7 @@
 .vp-cta__h{font-family:var(--font-display);font-size:23px;font-weight:500;letter-spacing:-0.014em;line-height:1.28;color:var(--text-heading);margin:0;max-width:56ch;text-wrap:pretty;}
 .vp-cta__btns{display:flex;gap:12px;flex-wrap:wrap;flex:none;}
 @media (max-width:1023px){.vp-cta__inner{padding:28px 40px;}}
-@media (max-width:600px){.vp-cta__inner{padding:24px 22px;}.vp-cta__h{font-size:20px;}}
+@media (max-width:600px){.vp-cta__inner{padding:24px 22px;}.vp-cta__h{font-size:20px;}.vp-cta__btns{flex:1 1 100%;min-width:0;}}
 
 /* ---------- Code panel ---------- */
 .vp-code{margin-top:36px;background:#0A1A2E;border-radius:12px;overflow:hidden;max-width:900px;border:1px solid rgba(255,255,255,.08);}

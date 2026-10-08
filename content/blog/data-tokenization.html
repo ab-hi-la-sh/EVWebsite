@@ -1,0 +1,348 @@
+---
+title: "Data Tokenization: Use Cases and How to Choose the Right Solution"
+titleEmphasis: "How to Choose the Right Solution"
+slug: "data-tokenization"
+layout: "pii-style"
+metaTitle: "What Is Data Tokenization? Use Cases & How to Choose a Solution"
+description: "Data tokenization replaces sensitive data with random tokens kept in a secure vault. Learn how it works, top use cases and what to look for in a solution."
+subtitle: "Data tokenization replaces sensitive values such as SSNs, bank account numbers and health details with random tokens that have no mathematical link to the original, while the real data stays encrypted inside a secure vault."
+date: 2026-10-07
+category: "Data Vault"
+allOnly: true
+author: "abhilash-kumar"
+readTime: 17
+heroImage: "/assets/blog/img-03.png"
+heroAlt: "Layered translucent panels representing sensitive data replaced by tokens"
+excerpt: "Data tokenization replaces sensitive values such as SSNs, bank account numbers and health details with random tokens, while the real data stays encrypted inside a secure vault. Here is how it works and how to choose a solution."
+tags: ["tokenization", "data-security", "pii", "encryption"]
+ogImage: "/assets/og/vault-data.jpg"
+ogImageAlt: "Data Tokenization: Use Cases and How to Choose the Right Solution | Enigma Vault"
+ogType: article
+styles: ["blog.css", "pages/blog-pii-hero.css", "tr-pages.css"]
+scripts: ["blog-article.js"]
+faqSchema: true
+faqs:
+  - q: "Is Tokenized Data Still Considered Personal Data Under GDPR?"
+    a: "Yes, for any organization that can map tokens back to real values. GDPR treats tokenized data as pseudonymised, so the business holding the vault keeps its full obligations."
+  - q: "Can a Token Be Reversed to Reveal the Original Data?"
+    a: "Only through the vault. A random token has no mathematical relationship to the original, so it can't be decoded. An authorized request to the vault is the single way back."
+  - q: "Is Data Tokenization More Secure Than Encryption?"
+    a: "Each protects something different. Tokenization keeps real values out of your applications, and encryption protects the values stored inside the vault. Strong setups use both."
+  - q: "Does Data Tokenization Reduce PCI DSS Scope?"
+    a: "It can. Systems that store only tokens may fall outside the cardholder data environment, though anything that detokenizes stays in scope. Your QSA confirms the final boundary."
+  - q: "Can You Search Tokenized Data Without Detokenizing It?"
+    a: "Yes, with deterministic tokens or exact-match lookup. The vault processes the search value the same way as the stored value and compares results, leaving stored records encrypted."
+  - q: "Is Data Tokenization the Same as Asset or NLP Tokenization?"
+    a: "No. Asset tokenization turns real-world assets into blockchain tokens, and NLP tokenization splits text into units for language models. Data tokenization protects sensitive values."
+---
+
+<p>Most companies can tell you where their customer database lives. Far fewer can tell you every place a customer's Social Security number has been copied since the day it was collected. It starts in an onboarding form, then shows up in a CRM note, a support ticket, a payroll export, a nightly analytics load and the backups of each. Every one of those copies has to be secured, monitored and eventually deleted.</p>
+
+<p>In this guide, we explain how it works, the token types you'll come across, where it fits in a business, how it compares with encryption and masking, and how to evaluate a solution.</p>
+
+<h2>Why Do Businesses Tokenize Sensitive Data Today?</h2>
+<p><strong>Businesses tokenize sensitive data because every copy of an SSN or account number in a CRM, log or report adds breach risk, while a token reveals nothing to an attacker, even when stolen.</strong></p>
+<p>Sensitive data rarely leaks from the system built to hold it. It leaks from the systems it drifted into. A support agent pastes an account number into a ticket to speed up a refund. An engineer logs a full API request while debugging and forgets to remove it. A finance team exports payroll data to a spreadsheet for an outside provider. None of these choices is malicious, yet each one creates a copy that sits outside your main security controls.</p>
+<p>Encryption alone doesn't fix this. Database encryption protects the bytes on disk, while any application, report or employee with query access still sees the real value, because the database decrypts it for them on every read.</p>
+<p>Data tokenization changes where the real value lives. The sensitive value is stored once, in an encrypted vault, and every other system receives a token instead. Your CRM, warehouse and support tools keep working with that token, and only a small number of approved services can ever turn it back into the original.</p>
+<p>The results show up quickly:</p>
+<ul>
+  <li><strong>Breach impact:</strong> a leaked table of tokens has no value without vault access.</li>
+  <li><strong>Audit effort:</strong> systems that hold only tokens carry less regulated data, which can reduce how much of your environment falls under standards such as PCI DSS v4.0.1.</li>
+  <li><strong>Everyday access:</strong> staff and vendors do their work with a token or a masked value, and far fewer people ever see the full SSN or account number. That narrows insider threats and third-party exposure at the same time.</li>
+</ul>
+<p>It also puts data minimization into practice, a principle behind GDPR and US state laws such as CCPA/CPRA: each system holds only what it needs to do its job.</p>
+
+<h2>What Is Data Tokenization?</h2>
+<p><strong>Data tokenization is a data security method that swaps a sensitive value for a randomly generated token, keeps the original in an encrypted vault and returns it only to authorized requests.</strong></p>
+<p>The idea is to separate the sensitive value from the business workflow. Your application keeps the customer record, the booking or the claim, and stores a token in the field where the sensitive value used to be. The vault keeps the real value, encrypted, and decides who may see it.</p>
+
+<h3>What Is a Token?</h3>
+<p>A token is a substitute value that stands in for the original inside your systems. Applications can store it, pass it between services and use it as a lookup key, yet it reveals nothing about the data behind it.</p>
+<p>What makes a token safe is how it's generated. A strong token comes from a cryptographically secure random number generator, so no formula, key or pattern leads back to the original. An SSN such as 123-45-6789 could be stored in your HR system as q3J9vX2mT8kLp0aZ4rWc1g. Anyone who steals that string has a random value and nothing more.</p>
+<p>Some tokens are deterministic, which means the same input always produces the same token. That matters when you need to match or join records, as we explain in the token types section.</p>
+
+<h3>What Is Detokenization?</h3>
+<p>Detokenization is the controlled reverse step. An authorized application or user sends a token to the vault, the vault checks the request against your access policies and, if allowed, returns the original value. A well-run system authenticates every request, limits which services can detokenize which fields and records each request in an audit log.</p>
+
+<h3>What Data Can You Tokenize?</h3>
+<p>Data tokenization works best on structured values that identify a person or unlock access to something.</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Category</th><th>Examples</th><th>Why it needs protection</th></tr></thead>
+    <tbody>
+      <tr><td>Personal identifiers</td><td>SSNs, passport and driver's license numbers, emails, phone numbers</td><td>They identify a person, and privacy and breach laws apply</td></tr>
+      <tr><td>Financial data</td><td>Bank account numbers, tax IDs, card numbers</td><td>High fraud value; card data also falls under PCI DSS</td></tr>
+      <tr><td>Health information</td><td>Diagnoses, prescriptions, lab results, member IDs</td><td>Becomes PHI under HIPAA when held by covered entities and their business associates</td></tr>
+      <tr><td>Credentials and secrets</td><td>Passwords, API keys, recovery codes</td><td>One leaked secret can open other systems</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>Files such as passport scans or tax returns hold several of these at once. They need protected file storage, while tokenization covers the structured fields you extract from them.</p>
+
+<h2>How Does Data Tokenization Work? A Step-by-Step Process</h2>
+<p><strong>Data tokenization works by sending each sensitive value to a vault that encrypts and stores it, then returning a random token your systems use everywhere the real value used to appear before.</strong></p>
+<p>Most data tokenization platforms follow the same lifecycle, whether you call them from a web app, a backend service or a data pipeline.</p>
+<ol>
+  <li><strong>Capture the value:</strong> Sensitive data is intercepted field by field where it enters your environment, such as a signup form, an API endpoint or a bulk migration job.</li>
+  <li><strong>Send it to the tokenization API:</strong> Your app passes the plaintext over an authenticated connection, using real-time tokenization for live traffic or batch tokenization for thousands of records at once.</li>
+  <li><strong>Encrypt and store the original:</strong> The vault encrypts the value with a key held outside your systems and stores it in isolated storage with strict access controls.</li>
+  <li><strong>Generate the token:</strong> A secure random generator creates the token. If you need matching, a deterministic option returns the same token every time that value appears.</li>
+  <li><strong>Replace the value in your systems:</strong> Your database, CRM and analytics tables store the token in the field where the SSN used to sit.</li>
+  <li><strong>Detokenize only on approved requests:</strong> When a payroll run, identity check or customer request needs the real value, an authorized service asks the vault for it.</li>
+  <li><strong>Manage the lifecycle:</strong> Records expire on the schedule you set, deletions remove the vault entry and every access lands in an audit log.</li>
+</ol>
+<p><strong>A quick example:</strong> a staffing platform collects a new worker's SSN and bank account during onboarding. Both values go to the vault in one API call, and the platform's database stores two tokens against the worker's ID. Recruiters, account managers and the analytics team work with those tokens every day. When payroll runs, only the payroll service may detokenize the bank account, and that request is logged.</p>
+
+<h2>What Types of Tokens Do Data Tokenization Platforms Use?</h2>
+<p><strong>Data tokenization platforms use random, deterministic, format-preserving and transient tokens, and the right choice depends on matching needs, legacy fields and how long access should last.</strong></p>
+<p>Token types differ in how they're generated and how they behave over time. Most teams use more than one, depending on the field. Payment industry guidance also distinguishes high-value tokens, which can stand in for the original in transactions, from low-value tokens that only reference it.</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Token type</th><th>How it behaves</th><th>Use it when</th></tr></thead>
+    <tbody>
+      <tr><td>Random</td><td>A new token every time, even for the same value</td><td>Records should never be linkable</td></tr>
+      <tr><td>Deterministic</td><td>The same input always gives the same token</td><td>You need joins, deduplication or exact-match search</td></tr>
+      <tr><td>Format-preserving</td><td>Keeps the length and character pattern of the original</td><td>Legacy fields validate on format</td></tr>
+      <tr><td>Transient</td><td>Expires after a set time-to-live (TTL)</td><td>Short workflows such as one-time sharing</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>Deterministic tokens deserve a closer look. They let your analytics team count unique customers or join two tables on a tokenized email without seeing a single real address, and referential integrity holds across every table. The same property means two systems holding the same token can be linked, so scope deterministic tokens to the systems that need them.</p>
+
+<h3>Vaulted vs Vaultless Tokenization</h3>
+<p>Vaulted tokenization keeps the encrypted original in a central vault and maps each token to it. Vaultless tokenization derives tokens mathematically, usually with format-preserving encryption such as the FF1 or FF3-1 modes defined in NIST SP 800-38G, so no lookup store exists.</p>
+<ul>
+  <li><strong>Vaulted:</strong> random tokens with no reversible link, per-record deletion and a single place to enforce access. The catch: it depends on the vault being fast and available.</li>
+  <li><strong>Vaultless:</strong> no lookup latency and easy scaling. Security rests entirely on one key, and you can't erase one person's data by deleting a record.</li>
+</ul>
+<p><strong>Static vs dynamic tokenization:</strong> static tokenization replaces values at rest in databases, files and data warehouse tables. Dynamic tokenization works in real time on data moving through APIs and applications, which helps protect systems you can't easily modify.</p>
+
+<h2>What Are the Top Data Tokenization Use Cases for Businesses?</h2>
+<p><strong>The top data tokenization use cases are protecting SSNs and account numbers, securing credentials, guarding health fields, handling deletions, cleaning PII from tools and sharing records.</strong></p>
+<p>Every strong data tokenization use case follows the same pattern. A business receives a sensitive value, copies it into everyday systems and later needs to use or share the real value again. Here's where that pattern shows up most.</p>
+
+<h3>Protecting SSNs and Bank Account Numbers in Production Databases</h3>
+<p>Onboarding is where most SSNs and bank details enter a business. HR, staffing and payroll teams collect them from new workers, while fintech, lending and wealth management platforms keep the same identifiers in their core databases.</p>
+<p><strong>Where the plaintext usually ends up:</strong></p>
+<ul>
+  <li>Spreadsheets and trackers built before payroll is set up</li>
+  <li>Application tables and their replicas</li>
+  <li>Nightly backups</li>
+  <li>Exports sent to payroll providers</li>
+</ul>
+<p>Tokenize at the point of entry, and every one of these holds a token. Only the step that needs the real number, such as a payroll run or account verification, can retrieve it.</p>
+
+<h3>Securing API Keys, Passwords and Credentials</h3>
+<p>A password pasted into a ticket stays readable long after the job is done. Managed service providers and outsourcing firms run into this daily.</p>
+<ul>
+  <li><strong>Before tokenization:</strong> client passwords and API keys sit in tickets and team chat, where anyone with access can copy them.</li>
+  <li><strong>After tokenization:</strong> the ticket holds a token, only the approved action retrieves the secret and every retrieval is logged with who asked and when.</li>
+</ul>
+
+<h3>Protecting HIPAA-Regulated Health Data</h3>
+<p>Which fields should a health insurer or benefits administrator tokenize first? Usually member identifiers, diagnoses, prescriptions and lab results, since these move across claims, case management and member service systems every day.</p>
+<p>Once they're tokenized, far fewer systems hold readable PHI. HIPAA still applies in full, including a business associate agreement with any vendor that stores PHI for you.</p>
+
+<h3>Processing GDPR, CCPA and DPDP Deletion Requests</h3>
+<p>When one customer's data sits in dozens of systems, every erasure request turns into a search project. Tokenization reduces it to three steps:</p>
+<ol>
+  <li>Find the customer's vault records using your own customer ID.</li>
+  <li>Delete those records.</li>
+  <li>Every token that pointed to them becomes meaningless across your stack.</li>
+</ol>
+<p>For routine retention, set an expiry period and records clear themselves on schedule.</p>
+
+<h3>Removing PII From Logs, CRMs and Support Tools</h3>
+<p>Some of the riskiest copies sit in tools nobody thinks of as sensitive.</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Tool</th><th>What leaks into it</th><th>Who usually adds it</th></tr></thead>
+    <tbody>
+      <tr><td>CRM notes</td><td>Identity answers and account numbers</td><td>Contact center and collections agents</td></tr>
+      <tr><td>Engineering logs</td><td>Full request bodies, SSNs included</td><td>Fintech application services</td></tr>
+      <tr><td>Analytics tables</td><td>The same values, copied for reporting</td><td>Data pipelines</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>Tokenize before data reaches these tools and they stay just as useful for support, debugging and reporting.</p>
+
+<h3>Sharing Sensitive Records With Vendors and Partners</h3>
+<p>Email creates a copy you can't take back. That's a real problem for wealth managers, payroll providers and service firms that regularly pass an account number or credential to someone outside the business. A one-time key avoids it: you generate a key for one record, the recipient reads the value once and the key expires on its own.</p>
+
+<h3>Linking Records for Analytics Without Exposing Identity</h3>
+<p><strong>Clinical research:</strong> the identity key stays in the vault, and analysts work with study-specific tokens. Re-identification stays with a small, authorized group.</p>
+<p><strong>Product and data teams:</strong> tokenizing inside the ETL pipeline means values land in a cloud data warehouse such as Snowflake, Databricks or BigQuery already protected. Deterministic tokens then let analysts join tables and remove duplicates without seeing real names or SSNs.</p>
+
+<h3>Tokenizing PII Before It Reaches an LLM</h3>
+<p>Applications that call language models can tokenize recognized personal data before a prompt leaves the app, then restore real values in the response. Because the tokens stay stable, the model can follow one customer across a conversation without knowing who they are. Our <a class="bl-link" href="/pii-tokenization-for-ai/">guide to PII tokenization for AI</a> covers this in detail.</p>
+
+<h2>Data Tokenization vs Encryption: What Is the Difference?</h2>
+<p><strong>Data tokenization replaces a value with an unrelated random token, whereas encryption scrambles it with an algorithm and a key, so anyone holding that key can reverse the encrypted data.</strong></p>
+<p>Encryption transforms data into ciphertext that only the right key can turn back into plaintext. Tokenization removes the value from your systems entirely and leaves a placeholder behind. The two answer different questions: encryption decides who can read stored bytes, and tokenization decides which systems hold the real value at all.</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Factor</th><th>Tokenization</th><th>Encryption</th></tr></thead>
+    <tbody>
+      <tr><td>Method</td><td>Swaps the value for a random token</td><td>Transforms the value with an algorithm and key</td></tr>
+      <tr><td>Mathematical link</td><td>None</td><td>Reversible with the key</td></tr>
+      <tr><td>If data leaks</td><td>Tokens are useless alone</td><td>Exposed if keys are compromised</td></tr>
+      <tr><td>Format</td><td>Can match existing fields when format-preserving</td><td>Usually changes length and characters</td></tr>
+      <tr><td>Analytics</td><td>Deterministic tokens support joins</td><td>Usually needs decryption first</td></tr>
+      <tr><td>Infrastructure</td><td>Needs a highly available vault</td><td>Can run locally</td></tr>
+      <tr><td>Best for</td><td>Structured fields reused across systems</td><td>Files, disks and data in transit</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>It helps to see what each control covers on its own:</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Control</th><th>What it protects</th><th>What it leaves open</th></tr></thead>
+    <tbody>
+      <tr><td>Encryption at rest</td><td>Stored bytes, without the key</td><td>Applications that can query and decrypt</td></tr>
+      <tr><td>TLS in transit</td><td>Data crossing a network</td><td>Who receives and stores the plaintext</td></tr>
+      <tr><td>Tokenization</td><td>Removes the real value from ordinary systems</td><td>Misuse by people with detokenize rights</td></tr>
+      <tr><td>Audit logging</td><td>Evidence of who did what</td><td>Prevention, by itself</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>In practice, you use them together. The vault encrypts every stored value, and your applications keep only the token.</p>
+
+<h2>Data Tokenization vs Data Masking: When to Use Each</h2>
+<p><strong>Use data tokenization when your business needs the original value again later, and use data masking when people downstream only need to see a hidden, partial or fake version of that value.</strong></p>
+<p>Masking hides data for display or testing. It's a good fit when nobody downstream will ever need the real value, such as a developer working with a copy of production data. Data tokenization fits when the business still has to act on the original later, such as paying a worker or verifying an identity.</p>
+<p>Masking comes in three common forms:</p>
+<ul>
+  <li><strong>Static masking:</strong> permanently replaces values in a copy of the data, typically for test and development databases.</li>
+  <li><strong>Dynamic masking:</strong> hides values at query time based on who's asking, such as showing support agents only the last four digits.</li>
+  <li><strong>Redaction:</strong> deletes the value outright, with no way to restore it.</li>
+</ul>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Question</th><th>Tokenization</th><th>Masking</th></tr></thead>
+    <tbody>
+      <tr><td>Can the original be restored?</td><td>Yes, through the vault</td><td>Static masking and redaction: no</td></tr>
+      <tr><td>Does matching still work?</td><td>Yes, with deterministic tokens</td><td>Usually no</td></tr>
+      <tr><td>Typical use</td><td>Production systems</td><td>Test data and display</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>Many teams combine the two: they tokenize in storage, then show staff a masked view for routine work. Two related terms often get mixed up here. Anonymization removes any path back to the person, and synthetic data replaces real records with generated ones, so neither lets you recover the original. Tokenization is a form of pseudonymisation under GDPR Article 4(5): re-identification remains possible, though only through the vault, so tokenized data stays personal data for anyone able to re-identify it.</p>
+
+<h2>What Are the Limits of Conventional Data Tokenization?</h2>
+<p><strong>The limits of conventional data tokenization are vault availability, latency at volume, legacy field rules, linkable tokens, vendor lock-in and weak coverage of unstructured data like free text.</strong></p>
+<p>Data tokenization protects only the paths you route through it. If an employee copies a full SSN from a secure screen into a CRM note, the CRM holds plaintext again. If one service tokenizes on write while another still logs raw request bodies, that second path stays exposed. Plan for these trade-offs before rollout:</p>
+<ul>
+  <li><strong>Vault availability:</strong> if the vault slows down or goes offline, every flow that detokenizes slows with it. Ask for uptime commitments and redundancy details.</li>
+  <li><strong>Latency at volume:</strong> per-record calls add up during migrations and high-throughput jobs, so batch endpoints matter.</li>
+  <li><strong>Legacy field rules:</strong> older systems may reject a token that breaks fixed lengths or validation rules. Map these fields early.</li>
+  <li><strong>Linkable tokens:</strong> deterministic tokens shared across every system can become universal identifiers. Scope them by tenant or purpose.</li>
+  <li><strong>Portability:</strong> proprietary token formats create vendor lock-in and make switching hard. Check export and migration options during evaluation.</li>
+  <li><strong>Unstructured data:</strong> free text, scanned documents and audio need separate handling before tokenization can help.</li>
+  <li><strong>Authorized misuse:</strong> people with detokenize rights still need least-privilege roles and regular access reviews.</li>
+</ul>
+
+<h2>How to Evaluate Data Tokenization Solutions</h2>
+<p><strong>Evaluate data tokenization solutions by defining your business requirements, mapping where sensitive data lives, setting system and token needs, then testing each vendor against that list.</strong></p>
+<p>A data tokenization platform sits in the path of your most sensitive data, so switching later is expensive. Work through these seven questions in order, and you'll separate a solution that fits your environment from one that only looks good in a demo.</p>
+
+<h3>1. What Are Your Primary Business Requirements?</h3>
+<p>Start with the problem you need to solve, because the right solution depends on it. Common goals include:</p>
+<ul>
+  <li>Reducing how many systems fall under PCI DSS, HIPAA or privacy audits</li>
+  <li>Removing SSNs, account numbers or credentials from application databases</li>
+  <li>Meeting GDPR, CCPA or DPDP deletion and retention rules</li>
+  <li>Letting analytics and support teams work without seeing raw values</li>
+</ul>
+<p>Then confirm the vendor supports every data type you hold. Some platforms focus on card data, while others handle any structured value, from SSNs to health fields and API keys.</p>
+
+<h3>2. Where Does Your Sensitive Data Live and Move?</h3>
+<p>List every database, application, warehouse, log store and vendor that stores or receives sensitive values. Then trace how data moves between them, since data in transit is exposed too.</p>
+<p>For each workflow, answer these questions:</p>
+<ul>
+  <li>Which channel brings the value in, and which system receives it first?</li>
+  <li>Who can see the plaintext today, including exports, logs, recordings and support tools?</li>
+  <li>Does the business need to see the value again, or only perform an action with it?</li>
+  <li>Can the everyday system keep a token or a masked value instead?</li>
+  <li>Will any plaintext still pass through your own application servers, or can values be captured and viewed directly through the vault?</li>
+</ul>
+<p>This map shows how many integration points the solution must cover and which workflow to tokenize first.</p>
+
+<h3>3. What Are Your System and Token Requirements?</h3>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Requirement</th><th>What to decide</th></tr></thead>
+    <tbody>
+      <tr><td>Databases</td><td>Which database types must store tokens</td></tr>
+      <tr><td>Languages and frameworks</td><td>Whether a REST API works for every stack, or you need SDKs</td></tr>
+      <tr><td>Infrastructure</td><td>Where your apps and data centers run, and any data residency rules</td></tr>
+      <tr><td>Authentication</td><td>How services and users will prove identity to the vault</td></tr>
+      <tr><td>Token reuse</td><td>Single-use tokens, or multi-use tokens referenced across systems</td></tr>
+      <tr><td>Matching</td><td>Which fields need deterministic tokens for joins and search</td></tr>
+      <tr><td>Format</td><td>Whether any legacy field rejects values that break its format</td></tr>
+      <tr><td>Retention</td><td>How long each value should live before it expires</td></tr>
+      <tr><td>Regulations</td><td>Which of PCI DSS v4.0.1, HIPAA, GLBA, GDPR or CCPA/CPRA apply to each field</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h3>4. What Security and Compliance Evidence Can the Vendor Show?</h3>
+<p>Ask the vendor to show evidence for each of these:</p>
+<ul>
+  <li><strong>Encryption:</strong> the algorithm used, whether each field is encrypted separately and whether keys are unique per customer</li>
+  <li><strong>Key management:</strong> where keys live, how often they rotate and what happens to existing tokens after rotation</li>
+  <li><strong>Isolation:</strong> how one customer's data and keys are separated from another's</li>
+  <li><strong>Access control:</strong> how role-based access control (RBAC) scopes detokenize rights by service, field and action, and whether raw-value access depends on your plan</li>
+  <li><strong>Audit logs:</strong> what each entry records, such as client ID, IP address, resource and outcome</li>
+  <li><strong>Certifications:</strong> a current PCI DSS Level 1 Attestation of Compliance and SOC 2 Type II report, plus a BAA if you handle PHI</li>
+</ul>
+
+<h3>5. Will Your Data Stay Usable After Tokenization?</h3>
+<p>Security that breaks everyday workflows rarely survives. Check that the platform supports:</p>
+<ul>
+  <li>Exact-match search on protected values without detokenizing</li>
+  <li>Deterministic tokens, so joins, deduplication and reporting keep working</li>
+  <li>Batch requests large enough for migrations and nightly jobs</li>
+  <li>Controlled sharing, such as one-time keys for outside parties</li>
+  <li>Expiry and deletion by your own record IDs</li>
+  <li>Latency your real-time flows can tolerate</li>
+</ul>
+
+<h3>6. How Easy Is It to Integrate, Exit and Pay For?</h3>
+<ul>
+  <li><strong>Integration:</strong> a plain REST API with clear documentation and a sandbox shortens the time to your first token.</li>
+  <li><strong>Migration and exit:</strong> ask whether you can bulk-import from your current vendor or receive new records from an existing vault in real time, and how you would export data if you leave.</li>
+  <li><strong>Pricing:</strong> compare monthly, per-request and minimum-commitment models against your real volumes, confirm whether limits count stored records or API requests, and look for a free tier you can pilot with.</li>
+</ul>
+
+<h3>7. Does It Pass a Pilot With Your Own Data?</h3>
+<p>Pick one workflow and run it end to end with your real field formats and batch sizes. Judge the pilot on evidence:</p>
+<ol>
+  <li><strong>Plaintext sightings:</strong> how many systems still show the raw value.</li>
+  <li><strong>Access breadth:</strong> how many roles can still see full values.</li>
+  <li><strong>Logs and monitoring:</strong> whether they show only tokens.</li>
+  <li><strong>Audit trail:</strong> whether it answers who accessed what, and when.</li>
+  <li><strong>Performance:</strong> whether latency and throughput hold at production volume.</li>
+</ol>
+
+<h2>Build vs Buy: How to Choose a Data Tokenization Solution</h2>
+<p><strong>Build data tokenization in-house only if you have dedicated security engineers and unusual needs; for most teams, a certified platform lowers the effort of keys, audits and ongoing upkeep.</strong></p>
+<p>Building data tokenization looks simple at first: generate a random string, store a mapping, encrypt the original. The hard parts come after. Your team has to design key storage and rotation, scope access for every service, build audit logging, handle sharing and deletion, keep the vault available and produce compliance evidence for every audit.</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Factor</th><th>Build in-house</th><th>Buy a platform</th></tr></thead>
+    <tbody>
+      <tr><td>Key management</td><td>You design, store and rotate keys</td><td>Handled by the provider</td></tr>
+      <tr><td>Compliance evidence</td><td>You produce it for every audit</td><td>Provider certifications cover the vault</td></tr>
+      <tr><td>Search and batch</td><td>Custom engineering</td><td>Usually built in</td></tr>
+      <tr><td>Availability</td><td>You run redundancy and recovery</td><td>Provider's responsibility</td></tr>
+      <tr><td>Maintenance</td><td>Ongoing reviews and patching</td><td>Provider's responsibility</td></tr>
+      <tr><td>Control</td><td>Full</td><td>Bounded by the provider's features</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><strong>When building makes sense:</strong> you have a security engineering team with cryptography experience, strict on-premises requirements or a workflow no platform supports.</p>
+<p><strong>When buying wins:</strong> your engineers are already stretched, you need audit evidence soon or tokenization is a supporting feature of your product. Keep in mind that a homegrown vault also becomes a high-value target, and owning it means owning that risk around the clock.</p>
+
+<h2>Why Enigma Data Vault for Data Tokenization</h2>
+<p>With <a class="bl-link" href="https://www.enigmavault.io/vault/data-vault/">Enigma Data Vault</a>, you encrypt any field and still search it. Your application keeps the token, and the vault keeps each value under AES-256 with its own initialization vector and per-customer keys that roll over periodically. You get exact-match lookup on encrypted data, deterministic tokens for joins, batches of up to 5,000 records, one-time sharing keys, expiry from 60 seconds to 7 years and an OAuth2 audit trail, all on PCI DSS Level 1 and SOC 2 Type II certified infrastructure. Your first 1,500 requests each month are free, so your queries keep working and your breach story changes completely.</p>

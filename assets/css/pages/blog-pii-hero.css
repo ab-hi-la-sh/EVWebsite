@@ -1,0 +1,222 @@
+/* content/blog/*.html via layout: "pii-style" — local test only.
+   Hero went through a dark .tr-hdark phase (the /triplets/ marketing
+   component, background art + canvas grid) before settling back on the
+   site's own plain .bl-ahead hero (layouts/blog/page.html, styled in
+   blog.css) -- a product-marketing-page banner never belonged on a blog
+   post, and .bl-ahead already gives the exact back-link/category/title/meta
+   shape every other post uses, with no extra CSS or JS. No .bl-pii-hero*
+   rules needed any more; removed along with the markup that used them. */
+
+/* ===========================================================
+   Breadcrumb, moved up into the hero (replacing the plain "Insights &
+   Resources" back-link) in place of the separate sticky utility bar that
+   used to pair it with a "Start a conversation" CTA below the hero --
+   experimental, dropped the CTA entirely rather than relocate it. Muted
+   links, mineral-blue current segment, truncated on one line so a long
+   title doesn't wrap. margin-bottom matches what .bl-ahead__back used to
+   carry (30px) so the category label below sits at the same distance it
+   always did. */
+.bl-pii-crumb{display:flex;align-items:baseline;gap:8px;font-family:var(--ev-font-sans);font-size:14px;overflow:hidden;white-space:nowrap;min-width:0;}
+.bl-pii-crumb--hero{margin-bottom:30px;}
+.bl-pii-crumb a{color:var(--ev-slate);text-decoration:none;flex:none;}
+.bl-pii-crumb a:hover{color:var(--ev-ink);}
+.bl-pii-crumb__sep{color:var(--ev-silver);flex:none;}
+.bl-pii-crumb__current{color:var(--ev-mineral-blue);font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;}
+
+/* ===========================================================
+   Hero accent -- a solid mineral-blue band behind the hero text, the exact
+   color/contrast of the nav's own "Contact" button (.np-btn--primary),
+   with white text. Scoped to this page's own stylesheet (not .bl-ahead
+   itself, which every other blog post also uses) so it doesn't leak.
+   Background sits on the <header>, not .np-container, so it's full-bleed
+   automatically -- the text column inside stays at its normal max-width,
+   just recolored.
+   .bl-ahead has no bottom padding of its own (fine for a transparent hero
+   that just ends where its content does) -- a solid-color band needs real
+   room below the meta row before the page goes back to its own light
+   background, so that's added here instead of touching the shared base
+   rule. The hairline .bl-ahead__rule that used to sit there is dropped
+   from this page's markup entirely: on a solid color fill it read as a
+   stray line, not a section divider. */
+.bl-ahead--accent{background:var(--ev-mineral-blue);padding-bottom:40px;}
+/* The hero's own .np-container still inherited the page-wide 1520px cap
+   (#bl-article .np-container below), so on a wide monitor the H1 sat well
+   short of the colored band's own right edge -- a block of plain color is
+   a lot more obviously "empty" than the same unused margin is against the
+   white page body, which is why this reads as a problem here specifically
+   and the grid/content area below is left at 1520 (per the earlier,
+   deliberate "don't run the page edge-to-edge" call). #bl-article .np-
+   container is an ID + one class (0,1,1); this needs the ID plus two
+   classes to actually win, not just more rules in the cascade. */
+#bl-article .bl-ahead--accent .np-container{max-width:none;}
+.bl-ahead--accent .bl-pii-crumb a{color:rgba(255,255,255,0.7);}
+.bl-ahead--accent .bl-pii-crumb a:hover{color:#fff;}
+.bl-ahead--accent .bl-pii-crumb__sep{color:rgba(255,255,255,0.35);}
+.bl-ahead--accent .bl-pii-crumb__current{color:#fff;}
+.bl-ahead--accent .bl-ahead__cat{color:var(--headline-accent-on-dark,#9FC4D6);}
+.bl-ahead--accent h1{color:#fff;}
+.bl-ahead--accent .bl-ahead__sub{color:rgba(255,255,255,0.78);}
+.bl-ahead--accent .bl-ameta{color:rgba(255,255,255,0.78);}
+.bl-ahead--accent .bl-ameta__author{color:#fff;}
+.bl-ahead--accent .bl-ameta__sep{background:rgba(255,255,255,0.35);}
+.bl-ahead--accent .bl-avatar{box-shadow:0 0 0 2px rgba(255,255,255,0.2);}
+/* .bl-ahead__inner is normally capped at the site's reading width (860px)
+   and centered -- right for a plain single-column post, but on this page
+   it left the hero text sitting in a narrow centered block with a lot of
+   unused color on both sides, and starting well to the right of where the
+   TOC/content grid below actually begins (x=290 vs the grid's x=64 at
+   1440px). Matching the grid's own left edge and letting it use the full
+   container width instead of a reading-width cap fixes both: no more
+   wasted side space, and the hero and the grid below finally line up. */
+#bl-article .bl-ahead__inner{max-width:none;margin:0;}
+
+/* Reading column -- no reserved sidebar track, so this is just a centered
+   max-width column inside the standard .np-container. */
+.bl-maincol--pii{max-width:var(--bl-read,860px);margin:0 auto;padding-top:40px;}
+
+/* ===========================================================
+   Static TOC -- a self-contained floating card (white, shadow, generous
+   padding), per the reference. Not a full-height tinted panel: the card
+   is only as tall as its own content and sticks near the top, same
+   pattern that already worked cleanly the first time around -- a plain
+   sticky box, un-stretched, so there's no risk of the sticky+stretch bug
+   documented elsewhere in this file's history.
+
+   Widened the container specifically for this layout (vs the default 1200)
+   and trimmed the gap slightly -- at the default width the content column
+   was squeezed down to ~696px, visibly narrower than intended. Scoped to
+   every .np-container on the page (#bl-article, not just the one wrapping
+   the grid) rather than only the grid's own: the grid and the hero/utility
+   bar above it were on different container widths, so the TOC's left edge
+   and the breadcrumb's left edge didn't line up. One shared width keeps
+   them flush with each other.
+   First tried going wider (1520) to close that gap, but at the time the
+   article column had no width cap of its own, so widening the container
+   just widened the visible body text too -- content running edge-to-edge
+   read as clumsy, not spacious (per a reference comparison against
+   Spreedly), so that pass was reverted back to 1360.
+   Now that .bl-maincol--pii2 below is independently capped at the site's
+   own reading width, that tradeoff doesn't hold any more: widening the
+   container no longer widens the text, it only grows the (already-capped)
+   content column's own right margin and shrinks the outer gutter on the
+   TOC's side.
+   Pushed this to 1680 + 40px padding in one pass, which overcorrected --
+   on a typical 1440ish laptop window (narrower than 1680, so the centered
+   gutter contributes ~0 either way) the inset is set almost entirely by
+   the padding value, and 40px read as the TOC hugging the edge, not just
+   "a little" closer in. Settled on 1520 with padding back at the
+   default 64px: on an ordinary window the inset stays the same 64px it
+   always was, and only on a genuinely wide monitor does the bigger
+   max-width shrink the gutter (~344px down to ~264px at 1920) instead of
+   collapsing it.
+   Sticky offset is nav height + utility bar height + a breathing gap
+   (measured ~81px + ~62px), not a guess -- that's what stopped the card
+   from sitting flush against the bar once stuck.
+
+   Shadow was originally 0 20px 45px, copied straight from the reference --
+   but the brandbook's own shadow tokens (tokens/spacing.css) cap out at
+   --ev-shadow-raised (0 2px 6px) with the explicit note "barely
+   perceptible; never heavy". Brought it down closer to that scale; still a
+   touch more than the token alone so the card reads as a distinct surface,
+   but nowhere near the reference's dramatic float. */
+#bl-article .np-container{max-width:1520px;}
+.bl-pii-layout{display:grid;grid-template-columns:272px minmax(0,1fr);column-gap:96px;padding:40px 0 64px;align-items:start;}
+/* Two visually separate card surfaces (real space between them) that move
+   as ONE sticky unit -- confirmed against the reference's actual DOM: its
+   "In this article" card and "Subscribe" card are both children of a
+   single sticky wrapper (.filter-box-section.p-sticky, position:sticky,
+   pinned at top:128px, one box covering both). Earlier attempts made only
+   the TOC card itself sticky and let the second card scroll away
+   independently -- that's the wrong shape entirely, hence "not fixed".
+   Sticky now lives on .bl-pii-sidebar itself (the actual grid item, so it
+   gets the grid row's full height as its containing block for free, same
+   as every earlier working version) instead of on .bl-pii-toc. */
+/* Was nav height + utility-bar height + a gap, measured live via
+   --bl-nav-h/--bl-bar-h (blog-article.js's syncStickyOffsets()) since a
+   hardcoded value only ever matched one breakpoint. The utility bar is
+   gone now, so this sticks just below the nav itself plus a breathing
+   gap -- --bl-bar-h would just be an unset var contributing nothing, so
+   it's dropped rather than left in as dead weight. */
+.bl-pii-sidebar{position:sticky;top:calc(var(--bl-nav-h,81px) + 17px);}
+.bl-pii-toc{margin-bottom:24px;background:var(--surface-card);border-radius:20px;box-shadow:0 8px 20px rgba(42,51,64,.06),var(--ev-shadow-raised);padding:30px 28px 34px;}
+/* Falls back to the site's own default .bl-toc__label (small, uppercase,
+   tracked, slate) instead of a custom heading style -- that's the
+   established convention already used everywhere else, not a one-off. */
+/* Removing the cap entirely (matching the live page's own uncapped
+   .bl-toc__list) pushed the contact card far enough down the sidebar that
+   it needed real extra scrolling to reach -- traded "TOC reads cramped"
+   for "contact card reads hidden", not an actual fix. Dropping the
+   contact card's email field (see .bl-pii-contact below) freed up ~90px
+   that padding/margin tuning alone couldn't find, which is what actually
+   lets this go back up to a size that shows most of a typical post's
+   sections without feeling cramped, while both the TOC and the contact
+   card stay fully visible together with real margin on an ordinary window.
+   Font sizes/weight still deliberately match the plain .bl-toc__list a rule
+   in the shared blog.css (13.5px lvl-2, 13px lvl-3, 500 active weight),
+   confirmed against that live page. */
+.bl-pii-toc .bl-toc__list{border-left:none;display:flex;flex-direction:column;gap:18px;max-height:255px;overflow-y:auto;padding-right:4px;}
+.bl-pii-toc .bl-toc__list a{padding:0 0 0 16px;margin-left:0;border-left:3px solid transparent;font-size:13.5px;line-height:1.4;color:var(--ev-slate);}
+.bl-pii-toc .bl-toc__list a.lvl-3{padding-left:30px;font-size:13px;}
+.bl-pii-toc .bl-toc__list a:hover{color:var(--ev-ink);}
+.bl-pii-toc .bl-toc__list a.is-active{border-left-color:var(--ev-mineral-blue);color:var(--ev-mineral-blue);font-weight:500;}
+
+/* Share sits inside the TOC card, below a divider (still one card together
+   with the nav list) -- the standalone divider replaces .bl-share's own
+   border-top so there's only one rule, not two. */
+.bl-pii-toc__rule{height:1px;background:var(--border-hairline);margin:18px 0;}
+/* Slightly smaller than the default 40px .bl-share__btn and a tighter gap
+   -- at the card's ~256px inner width, "SHARE" + 4 default-size buttons
+   only just fit, and wrapped to 2 rows in practice. This gives real margin. */
+.bl-share--toc{margin:0;padding-top:0;border-top:none;flex-wrap:nowrap;gap:8px;}
+.bl-share--toc .bl-share__label{margin-right:0;}
+.bl-share--toc .bl-share__btn{width:34px;height:34px;flex:none;}
+.bl-share--toc .bl-share__btn svg{width:16px;height:16px;}
+
+/* Contact card -- its own surface, same treatment as .bl-pii-toc so the two
+   read as a matched pair, just separate. Still a light card like .bl-pii-toc,
+   just more compact than the reference's dark "demo" card.
+   Dropped the email field entirely (was its own flex form wrapper around
+   label/input/privacy text) in favor of a single CTA straight to
+   /request-demo/, matching the reference's compact demo-card shape -- that
+   field was never wired to a submission endpoint, and cutting it is what
+   actually made room for the TOC and this card to both stay visible
+   together, which padding/margin tuning alone kept failing to do. */
+.bl-pii-contact{background:var(--surface-card);border-radius:16px;box-shadow:0 8px 20px rgba(42,51,64,.06),var(--ev-shadow-raised);padding:22px 20px;}
+.bl-pii-contact__t{font-family:var(--font-display);font-size:15px;font-weight:600;color:var(--ev-ink);margin:0;}
+.bl-pii-contact__s{font-size:12.5px;line-height:1.45;color:var(--ev-slate);margin:5px 0 0;}
+/* Padding/font bumped up from the site's .np-btn--sm defaults (9px 16px,
+   13px) -- next to the reference's chunky full-width demo button, the
+   --sm size read as a thin bar rather than a real button. Still short of
+   the base .np-btn size (14px 26px, 16px): full brand size would overflow
+   a 272px-wide sidebar card. */
+.bl-pii-contact__btn{width:100%;margin-top:16px;padding:12px 16px;font-size:14.5px;}
+
+/* Capped to the site's own reading width instead of stretching to fill the
+   rest of the grid track -- letting the article run the full remaining
+   width (with only the TOC's own padding as breathing room on its side)
+   left nothing between the text and the page's right edge, which is the
+   "give the content some space" the sidebar-width pass above was actually
+   about, not the outer page margins. No margin:auto: it stays flush against
+   the TOC/gap side and leaves the leftover space on the far side instead of
+   centering itself in the track. */
+.bl-maincol--pii2{padding-top:32px;max-width:var(--bl-read,860px);}
+
+@media (max-width:1100px){
+  .bl-pii-hero{padding:64px 0;}
+  .bl-pii-layout{grid-template-columns:minmax(0,1fr);column-gap:0;padding-top:8px;}
+  /* The nav list itself is covered by the .bl-toc-m accordion above instead
+     -- but share + contact have no other home on mobile, so only the list
+     portion of the card is hidden; the whole group stops being sticky and
+     stacks as normal blocks instead. */
+  .bl-pii-sidebar{position:static;}
+  .bl-pii-toc{margin-bottom:32px;}
+  .bl-pii-toc__nav{display:none;}
+  .bl-maincol--pii2{padding-top:0;max-width:none;}
+}
+@media (max-width:700px){
+  .bl-pii-hero{padding:48px 0;}
+}
+@media (max-width:600px){
+  .bl-pii-hero__inner{padding:0 4px;}
+  .bl-utilbar__cta span:last-child{display:none;}
+}

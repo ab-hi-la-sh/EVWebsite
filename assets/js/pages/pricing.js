@@ -4,6 +4,15 @@
   var panels = [].slice.call(document.querySelectorAll('.pr-panel'));
   var VALID = { vault:1, nopii:1, triplets:1 };
 
+  // A hash can name a tab (#triplets) or an element inside one (#pr-form);
+  // resolve the latter to the panel that contains it.
+  function panelFor(hash){
+    if (VALID[hash]) return hash;
+    var el = hash && document.getElementById(hash);
+    var panel = el && el.closest('.pr-panel');
+    return panel ? panel.getAttribute('data-panel') : 'vault';
+  }
+
   function show(id, push){
     if (!VALID[id]) id = 'vault';
     tabs.forEach(function(t){
@@ -27,6 +36,6 @@
       if (rail) window.scrollTo({ top: rail.offsetTop, behavior: 'smooth' });
     });
   });
-  window.addEventListener('hashchange', function(){ show(location.hash.replace('#',''), false); });
-  show(location.hash.replace('#','') || 'vault', false);
+  window.addEventListener('hashchange', function(){ show(panelFor(location.hash.replace('#','')), false); });
+  show(panelFor(location.hash.replace('#','')), false);
 })();

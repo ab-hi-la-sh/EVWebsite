@@ -1,0 +1,24 @@
+{{- /* Generic page-level schema, opted into with frontmatter:
+         pageSchema: "AboutPage" | "ContactPage" | "CollectionPage" | "WebPage" | "Blog"
+       Every page links back to the sitewide WebSite and Organization. The blog
+       index lists its posts so the Blog entity carries real blogPost items. */ -}}
+{{- with .Params.pageSchema -}}
+{{- $page := dict
+  "@context" "https://schema.org"
+  "@type" .
+  "name" ($.Params.metaTitle | default $.Title)
+  "url" $.Permalink
+  "description" $.Description
+  "inLanguage" "en-US"
+  "isPartOf" (dict "@type" "WebSite" "name" site.Title "url" site.BaseURL)
+  "publisher" (dict "@type" "Organization" "name" site.Title "url" site.BaseURL)
+-}}
+{{- if eq . "Blog" -}}
+  {{- $posts := slice -}}
+  {{- range where site.RegularPages "Type" "blog" -}}
+    {{- $posts = $posts | append (dict "@type" "BlogPosting" "headline" .Title "url" .Permalink "datePublished" (.Date.Format "2006-01-02T15:04:05Z07:00")) -}}
+  {{- end -}}
+  {{- $page = merge $page (dict "blogPost" $posts) -}}
+{{- end -}}
+<script type="application/ld+json">{{ $page | jsonify | safeJS }}</script>
+{{- end -}}

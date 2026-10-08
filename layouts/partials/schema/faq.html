@@ -1,29 +1,46 @@
 {{- /*
-  FAQPage schema derived from the page's own visible <details> accordion.
+  FAQPage schema, emitted only when a page opts in with faqSchema: true.
 
-  The old site hand-maintained this JSON separately and it had already drifted:
-  nopii/faqs listed 14 questions but only 12 in schema (and one schema entry
-  matched no question on the page); vault/faqs had 10 visible, 9 in schema.
-  Google requires schema to match visible content, so this reads the rendered
-  content instead — one source, no drift possible.
+  Two sources, in priority order, so the schema always matches what the page
+  actually shows:
+
+  1. `.Params.faqs` -- blog articles define FAQs in front matter and the
+     layout renders the accordion from it (after .Content), so the questions
+     are NOT in .Content and must be read from the param directly.
+  2. Rendered <details> in .Content -- product/FAQ pages that author the
+     accordion inline. Reading the rendered content keeps schema and visible
+     content in lockstep (the old hand-maintained JSON had already drifted:
+     nopii/faqs listed 14 questions but only 12 in schema; vault/faqs had 10
+     visible, 9 in schema). Google requires schema to match visible content.
+
+  Opt-in matters: not every <details> is an FAQ (nopii/overview's "Under the
+  Hood" list is feature descriptions, which must not be published as Questions).
 */ -}}
-{{- /* Opt-in: not every <details> accordion is an FAQ. nopii/overview's
-       "Under the Hood" list is feature descriptions ("Deterministic
-       tokenization"), which must not be published as Questions. */ -}}
 {{- if .Params.faqSchema -}}
 {{- $qa := slice -}}
-{{- range findRE `(?s)<details.*?</details>` .Content -}}
-  {{- $block := . -}}
-  {{- $q := "" -}}{{- $a := "" -}}
-  {{- range first 1 (findRE `(?s)<summary[^>]*>.*?</summary>` $block) -}}
-    {{- $q = . | replaceRE `<[^>]*>` "" | htmlUnescape | strings.TrimSpace -}}
+{{- with .Params.faqs -}}
+  {{- range . -}}
+    {{- $q := .q | htmlUnescape | strings.TrimSpace -}}
+    {{- $a := .a | htmlUnescape | strings.TrimSpace -}}
+    {{- if and $q $a -}}
+      {{- $qa = $qa | append (dict "@type" "Question" "name" $q
+            "acceptedAnswer" (dict "@type" "Answer" "text" $a)) -}}
+    {{- end -}}
   {{- end -}}
-  {{- range first 1 (findRE `(?s)<div class="np-acc__body">.*?</div>` $block) -}}
-    {{- $a = . | replaceRE `<[^>]*>` "" | htmlUnescape | strings.TrimSpace -}}
-  {{- end -}}
-  {{- if and $q $a -}}
-    {{- $qa = $qa | append (dict "@type" "Question" "name" $q
-          "acceptedAnswer" (dict "@type" "Answer" "text" $a)) -}}
+{{- else -}}
+  {{- range findRE `(?s)<details.*?</details>` .Content -}}
+    {{- $block := . -}}
+    {{- $q := "" -}}{{- $a := "" -}}
+    {{- range first 1 (findRE `(?s)<summary[^>]*>.*?</summary>` $block) -}}
+      {{- $q = . | replaceRE `<[^>]*>` "" | htmlUnescape | strings.TrimSpace -}}
+    {{- end -}}
+    {{- range first 1 (findRE `(?s)<div class="np-acc__body">.*?</div>` $block) -}}
+      {{- $a = . | replaceRE `<[^>]*>` "" | htmlUnescape | strings.TrimSpace -}}
+    {{- end -}}
+    {{- if and $q $a -}}
+      {{- $qa = $qa | append (dict "@type" "Question" "name" $q
+            "acceptedAnswer" (dict "@type" "Answer" "text" $a)) -}}
+    {{- end -}}
   {{- end -}}
 {{- end -}}
 {{- with $qa -}}

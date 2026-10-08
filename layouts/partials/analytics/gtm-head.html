@@ -1,9 +1,14 @@
 {{- with site.Params.gtmId -}}
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','{{ . }}');</script>
+<!-- Google Tag Manager: loaded on first user interaction, or after 4s as a fallback.
+     GTM pulls in HubSpot, gtag and Clarity; loading them at parse time cost ~1.3s of
+     main-thread work and dominated mobile Total Blocking Time. dataLayer is created
+     up front so any events pushed before GTM loads are queued, not lost. -->
+<script>window.dataLayer=window.dataLayer||[];(function(w,d,i){var done=false;function load(){if(done)return;done=true;
+['scroll','pointerdown','keydown','touchstart'].forEach(function(e){w.removeEventListener(e,load)});
+w.dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+var s=d.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtm.js?id='+i;
+d.head.appendChild(s);}
+['scroll','pointerdown','keydown','touchstart'].forEach(function(e){w.addEventListener(e,load,{once:true,passive:true})});
+setTimeout(load,4000);})(window,document,'{{ . }}');</script>
 <!-- End Google Tag Manager -->
 {{- end -}}

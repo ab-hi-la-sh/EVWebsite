@@ -20,4 +20,15 @@
 .hp-footer__social a:hover{color:var(--ev-mineral-blue);}
 @media (max-width:1200px){.hp-footer__grid{grid-template-columns:1fr repeat(3,minmax(0,1fr));row-gap:38px;}}
 @media (max-width:1023px){.hp-footer__inner{padding:0 32px;}.hp-footer__grid{grid-template-columns:1fr 1fr 1fr;row-gap:38px;}}
-@media (max-width:600px){.hp-footer__inner{padding:0 20px;}.hp-footer__grid{grid-template-columns:1fr;}}
+@media (max-width:600px){
+  .hp-footer{padding:52px 0 30px;}
+  .hp-footer__inner{padding:0 20px;}
+  /* Two link columns instead of one long stack; the brand block spans both. */
+  .hp-footer__grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:30px 20px;}
+  .hp-footer__grid>:first-child{grid-column:1 / -1;}
+  .hp-footer__logo{height:46px;}
+  .hp-footer__col h4{margin-bottom:12px;}
+  .hp-footer__col ul{gap:9px;}
+  .hp-footer__col a{overflow-wrap:anywhere;}
+  .hp-footer__bottom{margin-top:36px;}
+}

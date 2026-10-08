@@ -1,5 +1,7 @@
 {{- /* Site JS bundle. A page adds its own with frontmatter: scripts: ["foo.js"] */ -}}
 {{- $paths := slice "js/nav.js" -}}
+{{- /* Byline author card on every blog article, independent of per-page scripts. */ -}}
+{{- if and (eq .Type "blog") (eq .Kind "page") }}{{ $paths = $paths | append "js/authorcard.js" }}{{ end -}}
 {{- range .Params.scripts }}{{ $paths = $paths | append (printf "js/%s" .) }}{{ end -}}
 {{- $res := slice -}}
 {{- range $paths -}}

@@ -1,0 +1,762 @@
+---
+title: "Best Data Tokenization Software (2026): 10 Tools Compared"
+titleEmphasis: "10 Tools Compared"
+slug: "best-data-tokenization-software"
+layout: "pii-style"
+metaTitle: "Best Data Tokenization Software (2026): 10 Tools Compared"
+description: "I compared the 10 best data tokenization software tools for 2026 on token model, compliance, pricing and verified reviews, so you can pick the right one."
+subtitle: "I compared ten data tokenization platforms on token model, compliance evidence, public pricing and verified review scores, then matched each one to the buyer it suits best."
+date: 2026-10-08
+category: "Data Vault"
+allOnly: true
+author: "abhilash-kumar"
+readTime: 14
+heroImage: "/assets/blog/img-03.png"
+heroAlt: "Layered translucent panels representing sensitive data replaced by tokens"
+excerpt: "I compared ten data tokenization platforms on token model, compliance, public pricing and verified review scores, then matched each one to the buyer it suits."
+tags: ["tokenization", "data-security", "pii", "software-comparison"]
+ogImage: "/assets/og/vault-data.jpg"
+ogImageAlt: "Best Data Tokenization Software (2026): 10 Tools Compared | Enigma Vault"
+ogType: article
+styles: ["blog.css", "pages/blog-pii-hero.css", "tr-pages.css"]
+scripts: ["blog-article.js"]
+faqSchema: true
+faqs:
+  - q: "How Much Does Data Tokenization Software Cost?"
+    a: "Entry plans with public pricing run from free to roughly $1,000 a month. Enigma Vault starts free, Basis Theory and Evervault start near $995 a month and VGS starts at $1,000. Enterprise platforms are quote-only, so you need to ask."
+  - q: "What Is the Difference Between Vault and Vaultless Tokenization?"
+    a: "Vault-based tokenization stores each real value in a secure vault and gives you a random token. Vaultless tokenization creates tokens with cryptography and keys, so no mapping table is stored."
+  - q: "Does Tokenization Software Reduce PCI DSS Scope?"
+    a: "It can. Systems that hold only tokens may fall outside your cardholder data environment, while anything that detokenizes stays in scope. Your QSA confirms the final boundary."
+  - q: "Is Tokenization the Same as Encryption?"
+    a: "No. Encryption scrambles a value with a key that can reverse it, while tokenization swaps the value for an unrelated placeholder. Many platforms use both and encrypt what sits in the vault."
+  - q: "Can I Search Data After It Is Tokenized?"
+    a: "Often you can. Deterministic tokens and exact-match lookup let you find or join records without detokenizing them. Support varies by vendor, so check before you buy."
+  - q: "Do I Need Tokenization Before Sending Data to an LLM?"
+    a: "If your prompts could contain personal data, yes. Tokenize names, SSNs and account numbers first so real values stay out of the model, then restore them in your application when the response comes back."
+---
+
+<style>
+/* Table text matches paragraph text: 17.5px, and 16.5px on small screens like the paragraphs. */
+.bl-content .bl-table td, .bl-content .bl-table th { font-size: 17.5px; }
+/* Five-column pricing table: tighter cell padding so it fits the article column. */
+.bl-content .bl-table--wide td, .bl-content .bl-table--wide th { padding-left: 10px; padding-right: 10px; }
+@media (max-width: 767px) { .bl-content .bl-table td, .bl-content .bl-table th { font-size: 16.5px; } }
+
+/* Image carousels: homepage and product screenshots sit side by side and swipe. */
+.tk-carousel { position: relative; margin: 28px 0 0; }
+.tk-track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; border: 1px solid var(--border-hairline); border-radius: 12px; background: var(--ev-warm-cloud); outline-offset: 3px; }
+.tk-track::-webkit-scrollbar { display: none; }
+.tk-slide { flex: 0 0 100%; scroll-snap-align: center; box-sizing: border-box; margin: 0; padding: 20px 20px 16px; }
+.tk-slide picture { display: flex; align-items: center; justify-content: center; height: clamp(220px, 50vw, 400px); }
+.tk-slide img { display: block; width: auto; height: auto; max-width: 100%; max-height: 100%; border-radius: 8px; object-fit: contain; }
+.tk-slide figcaption { margin-top: 14px; text-align: center; font-size: 13px; line-height: 1.5; color: var(--ev-slate); border: 0; padding: 0; }
+.tk-btn { position: absolute; top: calc(50% - 40px); width: 40px; height: 40px; border: 1px solid var(--border-hairline); border-radius: 50%; background: #fff; color: var(--ev-ink); font-size: 24px; line-height: 1; display: grid; place-items: center; padding: 0 0 3px; cursor: pointer; box-shadow: 0 2px 8px rgba(15,61,86,.16); z-index: 2; }
+.tk-btn:hover { background: var(--ev-warm-cloud); }
+.tk-btn[disabled] { opacity: .35; cursor: default; }
+.tk-prev { left: 12px; }
+.tk-next { right: 12px; }
+.tk-dots { display: flex; gap: 8px; justify-content: center; margin-top: 12px; }
+.tk-dots button { width: 9px; height: 9px; padding: 0; border: 0; border-radius: 50%; background: var(--ev-cool-stone); cursor: pointer; }
+.tk-dots button[aria-current="true"] { background: var(--ev-mineral-blue); }
+@media (max-width: 640px) { .tk-slide { padding: 14px 12px 12px; } .tk-btn { width: 34px; height: 34px; font-size: 20px; } }
+</style>
+
+<p>Comparing the best data tokenization software for 2026: 1. Enigma Vault, 2. TokenEx / IXOPAY, 3. Skyflow, 4. Basis Theory, 5. VGS, 6. Evervault, 7. Thales CipherTrust, 8. Protegrity, 9. OpenText Voltage SecureData, 10. Fortanix DSM.</p>
+
+<p>Most data tokenization software pages look alike until you compare what sits underneath. I look at four things: where the real values are stored, which token formats the tool supports, what the vendor can prove about compliance and what you will pay. Those answers decide whether a tool fits your stack.</p>
+
+<h2>Which Data Tokenization Software Is Best? Quick Comparison</h2>
+<p>The best data tokenization software depends on what you protect: Enigma Vault is built for enterprises, startups and SMBs that want card, PII and file vaulting from one API, while Thales, Protegrity and OpenText Voltage fit large legacy enterprise estates.</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Tool</th><th>Best for</th><th>Token model</th><th>Starting price</th></tr></thead>
+    <tbody>
+      <tr><td><a class="bl-link" href="#enigma-vault">Enigma Vault</a></td><td>Enterprises, startups and SMBs needing card, PII and file vaulting</td><td>Vault-based</td><td>Free, then $49.99/mo</td></tr>
+      <tr><td><a class="bl-link" href="#tokenex-ixopay">TokenEx / IXOPAY</a></td><td>Merchants with multiple payment processors</td><td>Not stated on vendor page</td><td>Contact sales</td></tr>
+      <tr><td><a class="bl-link" href="#skyflow">Skyflow</a></td><td>PII and PHI vaulting with granular access policies</td><td>Data privacy vault</td><td>Contact sales</td></tr>
+      <tr><td><a class="bl-link" href="#basis-theory">Basis Theory</a></td><td>Engineering-led payments teams</td><td>Cloud vault</td><td>$995/mo</td></tr>
+      <tr><td><a class="bl-link" href="#vgs">VGS</a></td><td>Removing card data without changing app code</td><td>Proxy plus vault</td><td>$1,000/mo</td></tr>
+      <tr><td><a class="bl-link" href="#evervault">Evervault</a></td><td>Payments teams that want encryption plus card tooling</td><td>Encryption-based</td><td>$995/mo plus usage</td></tr>
+      <tr><td><a class="bl-link" href="#thales-ciphertrust">Thales CipherTrust</a></td><td>Large hybrid and on-premises estates</td><td>Vaulted and vaultless</td><td>Contact sales</td></tr>
+      <tr><td><a class="bl-link" href="#protegrity">Protegrity</a></td><td>Analytics and data-platform workloads at scale</td><td>Vaultless</td><td>Contact sales</td></tr>
+      <tr><td><a class="bl-link" href="#opentext-voltage">OpenText Voltage SecureData</a></td><td>Format-preserving protection in legacy systems</td><td>Format-preserving</td><td>Contact sales</td></tr>
+      <tr><td><a class="bl-link" href="#fortanix-dsm">Fortanix DSM</a></td><td>Key management and tokenization in one platform</td><td>Not stated on vendor page</td><td>Contact sales</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="bl-inlinecta">
+  <div>
+    <p class="bl-inlinecta__t">Not sure which tool fits your data?</p>
+    <p class="bl-inlinecta__s">Tell me what you need to protect and I will help you pick the right approach, whether or not it is Enigma Vault.</p>
+  </div>
+  <a class="np-btn np-btn--on-dark np-btn--primary" href="/contact/"><span>Get in touch</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
+</div>
+
+<h2>What Does Data Tokenization Software Do?</h2>
+<p>Data tokenization software replaces sensitive values, such as card numbers, SSNs and health details, with tokens that have no usable meaning, and returns the original only to authorized requests.</p>
+<p>Your application stores the token where the real value used to be. The real value lives in a secured vault, or you can recover it only through cryptographic keys, so a stolen database of tokens is worth very little to an attacker. Systems that hold only tokens often fall outside the scope of audits such as PCI DSS.</p>
+<p>This guide covers data security tokenization only. I left out blockchain asset tokenization, language-model tokenization and masking-only tools, because they solve different problems. For the basics, read my guide to <a class="bl-link" href="/blog/data-tokenization/">data tokenization use cases and how to choose a solution</a>. For the architecture choice behind most of the tools below, see <a class="bl-link" href="/blog/vault-vs-vaultless-tokenization/">vault vs vaultless tokenization</a>.</p>
+
+<h2>How I Evaluated the Best Data Tokenization Tools</h2>
+<p>I scored every tool on six criteria: token model, token formats, compliance evidence, searchability of protected data, integration and exit, and pricing transparency.</p>
+<ol>
+  <li><strong>Token model:</strong> vault-based, vaultless, proxy or encryption-based. This drives performance, portability and your audit scope.</li>
+  <li><strong>Token formats:</strong> random tokens, or format-preserving tokens that fit your existing database fields.</li>
+  <li><strong>Compliance evidence:</strong> the certifications and attestations the vendor publishes, such as PCI DSS, SOC 2 and HIPAA support.</li>
+  <li><strong>Searchability:</strong> whether you can look up or join records without detokenizing them.</li>
+  <li><strong>Integration and exit:</strong> APIs, SDKs, deployment options and how hard it is for you to leave.</li>
+  <li><strong>Pricing transparency:</strong> whether a starting price is public.</li>
+</ol>
+<p>Where a vendor does not publish a fact on its own site, the card says so instead of guessing. Review scores are the ones G2 and Gartner Peer Insights showed on October 8, 2026. The screenshots come from each vendor's own public pages. I could not sign in to anyone's account, so where a vendor shows no product screen, I used its product diagram instead.</p>
+
+<h2>The 10 Best Data Tokenization Software Tools</h2>
+
+<h3 id="enigma-vault">1. Enigma Vault: Best for Enterprises, Startups and SMBs That Need Card, PII and File Vaulting</h3>
+<p>Enigma Vault is a vault-based tokenization platform that protects payment cards, structured data and files through one REST API, for enterprises as well as startups and SMBs, with a free tier and public pricing.</p>
+<p>Enigma Vault splits protection into Card Vault, Data Vault and File Vault. You send the sensitive value to the vault, store the token it returns and call the vault again only when you need the original. Card Vault also forwards stored cards to your payment gateway, so card numbers never pass through your own servers. NoPII, a separate product, tokenizes personal data before it reaches an LLM.</p>
+<div class="tk-carousel" role="region" aria-roledescription="carousel" aria-label="Enigma Vault screenshots">
+  <div class="tk-track" tabindex="0">
+    <figure class="tk-slide" aria-label="Image 1 of 2">
+      {{< img src="/assets/blog/tokenization-software/enigma-vault-homepage.jpg" alt="Enigma Vault homepage" >}}
+      <figcaption>The Enigma Vault homepage.</figcaption>
+    </figure>
+    <figure class="tk-slide" aria-label="Image 2 of 2">
+      {{< img src="/assets/blog/tokenization-software/enigma-vault-dashboard.png" alt="Enigma Vault NoPII console dashboard" >}}
+      <figcaption>The Enigma Vault NoPII console dashboard.</figcaption>
+    </figure>
+  </div>
+  <button class="tk-btn tk-prev" type="button" aria-label="Previous image">&#8249;</button>
+  <button class="tk-btn tk-next" type="button" aria-label="Next image">&#8250;</button>
+  <div class="tk-dots"><button type="button" aria-label="Show image 1"></button><button type="button" aria-label="Show image 2"></button></div>
+</div>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <tbody>
+      <tr><td>Token model</td><td>Vault-based, with random tokens generated by a cryptographically secure generator</td></tr>
+      <tr><td>Compliance</td><td>PCI DSS Level 1 service provider, SOC 2 Type II, BAA available, 99.99% uptime SLA</td></tr>
+      <tr><td>Deployment</td><td>SaaS REST API with OAuth2, US and EU regions, AWS Marketplace</td></tr>
+      <tr><td>Pricing</td><td>Card, Data and File Vault each start free (Lite), then $49.99/mo (Plus) and $249.99/mo (Premium). NoPII is free for 1M tokens a month, then $50/mo, with custom Enterprise plans.</td></tr>
+      <tr><td>Reviews</td><td>G2 4.4/5 (6 reviews), Capterra 4.8/5 (4 reviews)</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><strong>Pricing tiers</strong></p>
+<div class="bl-tablewrap">
+  <table class="bl-table bl-table--wide">
+    <thead><tr><th>Product</th><th>Plan</th><th>Price</th><th>Included</th><th>Overage</th></tr></thead>
+    <tbody>
+      <tr><td>Card Vault</td><td>Lite</td><td>$0 (free forever)</td><td>1,000 requests/mo</td><td>$0.08 per request</td></tr>
+      <tr><td>Card Vault</td><td>Plus</td><td>$49.99/mo</td><td>20,000 requests/mo</td><td>$0.04 per request</td></tr>
+      <tr><td>Card Vault</td><td>Premium</td><td>$249.99/mo</td><td>250,000 requests/mo</td><td>$0.02 per request</td></tr>
+      <tr><td>Data Vault</td><td>Lite</td><td>$0 (free forever)</td><td>1,500 requests/mo</td><td>$0.06 per request</td></tr>
+      <tr><td>Data Vault</td><td>Plus</td><td>$49.99/mo</td><td>30,000 requests/mo</td><td>$0.03 per request</td></tr>
+      <tr><td>Data Vault</td><td>Premium</td><td>$249.99/mo</td><td>400,000 requests/mo</td><td>$0.01 per request</td></tr>
+      <tr><td>File Vault</td><td>Lite</td><td>$0 (free forever)</td><td>5 GB/mo</td><td>Not listed</td></tr>
+      <tr><td>File Vault</td><td>Plus</td><td>$49.99/mo</td><td>150 GB/mo</td><td>Not listed</td></tr>
+      <tr><td>File Vault</td><td>Premium</td><td>$249.99/mo</td><td>1 TB/mo</td><td>Not listed</td></tr>
+      <tr><td>NoPII</td><td>Free</td><td>$0</td><td>1M protected tokens/mo, 1-day retention</td><td>None, free tier</td></tr>
+      <tr><td>NoPII</td><td>Pro</td><td>$50/mo</td><td>50M protected tokens/mo, configurable retention</td><td>$1 per additional million</td></tr>
+      <tr><td>NoPII</td><td>Enterprise</td><td>Custom</td><td>Volume pricing, SSO, SLA, BAA for healthcare</td><td>Custom</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>Lite tiers include community support, Plus adds email support and ephemeral key sharing, and Premium adds priority support.</p>
+<p><strong>Pros</strong></p>
+<ul>
+  <li>You get a free entry tier on every vault, plus 1M free NoPII tokens a month, so you can test on real data before you pay.</li>
+  <li>One API covers cards, structured fields and files, and you can search encrypted data through exact-match lookup.</li>
+  <li>It holds PCI DSS Level 1 and SOC 2 Type II, offers a BAA and has a 99.99% uptime SLA, and every price tier is published.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li>Public reviews are few (6 on G2, 4 on Capterra), so you have less independent evidence than with older vendors.</li>
+  <li>One G2 reviewer asked for deeper built-in reporting and analytics dashboards.</li>
+  <li>The Lite tiers cover roughly 1,000 to 1,500 requests a month, and the site lists a SaaS API in US and EU regions with no self-hosted option.</li>
+</ul>
+<div class="bl-inlinecta">
+  <div>
+    <p class="bl-inlinecta__t">Not sure which tool fits your data?</p>
+    <p class="bl-inlinecta__s">Tell me what you need to protect and I will help you pick the right approach, whether or not it is Enigma Vault.</p>
+  </div>
+  <a class="np-btn np-btn--on-dark np-btn--primary" href="/contact/"><span>Get in touch</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
+</div>
+
+<h3 id="tokenex-ixopay">2. TokenEx / IXOPAY: Best for Merchants With Multiple Payment Processors</h3>
+<p>TokenEx, now part of IXOPAY, is a payments-focused tokenization provider built around reducing PCI scope for merchants and fintechs that send card data to several processors.</p>
+<p>TokenEx announced its merger with IXOPAY in 2024 and says its Universal Tokens can cut PCI scope by up to 90%, which is a vendor claim. Its homepage cites more than 500 merchants and fintechs as customers.</p>
+<div class="tk-carousel" role="region" aria-roledescription="carousel" aria-label="TokenEx screenshots">
+  <div class="tk-track" tabindex="0">
+    <figure class="tk-slide" aria-label="Image 1 of 2">
+      {{< img src="/assets/blog/tokenization-software/tokenex-homepage.jpg" alt="TokenEx homepage announcing that TokenEx is now IXOPAY" >}}
+      <figcaption>The TokenEx homepage, which now points visitors to IXOPAY.</figcaption>
+    </figure>
+    <figure class="tk-slide" aria-label="Image 2 of 2">
+      {{< img src="/assets/blog/tokenization-software/ixopay-dashboard.png" alt="IXOPAY payments intelligence portal showing a business reports view" >}}
+      <figcaption>The IXOPAY payments intelligence portal, business reports view.</figcaption>
+    </figure>
+  </div>
+  <button class="tk-btn tk-prev" type="button" aria-label="Previous image">&#8249;</button>
+  <button class="tk-btn tk-next" type="button" aria-label="Next image">&#8250;</button>
+  <div class="tk-dots"><button type="button" aria-label="Show image 1"></button><button type="button" aria-label="Show image 2"></button></div>
+</div>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <tbody>
+      <tr><td>Token model</td><td>Not stated on the vendor homepage</td></tr>
+      <tr><td>Compliance</td><td>Certifications are not listed on the vendor homepage, so check the trust center</td></tr>
+      <tr><td>Pricing</td><td>Not public</td></tr>
+      <tr><td>Reviews</td><td>G2 4.6/5 (17 reviews, listed as IXOPAY)</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><strong>Pricing tiers</strong></p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Plan</th><th>Price</th><th>What you get</th></tr></thead>
+    <tbody>
+      <tr><td>Custom quote</td><td>Not published</td><td>Neither the TokenEx nor the IXOPAY site lists plans or prices, so you request a quote. The TokenEx homepage offers sandbox access.</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><strong>Pros</strong></p>
+<ul>
+  <li>It focuses only on payments, and the homepage names more than 500 merchants and fintechs as customers.</li>
+  <li>Universal Tokens aim to unify payment data across channels and processors, which suits a multi-PSP setup.</li>
+  <li>It has a 4.6 G2 rating from 17 reviews, one of the stronger scores on this list.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li>There is no public pricing, so budgeting starts with a sales call.</li>
+  <li>Reviewers point to limited reporting.</li>
+  <li>The brand is mid-transition, with the TokenEx site now pointing you to IXOPAY, and the homepage lists no certifications.</li>
+</ul>
+<div class="bl-inlinecta">
+  <div>
+    <p class="bl-inlinecta__t">Not sure which tool fits your data?</p>
+    <p class="bl-inlinecta__s">Tell me what you need to protect and I will help you pick the right approach, whether or not it is Enigma Vault.</p>
+  </div>
+  <a class="np-btn np-btn--on-dark np-btn--primary" href="/contact/"><span>Get in touch</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
+</div>
+
+<h3 id="skyflow">3. Skyflow: Best for PII and PHI Vaulting With Granular Access Policies</h3>
+<p>Skyflow is a data privacy vault that isolates PII, PHI and payment data behind field-level policies, with a strong focus on AI and healthcare use cases.</p>
+<p>Skyflow uses polymorphic encryption and governance controls, so each field can come back in a different form for different users. Its site names customers including ServiceNow, GoodRx, Flipkart, Visa and Workato.</p>
+<div class="tk-carousel" role="region" aria-roledescription="carousel" aria-label="Skyflow screenshots">
+  <div class="tk-track" tabindex="0">
+    <figure class="tk-slide" aria-label="Image 1 of 2">
+      {{< img src="/assets/blog/tokenization-software/skyflow-homepage.jpg" alt="Skyflow homepage" >}}
+      <figcaption>The Skyflow homepage.</figcaption>
+    </figure>
+    <figure class="tk-slide" aria-label="Image 2 of 2">
+      {{< img src="/assets/blog/tokenization-software/skyflow-product.jpg" alt="Skyflow product diagram showing data sources, tokenized data and protected apps" >}}
+      <figcaption>Skyflow's product diagram from its homepage.</figcaption>
+    </figure>
+  </div>
+  <button class="tk-btn tk-prev" type="button" aria-label="Previous image">&#8249;</button>
+  <button class="tk-btn tk-next" type="button" aria-label="Next image">&#8250;</button>
+  <div class="tk-dots"><button type="button" aria-label="Show image 1"></button><button type="button" aria-label="Show image 2"></button></div>
+</div>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <tbody>
+      <tr><td>Token model</td><td>Data privacy vault</td></tr>
+      <tr><td>Compliance</td><td>Supports HIPAA, PCI DSS, SOC 2, GDPR, DPDP and CCPA</td></tr>
+      <tr><td>Pricing</td><td>Not public</td></tr>
+      <tr><td>Reviews</td><td>Too few public reviews to quote a reliable rating</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><strong>Pricing tiers</strong></p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Plan</th><th>Price</th><th>What you get</th></tr></thead>
+    <tbody>
+      <tr><td>Custom quote</td><td>Not published</td><td>The Skyflow site shows no plans or prices. It directs you to a demo or to sales.</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><strong>Pros</strong></p>
+<ul>
+  <li>Field-level policies let different users see the same field in different forms.</li>
+  <li>It lists the widest compliance coverage here for PII and health data (HIPAA, GDPR, DPDP, CCPA) alongside PCI DSS and SOC 2.</li>
+  <li>It has a clear AI-agent and LLM focus, with enterprise customers such as ServiceNow and Visa named on its site.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li>Pricing is quote-only.</li>
+  <li>Independent review evidence is thin, with only a handful of public reviews.</li>
+  <li>The homepage does not state token formats or whether the vault is vaulted or vaultless, so you have to ask.</li>
+</ul>
+<div class="bl-inlinecta">
+  <div>
+    <p class="bl-inlinecta__t">Not sure which tool fits your data?</p>
+    <p class="bl-inlinecta__s">Tell me what you need to protect and I will help you pick the right approach, whether or not it is Enigma Vault.</p>
+  </div>
+  <a class="np-btn np-btn--on-dark np-btn--primary" href="/contact/"><span>Get in touch</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
+</div>
+
+<h3 id="basis-theory">4. Basis Theory: Best for Engineering-Led Payments Teams</h3>
+<p>Basis Theory is a developer-first cloud vault for payment data, with network tokens, an Account Updater and front-end SDKs, sold at a flat public entry price.</p>
+<div class="tk-carousel" role="region" aria-roledescription="carousel" aria-label="Basis Theory screenshots">
+  <div class="tk-track" tabindex="0">
+    <figure class="tk-slide" aria-label="Image 1 of 2">
+      {{< img src="/assets/blog/tokenization-software/basis-theory-homepage.jpg" alt="Basis Theory homepage" >}}
+      <figcaption>The Basis Theory homepage.</figcaption>
+    </figure>
+    <figure class="tk-slide" aria-label="Image 2 of 2">
+      {{< img src="/assets/blog/tokenization-software/basis-theory-product.png" alt="Basis Theory product illustration next to a Web Elements code sample" >}}
+      <figcaption>Basis Theory's product illustration, shown beside its Web Elements code sample.</figcaption>
+    </figure>
+  </div>
+  <button class="tk-btn tk-prev" type="button" aria-label="Previous image">&#8249;</button>
+  <button class="tk-btn tk-next" type="button" aria-label="Next image">&#8250;</button>
+  <div class="tk-dots"><button type="button" aria-label="Show image 1"></button><button type="button" aria-label="Show image 2"></button></div>
+</div>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <tbody>
+      <tr><td>Token model</td><td>Cloud vault</td></tr>
+      <tr><td>Compliance</td><td>States PCI Level 1, SOC 2 Type II, ISO 27001 and HIPAA</td></tr>
+      <tr><td>Pricing</td><td>Starter at $995/mo for 20,000 tokens; Enterprise on request</td></tr>
+      <tr><td>Reviews</td><td>No public reviews on G2 or Capterra</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><strong>Pricing tiers</strong></p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Plan</th><th>Price</th><th>What you get</th></tr></thead>
+    <tbody>
+      <tr><td>Starter</td><td>$995/mo</td><td>20,000 tokens, a production PCI environment, PCI Attestation of Compliance, 1 MB payload limit, 24 hours of logs, US environment only</td></tr>
+      <tr><td>Scale</td><td>Not published</td><td>Referenced on the pricing page, with no price or limits shown</td></tr>
+      <tr><td>Enterprise</td><td>On request</td><td>Everything in Starter and Scale, plus extras the page does not itemize</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><strong>Pros</strong></p>
+<ul>
+  <li>Pricing is public, so you know the entry cost before you talk to sales.</li>
+  <li>You can route to any PSP, and you get network tokens, an Account Updater and front-end SDKs.</li>
+  <li>It states PCI Level 1, SOC 2 Type II, ISO 27001 and HIPAA.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li>The $995 monthly entry price is steep for a small team.</li>
+  <li>There are no public reviews on G2 or Capterra, so you have no independent track record to check.</li>
+  <li>The Starter plan is US only, and the product is built around payments more than general PII.</li>
+</ul>
+<div class="bl-inlinecta">
+  <div>
+    <p class="bl-inlinecta__t">Not sure which tool fits your data?</p>
+    <p class="bl-inlinecta__s">Tell me what you need to protect and I will help you pick the right approach, whether or not it is Enigma Vault.</p>
+  </div>
+  <a class="np-btn np-btn--on-dark np-btn--primary" href="/contact/"><span>Get in touch</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
+</div>
+
+<h3 id="vgs">5. VGS: Best for Removing Card Data Without Changing Application Code</h3>
+<p>VGS (Very Good Security) sits between your application and your processors as a proxy, so card data is captured and vaulted before it reaches your systems.</p>
+<p>VGS calls itself a leader in payment tokenization and says it holds more than 10 billion tokens. It also applies the same proxy approach to PII for GDPR and CCPA programs.</p>
+<div class="tk-carousel" role="region" aria-roledescription="carousel" aria-label="VGS screenshots">
+  <div class="tk-track" tabindex="0">
+    <figure class="tk-slide" aria-label="Image 1 of 2">
+      {{< img src="/assets/blog/tokenization-software/vgs-homepage.jpg" alt="VGS homepage" >}}
+      <figcaption>The VGS homepage.</figcaption>
+    </figure>
+    <figure class="tk-slide" aria-label="Image 2 of 2">
+      {{< img src="/assets/blog/tokenization-software/vgs-product.png" alt="VGS Collect secure card form shown on the VGS Vault page" >}}
+      <figcaption>VGS Collect, the secure card form shown on the VGS Vault page.</figcaption>
+    </figure>
+  </div>
+  <button class="tk-btn tk-prev" type="button" aria-label="Previous image">&#8249;</button>
+  <button class="tk-btn tk-next" type="button" aria-label="Next image">&#8250;</button>
+  <div class="tk-dots"><button type="button" aria-label="Show image 1"></button><button type="button" aria-label="Show image 2"></button></div>
+</div>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <tbody>
+      <tr><td>Token model</td><td>Proxy plus vault</td></tr>
+      <tr><td>Compliance</td><td>ISO 27001 highlighted; PCI compliance offered as subscription tiers</td></tr>
+      <tr><td>Pricing</td><td>Plans from $1,000/mo; Growth is custom</td></tr>
+      <tr><td>Reviews</td><td>G2 4.7/5 (47 reviews); none on Capterra</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><strong>Pricing tiers</strong></p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Plan</th><th>Price</th><th>What you get</th></tr></thead>
+    <tbody>
+      <tr><td>Starter</td><td>From $1,000/mo</td><td>A free trial is available, and the page gives no token or request limits</td></tr>
+      <tr><td>Growth</td><td>Custom</td><td>Network tokens, Account Updater, PCI compliance subscription (L1 and L2 to L4), VGS-provided auditor, large file transfers, VGS Compute, Card Attributes</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><strong>Pros</strong></p>
+<ul>
+  <li>It has the strongest review base on this list, at 4.7 on G2 from 47 reviews.</li>
+  <li>The proxy model means little or no change to your application code.</li>
+  <li>VGS shows scale (10 billion tokens held) and highlights ISO 27001 on its site.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li>The entry point is $1,000 a month.</li>
+  <li>Reviewers find the documentation hard to navigate if you are not technical.</li>
+  <li>Your traffic routes through the VGS proxy, so it becomes part of your request path, and there are no Capterra reviews.</li>
+</ul>
+<div class="bl-inlinecta">
+  <div>
+    <p class="bl-inlinecta__t">Not sure which tool fits your data?</p>
+    <p class="bl-inlinecta__s">Tell me what you need to protect and I will help you pick the right approach, whether or not it is Enigma Vault.</p>
+  </div>
+  <a class="np-btn np-btn--on-dark np-btn--primary" href="/contact/"><span>Get in touch</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
+</div>
+
+<h3 id="evervault">6. Evervault: Best for Payments Teams That Want Encryption Plus Card Tooling</h3>
+<p>Evervault is an encryption-based data protection platform, not a classic token vault, with card collection, 3DS and network tokens built in.</p>
+<p>Evervault encrypts your data and manages keys separately from the ciphertext, then offers products such as Relay and Functions so you can work with encrypted values. I include it because buyers who search for tokenization often land on it, and its model is worth understanding as a contrast to a vault.</p>
+<div class="tk-carousel" role="region" aria-roledescription="carousel" aria-label="Evervault screenshots">
+  <div class="tk-track" tabindex="0">
+    <figure class="tk-slide" aria-label="Image 1 of 2">
+      {{< img src="/assets/blog/tokenization-software/evervault-homepage.jpg" alt="Evervault homepage" >}}
+      <figcaption>The Evervault homepage.</figcaption>
+    </figure>
+    <figure class="tk-slide" aria-label="Image 2 of 2">
+      {{< img src="/assets/blog/tokenization-software/evervault-dashboard.jpg" alt="Evervault payments dashboard with card transactions, processors and acceptance rate" >}}
+      <figcaption>The Evervault payments view, as shown on its homepage.</figcaption>
+    </figure>
+  </div>
+  <button class="tk-btn tk-prev" type="button" aria-label="Previous image">&#8249;</button>
+  <button class="tk-btn tk-next" type="button" aria-label="Next image">&#8250;</button>
+  <div class="tk-dots"><button type="button" aria-label="Show image 1"></button><button type="button" aria-label="Show image 2"></button></div>
+</div>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <tbody>
+      <tr><td>Token model</td><td>Encryption-based</td></tr>
+      <tr><td>Compliance</td><td>States PCI DSS 4.0.1 Level 1, SOC 2 Type II, HIPAA and CSA STAR Level 1</td></tr>
+      <tr><td>Pricing</td><td>Platform at $995/mo plus usage; custom above 25,000 transactions a month</td></tr>
+      <tr><td>Reviews</td><td>G2 4.4/5 (17 reviews)</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><strong>Pricing tiers</strong></p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Plan</th><th>Price</th><th>What you get</th></tr></thead>
+    <tbody>
+      <tr><td>Platform</td><td>$995/mo plus usage</td><td>Recommended under 25K transactions a month. Includes card collection, 3D Secure, network tokens, Apple Pay and Google Pay, and encryption</td></tr>
+      <tr><td>Custom</td><td>Contact sales</td><td>Recommended above 25K transactions a month. Adds volume discounts, 24/7 support, a solutions engineer, a private Slack channel and SAML SSO</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>The Platform plan adds these usage fees:</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Operation</th><th>Price</th></tr></thead>
+    <tbody>
+      <tr><td>Decrypt</td><td>$0.005 per operation</td></tr>
+      <tr><td>File decrypt</td><td>$0.02 per file</td></tr>
+      <tr><td>3D Secure successful authentication</td><td>$0.03 per success</td></tr>
+      <tr><td>Network token creation</td><td>$0.03 per token</td></tr>
+      <tr><td>Card update</td><td>$0.25 per update</td></tr>
+      <tr><td>Apple Pay or Google Pay</td><td>$0.01 per transaction</td></tr>
+      <tr><td>BIN lookup</td><td>$0.005 per lookup</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><strong>Pros</strong></p>
+<ul>
+  <li>Card collection, 3DS, network tokens and Apple and Google Pay come in one platform.</li>
+  <li>It states PCI DSS 4.0.1 Level 1, SOC 2 Type II, HIPAA and CSA STAR Level 1.</li>
+  <li>Keys are managed separately from your encrypted data, and Relay lets you work with encrypted values.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li>Usage fees (for example, $0.005 per decrypt operation) come on top of the $995 platform price.</li>
+  <li>Reviewers flag cost for smaller organizations.</li>
+  <li>It is not a classic token vault, so what you expect about token formats and mapping will differ from the vault tools here.</li>
+</ul>
+<div class="bl-inlinecta">
+  <div>
+    <p class="bl-inlinecta__t">Not sure which tool fits your data?</p>
+    <p class="bl-inlinecta__s">Tell me what you need to protect and I will help you pick the right approach, whether or not it is Enigma Vault.</p>
+  </div>
+  <a class="np-btn np-btn--on-dark np-btn--primary" href="/contact/"><span>Get in touch</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
+</div>
+
+<h3 id="thales-ciphertrust">7. Thales CipherTrust Tokenization: Best for Large Hybrid and On-Premises Estates</h3>
+<p>Thales CipherTrust Tokenization offers both vaulted and vaultless tokenization with format-preserving tokens, centralized key management and multi-cloud support.</p>
+<div class="tk-carousel" role="region" aria-roledescription="carousel" aria-label="Thales CipherTrust Tokenization screenshots">
+  <div class="tk-track" tabindex="0">
+    <figure class="tk-slide" aria-label="Image 1 of 2">
+      {{< img src="/assets/blog/tokenization-software/thales-homepage.jpg" alt="Thales CipherTrust Tokenization page" >}}
+      <figcaption>The Thales CipherTrust Tokenization page.</figcaption>
+    </figure>
+    <figure class="tk-slide" aria-label="Image 2 of 2">
+      {{< img src="/assets/blog/tokenization-software/thales-product.png" alt="Thales diagram showing a card number turned into a protected token" >}}
+      <figcaption>Thales' own diagram of data in the clear becoming protected data.</figcaption>
+    </figure>
+  </div>
+  <button class="tk-btn tk-prev" type="button" aria-label="Previous image">&#8249;</button>
+  <button class="tk-btn tk-next" type="button" aria-label="Next image">&#8250;</button>
+  <div class="tk-dots"><button type="button" aria-label="Show image 1"></button><button type="button" aria-label="Show image 2"></button></div>
+</div>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <tbody>
+      <tr><td>Token model</td><td>Vaulted and vaultless, format-preserving</td></tr>
+      <tr><td>Deployment</td><td>REST API and application SDK, column-level database protection, multi-cloud</td></tr>
+      <tr><td>Pricing</td><td>Not public</td></tr>
+      <tr><td>Reviews</td><td>Gartner Peer Insights 4.7/5 (11 ratings)</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><strong>Pricing tiers</strong></p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Plan</th><th>Price</th><th>What you get</th></tr></thead>
+    <tbody>
+      <tr><td>Custom quote</td><td>Not published</td><td>The CipherTrust Tokenization page shows no plans, prices or trial. You request a quote from Thales.</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><strong>Pros</strong></p>
+<ul>
+  <li>You can choose vaulted or vaultless per use case instead of committing to one model.</li>
+  <li>Format-preserving tokens and column-level database protection let you avoid schema changes.</li>
+  <li>It has a 4.7 Gartner rating and centralized key management that fits an existing Thales deployment.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li>Reviewers cite high operating cost.</li>
+  <li>Reviewers report performance limits on very large databases.</li>
+  <li>There is no public pricing, and only 11 Gartner ratings sit behind the score.</li>
+</ul>
+<div class="bl-inlinecta">
+  <div>
+    <p class="bl-inlinecta__t">Not sure which tool fits your data?</p>
+    <p class="bl-inlinecta__s">Tell me what you need to protect and I will help you pick the right approach, whether or not it is Enigma Vault.</p>
+  </div>
+  <a class="np-btn np-btn--on-dark np-btn--primary" href="/contact/"><span>Get in touch</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
+</div>
+
+<h3 id="protegrity">8. Protegrity: Best for Analytics and Data-Platform Workloads at Scale</h3>
+<p>Protegrity is a vaultless data protection platform that combines tokenization, format-preserving encryption and dynamic masking, with integrations for AWS and Databricks.</p>
+<div class="tk-carousel" role="region" aria-roledescription="carousel" aria-label="Protegrity screenshots">
+  <div class="tk-track" tabindex="0">
+    <figure class="tk-slide" aria-label="Image 1 of 2">
+      {{< img src="/assets/blog/tokenization-software/protegrity-homepage.jpg" alt="Protegrity homepage" >}}
+      <figcaption>The Protegrity homepage.</figcaption>
+    </figure>
+    <figure class="tk-slide" aria-label="Image 2 of 2">
+      {{< img src="/assets/blog/tokenization-software/protegrity-dashboard.png" alt="Protegrity console showing the path to protection with discover, policy and insight steps" >}}
+      <figcaption>The Protegrity console, as shown on its homepage.</figcaption>
+    </figure>
+  </div>
+  <button class="tk-btn tk-prev" type="button" aria-label="Previous image">&#8249;</button>
+  <button class="tk-btn tk-next" type="button" aria-label="Next image">&#8250;</button>
+  <div class="tk-dots"><button type="button" aria-label="Show image 1"></button><button type="button" aria-label="Show image 2"></button></div>
+</div>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <tbody>
+      <tr><td>Token model</td><td>Vaultless</td></tr>
+      <tr><td>Editions</td><td>AI Developer Edition (free SDKs), AI Team Edition and AI Enterprise Edition</td></tr>
+      <tr><td>Pricing</td><td>Through demo and sales</td></tr>
+      <tr><td>Reviews</td><td>G2 4.5/5 (14 reviews), Gartner Peer Insights 4.3/5 (32 ratings)</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><strong>Pricing tiers</strong></p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Plan</th><th>Price</th><th>What you get</th></tr></thead>
+    <tbody>
+      <tr><td>AI Developer Edition</td><td>Free</td><td>Downloadable SDKs for finding and protecting sensitive data in prompts, logs and unstructured text, available on GitHub</td></tr>
+      <tr><td>AI Team Edition</td><td>Not published</td><td>Listed as a new edition for AI and analytics pipelines, with pricing through sales</td></tr>
+      <tr><td>AI Enterprise Edition</td><td>Not published</td><td>Listed as an edition, with pricing through sales</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><strong>Pros</strong></p>
+<ul>
+  <li>Vaultless tokenization means you have no vault to scale or keep available.</li>
+  <li>Tokenization, format-preserving encryption and dynamic masking come in one platform.</li>
+  <li>There is a free AI Developer Edition on GitHub, and review scores on both G2 (4.5) and Gartner (4.3).</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li>The homepage does not detail certifications.</li>
+  <li>Team and Enterprise pricing is quote-only.</li>
+  <li>The positioning leans toward enterprise data platforms, which can feel heavy if you run a small team with one data store.</li>
+</ul>
+<div class="bl-inlinecta">
+  <div>
+    <p class="bl-inlinecta__t">Not sure which tool fits your data?</p>
+    <p class="bl-inlinecta__s">Tell me what you need to protect and I will help you pick the right approach, whether or not it is Enigma Vault.</p>
+  </div>
+  <a class="np-btn np-btn--on-dark np-btn--primary" href="/contact/"><span>Get in touch</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
+</div>
+
+<h3 id="opentext-voltage">9. OpenText Voltage SecureData: Best for Format-Preserving Protection in Legacy Systems</h3>
+<p>OpenText Voltage SecureData protects data across its lifecycle with format-preserving encryption, tokenization, hashing and masking.</p>
+<div class="tk-carousel" role="region" aria-roledescription="carousel" aria-label="OpenText Voltage SecureData screenshots">
+  <div class="tk-track" tabindex="0">
+    <figure class="tk-slide" aria-label="Image 1 of 2">
+      {{< img src="/assets/blog/tokenization-software/opentext-voltage-homepage.jpg" alt="OpenText Voltage SecureData product page" >}}
+      <figcaption>The OpenText Voltage SecureData product page.</figcaption>
+    </figure>
+    <figure class="tk-slide" aria-label="Image 2 of 2">
+      {{< img src="/assets/blog/tokenization-software/opentext-voltage-dashboard.png" alt="OpenText Voltage data privacy and protection settings screens" >}}
+      <figcaption>OpenText's product screens for data protection settings.</figcaption>
+    </figure>
+  </div>
+  <button class="tk-btn tk-prev" type="button" aria-label="Previous image">&#8249;</button>
+  <button class="tk-btn tk-next" type="button" aria-label="Next image">&#8250;</button>
+  <div class="tk-dots"><button type="button" aria-label="Show image 1"></button><button type="button" aria-label="Show image 2"></button></div>
+</div>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <tbody>
+      <tr><td>Token model</td><td>Format-preserving encryption and tokenization with stateless key management; vault status not confirmed</td></tr>
+      <tr><td>Pricing</td><td>Not public</td></tr>
+      <tr><td>Reviews</td><td>Gartner Peer Insights 4.5/5 (69 ratings)</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><strong>Pricing tiers</strong></p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Plan</th><th>Price</th><th>What you get</th></tr></thead>
+    <tbody>
+      <tr><td>Custom quote</td><td>Not published</td><td>The "How to buy" section lists SecureData Payments, Integrations, Sentry, z/Protect and APIs, and sends you to a Contact us form for pricing</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><strong>Pros</strong></p>
+<ul>
+  <li>Format-preserving output drops into legacy schemas without changing your field lengths.</li>
+  <li>You get several techniques in one product: encryption, tokenization, hashing and masking.</li>
+  <li>It has the largest review base of the enterprise tools, with 69 Gartner ratings averaging 4.5.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li>Gartner reviewers describe higher cost and complexity, even when they praise the protection.</li>
+  <li>One reviewer says the client library needs modernization.</li>
+  <li>Pricing is not public, and I could not confirm vault status or certifications on the product page.</li>
+</ul>
+<div class="bl-inlinecta">
+  <div>
+    <p class="bl-inlinecta__t">Not sure which tool fits your data?</p>
+    <p class="bl-inlinecta__s">Tell me what you need to protect and I will help you pick the right approach, whether or not it is Enigma Vault.</p>
+  </div>
+  <a class="np-btn np-btn--on-dark np-btn--primary" href="/contact/"><span>Get in touch</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
+</div>
+
+<h3 id="fortanix-dsm">10. Fortanix Data Security Manager: Best for Key Management and Tokenization in One Platform</h3>
+<p>Fortanix Data Security Manager combines key management, secrets and tokenization for card numbers, health data and PII, with HSM-backed key control.</p>
+<div class="tk-carousel" role="region" aria-roledescription="carousel" aria-label="Fortanix Data Security Manager screenshots">
+  <div class="tk-track" tabindex="0">
+    <figure class="tk-slide" aria-label="Image 1 of 2">
+      {{< img src="/assets/blog/tokenization-software/fortanix-homepage.jpg" alt="Fortanix Data Security Manager page" >}}
+      <figcaption>The Fortanix Data Security Manager page.</figcaption>
+    </figure>
+    <figure class="tk-slide" aria-label="Image 2 of 2">
+      {{< img src="/assets/blog/tokenization-software/fortanix-dashboard.jpg" alt="Fortanix Data Security Manager dashboard with total apps, operations and tokenization operations" >}}
+      <figcaption>The Fortanix Data Security Manager dashboard, as shown on its product page.</figcaption>
+    </figure>
+  </div>
+  <button class="tk-btn tk-prev" type="button" aria-label="Previous image">&#8249;</button>
+  <button class="tk-btn tk-next" type="button" aria-label="Next image">&#8250;</button>
+  <div class="tk-dots"><button type="button" aria-label="Show image 1"></button><button type="button" aria-label="Show image 2"></button></div>
+</div>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <tbody>
+      <tr><td>Token model</td><td>Not stated on the vendor page</td></tr>
+      <tr><td>Compliance</td><td>Vendor references FIPS 140-2 Level 3, SOC 2, ISO and PCI DSS</td></tr>
+      <tr><td>Pricing</td><td>Not public</td></tr>
+      <tr><td>Reviews</td><td>G2 4.5/5 (2 reviews), too few to rely on</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><strong>Pricing tiers</strong></p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Plan</th><th>Price</th><th>What you get</th></tr></thead>
+    <tbody>
+      <tr><td>Free trial</td><td>Free</td><td>A "Try Us" button on the product page links to a free trial, with no duration shown</td></tr>
+      <tr><td>Paid plans</td><td>Not published</td><td>The page lists no plans or prices, so you request a demo or quote</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><strong>Pros</strong></p>
+<ul>
+  <li>You get HSM-backed key control, with FIPS 140-2 Level 3 referenced by the vendor.</li>
+  <li>Key management, secrets and tokenization run in one hybrid multicloud platform.</li>
+  <li>It tokenizes PANs, PHI and PII, and the product page shows its management dashboard.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li>Only 2 G2 reviews exist, too few to rely on.</li>
+  <li>The product page does not say whether tokens are vaulted or vaultless, or give format-preserving detail.</li>
+  <li>Pricing is not public.</li>
+</ul>
+<div class="bl-inlinecta">
+  <div>
+    <p class="bl-inlinecta__t">Not sure which tool fits your data?</p>
+    <p class="bl-inlinecta__s">Tell me what you need to protect and I will help you pick the right approach, whether or not it is Enigma Vault.</p>
+  </div>
+  <a class="np-btn np-btn--on-dark np-btn--primary" href="/contact/"><span>Get in touch</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
+</div>
+
+<h2>How to Choose Data Tokenization Software by Scenario</h2>
+<p>Match the tool to the data you protect and the team that runs it: payments teams start with card-focused vaults, SaaS teams with PII vaults and large enterprises with platform-level products.</p>
+<ul>
+  <li><strong>Reducing PCI DSS scope:</strong> look at Enigma Vault Card Vault, TokenEx / IXOPAY, VGS and Basis Theory. All of them focus on keeping card numbers off your servers.</li>
+  <li><strong>PII or PHI in a SaaS application:</strong> consider Enigma Vault Data Vault or Skyflow, which isolate sensitive fields behind access policies.</li>
+  <li><strong>Enterprise databases and legacy formats:</strong> shortlist Thales CipherTrust, Protegrity and OpenText Voltage, which handle format-preserving tokens at scale.</li>
+  <li><strong>LLM and AI pipelines:</strong> pick a tool that tokenizes personal data before it reaches a model. Enigma Vault NoPII and Skyflow both target this. See my guide to <a class="bl-link" href="/blog/pii-tokenization-for-ai/">PII tokenization for AI</a>.</li>
+  <li><strong>Startups, SMBs and small budgets:</strong> start with a free tier. Enigma Vault's Lite plans and NoPII's free monthly tokens cost nothing, while several alternatives start near $1,000 a month.</li>
+</ul>
+
+<h2>Common Mistakes When Buying Data Tokenization Software</h2>
+<ul>
+  <li><strong>Treating encryption and tokenization as the same thing.</strong> You can reverse encryption with a key, while a token has no mathematical link to the original.</li>
+  <li><strong>Ignoring exit costs.</strong> Ask how you would export your tokens and values if you left, and whether the token formats are portable.</li>
+  <li><strong>Trusting marketing labels.</strong> Terms like zero-knowledge or bank-grade need a precise definition and evidence from the vendor.</li>
+  <li><strong>Skipping governance on detokenization.</strong> Anything allowed to detokenize stays in your audit scope, so limit who and what can do it.</li>
+  <li><strong>Buying without a pilot.</strong> Test latency, throughput and search behavior with your own data before you commit.</li>
+</ul>
+
+<h2>Try Enigma Vault Free</h2>
+<p>With <a class="bl-link" href="https://www.enigmavault.io/vault/data-vault/">Enigma Vault</a>, you can tokenize cards, structured fields and files through one API, whether you run an enterprise program or a startup, and you can begin on a free plan. Data Vault takes batches of up to 5,000 records and supports exact-match lookup and deterministic tokens, and Card Vault forwards your stored cards to your payment gateway. It runs on PCI DSS Level 1 and SOC 2 Type II certified infrastructure. <a class="bl-link" href="/request-demo/">Request a demo</a> or start with the free tier and test it on your own data.</p>
+
+<script>
+document.querySelectorAll('.tk-carousel').forEach(function (c) {
+  var track = c.querySelector('.tk-track');
+  var prev = c.querySelector('.tk-prev');
+  var next = c.querySelector('.tk-next');
+  var dots = c.querySelectorAll('.tk-dots button');
+  var count = c.querySelectorAll('.tk-slide').length;
+  function index() { return Math.round(track.scrollLeft / track.clientWidth); }
+  function go(i) { track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' }); }
+  function update() {
+    var i = Math.min(count - 1, Math.max(0, index()));
+    prev.disabled = i === 0;
+    next.disabled = i === count - 1;
+    dots.forEach(function (d, k) { d.setAttribute('aria-current', k === i ? 'true' : 'false'); });
+  }
+  prev.addEventListener('click', function () { go(index() - 1); });
+  next.addEventListener('click', function () { go(index() + 1); });
+  dots.forEach(function (d, k) { d.addEventListener('click', function () { go(k); }); });
+  track.addEventListener('scroll', function () { window.requestAnimationFrame(update); }, { passive: true });
+  track.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { e.preventDefault(); go(index() + 1); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); go(index() - 1); }
+  });
+  update();
+});
+</script>

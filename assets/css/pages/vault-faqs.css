@@ -1,5 +1,2 @@
 /* vault/faqs.html — page-scoped styles */
 
-.cvd-body{padding:0 0 28px 0;font-size:16.5px;line-height:1.62;color:var(--text-body);}
-.cvd-body p{margin-bottom:20px;max-width:640px;}
-.cvd-body strong{white-space:nowrap;font-family:var(--font-mono);font-weight:600;color:var(--ev-mineral-blue);}

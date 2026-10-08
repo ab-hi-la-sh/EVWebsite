@@ -1,0 +1,53 @@
+---
+title: "Card Vault Live Demo"
+metaTitle: "Card Vault Live Demo: Tokenize a Test Card | Enigma Vault"
+description: "Try Card Vault live. Enter a test card in the hosted form and see the token that replaces the card number in your system."
+ogImage: "/assets/og/vault-card.jpg"
+ogImageAlt: "Accept payments. Never touch a card. — Enigma Vault"
+styles: ["vaults.css", "pages/vault-card-vault.css", "pages/vault-card-demo.css"]
+breadcrumb:
+  - name: "The Vault"
+    url: "/vault/"
+  - name: "Card Vault Live Demo"
+    url: "/vault/card-vault-demo/"
+---
+
+  <header class="np-hero np-hero--center">
+    <div class="np-container np-hero__inner">
+      <div class="np-hero__copy">
+        <nav class="vp-crumb" aria-label="Breadcrumb"><a href="/vault/">The Vault</a><span class="vp-crumb__sep">/</span><span aria-current="page">Card Vault Live Demo</span></nav>
+        <p class="np-eyebrow">Card Vault</p>
+        <h1 class="np-h1">Tokenize a card <em>in front of you</em>.</h1>
+        <p class="np-lead">Enter a test card in the hosted form and submit it. You get back a token that replaces the card number in your system, so your app never touches the card data.</p>
+      </div>
+    </div>
+  </header>
+
+  <section class="np-section np-rule-top" style="padding-top:48px">
+    <div class="np-container">
+      <div class="cvd-stage">
+        <iframe id="ev-demo" src="/embed/card-vault-demo.html?bg=transparent" title="Card Vault live demo"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <section class="np-section np-ctaband np-rule-top">
+    <div class="np-container">
+      <div class="np-ctaband__inner">
+        <h2 class="np-h2">Your checkout keeps working. <em>Your auditor gets a shorter list</em>.</h2>
+        <div class="np-ctaband__ctas">
+          <a class="np-btn np-btn--primary" href="https://aws.amazon.com/marketplace/seller-profile?id=c77b8db1-5511-48b7-8ce5-9a8d4a1a8018" target="_blank" rel="noopener"><span>Get started free</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
+          <a class="np-btn np-btn--secondary" href="/vault/card-vault/"><span>About Card Vault</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<script>
+(function(){
+  var f=document.getElementById("ev-demo");
+  window.addEventListener("message",function(e){
+    if(e.origin===location.origin&&e.data&&e.data.type==="ev-demo-height") f.style.height=(e.data.height+8)+"px";
+  });
+})();
+</script>

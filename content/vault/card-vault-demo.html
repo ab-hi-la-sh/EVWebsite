@@ -4,6 +4,8 @@ metaTitle: "Card Vault Live Demo: Tokenize a Test Card | Enigma Vault"
 description: "Try Card Vault live. Enter a test card in the hosted form and see the token that replaces the card number in your system."
 ogImage: "/assets/og/vault-card.jpg"
 ogImageAlt: "Accept payments. Never touch a card. — Enigma Vault"
+noindex: true
+excludeFromSitemap: true
 styles: ["vaults.css", "pages/vault-card-vault.css", "pages/vault-card-demo.css"]
 breadcrumb:
   - name: "The Vault"
@@ -47,7 +49,7 @@ breadcrumb:
 (function(){
   var f=document.getElementById("ev-demo");
   window.addEventListener("message",function(e){
-    if(e.origin===location.origin&&e.data&&e.data.type==="ev-demo-height") f.style.height=(e.data.height+8)+"px";
+    if(e.origin===location.origin&&e.data&&e.data.type==="ev-demo-height") f.style.height=Math.min(e.data.height,1400)+"px";
   });
 })();
 </script>

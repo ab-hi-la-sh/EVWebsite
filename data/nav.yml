@@ -54,7 +54,6 @@ items:
       - [How it works, /vault/#how-it-works]
       - [Use cases, /vault/#use-cases]
       - [FAQs, /vault/#faqs]
-      - [Card Vault Live Demo, /vault/card-vault-demo/]
     group:
       title: The four vaults
       links:

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Card Vault Demo</title>
+  <!--
+    Naked, iframe-able Card Vault demo. No header/footer, transparent background.
+
+    MUST be served from https://www.enigmavault.io. The card form only accepts
+    Submit from, and only sends the token response to, that origin. On any other
+    host the form loads but Submit does nothing.
+
+    Styling: everything in this file (the <style> block, CSS variables at the top)
+    is yours to change. The card fields themselves are served by api.enigmavault.io
+    and can't be styled from here; ask engineering to change them.
+
+    Embed:
+      <iframe id="ev-demo" src="/embed/card-vault-demo.html"
+              style="width:100%;max-width:520px;height:560px;border:0;" title="Card Vault Demo"></iframe>
+
+    Options (query string):
+      ?theme=light   light text/colors for a white host page (default: dark)
+      ?bg=transparent|dark|light   page background (default: transparent)
+
+    Auto-height (optional, on the host page):
+      window.addEventListener("message", function (e) {
+        if (e.data && e.data.type === "ev-demo-height")
+          document.getElementById("ev-demo").style.height = e.data.height + "px";
+      });
+  -->
+  <style>
+    @font-face { font-family: "Inter"; src: url("/fonts/inter/inter-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+    @font-face { font-family: "Inter"; src: url("/fonts/inter/inter-latin-500-normal.woff2") format("woff2"); font-weight: 500; font-display: swap; }
+    @font-face { font-family: "Inter"; src: url("/fonts/inter/inter-latin-600-normal.woff2") format("woff2"); font-weight: 600; font-display: swap; }
+    :root {
+      --primary: #0F3D56;
+      --primary-dark: #0C3348;
+      --card: #FFFFFF;
+      --border: #E2E6EB;
+      --silver: #C8CCD3;
+      --text: #3D4654;
+      --text-bright: #2A3340;
+      --muted: #6B7280;
+      --code-bg: #153A57;
+      --page-bg: transparent;
+      --font: "Inter", "Geist", -apple-system, "Helvetica Neue", sans-serif;
+      --mono: "SF Mono", "Fira Code", "Fira Mono", "Roboto Mono", monospace;
+    }
+    html[data-bg="dark"] { --page-bg: #0b1222; }
+    html[data-bg="light"] { --page-bg: #ffffff; }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { background: var(--page-bg); }
+    body { font-family: var(--font); color: var(--text); line-height: 1.6; padding: 4px; }
+
+    .demo { max-width: 520px; margin: 0 auto; }
+    .hint { text-align: center; font-size: 0.9rem; color: var(--muted); margin-bottom: 16px; }
+    .hint strong { color: var(--primary); font-family: var(--mono); font-weight: 600; }
+
+    .frame-wrap {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+      box-shadow: 0 1px 2px rgba(15, 61, 86, 0.04), 0 8px 24px rgba(15, 61, 86, 0.06);
+    }
+    .status {
+      text-align: center; padding: 48px 16px; color: var(--muted); font-size: 0.95rem;
+      border-radius: 12px; background: #F0F2F5; margin-bottom: 24px;
+    }
+    .status--error { color: #EF4444; background: #FDEAEA; border: 1px solid rgba(239, 68, 68, 0.2); }
+    iframe {
+      width: 100%; height: 250px; border: none; border-radius: 12px;
+      background: #182240; margin-bottom: 24px; display: block;
+    }
+    .actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      font: 500 0.95rem var(--font); padding: 0.7rem 1.5rem; border-radius: 999px;
+      cursor: pointer; transition: background 0.2s, border-color 0.2s, color 0.2s;
+    }
+    .btn-primary { background: var(--primary); color: #fff; border: 1px solid var(--primary); }
+    .btn-primary:hover { background: var(--primary-dark); border-color: var(--primary-dark); }
+    .btn-outline { background: transparent; color: var(--text-bright); border: 1px solid var(--silver); }
+    .btn-outline:hover { background: #F0F2F5; border-color: #B5BCC4; }
+
+    .response { margin-top: 24px; }
+    .response h3 { font-size: 1.05rem; font-weight: 600; color: var(--text-bright); margin-bottom: 4px; }
+    .response p { color: var(--muted); font-size: 0.9rem; margin-bottom: 12px; }
+    pre {
+      background: var(--code-bg); color: #E7EBF0; border-radius: 12px;
+      padding: 16px; font: 0.8rem/1.5 var(--mono); overflow-x: auto; white-space: pre;
+    }
+    [hidden] { display: none !important; }
+
+    @media (max-width: 420px) { .frame-wrap { padding: 16px; } }
+  </style>
+</head>
+<body>
+  <div class="demo">
+    <p class="hint">Try <strong>4111 1111 1111 1111</strong> with any future expiry and CVV.</p>
+
+    <div class="frame-wrap">
+      <div id="demoLoading" class="status">Loading card form&hellip;</div>
+      <div id="demoError" class="status status--error" hidden>Unable to load the card form. Please refresh and try again.</div>
+      <iframe title="Enigma Vault secure card form" id="evFrame" src="about:blank" hidden></iframe>
+      <div class="actions">
+        <button id="submitEvButton" type="button" class="btn btn-primary">Submit Card</button>
+        <button id="cvDemoButton" type="button" class="btn btn-outline">Refresh Form</button>
+      </div>
+    </div>
+
+    <div id="cvDemoSuccessAlert" class="response" hidden>
+      <h3>API Response</h3>
+      <p>This token replaces the card number in your system. Your app never touches the card data.</p>
+      <pre><code id="cvJson"></code></pre>
+    </div>
+  </div>
+
+  <script>
+  (function () {
+    var params = new URLSearchParams(location.search);
+    if (params.get("theme") === "light") document.documentElement.setAttribute("data-theme", "light");
+    if (params.get("bg")) document.documentElement.setAttribute("data-bg", params.get("bg"));
+
+    var FORM_ORIGIN = "https://api.enigmavault.io";
+    var storeFormUrl = "";
+    var loadingEl = document.getElementById("demoLoading");
+    var errorEl = document.getElementById("demoError");
+    var frameEl = document.getElementById("evFrame");
+    var alertEl = document.getElementById("cvDemoSuccessAlert");
+
+    function show(el) {
+      loadingEl.hidden = el !== loadingEl;
+      errorEl.hidden = el !== errorEl;
+      frameEl.hidden = el !== frameEl;
+      reportHeight();
+    }
+
+    // Lets the host page size the iframe to fit (response panel grows the page).
+    function reportHeight() {
+      if (window.parent === window) return;
+      window.parent.postMessage({ type: "ev-demo-height", height: document.documentElement.scrollHeight }, "*");
+    }
+
+    function getStoreFormUrl() {
+      alertEl.hidden = true;
+      storeFormUrl = "";
+      show(loadingEl);
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", "https://ki00phlx55.execute-api.us-east-1.amazonaws.com/prod/cardvault/store-form-url");
+      xhr.timeout = 30000;
+      xhr.onload = function () {
+        if (xhr.status !== 200) return show(errorEl);
+        try {
+          storeFormUrl = JSON.parse(xhr.responseText).storeFormUrl;
+          frameEl.src = storeFormUrl;
+          show(frameEl);
+        } catch (e) {
+          show(errorEl);
+        }
+      };
+      xhr.onerror = xhr.ontimeout = function () { show(errorEl); };
+      xhr.send();
+    }
+
+    function handleMessage(event) {
+      if (event.origin !== FORM_ORIGIN) return;
+      var evData = event.data;
+      if (evData && evData.status && evData.status.summary === "success") {
+        document.getElementById("cvJson").textContent = JSON.stringify(evData, null, "  ");
+        alertEl.hidden = false;
+        reportHeight();
+      }
+    }
+
+    document.getElementById("submitEvButton").addEventListener("click", function () {
+      if (storeFormUrl) frameEl.contentWindow.postMessage("submit", storeFormUrl);
+    });
+    document.getElementById("cvDemoButton").addEventListener("click", getStoreFormUrl);
+    window.addEventListener("message", handleMessage);
+    window.addEventListener("resize", reportHeight);
+
+    getStoreFormUrl();
+  })();
+  </script>
+</body>
+</html>

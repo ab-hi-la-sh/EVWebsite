@@ -1,0 +1,73 @@
+{{ define "head" }}
+<link rel="preconnect" href="https://ki00phlx55.execute-api.us-east-1.amazonaws.com" crossorigin>
+<link rel="preconnect" href="https://api.enigmavault.io" crossorigin>
+<link rel="dns-prefetch" href="https://ki00phlx55.execute-api.us-east-1.amazonaws.com">
+<link rel="dns-prefetch" href="https://api.enigmavault.io">
+<script>
+window.__evDemo=fetch("https://ki00phlx55.execute-api.us-east-1.amazonaws.com/prod/cardvault/store-form-url",{method:"POST"}).then(function(r){return r.json()});
+</script>
+{{ end }}
+
+{{ define "main" }}
+<main>
+{{ .Content }}
+</main>
+{{ end }}
+
+{{ define "scripts" }}
+<script>
+(function(){
+  var FORM_ORIGIN="https://api.enigmavault.io";
+  var storeFormUrl="";
+  var loadingEl=document.getElementById("demoLoading");
+  var errorEl=document.getElementById("demoError");
+  var frameEl=document.getElementById("evFrame");
+  var alertEl=document.getElementById("cvDemoSuccessAlert");
+
+  function show(el){
+    loadingEl.hidden=el!==loadingEl;
+    errorEl.hidden=el!==errorEl;
+    frameEl.hidden=el!==frameEl;
+  }
+
+  function applyFormUrl(data){
+    try{
+      storeFormUrl=data.storeFormUrl;
+      if(new URL(storeFormUrl).origin!==FORM_ORIGIN){storeFormUrl="";return show(errorEl);}
+      frameEl.src=storeFormUrl;
+      show(frameEl);
+    }catch(e){show(errorEl);}
+  }
+
+  function getStoreFormUrl(){
+    alertEl.hidden=true;
+    storeFormUrl="";
+    show(loadingEl);
+    fetch("https://ki00phlx55.execute-api.us-east-1.amazonaws.com/prod/cardvault/store-form-url",{method:"POST"})
+      .then(function(r){if(!r.ok)throw r;return r.json()})
+      .then(applyFormUrl)
+      .catch(function(){show(errorEl);});
+  }
+
+  window.addEventListener("message",function(event){
+    if(event.origin!==FORM_ORIGIN) return;
+    var evData=event.data;
+    if(evData&&evData.status&&evData.status.summary==="success"){
+      document.getElementById("cvJson").textContent=JSON.stringify(evData,null,"  ");
+      alertEl.hidden=false;
+    }
+  });
+
+  document.getElementById("submitEvButton").addEventListener("click",function(){
+    if(storeFormUrl) frameEl.contentWindow.postMessage("submit",storeFormUrl);
+  });
+  document.getElementById("cvDemoButton").addEventListener("click",getStoreFormUrl);
+
+  if(window.__evDemo){
+    window.__evDemo.then(applyFormUrl).catch(function(){show(errorEl);});
+  }else{
+    getStoreFormUrl();
+  }
+})();
+</script>
+{{ end }}

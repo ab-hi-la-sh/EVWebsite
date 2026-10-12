@@ -6,6 +6,7 @@ ogImage: "/assets/og/vault-card.jpg"
 ogImageAlt: "Accept payments. Never touch a card. — Enigma Vault"
 noindex: true
 excludeFromSitemap: true
+layout: "card-vault-demo"
 styles: ["vaults.css", "pages/vault-card-vault.css", "pages/vault-card-demo.css"]
 breadcrumb:
   - name: "The Vault"
@@ -58,56 +59,3 @@ breadcrumb:
       </div>
     </div>
   </section>
-
-<script>
-(function(){
-  var FORM_ORIGIN="https://api.enigmavault.io";
-  var storeFormUrl="";
-  var loadingEl=document.getElementById("demoLoading");
-  var errorEl=document.getElementById("demoError");
-  var frameEl=document.getElementById("evFrame");
-  var alertEl=document.getElementById("cvDemoSuccessAlert");
-
-  function show(el){
-    loadingEl.hidden=el!==loadingEl;
-    errorEl.hidden=el!==errorEl;
-    frameEl.hidden=el!==frameEl;
-  }
-
-  function getStoreFormUrl(){
-    alertEl.hidden=true;
-    storeFormUrl="";
-    show(loadingEl);
-    var xhr=new XMLHttpRequest();
-    xhr.open("POST","https://ki00phlx55.execute-api.us-east-1.amazonaws.com/prod/cardvault/store-form-url");
-    xhr.timeout=30000;
-    xhr.onload=function(){
-      if(xhr.status!==200) return show(errorEl);
-      try{
-        storeFormUrl=JSON.parse(xhr.responseText).storeFormUrl;
-        if(new URL(storeFormUrl).origin!==FORM_ORIGIN){storeFormUrl="";return show(errorEl);}
-        frameEl.src=storeFormUrl;
-        show(frameEl);
-      }catch(e){show(errorEl);}
-    };
-    xhr.onerror=xhr.ontimeout=function(){show(errorEl);};
-    xhr.send();
-  }
-
-  window.addEventListener("message",function(event){
-    if(event.origin!==FORM_ORIGIN) return;
-    var evData=event.data;
-    if(evData&&evData.status&&evData.status.summary==="success"){
-      document.getElementById("cvJson").textContent=JSON.stringify(evData,null,"  ");
-      alertEl.hidden=false;
-    }
-  });
-
-  document.getElementById("submitEvButton").addEventListener("click",function(){
-    if(storeFormUrl) frameEl.contentWindow.postMessage("submit",storeFormUrl);
-  });
-  document.getElementById("cvDemoButton").addEventListener("click",getStoreFormUrl);
-
-  getStoreFormUrl();
-})();
-</script>

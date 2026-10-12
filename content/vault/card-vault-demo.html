@@ -28,7 +28,21 @@ breadcrumb:
   <section class="np-section np-rule-top" style="padding-top:48px">
     <div class="np-container">
       <div class="cvd-stage">
-        <iframe id="ev-demo" src="/embed/card-vault-demo.html?bg=transparent" title="Card Vault live demo"></iframe>
+        <p class="cvd-hint">Try <strong>4111 1111 1111 1111</strong> with any future expiry and CVV.</p>
+        <div class="cvd-card">
+          <div id="demoLoading" class="cvd-status">Loading card form&hellip;</div>
+          <div id="demoError" class="cvd-status cvd-status--error" hidden>Unable to load the card form. Please refresh and try again.</div>
+          <iframe title="Enigma Vault secure card form" id="evFrame" src="about:blank" hidden></iframe>
+          <div class="cvd-actions">
+            <button id="submitEvButton" type="button" class="np-btn np-btn--primary"><span>Submit Card</span></button>
+            <button id="cvDemoButton" type="button" class="np-btn np-btn--secondary"><span>Refresh Form</span></button>
+          </div>
+        </div>
+        <div id="cvDemoSuccessAlert" class="cvd-response" hidden>
+          <h3>API Response</h3>
+          <p>This token replaces the card number in your system. Your app never touches the card data.</p>
+          <pre><code id="cvJson"></code></pre>
+        </div>
       </div>
     </div>
   </section>
@@ -47,9 +61,53 @@ breadcrumb:
 
 <script>
 (function(){
-  var f=document.getElementById("ev-demo");
-  window.addEventListener("message",function(e){
-    if(e.origin===location.origin&&e.data&&e.data.type==="ev-demo-height") f.style.height=Math.min(e.data.height,1400)+"px";
+  var FORM_ORIGIN="https://api.enigmavault.io";
+  var storeFormUrl="";
+  var loadingEl=document.getElementById("demoLoading");
+  var errorEl=document.getElementById("demoError");
+  var frameEl=document.getElementById("evFrame");
+  var alertEl=document.getElementById("cvDemoSuccessAlert");
+
+  function show(el){
+    loadingEl.hidden=el!==loadingEl;
+    errorEl.hidden=el!==errorEl;
+    frameEl.hidden=el!==frameEl;
+  }
+
+  function getStoreFormUrl(){
+    alertEl.hidden=true;
+    storeFormUrl="";
+    show(loadingEl);
+    var xhr=new XMLHttpRequest();
+    xhr.open("POST","https://ki00phlx55.execute-api.us-east-1.amazonaws.com/prod/cardvault/store-form-url");
+    xhr.timeout=30000;
+    xhr.onload=function(){
+      if(xhr.status!==200) return show(errorEl);
+      try{
+        storeFormUrl=JSON.parse(xhr.responseText).storeFormUrl;
+        if(new URL(storeFormUrl).origin!==FORM_ORIGIN){storeFormUrl="";return show(errorEl);}
+        frameEl.src=storeFormUrl;
+        show(frameEl);
+      }catch(e){show(errorEl);}
+    };
+    xhr.onerror=xhr.ontimeout=function(){show(errorEl);};
+    xhr.send();
+  }
+
+  window.addEventListener("message",function(event){
+    if(event.origin!==FORM_ORIGIN) return;
+    var evData=event.data;
+    if(evData&&evData.status&&evData.status.summary==="success"){
+      document.getElementById("cvJson").textContent=JSON.stringify(evData,null,"  ");
+      alertEl.hidden=false;
+    }
   });
+
+  document.getElementById("submitEvButton").addEventListener("click",function(){
+    if(storeFormUrl) frameEl.contentWindow.postMessage("submit",storeFormUrl);
+  });
+  document.getElementById("cvDemoButton").addEventListener("click",getStoreFormUrl);
+
+  getStoreFormUrl();
 })();
 </script>

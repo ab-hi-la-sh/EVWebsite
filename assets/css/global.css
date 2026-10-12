@@ -803,3 +803,35 @@ img{max-width:100%;display:block;}
 .hp-mega--industries .hp-mega__item:hover .hp-mega__ic{border-color:var(--ev-mineral-blue);box-shadow:0 4px 12px rgba(15,61,86,0.12);}
 .hp-mega--industries .hp-mega__item:hover .hp-mega__itxt strong{color:var(--ev-mineral-blue);}
 .hp-mega--industries .hp-mega__item--all{justify-content:center;color:var(--ev-mineral-blue);font-weight:600;}
+
+/* ==========================================================================
+   Code panels — one standard for every code block on the site
+   (vp-code: Vault pages · np-code: NoPII hero · uc2-code: NoPII audit log ·
+   bl-code: blog). base.css gives every pre/code a light inline-code background;
+   inside a dark panel that grey sat behind light text and made code unreadable.
+   Rules: dark panel shows through, text meets WCAG AA, long lines wrap inside
+   the block (no sideways scroll), and every panel gets a Copy button
+   (js/code-copy.js).
+   ========================================================================== */
+html .vp-code pre,html .np-code pre,html .uc2-code pre,html .bl-code pre,html .bl-code code,html .vp-code__out code{
+  background:transparent;border-radius:0;
+  white-space:pre-wrap;overflow-wrap:anywhere;word-break:normal;overflow-x:visible;}
+html .vp-code pre,html .np-code pre,html .uc2-code pre,html .bl-code pre,html .bl-code code{color:#E6EEF4;font-size:13.5px;}
+/* Syntax colours, tuned for contrast on #0A1A2E–#0C2030 */
+html .vp-code .c,html .np-code__cmt,html .bl-code .tok-c{color:#9DB9CC;}
+html .vp-code .s,html .uc2-code .s,html .np-code__str,html .bl-code .tok-s{color:#A9E2C0;}
+html .vp-code .k,html .uc2-code .k,html .bl-code .tok-k{color:#B3D6E8;}
+html .vp-code__step{color:#9DB9CC;}
+html .vp-code__file,html .uc2-code__label,html .bl-code__lang{color:rgba(230,238,244,.7);}
+
+/* Copy button, right-aligned in every panel's title bar */
+html .code-copy{margin-left:auto;display:inline-flex;align-items:center;gap:6px;flex:none;cursor:pointer;
+  font-family:var(--ev-font-sans);font-size:11.5px;font-weight:500;letter-spacing:.02em;line-height:1;
+  color:rgba(230,238,244,.82);background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);
+  border-radius:6px;padding:6px 10px;transition:background .15s ease-out,color .15s ease-out,border-color .15s ease-out;}
+html .code-copy svg{width:14px;height:14px;}
+html .code-copy:hover{background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.26);}
+html .code-copy:focus-visible{outline:2px solid #9FC4D6;outline-offset:2px;}
+html .code-copy.is-done{color:#A9E2C0;border-color:rgba(169,226,192,.4);}
+html .bl-code__lang + .code-copy{margin-left:12px;}
+@media (max-width:600px){html .code-copy span{display:none;}html .code-copy{padding:6px 8px;}}

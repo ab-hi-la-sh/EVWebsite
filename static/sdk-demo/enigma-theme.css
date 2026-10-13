@@ -1,0 +1,48 @@
+/* Enigma Vault theme for the NoPII browser SDK demo (loaded after the demo's own CSS).
+   The demo styles itself entirely through variables on html.embedded, so this file
+   only remaps them to the site palette (tokens/palette.css) and fonts. Do not edit
+   assets/embed-*.css; re-theme here. */
+@font-face{font-family:'EV Inter';src:url('/fonts/inter/inter-latin-400-normal.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'EV Inter';src:url('/fonts/inter/inter-latin-500-normal.woff2') format('woff2');font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:'EV Inter';src:url('/fonts/inter/inter-latin-600-normal.woff2') format('woff2');font-weight:600;font-style:normal;font-display:swap}
+
+html.embedded{
+  --bg:transparent;--surface:#fff;--surface-2:#F0F2F5;
+  --text:#2A3340;--muted:#6B7280;--border:#E2E6EB;
+  --accent:#0F3D56;--accent-contrast:#fff;
+  --pii-bg:#FBD0D0;--pii-text:#9B1C1C;
+  --token-bg:#C5E8D2;--token-text:#0E5A2C;
+  --absent-bg:#E9ECF0;--absent-text:#6B7280;
+  --radius:12px;color-scheme:light;background:transparent;
+}
+html.embedded body{background:transparent;font-family:'EV Inter','Geist',-apple-system,'Helvetica Neue',sans-serif;-webkit-font-smoothing:antialiased}
+html.embedded h2,html.embedded h3,html.embedded .tabs button{font-family:inherit}
+html.embedded a{color:#0F3D56;text-decoration:underline;text-underline-offset:3px}
+html.embedded .composer button:not(.ghost):not(:disabled):hover{background:#4B6E81;border-color:#4B6E81}
+html.embedded button.ghost:hover{border-color:#B5BCC4;background:#F8F9FA}
+html.embedded .tabs button.active{border-bottom-color:#0F3D56}
+html.embedded .tabs .reset{background:#fff}
+html.embedded .composer textarea{background:#FAFAFB}
+html.embedded .composer textarea::placeholder{color:#909AA6}
+html.embedded .bubble.user{background:#E3EAEE}
+html.embedded .step pre.system{background:#EAF0F3}
+html.embedded .chat,html.embedded .recipients,html.embedded .journey,html.embedded .wiring{box-shadow:0 1px 2px rgba(15,61,86,.05)}
+button:focus-visible,textarea:focus-visible{outline-color:#0F3D56}
+/* Tabs are underline tabs: never give them the filled-button hover/focus look. */
+html.embedded .tabs button:not(.reset):hover,
+html.embedded .tabs button:not(.reset):focus{background:transparent;color:var(--text)}
+html.embedded .tabs button:not(.reset):not(.active):hover{border-bottom-color:#B5BCC4}
+html.embedded .tabs button.active,
+html.embedded .tabs button.active:hover{color:var(--text);background:transparent;border-bottom-color:#0F3D56}
+html.embedded .tabs button:focus-visible{outline:2px solid #0F3D56;outline-offset:2px}
+/* Third-party chat widget (Acme Chat) recoloured to the site theme: Contact-button navy, #0C3348 on hover. */
+html.embedded .acme{border-color:#E2E6EB;background:#FAFAFB;color:#2A3340}
+html.embedded .acme-head{background:#0F3D56}
+html.embedded .acme-empty{color:#6B7280}
+html.embedded .acme-msg.visitor{background:#0F3D56;color:#fff}
+html.embedded .acme-msg.agent{background:#E9ECF0;color:#2A3340}
+html.embedded .acme-form{border-top-color:#E2E6EB}
+html.embedded .acme-form input{border-color:#DADDE2;color:#2A3340}
+html.embedded .acme-form button{background:#0F3D56;border:1px solid #0F3D56;color:#fff}
+html.embedded .acme-form button:not(:disabled):hover{background:#4B6E81;border-color:#4B6E81;color:#fff}
+html.embedded .acme-form button:focus-visible,html.embedded .acme-form input:focus-visible{outline:2px solid #0F3D56;outline-offset:1px}

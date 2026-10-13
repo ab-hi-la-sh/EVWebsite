@@ -1,0 +1,981 @@
+---
+title: "Best PCI DSS Compliance Tokenization Software (2026): 10 Platforms Compared"
+titleEmphasis: "10 Platforms Compared"
+slug: "best-pci-dss-compliance-tokenization-software"
+layout: "pii-style"
+metaTitle: "Best PCI DSS Compliance Tokenization Software (2026): 10 Platforms Compared"
+description: "I compared the 10 best PCI DSS tokenization platforms for 2026 on certification level, scope reduction, pricing and verified reviews, so you can pick the right one."
+subtitle: "I compared ten tokenization platforms on PCI DSS certification level, scope-reduction architecture, public pricing and verified review scores, then matched each one to the buyer it suits best."
+date: 2026-10-12
+category: "Card Vault"
+author: "abhilash-kumar"
+readTime: 18
+heroImage: "/assets/blog/img-06.png"
+heroAlt: "Layered translucent panels representing PCI cardholder data replaced by tokens"
+excerpt: "Ten PCI DSS tokenization platforms compared on certification level, scope reduction, pricing and verified reviews, with a guide to choosing by PCI scenario."
+tags: ["tokenization", "pci-dss", "compliance", "card-vault"]
+ogImage: "/assets/og/vault-card.jpg"
+ogImageAlt: "Best PCI DSS Compliance Tokenization Software (2026): 10 Platforms Compared | Enigma Vault"
+ogType: article
+styles: ["blog.css", "pages/blog-pii-hero.css", "tr-pages.css"]
+scripts: ["blog-article.js"]
+faqSchema: true
+faqs:
+  - q: "What Is the Best Tokenization Software for PCI DSS Compliance?"
+    a: "It depends on your scope-reduction goal and budget. Enigma Vault suits teams that want a free start with PCI DSS Level 1 certified card vaulting. VGS suits teams that want a proxy model that keeps PANs off their systems without code changes. Thales CipherTrust suits enterprises with hybrid or on-premises estates."
+  - q: "Does Tokenization Eliminate PCI DSS Requirements?"
+    a: "No. Tokenization can significantly reduce the systems in your PCI scope (the cardholder data environment), but it does not remove PCI DSS requirements entirely. Your acquirer or QSA confirms the questionnaire that applies after tokenization."
+  - q: "What Is the Difference Between PCI DSS Level 1 and Level 2 Tokenization Providers?"
+    a: "PCI DSS Level 1 service providers process or store the largest volume of card data and undergo the most rigorous annual assessment by a Qualified Security Assessor. Level 2 providers complete a self-assessment questionnaire. For tokenization, Level 1 certification gives you the strongest third-party validation."
+  - q: "How Does Tokenization Reduce PCI DSS Scope?"
+    a: "Tokenization replaces the primary account number with a token that has no exploitable value. Systems that store, process, or transmit only tokens (not PANs) can be removed from your cardholder data environment, reducing the number of systems subject to PCI DSS controls and the complexity of your annual assessment."
+  - q: "What Changed for Tokenization Under PCI DSS v4.0?"
+    a: "PCI DSS v4.0, enforced from March 2025, strengthens requirements around token generation, key management, and the security of the tokenization system itself. Requirement 3.5 tightens rules on PAN storage, and Requirement 12 adds risk analysis for customized approaches. Tokens must still have no mathematical reversibility to PANs."
+  - q: "Can I Switch Tokenization Providers Without Re-Collecting Cards?"
+    a: "With an independent, processor-agnostic vault, usually yes. The vault holds the PAN and your tokens are portable. With a processor-native vault (where the tokens are tied to that processor), switching typically requires migrating card data or asking customers to re-enter their cards."
+  - q: "How Much Does PCI Tokenization Software Cost?"
+    a: "Published entry prices range from free (Enigma Vault Lite) to roughly $1,000 a month (VGS, Basis Theory, Evervault). PCI Vault starts at $127 a month. Enterprise platforms from Thales, Skyflow, and IXOPAY are quote-only."
+---
+
+<style>
+.bl-content .bl-table--wide td, .bl-content .bl-table--wide th { padding-left: 10px; padding-right: 10px; }
+.tk-carousel { margin: 28px 0 0; }
+.tk-track { border: 1px solid var(--border-hairline); border-radius: 12px; background: var(--ev-warm-cloud); }
+.tk-slide { box-sizing: border-box; margin: 0; padding: 20px 20px 16px; }
+.tk-slide picture { display: flex; align-items: center; justify-content: center; height: clamp(220px, 50vw, 420px); }
+.tk-slide img { display: block; width: auto; height: auto; max-width: 100%; max-height: 100%; border-radius: 8px; object-fit: contain; }
+.tk-slide figcaption { margin-top: 14px; text-align: center; font-size: 13px; line-height: 1.5; color: var(--ev-slate); border: 0; padding: 0; }
+@media (max-width: 640px) { .tk-slide { padding: 14px 12px 12px; } }
+
+/* Promo banner */
+.ev-promo { position: relative; margin: 36px 0 44px; padding: 44px 40px 40px; border-radius: 16px; background: linear-gradient(135deg, #0A2A3D 0%, #0F3D56 45%, #185170 100%); overflow: hidden; color: #fff; }
+.ev-promo__badge { display: inline-flex; align-items: center; gap: 7px; padding: 6px 14px; border-radius: 100px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.18); font-family: var(--ev-font-sans); font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #9FC4D6; margin-bottom: 22px; }
+.ev-promo__badge svg { width: 14px; height: 14px; fill: #FFD54F; flex: none; }
+.ev-promo__h { font-family: var(--font-display); font-size: clamp(26px, 3.4vw, 38px); font-weight: 600; line-height: 1.14; letter-spacing: -0.02em; color: #fff; margin: 0 0 14px; max-width: 22ch; text-wrap: balance; }
+.ev-promo__sub { font-size: 16px; line-height: 1.6; color: rgba(214,228,238,0.82); margin: 0 0 26px; max-width: 52ch; }
+.ev-promo__sub strong { color: #fff; font-weight: 600; }
+.ev-promo__cta { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; border-radius: 10px; background: #fff; color: #0F3D56; font-family: var(--ev-font-sans); font-size: 15px; font-weight: 600; text-decoration: none; transition: background 0.2s, transform 0.15s; }
+.ev-promo__cta:hover { background: #E8EDF2; transform: translateY(-1px); }
+.ev-promo__dots { position: absolute; right: 36px; bottom: 28px; display: flex; align-items: end; gap: 12px; }
+.ev-promo__dot { border-radius: 50%; }
+.ev-promo__dot:nth-child(1) { width: 18px; height: 18px; background: rgba(159,196,214,0.3); }
+.ev-promo__dot:nth-child(2) { width: 10px; height: 10px; background: rgba(255,255,255,0.18); }
+.ev-promo__dot:nth-child(3) { width: 14px; height: 14px; background: rgba(107,163,189,0.25); }
+@media (max-width: 640px) { .ev-promo { padding: 30px 22px 28px; } .ev-promo__dots { display: none; } }
+
+/* G2 inline rating */
+.ev-g2 { display: inline-flex; align-items: center; gap: 12px; margin: 20px 0 8px; padding: 12px 18px; background: #FFF8F2; border: 1px solid #FFE4CC; border-radius: 10px; }
+.ev-g2__logo { flex: none; width: 32px; height: 32px; }
+.ev-g2__info { display: flex; flex-direction: column; }
+.ev-g2__stars { display: flex; align-items: center; gap: 1px; }
+.ev-g2__star { font-size: 18px; line-height: 1; color: #FF492C; }
+.ev-g2__star--half { background: linear-gradient(90deg, #FF492C 50%, #D0D5DB 50%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.ev-g2__star--empty { color: #D0D5DB; }
+.ev-g2__score { font-family: var(--ev-font-sans); font-size: 16px; font-weight: 700; color: #1A1A1A; margin-left: 6px; }
+.ev-g2__count { font-family: var(--ev-font-sans); font-size: 12px; color: #666; margin-top: 2px; }
+.ev-g2__no { font-family: var(--ev-font-sans); font-size: 12px; color: #999; font-style: italic; }
+@media (max-width: 480px) { .ev-g2 { flex-wrap: wrap; gap: 8px; padding: 10px 14px; } }
+
+/* Action buttons */
+.ev-actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 24px 0 12px; }
+.ev-actions__btn { display: inline-flex; align-items: center; gap: 7px; padding: 11px 22px; border-radius: 8px; font-family: var(--ev-font-sans); font-size: 14px; font-weight: 600; text-decoration: none; transition: all 0.18s; border: 1px solid transparent; }
+.ev-actions__btn--visit { background: var(--ev-mineral-blue, #0F3D56); color: #fff; }
+.ev-actions__btn--visit:hover { background: #0C3348; }
+.ev-actions__btn--g2 { background: #FFF8F2; color: #FF492C; border-color: #FFE4CC; }
+.ev-actions__btn--g2:hover { background: #FFF0E5; }
+.ev-actions__btn--secondary { background: transparent; color: var(--ev-mineral-blue, #0F3D56); border-color: #C8CCD3; }
+.ev-actions__btn--secondary:hover { background: #F0F2F5; border-color: #B5BCC4; }
+.ev-actions__arr { font-size: 15px; transition: transform 0.15s; }
+.ev-actions__btn:hover .ev-actions__arr { transform: translateX(2px); }
+@media (max-width: 480px) { .ev-actions__btn { padding: 10px 16px; font-size: 13px; } }
+
+/* Feature badges */
+.ev-badges { display: flex; flex-wrap: wrap; gap: 6px; margin: 14px 0 6px; }
+.ev-badge { display: inline-flex; align-items: center; gap: 5px; padding: 4px 10px; border-radius: 5px; font-family: var(--ev-font-sans); font-size: 11px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; }
+.ev-badge--pci { background: #EBF5FF; color: #0F3D56; border: 1px solid #C4DFF0; }
+.ev-badge--free { background: #E8F5E9; color: #2E7D32; border: 1px solid #C8E6C9; }
+.ev-badge--soc { background: #F3E8FD; color: #6A1B9A; border: 1px solid #E1BEE7; }
+.ev-badge--iso { background: #FFF3E0; color: #E65100; border: 1px solid #FFE0B2; }
+.ev-badge--hipaa { background: #E0F7FA; color: #00695C; border: 1px solid #B2DFDB; }
+</style>
+
+<p>Comparing the best PCI DSS compliance tokenization software for 2026: 1. Enigma Vault, 2. VGS, 3. TokenEx / IXOPAY, 4. PCI Vault, 5. Spreedly, 6. Basis Theory, 7. Skyflow, 8. Evervault, 9. Thales CipherTrust, 10. Bluefin ShieldConex.</p>
+
+<!-- Promo banner -->
+<div class="ev-promo">
+  <div class="ev-promo__badge">
+    <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0l2.47 4.94L16 5.76l-4 3.87.94 5.47L8 12.68 3.06 15.1 4 9.63 0 5.76l5.53-.82Z"/></svg>
+    #1 Rated &middot; Free Lite Tier
+  </div>
+  <p class="ev-promo__h">Still storing raw card or PII data in your own database?</p>
+  <p class="ev-promo__sub">Enigma Vault tokenizes sensitive fields via a simple API call. <strong>PCI DSS L1 + SOC 2 Type II</strong> certified. Free Lite tier onboarding fills up fast each month.</p>
+  <a class="ev-promo__cta" href="/request-demo/">Start Tokenizing Free <span aria-hidden="true">&#8594;</span></a>
+  <div class="ev-promo__dots" aria-hidden="true">
+    <span class="ev-promo__dot"></span>
+    <span class="ev-promo__dot"></span>
+    <span class="ev-promo__dot"></span>
+  </div>
+</div>
+
+<p>Every tokenization vendor says it reduces PCI scope. The question is how much evidence sits behind that claim. I look at PCI DSS certification level, the architecture that keeps PANs off your systems, what the vendor can prove to your QSA, and what you will pay. Those answers decide whether the platform actually shrinks your cardholder data environment or just moves the liability.</p>
+
+<h2>Which PCI DSS Tokenization Software Is Best? Quick Comparison</h2>
+<p>The best PCI DSS tokenization software depends on your scope-reduction goal: Enigma Vault is built for teams that want a PCI DSS Level 1 certified card vault with a free tier and processor freedom, while VGS suits teams that want a proxy model without code changes, and Thales CipherTrust fits large enterprise estates with on-premises requirements.</p>
+<div class="bl-tablewrap">
+  <table class="bl-table bl-table--wide">
+    <thead><tr><th>Platform</th><th>Best for</th><th>PCI DSS level</th><th>G2 rating</th><th>Starting price</th></tr></thead>
+    <tbody>
+      <tr><td><a class="bl-link" href="#enigma-vault">Enigma Vault</a></td><td>PCI L1 card vault with free tier and processor freedom</td><td>Level 1 service provider</td><td>4.4/5 (6)</td><td>Free, then $49.99/mo</td></tr>
+      <tr><td><a class="bl-link" href="#vgs">VGS</a></td><td>PCI scope reduction without application code changes</td><td>Level 1</td><td>4.7/5 (47)</td><td>$1,000/mo</td></tr>
+      <tr><td><a class="bl-link" href="#tokenex-ixopay">TokenEx / IXOPAY</a></td><td>Processor-agnostic PCI scope reduction at scale</td><td>Level 1</td><td>4.6/5 (17)</td><td>Contact sales</td></tr>
+      <tr><td><a class="bl-link" href="#pci-vault">PCI Vault</a></td><td>Zero-knowledge card vault with published pricing</td><td>Level 1 (claimed)</td><td>4.5/5 (12)</td><td>$127/mo</td></tr>
+      <tr><td><a class="bl-link" href="#spreedly">Spreedly</a></td><td>PCI L1 vault with multi-processor routing</td><td>Level 1</td><td>4.4/5 (35)</td><td>$750/mo</td></tr>
+      <tr><td><a class="bl-link" href="#basis-theory">Basis Theory</a></td><td>PCI environment included from day one</td><td>Level 1</td><td>No reviews</td><td>$995/mo</td></tr>
+      <tr><td><a class="bl-link" href="#skyflow">Skyflow</a></td><td>PCI vault for cards, PII and PHI together</td><td>PCI DSS stated</td><td>5.0/5 (2)</td><td>Contact sales</td></tr>
+      <tr><td><a class="bl-link" href="#evervault">Evervault</a></td><td>PCI DSS 4.0.1 L1 with published per-use fees</td><td>Level 1 (v4.0.1)</td><td>4.4/5 (17)</td><td>$995/mo plus usage</td></tr>
+      <tr><td><a class="bl-link" href="#thales-ciphertrust">Thales CipherTrust</a></td><td>Enterprise vaulted and vaultless PCI tokenization</td><td>Level 1</td><td>4.3/5 (22)</td><td>Contact sales</td></tr>
+      <tr><td><a class="bl-link" href="#bluefin-shieldconex">Bluefin ShieldConex</a></td><td>Vaultless PCI tokenization with P2PE</td><td>PCI DSS stated</td><td>No reviews</td><td>Contact sales</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="bl-inlinecta">
+  <div>
+    <p class="bl-inlinecta__t">Not sure which PCI tokenization approach fits your environment?</p>
+    <p class="bl-inlinecta__s">Tell me what you need to descope and I will help you pick the right approach, whether or not it is Enigma Vault.</p>
+  </div>
+  <a class="np-btn np-btn--on-dark np-btn--primary" href="/contact/"><span>Get in touch</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
+</div>
+
+<h2>How Tokenization Reduces PCI DSS Scope</h2>
+<p>PCI DSS applies to every system that stores, processes, or transmits cardholder data. That collection of systems is called the cardholder data environment (CDE). Every system in the CDE must meet PCI DSS controls, be included in your annual assessment, and remain audit-ready year-round.</p>
+<p>Tokenization reduces scope by replacing the primary account number (PAN) with a token that has no exploitable value. Systems that handle only tokens, and never the real PAN, can be removed from the CDE. The result: fewer systems to harden, fewer controls to evidence, and a simpler assessment.</p>
+<p>This only works if the tokenization system itself is properly certified. If you move PAN storage to a third-party vault, that vault becomes part of the card data flow, and its PCI DSS certification is what your assessor relies on. A provider with PCI DSS Level 1 certification has passed the most rigorous annual assessment, conducted by a Qualified Security Assessor (QSA). Level 1 is the standard to look for.</p>
+<p>Tokenization does not remove PCI DSS requirements entirely. Your acquirer or QSA confirms the final scope boundary and the self-assessment questionnaire (SAQ) that applies. But the difference between assessing a full CDE and assessing a handful of systems that never touch PANs can be months of work and hundreds of thousands in audit costs.</p>
+
+<h2>How I Evaluated PCI DSS Tokenization Platforms</h2>
+<p>I scored every platform on six criteria, weighted toward the ones that matter most for PCI scope reduction.</p>
+<ol>
+  <li><strong>PCI DSS certification level (25%):</strong> Level 1 service provider certification, SOC 2, and the evidence the vendor makes available to your assessor (AOC, responsibility matrix, penetration test summaries).</li>
+  <li><strong>Scope-reduction architecture (20%):</strong> how the platform keeps PANs off your systems: vault-based capture, proxy interception, hosted forms, or vaultless derivation.</li>
+  <li><strong>Processor portability (15%):</strong> whether your tokenized cards survive a change of payment processor, or whether they are locked to one gateway.</li>
+  <li><strong>Token formats (15%):</strong> format-preserving tokens that pass Luhn validation (so downstream systems need no changes), random tokens, or both.</li>
+  <li><strong>Pricing transparency (15%):</strong> published prices, free tiers, and per-use fees so you can model cost before a sales conversation.</li>
+  <li><strong>Independent reviews (10%):</strong> G2 rating, review count, and Gartner Peer Insights where available. Thin review volume is noted.</li>
+</ol>
+<p>Where a vendor does not publish a fact on its own site, I say so instead of guessing. G2 ratings were read on October 12, 2026. Pricing comes from vendor sites or AWS Marketplace listings on the same date.</p>
+
+<h2>The 10 Best PCI DSS Compliance Tokenization Platforms</h2>
+
+<!-- ==================== 1. ENIGMA VAULT ==================== -->
+<h3 id="enigma-vault">1. Enigma Vault: Best PCI DSS Level 1 Card Vault With Free Tier and Processor Freedom</h3>
+<div class="ev-badges">
+  <span class="ev-badge ev-badge--pci">PCI DSS L1</span>
+  <span class="ev-badge ev-badge--soc">SOC 2 Type II</span>
+  <span class="ev-badge ev-badge--free">Free Tier</span>
+</div>
+<p>Enigma Vault is a vault-based tokenization API that holds card numbers, structured data and files so they never touch your systems. For PCI scope reduction, the key product is Card Vault: it captures the PAN through hosted forms, phone capture (Twilio Pay), or API, stores it in a PCI DSS Level 1 certified vault, and returns a token. When you need to charge the card, the vault injects the PAN into your payment gateway request inside the vault environment, so your servers handle only tokens.</p>
+<p>The processor-agnostic architecture means the same token routes to any gateway you configure (Authorize.net, Stripe, Braintree, PayPal, or any REST-based gateway). You are not locked to one processor. The free Lite tier gives you 1,000 requests a month to test against real cards before any commercial commitment.</p>
+<div class="tk-carousel tk-single">
+  <div class="tk-track">
+    <figure class="tk-slide">
+      {{< img src="/assets/blog/tokenization-software/enigma-card-vault.png" alt="Enigma Vault Card Vault page showing PCI DSS Level 1 certified tokenization" >}}
+      <figcaption>The Enigma Vault Card Vault page.</figcaption>
+    </figure>
+  </div>
+</div>
+<div class="ev-g2">
+  <svg class="ev-g2__logo" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#FF492C"/><text x="16" y="21" text-anchor="middle" fill="#fff" font-size="14" font-weight="700" font-family="sans-serif">G2</text></svg>
+  <div class="ev-g2__info">
+    <div class="ev-g2__stars">
+      <span class="ev-g2__star">&#9733;</span><span class="ev-g2__star">&#9733;</span><span class="ev-g2__star">&#9733;</span><span class="ev-g2__star">&#9733;</span><span class="ev-g2__star ev-g2__star--half">&#9733;</span>
+      <span class="ev-g2__score">4.4/5</span>
+    </div>
+    <span class="ev-g2__count">Based on 6 reviews &middot; Capterra 4.8/5 (4 reviews)</span>
+  </div>
+</div>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <tbody>
+      <tr><td>PCI DSS level</td><td>Level 1 service provider (Card Vault, Data Vault, File Vault in scope; attestation on request)</td></tr>
+      <tr><td>Other compliance</td><td>SOC 2 Type II (security and availability), BAA available, ISO 27001 in progress</td></tr>
+      <tr><td>Architecture</td><td>Vault-based with gateway proxy; AES-256 encryption, per-customer keys</td></tr>
+      <tr><td>Token formats</td><td>Luhn-passable format-preserving tokens; existing checkout and fraud code keeps working</td></tr>
+      <tr><td>Deployment</td><td>SaaS REST API with OAuth2, US and EU regions, AWS Marketplace</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><strong>Pricing tiers</strong></p>
+<div class="bl-tablewrap">
+  <table class="bl-table bl-table--wide">
+    <thead><tr><th>Plan</th><th>Price</th><th>Requests/mo</th><th>Overage</th></tr></thead>
+    <tbody>
+      <tr><td>Lite</td><td>$0 (free forever)</td><td>1,000</td><td>$0.08 per request</td></tr>
+      <tr><td>Plus</td><td>$49.99/mo</td><td>20,000</td><td>$0.04 per request</td></tr>
+      <tr><td>Premium</td><td>$249.99/mo</td><td>250,000</td><td>$0.02 per request</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>Lite is a permanent free tier, not a time-limited trial. Billing runs through AWS Marketplace.</p>
+<p><strong>PCI scope-reduction details</strong></p>
+<ul>
+  <li>Hosted card capture forms keep PANs off your front end.</li>
+  <li>The gateway proxy injects the real PAN only inside the vault environment when charging, so your backend never sees it.</li>
+  <li>Phone capture through Twilio Pay means card numbers do not reach your agents or call-recording systems.</li>
+  <li>Luhn-passable tokens fit existing database schemas and validation without changes.</li>
+</ul>
+<p><strong>Pros</strong></p>
+<ul>
+  <li>The only PCI DSS Level 1 certified platform in this guide with a permanent free tier, so you can test PCI scope reduction before you pay.</li>
+  <li>Processor-agnostic: switch gateways without re-collecting cards.</li>
+  <li>One account covers cards (Card Vault), structured data (Data Vault), files (File Vault), and AI traffic (NoPII, which tokenizes personal data before it reaches the model provider).</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li>Public reviews are few (6 on G2, 4 on Capterra), so independent evidence is thin compared with older vendors.</li>
+  <li>It is a tokenization and proxy layer, not a payment orchestration platform; if you want smart routing or retry logic, you pair it with your processor or an orchestrator such as Spreedly.</li>
+  <li>Card Vault, Data Vault and File Vault are priced as separate products; organizations with multi-vault needs pay per product.</li>
+</ul>
+<p><strong>What users say</strong></p>
+<p><strong>Love:</strong> G2 reviewers describe a simple API, no surprises on PCI DSS de-scoping, and pricing well below alternatives. One reviewer says the platform handles card data, personal data, and large files smoothly.</p>
+<p><strong>Complain:</strong> one reviewer asked for deeper built-in reporting and analytics dashboards. The listing has 6 reviews, so the sample is small.</p>
+<p><strong>Our verdict:</strong> the fastest route to PCI DSS scope reduction for teams that want a free start, processor freedom, and one integration for cards, data, files, and AI traffic. PCI scope reduction depends on your environment; your acquirer or QSA confirms the questionnaire that applies.</p>
+<div class="ev-actions">
+  <a class="ev-actions__btn ev-actions__btn--visit" href="/request-demo/">Start Free <span class="ev-actions__arr" aria-hidden="true">&#8594;</span></a>
+  <a class="ev-actions__btn ev-actions__btn--g2" href="https://www.g2.com/products/enigma-vault/reviews" rel="nofollow">Read G2 Reviews <span class="ev-actions__arr" aria-hidden="true">&#8594;</span></a>
+  <a class="ev-actions__btn ev-actions__btn--secondary" href="/card-vault/">Learn More <span class="ev-actions__arr" aria-hidden="true">&#8594;</span></a>
+</div>
+
+<!-- ==================== 2. VGS ==================== -->
+<h3 id="vgs">2. VGS: Best for PCI Scope Reduction Without Application Code Changes</h3>
+<div class="ev-badges">
+  <span class="ev-badge ev-badge--pci">PCI DSS L1</span>
+  <span class="ev-badge ev-badge--iso">ISO 27001</span>
+</div>
+<p>VGS (Very Good Security) sits between your application and your payment processors as a proxy. Card data is captured and vaulted before it reaches your systems, so your servers never handle PANs. The proxy model means you do not rewrite your application: you route traffic through VGS, and the proxy intercepts, tokenizes, and forwards.</p>
+<p>VGS positions itself as a card management platform with network tokens, account updater, card attributes, 3D Secure, and wallet payments alongside the vault. It has the strongest G2 presence among dedicated tokenization vendors in this guide.</p>
+<div class="tk-carousel tk-single">
+  <div class="tk-track">
+    <figure class="tk-slide">
+      {{< img src="/assets/blog/tokenization-software/vgs-homepage.jpg" alt="VGS homepage describing the world's leader in payment tokenization" >}}
+      <figcaption>The VGS homepage.</figcaption>
+    </figure>
+  </div>
+</div>
+<div class="ev-g2">
+  <svg class="ev-g2__logo" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#FF492C"/><text x="16" y="21" text-anchor="middle" fill="#fff" font-size="14" font-weight="700" font-family="sans-serif">G2</text></svg>
+  <div class="ev-g2__info">
+    <div class="ev-g2__stars">
+      <span class="ev-g2__star">&#9733;</span><span class="ev-g2__star">&#9733;</span><span class="ev-g2__star">&#9733;</span><span class="ev-g2__star">&#9733;</span><span class="ev-g2__star ev-g2__star--half">&#9733;</span>
+      <span class="ev-g2__score">4.7/5</span>
+    </div>
+    <span class="ev-g2__count">Based on 47 reviews</span>
+  </div>
+</div>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <tbody>
+      <tr><td>PCI DSS level</td><td>Level 1</td></tr>
+      <tr><td>Other compliance</td><td>ISO 27001 (Schellman certified); HIPAA support stated</td></tr>
+      <tr><td>Architecture</td><td>Proxy plus vault; card data is intercepted before it reaches your servers</td></tr>
+      <tr><td>Token formats</td><td>Format-preserving aliases that maintain 16-digit numeric format with BIN and last four preserved</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><strong>Pricing tiers</strong></p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Plan</th><th>Price</th><th>What you get</th></tr></thead>
+    <tbody>
+      <tr><td>Starter</td><td>From $1,000/mo</td><td>Vault and tokenization; "try for free" available</td></tr>
+      <tr><td>Growth</td><td>Quote</td><td>Network tokens, account updater, PCI compliance subscription (L1 and L2 to L4), card attributes, VGS Compute</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><strong>PCI scope-reduction details</strong></p>
+<ul>
+  <li>The proxy intercepts card data at the network layer, so your application code stays unchanged.</li>
+  <li>Format-preserving aliases maintain the 16-digit format with BIN and last four preserved; downstream systems treat the token as a real card number.</li>
+  <li>Growth plan includes a PCI compliance subscription with a VGS-provided auditor for Level 1 through Level 4 assessments.</li>
+</ul>
+<p><strong>Pros</strong></p>
+<ul>
+  <li>The highest G2 rating in this guide (4.7 from 47 reviews), with consistent praise for quick integration and reduced compliance burden.</li>
+  <li>The proxy model means little or no change to your application code, which is the fastest path to PCI scope reduction for teams that cannot afford a large engineering project.</li>
+  <li>Visa is an investor, which is the most direct market validation a tokenization platform can have.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li>Starting near $1,000 a month is a high entry point compared with free-tier options.</li>
+  <li>Your traffic routes through the VGS proxy, so VGS becomes part of your request path; latency and availability are infrastructure dependencies.</li>
+  <li>Reviewers mention add-on costs, such as $40 per extra CNAME.</li>
+</ul>
+<p><strong>What users say</strong></p>
+<p><strong>Love:</strong> reviewers cite quick integration, a reduced compliance burden, and helpful chat support.</p>
+<p><strong>Complain:</strong> extra CNAME fees and a request to preset initial values in hosted form fields.</p>
+<p><strong>Our verdict:</strong> the strongest choice for teams that need PCI scope reduction fast and cannot afford to rewrite application code. The proxy model is the differentiator. If the $1,000 monthly floor is too high, start with Enigma Vault's free tier instead.</p>
+<div class="ev-actions">
+  <a class="ev-actions__btn ev-actions__btn--visit" href="https://www.verygoodsecurity.com/" rel="nofollow">Visit VGS <span class="ev-actions__arr" aria-hidden="true">&#8594;</span></a>
+  <a class="ev-actions__btn ev-actions__btn--g2" href="https://www.g2.com/products/vgs-platform/reviews" rel="nofollow">Read G2 Reviews <span class="ev-actions__arr" aria-hidden="true">&#8594;</span></a>
+</div>
+
+<div class="bl-inlinecta">
+  <div>
+    <p class="bl-inlinecta__t">Not sure which PCI tokenization approach fits your environment?</p>
+    <p class="bl-inlinecta__s">Tell me what you need to descope and I will help you pick the right approach, whether or not it is Enigma Vault.</p>
+  </div>
+  <a class="np-btn np-btn--on-dark np-btn--primary" href="/contact/"><span>Get in touch</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
+</div>
+
+<!-- ==================== 3. TOKENEX / IXOPAY ==================== -->
+<h3 id="tokenex-ixopay">3. TokenEx / IXOPAY: Best for Processor-Agnostic PCI Scope Reduction at Scale</h3>
+<div class="ev-badges">
+  <span class="ev-badge ev-badge--pci">PCI DSS L1</span>
+</div>
+<p>TokenEx, now part of IXOPAY, is a payments-focused tokenization provider built around reducing PCI scope for merchants and fintechs that send card data to several processors. Its Universal Tokens are designed to stay agnostic to your processors, so switching acquirers does not mean re-collecting cards.</p>
+<p>IXOPAY positions the combined platform as payment orchestration, tokenization, and payments intelligence, with 500+ pre-built payment adapters connecting to over 200 acquirers and 300 payment methods.</p>
+<div class="tk-carousel tk-single">
+  <div class="tk-track">
+    <figure class="tk-slide">
+      {{< img src="/assets/blog/tokenization-software/tokenex-homepage.jpg" alt="TokenEx homepage announcing that TokenEx is now IXOPAY" >}}
+      <figcaption>The TokenEx homepage, which now points visitors to IXOPAY.</figcaption>
+    </figure>
+  </div>
+</div>
+<div class="ev-g2">
+  <svg class="ev-g2__logo" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#FF492C"/><text x="16" y="21" text-anchor="middle" fill="#fff" font-size="14" font-weight="700" font-family="sans-serif">G2</text></svg>
+  <div class="ev-g2__info">
+    <div class="ev-g2__stars">
+      <span class="ev-g2__star">&#9733;</span><span class="ev-g2__star">&#9733;</span><span class="ev-g2__star">&#9733;</span><span class="ev-g2__star">&#9733;</span><span class="ev-g2__star ev-g2__star--half">&#9733;</span>
+      <span class="ev-g2__score">4.6/5</span>
+    </div>
+    <span class="ev-g2__count">Based on 17 reviews (listed as IXOPAY)</span>
+  </div>
+</div>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <tbody>
+      <tr><td>PCI DSS level</td><td>Level 1</td></tr>
+      <tr><td>Other compliance</td><td>Check the trust center; certifications are not listed on the vendor homepage</td></tr>
+      <tr><td>Architecture</td><td>Universal Tokens; processor-agnostic tokenization layer</td></tr>
+      <tr><td>Token formats</td><td>Multiple format options including format-preserving and random</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><strong>Pricing tiers</strong></p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Plan</th><th>Price</th><th>What you get</th></tr></thead>
+    <tbody>
+      <tr><td>TokenEx Core, Connect, Alternative Payments, Acquirer Compliance</td><td>Quote</td><td>Tokenization packages by use case; sandbox available</td></tr>
+      <tr><td>Orchestration and intelligence modules</td><td>Quote</td><td>Routing, risk, reconciliation, analytics</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><strong>PCI scope-reduction details</strong></p>
+<ul>
+  <li>TokenEx claims Universal Tokens can cut PCI scope by up to 90% (vendor claim; your QSA confirms the actual reduction).</li>
+  <li>Tokens stay portable across processors, so switching acquirers does not expand your CDE.</li>
+  <li>Network tokens and account updater are listed alongside tokenization.</li>
+</ul>
+<p><strong>Pros</strong></p>
+<ul>
+  <li>The second-highest G2 rating in this guide (4.6 from 17 reviews), with reviewers praising secure payment iframes and per-token cost lower than other providers.</li>
+  <li>Processor-agnostic tokens and a 500+ adapter network suit large multi-acquirer setups.</li>
+  <li>Network tokens, account updater, and 3D Secure sit next to tokenization.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li>No published pricing, so budgeting starts with a sales call.</li>
+  <li>The brand is mid-transition (TokenEx now pointing to IXOPAY), so confirm current product and support terms.</li>
+  <li>The scope is much broader than tokenization; it can be more platform than you need if you only want a PCI-compliant card vault.</li>
+</ul>
+<p><strong>What users say</strong></p>
+<p><strong>Love:</strong> reviewers like the secure payment iframe, tokens that are not tied to one gateway, and per-token cost lower than other providers.</p>
+<p><strong>Complain:</strong> limited reporting; the listing has 17 reviews.</p>
+<p><strong>Our verdict:</strong> a good match for enterprise payment teams that need portable tokens and orchestration from one vendor and are comfortable with a sales-led process.</p>
+<div class="ev-actions">
+  <a class="ev-actions__btn ev-actions__btn--visit" href="https://www.ixopay.com/" rel="nofollow">Visit IXOPAY <span class="ev-actions__arr" aria-hidden="true">&#8594;</span></a>
+  <a class="ev-actions__btn ev-actions__btn--g2" href="https://www.g2.com/products/ixopay-by-tokenex/reviews" rel="nofollow">Read G2 Reviews <span class="ev-actions__arr" aria-hidden="true">&#8594;</span></a>
+</div>
+
+<!-- ==================== 4. PCI VAULT ==================== -->
+<h3 id="pci-vault">4. PCI Vault: Best Zero-Knowledge Card Vault With Published Pricing</h3>
+<div class="ev-badges">
+  <span class="ev-badge ev-badge--pci">PCI DSS L1 (claimed)</span>
+</div>
+<p>PCI Vault is a PCI-focused tokenization provider built by SnapBill, Inc. Its zero-knowledge architecture means PCI Vault holds the secret key while the customer holds the passphrase; without both, the data is unrecoverable. The product is narrowly scoped to payment card data and ACH, not general PII or file tokenization.</p>
+<p>PCI Vault publishes tiered pricing starting at $127 a month, making it one of the more transparent providers in this guide. It also supports network tokenization for Visa, Mastercard, Amex, and Discover.</p>
+<div class="ev-g2">
+  <svg class="ev-g2__logo" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#FF492C"/><text x="16" y="21" text-anchor="middle" fill="#fff" font-size="14" font-weight="700" font-family="sans-serif">G2</text></svg>
+  <div class="ev-g2__info">
+    <div class="ev-g2__stars">
+      <span class="ev-g2__star">&#9733;</span><span class="ev-g2__star">&#9733;</span><span class="ev-g2__star">&#9733;</span><span class="ev-g2__star">&#9733;</span><span class="ev-g2__star ev-g2__star--half">&#9733;</span>
+      <span class="ev-g2__score">4.5/5</span>
+    </div>
+    <span class="ev-g2__count">Based on 12 reviews</span>
+  </div>
+</div>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <tbody>
+      <tr><td>PCI DSS level</td><td>Level 1 (claimed); AOC available for customer audits</td></tr>
+      <tr><td>Other compliance</td><td>No SOC 2, HIPAA, or ISO 27001 stated on the vendor site</td></tr>
+      <tr><td>Architecture</td><td>Vault plus proxy; zero-knowledge design with split-key encryption</td></tr>
+      <tr><td>Token formats</td><td>Standard, partial, Luhn-valid, and network tokens</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><strong>Pricing tiers</strong></p>
+<div class="bl-tablewrap">
+  <table class="bl-table bl-table--wide">
+    <thead><tr><th>Plan</th><th>Price</th><th>Per-operation fee</th></tr></thead>
+    <tbody>
+      <tr><td>Startup</td><td>$127/mo</td><td>$0.04</td></tr>
+      <tr><td>Growing</td><td>$255/mo</td><td>$0.02</td></tr>
+      <tr><td>Business</td><td>$965/mo</td><td>$0.01</td></tr>
+      <tr><td>Enterprise</td><td>$1,675/mo</td><td>$0.01</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><strong>PCI scope-reduction details</strong></p>
+<ul>
+  <li>Zero-knowledge architecture: PCI Vault holds the encryption key, you hold the passphrase. Neither party alone can access the cardholder data.</li>
+  <li>Hosted PCD capture forms (iframe-based) keep PANs off your front end.</li>
+  <li>PCI Proxy forwards tokenized requests to any payment service provider (Growing tier and above).</li>
+  <li>Network tokenization enrollment for Visa, Mastercard, Amex, and Discover.</li>
+</ul>
+<p><strong>Pros</strong></p>
+<ul>
+  <li>Published pricing from $127 a month makes cost modelling straightforward.</li>
+  <li>Zero-knowledge design provides an additional layer of assurance: PCI Vault itself cannot access your cardholder data without your passphrase.</li>
+  <li>G2 reviewers (4.5 from 12 reviews) praise fast integration (hours, not weeks) and strong security.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li>No SOC 2, HIPAA, or ISO 27001 certifications stated on the site; PCI DSS Level 1 is the only compliance claim.</li>
+  <li>Scoped to cards and ACH only; no general PII, file, or AI tokenization.</li>
+  <li>No free tier or trial; refund policy is the fallback.</li>
+</ul>
+<p><strong>What users say</strong></p>
+<p><strong>Love:</strong> G2 reviewers highlight fast integration, strong security, and competitive pricing.</p>
+<p><strong>Complain:</strong> some reviewers find the platform complex for small teams without dedicated IT, and support is email-only.</p>
+<p><strong>Our verdict:</strong> a solid PCI-focused card vault for teams that want zero-knowledge assurance and published pricing but do not need broader data or file tokenization.</p>
+<div class="ev-actions">
+  <a class="ev-actions__btn ev-actions__btn--visit" href="https://www.pcivault.io/" rel="nofollow">Visit PCI Vault <span class="ev-actions__arr" aria-hidden="true">&#8594;</span></a>
+  <a class="ev-actions__btn ev-actions__btn--g2" href="https://www.g2.com/products/pci-vault/reviews" rel="nofollow">Read G2 Reviews <span class="ev-actions__arr" aria-hidden="true">&#8594;</span></a>
+</div>
+
+<div class="bl-inlinecta">
+  <div>
+    <p class="bl-inlinecta__t">Not sure which PCI tokenization approach fits your environment?</p>
+    <p class="bl-inlinecta__s">Tell me what you need to descope and I will help you pick the right approach, whether or not it is Enigma Vault.</p>
+  </div>
+  <a class="np-btn np-btn--on-dark np-btn--primary" href="/contact/"><span>Get in touch</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
+</div>
+
+<!-- ==================== 5. SPREEDLY ==================== -->
+<h3 id="spreedly">5. Spreedly: Best PCI L1 Vault With Multi-Processor Routing</h3>
+<div class="ev-badges">
+  <span class="ev-badge ev-badge--pci">PCI DSS L1</span>
+  <span class="ev-badge ev-badge--soc">SOC 2</span>
+  <span class="ev-badge ev-badge--iso">ISO 27001</span>
+</div>
+<p>Spreedly sells an independent payment vault and a broader optimization layer. Its pricing page lists 150+ gateway connections, 60+ payment methods, and 32+ fraud and risk solutions. The vault is positioned as a way to keep payment tokens portable and avoid vendor lock-in.</p>
+<p>For PCI scope reduction, Spreedly's Independent Vault is PCI DSS Level 1 certified with unlimited token storage. Performance Optimization adds network tokenization, account updater, smart retries, and PSP-agnostic routing on top.</p>
+<div class="tk-carousel tk-single">
+  <div class="tk-track">
+    <figure class="tk-slide">
+      {{< img src="/assets/blog/tokenization-software/spreedly-homepage.png" alt="Spreedly homepage" >}}
+      <figcaption>The Spreedly homepage.</figcaption>
+    </figure>
+  </div>
+</div>
+<div class="ev-g2">
+  <svg class="ev-g2__logo" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#FF492C"/><text x="16" y="21" text-anchor="middle" fill="#fff" font-size="14" font-weight="700" font-family="sans-serif">G2</text></svg>
+  <div class="ev-g2__info">
+    <div class="ev-g2__stars">
+      <span class="ev-g2__star">&#9733;</span><span class="ev-g2__star">&#9733;</span><span class="ev-g2__star">&#9733;</span><span class="ev-g2__star">&#9733;</span><span class="ev-g2__star ev-g2__star--half">&#9733;</span>
+      <span class="ev-g2__score">4.4/5</span>
+    </div>
+    <span class="ev-g2__count">Based on 35 reviews</span>
+  </div>
+</div>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <tbody>
+      <tr><td>PCI DSS level</td><td>Level 1</td></tr>
+      <tr><td>Other compliance</td><td>SOC 2, ISO 27001 stated</td></tr>
+      <tr><td>Architecture</td><td>Independent vault plus payment orchestration</td></tr>
+      <tr><td>Token formats</td><td>Format-preserving tokens available</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><strong>Pricing tiers</strong></p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Plan</th><th>Price</th><th>What you get</th></tr></thead>
+    <tbody>
+      <tr><td>Independent Vault</td><td>From $750/mo</td><td>PCI L1 vault, unlimited storage, token ownership, vault health insights</td></tr>
+      <tr><td>Performance Optimization</td><td>Quote</td><td>Network tokenization, account updater, smart retries, routing, 3DS, fraud controls</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><strong>PCI scope-reduction details</strong></p>
+<ul>
+  <li>Token ownership stays with the merchant, so stored cards are portable across processors.</li>
+  <li>150+ gateway connections let you route the same token to any connected processor.</li>
+  <li>Vault health insights report on the state of stored payment data.</li>
+</ul>
+<p><strong>Pros</strong></p>
+<ul>
+  <li>Token ownership keeps your stored cards portable if you change processors.</li>
+  <li>The breadth of gateway connections suits merchants that already run multiple processors.</li>
+  <li>Optimization features (routing, retries, 3DS) sit next to the vault, so tokenization and authorization-rate work live with one vendor.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li>The $750 monthly floor is high for early-stage teams compared with free-tier options.</li>
+  <li>G2 reviewers mention unexpected and drastic fee increases on renewal.</li>
+  <li>Spreedly is wider than tokenization; it can be more platform than you need if you only want a PCI-compliant vault.</li>
+</ul>
+<p><strong>What users say</strong></p>
+<p><strong>Love:</strong> reviewers value a centralized vault across more than a hundred gateways and good support.</p>
+<p><strong>Complain:</strong> a slow dashboard and few documentation examples come up in reviews.</p>
+<p><strong>Our verdict:</strong> a strong fit for merchants whose main problem is gateway sprawl and who want PCI L1 token ownership, and a heavier buy than most small teams need for card storage alone.</p>
+<div class="ev-actions">
+  <a class="ev-actions__btn ev-actions__btn--visit" href="https://www.spreedly.com/" rel="nofollow">Visit Spreedly <span class="ev-actions__arr" aria-hidden="true">&#8594;</span></a>
+  <a class="ev-actions__btn ev-actions__btn--g2" href="https://www.g2.com/products/spreedly/reviews" rel="nofollow">Read G2 Reviews <span class="ev-actions__arr" aria-hidden="true">&#8594;</span></a>
+</div>
+
+<!-- ==================== 6. BASIS THEORY ==================== -->
+<h3 id="basis-theory">6. Basis Theory: Best for Startups That Want a PCI Environment Included From Day One</h3>
+<div class="ev-badges">
+  <span class="ev-badge ev-badge--pci">PCI DSS L1</span>
+  <span class="ev-badge ev-badge--soc">SOC 2 Type II</span>
+  <span class="ev-badge ev-badge--iso">ISO 27001</span>
+  <span class="ev-badge ev-badge--hipaa">HIPAA</span>
+</div>
+<p>Basis Theory is a developer-first cloud vault for payment data, with network tokens, an Account Updater, and front-end SDKs. Its $995 monthly Starter plan includes a PCI Attestation of Compliance (AOC), so you get a production PCI environment from the first paid month without filing for your own certification.</p>
+<div class="tk-carousel tk-single">
+  <div class="tk-track">
+    <figure class="tk-slide">
+      {{< img src="/assets/blog/tokenization-software/basis-theory-homepage.jpg" alt="Basis Theory homepage" >}}
+      <figcaption>The Basis Theory homepage.</figcaption>
+    </figure>
+  </div>
+</div>
+<div class="ev-g2">
+  <svg class="ev-g2__logo" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#FF492C"/><text x="16" y="21" text-anchor="middle" fill="#fff" font-size="14" font-weight="700" font-family="sans-serif">G2</text></svg>
+  <div class="ev-g2__info">
+    <span class="ev-g2__no">No reviews on G2 yet</span>
+  </div>
+</div>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <tbody>
+      <tr><td>PCI DSS level</td><td>Level 1</td></tr>
+      <tr><td>Other compliance</td><td>SOC 2 Type II, ISO 27001, HIPAA stated</td></tr>
+      <tr><td>Architecture</td><td>Cloud vault with token storage and routing</td></tr>
+      <tr><td>Token formats</td><td>Multiple formats; routes to any PSP</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><strong>Pricing tiers</strong></p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Plan</th><th>Price</th><th>What you get</th></tr></thead>
+    <tbody>
+      <tr><td>Starter</td><td>$995/mo</td><td>20,000 tokens, production PCI environment, AOC, 1 MB payload, 24-hour logs, US only</td></tr>
+      <tr><td>Enterprise</td><td>Quote</td><td>Unlimited interactions per token, custom payloads, uptime guarantees, SSO</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><strong>Pros</strong></p>
+<ul>
+  <li>Published pricing and an included PCI AOC simplify budgeting and compliance timelines.</li>
+  <li>It can route to any PSP and supports network tokens and an Account Updater.</li>
+  <li>It states PCI Level 1, SOC 2 Type II, ISO 27001, and HIPAA.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li>The $995 monthly entry is steep for small teams, especially compared with free-tier options.</li>
+  <li>The G2 listing has no reviews, so there is no independent peer feedback.</li>
+  <li>The Starter plan is US only and limited to 20,000 tokens; the product is built around payments more than general PII.</li>
+</ul>
+<p><strong>What users say</strong></p>
+<p><strong>Love:</strong> the G2 listing has no reviews. I rely on the vendor's published compliance and pricing pages.</p>
+<p><strong>Complain:</strong> none published on G2.</p>
+<p><strong>Our verdict:</strong> a reasonable choice for developer teams that value an included PCI environment and are comfortable with the $995 monthly floor.</p>
+<div class="ev-actions">
+  <a class="ev-actions__btn ev-actions__btn--visit" href="https://basistheory.com/" rel="nofollow">Visit Basis Theory <span class="ev-actions__arr" aria-hidden="true">&#8594;</span></a>
+</div>
+
+<div class="bl-inlinecta">
+  <div>
+    <p class="bl-inlinecta__t">Not sure which PCI tokenization approach fits your environment?</p>
+    <p class="bl-inlinecta__s">Tell me what you need to descope and I will help you pick the right approach, whether or not it is Enigma Vault.</p>
+  </div>
+  <a class="np-btn np-btn--on-dark np-btn--primary" href="/contact/"><span>Get in touch</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
+</div>
+
+<!-- ==================== 7. SKYFLOW ==================== -->
+<h3 id="skyflow">7. Skyflow: Best PCI Vault for Cards, PII, and PHI Together</h3>
+<div class="ev-badges">
+  <span class="ev-badge ev-badge--pci">PCI DSS</span>
+  <span class="ev-badge ev-badge--soc">SOC 2</span>
+  <span class="ev-badge ev-badge--hipaa">HIPAA</span>
+</div>
+<p>Skyflow is a data privacy vault built on polymorphic encryption and tokenization, with per-field policies and customer-specific isolation. Its Payments product is aimed at streamlining PCI compliance across card acceptance, card issuance, money movement, and agentic commerce. It also offers an LLM Gateway that de-identifies and re-identifies sensitive data for AI use.</p>
+<div class="tk-carousel tk-single">
+  <div class="tk-track">
+    <figure class="tk-slide">
+      {{< img src="/assets/blog/tokenization-software/skyflow-card-acceptance.png" alt="Skyflow for Credit Card and Payments Acceptance page" >}}
+      <figcaption>Skyflow's credit card and payments acceptance page.</figcaption>
+    </figure>
+  </div>
+</div>
+<div class="ev-g2">
+  <svg class="ev-g2__logo" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#FF492C"/><text x="16" y="21" text-anchor="middle" fill="#fff" font-size="14" font-weight="700" font-family="sans-serif">G2</text></svg>
+  <div class="ev-g2__info">
+    <div class="ev-g2__stars">
+      <span class="ev-g2__star">&#9733;</span><span class="ev-g2__star">&#9733;</span><span class="ev-g2__star">&#9733;</span><span class="ev-g2__star">&#9733;</span><span class="ev-g2__star">&#9733;</span>
+      <span class="ev-g2__score">5.0/5</span>
+    </div>
+    <span class="ev-g2__count">Based on 2 reviews (Payments Data Privacy Vault listing)</span>
+  </div>
+</div>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <tbody>
+      <tr><td>PCI DSS level</td><td>PCI DSS stated (level not specified on the homepage)</td></tr>
+      <tr><td>Other compliance</td><td>SOC 2, HIPAA, GDPR, CCPA, CPRA, DPDP stated</td></tr>
+      <tr><td>Architecture</td><td>Data privacy vault with polymorphic encryption and field-level policies</td></tr>
+      <tr><td>Token formats</td><td>Not stated on the homepage; ask the vendor</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><strong>Pricing tiers</strong></p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Plan</th><th>Price</th><th>What you get</th></tr></thead>
+    <tbody>
+      <tr><td>AWS Marketplace</td><td>Custom annual contracts; free trial advertised</td><td>Data privacy vault; pricing by data subjects protected</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><strong>Pros</strong></p>
+<ul>
+  <li>One vault covers cards, PII, and PHI with field-level governance; if your PCI scope intersects with HIPAA or GDPR obligations, Skyflow addresses both.</li>
+  <li>Pricing by data subjects (not API calls) can suit high-volume workloads.</li>
+  <li>An LLM Gateway for AI data protection sits alongside payment tokenization.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li>The PCI DSS level is not specified on the homepage; confirm the certification level with the vendor.</li>
+  <li>Enterprise-only pricing through demos and annual contracts; no self-serve path.</li>
+  <li>The G2 Payments listing has 2 reviews, so the 5.0 rating is statistically meaningless at this sample size.</li>
+</ul>
+<p><strong>What users say</strong></p>
+<p><strong>Love:</strong> the Payments Data Privacy Vault listing on G2 shows 5.0 from 2 reviews.</p>
+<p><strong>Complain:</strong> none published on G2.</p>
+<p><strong>Our verdict:</strong> a good match for organizations that need one vault for cards, PII, and PHI under unified governance, and are comfortable with an enterprise sales process.</p>
+<div class="ev-actions">
+  <a class="ev-actions__btn ev-actions__btn--visit" href="https://www.skyflow.com/" rel="nofollow">Visit Skyflow <span class="ev-actions__arr" aria-hidden="true">&#8594;</span></a>
+  <a class="ev-actions__btn ev-actions__btn--g2" href="https://www.g2.com/products/skyflow-payments-data-privacy-vault/reviews" rel="nofollow">Read G2 Reviews <span class="ev-actions__arr" aria-hidden="true">&#8594;</span></a>
+</div>
+
+<!-- ==================== 8. EVERVAULT ==================== -->
+<h3 id="evervault">8. Evervault: Best PCI DSS 4.0.1 Level 1 Platform With Published Per-Use Fees</h3>
+<div class="ev-badges">
+  <span class="ev-badge ev-badge--pci">PCI DSS L1 (v4.0.1)</span>
+  <span class="ev-badge ev-badge--soc">SOC 2 Type II</span>
+  <span class="ev-badge ev-badge--hipaa">HIPAA</span>
+</div>
+<p>Evervault is an encryption-based payments security platform. It is not a classic token vault: it encrypts your data and manages keys separately from the ciphertext, then offers products such as Relay and Functions so you can work with encrypted values. I include it because its PCI DSS 4.0.1 Level 1 certification is one of the most current in this guide, and buyers who search for PCI tokenization often land on it.</p>
+<div class="tk-carousel tk-single">
+  <div class="tk-track">
+    <figure class="tk-slide">
+      {{< img src="/assets/blog/tokenization-software/evervault-homepage.jpg" alt="Evervault homepage" >}}
+      <figcaption>The Evervault homepage.</figcaption>
+    </figure>
+  </div>
+</div>
+<div class="ev-g2">
+  <svg class="ev-g2__logo" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#FF492C"/><text x="16" y="21" text-anchor="middle" fill="#fff" font-size="14" font-weight="700" font-family="sans-serif">G2</text></svg>
+  <div class="ev-g2__info">
+    <div class="ev-g2__stars">
+      <span class="ev-g2__star">&#9733;</span><span class="ev-g2__star">&#9733;</span><span class="ev-g2__star">&#9733;</span><span class="ev-g2__star">&#9733;</span><span class="ev-g2__star ev-g2__star--half">&#9733;</span>
+      <span class="ev-g2__score">4.4/5</span>
+    </div>
+    <span class="ev-g2__count">Based on 17 reviews</span>
+  </div>
+</div>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <tbody>
+      <tr><td>PCI DSS level</td><td>Level 1 (v4.0.1)</td></tr>
+      <tr><td>Other compliance</td><td>SOC 2 Type II, CSA STAR Level 1, HIPAA stated</td></tr>
+      <tr><td>Architecture</td><td>Encryption-based; keys managed separately from ciphertext</td></tr>
+      <tr><td>Token formats</td><td>Encryption-based model (not a classic token-to-PAN mapping); Relay lets you work with encrypted values</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><strong>Pricing tiers</strong></p>
+<div class="bl-tablewrap">
+  <table class="bl-table bl-table--wide">
+    <thead><tr><th>Plan</th><th>Price</th><th>Best for</th></tr></thead>
+    <tbody>
+      <tr><td>Sandbox</td><td>Free</td><td>Building and testing</td></tr>
+      <tr><td>Platform</td><td>$995/mo plus usage</td><td>Under 25,000 transactions/mo</td></tr>
+      <tr><td>Custom</td><td>Quote</td><td>25,000+ transactions, volume discounts, SSO</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>Usage fees include $0.005 per decrypt, $0.03 per network token, $0.03 per 3DS authentication, $0.25 per card update, and $0.01 per Apple Pay or Google Pay transaction.</p>
+<p><strong>Pros</strong></p>
+<ul>
+  <li>PCI DSS 4.0.1 Level 1 is one of the most current certifications in this guide, which matters as v4.0 requirements are now enforced.</li>
+  <li>Every usage fee is published, making cost modelling straightforward.</li>
+  <li>Card collection, 3D Secure, network tokens, and wallet payments come in one platform.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li>The Platform plan starts at $995 a month plus per-use fees, so production costs can climb with volume.</li>
+  <li>It is encryption-based, not a classic token vault; what you expect about token formats and mapping differs from the vault providers here.</li>
+  <li>Standard support runs Monday to Friday, 9am to 5pm GMT only.</li>
+</ul>
+<p><strong>What users say</strong></p>
+<p><strong>Love:</strong> reviewers highlight easy integration and developer-friendly encryption.</p>
+<p><strong>Complain:</strong> a reviewer notes the dependency on a third-party service for data security.</p>
+<p><strong>Our verdict:</strong> a solid developer platform when you want PCI DSS 4.0.1 certification and fee-by-fee transparency, and are comfortable with a roughly $1,000 monthly starting point.</p>
+<div class="ev-actions">
+  <a class="ev-actions__btn ev-actions__btn--visit" href="https://evervault.com/" rel="nofollow">Visit Evervault <span class="ev-actions__arr" aria-hidden="true">&#8594;</span></a>
+  <a class="ev-actions__btn ev-actions__btn--g2" href="https://www.g2.com/products/evervault/reviews" rel="nofollow">Read G2 Reviews <span class="ev-actions__arr" aria-hidden="true">&#8594;</span></a>
+</div>
+
+<div class="bl-inlinecta">
+  <div>
+    <p class="bl-inlinecta__t">Not sure which PCI tokenization approach fits your environment?</p>
+    <p class="bl-inlinecta__s">Tell me what you need to descope and I will help you pick the right approach, whether or not it is Enigma Vault.</p>
+  </div>
+  <a class="np-btn np-btn--on-dark np-btn--primary" href="/contact/"><span>Get in touch</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
+</div>
+
+<!-- ==================== 9. THALES CIPHERTRUST ==================== -->
+<h3 id="thales-ciphertrust">9. Thales CipherTrust: Best Enterprise Vaulted and Vaultless PCI Tokenization</h3>
+<div class="ev-badges">
+  <span class="ev-badge ev-badge--pci">PCI DSS L1</span>
+  <span class="ev-badge ev-badge--pci">FIPS 140-2</span>
+</div>
+<p>Thales CipherTrust Tokenization is part of the CipherTrust Data Security Platform. It offers both vaulted tokenization (with format-preserving tokens and custom formats) and vaultless tokenization (with format-preserving tokens, an irreversible option, and random tokenization up to 128K of data). It pairs with dynamic data masking and centralized key management.</p>
+<div class="tk-carousel tk-single">
+  <div class="tk-track">
+    <figure class="tk-slide">
+      {{< img src="/assets/blog/tokenization-software/thales-homepage.jpg" alt="Thales CipherTrust Tokenization page" >}}
+      <figcaption>The Thales CipherTrust Tokenization page.</figcaption>
+    </figure>
+  </div>
+</div>
+<div class="ev-g2">
+  <svg class="ev-g2__logo" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#FF492C"/><text x="16" y="21" text-anchor="middle" fill="#fff" font-size="14" font-weight="700" font-family="sans-serif">G2</text></svg>
+  <div class="ev-g2__info">
+    <div class="ev-g2__stars">
+      <span class="ev-g2__star">&#9733;</span><span class="ev-g2__star">&#9733;</span><span class="ev-g2__star">&#9733;</span><span class="ev-g2__star">&#9733;</span><span class="ev-g2__star ev-g2__star--half">&#9733;</span>
+      <span class="ev-g2__score">4.3/5</span>
+    </div>
+    <span class="ev-g2__count">Based on 22 reviews (full CipherTrust Data Security Platform)</span>
+  </div>
+</div>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <tbody>
+      <tr><td>PCI DSS level</td><td>Level 1; positioned for PCI scope reduction</td></tr>
+      <tr><td>Other compliance</td><td>FIPS 140-2 validated key management; broader CipherTrust platform covers additional certifications</td></tr>
+      <tr><td>Architecture</td><td>Vaulted and vaultless tokenization, format-preserving; on-premises, hybrid, or as a service</td></tr>
+      <tr><td>Token formats</td><td>Format-preserving (vaulted and vaultless), custom formats (vaulted), random (vaultless)</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><strong>Pricing tiers</strong></p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Plan</th><th>Price</th><th>What you get</th></tr></thead>
+    <tbody>
+      <tr><td>Community Edition</td><td>Free</td><td>CipherTrust platform evaluation</td></tr>
+      <tr><td>Enterprise</td><td>Quote</td><td>Tokenization with centralized key management, multi-cloud deployment</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><strong>PCI scope-reduction details</strong></p>
+<ul>
+  <li>Format-preserving tokens and column-level database protection let you tokenize without schema changes.</li>
+  <li>Vaultless option removes the vault as a scaling and availability concern for very large data estates.</li>
+  <li>Centralized key management across cloud and on-premises environments fits regulated enterprises with existing Thales deployments.</li>
+</ul>
+<p><strong>Pros</strong></p>
+<ul>
+  <li>You can choose vaulted or vaultless per workload instead of committing to one model across the estate.</li>
+  <li>On-premises, hybrid, and cloud deployment options suit regulated industries where data residency matters.</li>
+  <li>A free Community Edition of the platform lets teams evaluate before a contract.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li>G2 reviewers cite high operating cost, even when they praise the protection.</li>
+  <li>Reviewers report performance limits on very large databases.</li>
+  <li>No published pricing, and the G2 rating of 4.3 from 22 reviews covers the full CipherTrust platform, not tokenization alone.</li>
+</ul>
+<p><strong>What users say</strong></p>
+<p><strong>Love:</strong> a reviewer describes managing keys across AWS and Azure from one dashboard, with transparent encryption that does not slow applications.</p>
+<p><strong>Complain:</strong> smaller teams find the buying and deployment effort heavier than a vault-only need requires.</p>
+<p><strong>Our verdict:</strong> the pick when you need both vaulted and vaultless PCI tokenization in one portfolio, on-premises deployment, and centralized key management. Not for teams that want a fast, self-serve start.</p>
+<div class="ev-actions">
+  <a class="ev-actions__btn ev-actions__btn--visit" href="https://cpl.thalesgroup.com/encryption/ciphertrust-tokenization" rel="nofollow">Visit Thales <span class="ev-actions__arr" aria-hidden="true">&#8594;</span></a>
+  <a class="ev-actions__btn ev-actions__btn--g2" href="https://www.g2.com/products/thales-ciphertrust-data-security-platform/reviews" rel="nofollow">Read G2 Reviews <span class="ev-actions__arr" aria-hidden="true">&#8594;</span></a>
+</div>
+
+<!-- ==================== 10. BLUEFIN SHIELDCONEX ==================== -->
+<h3 id="bluefin-shieldconex">10. Bluefin ShieldConex: Best Vaultless PCI Tokenization With P2PE</h3>
+<div class="ev-badges">
+  <span class="ev-badge ev-badge--pci">PCI DSS</span>
+  <span class="ev-badge ev-badge--pci">P2PE Validated</span>
+  <span class="ev-badge ev-badge--iso">ISO 27001:2022</span>
+</div>
+<p>ShieldConex is Bluefin's tokenization-as-a-service for payment cards, PII, and PHI. Tokens are generated with hardware security modules (HSMs) and no data is stored in a vault or database. The product supports API, iFrame, and batch SFTP deployment. Bluefin also offers PCI-validated point-to-point encryption (P2PE), making it the only provider in this guide that combines P2PE and tokenization.</p>
+<div class="tk-carousel tk-single">
+  <div class="tk-track">
+    <figure class="tk-slide">
+      {{< img src="/assets/blog/tokenization-software/bluefin-homepage.png" alt="Bluefin ShieldConex product page describing cloud-based vaultless tokenization" >}}
+      <figcaption>The Bluefin ShieldConex product page.</figcaption>
+    </figure>
+  </div>
+</div>
+<div class="ev-g2">
+  <svg class="ev-g2__logo" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#FF492C"/><text x="16" y="21" text-anchor="middle" fill="#fff" font-size="14" font-weight="700" font-family="sans-serif">G2</text></svg>
+  <div class="ev-g2__info">
+    <span class="ev-g2__no">No G2 reviews for ShieldConex (PayConex gateway: 4.5/5, 10 reviews)</span>
+  </div>
+</div>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <tbody>
+      <tr><td>PCI DSS level</td><td>PCI DSS stated; P2PE validated</td></tr>
+      <tr><td>Other compliance</td><td>SOC for Service Organizations and ISO/IEC 27001:2022 badges on the product page</td></tr>
+      <tr><td>Architecture</td><td>Vaultless; HSM-generated tokens with no central token store</td></tr>
+      <tr><td>Token formats</td><td>Format-preserving tokenization and format-preserving encryption</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><strong>Pricing tiers</strong></p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Plan</th><th>Price</th><th>What you get</th></tr></thead>
+    <tbody>
+      <tr><td>ShieldConex</td><td>Quote</td><td>Tokenization as a service; sandbox on request</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><strong>PCI scope-reduction details</strong></p>
+<ul>
+  <li>P2PE encrypts card data at the point of interaction (terminal, POS), so the merchant's POS environment falls outside PCI scope.</li>
+  <li>Vaultless tokenization means no central token store as a target; tokens are derived from the HSM.</li>
+  <li>Deterministic, format-preserving tokens keep downstream systems working across POS, web, and mobile channels.</li>
+</ul>
+<p><strong>Pros</strong></p>
+<ul>
+  <li>The only provider in this guide that combines PCI-validated P2PE and tokenization, which is the deepest scope reduction for card-present (in-store) environments.</li>
+  <li>Deterministic tokens maintain consistency across POS, web, and mobile without a central vault to scale.</li>
+  <li>ISO 27001:2022 certification and SOC attestation badges appear on the product page.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li>No G2 reviews for ShieldConex, so there is no independent peer feedback for this specific product.</li>
+  <li>Pricing is quote-only; no published rates or free tier.</li>
+  <li>Primarily designed for merchants and software vendors in the Bluefin ecosystem; confirm fit if you use other gateways.</li>
+</ul>
+<p><strong>What users say</strong></p>
+<p><strong>Love:</strong> the ShieldConex G2 listing has no reviews. Bluefin's PayConex gateway product has 4.5 from 10 reviews (different product).</p>
+<p><strong>Complain:</strong> none published for ShieldConex on G2.</p>
+<p><strong>Our verdict:</strong> the right pick for merchants with card-present environments that want both P2PE and tokenization to maximize PCI scope reduction. Not for teams that want a self-serve start or a general-purpose vault.</p>
+<div class="ev-actions">
+  <a class="ev-actions__btn ev-actions__btn--visit" href="https://www.bluefin.com/products/shieldconex/" rel="nofollow">Visit Bluefin <span class="ev-actions__arr" aria-hidden="true">&#8594;</span></a>
+</div>
+
+<div class="bl-inlinecta">
+  <div>
+    <p class="bl-inlinecta__t">Not sure which PCI tokenization approach fits your environment?</p>
+    <p class="bl-inlinecta__s">Tell me what you need to descope and I will help you pick the right approach, whether or not it is Enigma Vault.</p>
+  </div>
+  <a class="np-btn np-btn--on-dark np-btn--primary" href="/contact/"><span>Get in touch</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
+</div>
+
+<h2>What Changed Under PCI DSS v4.0 for Tokenization</h2>
+<p>PCI DSS v4.0, with enforcement beginning March 2025, introduces changes that affect how tokenization providers and their customers handle card data. Here is what matters for your vendor evaluation.</p>
+<div class="bl-tablewrap">
+  <table class="bl-table bl-table--wide">
+    <thead><tr><th>Area</th><th>What changed</th><th>What it means for tokenization buyers</th></tr></thead>
+    <tbody>
+      <tr><td>Requirement 3.5 (PAN storage)</td><td>Tighter rules on how PANs are stored, including stronger encryption and key management standards</td><td>Your tokenization provider's vault must meet the updated encryption requirements; ask for the v4.0 AOC</td></tr>
+      <tr><td>Customized approach</td><td>Organizations can now use a customized approach (with risk analysis) instead of the defined approach for meeting requirements</td><td>Tokenization can be part of a customized approach, but it requires documented risk analysis and QSA validation</td></tr>
+      <tr><td>Requirement 12 (risk analysis)</td><td>New requirements for targeted risk analysis across controls</td><td>Your tokenization architecture itself needs a documented risk analysis, not just the systems around it</td></tr>
+      <tr><td>Token generation</td><td>Strengthened requirements around how tokens are generated and managed</td><td>Ask your provider how they ensure tokens have no mathematical reversibility to the PAN under v4.0</td></tr>
+      <tr><td>Multi-factor authentication</td><td>MFA required for all access to the cardholder data environment, not just remote access</td><td>Confirm your tokenization provider enforces MFA on all administrative access to the vault</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>All ten platforms in this guide state PCI DSS compliance. Evervault explicitly states PCI DSS 4.0.1 Level 1. For the others, ask for the current AOC and confirm the version. If a vendor's AOC still references v3.2.1, press for the v4.0 update timeline.</p>
+
+<h2>How to Choose PCI DSS Tokenization Software by Scenario</h2>
+<p>Match the platform to your scope-reduction goal, payment channels, and compliance timeline.</p>
+<p><strong>By PCI scope-reduction goal</strong></p>
+<div class="bl-tablewrap">
+  <table class="bl-table bl-table--wide">
+    <thead><tr><th>Your situation</th><th>What to prioritize</th><th>Shortlist</th></tr></thead>
+    <tbody>
+      <tr><td>Reduce PCI scope for card-not-present (e-commerce)</td><td>Hosted capture forms, vault with gateway proxy, format-preserving tokens</td><td>Enigma Vault, VGS, PCI Vault</td></tr>
+      <tr><td>Reduce PCI scope for card-present (in-store)</td><td>P2PE plus tokenization, vaultless tokens across POS channels</td><td>Bluefin ShieldConex, Thales CipherTrust</td></tr>
+      <tr><td>Multi-processor environment</td><td>Processor-agnostic tokens, token ownership, orchestration</td><td>Spreedly, IXOPAY, Enigma Vault</td></tr>
+      <tr><td>Cards plus PII, PHI, or AI traffic</td><td>One vault for all sensitive data types under unified governance</td><td>Enigma Vault, Skyflow</td></tr>
+      <tr><td>Enterprise legacy estate</td><td>Vaulted and vaultless options, on-premises deployment, format-preserving</td><td>Thales CipherTrust, Bluefin ShieldConex</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><strong>By company stage</strong></p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Stage</th><th>Recommended approach</th></tr></thead>
+    <tbody>
+      <tr><td>Startup or small team</td><td>Start with a free tier or published pricing: Enigma Vault (free), PCI Vault ($127/mo), Evervault sandbox</td></tr>
+      <tr><td>Growth or mid-market</td><td>Pick a platform with processor portability: Enigma Vault, Spreedly, VGS</td></tr>
+      <tr><td>Enterprise</td><td>Run a structured evaluation: IXOPAY, Thales CipherTrust, Skyflow, with Enigma Vault or Basis Theory where API-first speed matters</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>Treat no vendor claim as a promise of a specific SAQ. Tokenization can significantly reduce what is in your CDE, but your acquirer or QSA confirms the final scope boundary and the questionnaire that applies.</p>
+
+<h2>Common Mistakes When Evaluating PCI Tokenization</h2>
+<ul>
+  <li><strong>Assuming tokenization eliminates PCI DSS:</strong> it reduces scope, but you still have PCI obligations. Your acquirer or QSA determines which SAQ applies after tokenization.</li>
+  <li><strong>Not checking the provider's PCI DSS version:</strong> PCI DSS v4.0 enforcement began March 2025. If the vendor's AOC still references v3.2.1, ask for the update timeline.</li>
+  <li><strong>Ignoring processor lock-in:</strong> tokens stored in a processor-native vault are tied to that processor. Switching means re-collecting cards. Choose a processor-agnostic vault if portability matters.</li>
+  <li><strong>Treating encryption and tokenization as the same thing:</strong> encrypted values can be reversed with a key; tokens have no mathematical link to the original. Both reduce risk, but they affect PCI scope differently.</li>
+  <li><strong>Skipping the detokenization audit:</strong> anything authorized to detokenize (retrieve the real PAN) stays in your CDE. Limit who and what can detokenize, and log every request.</li>
+  <li><strong>Buying without testing:</strong> test latency, throughput, and hosted form behavior with your own cards and checkout flow before you commit. A free tier or sandbox makes this possible.</li>
+</ul>
+
+<h2>Try Enigma Vault Free</h2>
+<p>The free Lite tier gives you 1,000 API requests a month with no time limit and no credit card required, backed by PCI DSS Level 1 certification and SOC 2 Type II. Tokenize a real card, route it through the gateway proxy, and see how it handles scope reduction before you commit.</p>
+<div class="ev-promo">
+  <div class="ev-promo__badge">
+    <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0l2.47 4.94L16 5.76l-4 3.87.94 5.47L8 12.68 3.06 15.1 4 9.63 0 5.76l5.53-.82Z"/></svg>
+    PCI DSS Level 1 &middot; SOC 2 Type II &middot; Free Tier
+  </div>
+  <p class="ev-promo__h">Ready to reduce your PCI scope?</p>
+  <p class="ev-promo__sub">Start with 1,000 free API requests a month. No credit card required. Tokenize real cards, route through any gateway, and see your scope shrink.</p>
+  <a class="ev-promo__cta" href="/request-demo/">Start Tokenizing Free <span aria-hidden="true">&#8594;</span></a>
+  <div class="ev-promo__dots" aria-hidden="true">
+    <span class="ev-promo__dot"></span>
+    <span class="ev-promo__dot"></span>
+    <span class="ev-promo__dot"></span>
+  </div>
+</div>

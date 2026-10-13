@@ -32,3 +32,7 @@
   .hp-footer__col a{overflow-wrap:anywhere;}
   .hp-footer__bottom{margin-top:36px;}
 }
+.hp-footer__contact{list-style:none;margin:22px 0 0;padding:0;display:grid;gap:10px;font-family:var(--ev-font-sans);font-size:14px;}
+.hp-footer__contact a{color:var(--text-body);text-decoration:none;}
+.hp-footer__contact a:hover{color:var(--ev-mineral-blue);}
+.hp-footer__brand .hp-footer__social,.hp-footer__grid>div:first-child .hp-footer__social{margin-top:22px;font-family:var(--ev-font-sans);font-size:13px;}

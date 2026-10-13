@@ -9,6 +9,17 @@
           {{ partial "img.html" (dict "src" "logo/lockup-transparent.png" "alt" "Enigma Vault" "class" "hp-footer__logo" "width" 350 "loading" "lazy") }}
         </a>
         <p class="hp-footer__brandtag">{{ $f.tagline }}</p>
+        <ul class="hp-footer__contact">
+          {{- range $f.contact }}
+          <li><a href="{{ index . 1 | safeURL }}">{{ index . 0 }}</a></li>
+          {{- end }}
+        </ul>
+        <div class="hp-footer__social">
+          {{- range $f.social }}
+          {{- $href := index . 1 }}
+          <a href="{{ $href }}"{{ if strings.HasPrefix $href "http" }} target="_blank" rel="noopener"{{ end }}>{{ index . 0 }}</a>
+          {{- end }}
+        </div>
       </div>
       {{- range $f.columns }}
       <div class="hp-footer__col">
@@ -31,12 +42,6 @@
           <a href="{{ $href }}"{{ if strings.HasPrefix $href "http" }} target="_blank" rel="noopener"{{ end }}>{{ index . 0 }}</a>
           {{- end }}
         </nav>
-      </div>
-      <div class="hp-footer__social">
-        {{- range $f.social }}
-        {{- $href := index . 1 }}
-        <a href="{{ $href }}"{{ if strings.HasPrefix $href "http" }} target="_blank" rel="noopener"{{ end }}>{{ index . 0 }}</a>
-        {{- end }}
       </div>
     </div>
   </div>

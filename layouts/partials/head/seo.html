@@ -18,7 +18,12 @@
 <title>{{ $title }}</title>
 <meta name="description" content="{{ $desc }}">
 <link rel="canonical" href="{{ .Permalink }}">
-<meta name="robots" content="{{ if .Params.noindex }}noindex, follow{{ else }}index, follow{{ end }}">
+{{- /* Blog pagination (/blog/page/N/): same Paginate args as layouts/blog/section.html, so Hugo reuses that pager */ -}}
+{{- $pagedBlog := false -}}
+{{- if and .IsSection (eq .Section "blog") -}}
+{{- $pagedBlog = gt (.Paginate (where site.RegularPages "Type" "blog") 9).PageNumber 1 -}}
+{{- end -}}
+<meta name="robots" content="{{ if $pagedBlog }}noindex, nofollow{{ else if .Params.noindex }}noindex, follow{{ else }}index, follow{{ end }}">
 <meta property="og:type" content="{{ .Params.ogType | default "website" }}">
 <meta property="og:site_name" content="{{ site.Params.og.siteName }}">
 <meta property="og:locale" content="{{ site.Params.og.locale }}">

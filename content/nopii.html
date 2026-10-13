@@ -4,7 +4,7 @@ metaTitle: "PII Protection for LLMs | NoPII by Enigma Vault"
 description: "Keep detected PII out of LLM API requests with NoPII. Tokenize sensitive values before model calls and restore them in responses to your application."
 ogImage: "/assets/og/nopii-overview.jpg"
 ogImageAlt: "What the model never sees, it can never leak. — Enigma Vault"
-styles: ["pages/nopii-overview.css", "pages/nopii-how-it-works.css", "nopii-use-cases.css", "pages/nopii-faqs.css"]
+styles: ["pages/nopii-live.css", "pages/nopii-overview.css", "pages/nopii-how-it-works.css", "nopii-use-cases.css", "pages/nopii-faqs.css"]
 scripts: ["pages/nopii-overview.js", "pages/nopii-how-it-works.js", "pages/nopii-use-cases.js"]
 faqSchema: true
 software:
@@ -84,6 +84,7 @@ software:
         <p>The dilemma is false. Swap every sensitive value for a stable token before the prompt leaves, restore it when the response returns, and the model reasons exactly as before while the provider never holds a single real identifier. That is NoPII, and it deploys in the time it takes to change a base URL.</p>
         <div class="np-ctas" style="margin-top:32px">
           <a class="np-btn np-btn--secondary" href="#how-it-works"><span>See how it works</span><span class="np-btn__arrow" aria-hidden="true">→</span></a>
+          <a class="np-btn np-btn--primary" href="/nopii/demo/"><span>Try the live demo</span><span class="np-btn__arrow" aria-hidden="true">→</span></a>
         </div>
       </div>
       <div class="np-splitmedia__media">{{< img src="/assets/np-prompt-transfer.jpg" alt="Many sources converging into a single point — every prompt is a data transfer." loading="eager" >}}</div>
@@ -149,7 +150,7 @@ software:
       <div class="np-ctas np-reveal" style="margin-top:44px">
         <a class="np-btn np-btn--secondary" href="/pricing/#nopii"><span>See pricing</span></a>
         <a class="np-btn np-btn--primary" href="https://app.nopii.co"><span>Get started for free</span><span class="np-btn__arrow" aria-hidden="true">→</span></a>
-      </div>
+        </div>
     </div>
   </section>
 
@@ -228,6 +229,7 @@ software:
           <button class="np-tab" data-tab="t5" role="tab" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="11" width="3" height="6"/><rect x="12" y="7" width="3" height="10"/><rect x="17" y="13" width="3" height="4"/></svg>Usage dashboard</button>
           <button class="np-tab" data-tab="t6" role="tab" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h4"/></svg>Audit log</button>
           <button class="np-tab" data-tab="t7" role="tab" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>Token purge</button>
+          <a class="np-btn np-btn--primary" href="/nopii/demo/" style="margin-top:24px;align-self:flex-start"><span>Try the live demo</span><span class="np-btn__arrow" aria-hidden="true">→</span></a>
         </div>
         <div class="np-tabs__panels">
           <div class="np-tabpanel is-active" data-panel="t1" role="tabpanel"><h3 class="np-tabpanel__title">Dashboard</h3><p class="np-tabpanel__body">A real-time view of your deployment: total requests, detections, entity-type distribution, provider breakdown.</p>
@@ -364,13 +366,13 @@ client = OpenAI(
       <div class="np-hero__codectas">
         <a class="np-btn np-btn--secondary" href="/request-demo/"><span>Request a demo</span></a>
         <a class="np-btn np-btn--primary" href="https://app.nopii.co"><span>Get started for free</span><span class="np-btn__arrow" aria-hidden="true">→</span></a>
-      </div>
+        </div>
       <p class="np-code__cap" style="margin-top:24px">No new SDK. No middleware rewrite. No re-architecture. SSE streaming fully supported.</p>
     </div>
   </header>
 
   <!-- SECTION 2 · Process pipeline -->
-  <section class="np-section np-rule-top np-bg-cloud">
+  <section class="np-section np-rule-top np-bg-cloud" id="pii-tokenization-flow" style="scroll-margin-top:56px">
     <div class="np-container">
       <div style="max-width:760px"><h2 class="np-h2">How PII tokenization works <em>for LLM APIs</em>.</h2></div>
       <div class="np-pipe">
@@ -425,6 +427,10 @@ client = OpenAI(
           <p class="np-ba__prompt">Please update the account for <span class="np-tok">[NAME: Ry0Ixd1]</span> (ID number: <span class="np-tok">[IDENTIFIER: k8Lm2n]</span>) at <span class="np-tok">[EMAIL: bN3dF5h]</span></p>
           <p class="np-ba__cap">Every sensitive element replaced with a deterministic, reversible token. Context is preserved and the model still understands the prompt.</p>
         </div>
+      </div>
+      <div class="np-ctas np-reveal" style="margin-top:36px;display:flex;justify-content:center;gap:12px;grid-column:1 / -1;width:100%">
+          <a class="np-btn np-btn--secondary" href="https://app.nopii.co"><span>Start free at app.nopii.co</span><span class="np-btn__arrow" aria-hidden="true">→</span></a>
+          <a class="np-btn np-btn--primary" href="/nopii/demo/"><span>Try the live demo</span><span class="np-btn__arrow" aria-hidden="true">→</span></a>
       </div>
     </div>
   </section>
@@ -554,7 +560,8 @@ client = OpenAI(
           <h2 class="np-h2">Why not <em>build it yourself</em>?</h2>
           <p class="np-split__body">Teams that build this in-house end up assembling and maintaining a stitched stack: a detection library, a token vault, a proxy layer, an admin console, and audit logging. Each piece works. The seams are where data leaks. And the stack is never finished: new providers, new streaming formats, new entity types, and new compliance questions arrive faster than a side project can absorb them.</p>
           <p class="np-split__body">NoPII replaces the entire build with one base URL swap, maintained as a product instead of a backlog item.</p>
-          <div class="np-ctas" style="margin-top:28px"><a class="np-btn np-btn--primary" href="https://app.nopii.co"><span>Try it yourself</span><span class="np-btn__arrow" aria-hidden="true">→</span></a></div>
+          <div class="np-ctas" style="margin-top:28px"><a class="np-btn np-btn--primary" href="https://app.nopii.co"><span>Try it yourself</span><span class="np-btn__arrow" aria-hidden="true">→</span></a>
+        </div>
         </div>
         <div>
           <div class="np-stitch">

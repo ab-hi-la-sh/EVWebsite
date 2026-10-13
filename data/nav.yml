@@ -44,6 +44,13 @@ items:
       - [How it works, /nopii/#how-it-works]
       - [Use cases, /nopii/#use-cases]
       - [FAQs, /nopii/#faqs]
+    # Second column of the dropdown: a promo card instead of a link list.
+    promo:
+      badge: Live demo
+      title: See NoPII in action
+      body: Send a message with a name, email or SSN and compare what your backend, the model provider and NoPII each receive.
+      cta: Try the live demo
+      href: /nopii/demo/
 
   - label: Vault
     topHref: /vault/

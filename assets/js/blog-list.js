@@ -29,8 +29,9 @@
   var startRows = [].slice.call(document.querySelectorAll('#bl-start-sec .bl-startrow'));
   var cards = [].slice.call(document.querySelectorAll('#bl-featured .bl-card'));
   var rows  = [].slice.call(document.querySelectorAll('#bl-archive .bl-row'));
+  var hasPagination = !!document.querySelector('.bl-pagination');
   var ARCH_STEP = 4;
-  var state = { q: '', cat: 'All', archShown: ARCH_STEP };
+  var state = { q: '', cat: 'All', archShown: hasPagination ? Infinity : ARCH_STEP };
 
   function matches(el) {
     if (state.cat !== 'All' && el.getAttribute('data-cat') !== state.cat) return false;
@@ -69,7 +70,7 @@
     if (featSec) featSec.style.display = nFeat ? '' : 'none';
     if (archSec) archSec.style.display = nArch ? '' : 'none';
     if (featCt) featCt.textContent = nFeat + (nFeat === 1 ? ' article' : ' articles');
-    if (archCt) archCt.textContent = nArch + ' more';
+    if (archCt) archCt.textContent = hasPagination ? nArch + (nArch === 1 ? ' article' : ' articles') : nArch + ' more';
     if (more) more.style.display = nArch > state.archShown ? '' : 'none';
     if (empty) empty.classList.toggle('is-on', nFeat === 0 && nArch === 0);
     if (clear) clear.style.display = state.q ? '' : 'none';
@@ -79,17 +80,17 @@
     [].forEach.call(chips.children, function (b) {
       b.addEventListener('click', function () {
         state.cat = b.getAttribute('data-cat');
-        state.archShown = ARCH_STEP;
+        state.archShown = hasPagination ? Infinity : ARCH_STEP;
         [].forEach.call(chips.children, function (x) { x.classList.toggle('is-active', x === b); });
         render();
       });
     });
   }
-  if (search) search.addEventListener('input', function () { state.q = search.value; state.archShown = ARCH_STEP; render(); });
+  if (search) search.addEventListener('input', function () { state.q = search.value; state.archShown = hasPagination ? Infinity : ARCH_STEP; render(); });
   if (clear) clear.addEventListener('click', function () { search.value = ''; state.q = ''; render(); search.focus(); });
   if (moreBtn) moreBtn.addEventListener('click', function () { state.archShown += ARCH_STEP; render(); });
   if (reset) reset.addEventListener('click', function () {
-    state.q = ''; state.cat = 'All'; state.archShown = ARCH_STEP;
+    state.q = ''; state.cat = 'All'; state.archShown = hasPagination ? Infinity : ARCH_STEP;
     if (search) search.value = '';
     if (chips) [].forEach.call(chips.children, function (x, i) { x.classList.toggle('is-active', i === 0); });
     render();

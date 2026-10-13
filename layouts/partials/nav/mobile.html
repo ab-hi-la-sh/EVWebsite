@@ -7,6 +7,7 @@
     {{- $links := slice -}}
     {{- with .topHref }}{{ $links = $links | append (dict "label" (printf "%s overview" $item.label) "href" . "top" true) }}{{ end -}}
     {{- range .panel }}{{ $links = $links | append (dict "label" (index . 0) "href" (index . 1)) }}{{ end -}}
+    {{- with .promo }}{{ $links = $links | append (dict "label" .title "href" .href) }}{{ end -}}
     {{- with .group }}{{ range .links }}{{ $links = $links | append (dict "label" (index . 0) "href" (index . 1)) }}{{ end }}{{ end -}}
     {{- with .mega }}{{ range .items }}{{ $links = $links | append (dict "label" .label "href" .href) }}{{ end }}{{ end -}}
     {{- if $links }}

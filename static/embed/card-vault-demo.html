@@ -12,6 +12,15 @@
     Submit from, and only sends the token response to, that origin. On any other
     host the form loads but Submit does nothing.
 
+    Framing: this page only loads the card form when it is opened directly or
+    framed by https://www.enigmavault.io (checked in script below). That check is
+    best effort. The enforceable control is the response header: serve this path
+    with
+      Content-Security-Policy: frame-ancestors 'self'
+    (or frame-ancestors https://www.enigmavault.io). The site sent
+    frame-ancestors 'self' and X-Frame-Options: SAMEORIGIN on 2026-10-09; do not
+    remove them. They cannot be set from a <meta> tag.
+
     Styling: everything in this file (the <style> block, CSS variables at the top)
     is yours to change. The card fields themselves are served by api.enigmavault.io
     and can't be styled from here; ask engineering to change them.
@@ -21,13 +30,16 @@
               style="width:100%;max-width:520px;height:560px;border:0;" title="Card Vault Demo"></iframe>
 
     Options (query string):
-      ?theme=light   light text/colors for a white host page (default: dark)
-      ?bg=transparent|dark|light   page background (default: transparent)
+      ?bg=transparent|dark|light   page background (default: transparent).
+                                   Use bg=dark on a dark host page so the text
+                                   outside the card stays readable.
 
     Auto-height (optional, on the host page):
       window.addEventListener("message", function (e) {
-        if (e.data && e.data.type === "ev-demo-height")
-          document.getElementById("ev-demo").style.height = e.data.height + "px";
+        if (e.origin !== "https://www.enigmavault.io") return;
+        var h = e.data && e.data.type === "ev-demo-height" ? Number(e.data.height) : NaN;
+        if (h >= 200 && h <= 2000)
+          document.getElementById("ev-demo").style.height = h + "px";
       });
   -->
   <style>
@@ -50,6 +62,8 @@
     }
     html[data-bg="dark"] { --page-bg: #0b1222; }
     html[data-bg="light"] { --page-bg: #ffffff; }
+    html[data-bg="dark"] .hint, html[data-bg="dark"] .response p { color: #B6BECA; }
+    html[data-bg="dark"] .hint strong, html[data-bg="dark"] .response h3 { color: #FFFFFF; }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { background: var(--page-bg); }
@@ -73,7 +87,7 @@
     .status--error { color: #EF4444; background: #FDEAEA; border: 1px solid rgba(239, 68, 68, 0.2); }
     iframe {
       width: 100%; height: 250px; border: none; border-radius: 12px;
-      background: #182240; margin-bottom: 24px; display: block;
+      background: #ffffff; margin-bottom: 24px; display: block;
     }
     .actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
     .btn {
@@ -121,10 +135,31 @@
   <script>
   (function () {
     var params = new URLSearchParams(location.search);
-    if (params.get("theme") === "light") document.documentElement.setAttribute("data-theme", "light");
     if (params.get("bg")) document.documentElement.setAttribute("data-bg", params.get("bg"));
 
     var FORM_ORIGIN = "https://api.enigmavault.io";
+    var HOST_ORIGIN = "https://www.enigmavault.io";
+
+    // Only run when opened directly or framed by the marketing site, so another
+    // site cannot present the working card form inside its own page.
+    function framedByAllowedHost() {
+      if (window.parent === window) return true;
+      var ancestors = location.ancestorOrigins;
+      if (ancestors && ancestors.length) {
+        for (var i = 0; i < ancestors.length; i++) {
+          if (ancestors[i] !== HOST_ORIGIN) return false;
+        }
+        return true;
+      }
+      // Best effort where ancestorOrigins is unavailable: the referrer shows who
+      // last navigated this frame, not who frames it. The frame-ancestors response
+      // header is the real control.
+      try {
+        return window.parent === window.top && new URL(document.referrer).origin === HOST_ORIGIN;
+      } catch (e) {
+        return false;
+      }
+    }
     var storeFormUrl = "";
     var loadingEl = document.getElementById("demoLoading");
     var errorEl = document.getElementById("demoError");
@@ -155,6 +190,10 @@
         if (xhr.status !== 200) return show(errorEl);
         try {
           storeFormUrl = JSON.parse(xhr.responseText).storeFormUrl;
+          if (new URL(storeFormUrl).origin !== FORM_ORIGIN) {
+            storeFormUrl = "";
+            return show(errorEl);
+          }
           frameEl.src = storeFormUrl;
           show(frameEl);
         } catch (e) {
@@ -178,11 +217,17 @@
     document.getElementById("submitEvButton").addEventListener("click", function () {
       if (storeFormUrl) frameEl.contentWindow.postMessage("submit", storeFormUrl);
     });
-    document.getElementById("cvDemoButton").addEventListener("click", getStoreFormUrl);
+    document.getElementById("cvDemoButton").addEventListener("click", function () {
+      if (framedByAllowedHost()) getStoreFormUrl();
+    });
     window.addEventListener("message", handleMessage);
     window.addEventListener("resize", reportHeight);
 
-    getStoreFormUrl();
+    if (framedByAllowedHost()) {
+      getStoreFormUrl();
+    } else {
+      show(errorEl);
+    }
   })();
   </script>
 </body>

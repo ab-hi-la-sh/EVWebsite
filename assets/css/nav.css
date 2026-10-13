@@ -51,3 +51,17 @@
   .hp-nav .hp-nav__brandlink{flex:0 1 auto;min-width:0;}
   .hp-nav .hp-nav__logo{height:auto;width:100%;max-width:180px;}
   .hp-nav .hp-nav__actions{flex:none;gap:10px;}}
+
+/* NoPII dropdown: links + a "Live demo" promo card in the second column */
+.hp-prod--promo{min-width:560px;}
+.hp-prod--promo .hp-prod__cols{grid-template-columns:1fr 1.15fr;}
+.hp-prod__promo{display:flex;flex-direction:column;align-items:flex-start;gap:8px;}
+.hp-prod__live{display:inline-flex;align-items:center;gap:7px;padding:4px 10px;border-radius:999px;background:#E8F5EC;color:#15803D;font-family:var(--ev-font-sans);font-size:10.5px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;}
+.hp-prod__live i{width:8px;height:8px;border-radius:50%;background:#16A34A;box-shadow:0 0 0 0 rgba(22,163,74,.55);animation:hp-live 1.6s ease-out infinite;}
+@keyframes hp-live{0%{box-shadow:0 0 0 0 rgba(22,163,74,.55)}70%{box-shadow:0 0 0 7px rgba(22,163,74,0)}100%{box-shadow:0 0 0 0 rgba(22,163,74,0)}}
+@media (prefers-reduced-motion:reduce){.hp-prod__live i{animation:none}}
+.hp-prod__ptitle{margin:4px 0 0;font-family:var(--ev-font-sans);font-size:15px;font-weight:600;color:var(--ev-ink);}
+.hp-prod__pbody{margin:0;font-family:var(--ev-font-sans);font-size:12.5px;line-height:1.55;color:var(--ev-slate);}
+.hp-prod__pcta{display:inline-flex;align-items:center;gap:8px;margin-top:6px;padding:9px 16px;border-radius:6px;background:var(--ev-mineral-blue);color:#fff;font-family:var(--ev-font-sans);font-size:13px;font-weight:500;text-decoration:none;transition:background .15s ease-out;}
+.hp-prod__pcta:hover{background:#4B6E81;color:#fff;text-decoration:none;}
+.hp-prod__pcta:focus-visible{outline:2px solid var(--ev-mineral-blue);outline-offset:2px;}

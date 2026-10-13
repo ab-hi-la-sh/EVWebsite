@@ -6,6 +6,7 @@ ogImage: "/assets/og/vault-card.jpg"
 ogImageAlt: "Accept payments. Never touch a card. — Enigma Vault"
 noindex: true
 excludeFromSitemap: true
+layout: "card-vault-demo"
 styles: ["vaults.css", "pages/vault-card-vault.css", "pages/vault-card-demo.css"]
 breadcrumb:
   - name: "The Vault"
@@ -28,7 +29,21 @@ breadcrumb:
   <section class="np-section np-rule-top" style="padding-top:48px">
     <div class="np-container">
       <div class="cvd-stage">
-        <iframe id="ev-demo" src="/embed/card-vault-demo.html?bg=transparent" title="Card Vault live demo"></iframe>
+        <p class="cvd-hint">Try <strong>4111 1111 1111 1111</strong> with any future expiry and CVV.</p>
+        <div class="cvd-card">
+          <div id="demoLoading" class="cvd-status">Loading card form&hellip;</div>
+          <div id="demoError" class="cvd-status cvd-status--error" hidden>Unable to load the card form. Please refresh and try again.</div>
+          <iframe title="Enigma Vault secure card form" id="evFrame" src="about:blank" hidden></iframe>
+          <div class="cvd-actions">
+            <button id="submitEvButton" type="button" class="np-btn np-btn--primary"><span>Submit Card</span></button>
+            <button id="cvDemoButton" type="button" class="np-btn np-btn--secondary"><span>Refresh Form</span></button>
+          </div>
+        </div>
+        <div id="cvDemoSuccessAlert" class="cvd-response" hidden>
+          <h3>API Response</h3>
+          <p>This token replaces the card number in your system. Your app never touches the card data.</p>
+          <pre><code id="cvJson"></code></pre>
+        </div>
       </div>
     </div>
   </section>
@@ -44,12 +59,3 @@ breadcrumb:
       </div>
     </div>
   </section>
-
-<script>
-(function(){
-  var f=document.getElementById("ev-demo");
-  window.addEventListener("message",function(e){
-    if(e.origin===location.origin&&e.data&&e.data.type==="ev-demo-height") f.style.height=Math.min(e.data.height,1400)+"px";
-  });
-})();
-</script>

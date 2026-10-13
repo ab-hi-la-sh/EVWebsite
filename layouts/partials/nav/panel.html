@@ -1,7 +1,8 @@
 {{- /* Product dropdown (.hp-prod). Context: one nav item with .panel.
        A .group makes it the two-column wide variant. */ -}}
 {{- $wide := .group -}}
-<div class="hp-prod{{ if $wide }} hp-prod--wide{{ end }}">
+{{- $promo := .promo -}}
+<div class="hp-prod{{ if $wide }} hp-prod--wide{{ end }}{{ if $promo }} hp-prod--promo{{ end }}">
   <div class="hp-prod__head">
     <span class="hp-prod__ic">{{ partial "img.html" (dict "src" .icon "alt" "" "width" 132) }}</span>
     <span class="hp-prod__ht">
@@ -11,7 +12,7 @@
   </div>
   <div class="hp-prod__cols">
     <div>
-      {{- if $wide }}<p class="hp-prod__colh">The product</p>{{ end }}
+      {{- if $wide }}<p class="hp-prod__colh">The product</p>{{ else if $promo }}<p class="hp-prod__colh">Explore</p>{{ end }}
       <div class="hp-prod__links">
         {{- range .panel }}<a href="{{ index . 1 }}">{{ index . 0 }}</a>{{ end }}
       </div>
@@ -22,6 +23,14 @@
       <div class="hp-prod__links">
         {{- range .links }}<a href="{{ index . 1 }}">{{ index . 0 }}</a>{{ end }}
       </div>
+    </div>
+    {{- end }}
+    {{- with $promo }}
+    <div class="hp-prod__div hp-prod__promo">
+      <span class="hp-prod__live"><i aria-hidden="true"></i>{{ .badge }}</span>
+      <p class="hp-prod__ptitle">{{ .title }}</p>
+      <p class="hp-prod__pbody">{{ .body }}</p>
+      <a class="hp-prod__pcta" href="{{ .href }}">{{ .cta }}<span aria-hidden="true">&#8594;</span></a>
     </div>
     {{- end }}
   </div>

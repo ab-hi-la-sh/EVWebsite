@@ -47,21 +47,6 @@
                   {
                     "type": "TEMPLATE",
                     "key": "name",
-                    "value": "cta_section"
-                  },
-                  {
-                    "type": "TEMPLATE",
-                    "key": "value",
-                    "value": "{{CJS - CTA Section}}"
-                  }
-                ]
-              },
-              {
-                "type": "MAP",
-                "map": [
-                  {
-                    "type": "TEMPLATE",
-                    "key": "name",
                     "value": "cta_page_section"
                   },
                   {
@@ -77,12 +62,27 @@
                   {
                     "type": "TEMPLATE",
                     "key": "name",
+                    "value": "cta_name"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "value",
+                    "value": "{{CJS - CTA Name}}"
+                  }
+                ]
+              },
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "name",
                     "value": "cta_text"
                   },
                   {
                     "type": "TEMPLATE",
                     "key": "value",
-                    "value": "{{Click Text}}"
+                    "value": "{{CJS - CTA Text}}"
                   }
                 ]
               },
@@ -165,20 +165,6 @@
       {
         "accountId": "0",
         "containerId": "0",
-        "variableId": "1",
-        "name": "CJS - CTA Section",
-        "type": "jsm",
-        "parameter": [
-          {
-            "type": "TEMPLATE",
-            "key": "javascript",
-            "value": "function(){\n  var el = {{Click Element}};\n  var a = el && el.closest ? el.closest('a') : el;\n  if (!a) return '(not set)';\n  var m = (a.getAttribute('class') || '').match(/(^|\\s)cta-(hero|body|bottom)(\\s|$)/);\n  return m ? m[2] : '(not set)';\n}"
-          }
-        ]
-      },
-      {
-        "accountId": "0",
-        "containerId": "0",
         "variableId": "2",
         "name": "CJS - CTA Page",
         "type": "jsm",
@@ -200,7 +186,35 @@
           {
             "type": "TEMPLATE",
             "key": "javascript",
-            "value": "function(){\n  return {{CJS - CTA Page}} + ' | ' + {{CJS - CTA Section}};\n}"
+            "value": "function(){\n  var el = {{Click Element}};\n  var a = el && el.closest ? el.closest('a') : el;\n  if (!a) return '(not set)';\n  var cls = (a.getAttribute('class') || '').split(/\\s+/);\n  for (var i = 0; i < cls.length; i++) {\n    var c = cls[i];\n    if (c.indexOf('cta-') === 0 && c !== 'cta-platform') {\n      var s = c.slice(4), k = s.lastIndexOf('-');\n      return s.slice(0, k) + ' | ' + s.slice(k + 1);\n    }\n  }\n  return '(not set)';\n}"
+          }
+        ]
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "variableId": "5",
+        "name": "CJS - CTA Text",
+        "type": "jsm",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "javascript",
+            "value": "function(){\n  var el = {{Click Element}};\n  var a = el && el.closest ? el.closest('a') : el;\n  if (!a) return '(not set)';\n  return (a.innerText || a.textContent || '').replace(/[\\u2190-\\u21FF\\u2192]/g, '').replace(/\\s+/g, ' ').trim();\n}"
+          }
+        ]
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "variableId": "6",
+        "name": "CJS - CTA Name",
+        "type": "jsm",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "javascript",
+            "value": "function(){\n  return {{CJS - CTA Page Section}} + ' | ' + {{CJS - CTA Text}};\n}"
           }
         ]
       },

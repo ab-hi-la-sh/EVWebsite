@@ -51,6 +51,16 @@ faqs:
 .tk-slide img { display: block; width: auto; height: auto; max-width: 100%; max-height: 100%; border-radius: 8px; object-fit: contain; }
 .tk-slide figcaption { margin-top: 14px; text-align: center; font-size: 13px; line-height: 1.5; color: var(--ev-slate); border: 0; padding: 0; }
 @media (max-width: 640px) { .tk-slide { padding: 14px 12px 12px; } }
+/* TL;DR summary box, same treatment as the site's uc2-cta callout. */
+.bl-content .tldr { margin: 8px 0 32px; padding: 22px 26px; border-radius: 12px; background: var(--ev-warm-cloud); border-left: 3px solid var(--ev-mineral-blue); }
+.bl-content .tldr .tldr__label { margin: 0 0 12px; padding: 0; border: 0; font-size: 13px; line-height: 1.4; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--ev-mineral-blue); }
+.bl-content .tldr .tldr__list { margin: 0; padding-left: 20px; }
+.bl-content .tldr .tldr__list li { margin: 0 0 10px; font-size: 16px; line-height: 1.6; color: var(--ev-ink); }
+.bl-content .tldr .tldr__list li::marker { color: var(--ev-mineral-blue); }
+.bl-content .tldr .tldr__list li:last-child { margin-bottom: 0; }
+.bl-content .tldr strong a { font-weight: 600; }
+.bl-content .tldr .tldr__tail { margin: 16px 0 0; padding-top: 14px; border-top: 1px solid var(--ev-cool-stone); font-size: 15px; }
+@media (max-width: 600px) { .bl-content .tldr { padding: 20px; } }
 </style>
 
 <p>Comparing the best credit card tokenization software of 2026 includes 1. Enigma Vault, 2. IXOPAY (formerly TokenEx), 3. Spreedly, 4. VGS, 5. Basis Theory, 6. Evervault, 7. Bluefin ShieldConex, 8. Thales CipherTrust Tokenization, 9. Skyflow.</p>
@@ -62,19 +72,21 @@ faqs:
   </div>
   <a class="np-btn np-btn--on-dark np-btn--primary" href="/pricing/"><span>Start free</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
 </div>
-<h2 id="tl-dr">TL;DR</h2>
-<ul>
-  <li><strong>Best overall for card-on-file without a sales call:</strong> Enigma Vault. Free-forever Lite tier, Luhn-passable tokens, phone and hosted capture, and a gateway proxy for Authorize.net, Stripe, Braintree, PayPal, and any REST gateway.</li>
-  <li><strong>Best for enterprises on many processors:</strong> IXOPAY (formerly TokenEx).</li>
-  <li><strong>Best for merchants juggling several gateways:</strong> Spreedly.</li>
-  <li><strong>Best for stored cards plus network tokens and card services:</strong> VGS.</li>
-  <li><strong>Best for developers who want a PCI environment bundled in:</strong> Basis Theory.</li>
-  <li><strong>Best for per-use pricing you can model upfront:</strong> Evervault.</li>
-  <li><strong>Best for vaultless, format-preserving card tokens:</strong> Bluefin ShieldConex.</li>
-  <li><strong>Best for cards living in mainframes and warehouses:</strong> Thales CipherTrust Tokenization.</li>
-  <li><strong>Best for cards governed alongside PII and PHI:</strong> Skyflow.</li>
-</ul>
-<p>Using Stripe, Braintree, Adyen, or Authorize.net already? Their built-in vaults hold up fine while you stay with one processor. Read <a class="bl-link" href="#gateway-native-card-vaults-where-your-processor-fits">Gateway-native card vaults</a> to see when an independent vault starts to pay off.</p>
+<div class="tldr" id="tldr">
+  <h2 class="tldr__label">TL;DR</h2>
+  <ul class="tldr__list">
+    <li><strong><a class="bl-link" href="#enigma-vault">Enigma Vault</a>:</strong> best overall for card-on-file without a sales call. PCI DSS Level 1 and SOC 2 Type II, a free-forever Lite tier, phone and hosted capture, and a gateway proxy for Authorize.net, Stripe, Braintree, PayPal, and any REST gateway.</li>
+    <li><strong><a class="bl-link" href="#ixopay">IXOPAY (formerly TokenEx)</a>:</strong> best for enterprises whose stored cards must work across many processors. Quote-based pricing, 4.6/5 from 17 G2 reviews.</li>
+    <li><strong><a class="bl-link" href="#spreedly">Spreedly</a>:</strong> best for merchants juggling several gateways. Independent Vault from $750 a month with 150+ gateway connections.</li>
+    <li><strong><a class="bl-link" href="#vgs">VGS</a>:</strong> best for stored cards plus network tokens and card services. From $1,000 a month, 4.7/5 from 47 G2 reviews.</li>
+    <li><strong><a class="bl-link" href="#basis-theory">Basis Theory</a>:</strong> best for developers who want a PCI environment bundled in. $995 a month for 20,000 tokens.</li>
+    <li><strong><a class="bl-link" href="#evervault">Evervault</a>:</strong> best for per-use pricing you can model upfront. Free sandbox, Platform plan from $995 a month plus usage.</li>
+    <li><strong><a class="bl-link" href="#bluefin-shieldconex">Bluefin ShieldConex</a>:</strong> best for vaultless, format-preserving card tokens across POS, web, and mobile.</li>
+    <li><strong><a class="bl-link" href="#thales-ciphertrust">Thales CipherTrust Tokenization</a>:</strong> best for cards living in mainframes and data warehouses.</li>
+    <li><strong><a class="bl-link" href="#skyflow">Skyflow</a>:</strong> best for cards governed alongside PII and PHI under one policy model.</li>
+  </ul>
+  <p class="tldr__tail">Using Stripe, Braintree, Adyen, or Authorize.net already? Their built-in vaults hold up fine while you stay with one processor. Read <a class="bl-link" href="#gateway-native-card-vaults-where-your-processor-fits">Gateway-native card vaults</a> to see when an independent vault starts to pay off.</p>
+</div>
 <h2 id="find-your-card-vault-match">Find Your Card Vault Match</h2>
 <p>Six questions about how cards move through your business, built from the workflows we see most often in travel, hospitality, healthcare, professional services, contact centers, and software platforms. You get a vault pattern, the Enigma Vault product that fits, and the other platforms worth a demo.</p>
 <div class="cq" id="card-quiz">

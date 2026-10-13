@@ -186,7 +186,7 @@
           {
             "type": "TEMPLATE",
             "key": "javascript",
-            "value": "function(){\n  var el = {{Click Element}};\n  var a = el && el.closest ? el.closest('a') : el;\n  if (!a) return '(not set)';\n  var cls = (a.getAttribute('class') || '').split(/\\s+/);\n  for (var i = 0; i < cls.length; i++) {\n    var c = cls[i];\n    if (c.indexOf('cta-') === 0 && c !== 'cta-platform') {\n      var s = c.slice(4), k = s.lastIndexOf('-');\n      return s.slice(0, k) + ' | ' + s.slice(k + 1);\n    }\n  }\n  return '(not set)';\n}"
+            "value": "function(){\n  var el = {{Click Element}};\n  var a = el && el.closest ? el.closest('a') : el;\n  if (!a) return '(not set)';\n  var cls = (a.getAttribute('class') || '').split(/\\s+/);\n  for (var i = 0; i < cls.length; i++) {\n    var m = cls[i].match(/^cta-(.+)--(.+)$/);\n    if (m) return m[1] + ' | ' + m[2];\n  }\n  return '(not set)';\n}"
           }
         ]
       },

@@ -17,8 +17,8 @@ scripts: ["pages/nopii-demo-v6.js"]
         <h1 class="np-h1">Sensitive data is reaching your AI. <em>That stops now.</em></h1>
         <p class="np-lead">Every prompt your team sends to an LLM can contain names, SSNs, email addresses, and more. NoPII is a reverse proxy that detects and tokenizes sensitive data before it reaches the model provider, and detokenizes on the way back. One line of code. Zero PII exposure.</p>
         <div class="np-hero__ctas">
-          <a class="np-btn np-btn--primary cta-nopii cta-demo--hero" href="https://app.nopii.co"><span>Start free</span><span class="np-btn__arrow" aria-hidden="true">→</span></a>
-          <a class="np-btn np-btn--secondary cta-nopii cta-demo--hero" href="/request-demo/"><span>Request a demo</span></a>
+          <a class="np-btn np-btn--primary cta-nopii-demo cta-demo--hero" href="https://app.nopii.co"><span>Start free</span><span class="np-btn__arrow" aria-hidden="true">→</span></a>
+          <a class="np-btn np-btn--secondary cta-nopii-demo cta-demo--hero" href="/request-demo/"><span>Request a demo</span></a>
         </div>
         <p class="np-note"><span class="np-note__dot"></span>One million protected tokens a month. No credit card. Live in minutes.</p>
       </div>
@@ -111,7 +111,7 @@ client = OpenAI(
           <p class="npd-flow__b">The LLM response flows back through the proxy. Tokens are mapped back to original values and the fully restored response is returned to your application, seamlessly.</p>
         </li>
       </ol>
-      <p class="npd-more npd-more--lead"><a class="cta-nopii cta-demo--how-it-works" href="/nopii/#pii-tokenization-flow">Explore the full technical flow →</a></p>
+      <p class="npd-more npd-more--lead"><a class="cta-nopii-demo cta-demo--how-it-works" href="/nopii/#pii-tokenization-flow">Explore the full technical flow →</a></p>
     </div>
   </section>
 
@@ -140,7 +140,7 @@ client = OpenAI(
         </article>
       </div>
       <div class="np-ctas np-reveal" style="margin-top:36px">
-        <a class="np-btn np-btn--primary cta-nopii cta-demo--why-nopii" href="https://app.nopii.co"><span>Get started for free</span><span class="np-btn__arrow" aria-hidden="true">→</span></a>
+        <a class="np-btn np-btn--primary cta-nopii-demo cta-demo--why-nopii" href="https://app.nopii.co"><span>Get started for free</span><span class="np-btn__arrow" aria-hidden="true">→</span></a>
       </div>
     </div>
   </section>
@@ -156,7 +156,7 @@ client = OpenAI(
           <p class="np-split__body">If the tokenization service is unreachable, the proxy blocks the request. It never degrades gracefully by sending PII through. Vault tokens expire automatically based on configurable retention policies, so tokenized data is never retained longer than necessary.</p>
           <p class="np-split__body">Every request is logged with a full audit trail: what was detected, what was tokenized, and what was forwarded. You get complete visibility into every interaction between your application and external AI providers.</p>
           <div class="np-ctas" style="margin-top:24px">
-            <a class="np-btn np-btn--primary cta-nopii cta-demo--fail-safe" href="/request-demo/"><span>Request a demo</span></a>
+            <a class="np-btn np-btn--primary cta-nopii-demo cta-demo--fail-safe" href="/request-demo/"><span>Request a demo</span></a>
           </div>
         </div>
       </div>
@@ -181,8 +181,8 @@ client = OpenAI(
         </div>
       </div>
       <div class="np-ctas np-reveal" style="margin-top:36px">
-        <a class="np-btn np-btn--primary cta-nopii cta-demo--build-vs-buy" href="https://app.nopii.co"><span>Start free</span><span class="np-btn__arrow" aria-hidden="true">→</span></a>
-        <a class="np-btn np-btn--secondary cta-nopii cta-demo--build-vs-buy" href="/pricing/#nopii"><span>See pricing</span></a>
+        <a class="np-btn np-btn--primary cta-nopii-demo cta-demo--build-vs-buy" href="https://app.nopii.co"><span>Start free</span><span class="np-btn__arrow" aria-hidden="true">→</span></a>
+        <a class="np-btn np-btn--secondary cta-nopii-demo cta-demo--build-vs-buy" href="/pricing/#nopii"><span>See pricing</span></a>
       </div>
     </div>
   </section>
@@ -199,31 +199,31 @@ client = OpenAI(
           <span class="npd-ind-ic"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></span>
           <h3 class="np-card__title">Healthcare</h3>
           <p class="np-card__body">Protect PHI in clinical notes, patient communications, and medical record summarization without blocking AI adoption.</p>
-          <p class="npd-more"><a class="cta-nopii cta-demo--industries" href="/nopii/#healthcare">Learn more →</a></p>
+          <p class="npd-more"><a class="cta-nopii-demo cta-demo--industries" href="/nopii/#healthcare">Learn more →</a></p>
         </article>
         <article class="np-card np-reveal">
           <span class="npd-ind-ic"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18"/><path d="M12 3l9 5H3Z"/><path d="M5 10v11"/><path d="M9 10v11"/><path d="M15 10v11"/><path d="M19 10v11"/></svg></span>
           <h3 class="np-card__title">Financial Services</h3>
           <p class="np-card__body">Keep account numbers, transaction details, and customer identities out of third-party models while enabling intelligent automation.</p>
-          <p class="npd-more"><a class="cta-nopii cta-demo--industries" href="/nopii/#financial-services">Learn more →</a></p>
+          <p class="npd-more"><a class="cta-nopii-demo cta-demo--industries" href="/nopii/#financial-services">Learn more →</a></p>
         </article>
         <article class="np-card np-reveal">
           <span class="npd-ind-ic"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18"/><path d="M8 21h8"/><path d="M5 7h14"/><path d="M7 7 4 13h6Z"/><path d="M17 7l-3 6h6Z"/></svg></span>
           <h3 class="np-card__title">Legal</h3>
           <p class="np-card__body">Redact client names, case details, and privileged information before sending documents to AI for review or summarization.</p>
-          <p class="npd-more"><a class="cta-nopii cta-demo--industries" href="/nopii/#legal">Learn more →</a></p>
+          <p class="npd-more"><a class="cta-nopii-demo cta-demo--industries" href="/nopii/#legal">Learn more →</a></p>
         </article>
         <article class="np-card np-reveal">
           <span class="npd-ind-ic"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H8l-4 4V5a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2Z"/><path d="M8 9h8"/><path d="M8 13h5"/></svg></span>
           <h3 class="np-card__title">Customer Support</h3>
           <p class="np-card__body">Power AI-assisted support workflows without exposing customer PII to external LLM providers.</p>
-          <p class="npd-more"><a class="cta-nopii cta-demo--industries" href="/nopii/#customer-support">Learn more →</a></p>
+          <p class="npd-more"><a class="cta-nopii-demo cta-demo--industries" href="/nopii/#customer-support">Learn more →</a></p>
         </article>
         <article class="np-card np-reveal">
           <span class="npd-ind-ic"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
           <h3 class="np-card__title">HR &amp; People Operations</h3>
           <p class="np-card__body">AI-powered people analytics without employee data leaving your environment. Tokenize names, salaries, and performance data automatically.</p>
-          <p class="npd-more"><a class="cta-nopii cta-demo--industries" href="/nopii/#hr">Learn more →</a></p>
+          <p class="npd-more"><a class="cta-nopii-demo cta-demo--industries" href="/nopii/#hr">Learn more →</a></p>
         </article>
       </div>
     </div>
@@ -236,8 +236,8 @@ client = OpenAI(
         <h2 class="np-h2">Ready to use AI <em>without the risk</em>?</h2>
         <p class="np-ctaband__body">One line of code. Full audit trail. Works with every major LLM provider.</p>
         <div class="np-ctaband__ctas">
-          <a class="np-btn np-btn--primary cta-nopii cta-demo--demo-band" href="https://app.nopii.co"><span>Start free at app.nopii.co</span><span class="np-btn__arrow" aria-hidden="true">→</span></a>
-          <a class="np-btn np-btn--secondary cta-nopii cta-demo--demo-band" href="/pricing/#nopii"><span>See pricing</span></a>
+          <a class="np-btn np-btn--primary cta-nopii-demo cta-demo--demo-band" href="https://app.nopii.co"><span>Start free at app.nopii.co</span><span class="np-btn__arrow" aria-hidden="true">→</span></a>
+          <a class="np-btn np-btn--secondary cta-nopii-demo cta-demo--demo-band" href="/pricing/#nopii"><span>See pricing</span></a>
         </div>
       </div>
     </div>

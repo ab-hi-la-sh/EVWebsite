@@ -26,6 +26,18 @@
   status = 301
   force = true
 
+# Blog post slug renamed (compliance -> compliant), Oct 2026.
+[[redirects]]
+  from = "/blog/best-pci-dss-compliance-tokenization-software/"
+  to = "/blog/best-pci-dss-compliant-tokenization-software/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/blog/best-pci-dss-compliance-tokenization-software"
+  to = "/blog/best-pci-dss-compliant-tokenization-software/"
+  status = 301
+  force = true
+
 # Netlify serves /index.html implicitly, so this one needs force.
 [[redirects]]
   from = "/index.html"

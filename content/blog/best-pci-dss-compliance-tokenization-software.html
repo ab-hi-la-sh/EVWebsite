@@ -93,7 +93,7 @@ faqs:
 }
 </style>
 
-<p class="bl-disclosure"><strong>Why trust Enigma Vault:</strong> I work on a PCI DSS Level 1 card vault, so I know which details matter once real cards are in production. Every platform here, including ours, follows the same template with real limitations, and every rating, price, and compliance claim comes from the vendor's own pages, the PCI Security Standards Council, G2, or Capterra, checked in October 2026. We list ourselves first because this is our guide. See <a class="bl-link" href="#how-i-evaluated-pci-dss-tokenization-software">how I evaluated each platform</a> and the <a class="bl-link" href="#legal-disclaimer">legal disclaimer</a>.</p>
+<p class="bl-disclosure"><strong>Why trust Enigma Vault:</strong> This guide comes from the team behind a PCI DSS Level 1 card vault, so I know which details matter once real cards are in production. Every platform here, including ours, follows the same template with real limitations, and every rating, price, and compliance claim comes from the vendor's own pages, the PCI Security Standards Council, G2, or Capterra, checked in October 2026. We list ourselves first because this is our guide. See <a class="bl-link" href="#how-i-evaluated-pci-dss-tokenization-software">how I evaluated each platform</a> and the <a class="bl-link" href="#legal-disclaimer">legal disclaimer</a>.</p>
 <div class="tldr" id="tldr">
   <h2 class="tldr__label">TL;DR</h2>
   <ul class="tldr__list">
@@ -116,8 +116,8 @@ faqs:
     <thead><tr><th>Platform</th><th>Best for</th><th>How it cuts PCI scope</th><th>PCI status (vendor-stated)</th><th>G2 rating</th><th>Capterra rating</th><th>Starting price</th></tr></thead>
     <tbody>
       <tr><td><a class="bl-link" href="#enigma-vault">Enigma Vault</a></td><td>A free PCI DSS Level 1 card vault that works with any gateway</td><td>Hosted card forms, phone capture, gateway proxy</td><td>Level 1 service provider, SOC 2 Type II</td><td>4.4/5 (6 reviews)</td><td>4.8/5 (4 reviews)</td><td>$0 (Lite, free forever)</td></tr>
-      <tr><td><a class="bl-link" href="#vgs">VGS</a></td><td>Cutting PCI scope without rewriting your application</td><td>Inbound and outbound proxy, iframe fields</td><td>Level 1</td><td>4.7/5 (47 reviews)</td><td>No reviews yet</td><td>From $1,000 a month</td></tr>
-      <tr><td><a class="bl-link" href="#ixopay">IXOPAY (formerly TokenEx)</a></td><td>Enterprises removing card data across many processors</td><td>Hosted capture, transparent gateway, universal tokens</td><td>Level 1, public PCI DSS v4.0 AOC</td><td>4.6/5 (17 reviews)</td><td>No reviews yet</td><td>Quote</td></tr>
+      <tr><td><a class="bl-link" href="#vgs">VGS</a></td><td>Cutting PCI scope without rewriting your application</td><td>Inbound and outbound proxy, iframe fields</td><td>PCI compliance add-ons (L1, L2 to L4)</td><td>4.7/5 (47 reviews)</td><td>No reviews yet</td><td>From $1,000 a month</td></tr>
+      <tr><td><a class="bl-link" href="#ixopay">IXOPAY (formerly TokenEx)</a></td><td>Enterprises removing card data across many processors</td><td>Hosted capture, transparent gateway, universal tokens</td><td>Public PCI DSS v4.0 AOC (July 2024)</td><td>4.6/5 (17 reviews)</td><td>No reviews yet</td><td>Quote</td></tr>
       <tr><td><a class="bl-link" href="#pci-vault">PCI Vault</a></td><td>A zero-knowledge card vault with published pricing</td><td>Capture forms, zero-knowledge PCI proxy</td><td>Level 1 storage</td><td>4.5/5 (12 reviews)</td><td>No reviews yet</td><td>From $255 a month</td></tr>
       <tr><td><a class="bl-link" href="#spreedly">Spreedly</a></td><td>Multi-gateway merchants that want one PCI Level 1 vault plus routing</td><td>Independent vault, 150+ gateway connections</td><td>PCI-1 vault</td><td>4.4/5 (35 reviews)</td><td>4.5/5 (13 reviews)</td><td>From $750 a month</td></tr>
       <tr><td><a class="bl-link" href="#basis-theory">Basis Theory</a></td><td>Fintech builders who want an AOC and PCI environment included</td><td>Collection elements, PCI environment you build in</td><td>Level 1, AOC included</td><td>0 reviews on G2</td><td>No reviews yet</td><td>$995 a month (free start)</td></tr>
@@ -263,7 +263,7 @@ faqs:
   <dl class="vc__facts">
     <div><dt>Starting price</dt><dd>From $1,000 a month</dd></div>
     <div><dt>Free tier or trial</dt><dd>Get started for free</dd></div>
-    <div><dt>PCI status</dt><dd>Level 1</dd></div>
+    <div><dt>PCI status</dt><dd>PCI add-ons (L1, L2 to L4)</dd></div>
     <div class="vc__best"><dt>Who it suits</dt><dd>Payments and engineering teams that want card data intercepted before it reaches their systems, with minimal changes to existing code.</dd></div>
   </dl>
 </div>
@@ -281,6 +281,7 @@ faqs:
   <li><strong>Inbound and outbound proxy:</strong> redact card data on the way in, reveal it only to approved destinations on the way out.</li>
   <li><strong>VGS Collect:</strong> iframe-based card fields for web and mobile.</li>
   <li><strong>PCI Compliance Subscription:</strong> a Growth add-on covering Level 1 and Levels 2 to 4.</li>
+  <li><strong>VGS Provided Auditor:</strong> available as a separate add-on.</li>
   <li><strong>Network tokens and account updater:</strong> Growth add-ons for stored cards.</li>
 </ul>
 <p><strong>Pricing</strong></p>
@@ -298,8 +299,8 @@ faqs:
   <table class="bl-table">
     <thead><tr><th>Item</th><th>Status</th></tr></thead>
     <tbody>
-      <tr><td>PCI DSS</td><td>Level 1</td></tr>
       <tr><td>PCI support</td><td>PCI Compliance Subscription (L1, L2 to L4) as an add-on</td></tr>
+      <tr><td>Auditor</td><td>VGS Provided Auditor as an add-on</td></tr>
     </tbody>
   </table>
 </div>
@@ -329,8 +330,8 @@ faqs:
   </div>
   <dl class="vc__facts">
     <div><dt>Starting price</dt><dd>Quote</dd></div>
-    <div><dt>Free tier or trial</dt><dd>Sandbox access</dd></div>
-    <div><dt>PCI status</dt><dd>Level 1, public v4.0 AOC</dd></div>
+    <div><dt>Free tier or trial</dt><dd>Demo</dd></div>
+    <div><dt>PCI status</dt><dd>Public PCI DSS v4.0 AOC (July 2024)</dd></div>
     <div class="vc__best"><dt>Who it suits</dt><dd>Enterprises and fintechs with several acquirers and payment methods that need one tokenization layer across all of them.</dd></div>
   </dl>
 </div>
@@ -342,7 +343,7 @@ faqs:
     </figure>
   </div>
 </div>
-<p><strong>Universal tokens with a published AOC:</strong> TokenEx is now part of IXOPAY. Its 2024 PCI DSS v4.0 Attestation of Compliance for service providers is public and lists services including browser and mobile tokenization, the token services API, the transparent gateway, and P2PE devices.</p>
+<p><strong>Universal tokens with a published AOC:</strong> TokenEx is now part of IXOPAY. Its PCI DSS v4.0 Attestation of Compliance for service providers (report dated 20 July 2024) is public and lists services including browser and mobile tokenization, the token services API, the transparent gateway, and P2PE devices.</p>
 <p><strong>Key features</strong></p>
 <ul>
   <li><strong>Transparent gateway:</strong> strips card data from requests before they enter your environment.</li>
@@ -364,7 +365,7 @@ faqs:
   <table class="bl-table">
     <thead><tr><th>Item</th><th>Status</th></tr></thead>
     <tbody>
-      <tr><td>PCI DSS</td><td>Level 1; public PCI DSS v4.0 AOC (2024)</td></tr>
+      <tr><td>PCI DSS</td><td>v4.0 AOC for service providers, report dated 20 July 2024</td></tr>
       <tr><td>Assessed services</td><td>Tokenization, token API, transparent gateway, batch file transfer, P2PE devices</td></tr>
     </tbody>
   </table>
@@ -408,10 +409,10 @@ faqs:
     </figure>
   </div>
 </div>
-<p><strong>A vault that cannot read your data on its own:</strong> PCI Vault describes its storage as zero-knowledge and PCI DSS Level 1. You hold the key needed to decrypt, and it offers capture forms and a zero-knowledge PCI proxy so card data can reach your payment provider without touching your servers.</p>
+<p><strong>A vault that cannot read your data on its own:</strong> PCI Vault describes itself as a zero-knowledge PCI DSS Level 1 compliant environment. It does not store your passphrase, which you need to retrieve your data, and it offers capture forms and a zero-knowledge PCI proxy so card data can reach your payment provider without touching your servers.</p>
 <p><strong>Key features</strong></p>
 <ul>
-  <li><strong>Zero-knowledge storage:</strong> the provider cannot decrypt your stored cards without your key.</li>
+  <li><strong>Zero-knowledge storage:</strong> data is locked with your own key and passphrase, and PCI Vault does not store the passphrase.</li>
   <li><strong>Card capture forms:</strong> hosted forms for collecting card input.</li>
   <li><strong>PCI proxy:</strong> receive and transmit card data without it reaching your systems.</li>
   <li><strong>Self-serve plans:</strong> pick a subscription and sign up on the site.</li>
@@ -442,7 +443,7 @@ faqs:
 </ul>
 <p><strong>Cons</strong></p>
 <ul>
-  <li>If you lose your key, the provider cannot recover your data.</li>
+  <li>Because PCI Vault does not store your passphrase, losing it means you cannot retrieve that data.</li>
   <li>You need developers to integrate the API.</li>
 </ul>
 <p><strong>What users like and dislike</strong></p>
@@ -607,10 +608,11 @@ faqs:
     </figure>
   </div>
 </div>
-<p><strong>Encrypt on entry, pay per action:</strong> Evervault states PCI DSS 4.0.1 Level One and SOC 2 Type II. Its card inputs load in an iframe, which Evervault says can reduce scope to SAQ A, and relays forward encrypted card data to third parties.</p>
+<p><strong>Encrypt on entry, pay per action:</strong> Evervault states PCI DSS 4.0.1 Level One and SOC 2 Type II. Its card inputs load in an iframe, and Evervault says that in most cases it reduces your PCI scope to the SAQ A control set. Relays forward encrypted card data to third parties.</p>
 <p><strong>Key features</strong></p>
 <ul>
   <li><strong>Iframe card inputs:</strong> keep card data off your servers.</li>
+  <li><strong>AoC and auditor introduction:</strong> Evervault provides its PCI DSS AoC, a policies and procedures bundle, and an introduction to an auditor familiar with its architecture.</li>
   <li><strong>Relays:</strong> forward encrypted card data to processors and partners.</li>
   <li><strong>Network tokens:</strong> $0.03 per creation, cryptogram, and update.</li>
   <li><strong>Card account updater:</strong> $0.25 per updated card.</li>

@@ -120,7 +120,7 @@
    touch more than the token alone so the card reads as a distinct surface,
    but nowhere near the reference's dramatic float. */
 #bl-article .np-container{max-width:1520px;}
-.bl-pii-layout{display:grid;grid-template-columns:272px minmax(0,1fr);column-gap:96px;padding:40px 0 64px;align-items:start;}
+.bl-pii-layout{display:grid;grid-template-columns:320px minmax(0,1fr);column-gap:72px;padding:40px 0 64px;align-items:start;}
 /* Two visually separate card surfaces (real space between them) that move
    as ONE sticky unit -- confirmed against the reference's actual DOM: its
    "In this article" card and "Subscribe" card are both children of a
@@ -138,6 +138,7 @@
    gap -- --bl-bar-h would just be an unset var contributing nothing, so
    it's dropped rather than left in as dead weight. */
 .bl-pii-sidebar{position:sticky;top:calc(var(--bl-nav-h,81px) + 17px);}
+
 .bl-pii-toc{margin-bottom:24px;background:var(--surface-card);border-radius:20px;box-shadow:0 8px 20px rgba(42,51,64,.06),var(--ev-shadow-raised);padding:30px 28px 34px;}
 /* Falls back to the site's own default .bl-toc__label (small, uppercase,
    tracked, slate) instead of a custom heading style -- that's the
@@ -154,7 +155,7 @@
    Font sizes/weight still deliberately match the plain .bl-toc__list a rule
    in the shared blog.css (13.5px lvl-2, 13px lvl-3, 500 active weight),
    confirmed against that live page. */
-.bl-pii-toc .bl-toc__list{border-left:none;display:flex;flex-direction:column;gap:18px;max-height:255px;overflow-y:auto;padding-right:4px;}
+.bl-pii-toc .bl-toc__list{border-left:none;display:flex;flex-direction:column;gap:18px;max-height:180px;overflow-y:auto;padding-right:4px;}
 .bl-pii-toc .bl-toc__list a{padding:0 0 0 16px;margin-left:0;border-left:3px solid transparent;font-size:13.5px;line-height:1.4;color:var(--ev-slate);}
 .bl-pii-toc .bl-toc__list a.lvl-3{padding-left:30px;font-size:13px;}
 .bl-pii-toc .bl-toc__list a:hover{color:var(--ev-ink);}
@@ -220,3 +221,33 @@
   .bl-pii-hero__inner{padding:0 4px;}
   .bl-utilbar__cta span:last-child{display:none;}
 }
+
+/* Sidebar promo card (replaces the small "Contact us" card): tag, two-line
+   headline, one sentence, three checks, full-width button. Same surface and
+   radius family as the TOC card; mineral-blue accents from the site tokens. */
+.bl-pii-promo{background:var(--ev-vault-fog);border:1px solid var(--ev-cool-stone);border-radius:10px;padding:24px 24px 22px;margin-bottom:16px;}
+.bl-pii-promo__tag{margin:0;font-family:var(--ev-font-sans);font-size:11px;font-weight:300;letter-spacing:.04em;text-transform:uppercase;color:var(--ev-ink);}
+.bl-pii-promo__h{font-family:var(--font-display);font-size:22px;line-height:1.25;font-weight:600;letter-spacing:-.005em;color:var(--ev-ink);margin:12px 0 0;}
+.bl-pii-promo__s{font-family:var(--ev-font-sans);font-size:13px;line-height:1.45;color:var(--text-body,#3D4654);margin:10px 0 0;padding-bottom:16px;border-bottom:1px solid var(--ev-silver);}
+.bl-pii-promo__list{list-style:none;margin:14px 0 0;padding:0;display:flex;flex-direction:column;gap:8px;}
+.bl-pii-promo__list li{position:relative;padding-left:24px;font-family:var(--ev-font-sans);font-size:13px;line-height:1.45;color:var(--text-body,#3D4654);}
+.bl-pii-promo__list li::before{content:"";position:absolute;left:2px;top:4px;width:11px;height:5px;border-left:2px solid var(--ev-ink);border-bottom:2px solid var(--ev-ink);transform:rotate(-45deg);}
+.bl-pii-promo__btn{display:block;margin-top:20px;padding:13px 16px;background:var(--ev-mineral-blue);color:#fff !important;text-align:center;text-decoration:none !important;transition:background .15s;font-family:var(--ev-font-sans);font-size:15px;font-weight:500;letter-spacing:0;text-transform:none;line-height:1.2;border-radius:4px;}
+.bl-pii-promo__btn:hover{background:var(--ev-mineral-hover);}
+
+/* Compact TOC card under the pinned promo so both fit one screen. */
+.bl-pii-promo + .bl-pii-toc{padding:22px 24px 22px;margin-bottom:0;}
+.bl-pii-promo + .bl-pii-toc .bl-toc__list{gap:12px;}
+
+/* Sidebar rail scrolls on its own when banner + full TOC are taller than
+   the screen (reference: a sticky rail capped at viewport height with
+   overflow auto). The TOC shows every section instead of an inner scroller. */
+@media (min-width:1101px){
+  .bl-pii-sidebar{max-height:calc(100vh - var(--bl-nav-h,81px) - 33px);overflow-y:auto;overscroll-behavior:contain;padding:2px 6px 16px 2px;margin:-2px -6px 0 -2px;scrollbar-width:thin;scrollbar-color:var(--ev-silver) transparent;}
+  .bl-pii-sidebar::-webkit-scrollbar{width:6px;}
+  .bl-pii-sidebar::-webkit-scrollbar-thumb{background:var(--ev-silver);border-radius:3px;}
+  .bl-pii-sidebar .bl-pii-toc .bl-toc__list{max-height:260px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--ev-silver) transparent;}
+  .bl-pii-sidebar .bl-pii-toc .bl-toc__list::-webkit-scrollbar{width:4px;}
+  .bl-pii-sidebar .bl-pii-toc .bl-toc__list::-webkit-scrollbar-thumb{background:var(--ev-silver);border-radius:2px;}
+}
+

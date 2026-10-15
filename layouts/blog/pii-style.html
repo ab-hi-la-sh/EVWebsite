@@ -55,6 +55,18 @@
     </div>
     <div class="bl-pii-layout">
       <div class="bl-pii-sidebar">
+        <div class="bl-pii-promo">
+          <p class="bl-pii-promo__tag">Enigma Vault</p>
+          <p class="bl-pii-promo__h">Secure your cards.<br>Protect your data.<br>Keep it out of your AI.</p>
+          <p class="bl-pii-promo__s">Data tokenization that keeps your applications working, so a breach exposes nothing worth stealing.</p>
+          <ul class="bl-pii-promo__list">
+            <li>Free Lite tier, no contract</li>
+            <li>PCI DSS Level 1, SOC&nbsp;2&nbsp;Type&nbsp;II</li>
+            <li>Billed through AWS Marketplace</li>
+          </ul>
+          <a class="bl-pii-promo__btn cta-blog cta-{{ .File.ContentBaseName }}--sidebar" href="/request-demo/">Request a demo</a>
+        </div>
+
         <aside class="bl-pii-toc">
           <div class="bl-pii-toc__nav">
             <p class="bl-toc__label">On this page</p>
@@ -75,25 +87,7 @@
              matches the reference's two-card layout (TOC+Share, then a
              gap, then a second standalone card) instead of one long
              stacked card. -->
-        <div class="bl-pii-contact">
-          <p class="bl-pii-contact__t">Contact us</p>
-          <!-- Was a generic "we'll route it to the right team" line, then
-               "See how Triplets grounds..." -- naming one product line is
-               too narrow (request-demo/ covers all three) and doesn't move
-               fast enough. Reframed as pain point + what we do, matching
-               the FinStackk reference's "Don't let a missed filing cost
-               you." pattern, phrased with the homepage's own "Ground your
-               AI answers" language (data/home.yml hero.title) rather than
-               inventing new wording. -->
-          <p class="bl-pii-contact__s">Stop shipping unprovable AI answers. Ground them in evidence.</p>
-          <!-- Dropped the email field (and the form wrapper it needed) --
-               a single CTA straight to /request-demo/ does the same job as
-               the reference's compact "FREE DEMO" card without a field that
-               was never wired to a submission endpoint anyway, and frees up
-               the vertical room the sidebar needed to keep the TOC and this
-               card both fully visible together. -->
-          <a class="np-btn np-btn--primary np-btn--sm bl-pii-contact__btn" href="/request-demo/">Request a demo</a>
-        </div>
+
       </div>
       <div class="bl-maincol bl-maincol--pii2">
       <article class="bl-content" id="bl-content">

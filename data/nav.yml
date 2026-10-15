@@ -68,6 +68,12 @@ items:
         - [Data Vault, /vault/data-vault/]
         - [File Vault, /vault/file-vault/]
         - [Customer Vault, /vault/customer-vault/]
+    promo:
+      badge: Live demo
+      title: See Card Vault in action
+      body: Enter a test card in the hosted form and see the token that replaces the card number in your system.
+      cta: Try the live demo
+      href: /vault/card-vault-demo/
 
   - label: Pricing
     topHref: /pricing/

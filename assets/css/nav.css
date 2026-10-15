@@ -55,6 +55,9 @@
 /* NoPII dropdown: links + a "Live demo" promo card in the second column */
 .hp-prod--promo{min-width:560px;}
 .hp-prod--promo .hp-prod__cols{grid-template-columns:1fr 1.15fr;}
+/* Vault dropdown: product links + four vaults + Card Vault live-demo promo */
+.hp-prod--three{min-width:760px;left:-340px;}
+.hp-prod--three .hp-prod__cols{grid-template-columns:1fr 1fr 1.2fr;}
 .hp-prod__promo{display:flex;flex-direction:column;align-items:flex-start;gap:8px;}
 .hp-prod__live{display:inline-flex;align-items:center;gap:7px;padding:4px 10px;border-radius:999px;background:#E8F5EC;color:#15803D;font-family:var(--ev-font-sans);font-size:10.5px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;}
 .hp-prod__live i{width:8px;height:8px;border-radius:50%;background:#16A34A;box-shadow:0 0 0 0 rgba(22,163,74,.55);animation:hp-live 1.6s ease-out infinite;}

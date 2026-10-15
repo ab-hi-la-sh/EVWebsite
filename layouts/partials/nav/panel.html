@@ -2,7 +2,7 @@
        A .group makes it the two-column wide variant. */ -}}
 {{- $wide := .group -}}
 {{- $promo := .promo -}}
-<div class="hp-prod{{ if $wide }} hp-prod--wide{{ end }}{{ if $promo }} hp-prod--promo{{ end }}">
+<div class="hp-prod{{ if $wide }} hp-prod--wide{{ end }}{{ if $promo }} hp-prod--promo{{ end }}{{ if and $wide $promo }} hp-prod--three{{ end }}">
   <div class="hp-prod__head">
     <span class="hp-prod__ic">{{ partial "img.html" (dict "src" .icon "alt" "" "width" 132) }}</span>
     <span class="hp-prod__ht">
@@ -30,7 +30,7 @@
       <span class="hp-prod__live"><i aria-hidden="true"></i>{{ .badge }}</span>
       <p class="hp-prod__ptitle">{{ .title }}</p>
       <p class="hp-prod__pbody">{{ .body }}</p>
-      <a class="hp-prod__pcta" href="{{ .href }}">{{ .cta }}<span aria-hidden="true">&#8594;</span></a>
+      <a class="hp-prod__pcta cta-nav cta-nav--{{ $.label | urlize | lower }}-demo" href="{{ .href }}">{{ .cta }}<span aria-hidden="true">&#8594;</span></a>
     </div>
     {{- end }}
   </div>

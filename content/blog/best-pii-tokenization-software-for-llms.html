@@ -1,10 +1,10 @@
 ---
-title: "Best PII Tokenization Software for LLMs in 2026: 9 Developer-Ready Platforms Compared"
-titleEmphasis: "9 Developer-Ready Platforms Compared"
+title: "Best PII Tokenization Software for LLMs in 2026: 6 Top Platforms for Protecting Prompts"
+titleEmphasis: "6 Top Platforms for Protecting Prompts"
 slug: "best-pii-tokenization-software-for-llms"
 layout: "pii-style"
 metaTitle: "Best PII Tokenization Software for LLMs (2026)"
-description: "Compare 9 PII tokenization platforms for LLM apps on reversible tokens, consistency across turns, integration effort, streaming, self-hosting, and pricing."
+description: "Compare 6 PII tokenization platforms for LLM apps on reversible tokens, consistency across turns, integration effort, streaming, self-hosting, and pricing."
 subtitle: "Which platforms let your chatbot, RAG pipeline, or agent send customer data to a model provider as tokens, then hand real values back to your users."
 date: 2026-10-16T00:04:00
 category: "NoPII"
@@ -12,17 +12,17 @@ author: "abhilash-kumar"
 readTime: 23
 heroImage: "/assets/blog/img-07.png"
 heroAlt: "Customer details swapped for tokens on their way from an app to a large language model"
-excerpt: "Nine PII tokenization platforms for LLM apps compared on round-trip tokens, detection, integration, streaming, deployment, and developer-scale pricing."
+excerpt: "Six PII tokenization platforms for LLM apps compared on round-trip tokens, detection, integration, streaming, deployment, and developer-scale pricing."
 tags: ["pii", "tokenization", "llm", "developers", "nopii"]
 ogImage: "/assets/og/nopii-overview.jpg"
-ogImageAlt: "Best PII tokenization software for LLMs in 2026 | Enigma Vault"
+ogImageAlt: "Best PII tokenization software for LLMs in 2026: 6 top platforms for protecting prompts | Enigma Vault"
 ogType: article
 styles: ["blog.css", "pages/blog-pii-hero.css", "tr-pages.css"]
 scripts: ["blog-article.js"]
 faqSchema: true
 faqs:
   - q: "What Is the Best PII Tokenization Software for LLMs?"
-    a: "For most developer teams, Enigma Vault (NoPII) is the quickest route: you change your SDK’s base URL, prompts are tokenized before they reach the model provider, and real values come back in the response. Protecto suits teams that need 200+ entity types and VPC deployment, Limina suits multilingual or clinical text, and Microsoft Presidio suits teams that want free code and will build the token vault themselves."
+    a: "For most developer teams, Enigma Vault (NoPII) is the quickest route: you change your SDK’s base URL, prompts are tokenized before they reach the model provider, and real values come back in the response. Protecto suits teams that need 200+ entity types and VPC deployment, Limina suits multilingual or clinical text, and Grepture suits small teams that want a low-cost, EU-hosted gateway."
   - q: "Is Reversible Tokenization Safe If the Model Provider Never Sees the Mapping?"
     a: "That is the point of it. The token-to-value mapping stays with your tokenization service, and the provider only receives stand-ins. The risk moves to the mapping store, so ask how it is encrypted, who can call detokenize, how long tokens live, and whether every restore is logged."
   - q: "How Much Latency Does a PII Tokenization Proxy Add?"
@@ -33,12 +33,10 @@ faqs:
     a: "Often, yes, if retrieved chunks are sent to a hosted model. Tokenizing at ingestion keeps raw identifiers out of your vector store and prompts. Use consistent tokens so the same customer maps to the same token in every chunk, or retrieval and reasoning across documents will suffer."
   - q: "Does Replacing Names With Tokens Hurt LLM Answer Quality?"
     a: "Usually very little for tasks like summarizing, drafting, or routing, because the model only needs to know which person is which. Quality drops when tokens change between turns, when a label like “Social Security number” triggers a refusal, or when the task genuinely needs the real value."
-  - q: "Can I Use Microsoft Presidio Instead of a Commercial Platform?"
-    a: "You can, if you have engineering time. Presidio detects PII and offers anonymizer operators, but only encryption is reversible and it keeps no token mapping, so you build the vault, consistency, response restore, and streaming handling yourself. Its own documentation says it cannot guarantee it finds all sensitive data."
   - q: "Do PII Tokenization Platforms Work With Local Models Like Ollama?"
-    a: "Some do. Philterd’s AI Proxy lists Ollama and vLLM, and self-hosted engines like Presidio, Limina, and Tonic Textual can sit in front of any model you call. Hosted proxies such as NoPII focus on commercial API providers, so check the provider list first."
+    a: "Some do. Philterd’s AI Proxy lists Ollama and vLLM, and self-hosted engines like Limina can sit in front of any model you call. Hosted proxies such as NoPII focus on commercial API providers, so check the provider list first."
   - q: "What Is the Cheapest Way to Tokenize PII for an LLM Prototype?"
-    a: "Start on a free tier. NoPII’s Free plan covers 1 million protected tokens a month with no card, Grepture’s free plan covers 1,000 requests, Limina’s Starter plan allows 75 API calls a day, and Presidio is free under the MIT license if you host it."
+    a: "Start on a free tier. NoPII’s Free plan covers 1 million protected tokens a month with no card, Grepture’s free plan covers 1,000 requests, Limina’s Starter plan allows 75 API calls a day, and Philterd’s AI Proxy is free under Apache-2.0 if you host it alongside a Philter engine."
   - q: "Does a Tokenization Proxy Store My Prompts?"
     a: "It depends on the vendor. Some keep token mappings for a configurable retention period and log metadata per request, some process data statelessly, and some offer a zero-data mode. Ask what is stored, for how long, and where, and get it in the DPA."
 ---
@@ -48,30 +46,54 @@ faqs:
 .bl-content .bl-table--wide td, .bl-content .bl-table--wide th { padding-left: 8px; padding-right: 8px; }
 .bl-content blockquote.bl-quote-cta{margin:24px 0;padding:14px 20px;border-left:3px solid var(--ev-mineral-blue);background:var(--ev-warm-cloud);border-radius:0 10px 10px 0}.bl-content blockquote.bl-quote-cta p{margin:0;font-size:16px}
 .bl-content figure.bl-shot{margin:20px 0 24px;padding:10px;border:1px solid var(--ev-cool-stone);border-radius:10px;background:var(--ev-warm-cloud)}.bl-content figure.bl-shot img{display:block;width:100%;height:auto;border-radius:6px}.bl-content figure.bl-shot figcaption{margin-top:8px;text-align:center;font-size:13px;color:var(--ev-slate)}
+.bl-content .vc { margin: 40px 0 20px; }
+.bl-content .vc__head { display: grid; grid-template-columns: auto 1fr auto; gap: 18px; align-items: center; margin-bottom: 14px; }
+.bl-content .vc__num { font-size: 34px; font-weight: 600; line-height: 1; color: var(--ev-mineral-blue); font-variant-numeric: tabular-nums; }
+.bl-content h3.vc__name { margin: 0; padding: 0; font-size: 26px; line-height: 1.25; font-weight: 600; color: var(--ev-ink); }
+.bl-content .vc__sep { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.bl-content .vc__pill { display: table; margin-top: 10px; padding: 6px 12px; border-radius: 6px; background: var(--ev-mineral-blue); color: #fff; font-size: 13px; line-height: 1.4; font-weight: 600; letter-spacing: 0; text-transform: none; }
+.bl-content .vc__rates { display: flex; flex-direction: column; gap: 8px; align-items: stretch; }
+.bl-content .vc__rate { display: flex; flex-direction: column; align-items: flex-end; padding: 8px 14px; border: 1px solid var(--ev-cool-stone); border-radius: 10px; background: #fff; text-decoration: none !important; min-width: 128px; }
+.bl-content a.vc__rate:hover { border-color: var(--ev-mineral-blue); }
+.bl-content .vc__score { font-size: 20px; font-weight: 700; color: var(--ev-ink); line-height: 1.2; }
+.bl-content .vc__score small { font-size: 13px; font-weight: 500; color: var(--ev-slate); }
+.bl-content .vc__src { font-size: 12px; color: var(--ev-slate); line-height: 1.3; }
+.bl-content .vc__rate--new .vc__score { font-size: 15px; }
+.bl-content .vc__facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px 24px; margin: 0; padding: 18px 22px; border-radius: 12px; background: var(--ev-warm-cloud); }
+.bl-content .vc__facts div { margin: 0; }
+.bl-content .vc__facts .vc__best { grid-column: 1 / -1; padding-top: 14px; border-top: 1px solid var(--ev-cool-stone); }
+.bl-content .vc__facts dt { margin: 0 0 4px; font-size: 11.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ev-slate); }
+.bl-content .vc__facts dd { margin: 0; font-size: 15px; line-height: 1.5; color: var(--ev-ink); }
+@media (max-width: 700px) {
+  .bl-content .vc__head { grid-template-columns: auto 1fr; }
+  .bl-content .vc__rates { grid-column: 1 / -1; flex-direction: row; flex-wrap: wrap; }
+  .bl-content .vc__rate { align-items: flex-start; }
+  .bl-content .vc__num { font-size: 26px; }
+  .bl-content h3.vc__name { font-size: 22px; }
+  .bl-content .vc__facts { grid-template-columns: 1fr; }
+}
 </style>
 
-<p>Comparing the best PII tokenization software for LLMs of 2026: 1. Enigma Vault (NoPII), 2. Protecto, 3. Skyflow, 4. Limina (formerly Private AI), 5. Tonic Textual, 6. Strac, 7. Microsoft Presidio, 8. Grepture, 9. Philterd.</p>
+<p>Comparing the best PII tokenization software for LLMs of 2026: 1. Enigma Vault (NoPII), 2. Protecto, 3. Skyflow, 4. Limina (formerly Private AI), 5. Grepture, 6. Philterd.</p>
 <p><strong>About the author: <a class="bl-link" href="https://www.linkedin.com/in/abhilashkumar15/" target="_blank" rel="noopener">Abhilash Kumar</a>, Chief Growth Officer at Enigma Vault</strong></p>
 <p>I lead growth, positioning, and partnerships at Enigma Vault, after running marketing at Amnic, Element5, and KenSci. Much of my week goes to calls with developers and AI product teams who are wiring customer data into chatbots, RAG pipelines, and agents, so I see where LLM privacy work stalls: the token that changed between turns, the redacted answer nobody could use, the proxy that broke streaming. I wrote this guide with our product and security team, who run a PCI DSS Level 1 vault with SOC 2 Type II controls.</p>
 <p><em>Disclosure: I work at Enigma Vault, which appears first in this list. Every platform here is judged on the same criteria, and the review ratings come from G2 and Capterra.</em></p>
 
-<p>You’re building a support copilot, a booking assistant, or an agent that reads customer records, and the prompt has to include names, emails, account numbers, or claim details to be useful. The question for your team isn’t whether to protect that data; it’s how to do it without wrecking the feature. That means the model provider should receive tokens instead of real values, the same customer should keep the same token from message one to message twenty, your users should see real values in the reply, and the whole thing shouldn’t add a week of plumbing or a noticeable pause before the first streamed word. This guide compares nine platforms on exactly those points.</p>
+<p>You’re building a support copilot, a booking assistant, or an agent that reads customer records, and the prompt has to include names, emails, account numbers, or claim details to be useful. The question for your team isn’t whether to protect that data; it’s how to do it without wrecking the feature.</p>
+<p>That means the model provider should receive tokens instead of real values, the same customer should keep the same token from message one to message twenty, your users should see real values in the reply, and the whole thing shouldn’t add a week of plumbing or a noticeable pause before the first streamed word. This guide compares six platforms on exactly those points.</p>
 
 <h2 id="top-rated-pii-tokenization-software-for-llms-at-a-glance">Top-Rated PII Tokenization Software for LLMs at a Glance</h2>
-<p>Here’s how the nine platforms stack up for an LLM app team. Every rating, price, and feature was checked on October 16, 2026.</p>
+<p>Here’s how the six platforms stack up for an LLM app team. Every rating, price, and feature was checked on October 16, 2026.</p>
 <div class="bl-tablewrap">
   <table class="bl-table bl-table--wide">
     <thead><tr><th>Platform</th><th>Best for</th><th>Starting price</th><th>Free trial or tier</th><th>Restores real values</th><th>How you integrate</th><th>G2 rating</th></tr></thead>
     <tbody>
-      <tr><td><a class="bl-link" href="#enigma-vault">Enigma Vault (NoPII)</a></td><td>Reversible, consistent tokens through a base-URL swap at developer-scale pricing</td><td>$0; Pro $50/mo</td><td>Free plan, 1M protected tokens/mo</td><td>Yes, in the response</td><td>Change base URL to the proxy</td><td>4.4/5 (6 reviews)</td></tr>
-      <tr><td><a class="bl-link" href="#protecto">Protecto</a></td><td>Broad entity coverage and role-based unmasking in your VPC</td><td>$250/mo</td><td>14 days, 1,000 API calls</td><td>Yes, for authorized callers</td><td>REST API, Python SDK</td><td>G2 listing, 0 reviews</td></tr>
-      <tr><td><a class="bl-link" href="#skyflow">Skyflow</a></td><td>A certified privacy vault that spans LLM and data stack</td><td>Custom quote</td><td>Demo only</td><td>Yes, governed re-identification</td><td>Vault API, Kong AI Gateway plugin</td><td>No reviews on the GenAI listing</td></tr>
-      <tr><td><a class="bl-link" href="#limina">Limina (formerly Private AI)</a></td><td>Accuracy-sensitive, multilingual text in your own infrastructure</td><td>$0 Starter</td><td>75 API calls/day</td><td>Yes, via returned entity mappings</td><td>Docker container, Python client</td><td>4.6/5 (22 reviews)</td></tr>
-      <tr><td><a class="bl-link" href="#tonic-textual">Tonic Textual</a></td><td>RAG and training corpora that need redaction or realistic synthetic values</td><td>Pay as you go, per 1,000 words</td><td>None for Textual</td><td>Yes, reversible tokenization listed</td><td>Python SDK, REST API</td><td>4.2/5 (38, Tonic.ai-wide)</td></tr>
-      <tr><td><a class="bl-link" href="#strac">Strac</a></td><td>Teams pairing employee Gen AI DLP with a tokenization API</td><td>Custom quote</td><td>Proof of value</td><td>Yes, server-side detokenize</td><td>REST API, outbound proxy</td><td>4.9/5 (28)</td></tr>
-      <tr><td><a class="bl-link" href="#microsoft-presidio">Microsoft Presidio</a></td><td>Engineers building their own pipeline on free, MIT-licensed code</td><td>Free (MIT)</td><td>Open source</td><td>Only with the encrypt operator</td><td>pip, Docker, HTTP service</td><td>Open source, no G2 listing</td></tr>
-      <tr><td><a class="bl-link" href="#grepture">Grepture</a></td><td>Small teams wanting a low-cost, EU-hosted AI gateway with mask and restore</td><td>$0; Pro $49/mo</td><td>Free plan, 1,000 requests/mo</td><td>Yes, mask and restore with TTL</td><td>SDK sets base URL to proxy</td><td>G2 listing, 0 reviews</td></tr>
-      <tr><td><a class="bl-link" href="#philterd">Philterd</a></td><td>Self-hosted, open source redaction in front of cloud or local models</td><td>Free proxy; Philter from $0.49/hr</td><td>Open source</td><td>No, redaction only</td><td>Self-hosted proxy</td><td>G2 listing, 0 reviews</td></tr>
+      <tr><td><a class="bl-link" href="#enigma-vault">Enigma Vault (NoPII)</a></td><td>Reversible, consistent tokens through a base-URL swap at developer-scale pricing</td><td>$0; Pro $50/mo</td><td>Free plan, 1M protected tokens/mo</td><td>Yes, in the response</td><td>Change base URL to the proxy</td><td><a class="bl-link" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener">4.4/5 (6 reviews)</a></td></tr>
+      <tr><td><a class="bl-link" href="#protecto">Protecto</a></td><td>Broad entity coverage and role-based unmasking in your VPC</td><td>$250/mo</td><td>14 days, 1,000 API calls</td><td>Yes, for authorized callers</td><td>REST API, Python SDK</td><td><a class="bl-link" href="https://www.g2.com/products/protecto/reviews" target="_blank" rel="noopener">G2 listing, 0 reviews</a></td></tr>
+      <tr><td><a class="bl-link" href="#skyflow">Skyflow</a></td><td>A certified privacy vault that spans LLM and data stack</td><td>Custom quote</td><td>Demo only</td><td>Yes, policy-governed re-identification</td><td>Vault API, Kong AI Gateway plugin</td><td><a class="bl-link" href="https://www.g2.com/products/skyflow-for-genai/reviews" target="_blank" rel="noopener">No reviews on the GenAI listing</a></td></tr>
+      <tr><td><a class="bl-link" href="#limina">Limina (formerly Private AI)</a></td><td>Accuracy-sensitive, multilingual text in your own infrastructure</td><td>$0 Starter</td><td>75 API calls/day</td><td>Yes, via returned entity mappings</td><td>Docker container, Python client</td><td><a class="bl-link" href="https://www.g2.com/products/limina/reviews" target="_blank" rel="noopener">4.6/5 (22 reviews)</a></td></tr>
+      <tr><td><a class="bl-link" href="#grepture">Grepture</a></td><td>Small teams wanting a low-cost, EU-hosted AI gateway with mask and restore</td><td>$0; Pro $49/mo</td><td>Free plan, 1,000 requests/mo</td><td>Yes, mask and restore with TTL</td><td>SDK sets base URL to proxy</td><td><a class="bl-link" href="https://www.g2.com/products/grepture/reviews" target="_blank" rel="noopener">G2 listing, 0 reviews</a></td></tr>
+      <tr><td><a class="bl-link" href="#philterd">Philterd</a></td><td>Self-hosted, open source redaction in front of cloud or local models</td><td>Free proxy; Philter from $0.49/hr</td><td>Open source</td><td>No, redaction only</td><td>Self-hosted proxy</td><td><a class="bl-link" href="https://www.g2.com/products/philter/reviews" target="_blank" rel="noopener">G2 listing, 0 reviews</a></td></tr>
     </tbody>
   </table>
 </div>
@@ -107,21 +129,48 @@ faqs:
     </tbody>
   </table>
 </div>
-<p><strong>Sources and method.</strong> We read each vendor’s product pages, developer documentation, GitHub repositories, security and pricing pages, plus G2 and Capterra listings, on October 16, 2026. We did not run hands-on benchmarks of competing products, so detection and latency claims are the vendors’ own. Compliance status is what each vendor states; ask for current reports before you sign.</p>
+<p><strong>Sources and method.</strong> We read each vendor’s product pages, developer documentation, GitHub repositories, security and pricing pages, plus <a class="bl-link" href="https://www.g2.com/" target="_blank" rel="noopener">G2</a> and <a class="bl-link" href="https://www.capterra.com/" target="_blank" rel="noopener">Capterra</a> listings, on October 16, 2026. We did not run hands-on benchmarks of competing products, so detection and latency claims are the vendors’ own. Compliance status is what each vendor states; ask for current reports before you sign.</p>
 
-<h2 id="the-9-best-pii-tokenization-software-for-llms-for-2026">The 9 Best PII Tokenization Software for LLMs for 2026</h2>
+<h2 id="the-6-best-pii-tokenization-software-for-llms-for-2026">The 6 Best PII Tokenization Software for LLMs for 2026</h2>
 
-<h3 id="enigma-vault">1. Enigma Vault (NoPII): Top-Rated Drop-In Proxy for Reversible LLM Tokenization</h3>
-<p><strong>Best for:</strong> Reversible, consistent tokens through a base-URL swap at developer-scale pricing.</p>
-<p>NoPII is Enigma Vault’s LLM privacy proxy. You point your existing OpenAI or Anthropic client at <code>https://api.nopii.co</code>, keep using your own provider API key, and every request is scanned before it goes out. Names, emails, Social Security numbers, addresses, and similar values are replaced with deterministic tokens, the request goes to the model provider, and the response is detokenized on the way back so your app receives real values. The same pass checks for 14 pattern families of credentials, such as cloud keys, database connection strings, and private keys. It fronts nine providers: OpenAI, Anthropic, Gemini, xAI, DeepSeek, Mistral, Groq, Together, and Fireworks.</p>
-<p>What stands out for an LLM app team is how little you change. There’s no SDK and no middleware rewrite, and Enigma Vault states time to protection is under five minutes. Tokens stay the same for the same value, so a multi-turn chat or an agent loop keeps track of who is who. NoPII also rewrites sensitive data-type labels (a “Social Security number” becomes an “ID number”) so the model doesn’t refuse a harmless request. If the tokenization service can’t be reached, the proxy blocks the request instead of letting raw data through, and each request lands in an audit log. Honestly, for a team that wants to ship this week, I’d start here, then test detection on your own prompts, because entities the proxy doesn’t recognize can pass through.</p>
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">01</span>
+    <div class="vc__id">
+      <h3 id="enigma-vault" class="vc__name"><span class="vc__sep">1. </span>Enigma Vault (NoPII)<span class="vc__sep">: </span><span class="vc__pill">Best for Reversible, Consistent Tokens Through a Base-URL Swap</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener"><span class="vc__score">4.4<small>/5</small></span><span class="vc__src">G2 · 6 reviews</span></a><a class="vc__rate" href="https://www.capterra.com/p/241650/Enigma-Vault/reviews/" target="_blank" rel="noopener"><span class="vc__score">4.8<small>/5</small></span><span class="vc__src">Capterra · 4 reviews</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>$0 (Free), then Pro at $50 a month</dd></div>
+    <div><dt>Free tier or trial</dt><dd>Free plan, 1M protected tokens a month, no card</dd></div>
+    <div><dt>Integration path</dt><dd>Change your SDK’s base URL</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Developer and AI product teams shipping chatbots, RAG pipelines, or agents on OpenAI, Anthropic, or other hosted models who want real values back in every answer without rewriting prompt code.</dd></div>
+  </dl>
+</div>
+<p>NoPII is Enigma Vault’s LLM privacy proxy. You point your existing OpenAI or Anthropic client at <code>https://api.nopii.co</code>, keep your own provider API key, and personal data in each prompt is replaced with deterministic tokens before it reaches the model provider, then restored in the response so your app receives real values.</p>
+<p>It fronts nine providers, and Enigma Vault states time to protection is under five minutes. Test detection on your own prompts first, because entities the proxy doesn’t recognize can pass through.</p>
+<ul>
+  <li>Ship protection with a one-line base-URL change, not a refactor.</li>
+  <li>Keep the same customer on the same token from turn one to turn twenty.</li>
+  <li>Prove it free on 1 million protected tokens a month.</li>
+</ul>
 <figure class="bl-shot">
   {{< img src="/assets/blog/listicles-2026/v3/enigma-nopii-demo.jpg" alt="Enigma Vault NoPII demo page showing a prompt tokenized before it reaches the model provider" >}}
   <figcaption>Enigma Vault NoPII page. Source: enigmavault.io/nopii/</figcaption>
 </figure>
+<p><strong>Key Features</strong></p>
+<ul>
+  <li><strong>Base-URL proxy:</strong> Point your OpenAI or Anthropic SDK at <code>https://api.nopii.co</code> and keep your own provider key, with no SDK or middleware rewrite.</li>
+  <li><strong>Deterministic round-trip tokens:</strong> The same value always gets the same token, and the response is detokenized automatically before it reaches your app.</li>
+  <li><strong>Streaming restore:</strong> SSE responses are detokenized in flight, so streamed chat keeps streaming.</li>
+  <li><strong>Refusal-safe labels:</strong> Data-type labels are neutralized (a “Social Security number” becomes an “ID number”) so the model doesn’t refuse a harmless request.</li>
+  <li><strong>Credential detection:</strong> Secrets across 14 pattern families, such as cloud keys, database connection strings, and private keys, are tokenized in the same pass as PII.</li>
+  <li><strong>Fail-closed with audit log:</strong> If the tokenization service can’t be reached, the request is blocked instead of sent raw, and each request is logged.</li>
+</ul>
 <div class="bl-tablewrap">
   <table class="bl-table">
-    <thead><tr><th>Item</th><th>Detail</th></tr></thead>
+    <thead><tr><th>LLM privacy factor</th><th>How it works</th></tr></thead>
     <tbody>
       <tr><td>Integration</td><td>Reverse proxy; change the SDK base URL, keep your provider key</td></tr>
       <tr><td>Token behavior</td><td>Deterministic tokens; response detokenized automatically</td></tr>
@@ -129,7 +178,6 @@ faqs:
       <tr><td>Streaming</td><td>SSE streaming supported; responses detokenized in flight</td></tr>
       <tr><td>Deployment and safety</td><td>Managed service; fails closed; configurable token retention; per-request audit log</td></tr>
       <tr><td>Compliance</td><td>PCI DSS Level 1 service provider, SOC 2 Type II; BAA on NoPII Enterprise</td></tr>
-      <tr><td>Reviews</td><td>G2 4.4/5 (6 reviews); Capterra 4.8/5 (4 reviews)</td></tr>
     </tbody>
   </table>
 </div>
@@ -156,27 +204,46 @@ faqs:
   <li>The Free plan keeps token mappings for one day, so tokens that must persist across longer sessions need Pro, where retention is configurable.</li>
   <li>There’s no published entity list or accuracy benchmark, so you need to test coverage on your own traffic before launch.</li>
 </ul>
-<p><strong>What developers say in reviews:</strong> Very positive. Enigma Vault holds 4.4/5 from 6 reviews on G2 and 4.8/5 from 4 on Capterra. Reviewers mostly discuss the company’s vault products and like the simple, easy-to-follow tokenization API, the affordable pricing, and quick responses to feature requests. One reviewer wants deeper reporting dashboards and another found pricing a little high; NoPII doesn’t yet have its own review listing.</p>
+<p><strong>What developers say in reviews:</strong> Very positive. Enigma Vault holds <a class="bl-link" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener">4.4/5 from 6 reviews on G2</a> and <a class="bl-link" href="https://www.capterra.com/p/241650/Enigma-Vault/reviews/" target="_blank" rel="noopener">4.8/5 from 4 on Capterra</a>. Reviewers mostly discuss the company’s vault products and like the simple, easy-to-follow tokenization API, the affordable pricing, and quick responses to feature requests. One reviewer wants deeper reporting dashboards and another found pricing a little high; NoPII doesn’t yet have its own review listing.</p>
 <blockquote class="bl-quote-cta"><p>Swap one base URL and watch your next prompt reach the model with tokens instead of customer details. <a class="bl-link" href="/nopii/">Start NoPII free</a></p></blockquote>
 
-<h3 id="protecto">2. Protecto: A Leading Masking Platform for Teams That Need Deep Entity Coverage</h3>
-<p><strong>Best for:</strong> Broad entity coverage and role-based unmasking in your VPC.</p>
-<p>Protecto calls itself an AI data control plane. It detects and masks sensitive values before they reach LLMs, agents, RAG pipelines, or MCP servers, and it claims 200+ data types across PII, PHI, and business-confidential information, with custom entities and multilingual support. Tokens are consistent within a namespace, preserve format and context, and can be unmasked by authorized callers, which Protecto pairs with context-based access control so a support agent and a finance analyst can see different things from the same answer.</p>
-<p>What stands out for developers is the framework list: Protecto names OpenAI, Gemini, Claude, DeepSeek, Cohere, and Grok, plus LangChain, LlamaIndex, Semantic Kernel, Haystack, Pinecone, and Weaviate. You integrate through REST APIs or the Python SDK, though, so you’ll write the mask, call, and unmask steps yourself, and the docs quickstart asks you to email the team for your endpoint. It’s also one of the few here offering SaaS, your VPC, or air-gapped on-premises deployment.</p>
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">02</span>
+    <div class="vc__id">
+      <h3 id="protecto" class="vc__name"><span class="vc__sep">2. </span>Protecto<span class="vc__sep">: </span><span class="vc__pill">Best for Broad Entity Coverage and Role-Based Unmasking in Your VPC</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate vc__rate--new" href="https://www.g2.com/products/protecto/reviews" target="_blank" rel="noopener"><span class="vc__score">No reviews yet</span><span class="vc__src">G2</span></a><a class="vc__rate vc__rate--new" href="https://www.capterra.com/p/10006145/Protecto/reviews/" target="_blank" rel="noopener"><span class="vc__score">No reviews yet</span><span class="vc__src">Capterra</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>$250 a month (Starter)</dd></div>
+    <div><dt>Free tier or trial</dt><dd>14-day trial, 1,000 API calls</dd></div>
+    <div><dt>Integration path</dt><dd>REST APIs and Python SDK</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Teams with unusual identifiers, PHI, or business-confidential data who need SaaS, VPC, or air-gapped deployment and different unmasking rights per role.</dd></div>
+  </dl>
+</div>
+<p>Protecto calls itself an AI data control plane that masks sensitive values before they reach LLMs, agents, RAG pipelines, or MCP tools. It claims 200+ data types and offers SaaS, VPC, and air-gapped on-premises deployment, but you write the mask, call, and unmask steps yourself through its APIs.</p>
 <figure class="bl-shot">
   {{< img src="/assets/blog/listicles-2026/v3/protecto.jpg" alt="Protecto homepage describing its AI data control plane" >}}
   <figcaption>Protecto homepage. Source: protecto.ai</figcaption>
 </figure>
+<p><strong>Key Features</strong></p>
+<ul>
+  <li><strong>200+ data types:</strong> Detection spans PII, PHI, and business-confidential data, with custom entities and multilingual support.</li>
+  <li><strong>Namespace-consistent tokens:</strong> The same input always produces the same token within a namespace, and tokens can be format-preserving.</li>
+  <li><strong>Role-based unmasking:</strong> Unmasking is governed by permissions, so a support agent and a supervisor can see different detail from the same answer.</li>
+  <li><strong>Framework coverage:</strong> Protecto names OpenAI, Gemini, Claude, DeepSeek, Cohere, and Grok, plus LangChain, LlamaIndex, Semantic Kernel, Haystack, Pinecone, and Weaviate.</li>
+  <li><strong>Flexible deployment:</strong> Run it as SaaS, in your own VPC, or on-premises in air-gapped mode with zero data egress.</li>
+</ul>
 <div class="bl-tablewrap">
   <table class="bl-table">
-    <thead><tr><th>Item</th><th>Detail</th></tr></thead>
+    <thead><tr><th>LLM privacy factor</th><th>How it works</th></tr></thead>
     <tbody>
       <tr><td>Integration</td><td>REST APIs (real-time, async, bulk), Python SDK, privacy gateway for AI chat</td></tr>
       <tr><td>Token behavior</td><td>Consistent per namespace, format-preserving, reversible for authorized roles</td></tr>
-      <tr><td>Detection</td><td>200+ data types, custom entities, multi-language; vendor claims 99%+ accuracy</td></tr>
+      <tr><td>Detection</td><td>200+ data types, custom entities, multi-language; vendor claims over 99% accuracy</td></tr>
       <tr><td>Deployment</td><td>SaaS (99.9% SLA), your VPC, on-premises or air-gapped</td></tr>
       <tr><td>Compliance</td><td>SOC 2 Type II, ISO 27001, HIPAA with BAA available</td></tr>
-      <tr><td>Reviews</td><td>G2 and Capterra listings with 0 reviews</td></tr>
     </tbody>
   </table>
 </div>
@@ -205,26 +272,46 @@ faqs:
   <li>The free trial masks only 1,000 values, which is thin for testing detection on realistic traffic.</li>
   <li>There’s no documented drop-in base-URL proxy, so you maintain the mask and unmask code around every model call.</li>
 </ul>
-<p><strong>What developers say in reviews:</strong> Protecto has no G2 or Capterra reviews yet, so ask for customer references. Its G2 and Capterra pages exist with zero ratings, and on G2 make sure you don’t confuse it with Protect AI, a different company.</p>
+<p><strong>What developers say in reviews:</strong> Protecto has no <a class="bl-link" href="https://www.g2.com/products/protecto/reviews" target="_blank" rel="noopener">G2</a> or <a class="bl-link" href="https://www.capterra.com/p/10006145/Protecto/reviews/" target="_blank" rel="noopener">Capterra</a> reviews yet, so ask for customer references. Its <a class="bl-link" href="https://www.g2.com/products/protecto/reviews" target="_blank" rel="noopener">G2</a> and <a class="bl-link" href="https://www.capterra.com/p/10006145/Protecto/reviews/" target="_blank" rel="noopener">Capterra</a> pages exist with zero ratings, and on <a class="bl-link" href="https://www.g2.com/products/protecto/reviews" target="_blank" rel="noopener">G2</a> make sure you don’t confuse it with Protect AI, a different company.</p>
 <blockquote class="bl-quote-cta"><p>Comparing per-call and per-token costs for your traffic? <a class="bl-link" href="/pricing/">See NoPII pricing</a></p></blockquote>
 
-<h3 id="skyflow">3. Skyflow: The Trusted Privacy Vault for Regulated LLM Programs</h3>
-<p><strong>Best for:</strong> A certified privacy vault that spans LLM and data stack.</p>
-<p>Skyflow’s LLM Privacy Vault extends its data privacy vault to generative AI, keeping sensitive data out of training, fine-tuning, RAG, and inference. LLM tokens are deterministic and are detokenized as the response returns to the user, with re-identification governed by vault policies. Developers who already run Kong can use the Skyflow De-identify plugin for Kong Gateway, which fails closed and covers OpenAI, Anthropic, and other providers. Skyflow lists ISO 27001:2022, SOC 2 Type II, and PCI DSS Level 1 service provider status, plus a separate data residency product.</p>
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">03</span>
+    <div class="vc__id">
+      <h3 id="skyflow" class="vc__name"><span class="vc__sep">3. </span>Skyflow<span class="vc__sep">: </span><span class="vc__pill">Best for a Certified Privacy Vault That Spans Your LLM and Data Stack</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate vc__rate--new" href="https://www.g2.com/products/skyflow-for-genai/reviews" target="_blank" rel="noopener"><span class="vc__score">No reviews yet</span><span class="vc__src">G2</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>Custom quote</dd></div>
+    <div><dt>Free tier or trial</dt><dd>Demo only</dd></div>
+    <div><dt>Integration path</dt><dd>Vault API or Kong AI Gateway plugin</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Regulated enterprises that want one governed vault for AI prompts, training data, and their warehouse, and can run a scoped rollout.</dd></div>
+  </dl>
+</div>
+<p>Skyflow’s LLM Privacy Vault extends its data privacy vault to generative AI, protecting sensitive data across collection, training, fine-tuning, RAG, and inference. It lists ISO 27001:2022, SOC 2 Type II, and PCI DSS Level 1 service provider status, but pricing is by quote and there’s no self-serve trial.</p>
 <figure class="bl-shot">
   {{< img src="/assets/blog/listicles-2026/v3/skyflow.jpg" alt="Skyflow homepage" >}}
   <figcaption>Skyflow homepage. Source: skyflow.com</figcaption>
 </figure>
+<p><strong>Key Features</strong></p>
+<ul>
+  <li><strong>Full AI lifecycle scope:</strong> Sensitive data is protected during collection, training, fine-tuning, RAG, and inference, for “any LLM or AI apps.”</li>
+  <li><strong>Tokenization and polymorphic encryption:</strong> Detected values are redacted or tokenized, then re-identified for authorized use under vault policies.</li>
+  <li><strong>Kong gateway plugin:</strong> The Skyflow De-identify plugin for Kong Gateway fails closed, so a gateway team can add protection without app code changes.</li>
+  <li><strong>Data stack integrations:</strong> Skyflow names AWS, Google Cloud, Snowflake, Databricks, Glean, ServiceNow, and HubSpot.</li>
+  <li><strong>Data residency product:</strong> A separate residency offering helps meet regional rules such as GDPR, the EU AI Act, and DPDP.</li>
+</ul>
 <div class="bl-tablewrap">
   <table class="bl-table">
-    <thead><tr><th>Item</th><th>Detail</th></tr></thead>
+    <thead><tr><th>LLM privacy factor</th><th>How it works</th></tr></thead>
     <tbody>
       <tr><td>Integration</td><td>Vault API; Kong AI Gateway plugin; partners include AWS, Snowflake, Databricks, Glean</td></tr>
-      <tr><td>Token behavior</td><td>Deterministic tokens; detokenized on response; polymorphic encryption</td></tr>
-      <tr><td>Scope</td><td>Training, fine-tuning, RAG, inference</td></tr>
+      <tr><td>Token behavior</td><td>Tokenization and polymorphic encryption; policy-governed re-identification</td></tr>
+      <tr><td>Scope</td><td>Data collection, training, fine-tuning, RAG, inference</td></tr>
       <tr><td>Deployment</td><td>SaaS on AWS, multi-AZ; data residency option</td></tr>
       <tr><td>Compliance</td><td>ISO 27001:2022, SOC 2 Type II, PCI DSS Level 1; HIPAA assessed and eligible</td></tr>
-      <tr><td>Reviews</td><td>G2: Skyflow for GenAI 0 reviews; Payments Data Privacy Vault 5/5 (1). No Capterra listing</td></tr>
     </tbody>
   </table>
 </div>
@@ -247,30 +334,49 @@ faqs:
 <p><strong>Cons</strong></p>
 <ul>
   <li>There’s no self-serve trial or public price, so you can’t test it in a spare afternoon.</li>
-  <li>Rollout is a project; a customer quoted on the product page talks about weeks, not minutes.</li>
+  <li>Rollout is a project; GoodRx, quoted on the product page, deployed in under three weeks, not minutes.</li>
   <li>LLM entity coverage and the full provider list aren’t published, so you’ll need a scoped proof of concept.</li>
 </ul>
-<p><strong>What developers say in reviews:</strong> Too few to judge. Skyflow holds 5/5 from 1 review on its G2 Payments Data Privacy Vault listing, its Skyflow for GenAI listing has no reviews yet, and there’s no Capterra listing, so ask for customer references that run LLM workloads.</p>
+<p><strong>What developers say in reviews:</strong> Too few to judge. Skyflow holds 5/5 from 1 review on its <a class="bl-link" href="https://www.g2.com/products/payments-data-privacy-vault/reviews" target="_blank" rel="noopener">G2</a> Payments Data Privacy Vault listing, its Skyflow for GenAI listing has no reviews yet, and there’s no Capterra listing, so ask for customer references that run LLM workloads.</p>
 <blockquote class="bl-quote-cta"><p>Need LLM protection running before a vault project is scoped? <a class="bl-link" href="/nopii/demo/">Try NoPII in minutes</a></p></blockquote>
 
-<h3 id="limina">4. Limina (Formerly Private AI): A Highly Accurate Detection Engine You Host Yourself</h3>
-<p><strong>Best for:</strong> Accuracy-sensitive, multilingual text in your own infrastructure.</p>
-<p>Limina, which rebranded from Private AI, focuses on detection quality. It reads context rather than matching patterns, covers 50+ entity types in 52 languages, including code-switched text, and publishes an internal 45,000-word test in which major cloud PII services missed 13.8% to 46.5% of entities against Limina’s 0.2% to 7%. A Providence deployment on physician conversations is cited at 99.5%.</p>
-<p>For LLM apps, the docs describe a de-identify, send, re-identify loop: the redaction call returns entity mappings you use to restore the model’s answer. That’s reversible, but you run the container, call the client, and write the restore step. The LLM guide was written against an older OpenAI client and doesn’t cover token consistency across turns or streaming, so I’d budget engineering time for both. Processing is stateless, which some security teams will like.</p>
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">04</span>
+    <div class="vc__id">
+      <h3 id="limina" class="vc__name"><span class="vc__sep">4. </span>Limina (Formerly Private AI)<span class="vc__sep">: </span><span class="vc__pill">Best for Accuracy-Sensitive, Multilingual Text in Your Own Infrastructure</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/limina/reviews" target="_blank" rel="noopener"><span class="vc__score">4.6<small>/5</small></span><span class="vc__src">G2 · 22 reviews</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>$0 (Starter), then custom quote</dd></div>
+    <div><dt>Free tier or trial</dt><dd>Starter plan, 75 API calls a day</dd></div>
+    <div><dt>Integration path</dt><dd>Docker container plus Python client</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Teams handling clinical or multilingual text that must stay inside their own network and have engineers to build the restore loop.</dd></div>
+  </dl>
+</div>
+<p>Limina, which rebranded from Private AI, is a detection engine that runs as a container in your VPC or on-premises. It covers 50+ entity types in 52 languages, and its LLM guide describes a de-identify, send, re-identify loop that you build yourself.</p>
 <figure class="bl-shot">
   {{< img src="/assets/blog/listicles-2026/v3/limina.jpg" alt="Limina homepage" >}}
   <figcaption>Limina homepage. Source: getlimina.ai</figcaption>
 </figure>
+<p><strong>Key Features</strong></p>
+<ul>
+  <li><strong>Context-aware detection:</strong> 50+ entity types across PII, PHI, and PCI, in 52 languages including code-switched text.</li>
+  <li><strong>Published accuracy test:</strong> In Limina’s 45,000-word internal test, general-purpose services missed 13.8% to 46.5% of entities against Limina’s 0.2% to 7%.</li>
+  <li><strong>Re-identification mappings:</strong> The redaction call returns entity mappings you use to restore the model’s answer.</li>
+  <li><strong>Self-hosted container:</strong> Runs in your VPC or on-premises with no outbound calls, and is available on AWS, Azure, and Snowflake marketplaces.</li>
+  <li><strong>Stateless processing:</strong> Text isn’t stored by the engine, which simplifies data-retention reviews.</li>
+</ul>
 <div class="bl-tablewrap">
   <table class="bl-table">
-    <thead><tr><th>Item</th><th>Detail</th></tr></thead>
+    <thead><tr><th>LLM privacy factor</th><th>How it works</th></tr></thead>
     <tbody>
       <tr><td>Integration</td><td>Docker container plus Python client; OpenAI example in docs</td></tr>
       <tr><td>Token behavior</td><td>Entity markers with returned mappings for re-identification</td></tr>
       <tr><td>Detection</td><td>50+ entity types, 52 languages, published internal accuracy test</td></tr>
       <tr><td>Deployment</td><td>Your VPC or on-premises; AWS, Azure, Snowflake marketplaces; SaaS option</td></tr>
       <tr><td>Compliance</td><td>ISO 27001:2022 and SOC 2 Type 2 for company operations; supports HIPAA, GDPR, PCI DSS, CPRA, Law 25 programs</td></tr>
-      <tr><td>Reviews</td><td>G2 4.6/5 (22 reviews, Private AI listing); no Capterra listing</td></tr>
     </tbody>
   </table>
 </div>
@@ -297,162 +403,47 @@ faqs:
   <li>The free tier stops at 75 calls a day, which is enough to evaluate but not to run a pilot.</li>
   <li>The LLM integration guide is dated and skips multi-turn consistency, streaming, and latency.</li>
 </ul>
-<p><strong>What developers say in reviews:</strong> Very positive. Limina holds 4.6/5 from 22 reviews on G2 under its former Private AI name and isn’t listed on Capterra. Reviewers praise detection accuracy and quick setup and call it simple and elegant. Complaints center on the interface and on enterprise-style pricing and setup that feel heavy for small teams.</p>
+<p><strong>What developers say in reviews:</strong> Very positive. Limina holds <a class="bl-link" href="https://www.g2.com/products/limina/reviews" target="_blank" rel="noopener">4.6/5 from 22 reviews on G2</a> under its former Private AI name and isn’t listed on Capterra. Reviewers praise detection accuracy and quick setup and call it simple and elegant. Complaints center on the interface and on enterprise-style pricing and setup that feel heavy for small teams.</p>
 <blockquote class="bl-quote-cta"><p>Want detection and restore handled in one hop? <a class="bl-link" href="/nopii/">See how NoPII works</a></p></blockquote>
 
-<h3 id="tonic-textual">5. Tonic Textual: A Strong Choice for Cleaning RAG and Training Data</h3>
-<p><strong>Best for:</strong> RAG and training corpora that need redaction or realistic synthetic values.</p>
-<p>Tonic Textual makes unstructured data safe to use with LLMs by redacting or synthesizing entities consistently across documents. Its pricing page lists reversible tokenization alongside synthetic replacement, which swaps “Maria Lopez” for a realistic fake name instead of a bracketed label. That matters for RAG and fine-tuning, because realistic text keeps embeddings and model behavior closer to the original. It reads files from S3, GCS, and Azure Blob, enriches vector-store metadata, supports 50+ languages and custom entity models, and now pitches itself as a privacy layer for agentic coding workflows. You can run it in Tonic’s cloud, your cloud, or self-hosted on Kubernetes.</p>
-<figure class="bl-shot">
-  {{< img src="/assets/blog/listicles-2026/v3/tonic.jpg" alt="Tonic.ai homepage" >}}
-  <figcaption>Tonic.ai homepage. Source: tonic.ai</figcaption>
-</figure>
-<div class="bl-tablewrap">
-  <table class="bl-table">
-    <thead><tr><th>Item</th><th>Detail</th></tr></thead>
-    <tbody>
-      <tr><td>Integration</td><td>Python SDK, REST API, cloud storage connectors</td></tr>
-      <tr><td>Token behavior</td><td>Consistent redaction or synthesis; reversible tokenization listed on pricing</td></tr>
-      <tr><td>Detection</td><td>Common entities plus custom-trained models; 50+ languages</td></tr>
-      <tr><td>Deployment</td><td>Textual Cloud, your cloud, self-hosted on Kubernetes or Docker</td></tr>
-      <tr><td>Compliance</td><td>SOC 2 Type II, HIPAA attestation; BAA on Enterprise</td></tr>
-      <tr><td>Reviews</td><td>G2 4.2/5 (38 reviews, whole Tonic.ai listing); Capterra 4.0/5 (2 reviews)</td></tr>
-    </tbody>
-  </table>
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">05</span>
+    <div class="vc__id">
+      <h3 id="grepture" class="vc__name"><span class="vc__sep">5. </span>Grepture<span class="vc__sep">: </span><span class="vc__pill">Best for a Low-Cost, EU-Hosted AI Gateway With Mask and Restore</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate vc__rate--new" href="https://www.g2.com/products/grepture/reviews" target="_blank" rel="noopener"><span class="vc__score">No reviews yet</span><span class="vc__src">G2</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>$0 (Free), then Pro at $49 a month billed annually</dd></div>
+    <div><dt>Free tier or trial</dt><dd>Free plan, 1,000 requests a month</dd></div>
+    <div><dt>Integration path</dt><dd>SDK sets the base URL to its proxy</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Small teams and early startups, especially in Europe, that want a cheap hosted gateway with masking, traces, and cost tracking in one place.</dd></div>
+  </dl>
 </div>
-<p><strong>Pricing tiers</strong></p>
-<div class="bl-tablewrap">
-  <table class="bl-table">
-    <thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
-    <tbody>
-      <tr><td>Pay as you go</td><td>Flat rate per 1,000 words processed</td><td>Unlimited users, custom entity models</td></tr>
-      <tr><td>Enterprise</td><td>Custom quote</td><td>Self-hosting, BAA, enterprise support</td></tr>
-    </tbody>
-  </table>
-</div>
-<p><strong>Pros</strong></p>
-<ul>
-  <li>Synthetic replacement keeps text natural, so retrieval and fine-tuning quality hold up better than with bracketed labels.</li>
-  <li>Broad file and storage coverage lets you clean a whole document corpus before it ever reaches a vector store.</li>
-  <li>Self-hosting on Kubernetes keeps regulated corpora in your own cloud account.</li>
-</ul>
-<p><strong>Cons</strong></p>
-<ul>
-  <li>It’s built for datasets and files, so request-time prompt tokenization and response restore are code you write.</li>
-  <li>Textual has no free tier, so even a small evaluation starts on a paid plan.</li>
-  <li>Reviewers report over-masking and setup effort on complex data, so expect tuning before results look right.</li>
-</ul>
-<p><strong>What developers say in reviews:</strong> Mostly positive. Tonic.ai holds 4.2/5 from 38 reviews on G2, a listing that covers all Tonic products rather than Textual alone, and 4.0/5 from 2 on Capterra. Reviewers like that it anonymizes entities without breaking context and that technical support is fast. They mention over-masking, wanting better linking of identical values and CSV handling, complex setup, and cost for small teams.</p>
-<blockquote class="bl-quote-cta"><p>Cleaning your corpus is half the job; live prompts need tokens too. <a class="bl-link" href="/nopii/demo/">Test NoPII on a prompt</a></p></blockquote>
-
-<h3 id="strac">6. Strac: A Versatile Option That Pairs DLP With a Tokenization API</h3>
-<p><strong>Best for:</strong> Teams pairing employee Gen AI DLP with a tokenization API.</p>
-<p>Strac is mostly a DLP platform for SaaS apps, endpoints, and employee Gen AI use, but it also ships a developer API. You can tokenize values into vault references, detokenize server to server, and run an outbound proxy that redacts requests to third parties, including LLM providers. Text redaction modes range from blanks and masks to token links, and the entity list covers SSNs, card numbers, passports, API keys, country-specific IDs, and PHI categories. The catch for an app team is that API keys and proxy destinations are arranged by contacting Strac, and detokenize calls are capped at 10 tokens each.</p>
-<figure class="bl-shot">
-  {{< img src="/assets/blog/listicles-2026/v3/strac.jpg" alt="Strac homepage" >}}
-  <figcaption>Strac homepage. Source: strac.io</figcaption>
-</figure>
-<div class="bl-tablewrap">
-  <table class="bl-table">
-    <thead><tr><th>Item</th><th>Detail</th></tr></thead>
-    <tbody>
-      <tr><td>Integration</td><td>REST API with samples in cURL, Node, Python, C#, Java, Ruby; outbound proxy</td></tr>
-      <tr><td>Token behavior</td><td>Vault tokens; detokenize up to 10 per call; batch tokenize up to 200</td></tr>
-      <tr><td>Detection</td><td>SSN, card, email, passport, API keys, national IDs, PHI</td></tr>
-      <tr><td>Deployment</td><td>Agentless SaaS</td></tr>
-      <tr><td>Compliance</td><td>Displays HIPAA, PCI DSS, ISO 27001, SOC 2, GDPR, CCPA badges</td></tr>
-      <tr><td>Reviews</td><td>G2 4.9/5 (28 reviews); no Capterra listing</td></tr>
-    </tbody>
-  </table>
-</div>
-<p><strong>Pricing tiers</strong></p>
-<div class="bl-tablewrap">
-  <table class="bl-table">
-    <thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
-    <tbody>
-      <tr><td>Custom</td><td>Quote within 24 hours of a 30-minute call</td><td>Scoped by surfaces covered, employee count, and data volume</td></tr>
-      <tr><td>Proof of value</td><td>Free, in your environment</td><td>Guided evaluation instead of a self-serve trial</td></tr>
-    </tbody>
-  </table>
-</div>
-<p><strong>Pros</strong></p>
-<ul>
-  <li>One vendor covers employee chatbot use and your own LLM calls, so security and engineering share a single policy set.</li>
-  <li>The entity list includes API keys and national IDs, so secrets in prompts get caught along with personal data.</li>
-  <li>Code samples in six languages make the API approachable whatever your backend stack.</li>
-</ul>
-<p><strong>Cons</strong></p>
-<ul>
-  <li>Proxy destinations must be allow-listed by Strac, so adding a new model provider waits on their team.</li>
-  <li>The 10-token detokenize limit means long, entity-heavy responses need several calls to restore.</li>
-  <li>Pricing is scoped around employees and DLP surfaces, which is awkward when you’re costing one LLM feature.</li>
-</ul>
-<p><strong>What developers say in reviews:</strong> Very positive. Strac holds 4.9/5 from 28 reviews on G2 and has no Capterra listing. Reviewers say it acts on sensitive data instead of just raising alerts, and support teams like redacting customer data inside their help desk and chat channels. Most report no real complaints, beyond a few features still being built, and the reviews center on the DLP product, so ask for references from teams using the developer API.</p>
-<blockquote class="bl-quote-cta"><p>Prefer self-serve keys and every provider on day one? <a class="bl-link" href="/nopii/">Get a NoPII key</a></p></blockquote>
-
-<h3 id="microsoft-presidio">7. Microsoft Presidio: The Proven Open Source Foundation for DIY Pipelines</h3>
-<p><strong>Best for:</strong> Engineers building their own pipeline on free, MIT-licensed code.</p>
-<p>Presidio is the open source PII detection and anonymization SDK many in-house solutions start from. It’s free under the MIT license, runs via pip, Docker, or an HTTP service, supports spaCy, Stanza, and Transformers engines, and has a LiteLLM proxy example. It’s widely adopted on GitHub and is now transitioning from Microsoft to community ownership under the Data Privacy Stack project.</p>
-<p>For tokenization, though, Presidio is a kit, not a product. Its anonymizer operators include replace, redact, hash, mask, and encrypt, and only encrypt can be reversed. There’s no stored mapping, so consistent tokens across turns, a vault, response restore, and streaming are all yours to build. Its own homepage warns there’s no guarantee it will find all sensitive information. If you have the engineers, it’s a fine base; if you don’t, it becomes a side project.</p>
-<figure class="bl-shot">
-  {{< img src="/assets/blog/listicles-2026/v3/presidio.jpg" alt="Microsoft Presidio homepage" >}}
-  <figcaption>Microsoft Presidio homepage. Source: presidio.dataprivacystack.org</figcaption>
-</figure>
-<div class="bl-tablewrap">
-  <table class="bl-table">
-    <thead><tr><th>Item</th><th>Detail</th></tr></thead>
-    <tbody>
-      <tr><td>Integration</td><td>pip package, Docker images, HTTP service; LiteLLM proxy example</td></tr>
-      <tr><td>Token behavior</td><td>Operators: replace, redact, hash, mask, encrypt; only encrypt reverses</td></tr>
-      <tr><td>Detection</td><td>Extensible recognizers; multiple languages; spaCy, Stanza, Transformers</td></tr>
-      <tr><td>Deployment</td><td>Self-hosted anywhere</td></tr>
-      <tr><td>Governance</td><td>MIT license; moving to community ownership; no compliance attestations</td></tr>
-      <tr><td>Reviews</td><td>No G2 or Capterra listing; widely adopted open source project on GitHub</td></tr>
-    </tbody>
-  </table>
-</div>
-<p><strong>Pricing tiers</strong></p>
-<div class="bl-tablewrap">
-  <table class="bl-table">
-    <thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
-    <tbody>
-      <tr><td>Open source</td><td>Free (MIT)</td><td>Analyzer, anonymizer, image redactor; you pay only for hosting and engineering time</td></tr>
-    </tbody>
-  </table>
-</div>
-<p><strong>Pros</strong></p>
-<ul>
-  <li>No license fee, so cost is your hosting and engineering time alone.</li>
-  <li>Everything runs in your environment, so no third party ever sees a prompt.</li>
-  <li>Custom recognizers are straightforward to add, so you can teach it your own ID formats.</li>
-</ul>
-<p><strong>Cons</strong></p>
-<ul>
-  <li>There’s no token vault or consistent reversible mapping, so you build the hardest part yourself.</li>
-  <li>Accuracy depends on how you tune the NLP models, and the project itself warns it may miss PII.</li>
-  <li>Governance is in transition and there are no compliance reports to hand an auditor.</li>
-</ul>
-<p><strong>What developers say in reviews:</strong> Presidio has no G2 or Capterra reviews, which is normal for open source. It’s widely adopted on GitHub, where most guidance centers on adding custom recognizers and tuning the NLP engine for your data, which matches the project’s own warning that detection isn’t guaranteed.</p>
-<blockquote class="bl-quote-cta"><p>Rather not build the vault and restore layer yourself? <a class="bl-link" href="/nopii/demo/">See NoPII do it for you</a></p></blockquote>
-
-<h3 id="grepture">8. Grepture: An Affordable AI Gateway With Mask and Restore</h3>
-<p><strong>Best for:</strong> Small teams wanting a low-cost, EU-hosted AI gateway with mask and restore.</p>
-<p>Grepture is a young, privacy-focused AI gateway hosted in Frankfurt and Nuremberg. Its SDK wraps your client and points the provider base URL at its proxy, where 80+ detection patterns plus AI entity detection mask values and restore them in the response, with a token time to live. It also adds prompt-injection blocking, traces, evals, and cost tracking, and covers OpenAI, Anthropic, Gemini, Azure OpenAI, Cohere, Mistral, Bedrock, Hugging Face, Groq, and Replicate.</p>
-<p>The price is the hook: Pro is $49 a month billed annually for 100,000 requests. I’d still check two things first. Consistency of tokens across requests and streaming behavior aren’t documented, and there’s no SOC 2 or similar report, only “GDPR-ready” claims. The AGPL proxy code is open source if you want to self-host.</p>
+<p>Grepture is a young, privacy-focused AI gateway hosted in Frankfurt and Nuremberg that masks values on the way out and restores them in the response. Pro costs $49 a month billed annually, but there’s no SOC 2 or comparable audit report, only “GDPR and EU AI Act ready” claims.</p>
 <figure class="bl-shot">
   {{< img src="/assets/blog/listicles-2026/v3/grepture.jpg" alt="Grepture homepage" >}}
   <figcaption>Grepture homepage. Source: grepture.com</figcaption>
 </figure>
+<p><strong>Key Features</strong></p>
+<ul>
+  <li><strong>Mask and restore:</strong> Reversible redaction with a token time to live keeps downstream systems working.</li>
+  <li><strong>80+ detection patterns:</strong> Pattern rules run alongside AI-powered entity detection.</li>
+  <li><strong>Prompt-injection blocking:</strong> The gateway detects and blocks injection attempts in the same hop.</li>
+  <li><strong>Built-in observability:</strong> Multi-step traces, LLM-as-judge evals, and per-model cost tracking come with the gateway.</li>
+  <li><strong>Zero-data mode:</strong> Content is processed in flight and never stored; only operational metadata is logged.</li>
+  <li><strong>Ten named providers:</strong> OpenAI, Anthropic, Google AI, Azure OpenAI, Cohere, Mistral, AWS Bedrock, Hugging Face, Groq, and Replicate.</li>
+</ul>
 <div class="bl-tablewrap">
   <table class="bl-table">
-    <thead><tr><th>Item</th><th>Detail</th></tr></thead>
+    <thead><tr><th>LLM privacy factor</th><th>How it works</th></tr></thead>
     <tbody>
       <tr><td>Integration</td><td>JavaScript and Python SDKs set base URL to the proxy; CLI</td></tr>
       <tr><td>Token behavior</td><td>Mask and restore with token TTL</td></tr>
       <tr><td>Detection</td><td>80+ patterns plus AI entity detection</td></tr>
-      <tr><td>Providers</td><td>OpenAI, Anthropic, Gemini, Azure OpenAI, Cohere, Mistral, Bedrock, Groq, and more</td></tr>
+      <tr><td>Providers</td><td>OpenAI, Anthropic, Google AI, Azure OpenAI, Cohere, Mistral, Bedrock, Groq, and more</td></tr>
       <tr><td>Deployment</td><td>EU-hosted SaaS; self-host via AGPL-3.0 proxy; zero-data mode</td></tr>
-      <tr><td>Reviews</td><td>G2 listing with 0 reviews; no Capterra listing</td></tr>
     </tbody>
   </table>
 </div>
@@ -480,26 +471,46 @@ faqs:
   <li>Token consistency across requests and streaming aren’t documented, so multi-turn behavior needs testing.</li>
   <li>The free plan allows just 25 AI detections, which isn’t enough to judge detection quality.</li>
 </ul>
-<p><strong>What developers say in reviews:</strong> Grepture has no G2 or Capterra reviews yet, so ask for customer references. Its open source proxy repository on GitHub is small and recent, so there’s little public feedback to go on.</p>
+<p><strong>What developers say in reviews:</strong> Grepture has no <a class="bl-link" href="https://www.g2.com/products/grepture/reviews" target="_blank" rel="noopener">G2</a> or Capterra reviews yet, so ask for customer references. Its open source proxy repository on GitHub is small and recent, so there’s little public feedback to go on.</p>
 <blockquote class="bl-quote-cta"><p>Need SOC 2 Type II behind your gateway? <a class="bl-link" href="/request-demo/">Talk to Enigma Vault</a></p></blockquote>
 
-<h3 id="philterd">9. Philterd: A Dependable Self-Hosted Redaction Baseline</h3>
-<p><strong>Best for:</strong> Self-hosted, open source redaction in front of cloud or local models.</p>
-<p>Philterd’s Philter AI Proxy sits between your app and OpenAI, Azure OpenAI, Claude, Gemini, Vertex AI, Bedrock, Ollama, or any OpenAI-compatible server like vLLM, and strips PII before the request leaves. It’s Apache-2.0, deploys as a binary, Docker Compose stack, or Helm chart, and needs a running Philter engine, which costs from $0.49 an hour on cloud marketplaces. It’s here as a contrast, because it redacts rather than tokenizes: the model sees “REDACTED,” nothing is restored, and multipart uploads such as files, audio, and image edits get a 400 error. If you only need to keep PII away from a local model and never need it back, that’s fine.</p>
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">06</span>
+    <div class="vc__id">
+      <h3 id="philterd" class="vc__name"><span class="vc__sep">6. </span>Philterd<span class="vc__sep">: </span><span class="vc__pill">Best for Self-Hosted, Open Source Redaction in Front of Cloud or Local Models</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate vc__rate--new" href="https://www.g2.com/products/philter/reviews" target="_blank" rel="noopener"><span class="vc__score">No reviews yet</span><span class="vc__src">G2</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>Free proxy; Philter engine from $0.49 an hour</dd></div>
+    <div><dt>Free tier or trial</dt><dd>Open source (Apache-2.0)</dd></div>
+    <div><dt>Integration path</dt><dd>Self-hosted proxy in front of your provider</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Teams running local or self-hosted models who only need PII kept away from the model and never need real values back.</dd></div>
+  </dl>
+</div>
+<p>Philterd’s Philter AI Proxy is an Apache-2.0 proxy that strips PII before a request reaches OpenAI, Claude, Gemini, Bedrock, Ollama, or an OpenAI-compatible server like vLLM. It’s here as a contrast, because it redacts rather than tokenizes, so the model sees “REDACTED” and nothing is restored.</p>
 <figure class="bl-shot">
   {{< img src="/assets/blog/listicles-2026/v3/philterd.jpg" alt="Philterd homepage" >}}
   <figcaption>Philterd homepage. Source: philterd.ai</figcaption>
 </figure>
+<p><strong>Key Features</strong></p>
+<ul>
+  <li><strong>Cloud and local providers:</strong> OpenAI, Azure OpenAI, Claude, Gemini, Vertex AI, Amazon Bedrock, and Ollama, plus OpenAI-compatible servers such as vLLM.</li>
+  <li><strong>Philter-backed redaction:</strong> Each request is sent to a running Philter engine, which redacts sensitive values before the text goes to the model.</li>
+  <li><strong>Opt-in response scanning:</strong> Per route, responses can be redacted, blocked, or passed through with a warning log.</li>
+  <li><strong>Flexible self-hosting:</strong> Deploy as a binary, a Docker Compose stack, or a Helm chart with autoscaling and mTLS.</li>
+  <li><strong>Long-running streams:</strong> Transport timeouts don’t bound body reads, so streamed responses run as long as the upstream sends.</li>
+</ul>
 <div class="bl-tablewrap">
   <table class="bl-table">
-    <thead><tr><th>Item</th><th>Detail</th></tr></thead>
+    <thead><tr><th>LLM privacy factor</th><th>How it works</th></tr></thead>
     <tbody>
       <tr><td>Integration</td><td>Self-hosted proxy in front of your provider; requires Philter</td></tr>
       <tr><td>Token behavior</td><td>Redaction only in the AI Proxy; Philter also masks, hashes, encrypts</td></tr>
       <tr><td>Providers</td><td>OpenAI, Azure OpenAI, Claude, Gemini, Vertex AI, Bedrock, Ollama, vLLM</td></tr>
-      <tr><td>Limits</td><td>Text only; streaming passes through</td></tr>
+      <tr><td>Limits</td><td>JSON request bodies only; multipart uploads rejected</td></tr>
       <tr><td>Deployment</td><td>Binary, Docker Compose, Helm; AWS, GCP, Azure marketplaces</td></tr>
-      <tr><td>Reviews</td><td>G2 listing with 0 reviews; no Capterra listing</td></tr>
     </tbody>
   </table>
 </div>
@@ -526,7 +537,7 @@ faqs:
   <li>Multipart uploads (files, audio, image edits) are rejected, which rules out many multimodal features.</li>
   <li>It’s a small project with a handful of GitHub stars, so community support is limited.</li>
 </ul>
-<p><strong>What developers say in reviews:</strong> Philterd has no G2 or Capterra reviews yet, so ask for customer references. Its GitHub repositories are small, and public discussion is limited to a few open issues.</p>
+<p><strong>What developers say in reviews:</strong> Philterd has no <a class="bl-link" href="https://www.g2.com/products/philter/reviews" target="_blank" rel="noopener">G2</a> or Capterra reviews yet, so ask for customer references. Its GitHub repositories are small, and public discussion is limited to a few open issues.</p>
 <blockquote class="bl-quote-cta"><p>Need the real values back in your answers? <a class="bl-link" href="/nopii/">Compare with NoPII</a></p></blockquote>
 
 <h2 id="key-features-compared-side-by-side">Key Features Compared Side by Side</h2>
@@ -537,11 +548,8 @@ faqs:
     <tbody>
       <tr><td>Enigma Vault (NoPII)</td><td>Automatic in proxy</td><td>Deterministic</td><td>Base-URL swap</td><td>SSE, detokenized in flight</td><td>Managed only</td><td>9 providers</td><td>PCI DSS L1, SOC 2 Type II</td></tr>
       <tr><td>Protecto</td><td>Unmask API, role-based</td><td>Per namespace</td><td>REST API, Python SDK</td><td>Real-time API</td><td>VPC, air-gapped</td><td>6 named, plus frameworks</td><td>SOC 2 Type II, ISO 27001</td></tr>
-      <tr><td>Skyflow</td><td>Detokenized on return</td><td>Deterministic</td><td>Vault API, Kong plugin</td><td>Via gateway</td><td>No (SaaS, residency)</td><td>“Any LLM”</td><td>ISO 27001, SOC 2, PCI DSS L1</td></tr>
+      <tr><td>Skyflow</td><td>Policy-governed re-identification</td><td>Not published</td><td>Vault API, Kong plugin</td><td>Via gateway</td><td>No (SaaS, residency)</td><td>“Any LLM”</td><td>ISO 27001, SOC 2, PCI DSS L1</td></tr>
       <tr><td>Limina</td><td>Via returned mappings</td><td>Per call</td><td>Container, Python client</td><td>Build your own</td><td>Yes, container</td><td>Any (OpenAI example)</td><td>ISO 27001, SOC 2 Type 2</td></tr>
-      <tr><td>Tonic Textual</td><td>Reversible tokenization</td><td>Consistent across files</td><td>SDK, REST</td><td>Batch-oriented</td><td>Kubernetes, Docker</td><td>Any via your code</td><td>SOC 2 Type II, HIPAA</td></tr>
-      <tr><td>Strac</td><td>Detokenize API (10 per call)</td><td>Vault references</td><td>REST, outbound proxy</td><td>Build your own</td><td>No</td><td>Allow-listed URLs</td><td>Badges displayed</td></tr>
-      <tr><td>Microsoft Presidio</td><td>Encrypt and decrypt only</td><td>With your own salt</td><td>pip, Docker, HTTP</td><td>Build your own</td><td>Yes, MIT</td><td>Any via LiteLLM</td><td>None</td></tr>
       <tr><td>Grepture</td><td>Mask and restore</td><td>TTL-based</td><td>SDK sets base URL</td><td>Check with vendor</td><td>AGPL proxy</td><td>10 providers</td><td>“GDPR-ready”</td></tr>
       <tr><td>Philterd</td><td>No, redaction only</td><td>Not applicable</td><td>Self-hosted proxy</td><td>Passes through</td><td>Yes, Apache-2.0</td><td>8, incl. Ollama, vLLM</td><td>None stated</td></tr>
     </tbody>
@@ -560,9 +568,9 @@ faqs:
       <tr><td>Contact center agent copilot</td><td>Enigma Vault (NoPII)</td><td>Streaming suggestions with real customer details restored, behind a one-line change</td></tr>
       <tr><td>Clinic intake or patient messaging assistant</td><td>Enigma Vault (NoPII) Enterprise or Limina</td><td>BAA on NoPII Enterprise; Limina for self-hosted clinical text</td></tr>
       <tr><td>SaaS support bot over tickets</td><td>Enigma Vault (NoPII) or Grepture</td><td>Low-cost hosted proxies with restore and free tiers</td></tr>
-      <tr><td>RAG over contracts or case files</td><td>Tonic Textual, then NoPII for live prompts</td><td>Clean the corpus at ingestion, tokenize the questions at request time</td></tr>
+      <tr><td>RAG over contracts or case files</td><td>Protecto</td><td>Namespace-consistent tokens across documents and named LangChain and LlamaIndex support</td></tr>
       <tr><td>Fintech agent touching account data</td><td>Skyflow or Protecto</td><td>Governed re-identification and certified vault infrastructure</td></tr>
-      <tr><td>Local models on your own GPUs</td><td>Philterd or Presidio</td><td>Self-hosted and works with Ollama or vLLM</td></tr>
+      <tr><td>Local models on your own GPUs</td><td>Philterd or Limina</td><td>Self-hosted; Philterd’s proxy works with Ollama and vLLM</td></tr>
     </tbody>
   </table>
 </div>
@@ -575,7 +583,7 @@ faqs:
       <tr><td>Seed to Series A, first production feature</td><td>Enigma Vault (NoPII) Pro</td><td>$50 a month for 50M tokens with no rebuild of your prompt code</td></tr>
       <tr><td>Scale-up with many LLM features</td><td>Enigma Vault (NoPII) or Protecto</td><td>Per-token pricing vs. deep entity catalog and role-based unmasking</td></tr>
       <tr><td>Regulated enterprise with a vault program</td><td>Skyflow</td><td>Certifications and one vault across AI and data platforms</td></tr>
-      <tr><td>Team with a strict self-host mandate</td><td>Limina or Presidio</td><td>Detection runs entirely inside your network</td></tr>
+      <tr><td>Team with a strict self-host mandate</td><td>Limina or Philterd</td><td>Detection runs entirely inside your network</td></tr>
     </tbody>
   </table>
 </div>

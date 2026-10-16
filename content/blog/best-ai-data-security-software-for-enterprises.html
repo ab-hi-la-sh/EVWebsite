@@ -1,10 +1,10 @@
 ---
-title: "Best AI Data Security Software for Enterprises in 2026: 10 Leading Platforms Compared"
-titleEmphasis: "10 Leading Platforms Compared"
-slug: "best-ai-data-security-software-enterprises"
+title: "Best AI Data Security Software for Enterprises in 2026: Our Top 7 Picks for Securing AI Data"
+titleEmphasis: "Our Top 7 Picks for Securing AI Data"
+slug: "best-ai-data-security-software-for-enterprises"
 layout: "pii-style"
 metaTitle: "Best AI Data Security Software for Enterprises (2026)"
-description: "Compare 10 AI data security platforms on where they sit in the data path, tokenization vs. blocking, deployment, enterprise controls, ratings, and pricing."
+description: "Compare 7 AI data security platforms on where they sit in the data path, tokenization vs. blocking, deployment, enterprise controls, ratings, and pricing."
 subtitle: "How each platform keeps regulated and customer data safe as it flows into LLMs, AI apps, and agents without breaking what the AI can do."
 date: 2026-10-16T00:01:00
 category: "NoPII"
@@ -12,17 +12,17 @@ author: "abhilash-kumar"
 readTime: 24
 heroImage: "/assets/blog/img-04.png"
 heroAlt: "Layered panels representing sensitive data tokenized on its way to an AI model"
-excerpt: "Ten AI data security platforms compared on data-path position, protection method, deployment, controls, ratings, and pricing."
+excerpt: "Seven AI data security platforms compared on data-path position, protection method, deployment, controls, ratings, and pricing."
 tags: ["ai-security", "llm", "pii", "tokenization", "nopii"]
 ogImage: "/assets/og/nopii-overview.jpg"
-ogImageAlt: "Best AI data security software for enterprises in 2026 | Enigma Vault"
+ogImageAlt: "Best AI data security software for enterprises in 2026: our top 7 picks for securing ai data | Enigma Vault"
 ogType: article
 styles: ["blog.css", "pages/blog-pii-hero.css", "tr-pages.css"]
 scripts: ["blog-article.js"]
 faqSchema: true
 faqs:
   - q: "What Is the Best AI Data Security Software for Enterprises?"
-    a: "It depends on the data path you need to protect. Enigma Vault (NoPII) is best for tokenizing PII in LLM API calls without losing multi-turn context; Nightfall AI is best for stopping sensitive data in employee AI use across browser, endpoint, and SaaS; Cyera is best for finding and fixing exposed data before AI agents can reach it; and Microsoft Purview DSPM is best for Microsoft 365 Copilot and E5 estates."
+    a: "It depends on the data path you need to protect. Enigma Vault (NoPII) is best for tokenizing PII in LLM API calls without losing multi-turn context; Nightfall AI is best for stopping sensitive data in employee AI use across browser, endpoint, and SaaS; Protecto is best for reversible masking inside your own VPC or data center; and Lakera is best for screening model inputs and outputs for prompt injection."
   - q: "What Is the Difference Between Tokenization and Redaction for LLM Prompts?"
     a: "Redaction replaces a value with a blank or placeholder that can't be restored, so the model loses who is who. Tokenization swaps each value for a consistent stand-in that your application can reverse, so the model keeps context and your users get real values back in the answer."
   - q: "Do I Need Both a Browser DLP Platform and an LLM Proxy?"
@@ -32,42 +32,66 @@ faqs:
   - q: "How Do I Keep a Customer's Identity Consistent Across a Multi-Turn AI Conversation?"
     a: "Use deterministic tokenization, where the same value always maps to the same token within a session. The model can then link a customer to an account across turns without ever seeing the real name or number."
   - q: "Which AI Data Security Platforms Can Run in My Own VPC or on-Premises?"
-    a: "Protecto offers SaaS, your VPC, and on-premises or air-gapped deployment, and Limina (formerly Private AI) runs as a container in your VPC or data center. Lakera and Prisma AIRS offer self-hosted or firewall-based options at enterprise tiers. NoPII is a hosted proxy."
+    a: "Protecto offers SaaS, your VPC, and on-premises or air-gapped deployment, and Limina (formerly Private AI) runs as a container in your VPC or data center. Lakera offers self-hosting on its Enterprise tier. NoPII is a hosted proxy."
   - q: "How Does the OWASP Top 10 for LLM Applications 2025 Address Data Leakage?"
     a: "It ranks sensitive information disclosure as LLM02 and recommends sanitizing data, including tokenization and redaction, before it reaches the model, along with strict access controls and careful handling of logs and outputs."
   - q: "What Does the EU AI Act Mean for AI Data Security in 2026?"
     a: "Prohibited practices have applied since February 2, 2025 and general-purpose AI model obligations since August 2, 2025. The Digital Omnibus on AI (in force July 27, 2026) moved most stand-alone high-risk system obligations to December 2, 2027. GDPR still governs the personal data in your prompts."
-  - q: "Who Owns Lakera, Prompt Security, and Portkey Now?"
-    a: "Check Point acquired Lakera (closed October 22, 2025), SentinelOne completed its acquisition of Prompt Security on September 5, 2025, and Palo Alto Networks closed its acquisition of the Portkey AI gateway on May 29, 2026 as part of Prisma AIRS."
+  - q: "Who Owns Lakera and Prompt Security Now?"
+    a: "Check Point acquired Lakera (closed October 22, 2025), and SentinelOne completed its acquisition of Prompt Security on September 5, 2025."
   - q: "How Much Does AI Data Security Software Cost?"
-    a: "Prices range from free tiers to custom enterprise contracts. NoPII is free for 1 million protected tokens a month and $50 a month for 50 million, Lakera has a free Community tier, Microsoft Purview comes with Microsoft 365 licensing, and most others are quoted per user, per data volume, or in platform credits."
+    a: "Prices range from free tiers to custom enterprise contracts. NoPII is free for 1 million protected tokens a month and $50 a month for 50 million, Lakera has a free Community tier, and most others are quoted per user, per data volume, or by deployment model."
 ---
 <style>
 /* Wide tables: tighter cell padding so they fit the article column. */
 .bl-content .bl-table--wide td, .bl-content .bl-table--wide th { padding-left: 8px; padding-right: 8px; }
 .bl-content blockquote.bl-quote-cta{margin:24px 0;padding:14px 20px;border-left:3px solid var(--ev-mineral-blue);background:var(--ev-warm-cloud);border-radius:0 10px 10px 0}.bl-content blockquote.bl-quote-cta p{margin:0;font-size:16px}
 .bl-content figure.bl-shot{margin:20px 0 24px;padding:10px;border:1px solid var(--ev-cool-stone);border-radius:10px;background:var(--ev-warm-cloud)}.bl-content figure.bl-shot img{display:block;width:100%;height:auto;border-radius:6px}.bl-content figure.bl-shot figcaption{margin-top:8px;text-align:center;font-size:13px;color:var(--ev-slate)}
+/* Vendor header card: rank, name, best-for pill, review scores, key facts. */
+.bl-content .vc { margin: 40px 0 20px; }
+.bl-content .vc__head { display: grid; grid-template-columns: auto 1fr auto; gap: 18px; align-items: center; margin-bottom: 14px; }
+.bl-content .vc__num { font-size: 34px; font-weight: 600; line-height: 1; color: var(--ev-mineral-blue); font-variant-numeric: tabular-nums; }
+.bl-content h3.vc__name { margin: 0; padding: 0; font-size: 26px; line-height: 1.25; font-weight: 600; color: var(--ev-ink); }
+.bl-content .vc__sep { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.bl-content .vc__pill { display: table; margin-top: 10px; padding: 6px 12px; border-radius: 6px; background: var(--ev-mineral-blue); color: #fff; font-size: 12px; line-height: 1.4; font-weight: 600; text-transform: none; letter-spacing: 0; font-size: 13px; }
+.bl-content .vc__rates { display: flex; flex-direction: column; gap: 8px; align-items: stretch; }
+.bl-content .vc__rate { display: flex; flex-direction: column; align-items: flex-end; padding: 8px 14px; border: 1px solid var(--ev-cool-stone); border-radius: 10px; background: #fff; text-decoration: none !important; min-width: 128px; }
+.bl-content a.vc__rate:hover { border-color: var(--ev-mineral-blue); }
+.bl-content .vc__score { font-size: 20px; font-weight: 700; color: var(--ev-ink); line-height: 1.2; }
+.bl-content .vc__score small { font-size: 13px; font-weight: 500; color: var(--ev-slate); }
+.bl-content .vc__src { font-size: 12px; color: var(--ev-slate); line-height: 1.3; }
+.bl-content .vc__rate--new .vc__score { font-size: 15px; }
+.bl-content .vc__facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px 24px; margin: 0; padding: 18px 22px; border-radius: 12px; background: var(--ev-warm-cloud); }
+.bl-content .vc__facts div { margin: 0; }
+.bl-content .vc__facts .vc__best { grid-column: 1 / -1; padding-top: 14px; border-top: 1px solid var(--ev-cool-stone); }
+.bl-content .vc__facts dt { margin: 0 0 4px; font-size: 11.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ev-slate); }
+.bl-content .vc__facts dd { margin: 0; font-size: 15px; line-height: 1.5; color: var(--ev-ink); }
+@media (max-width: 700px) {
+  .bl-content .vc__head { grid-template-columns: auto 1fr; }
+  .bl-content .vc__rates { grid-column: 1 / -1; flex-direction: row; flex-wrap: wrap; }
+  .bl-content .vc__rate { align-items: flex-start; }
+  .bl-content .vc__num { font-size: 26px; }
+  .bl-content h3.vc__name { font-size: 22px; }
+  .bl-content .vc__facts { grid-template-columns: 1fr; }
+}
 </style>
 
-<p>Comparing the best AI data security software for enterprises of 2026: 1. Enigma Vault (NoPII), 2. Protecto, 3. Skyflow, 4. Limina (formerly Private AI), 5. Nightfall AI, 6. Prompt Security (SentinelOne), 7. Lakera (Check Point), 8. Prisma AIRS (Palo Alto Networks), 9. Cyera, 10. Microsoft Purview DSPM.</p>
+<p>Comparing the best AI data security software for enterprises of 2026: 1. Enigma Vault (NoPII), 2. Protecto, 3. Skyflow, 4. Limina (formerly Private AI), 5. Nightfall AI, 6. Prompt Security (SentinelOne), and 7. Lakera (Check Point).</p>
 <p><strong>About the author: <a class="bl-link" href="https://www.linkedin.com/in/abhilashkumar15/" target="_blank" rel="noopener">Abhilash Kumar</a>, Chief Growth Officer at Enigma Vault</strong></p>
 <p>I lead growth, positioning, and partnerships at Enigma Vault, after running marketing at Amnic, Element5, and KenSci. Much of my week goes to working sessions with security and AI leaders who want LLMs in production without sending customer data to a model provider, so I see where AI security programs stall: the proxy nobody routed traffic through, the redaction that broke the answer, the audit question nobody could answer. I wrote this guide with our product and security team, who run a PCI DSS Level 1 vault with SOC 2 Type II controls.</p>
 <p><em>Disclosure: I work at Enigma Vault, which appears first in this list. Every platform here is judged on the same criteria, and the review ratings come from G2 and Capterra.</em></p>
 <h2 id="leading-ai-data-security-software-at-a-glance">Leading AI Data Security Software at a Glance</h2>
-<p>Here’s how the 10 platforms stack up for a CISO or Head of AI deciding where each one sits in the data path: browser and endpoint, application proxy, data stores, or model firewall. Every rating, price and feature was checked on October 16, 2026.</p>
+<p>Here’s how the 7 platforms stack up for a CISO or Head of AI deciding where each one sits in the data path: browser and endpoint, application proxy, privacy vault, or model firewall. Every rating, price and feature was checked on October 16, 2026.</p>
 <div class="bl-tablewrap"><table class="bl-table bl-table--wide">
 <thead><tr><th>Platform</th><th>Best for</th><th>Starting price</th><th>Free trial or tier</th><th>Where it sits</th><th>Protection method</th><th>G2 rating</th></tr></thead>
 <tbody>
-<tr><td><a class="bl-link" href="#enigma-vault">Enigma Vault (NoPII)</a></td><td>Tokenizing PII in your own LLM API calls without losing multi-turn context</td><td>$0, then $50 a month</td><td>Free: 1M tokens a month</td><td>Application-level proxy</td><td>Deterministic, reversible tokens</td><td>4.4/5 (6 reviews)</td></tr>
-<tr><td><a class="bl-link" href="#protecto">Protecto</a></td><td>Reversible masking inside your own VPC or data center</td><td>Custom quote</td><td>Free trial</td><td>API layer and data pipelines</td><td>Consistent, reversible masking</td><td>No reviews yet</td></tr>
-<tr><td><a class="bl-link" href="#skyflow">Skyflow</a></td><td>An LLM privacy vault inside a wider privacy program</td><td>Custom quote</td><td>Demo</td><td>Data privacy vault plus API</td><td>Tokenization, redaction, re-identification</td><td>5.0/5 (1 review, Payments vault)</td></tr>
-<tr><td><a class="bl-link" href="#limina">Limina (formerly Private AI)</a></td><td>Self-hosted PII detection across many languages</td><td>Custom quote</td><td>Free trial</td><td>Container in your pipeline</td><td>Redaction, pseudonymization, synthetic data</td><td>4.6/5 (22 reviews)</td></tr>
-<tr><td><a class="bl-link" href="#nightfall-ai">Nightfall AI</a></td><td>Employee AI use across browser, endpoint, and SaaS</td><td>Custom quote, per user</td><td>Free trial or proof of value</td><td>Browser, endpoint, SaaS</td><td>Detect and block</td><td>4.6/5 (101 reviews)</td></tr>
-<tr><td><a class="bl-link" href="#prompt-security">Prompt Security (SentinelOne)</a></td><td>Workforce and homegrown GenAI in a SentinelOne estate</td><td>Custom quote</td><td>Demo</td><td>Browser, endpoint, app layer</td><td>Detect, redact, block</td><td>5.0/5 (2 reviews)</td></tr>
-<tr><td><a class="bl-link" href="#lakera">Lakera (Check Point)</a></td><td>A model-facing firewall against prompt injection and leakage</td><td>Free Community tier</td><td>Free tier</td><td>Model firewall API</td><td>Detect and block</td><td>No reviews yet</td></tr>
-<tr><td><a class="bl-link" href="#prisma-airs">Prisma AIRS (Palo Alto Networks)</a></td><td>Palo Alto estates adding AI runtime and gateway controls</td><td>Credit-based licensing</td><td>Demo</td><td>Network, API, AI gateway</td><td>Detect, mask, block</td><td>5.0/5 (1 review)</td></tr>
-<tr><td><a class="bl-link" href="#cyera">Cyera</a></td><td>Finding exposed data before AI agents can reach it</td><td>Custom quote</td><td>Demo</td><td>Data stores (DSPM)</td><td>Discover, classify, restrict</td><td>4.5/5 (41 reviews)</td></tr>
-<tr><td><a class="bl-link" href="#microsoft-purview">Microsoft Purview DSPM</a></td><td>Microsoft 365 Copilot and E5 estates</td><td>Microsoft 365 licensing</td><td>Microsoft 365 trial</td><td>Tenant, browser, endpoint, network</td><td>Labels, DLP block, audit</td><td>4.6/5 (22 reviews, Purview DLP)</td></tr>
+<tr><td><a class="bl-link" href="#enigma-vault">Enigma Vault (NoPII)</a></td><td>Tokenizing PII in your own LLM API calls without losing multi-turn context</td><td>$0, then $50 a month</td><td>Free: 1M tokens a month</td><td>Application-level proxy</td><td>Deterministic, reversible tokens</td><td><a class="bl-link" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener">4.4/5 (6 reviews)</a></td></tr>
+<tr><td><a class="bl-link" href="#protecto">Protecto</a></td><td>Reversible masking inside your own VPC or data center</td><td>Custom quote</td><td>Free trial</td><td>API layer and data pipelines</td><td>Consistent, reversible masking</td><td><a class="bl-link" href="https://www.g2.com/products/protecto/reviews" target="_blank" rel="noopener">No reviews yet</a></td></tr>
+<tr><td><a class="bl-link" href="#skyflow">Skyflow</a></td><td>An LLM privacy vault inside a wider privacy program</td><td>Custom quote</td><td>Demo</td><td>Data privacy vault plus API</td><td>Tokenization, redaction, re-identification</td><td><a class="bl-link" href="https://www.g2.com/products/payments-data-privacy-vault/reviews" target="_blank" rel="noopener">5.0/5 (1 review, Payments vault)</a></td></tr>
+<tr><td><a class="bl-link" href="#limina">Limina (formerly Private AI)</a></td><td>Self-hosted PII detection across many languages</td><td>Custom quote</td><td>Free trial</td><td>Container in your pipeline</td><td>Redaction, pseudonymization, synthetic data</td><td><a class="bl-link" href="https://www.g2.com/products/limina/reviews" target="_blank" rel="noopener">4.6/5 (22 reviews)</a></td></tr>
+<tr><td><a class="bl-link" href="#nightfall-ai">Nightfall AI</a></td><td>Employee AI use across browser, endpoint, and SaaS</td><td>Custom quote, per user</td><td>Free trial or proof of value</td><td>Browser, endpoint, SaaS</td><td>Detect and block</td><td><a class="bl-link" href="https://www.g2.com/products/nightfall-ai/reviews" target="_blank" rel="noopener">4.6/5 (101 reviews)</a></td></tr>
+<tr><td><a class="bl-link" href="#prompt-security">Prompt Security (SentinelOne)</a></td><td>Workforce and homegrown GenAI in a SentinelOne estate</td><td>Custom quote</td><td>Demo</td><td>Browser, endpoint, app layer</td><td>Detect, redact, block</td><td><a class="bl-link" href="https://www.g2.com/products/prompt-security/reviews" target="_blank" rel="noopener">5.0/5 (2 reviews)</a></td></tr>
+<tr><td><a class="bl-link" href="#lakera">Lakera (Check Point)</a></td><td>A model-facing firewall against prompt injection and leakage</td><td>Free Community tier</td><td>Free tier</td><td>Model firewall API</td><td>Detect and block</td><td><a class="bl-link" href="https://www.g2.com/products/check-point-ai-agent-security/reviews" target="_blank" rel="noopener">4.2/5 (12, Check Point listing)</a></td></tr>
 </tbody></table></div>
 <blockquote class="bl-quote-cta"><p>Mapping which AI data flows your program has to cover? Tell us where customer data meets your models and we’ll walk through the gaps with you. <a class="bl-link" href="/request-demo/">Get in touch</a></p></blockquote>
 
@@ -98,27 +122,53 @@ faqs:
 <tr><td>Compliance evidence</td><td>15%</td><td>Vendor-stated SOC 2, ISO 27001, BAA, and mapping to OWASP LLM02, NIST AI RMF, EU AI Act</td></tr>
 <tr><td>Licensing clarity and reviews</td><td>10%</td><td>Published prices, free tiers, license model, G2 and Capterra feedback</td></tr>
 </tbody></table></div>
-<p><strong>Sources and method.</strong> Every figure comes from the vendor’s own product, documentation, trust, and pricing pages, acquisition announcements and SEC filings, or review pages on G2 and Capterra (plus Gartner Peer Insights for added context), read on October 16, 2026. We didn’t run hands-on tests of competing products. Compliance status is what each vendor states, so ask for current reports before you sign.</p>
+<p><strong>Sources and method.</strong> Every figure comes from the vendor’s own product, documentation, trust, and pricing pages, acquisition announcements and SEC filings, or review pages on <a class="bl-link" href="https://www.g2.com/" target="_blank" rel="noopener">G2</a> and <a class="bl-link" href="https://www.capterra.com/" target="_blank" rel="noopener">Capterra</a> (plus Gartner Peer Insights for added context), read on October 16, 2026. We didn’t run hands-on tests of competing products. Compliance status is what each vendor states, so ask for current reports before you sign.</p>
 
-<h2 id="the-10-best-ai-data-security-software-for-2026">The 10 Best AI Data Security Software for 2026</h2>
+<h2 id="the-7-best-ai-data-security-software-for-2026">The 7 Best AI Data Security Software for 2026</h2>
 
-<h3 id="enigma-vault">1. Enigma Vault (NoPII): Top-Rated Tokenizing Proxy for the AI Features Your Enterprise Builds</h3>
-<p><strong>Best for:</strong> Enterprises shipping their own AI features (support copilots, claims and case summaries, clinical or financial assistants, agents) that need customer data in the prompt but not at the model provider.</p>
-<p>NoPII is a reverse proxy you put in front of your LLM API traffic by changing your SDK’s base URL. It detects 30+ configurable entity types plus fourteen families of secrets and API keys, swaps each value for a token so it’s tokenized before it reaches the model provider, and restores the real values in the response, streamed responses included. The tokens are deterministic, so “Maria Lopez” gets the same token in turn one and turn twelve, and your agent keeps reasoning across steps. If detection errors, the request is blocked rather than forwarded.</p>
-<p>What stands out for a security program is governance at the API layer. One proxy fronts nine providers (OpenAI, Anthropic, Gemini, xAI, DeepSeek, Mistral, Groq, Together, and Fireworks) and works with LangChain, LangGraph, LlamaIndex, LiteLLM, and the Vercel AI SDK, so switching models doesn’t reset your controls. Every detection is logged with entity type, confidence score, session ID, provider, model, and timestamp, which honestly is the evidence your audit team keeps asking for. Triplets is an optional second layer that grounds answers in your evidence and says “I don’t know” when it can’t support one.</p>
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">01</span>
+    <div class="vc__id">
+      <h3 id="enigma-vault" class="vc__name"><span class="vc__sep">1. </span>Enigma Vault (NoPII)<span class="vc__sep">: </span><span class="vc__pill">Best for Tokenizing PII in Your Own LLM API Calls</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener"><span class="vc__score">4.4<small>/5</small></span><span class="vc__src">G2 · 6 reviews</span></a><a class="vc__rate" href="https://www.capterra.com/p/241650/Enigma-Vault/reviews/" target="_blank" rel="noopener"><span class="vc__score">4.8<small>/5</small></span><span class="vc__src">Capterra · 4 reviews</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>$0, then $50 a month</dd></div>
+    <div><dt>Free tier or trial</dt><dd>Free plan: 1M protected tokens a month</dd></div>
+    <div><dt>Where it sits</dt><dd>Application-level reverse proxy for LLM API calls</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Enterprises shipping their own AI features (support copilots, claims and case summaries, clinical or financial assistants, agents) that need customer data in the prompt but not at the model provider.</dd></div>
+  </dl>
+</div>
+<p>NoPII is a reverse proxy you put in front of your LLM API traffic by changing your SDK’s base URL. It detects 30+ configurable entity types and fourteen families of secrets, swaps each value for a deterministic token so it’s tokenized before it reaches the model provider, and restores the real values in the response.</p>
+<p>One proxy fronts nine providers under one policy and one audit log. If detection errors, the request is blocked rather than forwarded.</p>
+<ul>
+  <li>Keep multi-turn context: the same customer gets the same token in every turn.</li>
+  <li>Prove it on live traffic: the free plan covers 1M protected tokens a month.</li>
+  <li>Hand auditors evidence: every detection is logged per request.</li>
+</ul>
 <figure class="bl-shot">
   {{< img src="/assets/blog/listicles-2026/v3/enigma-nopii-demo.jpg" alt="Enigma Vault NoPII live demo tokenizing a prompt" >}}
-  <figcaption>Enigma Vault NoPII live demo. Source: <a class="bl-link" href="/nopii/demo/">enigmavault.io/nopii/demo/</a></figcaption>
+  <figcaption>Enigma Vault NoPII page. Source: enigmavault.io/nopii/</figcaption>
 </figure>
+<p><strong>Key Features</strong></p>
+<ul>
+  <li><strong>Deterministic tokenization:</strong> “Maria Lopez” gets the same token in turn one and turn twelve, so assistants and agents keep reasoning across steps.</li>
+  <li><strong>Round-trip detokenization, streaming included:</strong> Real values are restored in the response as chunks arrive, for both standard and streaming SSE responses.</li>
+  <li><strong>Secret and API key detection:</strong> Fourteen pattern families of credentials, from cloud keys to private keys, are caught in the same pass as PII.</li>
+  <li><strong>Fail-safe blocking:</strong> If tokenization fails, the request is blocked, so raw data never reaches the provider on a best-effort basis.</li>
+  <li><strong>One proxy for nine providers:</strong> OpenAI, Anthropic, Gemini, xAI, DeepSeek, Mistral, Groq, Together, and Fireworks, plus LangChain, LangGraph, LlamaIndex, LiteLLM, and the Vercel AI SDK.</li>
+  <li><strong>Per-request audit log:</strong> Each detection records entity type, confidence score, session ID, provider, model, and timestamp.</li>
+</ul>
 <div class="bl-tablewrap"><table class="bl-table">
-<thead><tr><th>Item</th><th>Detail</th></tr></thead>
+<thead><tr><th>Security control</th><th>How it works</th></tr></thead>
 <tbody>
 <tr><td>Where it sits</td><td>Application-level reverse proxy for LLM API calls</td></tr>
 <tr><td>Protection method</td><td>Deterministic tokenization with round-trip detokenization; fail-safe blocking</td></tr>
 <tr><td>Deployment</td><td>Hosted proxy (api.nopii.co); base-URL change</td></tr>
 <tr><td>Governance</td><td>Per-request audit log; roles and multi-tenancy on Pro; SSO, SLA, and BAA on Enterprise</td></tr>
 <tr><td>Compliance evidence</td><td>Built on Enigma Vault: PCI DSS Level 1, SOC 2 Type II; ISO 27001 in progress</td></tr>
-<tr><td>Reviews</td><td>G2 4.4/5 (6 reviews); Capterra 4.8/5 (4 reviews), company-wide listings</td></tr>
 </tbody></table></div>
 <p><strong>Pricing tiers</strong></p>
 <div class="bl-tablewrap"><table class="bl-table">
@@ -140,25 +190,45 @@ faqs:
   <li>It only tokenizes what it recognizes, so an internal account format it misses reaches the provider as-is; test on your own records and budget for custom phrase rules on a paid plan.</li>
   <li>It runs as a hosted proxy with no published self-hosted option, and ISO 27001 is still in progress, so residency-bound or certification-gated procurement needs extra review with sales.</li>
 </ul>
-<p><strong>What security buyers say in reviews:</strong> Very positive. Enigma Vault holds 4.4/5 from 6 reviews on G2 and 4.8/5 from 4 on Capterra; these listings cover the company’s vault products rather than NoPII alone. Reviewers like a simple, easy-to-understand API, clear de-scoping, pricing below alternatives, and how quickly the team added requested features. The complaints are a wish for deeper reporting and analytics dashboards and one reviewer who found pricing a bit high.</p>
+<p><strong>What security buyers say in reviews:</strong> Very positive. Enigma Vault holds <a class="bl-link" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener">4.4/5 from 6 reviews on G2</a> and <a class="bl-link" href="https://www.capterra.com/p/241650/Enigma-Vault/reviews/" target="_blank" rel="noopener">4.8/5 from 4 on Capterra</a>; these listings cover the company’s vault products rather than NoPII alone. Reviewers like a simple, easy-to-understand API, clear de-scoping, pricing below alternatives, and how quickly the team added requested features. The complaints are a wish for deeper reporting and analytics dashboards and one reviewer who found pricing a bit high.</p>
 <blockquote class="bl-quote-cta"><p>Want customer data in your prompts but not at the model provider? Try the NoPII live demo on a sample prompt, or bring your own AI use case and we’ll map the data path with you. <a class="bl-link" href="/request-demo/">Get in touch</a></p></blockquote>
 
-<h3 id="protecto">2. Protecto: A Self-Hosted Masking Layer for Regulated AI and Agents</h3>
-<p><strong>Best for:</strong> Banks, insurers, and health systems that want masking and unmasking controlled by role and must keep processing in their own cloud or data center.</p>
-<p>Protecto detects PII, PHI, and confidential business data and masks it before it reaches LLMs, agents, or MCP servers. Its tokens stay consistent within a namespace, so the same customer in a CRM and a warehouse maps to the same token. Unmasking follows what it calls context-based access control, tied to Active Directory and Okta, and you can run it as SaaS (99.9% SLA stated), in your VPC, or on-premises including air-gapped setups. It lists SOC 2 Type II and ISO 27001 and offers a HIPAA BAA.</p>
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">02</span>
+    <div class="vc__id">
+      <h3 id="protecto" class="vc__name"><span class="vc__sep">2. </span>Protecto<span class="vc__sep">: </span><span class="vc__pill">Best for Reversible Masking in Your Own VPC or Data Center</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate vc__rate--new" href="https://www.g2.com/products/protecto/reviews" target="_blank" rel="noopener"><span class="vc__score">No reviews yet</span><span class="vc__src">G2</span></a><a class="vc__rate vc__rate--new" href="https://www.capterra.com/p/10006145/Protecto/reviews/" target="_blank" rel="noopener"><span class="vc__score">No reviews yet</span><span class="vc__src">Capterra</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>Custom quote</dd></div>
+    <div><dt>Free tier or trial</dt><dd>Free trial and API sandbox</dd></div>
+    <div><dt>Deployment</dt><dd>SaaS, your VPC, or on-premises (air-gapped)</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Banks, insurers, and health systems that want masking and unmasking controlled by role and must keep processing in their own cloud or data center.</dd></div>
+  </dl>
+</div>
+<p>Protecto detects PII, PHI, and confidential business data and masks it before it reaches LLMs, agents, or MCP servers. It runs as SaaS (99.9% SLA stated), in your VPC, or on-premises including air-gapped setups, and lists SOC 2 Type II, ISO 27001, and a HIPAA BAA.</p>
 <figure class="bl-shot">
   {{< img src="/assets/blog/listicles-2026/v3/protecto.jpg" alt="Protecto homepage" >}}
   <figcaption>Protecto homepage. Source: protecto.ai</figcaption>
 </figure>
+<p><strong>Key Features</strong></p>
+<ul>
+  <li><strong>Consistent tokens within a namespace:</strong> The same customer in your CRM and your warehouse maps to one token, so joins and analytics work without raw PII.</li>
+  <li><strong>Context-based access control:</strong> Unmasking weighs who is asking, for what task, and what they may see, so supervisors and analysts get different views.</li>
+  <li><strong>RAG, MCP, and multi-agent coverage:</strong> It protects data flowing through RAG pipelines, MCP tools, and multi-agent systems, not just single prompts.</li>
+  <li><strong>Three deployment models:</strong> Hosted SaaS, your own VPC, or on-premises with zero data egress for air-gapped environments.</li>
+  <li><strong>Healthcare-ready paperwork:</strong> A HIPAA BAA is available, alongside SOC 2 Type II and ISO 27001.</li>
+</ul>
 <div class="bl-tablewrap"><table class="bl-table">
-<thead><tr><th>Item</th><th>Detail</th></tr></thead>
+<thead><tr><th>Security control</th><th>How it works</th></tr></thead>
 <tbody>
 <tr><td>Where it sits</td><td>API layer in front of LLMs, agents, and MCP; data pipelines</td></tr>
 <tr><td>Protection method</td><td>Consistent, reversible masking</td></tr>
 <tr><td>Deployment</td><td>SaaS, your VPC, on-premises or air-gapped</td></tr>
 <tr><td>Governance</td><td>Role- and context-based unmasking, directory integration, audit trail</td></tr>
 <tr><td>Compliance evidence</td><td>SOC 2 Type II, ISO 27001, HIPAA BAA (vendor-stated)</td></tr>
-<tr><td>Reviews</td><td>G2 and Capterra listings with 0 reviews</td></tr>
 </tbody></table></div>
 <p><strong>Pricing tiers</strong></p>
 <div class="bl-tablewrap"><table class="bl-table">
@@ -179,26 +249,46 @@ faqs:
   <li>Accuracy and latency claims are vendor-stated with little independent signal, so you have to benchmark both in a proof of concept.</li>
   <li>Running it in your VPC or air-gapped means your team owns upgrades and scaling, and with no published prices, sizing that cost takes a sales cycle.</li>
 </ul>
-<p><strong>What security buyers say in reviews:</strong> Protecto has no G2 or Capterra reviews yet, so ask for customer references in your industry. Public commentary comes mostly from analyst write-ups that repeat the vendor’s deployment options rather than user experience.</p>
+<p><strong>What security buyers say in reviews:</strong> Protecto has no <a class="bl-link" href="https://www.g2.com/products/protecto/reviews" target="_blank" rel="noopener">G2</a> or <a class="bl-link" href="https://www.capterra.com/p/10006145/Protecto/reviews/" target="_blank" rel="noopener">Capterra</a> reviews yet, so ask for customer references in your industry. Public commentary comes mostly from analyst write-ups that repeat the vendor’s deployment options rather than user experience.</p>
 <blockquote class="bl-quote-cta"><p>Need deterministic tokens on live prompts this week, before a long self-hosting project? <a class="bl-link" href="/request-demo/">Get in touch</a></p></blockquote>
 
-<h3 id="skyflow">3. Skyflow: The Trusted Privacy Vault That Extends Into AI</h3>
-<p><strong>Best for:</strong> Enterprises already centralizing PII, PHI, and card data in one vault that want AI training, RAG, and inference to follow the same policies.</p>
-<p>Skyflow’s LLM Privacy Vault detects and redacts sensitive data during collection, training, fine-tuning, RAG, and inference, and lets authorized users re-identify it. It uses tokenization and polymorphic encryption, offers regional data residency, and integrates with AWS, Google Cloud, Snowflake, Databricks, Glean, and ServiceNow.</p>
-<p>I’d say the appeal for a CISO is one policy model across data at rest and data headed to a model. It lists PCI DSS Level 1, SOC 2 Type II, and ISO 27001:2022, and it’s sold on annual contracts, including AWS Marketplace private offers.</p>
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">03</span>
+    <div class="vc__id">
+      <h3 id="skyflow" class="vc__name"><span class="vc__sep">3. </span>Skyflow<span class="vc__sep">: </span><span class="vc__pill">Best for An LLM Privacy Vault Inside a Wider Privacy Program</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/payments-data-privacy-vault/reviews" target="_blank" rel="noopener"><span class="vc__score">5.0<small>/5</small></span><span class="vc__src">G2 · 1 review</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>Custom quote</dd></div>
+    <div><dt>Free tier or trial</dt><dd>Demo</dd></div>
+    <div><dt>Where it sits</dt><dd>Data privacy vault with APIs across the LLM lifecycle</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Enterprises already centralizing PII, PHI, and card data in one vault that want AI training, RAG, and inference to follow the same policies.</dd></div>
+  </dl>
+</div>
+<p>Skyflow’s LLM Privacy Vault detects and redacts sensitive data during collection, training, fine-tuning, RAG, and inference, and lets authorized users re-identify it. It lists PCI DSS Level 1, SOC 2 Type II, and ISO 27001:2022 and is sold on annual contracts, including AWS Marketplace private offers.</p>
 <figure class="bl-shot">
   {{< img src="/assets/blog/listicles-2026/v3/skyflow.jpg" alt="Skyflow homepage" >}}
   <figcaption>Skyflow homepage. Source: skyflow.com</figcaption>
 </figure>
+<p><strong>Key Features</strong></p>
+<ul>
+  <li><strong>Lifecycle-wide redaction:</strong> Sensitive data and intellectual property are detected and redacted from collection through training, fine-tuning, RAG, and inference.</li>
+  <li><strong>Re-identification for authorized users:</strong> De-identified values can be restored after processing for the people allowed to see them.</li>
+  <li><strong>Tokenization and polymorphic encryption:</strong> Values are tokenized or encrypted in the vault rather than simply removed.</li>
+  <li><strong>Agent data protection:</strong> It detects, isolates, and protects sensitive data moving into and out of AI agents.</li>
+  <li><strong>Data residency:</strong> Regional controls support GDPR, EU AI Act, and DPDP requirements.</li>
+  <li><strong>Data platform integrations:</strong> AWS, Google Cloud BigQuery, Snowflake, Databricks, Glean, ServiceNow, and HubSpot.</li>
+</ul>
 <div class="bl-tablewrap"><table class="bl-table">
-<thead><tr><th>Item</th><th>Detail</th></tr></thead>
+<thead><tr><th>Security control</th><th>How it works</th></tr></thead>
 <tbody>
 <tr><td>Where it sits</td><td>Data privacy vault with APIs across the LLM lifecycle</td></tr>
 <tr><td>Protection method</td><td>Tokenization, redaction, re-identification for authorized users</td></tr>
 <tr><td>AI coverage</td><td>Training, fine-tuning, RAG, inference, agents</td></tr>
 <tr><td>Deployment</td><td>Cloud vault with regional data residency</td></tr>
 <tr><td>Compliance evidence</td><td>PCI DSS Level 1, SOC 2 Type II, ISO 27001:2022 (vendor-stated)</td></tr>
-<tr><td>Reviews</td><td>G2 5.0/5 (1 review, Payments Data Privacy Vault); no Capterra listing</td></tr>
 </tbody></table></div>
 <p><strong>Pricing tiers</strong></p>
 <div class="bl-tablewrap"><table class="bl-table">
@@ -219,25 +309,46 @@ faqs:
   <li>Every detokenize call adds a round trip, and there are no public latency benchmarks, so real-time apps need careful architecture and your own measurements.</li>
   <li>Production needs an enterprise agreement with no self-serve tier, so even a pilot runs through procurement.</li>
 </ul>
-<p><strong>What security buyers say in reviews:</strong> Positive but thin. Skyflow’s Payments Data Privacy Vault listing holds 5/5 from 1 review on G2, and its PII and GenAI listings have no reviews; there’s no Capterra listing. One review is too small a sample to show themes, so lean on customer references.</p>
+<p><strong>What security buyers say in reviews:</strong> Positive but thin. Skyflow’s Payments Data Privacy Vault listing holds <a class="bl-link" href="https://www.g2.com/products/payments-data-privacy-vault/reviews" target="_blank" rel="noopener">5/5 from 1 review on G2</a>, and its PII and GenAI listings have no reviews; there’s no Capterra listing. One review is too small a sample to show themes, so lean on customer references.</p>
 <blockquote class="bl-quote-cta"><p>Want prompt-level protection without a vault program first? <a class="bl-link" href="/request-demo/">Talk to us</a></p></blockquote>
 
-<h3 id="limina">4. Limina (Formerly Private AI): A Reliable Self-Hosted Detection Engine</h3>
-<p><strong>Best for:</strong> Global enterprises and AI teams that build their own pipelines and need detection in dozens of languages without data leaving their infrastructure.</p>
-<p>Private AI now operates as Limina, and its old domain redirects to the new site. It detects 50+ entity types across PII, PHI, and payment data in 52 languages, then redacts, pseudonymizes, generalizes, or swaps in synthetic data. It runs as a container in your VPC or on-premises and integrates with AWS, Azure, Snowflake, and NVIDIA NeMo, but it’s a building block, not a proxy: your engineers wire it in before the LLM call and decide how restoration works.</p>
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">04</span>
+    <div class="vc__id">
+      <h3 id="limina" class="vc__name"><span class="vc__sep">4. </span>Limina (Formerly Private AI)<span class="vc__sep">: </span><span class="vc__pill">Best for Self-Hosted PII Detection in 52 Languages</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/limina/reviews" target="_blank" rel="noopener"><span class="vc__score">4.6<small>/5</small></span><span class="vc__src">G2 · 22 reviews</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>Custom quote</dd></div>
+    <div><dt>Free tier or trial</dt><dd>Free trial</dd></div>
+    <div><dt>Deployment</dt><dd>Container (CPU or GPU) in your VPC or on-premises</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Global enterprises and AI teams that build their own pipelines and need detection in dozens of languages without data leaving their infrastructure.</dd></div>
+  </dl>
+</div>
+<p>Private AI now operates as Limina, and its old domain redirects to the new site. It runs as a container in your VPC or on-premises, and it’s a building block, not a proxy: your engineers wire it in before the LLM call and decide how restoration works.</p>
 <figure class="bl-shot">
   {{< img src="/assets/blog/listicles-2026/v3/limina.jpg" alt="Limina homepage" >}}
   <figcaption>Limina homepage. Source: getlimina.ai</figcaption>
 </figure>
+<p><strong>Key Features</strong></p>
+<ul>
+  <li><strong>50+ entity types:</strong> Detection covers PII, PHI, and payment data in one engine.</li>
+  <li><strong>52 languages:</strong> Coverage includes regional varieties and code-switching within the same text.</li>
+  <li><strong>Four transformation methods:</strong> Redaction, pseudonymization, synthetic PII generation, and generalization of entities.</li>
+  <li><strong>Self-hosted container:</strong> CPU or GPU images run in your VPC or data center, so text never leaves your infrastructure.</li>
+  <li><strong>Platform integrations:</strong> AWS, Azure, Snowflake, and NVIDIA NeMo.</li>
+  <li><strong>Independent validation:</strong> The vendor cites validation by Armilla AI and offers expert determination reports through partners.</li>
+</ul>
 <div class="bl-tablewrap"><table class="bl-table">
-<thead><tr><th>Item</th><th>Detail</th></tr></thead>
+<thead><tr><th>Security control</th><th>How it works</th></tr></thead>
 <tbody>
 <tr><td>Where it sits</td><td>Self-hosted detection service called by your pipeline</td></tr>
 <tr><td>Protection method</td><td>Redaction, pseudonymization, synthetic replacement, generalization</td></tr>
 <tr><td>Languages</td><td>52</td></tr>
 <tr><td>Deployment</td><td>Container (CPU or GPU) in your VPC or on-premises</td></tr>
 <tr><td>Compliance evidence</td><td>ISO 27001 (vendor-stated)</td></tr>
-<tr><td>Reviews</td><td>G2 4.6/5 (22 reviews, Private AI listing); no Capterra listing</td></tr>
 </tbody></table></div>
 <p><strong>Pricing tiers</strong></p>
 <div class="bl-tablewrap"><table class="bl-table">
@@ -258,26 +369,46 @@ faqs:
   <li>The GPU container needs an Nvidia GPU (Volta or newer) with 16GB of VRAM and a 100GB disk; CPU images run slower, so plan infrastructure cost before you scale.</li>
   <li>It ships in several container flavors, and file processing by URI needs extra volume configuration, so operating it is ongoing work for your team.</li>
 </ul>
-<p><strong>What security buyers say in reviews:</strong> Mostly positive. Limina’s Private AI listing holds 4.6/5 from 22 reviews on G2; there’s no Capterra listing. Reviewers praise PII detection accuracy, an easy setup, and a simple, elegant approach. The complaints are an interface that could be better and enterprise-leaning pricing and setup for smaller teams.</p>
+<p><strong>What security buyers say in reviews:</strong> Mostly positive. Limina’s Private AI listing holds <a class="bl-link" href="https://www.g2.com/products/limina/reviews" target="_blank" rel="noopener">4.6/5 from 22 reviews on G2</a>; there’s no Capterra listing. Reviewers praise PII detection accuracy, an easy setup, and a simple, elegant approach. The complaints are an interface that could be better and enterprise-leaning pricing and setup for smaller teams.</p>
 <blockquote class="bl-quote-cta"><p>Rather not build the proxy and token store around a detection engine? <a class="bl-link" href="/request-demo/">Get in touch</a></p></blockquote>
 
-<h3 id="nightfall-ai">5. Nightfall AI: The Top Pick for Workforce AI Data Loss Prevention</h3>
-<p><strong>Best for:</strong> Security teams whose biggest worry is staff pasting customer data into chatbots, copilots, and coding assistants they don’t control.</p>
-<p>Nightfall watches where employees actually use AI. It inspects prompts and responses in sanctioned assistants, stops corporate data going to personal chatbots and browser AI extensions, covers clipboard, USB, and local egress on the endpoint, and scans SaaS apps such as Slack, Google Drive, Salesforce, Jira, and Microsoft 365 for data already exposed.</p>
-<p>What stands out is breadth on the workforce side, plus an MCP gateway that applies policy to agent actions. The model is detect and block at the point of action, which protects the data but doesn’t keep a blocked prompt useful. It’s priced per user per year.</p>
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">05</span>
+    <div class="vc__id">
+      <h3 id="nightfall-ai" class="vc__name"><span class="vc__sep">5. </span>Nightfall AI<span class="vc__sep">: </span><span class="vc__pill">Best for Employee AI Use Across Browser, Endpoint, and SaaS</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/nightfall-ai/reviews" target="_blank" rel="noopener"><span class="vc__score">4.6<small>/5</small></span><span class="vc__src">G2 · 101 reviews</span></a><a class="vc__rate" href="https://www.capterra.com/p/211481/Nightfall-DLP/reviews/" target="_blank" rel="noopener"><span class="vc__score">5.0<small>/5</small></span><span class="vc__src">Capterra · 2 reviews</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>Custom quote, per user</dd></div>
+    <div><dt>Free tier or trial</dt><dd>Free trial or proof of value</dd></div>
+    <div><dt>Where it sits</dt><dd>Browser, endpoint agent, SaaS APIs, MCP gateway</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Security teams whose biggest worry is staff pasting customer data into chatbots, copilots, and coding assistants they don’t control.</dd></div>
+  </dl>
+</div>
+<p>Nightfall watches where employees actually use AI, from sanctioned assistants to personal chatbots, browser AI apps, and the endpoint itself. Its model is detect and block at the point of action, which protects the data but doesn’t keep a blocked prompt useful.</p>
 <figure class="bl-shot">
   {{< img src="/assets/blog/listicles-2026/v3/nightfall.jpg" alt="Nightfall AI homepage" >}}
   <figcaption>Nightfall AI homepage. Source: nightfall.ai</figcaption>
 </figure>
+<p><strong>Key Features</strong></p>
+<ul>
+  <li><strong>Shadow AI prevention:</strong> It stops corporate data going to personal ChatGPT, unmanaged copilots, and browser AI apps.</li>
+  <li><strong>Endpoint egress control:</strong> Clipboard, USB, and local egress are monitored on the device, with policy enforced before data leaves.</li>
+  <li><strong>SaaS DLP:</strong> Slack, Google Drive, Gmail, Jira, Confluence, Salesforce, Microsoft Teams, SharePoint Online, and other apps are scanned for exposed data.</li>
+  <li><strong>MCP gateway:</strong> Admins approve specific MCP servers, block the rest by default, and enforce policy on each tool call.</li>
+  <li><strong>Prompt injection interception:</strong> Prompts, files, and tool responses are inspected in live agent sessions.</li>
+  <li><strong>Pre-trained detectors:</strong> The vendor states 95% detection precision.</li>
+</ul>
 <div class="bl-tablewrap"><table class="bl-table">
-<thead><tr><th>Item</th><th>Detail</th></tr></thead>
+<thead><tr><th>Security control</th><th>How it works</th></tr></thead>
 <tbody>
 <tr><td>Where it sits</td><td>Browser, endpoint agent, SaaS APIs, MCP gateway</td></tr>
 <tr><td>Protection method</td><td>Detect and block, with alerts and employee coaching</td></tr>
 <tr><td>Apps covered</td><td>Chatbots, copilots, coding assistants, major SaaS apps</td></tr>
 <tr><td>Deployment</td><td>SaaS with endpoint and browser agents</td></tr>
 <tr><td>Detection</td><td>Pre-trained detectors; vendor states 95% precision</td></tr>
-<tr><td>Reviews</td><td>G2 4.6/5 (101 reviews); Capterra 5.0/5 (2 reviews)</td></tr>
 </tbody></table></div>
 <p><strong>Pricing tiers</strong></p>
 <div class="bl-tablewrap"><table class="bl-table">
@@ -295,28 +426,48 @@ faqs:
 <p><strong>Cons</strong></p>
 <ul>
   <li>Blocking stops the leak but the employee’s AI task fails; it doesn’t tokenize and restore values inside the AI apps you build.</li>
-  <li>G2 reviewers cite limited reporting dashboards and few ways to customize alerts, so teams often push events to a SIEM.</li>
+  <li><a class="bl-link" href="https://www.g2.com/products/nightfall-ai/reviews" target="_blank" rel="noopener">G2 reviewers</a> cite limited reporting dashboards and few ways to customize alerts, so teams often push events to a SIEM.</li>
   <li>Users must sign in through Chrome for the browser extension, so unmanaged browsers and devices without the agent sit outside coverage.</li>
 </ul>
-<p><strong>What security buyers say in reviews:</strong> Very positive. Nightfall holds 4.6/5 from 101 reviews on G2 and 5.0/5 from 2 on Capterra. Reviewers like the AI and DLP coverage, strong out-of-the-box policies, easy integration, and Slack alerting. The complaints are reporting and filters that need work, false positives that take policy tuning (sometimes with regex), and alert classification that could be clearer.</p>
+<p><strong>What security buyers say in reviews:</strong> Very positive. Nightfall holds <a class="bl-link" href="https://www.g2.com/products/nightfall-ai/reviews" target="_blank" rel="noopener">4.6/5 from 101 reviews on G2</a> and <a class="bl-link" href="https://www.capterra.com/p/211481/Nightfall-DLP/reviews/" target="_blank" rel="noopener">5.0/5 from 2 on Capterra</a>. Reviewers like the AI and DLP coverage, strong out-of-the-box policies, easy integration, and Slack alerting. The complaints are reporting and filters that need work, false positives that take policy tuning (sometimes with regex), and alert classification that could be clearer.</p>
 <blockquote class="bl-quote-cta"><p>Nightfall covers your people; for the LLM calls your product makes, add a tokenizing layer. <a class="bl-link" href="/request-demo/">Get in touch</a></p></blockquote>
 
-<h3 id="prompt-security">6. Prompt Security (SentinelOne): A Consolidated Choice for SentinelOne Shops</h3>
-<p><strong>Best for:</strong> SentinelOne customers who want one console for employee AI use, homegrown AI apps, and agent activity.</p>
-<p>SentinelOne completed its acquisition of Prompt Security on September 5, 2025, according to its SEC filings, and the product now carries the “Prompt Security from SentinelOne” name within the Singularity Platform. It shows which AI apps employees use, applies guardrails for sensitive data, secrets, prompt injection, and custom topics, and adds controls for AI agents. For homegrown apps it inspects prompts and responses so sensitive data can be redacted or blocked before the model sees it.</p>
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">06</span>
+    <div class="vc__id">
+      <h3 id="prompt-security" class="vc__name"><span class="vc__sep">6. </span>Prompt Security (SentinelOne)<span class="vc__sep">: </span><span class="vc__pill">Best for Workforce and Homegrown AI in a SentinelOne Estate</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/prompt-security/reviews" target="_blank" rel="noopener"><span class="vc__score">5.0<small>/5</small></span><span class="vc__src">G2 · 2 reviews</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>Custom quote</dd></div>
+    <div><dt>Free tier or trial</dt><dd>Demo</dd></div>
+    <div><dt>Ownership</dt><dd>SentinelOne (acquisition closed September 5, 2025)</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>SentinelOne customers who want one console for employee AI use, homegrown AI apps, and agent activity.</dd></div>
+  </dl>
+</div>
+<p>SentinelOne completed its acquisition of Prompt Security on September 5, 2025, according to its SEC filings, and the product now sits within the Singularity Platform. It governs employee AI use across 15,000+ AI services and code assistants, and for homegrown apps it can redact or block sensitive data before the model sees it.</p>
 <figure class="bl-shot">
   {{< img src="/assets/blog/listicles-2026/v3/promptsec.jpg" alt="Prompt Security from SentinelOne homepage" >}}
   <figcaption>Prompt Security homepage. Source: sentinelone.com/platform/securing-ai-prompt/</figcaption>
 </figure>
+<p><strong>Key Features</strong></p>
+<ul>
+  <li><strong>AI usage control:</strong> It discovers shadow AI and code assistants such as GitHub Copilot, Cursor, and Claude Code, and redacts sensitive data in real time.</li>
+  <li><strong>Guardrails by policy:</strong> Rules cover sensitive data, secrets, prompt injection, and custom topics, with redact or block actions.</li>
+  <li><strong>Agentic AI security:</strong> It maps agents and MCP servers, finds unsanctioned deployments, enforces least privilege, and keeps a searchable log of agent actions.</li>
+  <li><strong>AI application security:</strong> Homegrown apps are tested for prompt injection, jailbreaks, and data poisoning, then protected by a runtime AI firewall.</li>
+  <li><strong>One SentinelOne console:</strong> AI policy and risk sit in the same console as endpoint, cloud, and identity security.</li>
+</ul>
 <div class="bl-tablewrap"><table class="bl-table">
-<thead><tr><th>Item</th><th>Detail</th></tr></thead>
+<thead><tr><th>Security control</th><th>How it works</th></tr></thead>
 <tbody>
 <tr><td>Ownership</td><td>SentinelOne (acquisition closed September 5, 2025)</td></tr>
 <tr><td>Where it sits</td><td>Browser extension, endpoint, inline layer for homegrown apps</td></tr>
 <tr><td>Protection method</td><td>Detect, redact, or block by policy</td></tr>
 <tr><td>Coverage</td><td>Employee AI use, homegrown apps, AI agents</td></tr>
 <tr><td>Deployment</td><td>SaaS within SentinelOne Singularity</td></tr>
-<tr><td>Reviews</td><td>G2 5.0/5 (2 reviews); no Capterra listing</td></tr>
 </tbody></table></div>
 <p><strong>Pricing tiers</strong></p>
 <div class="bl-tablewrap"><table class="bl-table">
@@ -336,26 +487,45 @@ faqs:
   <li>Redaction removes values rather than keeping consistent tokens, so multi-turn assistants lose track of who is who.</li>
   <li>Browser-extension controls can miss some file upload paths, so confirm coverage for desktop AI apps and CLI coding assistants in your trial.</li>
 </ul>
-<p><strong>What security buyers say in reviews:</strong> Positive but thin. Prompt Security holds 5.0/5 from 2 reviews on G2; there’s no Capterra listing. Reviewers like how quickly the extension rolls out and that it spots shadow AI and redacts in real time. They want more dashboard customization, and a Gartner Peer Insights reviewer flags limited report export.</p>
+<p><strong>What security buyers say in reviews:</strong> Positive but thin. Prompt Security holds <a class="bl-link" href="https://www.g2.com/products/prompt-security/reviews" target="_blank" rel="noopener">5.0/5 from 2 reviews on G2</a>; there’s no Capterra listing. Reviewers like how quickly the extension rolls out and that it spots shadow AI and redacts in real time. They want more dashboard customization, and a Gartner Peer Insights reviewer flags limited report export.</p>
 <blockquote class="bl-quote-cta"><p>Redacted prompts leaving your assistant confused? <a class="bl-link" href="/request-demo/">Let’s talk tokens</a></p></blockquote>
 
-<h3 id="lakera">7. Lakera (Check Point): The Recommended Model Firewall for Prompt Attacks</h3>
-<p><strong>Best for:</strong> AI product and AppSec teams whose top concern is attackers manipulating the model into leaking data, with PII checks as part of the same screen.</p>
-<p>Check Point announced its agreement to acquire Lakera on September 16, 2025 and closed the deal on October 22, 2025, folding Lakera into its Infinity Platform. Lakera Guard screens prompts and outputs for prompt injection, jailbreaks, and data leakage including PII, and Lakera Red runs adversarial testing.</p>
-<p>It decides whether to allow or flag a request; it doesn’t replace values with restorable tokens, so your app decides what happens next. You can start on a free Community tier of about 10,000 requests a month, SaaS only.</p>
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">07</span>
+    <div class="vc__id">
+      <h3 id="lakera" class="vc__name"><span class="vc__sep">7. </span>Lakera (Check Point)<span class="vc__sep">: </span><span class="vc__pill">Best for A Model Firewall Against Prompt Injection and Leakage</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/check-point-ai-agent-security/reviews" target="_blank" rel="noopener"><span class="vc__score">4.2<small>/5</small></span><span class="vc__src">G2 · 12 reviews (Check Point AI Agent Security)</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>Free Community tier</dd></div>
+    <div><dt>Free tier or trial</dt><dd>Free tier</dd></div>
+    <div><dt>Ownership</dt><dd>Check Point (acquisition closed October 22, 2025)</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>AI product and AppSec teams whose top concern is attackers manipulating the model into leaking data, with PII checks as part of the same screen.</dd></div>
+  </dl>
+</div>
+<p>Check Point announced its agreement to acquire Lakera on September 16, 2025 and closed the deal on October 22, 2025. Lakera screens prompts and outputs for prompt injection, jailbreaks, and data leakage, and flags or blocks a request rather than replacing values with restorable tokens.</p>
 <figure class="bl-shot">
   {{< img src="/assets/blog/listicles-2026/v3/lakera.jpg" alt="Lakera homepage" >}}
   <figcaption>Lakera homepage. Source: lakera.ai</figcaption>
 </figure>
+<p><strong>Key Features</strong></p>
+<ul>
+  <li><strong>AI agent security:</strong> Runtime protection screens inputs and outputs of AI apps and agents for injection and data leakage.</li>
+  <li><strong>Workforce AI security:</strong> A separate module covers how employees use AI tools.</li>
+  <li><strong>AI red teaming:</strong> Lakera Red and an expert-led service test your apps with risk-based adversarial attacks.</li>
+  <li><strong>Multilingual and multimodal coverage:</strong> Detection extends to indirect prompt injection and attacks across languages and media.</li>
+  <li><strong>Low added latency:</strong> The vendor states sub-50 ms runtime latency, even on large prompts.</li>
+</ul>
 <div class="bl-tablewrap"><table class="bl-table">
-<thead><tr><th>Item</th><th>Detail</th></tr></thead>
+<thead><tr><th>Security control</th><th>How it works</th></tr></thead>
 <tbody>
 <tr><td>Ownership</td><td>Check Point Software Technologies (acquisition closed October 22, 2025)</td></tr>
 <tr><td>Where it sits</td><td>Model firewall API on inputs and outputs</td></tr>
 <tr><td>Protection method</td><td>Detect and flag or block</td></tr>
 <tr><td>Threats covered</td><td>Prompt injection, jailbreaks, PII leakage, content policy</td></tr>
 <tr><td>Deployment</td><td>SaaS; self-hosted on Enterprise</td></tr>
-<tr><td>Reviews</td><td>G2 listing with 0 reviews; no Capterra listing</td></tr>
 </tbody></table></div>
 <p><strong>Pricing tiers</strong></p>
 <div class="bl-tablewrap"><table class="bl-table">
@@ -376,126 +546,8 @@ faqs:
   <li>It’s being folded into Check Point’s broader AI security stack, so standalone buyers face renaming, bundling, and roadmap shifts.</li>
   <li>Every call adds a pre-check, and the latency figures are vendor claims, so measure them on your own traffic.</li>
 </ul>
-<p><strong>What security buyers say in reviews:</strong> Lakera has no G2 or Capterra reviews yet, so ask for customer references. Public comparison write-ups mostly discuss its detection focus and the Check Point integration rather than day-to-day user experience.</p>
+<p><strong>What security buyers say in reviews:</strong> Mostly positive, on a small sample. Since the acquisition, G2 lists Lakera under <a class="bl-link" href="https://www.g2.com/products/check-point-ai-agent-security/reviews" target="_blank" rel="noopener">Check Point AI Agent Security, which holds 4.2/5 from 12 reviews on G2</a>; there’s no Capterra listing. Reviewers like that it checks each tool call and MCP connection an agent makes and blocks only the risky ones, that it finds shadow AI across cloud and low-code platforms, and that policies add little noticeable latency. The complaints are that custom and on-premises agent frameworks take more effort to onboard, documentation lags the fast-moving feature set, and licensing inside the Infinity portfolio is hard to size without going back to Check Point.</p>
 <blockquote class="bl-quote-cta"><p>A firewall stops attacks; tokens stop exposure. <a class="bl-link" href="/request-demo/">See both working together</a></p></blockquote>
-
-<h3 id="prisma-airs">8. Prisma AIRS (Palo Alto Networks): A Leading AI Runtime Platform for Palo Alto Estates</h3>
-<p><strong>Best for:</strong> Large enterprises standardized on Palo Alto firewalls and Strata Cloud Manager that want AI traffic under the same policy.</p>
-<p>Prisma AIRS bundles AI runtime security, model scanning, red teaming, and agent controls. Its API intercept scans prompts and responses and, since May 2025, can mask patterns such as Social Security and bank account numbers by replacing them with “X” characters. A network option inspects AI traffic through software firewalls, with EU-hosted detection available for the API.</p>
-<p>The bigger story is the gateway: Palo Alto Networks announced it would acquire the Portkey AI gateway on April 30, 2026 and closed the deal on May 29, 2026, positioning Portkey inside Prisma AIRS. Licensing comes from Software NGFW credits, with API intercept metered in monthly tokens.</p>
-<figure class="bl-shot">
-  {{< img src="/assets/blog/listicles-2026/v3/prisma.jpg" alt="Prisma AIRS homepage" >}}
-  <figcaption>Prisma AIRS homepage. Source: paloaltonetworks.com/prisma/prisma-ai-runtime-security</figcaption>
-</figure>
-<div class="bl-tablewrap"><table class="bl-table">
-<thead><tr><th>Item</th><th>Detail</th></tr></thead>
-<tbody>
-<tr><td>Ownership</td><td>Palo Alto Networks; Portkey gateway acquired May 2026</td></tr>
-<tr><td>Where it sits</td><td>API intercept, network firewalls, AI gateway</td></tr>
-<tr><td>Protection method</td><td>Detect, mask with X characters, or block</td></tr>
-<tr><td>Coverage</td><td>AI apps, models, agents, AI supply chain</td></tr>
-<tr><td>Deployment</td><td>Cloud API (incl. EU region), software NGFW</td></tr>
-<tr><td>Reviews</td><td>G2 5.0/5 (1 review); no Capterra listing; Gartner Peer Insights 4.4/5 (about 35 ratings)</td></tr>
-</tbody></table></div>
-<p><strong>Pricing tiers</strong></p>
-<div class="bl-tablewrap"><table class="bl-table">
-<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
-<tbody>
-<tr><td>API intercept</td><td>Custom quote</td><td>Software NGFW credits; metered in monthly tokens</td></tr>
-<tr><td>Network intercept</td><td>Custom quote</td><td>About 10K AI transactions a day per vCPU, 4 vCPU minimum</td></tr>
-</tbody></table></div>
-<p><strong>Pros</strong></p>
-<ul>
-  <li>Network, cloud, and AI traffic share one policy model, so your firewall team doesn’t learn a new language.</li>
-  <li>Runtime, model scanning, and red teaming come together, so one contract covers most of the AI security checklist.</li>
-  <li>The Portkey gateway routes many models natively, so platform teams can centralize model access.</li>
-</ul>
-<p><strong>Cons</strong></p>
-<ul>
-  <li>In the managed SaaS firewall, AI traffic goes to the US region for inspection, which can clash with EU or other residency rules.</li>
-  <li>Credit-based licensing sized per vCPU needs traffic forecasts, so first-year cost is hard to pin down.</li>
-  <li>Masking with X characters can’t be reversed, so the model’s answer loses the real names and numbers.</li>
-</ul>
-<p><strong>What security buyers say in reviews:</strong> Mostly positive. Prisma AIRS holds 5.0/5 from a single review on G2, isn’t listed on Capterra, and holds 4.4/5 from about 35 ratings on Gartner Peer Insights. The G2 reviewer values detection of prompt injection and sensitive-data leaks with real-time blocking. Reviewers there value centralized AI governance and visibility, shadow AI discovery, and blocking of sensitive data headed to LLMs. The main complaint is that some features still feel underdeveloped.</p>
-<blockquote class="bl-quote-cta"><p>Your gateway can still route through a tokenizing proxy. <a class="bl-link" href="/request-demo/">Ask us how</a></p></blockquote>
-
-<h3 id="cyera">9. Cyera: The Top-Rated DSPM for Cleaning Up Data Before AI Reads It</h3>
-<p><strong>Best for:</strong> Large enterprises rolling out copilots and agents across cloud, SaaS, and on-premises data that first need to know what sensitive data those agents could read.</p>
-<p>Cyera is a data security posture management (DSPM) platform: it discovers and classifies sensitive data across cloud, SaaS, and on-premises stores and shows who and what can access it. AI Guardian, launched August 4, 2025, adds an AI asset inventory and runtime protection, and Agent Guardian focuses on what agents can see and do. Cyera raised $600M at a $12B valuation in June 2026 and completed its acquisition of Oasis Security in September 2026.</p>
-<figure class="bl-shot">
-  {{< img src="/assets/blog/listicles-2026/v3/cyera.jpg" alt="Cyera homepage" >}}
-  <figcaption>Cyera homepage. Source: cyera.com</figcaption>
-</figure>
-<div class="bl-tablewrap"><table class="bl-table">
-<thead><tr><th>Item</th><th>Detail</th></tr></thead>
-<tbody>
-<tr><td>Where it sits</td><td>Data stores across cloud, SaaS, and on-premises</td></tr>
-<tr><td>Protection method</td><td>Discover, classify, restrict access; runtime blocking via AI Guardian</td></tr>
-<tr><td>AI coverage</td><td>AI asset inventory, agent permissions, runtime events</td></tr>
-<tr><td>Deployment</td><td>SaaS with connectors for on-premises sources</td></tr>
-<tr><td>Reviews</td><td>G2 4.5/5 (41 reviews); no Capterra listing</td></tr>
-</tbody></table></div>
-<p><strong>Pricing tiers</strong></p>
-<div class="bl-tablewrap"><table class="bl-table">
-<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
-<tbody>
-<tr><td>DSPM</td><td>Custom quote</td><td>Discovery, classification, posture; priced by data estate</td></tr>
-<tr><td>DLP</td><td>Custom quote</td><td>Data loss prevention on the same platform</td></tr>
-</tbody></table></div>
-<p><strong>Pros</strong></p>
-<ul>
-  <li>You find overshared data before a copilot surfaces it, so the riskiest exposure gets fixed first.</li>
-  <li>Discovery spans cloud, SaaS, and on-premises, so one inventory feeds your AI risk register.</li>
-  <li>A well-funded vendor with an active AI roadmap, so agent-specific controls keep arriving.</li>
-</ul>
-<p><strong>Cons</strong></p>
-<ul>
-  <li>It protects data at rest and doesn’t tokenize live prompts, so you still need a runtime layer for AI traffic.</li>
-  <li>A Gartner Peer Insights reviewer cites false positives from policies and hard-to-use filters and reporting.</li>
-  <li>Findings still need owners, and reviewers want more automation and self-serve reporting, so plan for remediation headcount.</li>
-</ul>
-<p><strong>What security buyers say in reviews:</strong> Very positive. Cyera holds 4.5/5 from 41 reviews on G2; there’s no Capterra listing. Reviewers like the agentless, cloud-native approach and an AI-driven classification engine that gives fast visibility into sensitive data. The complaints are that automated remediation needs careful tuning, executive risk dashboards feel underdeveloped, and first full discovery scans take time.</p>
-<blockquote class="bl-quote-cta"><p>Found where the sensitive data lives? Keep it tokenized on its way to the model. <a class="bl-link" href="/request-demo/">Get in touch</a></p></blockquote>
-
-<h3 id="microsoft-purview">10. Microsoft Purview DSPM: The Trusted Native Layer for Microsoft 365 Copilot</h3>
-<p><strong>Best for:</strong> Microsoft-centric enterprises rolling out Microsoft 365 Copilot and agents that already use sensitivity labels and Purview DLP.</p>
-<p>Microsoft Purview’s data security posture management for AI, now folded into a unified DSPM experience, shows AI activity across Microsoft 365 Copilot, agents, and listed third-party AI sites. It runs weekly oversharing assessments on your top SharePoint sites and can stop Copilot from summarizing content with chosen sensitivity labels.</p>
-<p>Third-party AI sites need the Purview browser extension and device onboarding, and network detection uses a security service edge integration. Protection is through labels, DLP blocks, and audit, not reversible tokens.</p>
-<figure class="bl-shot">
-  {{< img src="/assets/blog/listicles-2026/v3/purview.jpg" alt="Microsoft Purview page" >}}
-  <figcaption>Microsoft Purview homepage. Source: learn.microsoft.com/purview/dspm-for-ai</figcaption>
-</figure>
-<div class="bl-tablewrap"><table class="bl-table">
-<thead><tr><th>Item</th><th>Detail</th></tr></thead>
-<tbody>
-<tr><td>Where it sits</td><td>Microsoft 365 tenant, browser extension, endpoints, network via SSE</td></tr>
-<tr><td>Protection method</td><td>Sensitivity labels, DLP block, oversharing fixes, audit</td></tr>
-<tr><td>Coverage</td><td>Microsoft 365 Copilot, Copilot Studio agents, ChatGPT Enterprise, Foundry apps, listed AI sites</td></tr>
-<tr><td>Deployment</td><td>Microsoft cloud, managed in the Purview portal</td></tr>
-<tr><td>Compliance evidence</td><td>Compliance Manager templates for AI regulations</td></tr>
-<tr><td>Reviews</td><td>G2 4.6/5 (22 reviews, Purview DLP); Capterra 4.5/5 (2 reviews, Microsoft Purview)</td></tr>
-</tbody></table></div>
-<p><strong>Pricing tiers</strong></p>
-<div class="bl-tablewrap"><table class="bl-table">
-<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
-<tbody>
-<tr><td>Microsoft 365 E5 or E5 Compliance</td><td>Per user, Microsoft list price</td><td>Purview DLP, labels, and DSPM features</td></tr>
-<tr><td>Pay-as-you-go features</td><td>Usage-based</td><td>Some AI and non-Microsoft app coverage billed to an Azure subscription</td></tr>
-</tbody></table></div>
-<p><strong>Pros</strong></p>
-<ul>
-  <li>It’s native to Copilot, so there’s no extra proxy in the Microsoft path.</li>
-  <li>It reuses the labels and DLP policies you already have, so rollout builds on existing work.</li>
-  <li>Oversharing reports land before Copilot goes wide, so you fix permissions first.</li>
-</ul>
-<p><strong>Cons</strong></p>
-<ul>
-  <li>DSPM for AI needs Microsoft 365 E5 or E5 Compliance (or equivalent add-ons), so E3 estates face a license uplift.</li>
-  <li>Third-party AI sites require an Azure subscription for pay-as-you-go billing, device onboarding, and the browser extension.</li>
-  <li>It blocks and labels but doesn’t tokenize data for AI apps you build on OpenAI, Anthropic, or Gemini.</li>
-</ul>
-<p><strong>What security buyers say in reviews:</strong> Mostly positive. Purview Data Loss Prevention holds 4.6/5 from 22 reviews on G2, and the Microsoft Purview family listing holds 4.5/5 from 2 on Capterra. G2 reviewers like flexible sensitive information types, DLP and email encryption, and a test mode before enforcing policies; they report a hard path to production, no bulk rule updates through PowerShell, a 10,000-activity export cap, and some false positives. On Gartner Peer Insights, a critical April 2026 review cites support problems.</p>
-<blockquote class="bl-quote-cta"><p>Building AI apps on other models alongside Copilot? <a class="bl-link" href="/request-demo/">Get in touch</a></p></blockquote>
 
 <h2 id="key-features-compared-side-by-side">Key Features Compared Side by Side</h2>
 <p>Only Enigma Vault (NoPII) and Protecto keep a customer’s identity consistent across turns without you building the token store, and only NoPII publishes a self-serve price. Each cell comes from the vendor’s own pages, checked October 16, 2026.</p>
@@ -503,15 +555,12 @@ faqs:
 <thead><tr><th>Platform</th><th>Where it sits</th><th>Protection method</th><th>Context across turns</th><th>Deployment</th><th>Coverage</th><th>Governance</th></tr></thead>
 <tbody>
 <tr><td>Enigma Vault (NoPII)</td><td>Reverse proxy, app to LLM API</td><td>Reversible tokens; blocks if detection fails</td><td>Yes, same token per session</td><td>Hosted proxy, base-URL change</td><td>9 LLM providers via API</td><td>Roles on Pro; SSO, SLA, BAA on Enterprise</td></tr>
-<tr><td>Protecto</td><td>API layer before LLMs, agents, MCP</td><td>Consistent, reversible masking</td><td>Yes, within a namespace</td><td>SaaS, VPC, on-prem, air-gapped</td><td>AI apps, RAG, agents, pipelines</td><td>Context-based unmasking, AD and Okta</td></tr>
+<tr><td>Protecto</td><td>API layer before LLMs, agents, MCP</td><td>Consistent, reversible masking</td><td>Yes, within a namespace</td><td>SaaS, VPC, on-prem, air-gapped</td><td>AI apps, RAG, agents, pipelines</td><td>Context-based unmasking by role and task</td></tr>
 <tr><td>Skyflow</td><td>Vault plus detect-and-protect API</td><td>Tokenization, redaction, re-identification</td><td>Yes, through vault tokens</td><td>Cloud vault, regional residency</td><td>Training, RAG, inference, agents</td><td>Per-field access policies</td></tr>
 <tr><td>Limina</td><td>Container in your pipeline</td><td>Redaction, pseudonymization, synthetic</td><td>Only if you build the token store</td><td>Your VPC or on-prem (CPU or GPU)</td><td>Text in 52 languages</td><td>Your own access controls</td></tr>
 <tr><td>Nightfall AI</td><td>Browser, endpoint, SaaS, MCP gateway</td><td>Detect and block, with coaching</td><td>No, blocked not tokenized</td><td>SaaS plus agents</td><td>Chatbots, copilots, SaaS apps</td><td>Policies, alerts, coaching</td></tr>
 <tr><td>Prompt Security</td><td>Extension, endpoint, inline app layer</td><td>Detect, redact, or block</td><td>No, redaction drops identity</td><td>SaaS within SentinelOne</td><td>Employee AI, homegrown apps, agents</td><td>Shadow AI visibility, policy by user</td></tr>
 <tr><td>Lakera</td><td>Model firewall API</td><td>Detect and flag or block</td><td>No</td><td>SaaS; self-hosted on Enterprise</td><td>Injection, jailbreaks, PII leakage</td><td>Policy screens per app</td></tr>
-<tr><td>Prisma AIRS</td><td>API intercept, NGFW, Portkey gateway</td><td>Detect, mask with X, or block</td><td>No, masking can’t be reversed</td><td>Cloud API (EU region), software NGFW</td><td>AI apps, models, agents, supply chain</td><td>Strata Cloud Manager</td></tr>
-<tr><td>Cyera</td><td>Data stores (DSPM)</td><td>Discover, classify, restrict; AI Guardian</td><td>Not applicable, data at rest</td><td>SaaS, on-prem connectors</td><td>Data estate, AI assets, agent permissions</td><td>DSPM and DLP plans</td></tr>
-<tr><td>Microsoft Purview DSPM</td><td>Tenant, extension, endpoint, SSE</td><td>Labels, DLP block, audit</td><td>No</td><td>Microsoft cloud</td><td>Copilot, Copilot Studio, ChatGPT Enterprise</td><td>Compliance Manager, E5 licensing</td></tr>
 </tbody></table></div>
 <p>Packaging changes often, so confirm the cells that matter most to you in the vendor’s quote.</p>
 
@@ -524,10 +573,9 @@ faqs:
 <tr><td>Contact center copilot summarizing calls with names and account numbers</td><td>Enigma Vault (NoPII)</td><td>Consistent tokens keep summaries accurate while the provider sees no identifiers</td></tr>
 <tr><td>SaaS or fintech product adding an AI assistant on several model providers</td><td>Enigma Vault (NoPII)</td><td>One proxy and one log across nine providers</td></tr>
 <tr><td>Clinic or health system drafting notes with an LLM</td><td>Enigma Vault (NoPII), with Triplets</td><td>Tokens keep PHI from the provider; Triplets refuses answers the evidence can’t support</td></tr>
-<tr><td>Travel or hospitality group running agents on guest profiles</td><td>Enigma Vault (NoPII), plus Cyera</td><td>Tokenize guest identifiers in agent calls; find exposed profiles at rest</td></tr>
+<tr><td>Travel or hospitality group running agents on guest profiles</td><td>Enigma Vault (NoPII), plus Nightfall AI</td><td>Tokenize guest identifiers in agent calls; catch guest data exposed in SaaS apps</td></tr>
 <tr><td>Bank that requires on-premises or air-gapped processing</td><td>Protecto or Limina</td><td>Both run inside your own infrastructure</td></tr>
 <tr><td>Staff pasting client data into public chatbots</td><td>Nightfall AI or Prompt Security</td><td>Browser and endpoint controls reach where a proxy can’t</td></tr>
-<tr><td>Microsoft 365 Copilot rollout at a professional services firm</td><td>Microsoft Purview DSPM</td><td>Native labels and oversharing reports for Copilot</td></tr>
 </tbody></table></div>
 <h3 id="which-ai-data-security-software-fits-your-scale">Which AI Data Security Software Fits Your Scale</h3>
 <div class="bl-tablewrap"><table class="bl-table">
@@ -535,8 +583,8 @@ faqs:
 <tbody>
 <tr><td>One AI feature in production</td><td>Enigma Vault (NoPII) free plan</td><td>Prove protection on real traffic before procurement</td></tr>
 <tr><td>Several AI products and teams</td><td>NoPII Pro or Enterprise, plus Nightfall AI or Prompt Security</td><td>Cover product traffic and workforce use separately</td></tr>
-<tr><td>Global enterprise with residency rules</td><td>Protecto or Limina, plus Cyera</td><td>Keep processing in region and map the estate first</td></tr>
-<tr><td>Enterprise consolidating on one security vendor</td><td>Prisma AIRS, Lakera via Check Point, or Purview</td><td>Fit AI controls into the console you already run</td></tr>
+<tr><td>Global enterprise with residency rules</td><td>Protecto or Limina</td><td>Keep processing in your own region and infrastructure</td></tr>
+<tr><td>Enterprise consolidating on one security vendor</td><td>Prompt Security via SentinelOne or Lakera via Check Point</td><td>Fit AI controls into the console you already run</td></tr>
 </tbody></table></div>
 
 <h2 id="common-mistakes-enterprises-make-when-buying-ai-data-security-software">Common Mistakes Enterprises Make When Buying AI Data Security Software</h2>

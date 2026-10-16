@@ -1,0 +1,598 @@
+---
+title: "Best Privacy Vault for Cross-Border Data Sharing in 2026: 9 Leading Platforms Compared"
+titleEmphasis: "9 Leading Platforms Compared"
+slug: "best-privacy-vault-cross-border-data-sharing"
+layout: "pii-style"
+metaTitle: "Best Privacy Vault for Cross-Border Data Sharing (2026)"
+description: "Compare 9 privacy vaults for cross-border data sharing on vault regions, residency model, key control, GDPR and DOJ rule fit, ratings, and pricing."
+subtitle: "We compare where each platform keeps readable personal data, who holds the keys, and who can reverse a token from which country."
+date: 2026-10-16T00:03:00
+category: "Data Vault"
+author: "abhilash-kumar"
+readTime: 22
+heroImage: "/assets/blog/img-07.png"
+heroAlt: "Layered translucent panels representing personal data kept in one region while tokens move between countries"
+excerpt: "Nine privacy vaults compared on vault regions, residency model, key control, and fit with GDPR transfer rules and the DOJ bulk data rule."
+tags: ["data-residency", "cross-border", "gdpr", "data-vault", "tokenization"]
+ogImage: "/assets/og/vault-card.jpg"
+ogImageAlt: "Best privacy vault for cross-border data sharing in 2026: 9 leading platforms compared | Enigma Vault"
+ogType: article
+styles: ["blog.css", "pages/blog-pii-hero.css", "tr-pages.css"]
+scripts: ["blog-article.js"]
+faqSchema: true
+faqs:
+  - q: "What Is the Best Privacy Vault for Cross-Border Data Sharing?"
+    a: "It depends on what crosses where. Enigma Vault suits readable records kept in EU or US regions while only tokens cross; Skyflow, regional vaults behind one app; InCountry, records kept inside one country; Fortanix, keys in the region and hardware you pick."
+  - q: "Is Tokenized Data Still Personal Data Under GDPR?"
+    a: "Yes. Tokenized data is pseudonymised data, which GDPR Article 4(5) and the EDPB’s January 2025 pseudonymisation guidelines treat as personal data, because it can be linked back to a person with additional information."
+  - q: "Can Tokenization Help with EU to US Transfers Under SCCs?"
+    a: "It can. The EDPB accepts pseudonymisation as a supplementary measure when the exporter alone keeps the information needed to re-identify. You still need a transfer mechanism, such as SCCs or the EU-US Data Privacy Framework."
+  - q: "Do I Still Need a Vault If I Rely on the EU-US Data Privacy Framework?"
+    a: "The framework covers transfers to certified US companies, but it doesn’t limit how many systems, partners, and AI providers hold readable data. A vault cuts those copies and gives you a fallback if the framework is challenged."
+  - q: "Does Encryption Exempt Data from the DOJ Data Security Program?"
+    a: "No. The rule covers bulk US sensitive personal data regardless of whether it is anonymized, pseudonymized, de-identified, or encrypted. Vault access controls and logs help you show who reached real values."
+  - q: "When Did the DOJ Bulk Data Rule Take Effect?"
+    a: "The Data Security Program under 28 CFR Part 202 took effect on 8 April 2025, with due-diligence, audit, and reporting requirements applying from 5 October 2025."
+  - q: "What Is the Difference Between Data Residency and Data Sovereignty?"
+    a: "Residency is where data is physically stored. Sovereignty is whose laws and which operators can reach it, which also depends on who holds the keys and runs the service."
+  - q: "Where Does Enigma Vault Store Data?"
+    a: "Enigma Vault states that its vault runs in EU and US regions. Its security policy also describes real-time replication to another region for disaster recovery, so confirm the replica region for your account."
+  - q: "Can I Bring My Own Encryption Key to a Privacy Vault?"
+    a: "Some platforms support it. Fortanix supports bring your own key, and CipherStash offers a bring-your-own KMS root key on its Enterprise plan. Enigma Vault uses vendor-managed per-field encryption."
+  - q: "Are AI Prompts a Cross-Border Transfer?"
+    a: "Often, yes. Sending EU personal data in a prompt to a model provider in another country is a transfer. Enigma Vault’s NoPII tokenizes recognized PII before it reaches the model provider; test detection on your own data, since unrecognized PII can pass through."
+---
+
+<style>
+/* Wide tables: tighter cell padding so they fit the article column. */
+.bl-content .bl-table--wide td, .bl-content .bl-table--wide th { padding-left: 8px; padding-right: 8px; }
+.bl-content blockquote.bl-quote-cta{margin:24px 0;padding:14px 20px;border-left:3px solid var(--ev-mineral-blue);background:var(--ev-warm-cloud);border-radius:0 10px 10px 0}.bl-content blockquote.bl-quote-cta p{margin:0;font-size:16px}
+.bl-content figure.bl-shot{margin:20px 0 24px;padding:10px;border:1px solid var(--ev-cool-stone);border-radius:10px;background:var(--ev-warm-cloud)}.bl-content figure.bl-shot img{display:block;width:100%;height:auto;border-radius:6px}.bl-content figure.bl-shot figcaption{margin-top:8px;text-align:center;font-size:13px;color:var(--ev-slate)}
+</style>
+
+<p>Comparing the best privacy vault for cross-border data sharing of 2026: 1. Enigma Vault, 2. Skyflow, 3. VGS, 4. InCountry, 5. CipherStash, 6. Protecto, 7. Fortanix Data Security Manager, 8. Kiteworks, 9. Tresorit.</p>
+<p><strong>About the author: <a class="bl-link" href="https://www.linkedin.com/in/abhilashkumar15/" target="_blank" rel="noopener">Abhilash Kumar</a>, Chief Growth Officer at Enigma Vault</strong></p>
+<p>I lead growth, positioning, and partnerships at Enigma Vault, after running marketing at Amnic, Element5, and KenSci. Most of my week goes to conversations with US software, travel, and fintech teams that collect personal data in one country and need to use it in another, so I hear first-hand where residency plans break down: the partner who needs a real name, the AI provider in another region, the backup nobody mapped. I wrote this guide with our product and security team, who run a PCI DSS Level 1 vault with SOC 2 Type II controls.</p>
+<p><em>Disclosure: I work at Enigma Vault, which appears first in this list. Every platform here is judged on the same criteria, and the review ratings come from G2 and Capterra.</em></p>
+<p>Cross-border data sharing isn’t really about where the data goes. It’s about where the readable copy lives and who can turn a token back into a name from which country. A US company receiving EU customer data, sending Americans’ data to a contractor abroad, or pushing prompts to an AI provider faces the same two questions from counsel: where is the original, and who can reach it?</p>
+<p>This guide compares 9 platforms on exactly that: published vault regions, residency model, key control, and how well each fits the transfer laws a US company actually deals with (GDPR Chapter V, the EU-US Data Privacy Framework, standard contractual clauses, and the US Department of Justice’s Data Security Program).</p>
+
+<h2 id="leading-privacy-vaults-for-cross-border-data-sharing-at-a-glance">Leading Privacy Vaults for Cross-Border Data Sharing at a Glance</h2>
+<p>Here’s how the 9 platforms stack up side by side. Every rating, price, and feature was checked on October 16, 2026.</p>
+<div class="bl-tablewrap">
+  <table class="bl-table bl-table--wide">
+    <thead><tr><th>Platform</th><th>Best for</th><th>Starting price</th><th>Free trial or tier</th><th>Published regions</th><th>Key control</th><th>G2 rating</th></tr></thead>
+    <tbody>
+      <tr><td><a class="bl-link" href="#enigma-vault">Enigma Vault</a></td><td>Keeping readable records in EU or US vault regions while only tokens cross borders</td><td>$0 (Lite)</td><td>Lite tier, free forever</td><td>EU and US</td><td>Vendor-managed AES-256 per field</td><td>4.4/5 (6)</td></tr>
+      <tr><td><a class="bl-link" href="#skyflow">Skyflow</a></td><td>Regional vaults in many countries behind one central app</td><td>Custom quote</td><td>Demo; AWS Marketplace private offer</td><td>US, EU, India, Japan, Australia, Indonesia, Middle East</td><td>Vendor-managed polymorphic encryption</td><td>5/5 (1, Payments vault listing)</td></tr>
+      <tr><td><a class="bl-link" href="#vgs">VGS</a></td><td>Payments data split across US, EU, and Asia-Pacific vaults</td><td>From $1,000 a month</td><td>Get started for free</td><td>US, EU, Asia-Pacific (Singapore)</td><td>Vendor-managed</td><td>4.7/5 (47)</td></tr>
+      <tr><td><a class="bl-link" href="#incountry">InCountry</a></td><td>Keeping regulated records inside one specific country</td><td>Custom quote by country</td><td>Demo</td><td>Priced per country, including China</td><td>InCountry cloud or your infrastructure</td><td>3.5/5 (1)</td></tr>
+      <tr><td><a class="bl-link" href="#cipherstash">CipherStash</a></td><td>Region-bound encryption keys on Postgres and AWS</td><td>$0 (Dev)</td><td>Dev plan, free</td><td>AWS regions you choose</td><td>Client keys stay with you; BYO KMS root key on Enterprise</td><td>No reviews yet</td></tr>
+      <tr><td><a class="bl-link" href="#protecto">Protecto</a></td><td>Consistent tokens across regions and 50+ languages</td><td>Custom quote</td><td>API trial on request</td><td>SaaS, on-premises, or air-gapped</td><td>Vendor or self-hosted</td><td>No reviews yet</td></tr>
+      <tr><td><a class="bl-link" href="#fortanix">Fortanix DSM</a></td><td>Holding keys in the region and hardware you choose</td><td>Custom quote</td><td>Free trial</td><td>North America, EU, UK, APAC, Australia, Saudi Arabia</td><td>FIPS 140-2 Level 3 HSMs, BYOK</td><td>4.5/5 (2)</td></tr>
+      <tr><td><a class="bl-link" href="#kiteworks">Kiteworks</a></td><td>Governed file exchange on a single-tenant instance you place</td><td>Custom quote</td><td>Free trial</td><td>Wherever you run the instance</td><td>AES-256, FIPS 140-3 validated modules</td><td>4.4/5 (118)</td></tr>
+      <tr><td><a class="bl-link" href="#tresorit">Tresorit</a></td><td>End-to-end encrypted file sharing with a chosen data region</td><td>$19 per user a month (Business)</td><td>14-day free trial</td><td>Residency options on Business and above</td><td>End-to-end, zero-knowledge</td><td>4.5/5 (266)</td></tr>
+    </tbody>
+  </table>
+</div>
+<blockquote class="bl-quote-cta"><p>Not sure which vault fits the way your data moves between countries? Tell us where it’s collected and where it’s used, and we’ll map the flow with you. <a class="bl-link" href="/request-demo/">Get in touch</a></p></blockquote>
+
+<h2 id="what-is-a-privacy-vault-for-cross-border-data-sharing">What Is a Privacy Vault for Cross-Border Data Sharing?</h2>
+<p>A privacy vault for cross-border data sharing keeps readable personal data encrypted in a region you choose and hands out tokens, so teams abroad can use the data without holding the original.</p>
+<h3 id="key-features-to-look-for-in-a-privacy-vault-for-cross-border-data-sharing">Key Features to Look for in a Privacy Vault for Cross-Border Data Sharing</h3>
+<p>In any demo, these are the things worth checking first:</p>
+<ul>
+  <li><strong>Published vault regions:</strong> A named list of where originals are stored, not a vague “global” claim.</li>
+  <li><strong>Residency and sovereignty:</strong> Residency is where data physically sits; sovereignty is whose laws and which operators can reach it, and you need answers to both.</li>
+  <li><strong>Key location and BYOK:</strong> Where the encryption keys live, and whether you can bring your own key (BYOK) from a key manager you control.</li>
+  <li><strong>Detokenization by region:</strong> Only systems in the exporter’s region should be able to turn tokens back into real values, with every reveal logged.</li>
+  <li><strong>Consistent tokens:</strong> The same input gets the same token, so partners abroad can still join, dedupe, and report.</li>
+  <li><strong>Every copy accounted for:</strong> Backups, logs, and disaster-recovery replicas should sit in named regions too.</li>
+  <li><strong>Deletion and expiry:</strong> Delete the original once and every token pointing to it becomes meaningless everywhere.</li>
+  <li><strong>Pseudonymised, not anonymous:</strong> Under GDPR, tokenized data is still personal data (<a class="bl-link" href="https://gdpr-info.eu/art-4-gdpr/" target="_blank" rel="noopener">GDPR Article 4(5)</a>; <a class="bl-link" href="https://www.edpb.europa.eu/our-work-tools/documents/public-consultations/2025/guidelines-012025-pseudonymisation_en" target="_blank" rel="noopener">EDPB Guidelines 01/2025</a>).</li>
+</ul>
+<p>Related reading: <a class="bl-link" href="/blog/data-privacy-vault/">what a data privacy vault is</a>, <a class="bl-link" href="/blog/vault-vs-vaultless-tokenization/">vault vs vaultless tokenization</a>, and <a class="bl-link" href="/blog/best-data-tokenization-software/">the best data tokenization software</a>.</p>
+
+<h2 id="how-we-tested-and-ranked-privacy-vaults-for-cross-border-data-sharing">How We Tested and Ranked Privacy Vaults for Cross-Border Data Sharing</h2>
+<p>I weighted six criteria toward the two questions that decide a cross-border review: where the original lives, and who can reverse a token.</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Criteria</th><th>Weight</th><th>What we looked at</th></tr></thead>
+    <tbody>
+      <tr><td>Residency model</td><td>25%</td><td>Where originals physically sit: regional vaults, in-country storage, or one vault with tokens traveling</td></tr>
+      <tr><td>Detokenization control by region</td><td>20%</td><td>Who can reverse a token, from which systems and countries, and whether each reveal is logged</td></tr>
+      <tr><td>Key location and BYOK</td><td>20%</td><td>Who holds the keys or token map, in which region, and whether you can bring your own key</td></tr>
+      <tr><td>Transfer-law fit</td><td>15%</td><td>Support for SCC supplementary measures, Data Privacy Framework flows, and DOJ access controls</td></tr>
+      <tr><td>Pricing transparency</td><td>10%</td><td>Published prices, free tiers, and trials</td></tr>
+      <tr><td>Peer reviews</td><td>10%</td><td>G2 and Capterra ratings and what reviewers actually say</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><strong>Sources and method.</strong> I read each vendor’s product, pricing, docs, and security pages, plus G2 and Capterra listings, GDPR text, EDPB guidance, and Department of Justice sources, on October 16, 2026 (some vendor details first read on October 14 and rechecked). I didn’t run hands-on production tests. Regions are what each vendor publishes, so confirm the exact regions in your contract.</p>
+
+<h2 id="the-9-best-privacy-vaults-for-cross-border-data-sharing-for-2026">The 9 Best Privacy Vaults for Cross-Border Data Sharing for 2026</h2>
+
+<h3 id="enigma-vault">1. Enigma Vault: Top-Rated Privacy Vault for Keeping Originals in EU or US Regions</h3>
+<p><strong>Best for:</strong> US software, fintech, travel, clinic, and professional services teams that collect personal data in one country and use it in another, including through AI providers.</p>
+<p>Enigma Vault holds cards, fields, files, and customer records under encryption in EU and US regions, and your systems point to them by token. <a class="bl-link" href="/vault/data-vault/">Data Vault</a> encrypts each field with AES-256 and a unique initialization vector yet still supports exact-match lookups, so a support team in Manila or a partner in Toronto can match and report on records without ever holding a readable passport number or bank detail.</p>
+<p>What stands out for cross-border work is that you can trace every reveal. Each Data Vault request is authenticated with OAuth2 machine-to-machine credentials and logged, so “who turned this token back into a name, and from where?” has an answer. Deterministic tokens keep joins working on the receiving side, and record expiry (60 seconds to 7 years) lets you retire tokens for good. Honestly, the piece I’d point counsel to first is <a class="bl-link" href="/nopii/">NoPII</a>: recognized PII in AI traffic is tokenized before it reaches the model provider and restored on the way back.</p>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v3/enigma-card-vault-demo.jpg" alt="Enigma Vault Card Vault live demo page" >}}
+  <figcaption>Enigma Vault Card Vault demo page. Source: enigmavault.io/vault/card-vault-demo/</figcaption>
+</figure>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Item</th><th>Detail</th></tr></thead>
+    <tbody>
+      <tr><td>Published vault regions</td><td>EU and US</td></tr>
+      <tr><td>Residency model</td><td>Vault per region; tokens in your apps, partner feeds, and AI prompts</td></tr>
+      <tr><td>Key control</td><td>Enigma-managed AES-256 per field; File Vault wraps a unique key per file with your account key</td></tr>
+      <tr><td>Who can detokenize</td><td>Only API clients holding your OAuth2 credentials; every request logged</td></tr>
+      <tr><td>Compliance</td><td>PCI DSS Level 1 service provider, SOC 2 Type II; ISO 27001 in progress</td></tr>
+      <tr><td>Reviews</td><td>G2 4.4/5 (6); Capterra 4.8/5 (4)</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><strong>Pricing tiers</strong></p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+    <tbody>
+      <tr><td>Lite</td><td>$0, free forever</td><td>Data Vault 1,500 requests a month; File Vault 5GB; Card Vault 1,000 requests</td></tr>
+      <tr><td>Plus</td><td>$49.99 a month</td><td>Data Vault 30,000 requests; File Vault 150GB; Card Vault 20,000 requests</td></tr>
+      <tr><td>Premium</td><td>$249.99 a month</td><td>Data Vault 400,000 requests; File Vault 1TB; Card Vault 250,000 requests</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><strong>Pros</strong></p>
+<ul>
+  <li>The free Lite tier runs in EU or US regions, so you can prove a token-only flow between countries before legal signs anything.</li>
+  <li>One vault covers structured records, files, cards, and AI prompts, so you write one transfer story for counsel instead of three.</li>
+  <li>Every reveal is logged with the calling client, so you can show an EU exporter kept re-identification under its own control.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li>Only EU and US regions are published; if data must stay in India, China, or the Gulf, you’ll need an in-country provider alongside it.</li>
+  <li>Keys are Enigma-managed with no bring-your-own-key option published, so key-sovereignty programs should pair it with a key manager.</li>
+  <li>Disaster-recovery replication goes to another region, so confirm in writing that EU data replicates within the EU for your account.</li>
+</ul>
+<p><strong>What engineering teams say in reviews:</strong> Very positive. Enigma Vault holds 4.4/5 from 6 reviews on G2 and 4.8/5 from 4 on Capterra. Reviewers say the tokenization API is simple to understand, that PCI DSS de-scoping is clear, and that it costs less than alternatives; one notes the vendor added domestic card types and languages quickly. The complaints are a wish for deeper reporting dashboards and one reviewer finding pricing a bit high, while several report no complaints at all.</p>
+<blockquote class="bl-quote-cta"><p>Want to see EU records stay in the EU vault while your US team works on tokens? Start on the free tier or walk through your flow with our team. <a class="bl-link" href="/request-demo/">Get in touch</a></p></blockquote>
+
+<h3 id="skyflow">2. Skyflow: A Leading Multi-Region Vault for Strict Localization Laws</h3>
+<p><strong>Best for:</strong> global SaaS and enterprise teams that must localize customer data in several countries while keeping one CRM, ticketing, or core application.</p>
+<p>Skyflow’s data privacy vault isolates sensitive fields and returns tokens to the application. In its published integrations, a US customer’s data goes to a US vault and an Australian customer’s data to an Australian vault, while the CRM keeps only tokens. Its May 2025 ServiceNow announcement lists vault deployments across the EU, India, Japan, Australia, Indonesia, and the Middle East, which is the widest regional footprint of any tokenizing vault here. That’s the cleanest answer to a localization law that bans the original from leaving the country, rather than a transfer law that only regulates how it leaves.</p>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v3/skyflow.jpg" alt="Skyflow homepage" >}}
+  <figcaption>Skyflow homepage. Source: skyflow.com</figcaption>
+</figure>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Item</th><th>Detail</th></tr></thead>
+    <tbody>
+      <tr><td>Published vault regions</td><td>US plus EU, India, Japan, Australia, Indonesia, Middle East</td></tr>
+      <tr><td>Residency model</td><td>Regional vaults; tokens flow into ServiceNow, HubSpot, or your own app</td></tr>
+      <tr><td>Key control</td><td>Skyflow-managed polymorphic encryption</td></tr>
+      <tr><td>Who can detokenize</td><td>Fine-grained, per-field access policies</td></tr>
+      <tr><td>Compliance</td><td>PCI DSS Level 1, SOC 2 Type II, ISO 27001:2022</td></tr>
+      <tr><td>Reviews</td><td>G2 5/5 (1, Payments Data Privacy Vault listing; PII and GenAI listings have 0); no Capterra listing</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><strong>Pricing tiers</strong></p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+    <tbody>
+      <tr><td>Skyflow vault</td><td>Custom quote</td><td>Priced by data subjects protected; private offers on AWS Marketplace</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><strong>Pros</strong></p>
+<ul>
+  <li>Vaults already run in many countries, so you can enter a new market without rebuilding your backend there.</li>
+  <li>The central app only ever holds tokens, so your US systems stay out of each country’s localization scope.</li>
+  <li>Per-field policies let one region see what another can’t, so you can tune access country by country.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li>Each regional vault is a separate endpoint, so your app has to route every insert and detokenize call to the right country, and that routing logic is yours to build and test.</li>
+  <li>Server-side SDKs cover Java, Node.js, Python, and Go only, and all v1 server-side SDKs reach end of life on October 31, 2026, so older integrations need a v2 migration first.</li>
+  <li>Regions beyond the core US and EU footprint are scoped in a sales-led contract with no public price, so multi-country cost is hard to model up front.</li>
+</ul>
+<p><strong>What buyers say in reviews:</strong> Too early to call. Skyflow is split across three G2 listings: its Payments Data Privacy Vault holds 5/5 from a single review, and its PII Data Privacy Vault and Skyflow for GenAI listings have none. There’s no Capterra listing, so one review isn’t enough to spot themes; ask for customer references in the countries you plan to localize.</p>
+<blockquote class="bl-quote-cta"><p>Only need EU and US? <a class="bl-link" href="/request-demo/">Get in touch</a></p></blockquote>
+
+<h3 id="vgs">3. VGS: The Trusted Regional Vault for Cross-Border Payments Data</h3>
+<p><strong>Best for:</strong> payments, fintech, and marketplace teams that take card and bank data in several regions and want each region’s data held there.</p>
+<p>VGS (Very Good Security) replaces sensitive values with aliases as traffic passes through its inbound and outbound proxy. Its API documentation lists separate vault endpoints for Europe (live-eu-1) and Asia-Pacific (live-ap-1) next to the US, and it launched a Singapore region in May 2025. In practice, a European card is aliased and stored in the EU vault, your US services forward only the alias, and the raw value is revealed when the outbound proxy sends it to an approved destination such as a processor.</p>
+<p>I’d say that makes residency unusually easy to show an auditor: each region has its own hostname, so the endpoint itself is the evidence.</p>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v3/vgs.jpg" alt="VGS homepage" >}}
+  <figcaption>VGS homepage. Source: verygoodsecurity.com</figcaption>
+</figure>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Item</th><th>Detail</th></tr></thead>
+    <tbody>
+      <tr><td>Published vault regions</td><td>US, EU, Asia-Pacific (Singapore)</td></tr>
+      <tr><td>Residency model</td><td>One isolated vault per region, each with its own API hostname</td></tr>
+      <tr><td>Who can detokenize</td><td>Outbound proxy routes you configure; reveal only to approved endpoints</td></tr>
+      <tr><td>Payment add-ons</td><td>PCI Compliance Subscription, VGS Provided Auditor</td></tr>
+      <tr><td>Reviews</td><td>G2 4.7/5 (47); Capterra listing with 0 reviews</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><strong>Pricing tiers</strong></p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+    <tbody>
+      <tr><td>Starter</td><td>From $1,000 a month</td><td>Starter package; get started for free</td></tr>
+      <tr><td>Growth</td><td>Custom quote</td><td>Add-ons such as the PCI Compliance Subscription and VGS Provided Auditor</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><strong>Pros</strong></p>
+<ul>
+  <li>Named regions with separate endpoints, so you can show an auditor exactly where each data set lives.</li>
+  <li>The proxy model swaps values in transit, so you change very little application code to keep raw data out.</li>
+  <li>It has the strongest review record here with a meaningful sample, so you’re not betting on an unproven platform.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li>Regional vaults are isolated and VGS documents no way to move aliases between them, so you have to pick the region per data set before go-live.</li>
+  <li>Reviewers flag $40 for each extra CNAME, which adds up when every country or partner gets its own domain.</li>
+  <li>Reviewers also mention out-of-date documentation and limited log filtering, which slows audits of who revealed data from which region.</li>
+</ul>
+<p><strong>What payments teams say in reviews:</strong> Very positive. VGS holds 4.7/5 from 47 reviews on G2, and its Capterra listing has no reviews yet. Reviewers say the proxy was quick to learn and praise fair-cost PCI compliance and support, especially chat. The complaints are the $40 fee for each extra CNAME, a price some call on the high side, and small gaps in VGS Collect forms that need workarounds.</p>
+<blockquote class="bl-quote-cta"><p>Sharing more than card data across borders? <a class="bl-link" href="/request-demo/">Get in touch</a></p></blockquote>
+
+<h3 id="incountry">4. InCountry: The Go-To Data Residency Service for Country-Locked Records</h3>
+<p><strong>Best for:</strong> SaaS and enterprise teams selling into countries with strict localization rules, such as China, that still run one global application.</p>
+<p>InCountry sells Data Residency-as-a-Service: regulated fields are stored inside a chosen country, your global application works with a redacted version, and the real values are filled back in only inside that country. Its pricing page says cost is set by country and features, with custom quotes for China and multi-country deals. It lists AWS Outposts, Alibaba Cloud, and Yandex as infrastructure options, which matters where the big US clouds have limited presence, and it has added AgentCloak products for AI workloads.</p>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v3/incountry.jpg" alt="InCountry homepage" >}}
+  <figcaption>InCountry homepage. Source: incountry.com</figcaption>
+</figure>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Item</th><th>Detail</th></tr></thead>
+    <tbody>
+      <tr><td>Published regions</td><td>Priced per country; China quoted separately</td></tr>
+      <tr><td>Residency model</td><td>Regulated data in-country; redacted copy in the global app</td></tr>
+      <tr><td>Key control</td><td>Depends on deployment: InCountry cloud or your own infrastructure</td></tr>
+      <tr><td>Infrastructure options</td><td>AWS Outposts, Alibaba Cloud, Yandex</td></tr>
+      <tr><td>Reviews</td><td>G2 3.5/5 (1); no Capterra listing</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><strong>Pricing tiers</strong></p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+    <tbody>
+      <tr><td>Data Residency-as-a-Service</td><td>Custom quote</td><td>Driven by country count and features; China and multi-country are custom</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><strong>Pros</strong></p>
+<ul>
+  <li>It’s built for localization from the ground up, so you get in-country storage without adapting a payments product.</li>
+  <li>It reaches markets where hyperscaler regions are thin, so you can serve countries your main cloud doesn’t cover.</li>
+  <li>The global app keeps working on redacted data, so you avoid forking your product for each country.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li>Your app must pick the country-specific REST endpoint for each record, so mis-tagged data lands in the wrong store and is painful to move later.</li>
+  <li>Each country is its own point of presence, so cost and operations grow with every country you add.</li>
+  <li>Its one G2 reviewer questions how fully it covers China’s PIPL, so get a written PIPL mapping before relying on it there.</li>
+</ul>
+<p><strong>What enterprise architects say in reviews:</strong> Mixed, on a tiny sample. InCountry holds 3.5/5 from a single review on G2 and has no Capterra listing. That reviewer finds the architecture simple to use and easy to implement but is unsure how fully it covers PIPL. One review can’t show a pattern, so ask for references in the countries you need.</p>
+<blockquote class="bl-quote-cta"><p>Data allowed to live in the EU or US? <a class="bl-link" href="/request-demo/">Get in touch</a></p></blockquote>
+
+<h3 id="cipherstash">5. CipherStash: A Developer-Friendly Choice for Region-Bound Encryption Keys</h3>
+<p><strong>Best for:</strong> engineering teams on Postgres and AWS that want residency enforced by cryptography rather than policy.</p>
+<p>CipherStash encrypts data in Postgres while keeping it searchable, and the encryption happens in your application, not on CipherStash servers. Its key service runs on AWS with a separate setup per region, so data written in Frankfurt can only be decrypted with Frankfurt credentials, which you can revoke.</p>
+<p>The pricing is the other thing worth knowing: you pay only for encryption operations, decryptions are free on every plan, and the Enterprise tier adds a bring-your-own KMS root key and AWS PrivateLink.</p>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v3/cipherstash.jpg" alt="CipherStash homepage" >}}
+  <figcaption>CipherStash homepage. Source: cipherstash.com</figcaption>
+</figure>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Item</th><th>Detail</th></tr></thead>
+    <tbody>
+      <tr><td>Published regions</td><td>AWS regions; one key setup per region</td></tr>
+      <tr><td>Residency model</td><td>Data stays in your own Postgres as ciphertext</td></tr>
+      <tr><td>Key control</td><td>Client keys deploy with your app; BYO KMS root key on Enterprise</td></tr>
+      <tr><td>Who can decrypt</td><td>Holders of that region’s credentials; key requests logged</td></tr>
+      <tr><td>Reviews</td><td>G2 listing with 0 reviews; no Capterra listing</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><strong>Pricing tiers</strong></p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+    <tbody>
+      <tr><td>Dev</td><td>$0</td><td>10,000 encryption operations a month</td></tr>
+      <tr><td>Pro</td><td>$20 a month</td><td>25,000 operations, then $3.00 per 1,000</td></tr>
+      <tr><td>Business</td><td>$870 a month</td><td>500,000 operations, then $2.00 per 1,000</td></tr>
+      <tr><td>Enterprise</td><td>Custom quote</td><td>Negotiated volume, 99.9% uptime SLA, SSO, PrivateLink, BYO KMS root key</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><strong>Pros</strong></p>
+<ul>
+  <li>Residency is enforced by where the key lives, so you can explain the control to an auditor in one sentence.</li>
+  <li>Published pricing with a free plan and free decryption, so you know reads won’t inflate the bill.</li>
+  <li>Data never leaves your own database, so you add no new storage location to your transfer map.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li>Current docs center on Postgres; MySQL, SQL Server, MongoDB, or SaaS apps not built on Postgres are outside the main path.</li>
+  <li>Its Proxy documents unsupported SQL on encrypted columns, such as arithmetic assignments in UPDATEs and joins on encrypted columns, so expect query rewrites.</li>
+  <li>The key service runs on AWS only, so Azure or Google Cloud shops still depend on AWS for key operations in each region.</li>
+</ul>
+<p><strong>What developers say in reviews:</strong> CipherStash has no G2 or Capterra reviews yet (its G2 listing shows zero), so ask for customer references. Its public documentation, including a frank page of SQL limitations, is the best evidence of how it behaves before you run your own proof of concept.</p>
+<blockquote class="bl-quote-cta"><p>Need tokens partners can actually use, not ciphertext? <a class="bl-link" href="/request-demo/">Get in touch</a></p></blockquote>
+
+<h3 id="protecto">6. Protecto: A Recommended Vault for Multilingual Data and AI Pipelines</h3>
+<p><strong>Best for:</strong> data and AI teams sharing records between subsidiaries and partners in different countries and languages.</p>
+<p>Protecto’s Privacy Vault detects PII and PHI in 50+ languages across tables and free text, and maps the same entity to the same token across systems within a namespace. That helps when a German HR record and a Japanese support ticket refer to the same person. Authorized users unmask role by role, context-based access control adds a task-level check, and every unmask event is logged. Because it deploys as SaaS, on-premises, or air-gapped, the token map can stay in the exporter’s country.</p>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v3/protecto.jpg" alt="Protecto homepage" >}}
+  <figcaption>Protecto homepage. Source: protecto.ai</figcaption>
+</figure>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Item</th><th>Detail</th></tr></thead>
+    <tbody>
+      <tr><td>Deployment</td><td>SaaS, on-premises, air-gapped</td></tr>
+      <tr><td>Residency model</td><td>Consistent tokens; place the vault where the exporter controls it</td></tr>
+      <tr><td>Who can detokenize</td><td>Role-based and context-based unmasking, logged</td></tr>
+      <tr><td>Detection</td><td>50+ languages, structured and unstructured</td></tr>
+      <tr><td>Compliance</td><td>SOC 2 Type II, ISO 27001, HIPAA (BAA available)</td></tr>
+      <tr><td>Reviews</td><td>Capterra and G2 listings with 0 reviews</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><strong>Pricing tiers</strong></p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+    <tbody>
+      <tr><td>Privacy Vault</td><td>Custom quote</td><td>Scoped by deployment model, data volume, and AI use cases</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><strong>Pros</strong></p>
+<ul>
+  <li>Detection covers 50+ languages, so you can tokenize messy multilingual text, not just neat database columns.</li>
+  <li>Self-hosted and air-gapped options exist, so you can keep the token map in the exporter’s country.</li>
+  <li>Unmask events are logged per role and task, so you can show exactly who saw real values and why.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li>Detection-led tokenization needs testing on your own multilingual data; any name or ID it misses crosses the border in clear text.</li>
+  <li>Rate limits are set per namespace and tier and aren’t published (trial access goes through sales), so large backfills need async APIs and a sales call.</li>
+  <li>Inputs must be strings and booleans can’t be masked, so structured exports need cleanup before they reach the vault.</li>
+</ul>
+<p><strong>What AI teams say in reviews:</strong> Protecto has no G2 or Capterra reviews yet (both listings show zero), so ask for customer references. Its public API docs on rate limits and supported data types are the most useful outside evidence today.</p>
+<blockquote class="bl-quote-cta"><p>Sending prompts to a model provider in another country? <a class="bl-link" href="/request-demo/">Get in touch</a></p></blockquote>
+
+<h3 id="fortanix">7. Fortanix Data Security Manager: The Trusted Key Manager for Sovereignty Built on Key Location</h3>
+<p><strong>Best for:</strong> enterprises whose sovereignty plan rests on controlling where keys live across clouds and data centers.</p>
+<p>Fortanix Data Security Manager manages keys across clouds and data centers and stores them in FIPS 140-2 Level 3 validated hardware security modules (tamper-resistant devices built to hold keys). It offers regional SaaS in North America, the EU, the UK, Asia-Pacific, Australia, and Saudi Arabia, plus on-premises hardware.</p>
+<p>Why does that matter across borders? If data sits in a US cloud but the key that decrypts it sits in an EU-only HSM you control, a US request for readable data has to go through you. Bring-your-own-key support extends that to the big cloud providers.</p>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v3/fortanix.jpg" alt="Fortanix homepage" >}}
+  <figcaption>Fortanix homepage. Source: fortanix.com</figcaption>
+</figure>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Item</th><th>Detail</th></tr></thead>
+    <tbody>
+      <tr><td>Regional SaaS</td><td>North America, EU, UK, Asia-Pacific, Australia, Saudi Arabia</td></tr>
+      <tr><td>Residency model</td><td>Keys pinned to a region; data can be elsewhere</td></tr>
+      <tr><td>Key control</td><td>FIPS 140-2 Level 3 HSMs; bring your own key</td></tr>
+      <tr><td>Who can decrypt</td><td>Custom policies per key and per use</td></tr>
+      <tr><td>Reviews</td><td>G2 4.5/5 (2, vendor-level); Capterra 5.0/5 (1)</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><strong>Pricing tiers</strong></p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+    <tbody>
+      <tr><td>Data Security Manager</td><td>Custom quote</td><td>Driven by deployment (SaaS or appliance), key volume, and integrations</td></tr>
+      <tr><td>Free trial</td><td>$0</td><td>Trial of the SaaS service</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><strong>Pros</strong></p>
+<ul>
+  <li>It has the broadest list of regional key instances here, so you can pin keys close to almost any data set.</li>
+  <li>Keys sit in hardware security modules, so your sovereignty argument rests on something an auditor can verify.</li>
+  <li>One key layer spans clouds and databases, so you manage policy once instead of per provider.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li>A key manager, not a tokenization vault: readable data still sits wherever your apps store it, so you need tokenization too if partners mustn’t see real values.</li>
+  <li>Reviewers say initial setup is hard to understand and configure, so budget time for HSM, policy, and cloud BYOK wiring.</li>
+  <li>Keys pinned to one region mean services elsewhere call back across the border for each crypto operation, which adds latency.</li>
+</ul>
+<p><strong>What security teams say in reviews:</strong> Positive, but thin. Fortanix holds 4.5/5 from 2 reviews on G2 (vendor-level) and 5.0/5 from 1 on Capterra. Reviewers like that it’s easy to implement and that the encryption is strong. The complaints are that pricing isn’t cost-flexible and that managing many encryption devices gets strenuous at scale.</p>
+<blockquote class="bl-quote-cta"><p>Pair key control with tokens your partners can use. <a class="bl-link" href="/request-demo/">Get in touch</a></p></blockquote>
+
+<h3 id="kiteworks">8. Kiteworks: A Dependable Single-Tenant Platform for Regulated File Exchange</h3>
+<p><strong>Best for:</strong> regulated organizations, including government contractors, that exchange sensitive files and email with partners abroad.</p>
+<p>Kiteworks runs as a single-tenant virtual appliance you deploy on-premises, in a hybrid setup, or air-gapped, and states FedRAMP authorization, AES-256 at rest, TLS 1.3 in transit, and FIPS 140-3 validated cryptographic modules. When the thing crossing a border is a contract, a claims file, or a patient record PDF, it keeps the system of record in the country you choose and logs every access.</p>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v3/kiteworks.jpg" alt="Kiteworks homepage" >}}
+  <figcaption>Kiteworks homepage. Source: kiteworks.com</figcaption>
+</figure>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Item</th><th>Detail</th></tr></thead>
+    <tbody>
+      <tr><td>Deployment</td><td>Single-tenant; on-premises, hybrid, air-gapped</td></tr>
+      <tr><td>Residency model</td><td>You choose where the instance runs</td></tr>
+      <tr><td>Key control</td><td>AES-256 at rest; FIPS 140-3 validated modules</td></tr>
+      <tr><td>Who can access</td><td>Policy-governed sharing for people and AI agents, logged</td></tr>
+      <tr><td>Compliance</td><td>FedRAMP Authorized; ISO 27001, 27017, 27018 and SOC 2 listed</td></tr>
+      <tr><td>Reviews</td><td>G2 4.4/5 (118); Capterra 4.0/5 (27)</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><strong>Pricing tiers</strong></p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+    <tbody>
+      <tr><td>Kiteworks</td><td>Custom quote</td><td>Driven by users, deployment model, and modules</td></tr>
+      <tr><td>Free trial</td><td>$0</td><td>Trial on request from the homepage</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><strong>Pros</strong></p>
+<ul>
+  <li>FedRAMP authorization is in place, so you can use it for US public-sector work without a separate authorization project.</li>
+  <li>You decide the physical location of the instance, so residency is a deployment choice rather than a vendor promise.</li>
+  <li>Every file touch is logged, so you can answer an auditor’s “who opened this abroad?” quickly.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li>Files and email, not field-level tokens, so database records and API payloads crossing borders need a separate vault.</li>
+  <li>Capterra reviewers report uploads that don’t work consistently and want more storage included in licenses.</li>
+  <li>Each country you pin data to means its own cluster, which raises cost for multi-country sharing.</li>
+</ul>
+<p><strong>What compliance teams say in reviews:</strong> Mostly positive. Kiteworks holds 4.4/5 from 118 reviews on G2 and 4.0/5 from 27 on Capterra. Reviewers praise granular access controls, automatic file expiry, and one governed place for file sharing and secure email. The complaints are an interface that takes time to learn, external recipients who need help opening shares, and awkward audit-log exports and native integrations.</p>
+<blockquote class="bl-quote-cta"><p>Need expiring links for client files without running a server? <a class="bl-link" href="/request-demo/">Get in touch</a></p></blockquote>
+
+<h3 id="tresorit">9. Tresorit: An Easy-to-Use Encrypted File Sharing Service with a Chosen Data Region</h3>
+<p><strong>Best for:</strong> professional services firms, legal teams, and agencies sharing contracts and client files with partners in other countries.</p>
+<p>Tresorit encrypts files end to end with a zero-knowledge design, so the service holding the file can’t open it. Data residency options start on the Business plan, Business Pro adds user-level residency, and Enterprise supports multiple residency locations. For document-heavy cross-border work, that answers both halves of the question: the readable copy lives only on invited users’ devices, and only they can decrypt it.</p>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v3/tresorit.jpg" alt="Tresorit homepage" >}}
+  <figcaption>Tresorit homepage. Source: tresorit.com</figcaption>
+</figure>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Item</th><th>Detail</th></tr></thead>
+    <tbody>
+      <tr><td>Residency options</td><td>Business; user-level on Business Pro; multiple on Enterprise</td></tr>
+      <tr><td>Key control</td><td>End-to-end, zero-knowledge</td></tr>
+      <tr><td>Who can decrypt</td><td>Only invited users</td></tr>
+      <tr><td>Plan minimums</td><td>Business 3 users; Business Pro 5 users</td></tr>
+      <tr><td>Reviews</td><td>G2 4.5/5 (266); Capterra 4.8/5 (130)</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><strong>Pricing tiers</strong></p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+    <tbody>
+      <tr><td>Professional</td><td>$27.49 a month</td><td>1 user, 4TB</td></tr>
+      <tr><td>Business</td><td>$19 per user a month</td><td>Minimum 3 users, data residency options</td></tr>
+      <tr><td>Business Pro</td><td>$24 per user a month</td><td>Minimum 5 users, user-level residency</td></tr>
+      <tr><td>Enterprise</td><td>Custom quote</td><td>Multiple residency locations</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><strong>Pros</strong></p>
+<ul>
+  <li>Pricing is published with a 14-day free trial, so you can budget before you talk to sales.</li>
+  <li>The zero-knowledge design means the provider can’t read files, so you limit who can be compelled to hand them over.</li>
+  <li>Business Pro sets residency per user, so you can keep each office’s files in its own region.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li>User-level residency starts on Business Pro (5-user minimum) and multiple regions on Enterprise, so smaller teams can’t pin data by country.</li>
+  <li>Reviewers report slow sync on large files, since encrypted files re-upload in full after small changes.</li>
+  <li>Zero-knowledge means a forgotten password with no logged-in device can lose data for good, so set up admin recovery before rollout.</li>
+</ul>
+<p><strong>What professional services teams say in reviews:</strong> Very positive. Tresorit holds 4.5/5 from 266 reviews on G2 and 4.8/5 from 130 on Capterra. Reviewers keep coming back to its security, privacy, and end-to-end encryption. The complaints are technical bugs and sync issues. The complaints are a limited integration ecosystem, no real-time co-editing or full-text search inside encrypted files, and slow sync for very large files.</p>
+<blockquote class="bl-quote-cta"><p>Files, records, and card data in one vault? <a class="bl-link" href="/request-demo/">Get in touch</a></p></blockquote>
+
+<h2 id="key-features-compared-side-by-side">Key Features Compared Side by Side</h2>
+<p>Only Enigma Vault and Protecto pair usable tokens with built-in AI prompt protection; Skyflow and InCountry sell that as a separate product, and the rest encrypt, manage keys, or move files. Each cell comes from the vendor’s own pages, checked October 16, 2026.</p>
+<div class="bl-tablewrap">
+  <table class="bl-table bl-table--wide">
+    <thead><tr><th>Platform</th><th>Data regions</th><th>Where readable data lives</th><th>Key control</th><th>Who can reveal data</th><th>Deployment</th><th>Data covered</th><th>AI prompt protection</th></tr></thead>
+    <tbody>
+      <tr><td>Enigma Vault</td><td>EU and US</td><td>Regional vault; tokens go to apps, partners, and AI prompts</td><td>Enigma-managed AES-256 per field; per-file keys</td><td>API clients with your OAuth2 credentials, logged</td><td>Cloud, on AWS</td><td>Fields, cards, files, customer records</td><td>Included (NoPII)</td></tr>
+      <tr><td>Skyflow</td><td>US, EU, India, Japan, Australia, Indonesia, Middle East</td><td>Regional vaults; tokens in your app or ServiceNow</td><td>Skyflow-managed polymorphic encryption</td><td>Per-field access policies</td><td>Skyflow-hosted regions</td><td>PII and payment fields</td><td>Separate product (Skyflow for GenAI)</td></tr>
+      <tr><td>VGS</td><td>US, EU, Asia-Pacific (Singapore)</td><td>One vault per region, own hostname each</td><td>VGS-managed</td><td>Approved endpoints via outbound proxy routes</td><td>VGS-hosted regions</td><td>Payment and PII fields</td><td>Not a focus</td></tr>
+      <tr><td>InCountry</td><td>Per country; China quoted separately</td><td>In-country; global app sees a redacted copy</td><td>InCountry cloud or yours</td><td>Restored only inside the country</td><td>Your infrastructure, AWS Outposts, Alibaba Cloud</td><td>CRM and customer records</td><td>AgentCloak add-on</td></tr>
+      <tr><td>CipherStash</td><td>AWS regions, one key setup each</td><td>Your own Postgres, as ciphertext</td><td>Client keys in your app; BYO KMS root key on Enterprise</td><td>Holders of that region’s credentials</td><td>Your database; key service on AWS</td><td>Postgres columns, searchable</td><td>Not offered</td></tr>
+      <tr><td>Protecto</td><td>Wherever you deploy it</td><td>Same value, same token within a namespace</td><td>Your deployment</td><td>Role- and context-based unmasking, logged</td><td>SaaS, on-premises, air-gapped</td><td>Structured and free text, 50+ languages</td><td>Included (AI apps, RAG, agents)</td></tr>
+      <tr><td>Fortanix DSM</td><td>North America, EU, UK, APAC, Australia, Saudi Arabia</td><td>Keys pinned to a region; data elsewhere</td><td>FIPS 140-2 Level 3 HSMs, BYOK</td><td>Policies per key and use</td><td>Regional SaaS or appliance</td><td>Keys for databases and clouds</td><td>Not offered</td></tr>
+      <tr><td>Kiteworks</td><td>Wherever you run the instance</td><td>Single-tenant instance you place</td><td>AES-256, FIPS 140-3 modules</td><td>Policy-governed sharing, logged</td><td>On-premises, hybrid, air-gapped</td><td>Files and email</td><td>Governs AI agent file access</td></tr>
+      <tr><td>Tresorit</td><td>Chosen region (user-level on Business Pro)</td><td>Encrypted files in the chosen region</td><td>End-to-end, zero-knowledge</td><td>Only invited users</td><td>Tresorit cloud</td><td>Files</td><td>Not offered</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>Packaging changes often, so confirm the cells that matter most to you in the vendor’s quote.</p>
+
+<h2 id="how-to-pick-the-right-privacy-vault-for-your-cross-border-data-flows">How to Pick the Right Privacy Vault for Your Cross-Border Data Flows</h2>
+<p>In my experience, two questions narrow the list fast: which country’s law says the original has to stay put, and who needs to read it from where?</p>
+<h3 id="recommended-privacy-vault-for-each-cross-border-use-case">Recommended Privacy Vault for Each Cross-Border Use Case</h3>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Use case</th><th>Start with</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td>Travel agency sharing traveler passports and cards with EU suppliers</td><td>Enigma Vault</td><td>Originals stay in the EU or US vault; suppliers get tokens, and every reveal is logged</td></tr>
+      <tr><td>Hotel group with properties in the EU and US</td><td>Enigma Vault</td><td>Customer Vault intake and Card Vault keep guest IDs and cards out of property systems</td></tr>
+      <tr><td>Clinic network using offshore billing or transcription</td><td>Enigma Vault, Tresorit</td><td>Contractors work on tokens or encrypted files; readable records stay home</td></tr>
+      <tr><td>Contact center with agents in another country</td><td>Enigma Vault</td><td>Agents see tokens instead of names, card numbers, and IDs</td></tr>
+      <tr><td>SaaS selling into India, Indonesia, or the Gulf</td><td>Skyflow, InCountry</td><td>In-country vaults satisfy localization rules</td></tr>
+      <tr><td>Fintech holding payments data in the US, EU, and Singapore</td><td>VGS</td><td>Named regional payment vaults</td></tr>
+      <tr><td>AI features using EU customer data with US model providers</td><td>Enigma Vault (NoPII), Protecto</td><td>PII tokenized before it reaches the model provider</td></tr>
+    </tbody>
+  </table>
+</div>
+<h3 id="which-privacy-vault-fits-your-scale">Which Privacy Vault Fits Your Scale</h3>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Size</th><th>Start with</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td>Startup or small business</td><td>Enigma Vault, CipherStash, Tresorit</td><td>Free or published pricing lets you prove a flow before a contract</td></tr>
+      <tr><td>Growth or mid-market</td><td>Enigma Vault, Protecto, VGS</td><td>Add regions and partners without multiplying readable copies</td></tr>
+      <tr><td>Enterprise with many jurisdictions</td><td>Skyflow, InCountry, Fortanix</td><td>Per-country vaults and key sovereignty at scale</td></tr>
+      <tr><td>Public sector or defense supply chain</td><td>Kiteworks</td><td>FedRAMP authorization and self-hosting</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h2 id="common-mistakes-us-companies-make-when-buying-a-privacy-vault-for-cross-border-data">Common Mistakes US Companies Make When Buying a Privacy Vault for Cross-Border Data</h2>
+<ul>
+  <li><strong>Treating tokens as anonymous data:</strong> Tokenized data is pseudonymised and still personal data under GDPR, and the DOJ rule covers encrypted data too.</li>
+  <li><strong>Checking the primary region only:</strong> Backups, logs, and disaster-recovery copies can sit in another country, so ask for every copy’s region.</li>
+  <li><strong>Ignoring who can call reveal:</strong> Residency means little if a support engineer abroad can detokenize at will; restrict reveal by system and region.</li>
+  <li><strong>Relying on the Data Privacy Framework alone:</strong> It only covers certified recipients and could be challenged again, so keep SCCs and technical measures ready.</li>
+  <li><strong>Forgetting AI providers:</strong> A prompt sent to a model API in another country is a transfer too, so tokenize before it leaves.</li>
+</ul>
+
+<h2 id="smart-questions-to-ask-a-privacy-vault-vendor-before-you-sign">Smart Questions to Ask a Privacy Vault Vendor Before You Sign</h2>
+<ul>
+  <li>Which regions can store our originals today, by name, and will you put that list in the contract?</li>
+  <li>Where do backups, logs, and disaster-recovery replicas live?</li>
+  <li>Who can detokenize, from which systems, and is each reveal logged?</li>
+  <li>Who holds the keys, and can we bring our own?</li>
+  <li>Which subprocessors touch our data, and in which countries?</li>
+  <li>How do your controls support our DOJ Data Security Program obligations, given encryption alone doesn’t exempt covered data?</li>
+</ul>
+
+<h2 id="ready-to-try-enigma-vaults-data-vault">Ready to Try Enigma Vault’s Data Vault?</h2>
+<p>Start by moving one cross-border flow to tokens: the EU customer table your US support team reads, the passport scans your travel desk emails to suppliers, or the prompts your app sends to a model provider. <a class="bl-link" href="/vault/data-vault/">Data Vault</a> runs in EU or US regions, and the <a class="bl-link" href="/pricing/">free Lite tier</a> covers 1,500 requests a month with no contract, so you can show counsel the reveal log before anyone signs. Prefer to talk it through first? <a class="bl-link" href="/request-demo/">Book a demo</a>.</p>
+<div class="bl-inlinecta">
+  <div>
+    <p class="bl-inlinecta__t">Personal data shouldn’t need a passport.</p>
+    <p class="bl-inlinecta__s">Start free with Data Vault, or talk to us about how your data moves between countries.</p>
+  </div>
+  <a class="np-btn np-btn--on-dark np-btn--primary" href="/pricing/"><span>Start free</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
+</div>

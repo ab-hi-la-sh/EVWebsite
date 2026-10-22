@@ -6,7 +6,6 @@ description: "Try NoPII live. Watch PII get detected, tokenized and restored thr
 ogImage: "/assets/og/nopii-overview.jpg"
 ogImageAlt: "What the model never sees, it can never leak. — Enigma Vault"
 styles: ["pages/nopii-live.css", "pages/nopii-overview.css", "pages/nopii-demo.css"]
-scripts: ["pages/nopii-demo-v6.js"]
 ---
 
   <!-- 1 · Hero -->
@@ -54,21 +53,26 @@ client = OpenAI(
       <div class="npd">
         <div class="npd__head">
           <h2 class="np-h2">Try it <em>yourself</em>.</h2>
-          <div class="npd-tabs" role="tablist" aria-label="Which demo" id="npd-tablist">
-            <button class="npd-tab" role="tab" id="npd-tab-proxy" aria-selected="true" aria-controls="npd-panel-proxy" type="button">Through the proxy</button>
-            <button class="npd-tab" role="tab" id="npd-tab-sdk" aria-selected="false" aria-controls="npd-panel-sdk" tabindex="-1" type="button">In the browser <span class="npd-badge">Preview</span></button>
-          </div>
-          <p class="npd__sub" id="npd-sub">See how NoPII detects, tokenizes, and restores personally identifiable information in real time.</p>
         </div>
 
-        <div class="npd-panel npd-panel--proxy" id="npd-panel-proxy" role="tabpanel" aria-labelledby="npd-tab-proxy">
-          <div id="npd-proxy"><noscript>This demo needs JavaScript. Without it, <a href="/nopii/#how-it-works">read how NoPII works</a>.</noscript></div>
-        </div>
-
-        <div class="npd-panel" id="npd-panel-sdk" role="tabpanel" aria-labelledby="npd-tab-sdk" hidden>
-          <iframe class="npd-frame" id="npd-frame" data-src="/sdk-demo/index.html?v=5" title="NoPII browser SDK demo"></iframe>
-        </div>
-
+        <iframe
+          id="nopii-demo"
+          src="https://www.nopii.co/embed/demo?theme=enigmavault"
+          title="NoPII demo"
+          loading="lazy"
+          style="display:block;width:100%;height:900px;border:0"
+        ></iframe>
+        <script>
+          (function () {
+            var frame = document.getElementById("nopii-demo");
+            window.addEventListener("message", function (e) {
+              if (e.origin !== "https://www.nopii.co" || e.source !== frame.contentWindow) return;
+              if (!e.data || e.data.type !== "nopii-demo:height") return;
+              var h = Number(e.data.height);
+              if (h > 0 && h < 8000) frame.style.height = Math.ceil(h) + "px";
+            });
+          })();
+        </script>
       </div>
     </div>
   </section>

@@ -144,12 +144,17 @@ faqs:
 <p>Identity is the only thing removed.</p>
 <p>One exception is worth calling out. Card numbers shouldn't enter prompts at all, tokenized or not. Keep card capture in a separate, PCI-scoped payment flow.</p>
 <p>For your engineering team, adopting a hosted reverse proxy usually means changing one setting in the SDK you already use:</p>
-<div class="bl-docbox">
-<pre><code><span class="tok-k">from</span> openai <span class="tok-k">import</span> OpenAI
-
+<div class="bl-code bl-code--light">
+  <div class="bl-code__bar"><span class="bl-code__lang">BEFORE</span></div>
+  <pre><code><span class="tok-c"># Before: PII goes straight to OpenAI</span>
+client = OpenAI(api_key=<span class="tok-s">"sk-..."</span>)</code></pre>
+</div>
+<div class="bl-code bl-code--light">
+  <div class="bl-code__bar"><span class="bl-code__lang">AFTER</span></div>
+  <pre><code><span class="tok-c"># After: PII is intercepted and tokenized by NoPII</span>
 client = OpenAI(
-    base_url=<span class="tok-s">"https://api.nopii.co"</span>,
-    api_key=<span class="tok-s">"YOUR_OPENAI_API_KEY"</span>,
+  api_key=<span class="tok-s">"sk-..."</span>,
+  base_url=<span class="tok-s">"https://api.nopii.co"</span>
 )</code></pre>
 </div>
 <p>The rest of your application stays as it is.</p>
@@ -160,8 +165,9 @@ client = OpenAI(
 <h3>Streaming Responses</h3>
 <p>Chat interfaces stream text in small chunks through server-sent events (SSE). If a proxy waits for the full response before restoring values, the chat freezes and then dumps the whole answer at once.</p>
 <p>A streaming-aware proxy restores tokens as each chunk arrives:</p>
-<div class="bl-docbox bl-docbox--plain">
-<pre><code>Provider sends:   "Hi [NAME: Ry0Ixd1], thanks for confirming"
+<div class="bl-code bl-code--light">
+  <div class="bl-code__bar"><span class="bl-code__lang">STREAMING RESTORE</span></div>
+  <pre><code>Provider sends:   "Hi [NAME: Ry0Ixd1], thanks for confirming"
 Agent sees:       "Hi Angela, thanks for confirming"
 
 Provider sends:   " your plan on [ACCOUNT: 7Qp2mX]."
@@ -198,9 +204,13 @@ Agent sees:       " your plan on CA-88214."</code></pre>
 <p>When NoPII can't tokenize a request, it stops the call and returns a 503 error that reads, "Request blocked to prevent data leakage." Your application can retry safely, and nothing reaches the model.</p>
 <h3>Labels That Trigger Refusals</h3>
 <p>Models sometimes refuse or hedge when a prompt names a sensitive category. Context phrase neutralization rewrites those labels, so the model has no reason to refuse and can't guess what a token hides:</p>
-<div class="bl-docbox bl-docbox--plain">
-<pre><code>Before:  Update the record for Angela Brooks (social security number: 123-45-6789)
-After:   Update the record for [NAME: Ry0Ixd1] (ID number: [GOV_ID: k8Lm2n])</code></pre>
+<div class="bl-code bl-code--light">
+  <div class="bl-code__bar"><span class="bl-code__lang">BEFORE</span></div>
+  <pre><code>Update the record for Angela Brooks (social security number: 123-45-6789)</code></pre>
+</div>
+<div class="bl-code bl-code--light">
+  <div class="bl-code__bar"><span class="bl-code__lang">AFTER</span></div>
+  <pre><code>Update the record for [NAME: Ry0Ixd1] (ID number: [GOV_ID: k8Lm2n])</code></pre>
 </div>
 <h2>Which AI Traffic Should Run Through an LLM Privacy Proxy?</h2>
 <p><strong>Any AI traffic your application sends to a model API should run through an LLM privacy proxy, while consumer chatbots, browser extensions and image or audio files need separate controls.</strong></p>
@@ -289,9 +299,13 @@ After:   Update the record for [NAME: Ry0Ixd1] (ID number: [GOV_ID: k8Lm2n])</co
 <h3>Financial Services and Fintech</h3>
 <p>Support agents at a lending platform paste account details into an internal copilot many times a day. Engineers on the same team paste API keys and connection strings into AI coding assistants while debugging.</p>
 <p>A privacy proxy with secrets detection catches both. Token formats are illustrative:</p>
-<div class="bl-docbox bl-docbox--plain">
-<pre><code>Engineer pastes:  Why does this fail? key=sk_live_51Hx... db=postgres://admin:pass@prod-db
-Model receives:   Why does this fail? key=[SECRET: a8Kd2p] db=[SECRET: Qw9Lm3]</code></pre>
+<div class="bl-code bl-code--light">
+  <div class="bl-code__bar"><span class="bl-code__lang">ENGINEER PASTES</span></div>
+  <pre><code>Why does this fail? key=sk_live_51Hx... db=postgres://admin:pass@prod-db</code></pre>
+</div>
+<div class="bl-code bl-code--light">
+  <div class="bl-code__bar"><span class="bl-code__lang">MODEL RECEIVES</span></div>
+  <pre><code>Why does this fail? key=[SECRET: a8Kd2p] db=[SECRET: Qw9Lm3]</code></pre>
 </div>
 <p>Fraud teams get the same benefit when they summarize transaction narratives, because customer names and account numbers stay tokenized throughout.</p>
 <h3>Law Firms and Legal Tech</h3>

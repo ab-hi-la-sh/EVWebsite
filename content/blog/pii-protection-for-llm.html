@@ -47,10 +47,14 @@ faqs:
 <p><strong>PII protection for LLMs is a set of controls that keeps personal data out of prompts, retrieved context, model outputs and logs, while still giving the model enough context to do its job well.</strong></p>
 <p>The goal fits in one line: protect identity, keep context. A model drafting a reply about a disputed charge needs to know what happened. It doesn't need to know who the customer is.</p>
 <p>Here's a bank contact center prompt, before and after protection.</p>
-<p><strong>Before protection:</strong></p>
-<p class="bl-indent">Draft a reply to Robert Hayes (robert.hayes@email.com, account 0049-8812-3301) about the $2,140 disputed charge. His SSN on file is 123-45-6789.</p>
-<p><strong>After protection:</strong></p>
-<p class="bl-indent">Draft a reply to [NAME: Ry0Ixd1] ([EMAIL: p91QzT], account reference [ACCT: Xa40Lm]) about the $2,140 disputed charge. His ID number on file is [GOV_ID: k8Lm2n].</p>
+<div class="bl-code bl-code--light">
+  <div class="bl-code__bar"><span class="bl-code__lang">BEFORE PROTECTION</span></div>
+  <pre><code>Draft a reply to Robert Hayes (robert.hayes@email.com, account 0049-8812-3301) about the $2,140 disputed charge. His SSN on file is 123-45-6789.</code></pre>
+</div>
+<div class="bl-code bl-code--light">
+  <div class="bl-code__bar"><span class="bl-code__lang">AFTER PROTECTION</span></div>
+  <pre><code>Draft a reply to [NAME: Ry0Ixd1] ([EMAIL: p91QzT], account reference [ACCT: Xa40Lm]) about the $2,140 disputed charge. His ID number on file is [GOV_ID: k8Lm2n].</code></pre>
+</div>
 <p>The model still writes an accurate reply, and your application restores the real values before the agent sends it.</p>
 <p>Notice that "SSN" became "ID number." At NoPII, we neutralize labels like this, because a phrase such as "social security number" next to a token can hint at what it hides or make some models refuse the request.</p>
 <h2>Why Do LLMs Need Their Own PII Protection?</h2>
@@ -231,12 +235,17 @@ faqs:
 <p>The principle never changes. What changes is where that control point fits in your stack.</p>
 <h3>Direct API Calls to OpenAI, Anthropic and Gemini</h3>
 <p>This is the simplest setup and the easiest to protect. Route the SDK's traffic through the protection layer by changing one setting:</p>
-<div class="bl-docbox">
-<pre><code><span class="tok-k">from</span> openai <span class="tok-k">import</span> OpenAI
-
+<div class="bl-code bl-code--light">
+  <div class="bl-code__bar"><span class="bl-code__lang">BEFORE</span></div>
+  <pre><code><span class="tok-c"># Before: PII goes straight to OpenAI</span>
+client = OpenAI(api_key=<span class="tok-s">"sk-..."</span>)</code></pre>
+</div>
+<div class="bl-code bl-code--light">
+  <div class="bl-code__bar"><span class="bl-code__lang">AFTER</span></div>
+  <pre><code><span class="tok-c"># After: PII is intercepted and tokenized by NoPII</span>
 client = OpenAI(
-    base_url=<span class="tok-s">"https://your-protection-layer.example.com/v1"</span>,
-    api_key=<span class="tok-s">"YOUR_KEY"</span>,
+  api_key=<span class="tok-s">"sk-..."</span>,
+  base_url=<span class="tok-s">"https://api.nopii.co"</span>
 )</code></pre>
 </div>
 <p>Every request now passes through detection and tokenization first, and responses return with real values restored. No other code changes.</p>

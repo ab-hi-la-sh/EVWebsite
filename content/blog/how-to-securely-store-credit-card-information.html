@@ -1,0 +1,279 @@
+---
+title: "How to Securely Store Credit Card Information: A Business Guide"
+titleEmphasis: "A Business Guide"
+slug: "how-to-securely-store-credit-card-information"
+layout: "pii-style"
+metaTitle: "How to Securely Store Credit Card Information: A Business Guide"
+description: "Learn how to securely store credit card information: what PCI DSS lets you keep, where cards should never go and how a card vault lets staff use cards safely."
+subtitle: "Learn how to securely store credit card information: what PCI DSS lets you keep, where cards should never go and how a card vault lets staff use cards safely."
+date: 2026-10-24
+category: "Card Vault"
+author: "abhilash-kumar"
+readTime: 20
+heroImage: "/assets/blog/img-09.png"
+heroAlt: "Layered translucent panels representing a credit card secured in a vault"
+excerpt: "Learn how to securely store credit card information: what PCI DSS lets you keep, where cards should never go and how a card vault lets staff use cards safely."
+tags: ["card-storage", "pci-dss", "tokenization", "card-vault"]
+ogImage: "/assets/og/vault-data.jpg"
+ogImageAlt: "How to Securely Store Credit Card Information: A Business Guide | Enigma Vault"
+ogType: article
+styles: ["blog.css", "pages/blog-pii-hero.css", "tr-pages.css"]
+scripts: ["blog-article.js"]
+faqSchema: true
+faqs:
+  - q: "Can We Store the CVV for Later Bookings or Recurring Charges?"
+    a: "No. PCI DSS prohibits storing the CVV after authorization, even with customer consent. When a later booking needs the code, collect it again through a secure CVV-only form that deletes it shortly after use."
+  - q: "Can Staff View a Full Card Number Without It Passing Through Our Server?"
+    a: "Yes. A vault-hosted reveal shows the card to authorized staff inside the vault's own interface, behind passkeys or MFA, with every view logged. Your website or booking app only ever handles the token."
+  - q: "Which PCI SAQ Applies if a Vault Stores Our Cards?"
+    a: "It depends on the full setup. Card-not-present businesses that capture cards on vault-hosted forms and store only tokens often aim for SAQ A. Your acquirer or QSA confirms the final questionnaire for your setup."
+  - q: "Can Cards in a Vault Be Charged Through Stripe or Other Processors?"
+    a: "Yes, when the vault is independent. A payment proxy fills in the card at charge time and forwards it to Stripe, Authorize.net, Braintree or any REST-based gateway, so cards aren't tied to one processor."
+  - q: "Can We Move Stored Cards From Our Current Tokenization Provider?"
+    a: "Usually, yes. Cards can be exported by the current provider and imported into the new vault in bulk, then charged against new tokens. Plan the transfer with both providers so card data moves directly and securely."
+---
+
+<p><strong>To store credit card information securely, a business captures cards through a secure form or phone system, replaces each card number with a token, keeps the real number in a PCI-certified vault and never stores the CVV.</strong></p>
+
+<p>Plenty of businesses need a customer's card long after the first conversation.</p>
+
+<p>A travel agent books an independent hotel three weeks after the client approves the trip. A private club charges dues every month, and a law firm draws down a retainer. A clinic runs a patient's payment plan, while a property manager holds a card for a security deposit.</p>
+
+<p>The card has to be usable later. Keeping it safe in the meantime is where most teams get stuck.</p>
+
+<p>Card photos arrive on WhatsApp. Authorization forms pile up in an inbox. Numbers get typed into CRM notes or read aloud on recorded calls. Owners building their own booking app don't want a card number anywhere near their server, yet staff still need the card when a supplier asks for it.</p>
+
+<p>We hear these questions regularly, from small travel agencies to growing software platforms. In this guide, we'll cover what PCI DSS lets you store, where cards should never sit and how to keep cards usable without letting them touch your systems.</p>
+
+<h2>What Credit Card Information Can a Business Store?</h2>
+<p><strong>A business can store the card number, cardholder name, expiration date and service code if they're protected under PCI DSS, but it can never store the CVV, PIN or full magnetic stripe data after authorization.</strong></p>
+<p>PCI DSS splits card data into two groups. Cardholder data can be stored when it's protected. Sensitive authentication data can't be stored at all once a payment is authorized, even in encrypted form.</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Data element</th><th>Can it be stored?</th><th>What PCI DSS requires</th><th>How it works in practice</th></tr></thead>
+    <tbody>
+      <tr><td>Card number (PAN)</td><td>Yes</td><td>Must be made unreadable wherever it's stored, and shown with no more than the first six and last four digits</td><td>A booking app keeps tok_c7Rn4Wz1Hd and "Visa ending 1111" while the real number sits in a vault</td></tr>
+      <tr><td>Cardholder name</td><td>Yes</td><td>Needs protection when it's kept together with the card number</td><td>A club's member record shows the name, and only the vault links that name to a card</td></tr>
+      <tr><td>Expiration date</td><td>Yes</td><td>Falls under the same protection as the card number it belongs to</td><td>The vault keeps the date so next month's dues charge goes through without asking the member again</td></tr>
+      <tr><td>Service code</td><td>Yes</td><td>Protected alongside the card number, though few merchants ever need it</td><td>Most phone and online businesses never collect it at all</td></tr>
+      <tr><td>CVV or CVC</td><td>No</td><td>May be held only until the payment is authorized, then removed, even if it was encrypted</td><td>A vault can keep the code for the first charge and delete it within minutes</td></tr>
+      <tr><td>PIN or PIN block</td><td>No</td><td>Never kept by the merchant under any circumstances</td><td>Phone and online businesses don't handle PINs, since they're entered on card-present terminals</td></tr>
+      <tr><td>Full magnetic stripe or chip data</td><td>No</td><td>Can't be retained once the transaction is authorized</td><td>A store's terminal passes it to the processor, and nothing is saved on the merchant's side</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>Two more rules shape every storage decision. A displayed card number can show the first six and last four digits at most. Stored card data also needs a defined retention period, so nothing stays longer than the business needs it.</p>
+<p>The full requirements sit in the <a class="bl-link" href="https://www.pcisecuritystandards.org/document_library/" target="_blank" rel="noopener">PCI SSC document library</a>.</p>
+
+<h2>Where Should Credit Card Information Never Be Stored?</h2>
+<p><strong>Credit card information should never be stored in paper forms, email, spreadsheets, CRM notes, call recordings, chat tools or a company's own application database, because none of them is built to protect card data.</strong></p>
+<p>Most card leaks start with a shortcut. Someone needs the card later, so it gets saved wherever is quickest. Here's where cards usually end up, what that causes and how tokenizing the card changes the picture.</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Where it gets stored</th><th>Real-world example</th><th>What happens because of it</th><th>How tokenizing the card fixes it</th></tr></thead>
+    <tbody>
+      <tr><td>Paper authorization forms</td><td>A hotel's front desk keeps signed forms from corporate travel bookers in a binder</td><td>Anyone near the desk can read, copy or photograph the card</td><td>The booker enters the card on a secure link, and the hotel keeps a token with the signed record</td></tr>
+      <tr><td>Email inboxes</td><td>A travel agency's clients email card details for each trip</td><td>The number sits in inboxes, sent folders, backups and forwarded threads for years</td><td>The client enters the card once on a hosted form, and only the token reaches the agency</td></tr>
+      <tr><td>Spreadsheets</td><td>A private club tracks members' cards for monthly dues in a shared sheet</td><td>Files get downloaded, shared and synced to personal laptops</td><td>Each member's dues charge runs from a token, and the sheet holds only the last four digits</td></tr>
+      <tr><td>CRM or booking notes</td><td>A law firm pastes a client's retainer card into the matter notes</td><td>Every user who opens the record can read the full number</td><td>The matter record stores a token that's useless to anyone browsing it</td></tr>
+      <tr><td>Call recordings</td><td>A home services dispatcher repeats the card back to the caller</td><td>The number lands in audio files and transcripts that stay searchable</td><td>The caller types the card on their keypad, so nothing sensitive is spoken</td></tr>
+      <tr><td>Chat and messaging apps</td><td>A property manager receives a tenant's card photo for a deposit on WhatsApp</td><td>The image stays on a personal phone and in cloud backups</td><td>A secure link replaces the photo, and the tenant record holds a token</td></tr>
+      <tr><td>Your own app database</td><td>A small agency stores cards in the database behind its WordPress booking site</td><td>Servers, logs and backups all fall into PCI scope, and a breach exposes every card</td><td>The app stores tokens, while the cards sit in a vault outside your environment</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>That last row surprises many owners. A small agency building its own booking platform on WordPress or Replit often assumes encryption in its own database is enough. It isn't, because the application still handles the card number, and that pulls the whole stack into PCI DSS.</p>
+<p>The pattern is the same in every row. The card lives where people and tools can reach it. Tokenizing at the moment of capture moves the card into a vault built for it, and leaves your team with a reference that can't be misused.</p>
+
+<h2>How to Securely Store Credit Card Information: Step-by-Step</h2>
+<p><strong>Securely storing credit card information means capturing the card outside your systems, tokenizing it instantly, encrypting it inside a vault, saving only the token and controlling how the card is charged, revealed and deleted.</strong></p>
+<p>Before any card is stored, confirm you actually need it for a later charge, and record what the customer agreed to. Then the card moves through a vault in eight steps. Here's how it works with Enigma's Card Vault.</p>
+
+<h3>Step 1: Capture the Card Through a Secure Channel</h3>
+<p>The card should go from the customer straight to the vault. There are three common ways to do that:</p>
+<ul>
+  <li><strong>Hosted or embedded form:</strong> A card form loaded from the vault sits inside your website or checkout as an iframe, so the number is typed into the vault's page, never yours.</li>
+  <li><strong>Phone keypad:</strong> For phone bookings, the caller types the card on their keypad through an IVR connector such as Twilio Pay, and agents never hear it.</li>
+  <li><strong>Server-side API:</strong> Platforms with their own capture flow send the card to the vault in one authenticated call.</li>
+</ul>
+<p>A travel agency taking a cruise deposit by phone and a SaaS platform adding card-on-file to its checkout use different channels, but in both cases the card skips their staff and servers.</p>
+
+<h3>Step 2: Tokenize the Card the Moment It's Captured</h3>
+<p>As soon as the card reaches the vault, it's swapped for a token. With a hosted form, the token comes back to your page through a browser callback, so your backend only ever sees something like tok_c7Rn4Wz1Hd.</p>
+<p>You can watch this happen yourself. <a class="bl-link" href="https://www.enigmavault.io/vault/card-vault-demo/">Try the Card Vault live demo</a> with the test card 4111 1111 1111 1111, and see the token come back in place of the number.</p>
+
+<h3>Step 3: Encrypt and Store the Card Inside the Vault</h3>
+<p>Here's where the card actually lives. Inside the vault, each card field is encrypted with AES-256, using a unique initialization vector per field. Every customer has its own encryption keys in a managed secrets store, rotated on a schedule and never shared with another customer.</p>
+<p>Tenants are isolated from one another, and the vault runs in US and EU regions. Your team never manages a key, which removes one of the hardest parts of PCI DSS from your plate.</p>
+
+<h3>Step 4: Save Only the Token in Your Own Systems</h3>
+<p>Your CRM, booking tool or billing system stores the token, the card brand and the last four digits. That's enough for a clinic's front desk to confirm "the Visa ending 1111" with a patient.</p>
+<p>If an older system rejects anything that doesn't look like a card number, a format-preserving token keeps the first six and last four digits and passes the same Luhn check, so nothing downstream breaks.</p>
+
+<h3>Step 5: Handle the CVV Separately and Let It Expire</h3>
+<p>The security code can help authorize the first charge, but PCI DSS forbids keeping it afterward. In Card Vault, the CVV is held encrypted for 30 minutes at most, then deleted.</p>
+<p>When a supplier asks for the code on a later booking, a CVV-only hosted form collects it again at that moment.</p>
+
+<h3>Step 6: Charge the Card Without Touching It</h3>
+<p>When it's time to bill, your app sends a request with placeholders where the card number, CVV and expiry would go. The vault's payment proxy fills in the real values and forwards the charge to your gateway, whether that's Authorize.net, Stripe, Braintree or PayPal.</p>
+<p>A property manager's monthly rent run works this way. The rent goes through, and no one in the office or the software ever sees the tenant's card.</p>
+
+<h3>Step 7: Control Who Can Retrieve or Reveal the Card</h3>
+<p>Every request to the vault uses OAuth2 credentials scoped to specific actions, and every request is logged. Most services only need to store cards and charge them.</p>
+<p>When a person needs the full number, such as a travel agent typing a card into a hotel's portal, the reveal happens inside the vault's own interface, behind multi-factor sign-in, and each reveal is recorded. Pulling raw card numbers into your own app is possible, but it brings that app back into PCI scope.</p>
+
+<h3>Step 8: Set an Expiry and Delete Cards You No Longer Need</h3>
+<p>A card collected for one booking shouldn't stay on file for years. Each stored card can carry an expiry, from 60 seconds up to seven years, and cards can be deleted on request. Once this flow is in place, ask your acquirer or QSA which self-assessment questionnaire fits your setup. Treat any shorter questionnaire as something they confirm, whatever a vendor's marketing says, ours included.</p>
+
+<h2>Tokenization vs Encryption vs Truncation: Which Storage Method Is Best?</h2>
+<p><strong>Tokenization is the best storage method for most businesses, because it removes the card number from company systems, while encryption keeps it in place and truncation or hashing make it unusable for later charges.</strong></p>
+<p>PCI DSS accepts four ways to make a stored card number unreadable. The easiest way to see the difference is to store the same card, 4111 1111 1111 1111, each way:</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Method</th><th>What sits in your database</th><th>What a stolen copy gives an attacker</th><th>Can you charge it later?</th></tr></thead>
+    <tbody>
+      <tr><td>Encryption</td><td>Ciphertext such as 9f3a7c2e81b4d6f0, plus a key somewhere in your environment</td><td>The card, if the key leaks too</td><td>Yes, after decrypting</td></tr>
+      <tr><td>Tokenization</td><td>tok_c7Rn4Wz1Hd</td><td>A random string; the card sits in a separate vault</td><td>Yes, through the vault</td></tr>
+      <tr><td>Truncation</td><td>411111******1111</td><td>Partial digits only</td><td>No</td></tr>
+      <tr><td>One-way hashing</td><td>A fixed value such as a3c91f07be2d84e6c5f2</td><td>A value attackers may crack by guessing, since card numbers follow known patterns</td><td>No</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>Now picture a clinic's billing database being copied in a breach.</p>
+<p>With encryption, the attacker holds ciphertext and goes looking for the key. That key often lives on the same server, in a configuration file or in the hands of the developer who set it up. Find it, and every card in the table opens.</p>
+<p>With tokenization, the attacker holds tok_c7Rn4Wz1Hd and thousands like it. Each one is random, with no mathematical link to a card. The vault that holds the real numbers was never part of the breach.</p>
+<p>That's the core difference. Encryption keeps the card and its key inside your environment, so every system and person near either one stays in PCI scope. Tokenization moves the card out entirely, which is why it suits businesses that need to charge cards again without running a full security program.</p>
+<p>The same approach sits behind <a class="bl-link" href="/blog/credit-card-tokenization/">credit card tokenization</a> more broadly.</p>
+
+<h2>How Different Industries Store Credit Card Information Securely</h2>
+<p><strong>Businesses store credit card information securely by matching the capture channel to how cards arrive, whether that's a phone booking, an intake link or a checkout form, then keeping only tokens in their own systems.</strong></p>
+<p>Every industry collects cards a little differently. The storage pattern stays the same: capture outside your systems, tokenize, keep the token.</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Industry</th><th>How cards usually arrive</th><th>Where they end up today</th><th>Secure storage pattern</th></tr></thead>
+    <tbody>
+      <tr><td>Travel agencies and tour operators</td><td>Phone calls, emails and booking forms</td><td>Inboxes, CRM notes and supplier portals</td><td>Hosted form or secure link, token on the booking, vault reveal for supplier portals</td></tr>
+      <tr><td>Hotels and hospitality groups</td><td>Third-party authorization forms from assistants and event planners</td><td>Email attachments and front-desk binders</td><td>Branded intake link with e-signature, token on the reservation</td></tr>
+      <tr><td>Private aviation, yacht charter and clubs</td><td>Cards collected over years for charters and dues</td><td>Spreadsheets and legacy systems</td><td>Bulk import into the vault, charges through the existing processor</td></tr>
+      <tr><td>Clinics and dental practices</td><td>Phone calls and paper intake forms</td><td>Practice notes and call recordings</td><td>Keypad capture or secure link, token for payment plans</td></tr>
+      <tr><td>Law firms and accounting practices</td><td>Retainer requests by email</td><td>Matter notes and billing inboxes</td><td>Secure link, token on the matter, charges through a proxy</td></tr>
+      <tr><td>Property management</td><td>Deposit and rent cards by text or form</td><td>Phones and property software notes</td><td>Secure link, token on the tenant ledger</td></tr>
+      <tr><td>Home services and field teams</td><td>Dispatcher calls and technician devices</td><td>Call recordings and job notes</td><td>Keypad capture or payment link, token on the job</td></tr>
+      <tr><td>Contact centers and collections</td><td>Agents taking cards on recorded calls</td><td>Audio, transcripts and agent desktops</td><td>IVR capture, token in the case system</td></tr>
+      <tr><td>SaaS platforms and marketplaces</td><td>Merchants adding cards on file for billing</td><td>The platform's own database</td><td>Embedded form, token in the app, proxy to any gateway</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>A travel agency and a SaaS platform look nothing alike, but both end up in the same place: the card in a vault and a token everywhere else.</p>
+
+<h2>How to Store Credit Cards Collected by Phone, Email or Authorization Forms</h2>
+<p><strong>Cards collected by phone, email or authorization forms should be captured through a phone keypad system, a pay-by-link page or a secure intake link that sends the number straight to a vault instead of to staff.</strong></p>
+<p>Remote card collection is normal in the US. Travel advisers, hotels, clinics and home services teams take cards by phone or form every day. These mail order and telephone order (MOTO) payments are legitimate, but the capture path decides how much risk follows.</p>
+<p><strong>Phone payments:</strong> When a customer reads a card number aloud, it lands in the agent's ears, the call recording and often the CRM. Keypad entry through an IVR keeps the number away from all three. Enigma's Twilio Pay connector works this way, sending the card to the vault and the token back to your system.</p>
+<p><strong>Emailed cards and photos:</strong> Ask customers to stop emailing cards, and send a secure link instead. A hosted payment page captures the card and returns a token.</p>
+<p><strong>Card authorization forms:</strong> Hotels often receive these from assistants or corporate travel teams booking for someone else. A signed PDF with the card written on it is still a card in an inbox. A branded intake link lets the client enter the card and sign the authorization in one place, with no account to create, so the signed record and the token sit together. It's the same model behind <a class="bl-link" href="/blog/secure-client-intake-form/">secure client intake forms</a>.</p>
+<p><strong>Manual entry:</strong> Typing a card into a general-purpose browser or CRM doesn't reduce PCI scope just because it's manual. Only an approved, isolated setup changes that, and your acquirer or QSA confirms it.</p>
+
+<h2>How to Store Cards on File for Recurring and Future Charges</h2>
+<p><strong>Cards on file for recurring and future charges should be stored as tokens with recorded customer consent, charged without the CVV and kept current when banks reissue them.</strong></p>
+<p>Storing a card for later is common, but card network rules expect a clear record of what the customer agreed to.</p>
+<ul>
+  <li><strong>Consent first:</strong> Record the amount or billing terms, the schedule and how the customer can cancel.</li>
+  <li><strong>Charge type:</strong> Flag whether the customer started the charge, such as approving a booking deposit, or the business did, such as a monthly dues run.</li>
+  <li><strong>CVV rules:</strong> The PCI Security Standards Council is direct about this in its <a class="bl-link" href="https://blog.pcisecuritystandards.org/faq-can-cvc-be-stored-for-card-on-file-or-recurring-transactions" target="_blank" rel="noopener">FAQ on card-on-file and recurring transactions</a>: "These values are not needed for card-on-file or recurring transactions," and "storage for these purposes is prohibited under PCI DSS Requirement 3.2." Customer consent doesn't change that.</li>
+  <li><strong>Card updates:</strong> Reissued or expired cards break stored payments, so plan for a card update process or network tokens.</li>
+</ul>
+<p>A dental group running payment plans shows why consistency matters too. When the same card always maps to the same token, the billing team can spot duplicate signups and keep a patient's charges linked without anyone seeing the number. Deterministic tokens like these are a core part of <a class="bl-link" href="/blog/card-vault-tokenization/">card vault tokenization</a>.</p>
+
+<h2>How Can Staff Use a Stored Card Without It Touching Your Servers?</h2>
+<p><strong>Staff can use a stored card without it touching company servers by charging through a payment proxy that fills in the card inside the vault, or by viewing it in a vault-hosted screen that logs every reveal.</strong></p>
+<p>This is the question we get most often from travel agencies. A client authorizes the agency to book an independent hotel or a cruise line on their behalf. The supplier has no API, so someone has to type the card into the supplier's portal.</p>
+<p>The owner wants two things at once: staff who can use the card when needed, and an app that never sees it.</p>
+<p>There are two safe paths.</p>
+<p><strong>Path 1, charge through a proxy:</strong> When the payment goes to a gateway such as Stripe or Authorize.net, nobody needs to see the card. Your app sends the token, and a payment proxy fills in the card details inside the vault before forwarding the request.</p>
+<p><strong>Path 2, reveal inside the vault:</strong> When a supplier needs the card typed in by hand, an authorized staff member opens it in a vault-hosted screen. In Enigma's Customer Vault, staff sign in with passkeys or an authenticator app, access is limited by role, and every reveal is logged against the person who made it. The card is shown in the vault's interface and never travels through your WordPress site or custom app.</p>
+<p>Human access still needs house rules. Train staff never to copy a revealed card into email, chat or a screenshot, and tie each reveal to a booking, an amount and the client's authorization.</p>
+<p>There's also a third option that looks tempting and usually isn't. Pulling raw card numbers into your own application through an API gives your developers control, but it also brings that application back into PCI scope, which is the outcome most small agencies are trying to avoid.</p>
+
+<h2>Can Stored Cards Work With More Than One Payment Provider?</h2>
+<p><strong>Stored cards can work with more than one payment provider when they're held in an independent card vault, because processor-held tokens usually work only with the processor that issued them.</strong></p>
+<p>Many businesses start by saving cards with their payment processor. It works until they want a second processor, a better rate or a new market. Then they learn the tokens can't move, and every customer has to re-enter a card.</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Question</th><th>Processor's vault</th><th>Independent card vault</th></tr></thead>
+    <tbody>
+      <tr><td>Who holds the card?</td><td>The payment processor</td><td>A separate vault provider</td></tr>
+      <tr><td>Can you use another gateway?</td><td>Usually not without a migration</td><td>Yes, through a gateway proxy</td></tr>
+      <tr><td>Switching processors</td><td>Every card has to move or be re-collected</td><td>A configuration change</td></tr>
+      <tr><td>Staff access to cards</td><td>Limited to the processor's tools</td><td>Controlled reveal and logging</td></tr>
+      <tr><td>Best fit</td><td>One processor, standard online checkout</td><td>Card-on-file, several gateways, staff bookings</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>A processor's vault is often enough for a business with one processor and a standard online checkout. The independent vault earns its place once cards are reused across gateways, suppliers or staff workflows.</p>
+<p>Network tokens from Visa and Mastercard are another option. They keep cards current when banks reissue them, and many businesses use them alongside a vault.</p>
+<p>With Enigma Vault, your cards never live with the processor in the first place, so switching processors becomes a configuration change. Teams already storing cards with another tokenization provider can plan a card-on-file migration with us, and if those tokens are vaultless, the same phased steps apply as when you <a class="bl-link" href="/blog/how-to-migrate-from-vaultless-tokenization-to-vault/">migrate from vaultless tokenization to a vault</a>.</p>
+
+<h2>Which PCI SAQ Applies When You Store Credit Card Information?</h2>
+<p><strong>The PCI SAQ that applies when you store credit card information depends on where cards are captured and stored, with SAQ A possible when a compliant vault handles every card function and SAQ D when your systems store card data.</strong></p>
+<p>Small businesses validate PCI DSS compliance with a self-assessment questionnaire (SAQ). The right one depends on your setup, and your acquirer or QSA has the final say.</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>SAQ</th><th>Typical setup</th><th>What it means for card storage</th></tr></thead>
+    <tbody>
+      <tr><td>SAQ A</td><td>Card-not-present merchants that fully outsource card capture and storage to compliant third parties</td><td>Your systems never store, process or transmit card numbers</td></tr>
+      <tr><td>SAQ A-EP</td><td>E-commerce sites that outsource payment but control the page that loads the payment form</td><td>Your website can affect card security, so more controls apply</td></tr>
+      <tr><td>SAQ B-IP</td><td>Standalone, PCI-approved payment devices that connect over IP and store no card data</td><td>Staff key cards into an approved device, never a computer</td></tr>
+      <tr><td>SAQ C-VT</td><td>Staff enter one card at a time into an isolated, third-party-hosted virtual terminal</td><td>Works only when the computer is kept apart from other business use</td></tr>
+      <tr><td>SAQ D</td><td>Businesses that store, process or transmit card data on their own systems</td><td>The broadest questionnaire, with every PCI DSS requirement</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>Storing cards in your own database almost always lands a business in SAQ D. Capturing cards on vault-hosted forms and keeping only tokens is how most small businesses aim for a much shorter questionnaire.</p>
+<p>PCI DSS Requirement 3 also asks for four things whenever card data is stored: a retention policy, no sensitive authentication data, masked display and card numbers made unreadable. Encryption adds key management duties on top.</p>
+
+<h2>Common Mistakes Businesses Make When Storing Credit Card Information</h2>
+<p><strong>Common mistakes when storing credit card information include keeping the CVV, saving cards in CRM notes, emailing authorization forms, encrypting cards in a home-built database and tying every card to one processor.</strong></p>
+<ul>
+  <li><strong>Keeping the CVV "just in case":</strong> A hotel saves the code to avoid calling the guest again. It's prohibited, consent or not.</li>
+  <li><strong>Saving cards in booking or CRM notes:</strong> A front-desk agent pastes a card into a reservation note, and every user with access can now read it.</li>
+  <li><strong>Emailing card authorization forms:</strong> A signed PDF with a card number sits in three inboxes and a backup.</li>
+  <li><strong>Encrypting cards in your own database:</strong> A platform team adds encryption and assumes it's compliant, but its servers, logs and keys are all in scope now.</li>
+  <li><strong>Locking every card to one processor:</strong> A subscription business can't add a cheaper gateway without asking thousands of customers for their cards again.</li>
+  <li><strong>Letting staff read cards over the phone:</strong> A clinic's billing calls end up in recordings that store card numbers for years.</li>
+  <li><strong>Skipping retention rules:</strong> Cards for a single booking stay on file long after the trip ends.</li>
+</ul>
+
+<h2>How Enigma Vault Helps Businesses Store Credit Card Information Securely</h2>
+<p>Enigma Vault gives small businesses and growing platforms one place to keep cards. You keep tokens and masked details, and we keep the card.</p>
+
+<h3>Capture and Tokenize Cards With Card Vault</h3>
+<p><a class="bl-link" href="https://www.enigmavault.io/vault/card-vault/">Card Vault</a> takes cards through hosted and embedded forms in 13 languages, a Twilio Pay phone connector or one API call, and returns a token in a single step. Tokens are random by default, and Luhn-passable or deterministic tokens are there when your systems need them.</p>
+
+<h3>Secure Staff Access With Customer Vault and Agent Vault</h3>
+<p>Here's how a booking works in <a class="bl-link" href="https://www.enigmavault.io/vault/customer-vault/">Customer Vault</a>:</p>
+<ol>
+  <li>The client opens a branded intake link, enters the card and signs the authorization.</li>
+  <li>Your booking app stores the token, while the card stays in the vault.</li>
+  <li>A staff member signs in with a passkey, reveals the card for the supplier and the reveal is logged.</li>
+</ol>
+<p>Operators with thousands of cards on file can add Agent Vault, which brings bulk import, a branded card-management experience for account holders and enterprise single sign-on for staff.</p>
+
+<h3>Charge Through the Gateway You Already Use</h3>
+<p>Our payment proxy forwards charges to Authorize.net, Stripe, Braintree, PayPal or any REST-based gateway. For gateways with strict signing rules, requests can be signed with HMAC-SHA256 or OAuth 1.0a.</p>
+
+<h3>Move Cards From Your Current Provider</h3>
+<p>In one private aviation deployment, existing cards were imported into the vault in bulk and every charge kept running through the operator's processor. The cards moved into certified custody, and the operation didn't change. If your cards sit with a processor or another vault today, talk to us about card-on-file migration.</p>
+
+<h3>Enigma Vault Solution and Pricing</h3>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Card Vault plan</th><th>Monthly price</th><th>Included requests</th><th>Overage per request</th><th>Includes</th></tr></thead>
+    <tbody>
+      <tr><td>Lite</td><td>$0, free forever</td><td>1,000 per month</td><td>$0.08</td><td>Tokenization, gateway proxy and community support</td></tr>
+      <tr><td>Plus</td><td>$49.99</td><td>20,000 (roughly 200 to 300 daily transactions)</td><td>$0.04</td><td>Ephemeral key sharing and email support</td></tr>
+      <tr><td>Premium</td><td>$249.99</td><td>250,000 (roughly 2,000 daily transactions)</td><td>$0.02</td><td>Highest request volume and priority support</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>Our platform runs on PCI DSS Level 1 and SOC 2 Type II certified infrastructure. Plans are billed through AWS Marketplace, and Customer Vault is priced by engagement. See the <a class="bl-link" href="https://www.enigmavault.io/pricing/#vault">pricing page</a> or <a class="bl-link" href="https://www.enigmavault.io/request-demo/">request a demo</a> to walk through your workflow with our team.</p>

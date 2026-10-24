@@ -1,0 +1,296 @@
+---
+title: "How and Why to Migrate From Vaultless Tokenization to a Vault"
+titleEmphasis: "Migrate From Vaultless Tokenization to a Vault"
+slug: "how-to-migrate-from-vaultless-tokenization-to-vault"
+layout: "pii-style"
+metaTitle: "How and Why to Migrate From Vaultless Tokenization to a Vault"
+description: "A step-by-step guide to migrating from vaultless tokenization to a vault: decrypt legacy tokens safely, re-tokenize at scale and cut over with no downtime."
+subtitle: "A step-by-step guide to migrating from vaultless tokenization to a vault: decrypt legacy tokens safely, re-tokenize at scale and cut over with no downtime."
+date: 2026-10-24
+category: "Data Vault"
+author: "abhilash-kumar"
+readTime: 17
+heroImage: "/assets/blog/img-08.png"
+heroAlt: "Layered translucent panels representing legacy tokens migrating into a secure vault"
+excerpt: "A step-by-step guide to migrating from vaultless tokenization to a vault: decrypt legacy tokens safely, re-tokenize at scale and cut over with no downtime."
+tags: ["tokenization", "vaultless-tokenization", "data-vault", "migration"]
+ogImage: "/assets/og/vault-data.jpg"
+ogImageAlt: "How and Why to Migrate From Vaultless Tokenization to a Vault | Enigma Vault"
+ogType: article
+styles: ["blog.css", "pages/blog-pii-hero.css", "tr-pages.css"]
+scripts: ["blog-article.js"]
+faqSchema: true
+faqs:
+  - q: "Can We Keep Our Existing Token Values After Migrating to a Vault?"
+    a: "Usually not. Vault tokens are random, so legacy tokens are replaced. Format-preserving tokens and reference IDs keep downstream systems compatible, and a legacy-to-vault map supports the transition period."
+  - q: "Will Migrating From Vaultless Tokenization Cause Downtime?"
+    a: "Not when it runs in phases. Dual-mode tokenization sends new writes to the vault while reads fall back to legacy decryption, so applications keep working as historical data moves in batches."
+  - q: "Does Decrypting Legacy Tokens Bring Systems Into PCI Scope?"
+    a: "The decryption job handles real card numbers, so it sits in scope while it runs. Isolating it, restricting key access and keeping plaintext out of logs limits that scope to a short, controlled window."
+  - q: "How Long Does It Take to Migrate Millions of Tokenized Records?"
+    a: "It depends on volume and how many systems hold tokens. With batch APIs that accept thousands of values per request, data transfer is often the quickest phase, while downstream updates and validation take longer."
+  - q: "Will Our Payment Gateway Still Accept Cards After the Migration?"
+    a: "Yes. The vault supplies the real card number at charge time through a payment proxy, so the gateway receives the same card data as before and charges run without customers re-entering cards."
+---
+
+<p><strong>Migrating from vaultless tokenization to a vault means decrypting existing tokens in a controlled environment, re-tokenizing the original values into a secure vault, then updating downstream systems before the old keys are retired.</strong></p>
+
+<p>Vaultless tokenization usually wins the first round. It needs no database, generates tokens on the fly with format-preserving encryption and fits existing schemas, because each token looks like the data it replaces.</p>
+<p>The costs arrive later.</p>
+<p>Take a lending platform that tokenized two million SSNs this way. Every token depends on one key. When the security team schedules a key rotation, it finds those tokens in underwriting, servicing and a partner's nightly file, and every copy has to be re-encrypted. When a former borrower asks to be forgotten, there's no record to delete, because the SSN lives inside each token.</p>
+<p>Or take a private club that keeps member cards on file through a vaultless scheme tied to its processor. The day it wants a second gateway, it learns those tokens can't move.</p>
+<p>Both teams are running into the same limits:</p>
+<ul>
+  <li><strong>One key for everything:</strong> If the key leaks, every token ever issued can be reversed.</li>
+  <li><strong>Rotation pain:</strong> Changing that key means re-encrypting every stored token across every system.</li>
+  <li><strong>Nothing to erase:</strong> An erasure or expiry request has no single record to delete.</li>
+  <li><strong>Compliance questions:</strong> PCI guidance treats reversible tokens as encrypted card numbers.</li>
+</ul>
+<p>In this article, we'll explore the limitations of vaultless tokenization, then follow the lending platform and the club through a phased migration that moves them to a vault without a risky cutover.</p>
+
+<h2>What Is the Difference Between Vaultless and Vaulted Tokenization?</h2>
+<p><strong>Vaultless tokenization generates tokens from the original value with an encryption key, whereas vaulted tokenization issues random tokens and stores the original value in a secure vault that maps each token back.</strong></p>
+<p>The two approaches can produce tokens that look alike. What separates them is what stands between the token and the original value.</p>
+<p>Here's how the lending platform's SSNs and the club's card number look under each model:</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Original value</th><th>Vaultless token</th><th>Vault token (random)</th><th>Vault token (format-preserving)</th></tr></thead>
+    <tbody>
+      <tr><td>SSN 123-45-6789</td><td>847-29-3016</td><td>tok_8fK2xQ9mLp</td><td>Not needed for SSNs</td></tr>
+      <tr><td>SSN 987-65-4321</td><td>302-81-5574</td><td>tok_Qm3Lw7Zr2N</td><td>Not needed for SSNs</td></tr>
+      <tr><td>Card 4111 1111 1111 1111</td><td>4111 1183 9927 1111</td><td>tok_c7Rn4Wz1Hd</td><td>4111 1162 0459 1111</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>With vaulted tokenization, there's no relationship between a value and its token. If an attacker learns that tok_8fK2xQ9mLp stands for 123-45-6789, that tells them nothing about tok_Qm3Lw7Zr2N or any other borrower. The values sit in the vault, and each token is only a random reference.</p>
+<p>With vaultless tokenization, every token comes from the same algorithm and key. An attacker who obtains that key can turn 847-29-3016 back into 123-45-6789 and 302-81-5574 into 987-65-4321, along with every other token the platform has issued.</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Factor</th><th>Vaultless tokenization</th><th>Vaulted tokenization</th></tr></thead>
+    <tbody>
+      <tr><td>Token generation</td><td>Derived with an algorithm, usually format-preserving encryption</td><td>Random, with no mathematical link to the value</td></tr>
+      <tr><td>Data storage</td><td>No central store; the value is recoverable from the token and key</td><td>Original value encrypted and stored in the vault</td></tr>
+      <tr><td>Mapping dependency</td><td>Relies on keeping the encryption keys safe</td><td>Relies on the vault's lookup table and access controls</td></tr>
+      <tr><td>Key compromise</td><td>Every token can be reversed at once</td><td>Tokens stay meaningless without vault access</td></tr>
+      <tr><td>Key rotation</td><td>Every stored token must be re-encrypted</td><td>Keys rotate inside the vault while tokens stay the same</td></tr>
+      <tr><td>Erasure and expiry</td><td>No record to delete</td><td>Each record can be deleted or set to expire</td></tr>
+      <tr><td>Access control</td><td>All-or-nothing access to the key</td><td>Scoped access per value, with audit logs</td></tr>
+      <tr><td>Token format</td><td>Matches the original format</td><td>Random by default, format-preserving when needed</td></tr>
+      <tr><td>PCI DSS view</td><td>Treated as encrypted PAN that may stay in scope</td><td>Systems holding only tokens can sit outside the cardholder data environment</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>With Enigma Vault, you get random tokens by default. Each one comes from a cryptographically secure random number generator, with 128 bits of entropy and no structure to reverse. When your downstream systems expect card formats, Enigma Vault lets you issue Luhn-passable tokens that keep the first six and last four digits.</p>
+<p>The same trade-offs shape every <a class="bl-link" href="/blog/data-tokenization/">data tokenization</a> program, and they sit at the center of the <a class="bl-link" href="/blog/vault-vs-vaultless-tokenization/">vault vs vaultless tokenization</a> decision.</p>
+
+<h2>What to Prepare Before Migrating From Vaultless Tokenization</h2>
+<p><strong>Preparing to migrate from vaultless tokenization means mapping every place tokens live, every service that detokenizes them, the formats downstream systems expect and who controls the encryption keys.</strong></p>
+<p>Most migration problems trace back to a token nobody knew about. For the lending platform, the inventory turns up SSN tokens in a reporting replica nobody owns and in a partner's nightly file. Each one still depends on the key the team planned to retire.</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Area</th><th>What to document</th><th>Why it matters</th></tr></thead>
+    <tbody>
+      <tr><td>Token locations</td><td>Databases, warehouses, log stores, backups and partner files</td><td>Missed copies keep the old keys alive</td></tr>
+      <tr><td>Detokenization callers</td><td>Every service, job and person that reverses tokens today</td><td>Each one must switch to the vault</td></tr>
+      <tr><td>Token formats</td><td>Length, character set, Luhn checks, first-six and last-four rules</td><td>Downstream validation can break on new tokens</td></tr>
+      <tr><td>Key custody</td><td>Where keys live, who can use them, HSM access</td><td>Decryption during migration needs controlled key use</td></tr>
+      <tr><td>Compliance owners</td><td>Security, privacy, PCI and audit contacts</td><td>Scope changes need sign-off</td></tr>
+      <tr><td>Rollback plan</td><td>How to fall back if a phase fails</td><td>Operations keep running if something breaks</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>Two decisions round out the plan:</p>
+<ul>
+  <li><strong>Migration order:</strong> Most teams move one data type at a time, starting where risk is highest. The club moves member cards first and member IDs later, while the lender starts with SSNs.</li>
+  <li><strong>Success measures:</strong> Agree up front on what done looks like, such as zero fallback reads to the legacy key, every historical token resolving through the vault and no plaintext in logs.</li>
+</ul>
+
+<h2>How to Migrate From Vaultless Tokenization to a Vault: Step-by-Step</h2>
+<p><strong>Migrating from vaultless tokenization to a vault runs in five phases: set up the vault, run dual-mode tokenization, re-tokenize historical data, update downstream systems, then validate and retire the old keys.</strong></p>
+<p>A phased approach avoids downtime and gives every team a checkpoint before the old system goes away.</p>
+
+<h3>Phase 1: Set Up the Vault and Access Controls</h3>
+<ol>
+  <li><strong>Provision the vault:</strong> Stand up the vault service and confirm availability and recovery requirements.</li>
+  <li><strong>Scope credentials:</strong> Give each service its own credentials with only the actions it needs, such as store, retrieve or delete.</li>
+  <li><strong>Design the mapping:</strong> Plan how each legacy token links to its new vault token, usually through a reference ID stored with the record.</li>
+</ol>
+<p>For the club, each card's new vault token carries the member number as its reference ID. With Enigma Vault, every stored card accepts your own reference ID, and Data Vault lets you attach your own record IDs to each secret, so vault entries map cleanly onto your existing data model.</p>
+
+<h3>Phase 2: Run Tokenization in Dual Mode</h3>
+<p>Dual mode lets old and new tokens coexist while the history moves.</p>
+<ol>
+  <li><strong>Update the tokenization service:</strong> Add vault calls behind the same internal interface applications already use.</li>
+  <li><strong>Route new writes to the vault:</strong> Every new value gets a vault token from the start.</li>
+  <li><strong>Handle reads in order:</strong> Look up the token in the vault first. If it isn't there, decrypt it with the legacy key.</li>
+</ol>
+<p>A servicing agent at the lending platform never notices the switch. New borrowers get vault tokens, and existing records still resolve through the legacy key until their turn comes.</p>
+
+<h3>Phase 3: Decrypt and Re-Tokenize Historical Data</h3>
+<ol>
+  <li><strong>Extract legacy tokens:</strong> Pull them from every location found during preparation.</li>
+  <li><strong>Decrypt in an isolated environment:</strong> Run decryption in a locked-down job with restricted key access and no plaintext written to disk or logs.</li>
+  <li><strong>Re-tokenize in batches:</strong> Send recovered values to the vault in controlled batches and record each new token.</li>
+  <li><strong>Store the mapping:</strong> Keep a legacy-to-vault token map until cutover is complete.</li>
+</ol>
+<p>With Enigma Vault, you can send up to 5,000 values in a single Data Vault request. For the lending platform's two million SSNs, that turns the migration into a weekend job instead of a quarter-long project.</p>
+
+<h3>Phase 4: Update Downstream Systems</h3>
+<ul>
+  <li>Replace legacy tokens in application databases and APIs with vault tokens.</li>
+  <li>Send updated files to processors and partners, or agree on a transition window.</li>
+  <li>Purge legacy tokens from logs and caches as retention rules allow.</li>
+</ul>
+<p>The club's monthly dues run keeps working through this phase. Our payment proxy fills in the card number at charge time and forwards the request to the club's existing processor, so the gateway receives the same data while the club's systems hold only tokens.</p>
+
+<h3>Phase 5: Validate, Cut Over and Retire the Keys</h3>
+<ol>
+  <li><strong>Run parity checks:</strong> Confirm every historical token resolves to the same value through the vault.</li>
+  <li><strong>Turn off fallback reads:</strong> Remove the legacy decryption path once lookups stop hitting it.</li>
+  <li><strong>Revoke and archive keys:</strong> Retire the encryption keys under your key management policy.</li>
+  <li><strong>Switch to vault-only mode:</strong> Disable the vaultless code path entirely.</li>
+</ol>
+<p>The lending platform knows it's ready when a full week of production traffic passes with zero fallback reads to the legacy key.</p>
+
+<h2>How to Keep Downstream Systems Working During Migration</h2>
+<p><strong>Downstream systems keep working during migration when new tokens match the formats they expect, link back to existing records and stay consistent enough for joins and deduplication to run unchanged.</strong></p>
+<p>Tokens rarely live in one place. Billing systems validate them, and partners receive them in files. Each consumer needs the new token to behave like the old one.</p>
+<p><strong>Match the expected format:</strong> The club's booking system rejects any card number that fails a Luhn check, so a random token would break it. A format-preserving vault token passes the same check and keeps the first six and last four digits, and the booking code stays as it is.</p>
+<p><strong>Link new tokens to old records:</strong> A reference ID stored with each vault entry connects it to the record or legacy token it replaces. The club can trace every migrated card back to a member without keeping the old keys around.</p>
+<p><strong>Keep tokens consistent:</strong> Deterministic tokens give the same value the same token every time. The lender's fraud team counts unique applicants by SSN, and that count stays the same after the move.</p>
+<p><strong>Coordinate with processors and partners:</strong> Gateways and partners that store your tokens need a transition plan. A gateway-agnostic proxy removes much of that work for card payments, since the vault supplies the card number at charge time.</p>
+<p>Enigma Vault lets you choose token behavior per data type: format-preserving tokens for cards, deterministic tokens for identifiers that drive joins and a reference ID on every record. In the software platforms we work with, Luhn-passable tokens slot into existing checkout code, and charges route through our proxy to whichever gateway the platform or its merchants use.</p>
+
+<h2>Why Do Teams Migrate From Vaultless Tokenization to a Vault?</h2>
+<p><strong>Teams migrate from vaultless tokenization to a vault when key risk, rotation costs, erasure requests or processor lock-in start costing more than a vault, often after an audit or a security event.</strong></p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Trigger</th><th>What breaks with vaultless tokenization</th></tr></thead>
+    <tbody>
+      <tr><td>Audit finding</td><td>Reviewers question tokens that can be reversed with a key</td></tr>
+      <tr><td>Key rotation deadline</td><td>Every stored token has to be re-encrypted</td></tr>
+      <tr><td>Erasure request backlog</td><td>No record exists to delete for one person</td></tr>
+      <tr><td>Processor switch</td><td>Tokens tied to one format or provider can't move</td></tr>
+      <tr><td>Suspected key exposure</td><td>Every token issued under that key is at risk</td></tr>
+      <tr><td>Retention policy</td><td>Per-record expiry can't be enforced</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>Most teams hit more than one trigger at once. The lending platform's rotation project surfaces an audit question about who can use the key, and the club's gateway plan exposes how many systems hold card-derived tokens that only the old scheme can read.</p>
+<p>Audits add pressure from the other side. When an assessor asks who can reverse a token and where that access is logged, a vaultless setup can only point to the key. A vault answers with a named credential and an audit record for every request.</p>
+<p>Many of the card-on-file operators we see reach this point with cards scattered across spreadsheets, legacy systems and old payment terminals. For them, the vault also becomes the first real system of record for those cards. Enigma Vault helps organizations like these move cards and identifiers into one governed place without changing how the business runs.</p>
+
+<h2>Why Vaultless Tokens Count as Encrypted Data Under PCI DSS</h2>
+<p><strong>Vaultless tokens count as encrypted data under PCI DSS because they're generated with reversible encryption, so anyone holding the key can recover the card number from the token itself.</strong></p>
+<p>Returning to the club's card: 4111 1183 9927 1111 looks like a card number because, to anyone holding the key, it still is one. Most vaultless systems create tokens like this with format-preserving encryption, such as the FF1 method defined in <a class="bl-link" href="https://csrc.nist.gov/pubs/sp/800/38/g/final" target="_blank" rel="noopener">NIST SP 800-38G</a>, using keys held in hardware security modules.</p>
+<p>That's why the <a class="bl-link" href="https://www.pcisecuritystandards.org/documents/Tokenization_Guidelines_Info_Supplement.pdf" target="_blank" rel="noopener">PCI Security Standards Council's Tokenization Guidelines</a> treat these tokens differently. When a token is generated with reversible encryption, "the resultant token is an encrypted PAN, and may be subject to PCI DSS considerations."</p>
+<p>Three consequences follow for the club:</p>
+<ul>
+  <li><strong>Scope can follow the token:</strong> Systems that store reversible tokens may stay inside the cardholder data environment.</li>
+  <li><strong>Key protection becomes the control:</strong> Every system that can reach the key is part of the security boundary.</li>
+  <li><strong>High-value tokens add risk:</strong> Tokens that can initiate a payment may carry the same value to an attacker as the card number itself.</li>
+</ul>
+<p>Treating tokens as encrypted PAN also brings PCI DSS key management requirements into play, from documented key custody to scheduled rotation and secure key storage. For a vaultless system, those controls cover every token in circulation.</p>
+<p>The club's vault token, tok_c7Rn4Wz1Hd, has no mathematical relationship to the card. Systems that hold only tokens like it can be designed out of scope, with the acquirer or QSA confirming the final boundary.</p>
+<p>With Enigma Vault, your applications hold only tokens while card data stays in our vault, which runs on PCI DSS Level 1 certified infrastructure.</p>
+
+<h2>What Are the Limitations of Vaultless Tokenization?</h2>
+<p><strong>The limitations of vaultless tokenization include a single key that can reverse every token, costly key rotation, no record to erase or expire, no per-record access control and tokens locked to one system.</strong></p>
+
+<h3>One Key Can Reverse Every Token</h3>
+<p>Vaultless security rests entirely on the key. If it leaks through a misconfigured HSM policy or a compromised service account, all two million of the lending platform's SSN tokens become readable at once. There's no second barrier, because each token carries its own value.</p>
+<p>With a vault, a stolen token table is a list of random strings.</p>
+
+<h3>Key Rotation Means Re-Encrypting Everything</h3>
+<p>Rotating a vaultless key changes every token it produced. Every stored copy has to be re-encrypted in a coordinated window, or the old key has to stay alive. Many teams quietly keep the old key, which defeats the purpose of rotating it.</p>
+
+<h3>Erasure Requests Have Nothing to Delete</h3>
+<p>Returning to the former borrower who asked to be forgotten:</p>
+<ul>
+  <li><strong>With vaultless tokenization:</strong> The SSN lives inside tokens copied across underwriting, servicing and the partner file. Each copy has to be found and removed by hand.</li>
+  <li><strong>With a vault:</strong> The lender deletes one vault record, and every token that pointed to it stops resolving.</li>
+</ul>
+<p>Expiry works the same way. Vaultless tokens can't be set to expire per record, so retention depends on cleanup jobs that rarely reach every copy. SSNs are exactly the kind of <a class="bl-link" href="/blog/what-is-pii/">PII</a> that privacy laws let people ask to remove.</p>
+
+<h3>No Per-Record Access Control or Audit Trail</h3>
+<p>Anyone who can use the key can reverse any token. The lender can't let a support agent reveal one borrower's SSN while blocking bulk access, and nothing records which value was revealed to whom.</p>
+
+<h3>Tokens Stay Locked to the System That Issued Them</h3>
+<p>The club's card tokens follow the format and keys of the scheme that issued them. Adding a gateway means decrypting and reprocessing every stored card, the very migration the club hoped to avoid.</p>
+
+<h2>What Can a Vault Do That Vaultless Tokenization Can't?</h2>
+<p><strong>A vault can keep tokens meaningless if a key leaks, rotate keys without reissuing tokens, delete single records and control who sees each value, which vaultless tokenization can't do.</strong></p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Business need</th><th>Vaultless tokenization</th><th>With Enigma Vault</th></tr></thead>
+    <tbody>
+      <tr><td>Breach impact</td><td>A leaked key exposes every token</td><td>Random tokens reveal nothing without authorized vault access</td></tr>
+      <tr><td>Key management</td><td>Rotation reissues every token</td><td>Per-customer AES-256 keys roll over inside the vault while tokens stay the same</td></tr>
+      <tr><td>Erasure and expiry</td><td>No record to delete</td><td>Delete any record, or set expiry from 60 seconds to 7 years</td></tr>
+      <tr><td>Access and audit</td><td>Key holders see everything</td><td>Scoped OAuth2 credentials, one-time ephemeral keys and a log of every API request</td></tr>
+      <tr><td>Format compatibility</td><td>Matches the original format</td><td>Random by default, with Luhn-passable card tokens when needed</td></tr>
+      <tr><td>Processor portability</td><td>Tied to the issuing system</td><td>Payment proxy forwards charges to any REST-based gateway</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><strong>Keys rotate without touching tokens:</strong> In a vault, keys protect the stored values while tokens stay random. With Enigma Vault, each customer has its own AES-256 keys, no key is shared between customers and your team never manages one.</p>
+<p><strong>Retention becomes a setting:</strong> With Enigma Vault, you have a better way to handle erasure. The lender's former borrower becomes a single delete call. Every record can also carry its own expiry, and expired records are removed automatically.</p>
+<p><strong>Access becomes specific:</strong> Scoped credentials decide which service can store, read or delete. When another client needs one value, a one-time ephemeral key shares it and then expires.</p>
+<p><strong>Processors become interchangeable:</strong> For the club, adding a second gateway is a configuration change, because the cards never lived with the processor in the first place.</p>
+<p>Enigma Vault is designed so the systems you run every day hold only references, while the vault holds the values and decides who can use them. That model is what a <a class="bl-link" href="/blog/data-privacy-vault/">data privacy vault</a> adds over a tokenization algorithm.</p>
+
+<h2>Who Should Migrate From Vaultless Tokenization to a Vault?</h2>
+<p><strong>Organizations that should migrate from vaultless tokenization to a vault include payment platforms tied to one processor, lenders holding SSNs as encrypted tokens, payers with scattered member IDs and card-on-file businesses.</strong></p>
+
+<h3>SaaS and Payment Platforms</h3>
+<p>Platforms that tokenized cards inside one processor's format face a migration every time they add a gateway, often just as merchants start asking for cards on file and recurring billing. An independent vault lets the platform route charges to any gateway while customers never re-enter a card. The same logic applies to any <a class="bl-link" href="/blog/credit-card-tokenization/">credit card tokenization</a> setup that needs to stay processor-neutral.</p>
+
+<h3>Fintech and Lending</h3>
+<ul>
+  <li><strong>Signal:</strong> SSNs and bank account numbers stored as format-preserving encryption values.</li>
+  <li><strong>Risk:</strong> Each key rotation turns into a re-encryption project across underwriting and servicing systems.</li>
+  <li><strong>Outcome:</strong> Random vault tokens with exact-match lookup keep servicing workflows running, and deterministic tokens keep duplicate-application checks working.</li>
+</ul>
+
+<h3>Health Insurers and Administrators</h3>
+<p>Member IDs copied into claims tools and contact-center notes are hard to rotate and harder to erase. A vault gives each identifier one governed record, with tokens scoped to the systems that use them and every retrieval logged.</p>
+
+<h3>Aviation, Cruise and Member Clubs</h3>
+<p>Card-on-file records in these businesses are collected over years across booking channels and phone calls:</p>
+<ol>
+  <li>Existing cards move into the vault in bulk.</li>
+  <li>Bookings and dues keep charging against the new tokens through the existing processor.</li>
+  <li>Staff stop handling card numbers in booking and membership tools.</li>
+</ol>
+
+<h2>How Enigma Vault Simplifies Migration From Vaultless Tokenization</h2>
+<p>Enigma Vault makes migration from vaultless tokenization to vaulted tokenization easy. Our approach is the same for cards and personal data: we re-tokenize values in batches, keep your downstream formats intact and retire the old keys in phases.</p>
+<p>In one private aviation deployment, existing cards were imported into the vault in bulk, staff signed in through enterprise single sign-on and every charge kept running through the operator's existing processor. The cards moved into certified custody, and the operation didn't change. For card-on-file operators, we package that pattern as Agent Vault, a fixed-scope, eight-week engagement that includes the migration.</p>
+
+<h3>Batch Migration With Data Vault</h3>
+<p><a class="bl-link" href="https://www.enigmavault.io/vault/data-vault/">Data Vault</a> accepts up to 5,000 values per request, so historical SSNs and account numbers move as batch calls. You can attach your own record IDs to each value so entries map onto your existing data model, and deterministic tokens keep joins and lookups working once the migration is done.</p>
+
+<h3>Card-on-File Migration With Card Vault</h3>
+<ul>
+  <li><strong>Format-preserving tokens:</strong> <a class="bl-link" href="https://www.enigmavault.io/vault/card-vault/">Card Vault</a> can issue Luhn-passable tokens that keep the first six and last four digits.</li>
+  <li><strong>Reference IDs:</strong> Each stored card carries your own reference, linking it to the customer or legacy record.</li>
+  <li><strong>Any gateway:</strong> The payment proxy fills in card details inside the vault and forwards charges to Authorize.net, Stripe, Braintree, PayPal or any REST-based gateway.</li>
+  <li><strong>Migration support:</strong> Our team works with you on card-on-file migrations, as covered in <a class="bl-link" href="/blog/card-vault-tokenization/">card vault tokenization</a>.</li>
+</ul>
+
+<h3>Governance After the Move</h3>
+<p>Every record can expire on a schedule or be deleted on request. Scoped OAuth2 credentials limit what each service can do, one-time ephemeral keys share a value with another client, and every API request is logged.</p>
+
+<h3>Enigma Vault Solution and Pricing</h3>
+<p>Our platform runs on PCI DSS Level 1 and SOC 2 Type II certified infrastructure. Each vault is priced independently, so you can run Card Vault for cards and Data Vault for SSNs and account numbers on the plans that fit each workload.</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Plan</th><th>Card Vault</th><th>Data Vault</th><th>Includes</th></tr></thead>
+    <tbody>
+      <tr><td>Lite</td><td>$0 per month, free forever: 1,000 requests, then $0.08 per request</td><td>$0 per month, free forever: 1,500 requests, then $0.06 per request</td><td>Card tokenization and gateway proxy, or AES-256 field encryption, with community support</td></tr>
+      <tr><td>Plus</td><td>$49.99 per month: 20,000 requests (roughly 200 to 300 daily transactions), then $0.04 per request</td><td>$49.99 per month: 30,000 requests, then $0.03 per request</td><td>Ephemeral key sharing and email support</td></tr>
+      <tr><td>Premium</td><td>$249.99 per month: 250,000 requests (roughly 2,000 daily transactions), then $0.02 per request</td><td>$249.99 per month: 400,000 requests, then $0.01 per request</td><td>Highest request volume and priority support</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>Every plan is billed through AWS Marketplace, and teams with custom volume or dedicated infrastructure needs can ask for an enterprise plan. See the full <a class="bl-link" href="https://www.enigmavault.io/pricing/#vault">pricing page</a>, <a class="bl-link" href="https://www.enigmavault.io/vault/card-vault-demo/">try the Card Vault demo</a> or <a class="bl-link" href="https://www.enigmavault.io/request-demo/">request a demo</a> to plan your migration with our team.</p>

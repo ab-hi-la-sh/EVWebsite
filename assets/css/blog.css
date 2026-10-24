@@ -394,3 +394,13 @@ a.bl-pagination__page:hover{border-color:var(--ev-cool-stone);color:var(--ev-ink
   .bl-authorbio__img,.bl-authorbio__initials{width:84px;height:84px;}
   .bl-authorbio__initials{font-size:28px;}
 }
+
+/* Doc-style example boxes (light grey, Docs-like code colours) and indented example text */
+.bl-docbox{margin:24px 0;background:#F1F3F4;border-radius:12px;padding:16px 22px;}
+.bl-docbox__lang{display:block;margin:0 0 6px;font-family:var(--ev-font-sans);font-size:12px;line-height:1.4;color:#5F6368;}
+html .bl-docbox pre{margin:0;padding:0;background:none;border:0;border-radius:0;overflow-x:auto;}
+html .bl-docbox code{display:block;margin:0;padding:0;background:none;border:0;border-radius:0;font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-size:14px;line-height:1.75;color:#3C4043;white-space:pre-wrap;overflow-wrap:anywhere;text-indent:0;}
+html .bl-docbox--plain code{color:#188038;}
+html .bl-docbox .tok-k{color:#1A56DB;}
+html .bl-docbox .tok-s{color:#188038;}
+html p.bl-indent{margin-left:32px;}

@@ -1,0 +1,282 @@
+---
+title: "PII Protection for LLMs in Healthcare: Keeping PHI Out of Prompts"
+titleEmphasis: "Keeping PHI Out of Prompts"
+slug: "pii-protection-for-llm-in-healthcare"
+layout: "pii-style"
+metaTitle: "PII Protection for LLMs in Healthcare: Keeping PHI Out of Prompts"
+description: "Learn how PII protection for LLMs in healthcare keeps PHI out of prompts for ambient documentation, coding and prior authorization, and why a BAA alone isn't enough."
+subtitle: "Learn how PII protection for LLMs in healthcare keeps PHI out of prompts for ambient documentation, coding and prior authorization, and why a BAA alone isn't enough."
+date: 2026-10-24
+category: "NoPII"
+author: "abhilash-kumar"
+readTime: 15
+heroImage: "/assets/blog/img-10.png"
+heroAlt: "Layered translucent panels representing patient identifiers replaced by tokens in a clinical prompt"
+excerpt: "Learn how PII protection for LLMs in healthcare keeps PHI out of prompts for ambient documentation, coding and prior authorization, and why a BAA alone isn't enough."
+tags: ["nopii", "healthcare", "hipaa", "ai-security"]
+ogImage: "/assets/og/nopii-use-cases.jpg"
+ogImageAlt: "PII Protection for LLMs in Healthcare: Keeping PHI Out of Prompts | Enigma Vault"
+ogType: article
+styles: ["blog.css", "pages/blog-pii-hero.css", "tr-pages.css"]
+scripts: ["blog-article.js"]
+faqSchema: true
+faqs:
+  - q: "Will Our AI Governance Committee Accept Tokenization as a PHI Control?"
+    a: "Committees usually approve on evidence. Per-request audit logs, replay results on synthetic notes and a data flow showing the provider never received identifiers give them something concrete to review before go-live."
+  - q: "Which NoPII Plan Do We Need to Get a BAA?"
+    a: "A BAA for healthcare workloads comes with NoPII Enterprise. Many teams test one workflow on the Free plan with synthetic notes first, then move to Enterprise before real patient data flows through the proxy."
+  - q: "Can Our Ambient Scribe Vendor Use PII Protection?"
+    a: "Yes, if the vendor routes its model calls through a protected endpoint. When a third-party scribe calls the model directly, ask the vendor to integrate a proxy or confirm how identifiers are handled before go-live."
+  - q: "Will Tokenization Slow Down Live Clinical Documentation?"
+    a: "It adds a step, so test it on your own workload. Streaming restore swaps real values back in as each chunk arrives, which keeps drafts appearing at a normal pace for most ambient scribe and agent-assist setups."
+  - q: "What Happens to Patient Identifiers the Detector Doesn't Recognize?"
+    a: "They pass through, which is why testing matters. Add custom rules for local formats like record numbers or study IDs, minimize prompts upstream and review detection logs during the pilot before scaling up."
+---
+
+<p><strong>PII protection for LLMs in healthcare detects patient identifiers in clinical prompts and replaces them with tokens before the request reaches the model provider, then restores the real values in the response.</strong></p>
+<p>A multi-site medical group rolls out an ambient scribe across its primary care clinics. In every visit, the scribe hears the patient confirm their name and date of birth, captures the reason for the visit and sends the transcript to a model provider to draft the note. Over a month, that adds up to thousands of transcripts carrying patient identifiers.</p>
+<p>Each transcript became a prompt. Copies may now sit in the provider's request logs, the scribe vendor's tracing tool and the application's error reports, and few of those places appear in the group's HIPAA risk analysis.</p>
+<p>That gap lands on different desks across a healthcare organization:</p>
+<ul>
+  <li><strong>Privacy officers:</strong> LLM traffic is missing from the risk analysis, and an incomplete risk analysis is the finding HIPAA enforcement keeps returning to.</li>
+  <li><strong>AI governance committees:</strong> Approval for a new scribe or coding tool arrives with no evidence of what the model provider actually received.</li>
+  <li><strong>Revenue-cycle and IT leaders:</strong> Prior authorization and coding automations stall in privacy review because no one can show where patient identifiers go.</li>
+  <li><strong>Practice administrators:</strong> Front-desk staff copy patient messages into free consumer chatbots to draft replies faster, where no BAA covers the data.</li>
+</ul>
+<p>A business associate agreement (BAA) decides who is liable once patient data moves. It doesn't stop the data from moving. In this guide, we'll show where PHI enters healthcare AI, how PII protection keeps identifiers out of the prompt and how each type of healthcare organization applies it.</p>
+<h2>What Is PII Protection for LLMs in Healthcare?</h2>
+<p><strong>PII protection for LLMs in healthcare is a control that finds patient identifiers in clinical prompts and swaps them for tokens before the request leaves the application, so the model provider never receives them.</strong></p>
+<p><a class="bl-link" href="/blog/pii-protection-for-llm/">PII protection for LLMs</a> applies to any model API. Healthcare raises the stakes in three ways:</p>
+<ul>
+  <li><strong>Identifier density:</strong> An encounter note's first few lines often hold a name, date of birth, phone number and member ID.</li>
+  <li><strong>Legal status:</strong> Once those identifiers sit beside health information in a covered workflow, HIPAA treats them as protected health information (PHI).</li>
+  <li><strong>Volume:</strong> Coding and prior authorization tools send patient records to models thousands of times a day.</li>
+</ul>
+<p>Whether a value counts as PHI depends on the context around it:</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Example</th><th>PII?</th><th>PHI under HIPAA?</th></tr></thead>
+    <tbody>
+      <tr><td>Patient name and phone number in a clinic's scheduling assistant</td><td>Yes</td><td>Yes, because the clinic links it to care</td></tr>
+      <tr><td>Same name in a travel agency's CRM</td><td>Yes</td><td>No</td></tr>
+      <tr><td>Encounter transcript with a name, date of birth and symptoms</td><td>Yes</td><td>Yes</td></tr>
+      <tr><td>Dataset that meets HIPAA de-identification standards</td><td>No</td><td>No</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>PII protection targets the identifiers. The clinical detail around them still needs its own handling, which we cover further down.</p>
+<h2>Where Does PHI Leak in Healthcare AI Workflows?</h2>
+<p><strong>PHI leaks in healthcare AI workflows wherever clinical text becomes a prompt, including transcripts, retrieved records, batch jobs, provider logs, tracing tools and the outputs written back to the EHR.</strong></p>
+<p>Follow one ambient documentation session and the exposure points stack up:</p>
+<ol>
+  <li><strong>Room audio:</strong> "Good morning, Mr. Alvarez," followed by a date-of-birth check.</li>
+  <li><strong>Transcript:</strong> Speech-to-text keeps every identifier intact.</li>
+  <li><strong>Prompt:</strong> Instructions get wrapped around the transcript before it's sent to the model.</li>
+  <li><strong>Provider logs:</strong> Requests may be retained under the provider's logging policy, BAA or not.</li>
+  <li><strong>Tracing and error tools:</strong> Observability platforms often capture full prompt and response bodies for debugging.</li>
+  <li><strong>Generated note:</strong> Identifiers come back in the draft, which lands in the EHR and sometimes in analytics tables.</li>
+</ol>
+<p>Other clinical AI workflows add their own leak points:</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Workflow</th><th>What enters the prompt</th><th>Extra exposure</th></tr></thead>
+    <tbody>
+      <tr><td>Chart abstraction</td><td>Full records and prior notes</td><td>Retrieval pulls far more of the chart than the task needs</td></tr>
+      <tr><td>Prior authorization</td><td>Notes, orders and member IDs</td><td>Batch jobs repeat the same identifiers at high volume</td></tr>
+      <tr><td>Payer agent assist</td><td>Live member call transcripts</td><td>Transcripts flow into quality-scoring tools</td></tr>
+      <tr><td>Patient portal replies</td><td>Messages with names and contact details</td><td>Drafts are stored alongside the message thread</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>Few of these routes appear in a typical HIPAA risk analysis. That gap matters, because <a class="bl-link" href="https://www.hhs.gov/hipaa/for-professionals/security/guidance/guidance-risk-analysis/index.html" target="_blank" rel="noopener">HHS guidance on risk analysis</a> expects organizations to account for every place electronic PHI is created, received or transmitted.</p>
+<h2>Is a BAA Enough to Use LLMs With Patient Data?</h2>
+<p><strong>A BAA is required but not sufficient on its own, because it assigns responsibility after PHI reaches the model provider, while PII protection keeps patient identifiers from reaching the provider at all.</strong></p>
+<p>Major model providers sign BAAs for their enterprise and API tiers. Consumer chat apps generally aren't covered, so a staff member pasting a patient record into one creates a disclosure problem before anything else.</p>
+<p>For covered tiers, here's what changes when PII protection sits in front of the model:</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Question</th><th>BAA only</th><th>BAA plus PII protection</th></tr></thead>
+    <tbody>
+      <tr><td>What the provider receives</td><td>Names, dates of birth and contact details</td><td>Tokens in place of recognized identifiers</td></tr>
+      <tr><td>What sits in provider logs</td><td>Patient identifiers</td><td>Tokens that mean nothing outside your vault</td></tr>
+      <tr><td>What the agreement handles</td><td>Liability once PHI moves</td><td>The same, with far less PHI moving</td></tr>
+      <tr><td>Breach at the provider</td><td>Identifiers exposed</td><td>Tokens exposed</td></tr>
+      <tr><td>Line in the risk analysis</td><td>"Our vendor signed a BAA"</td><td>"The provider never held an identifier"</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>The last row is the one governance committees can defend. It describes a data flow they can verify with logs, instead of a contract they have to trust.</p>
+<p>Tokenized data doesn't automatically stop being PHI. Whether it does depends on who can re-identify it, and the HIPAA rules behind that question are covered in <a class="bl-link" href="/blog/patient-data-tokenization-healthcare/">patient data tokenization in healthcare</a>.</p>
+<h2>How PII Protection Works Inside a Clinical AI Request</h2>
+<p><strong>PII protection works inside a clinical AI request by tokenizing identifiers as the prompt leaves the application, letting the model reason over the clinical content and restoring the real values as the response streams back.</strong></p>
+<p>Here's an encounter excerpt before and after it passes through a PII protection proxy. Token formats are illustrative.</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>What the scribe captured</th><th>What the model receives</th></tr></thead>
+    <tbody>
+      <tr><td>"Good morning, Daniel Alvarez. Can you confirm your date of birth?"</td><td>"Good morning, [NAME_7Q2K]. Can you confirm your date?"</td></tr>
+      <tr><td>"It's March 3, 1958. Call 555-0142 if the pharmacy needs me."</td><td>"It's [DATE_4M8P]. Call [PHONE_9X1C] if the pharmacy needs me."</td></tr>
+      <tr><td>"Mr. Alvarez reports chest tightness on exertion for two weeks."</td><td>"[NAME_7Q2K] reports chest tightness on exertion for two weeks."</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>The symptoms stay, because the model needs them to write the note. The identity goes.</p>
+<p>Several behaviors make this workable in a clinical setting:</p>
+<ul>
+  <li><strong>Deterministic tokens:</strong> Daniel Alvarez maps to the same token in line one and line forty, so the model tracks one patient across the whole encounter.</li>
+  <li><strong>Label neutralization:</strong> Field labels like "date of birth" are softened to "date," so models are less likely to refuse or flag the request.</li>
+  <li><strong>Streaming restore:</strong> Real values are swapped back in as each chunk of the response arrives, which keeps live scribing at its usual pace.</li>
+  <li><strong>Fail-safe blocking:</strong> If detection or tokenization fails, the request is blocked instead of going out with raw identifiers.</li>
+  <li><strong>Safe failure on the way back:</strong> If restoring fails, the draft shows tokens, and nothing sensitive leaks.</li>
+  <li><strong>Per-request audit log:</strong> Each request records the entity types found, confidence scores, provider and model.</li>
+</ul>
+<p>With NoPII, all of this runs as a reverse proxy in front of the model, and your application changes one base URL to use it. Want to see it before reading further? <a class="bl-link" href="https://www.enigmavault.io/nopii/demo/">Try the NoPII live demo</a>, send a message with a name or date of birth and compare what your backend and the model provider each receive.</p>
+<h2>How PII Protection Applies to Each Healthcare AI Use Case</h2>
+<p><strong>PII protection applies to healthcare AI use cases by tokenizing the identifiers each organization's workflow carries, from names in scribe transcripts to member IDs in payer calls, while leaving the clinical content the model needs.</strong></p>
+<p>Healthcare isn't one buyer. A health system running ambient scribes, a dental service organization drafting portal replies and a health plan running agent assist all send different PHI to different models. Here's how PII protection fits each one.</p>
+<h3>Health Systems and Medical Groups: Ambient Documentation and Chart Abstraction</h3>
+<p>A cardiology service line prepares a two-page summary before every new referral visit. Retrieval pulls the referral letter, prior echo reports and the medication list into one prompt, and each document repeats the patient's name, date of birth and phone number.</p>
+<p>With PII protection in the request path:</p>
+<ol>
+  <li><strong>Before the model:</strong> Names, dates of birth and phone numbers become tokens, while findings, medications and history pass through untouched.</li>
+  <li><strong>During generation:</strong> Deterministic tokens let the model connect "Ms. Okafor" in the referral letter with the same patient in a three-year-old echo report.</li>
+  <li><strong>After the response:</strong> Real values are restored inside the EHR integration, so the cardiologist reads a normal summary.</li>
+</ol>
+<p>Ambient documentation follows the same pattern at higher volume, since every visit opens with a name and date-of-birth check. Record numbers follow local formats, so plan custom rules for them, and trim retrieval to the sections the summary needs.</p>
+<h3>Outpatient Clinics and Dental Practices: Front-Desk and Patient Messaging AI</h3>
+<p>A dental service organization adds an AI assistant to its patient portal. A message comes in: "Hi, this is Priya Nair, can I move my crown appointment to Thursday? My cell is 555-0187, and will my insurance cover the second visit?"</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>What the patient wrote</th><th>What the model receives</th><th>What the office manager sees</th></tr></thead>
+    <tbody>
+      <tr><td>Priya Nair</td><td>[NAME_3H7D]</td><td>Priya Nair</td></tr>
+      <tr><td>555-0187</td><td>[PHONE_8K2W]</td><td>555-0187</td></tr>
+      <tr><td>Crown appointment, Thursday, insurance question</td><td>Unchanged</td><td>Unchanged</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>The model drafts a reply about rescheduling and coverage, and the office manager approves it with the patient's real name restored. Outpatient clinics apply the same pattern to scheduling assistants, referral follow-ups and recall reminders. Because these practices rarely have engineering teams, a base-URL change on the vendor's integrated application is usually the realistic path.</p>
+<h3>Behavioral Health and Telehealth: Scheduling and Billing AI With Extra Review</h3>
+<p>A telehealth therapy practice uses an AI assistant to reschedule sessions and answer billing questions by text. Client names and phone numbers are tokenized like anywhere else. A message such as "Can I move my substance use intake to Friday?" still carries sensitive context after the name is gone.</p>
+<p>That's why behavioral health teams usually:</p>
+<ul>
+  <li><strong>Begin with administrative workflows</strong> such as scheduling and billing, keeping session notes out of scope.</li>
+  <li><strong>Replace names with client IDs</strong> wherever the task allows, so less reaches the proxy in the first place.</li>
+  <li><strong>Flag specially protected records,</strong> including substance use treatment information, which can carry rules beyond baseline HIPAA.</li>
+  <li><strong>Run privacy and clinical review</strong> before each new AI workflow goes live.</li>
+</ul>
+<h3>Health Insurers and TPAs: Member Services AI and Prior Authorization</h3>
+<p>A third-party administrator running claims for self-funded employer plans adds agent assist to its member services line. A caller says, "This is Marcus Bell, I'm calling about my MRI claim," then reads out an address and member ID while the model suggests answers in real time.</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Payer workflow</th><th>Identifiers in the prompt</th><th>How PII protection handles them</th></tr></thead>
+    <tbody>
+      <tr><td>Agent assist on live calls</td><td>Member name, address, phone, member ID</td><td>Names, addresses and phones tokenized in the stream, with custom rules for plan-specific member ID formats</td></tr>
+      <tr><td>Prior authorization drafting</td><td>Member details inside clinical notes and orders</td><td>Identifiers tokenized for the batch, then restored before a reviewer submits</td></tr>
+      <tr><td>Claims and appeals summaries</td><td>Names repeated across long case histories</td><td>One deterministic token per member keeps the summary coherent</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>Keep tokens scoped to each application, so they don't become universal member keys that link records across systems.</p>
+<h3>Digital Health Vendors and AI Scribe Companies: AI Inside the Product</h3>
+<p>An AI scribe startup is in procurement with a regional health system. The security questionnaire asks a direct question: "Does PHI reach your LLM provider?"</p>
+<p>Routing the product's model calls through a PII protection proxy changes that answer. The vendor can show per-request audit logs proving which entity types were tokenized before each call, and it can switch model providers without rebuilding its privacy controls. For digital health companies, that evidence often decides how fast a hospital deal closes.</p>
+<h3>Clinical Research and Life Sciences Teams: Study Data and Medical Inquiries</h3>
+<p>A clinical research site uses AI to summarize participant visit notes for a sponsor report, while a life sciences medical information team drafts responses to clinician inquiries that sometimes describe a specific patient's case. Both send identifiers a general detector may miss, such as study participant IDs and site-specific codes. Write custom rules for those formats and test them against real samples before go-live, and keep study data under the same minimization rules as any other PHI.</p>
+<h2>Does PII Protection Affect Clinical AI Accuracy?</h2>
+<p><strong>PII protection rarely affects accuracy for summarizing, coding or drafting, because those tasks rely on clinical content instead of identity, though tasks that depend on the literal identifier need a different design.</strong></p>
+<p>The model still sees the medicine. What it loses is the name, the date and the number, and most clinical tasks never needed those.</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Task</th><th>Works on tokens?</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td>Summarizing an encounter</td><td>Yes</td><td>Symptoms and plan stay intact, and the patient is one consistent token</td></tr>
+      <tr><td>Suggesting billing codes</td><td>Yes</td><td>Codes come from clinical language</td></tr>
+      <tr><td>Drafting a portal reply</td><td>Yes</td><td>Names are restored before staff see the draft</td></tr>
+      <tr><td>Working out age from a date of birth</td><td>Needs care</td><td>Pass age as a separate field instead of asking the model to calculate it</td></tr>
+      <tr><td>Matching patients with similar names</td><td>No</td><td>Tokens don't preserve spelling similarity</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>Deterministic tokens do a lot of quiet work here. When "Mr. Alvarez," "the patient" and "he" all point to the same token, the note reads coherently.</p>
+<p>The only reliable way to confirm accuracy is to test it. Replay synthetic or approved notes through the protected route, then compare output quality, token consistency, restoration accuracy and latency against the unprotected baseline.</p>
+<h2>What PHI Stays in the Prompt After Identifiers Are Tokenized?</h2>
+<p><strong>After identifiers are tokenized, clinical narrative, rare details, behavioral health context, local identifier formats and anything inside images or audio can still remain in the prompt, so PII protection needs layered controls.</strong></p>
+<p>Tokenization removes recognized identifiers. It doesn't make a clinical record anonymous.</p>
+<ul>
+  <li><strong>Clinical narrative:</strong> Diagnoses, medications and history stay, because the model needs them.</li>
+  <li><strong>Rare details:</strong> A rare condition plus a small town can point to one person.</li>
+  <li><strong>Sensitive context:</strong> Trauma or substance use notes stay sensitive whatever happens to the names.</li>
+  <li><strong>Local identifiers:</strong> Record numbers, study IDs and internal account formats may slip past a general detector without custom rules.</li>
+  <li><strong>Images and audio:</strong> Text detection doesn't read scanned referrals or raw audio, so transcribe and minimize before the proxy.</li>
+</ul>
+<p>Four controls cover most of that residue:</p>
+<ol>
+  <li>Minimize what goes into the prompt before it reaches the proxy.</li>
+  <li>Scope retrieval to the fields each task needs.</li>
+  <li>Keep prompt and response bodies out of ordinary logs and tracing tools.</li>
+  <li>Route every model call through the protected path, including fallback providers.</li>
+</ol>
+<h2>How to Evaluate PII Protection Tools for Healthcare AI</h2>
+<p><strong>Evaluating PII protection tools for healthcare AI means checking BAA availability, identifier coverage, failure behavior, streaming support, token consistency, provider coverage, audit evidence and retention controls against your clinical workflows.</strong></p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Criterion</th><th>Why it matters in healthcare</th><th>Question to ask</th></tr></thead>
+    <tbody>
+      <tr><td>BAA availability</td><td>The proxy handles PHI on your behalf</td><td>Will you sign a BAA for this deployment?</td></tr>
+      <tr><td>Identifier coverage</td><td>Clinical text mixes standard and local formats</td><td>Which entities are detected, and can we add custom rules for record numbers?</td></tr>
+      <tr><td>Failure behavior</td><td>Silent failure sends raw PHI to the model</td><td>Does the request block if detection fails?</td></tr>
+      <tr><td>Streaming</td><td>Scribes and agent assist run in real time</td><td>Are tokens restored mid-stream?</td></tr>
+      <tr><td>Token consistency</td><td>Notes mention the same patient many times</td><td>Does one value always map to one token?</td></tr>
+      <tr><td>Provider and framework coverage</td><td>Teams switch models and orchestration tools</td><td>Which providers and frameworks work through the same route?</td></tr>
+      <tr><td>Audit evidence</td><td>Governance committees need proof</td><td>What does each request log, and can we export it?</td></tr>
+      <tr><td>Retention and purge</td><td>Minimum necessary and erasure requests</td><td>Can we set token retention and purge values on request?</td></tr>
+      <tr><td>Setup effort</td><td>Clinical IT teams are stretched</td><td>How many code changes does the first workflow need?</td></tr>
+      <tr><td>Latency</td><td>Clinicians notice delays</td><td>What does the proxy add to response time on our workload?</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>Run the shortlist through the same synthetic replay test. The results usually settle the evaluation faster than any feature list.</p>
+<h2>How to Roll Out PII Protection for Clinical AI Safely</h2>
+<p><strong>Rolling out PII protection for clinical AI safely starts with mapping every model route and confirming HIPAA roles, then piloting one administrative workflow before expanding to clinical documentation.</strong></p>
+<ol>
+  <li><strong>Map every model route:</strong> List each application that calls a model, including fallback providers and internal tools. An unprotected second route undoes the first.</li>
+  <li><strong>Confirm roles and agreements:</strong> Decide whether each vendor acts as a business associate, and confirm BAAs with both the proxy provider and the model provider.</li>
+  <li><strong>Pilot an administrative workflow:</strong> Scheduling assistants, coding support or prior authorization make better first pilots than clinical decision support.</li>
+  <li><strong>Replay synthetic notes:</strong> Measure recognition, false positives, token consistency and restore accuracy before real PHI flows.</li>
+  <li><strong>Minimize upstream:</strong> Trim prompts and retrieval so the proxy handles less to begin with.</li>
+  <li><strong>Close the bypasses:</strong> Route all production traffic through the protected path, and pair it with a policy on consumer AI tools, which no proxy can cover.</li>
+  <li><strong>Report to governance:</strong> Share audit logs and test results with the AI governance committee before each new workflow goes live.</li>
+</ol>
+<h2>How NoPII Protects PHI in Healthcare AI</h2>
+<p>At Enigma Vault, we built NoPII as the AI privacy layer for teams that want clinical AI in production without patient identifiers reaching the model provider. Healthcare teams place <a class="bl-link" href="https://www.enigmavault.io/nopii/">NoPII</a> in front of ambient documentation, chart abstraction, coding and prior authorization. Your application points its model calls at api.nopii.co instead of the provider's endpoint, with no SDK to install, and identifiers are tokenized before each prompt leaves.</p>
+<p>That gives your risk analysis a line it can defend: the provider never held an identifier. Here's what comes with it:</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Capability</th><th>What it means for a healthcare team</th></tr></thead>
+    <tbody>
+      <tr><td>Provider coverage</td><td>One route for OpenAI, Anthropic, Google Gemini, xAI, DeepSeek, Mistral, Groq, Together and Fireworks</td></tr>
+      <tr><td>Framework support</td><td>Works with LangChain, LangGraph, LlamaIndex, LiteLLM and the Vercel AI SDK</td></tr>
+      <tr><td>Entity coverage</td><td>30+ configurable entity types, with custom phrase rules on paid plans</td></tr>
+      <tr><td>Deterministic tokens</td><td>One patient keeps one token across every turn</td></tr>
+      <tr><td>Fail-safe design</td><td>Requests are blocked if tokenization fails</td></tr>
+      <tr><td>Streaming</td><td>Real values restored as chunks arrive</td></tr>
+      <tr><td>Audit logs</td><td>Entity type, confidence score, provider and model for every request</td></tr>
+      <tr><td>Retention and purge</td><td>Token retention from one day to permanent on paid plans, plus purge on request</td></tr>
+      <tr><td>BAA</td><td>Available for healthcare deployments on NoPII Enterprise</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>NoPII runs on Enigma Vault infrastructure, which is PCI DSS Level 1 and SOC 2 Type II certified. Tokenized values are encrypted with AES-256 at the field level, using keys unique to each customer.</p>
+<p>Pricing is published, so you can plan a pilot before talking to sales:</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Plan</th><th>Price</th><th>Protected tokens</th><th>Overage</th><th>Token retention</th><th>What's included</th></tr></thead>
+    <tbody>
+      <tr><td>Free</td><td>$0 per month</td><td>1 million per month</td><td>None, with a prompt to upgrade</td><td>1 day</td><td>All providers, 30+ entity types, deterministic tokens, fail-safe blocking, audit logs, admin console</td></tr>
+      <tr><td>Pro</td><td>$50 per month</td><td>50 million per month</td><td>$1 per additional million</td><td>1 day to permanent</td><td>Everything in Free, plus multi-tenancy and roles, custom phrase rules and priority support</td></tr>
+      <tr><td>Enterprise</td><td>Custom</td><td>Volume pricing</td><td>Volume discounts</td><td>Configurable</td><td>SSO, SLA, a dedicated account manager and a BAA for healthcare</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>Most healthcare teams start by routing one administrative workflow through the Free plan with synthetic notes and reading the detection log, then move to Enterprise for the BAA before real patient data flows. <a class="bl-link" href="https://www.enigmavault.io/nopii/demo/">Try the NoPII live demo</a>, or <a class="bl-link" href="https://www.enigmavault.io/request-demo/">request a demo</a> to walk through your clinical AI routes with our team.</p>

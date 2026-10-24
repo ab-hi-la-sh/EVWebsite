@@ -1,0 +1,367 @@
+---
+title: "What Is an LLM Privacy Proxy? How It Protects PII in Every Model Call"
+titleEmphasis: "How It Protects PII in Every Model Call"
+slug: "llm-privacy-proxy"
+layout: "pii-style"
+metaTitle: "What Is an LLM Privacy Proxy? How It Works and Why Teams Use One"
+description: "An LLM privacy proxy tokenizes PII before prompts reach OpenAI, Anthropic or other providers. Learn how it works, where it fits and how to choose one."
+subtitle: "An LLM privacy proxy tokenizes PII before prompts reach OpenAI, Anthropic or other providers. Learn how it works, where it fits and how to choose one."
+date: 2026-10-24
+category: "NoPII"
+author: "abhilash-kumar"
+readTime: 19
+heroImage: "/assets/blog/img-06.png"
+heroAlt: "Abstract proxy layer sitting between an application and an AI model"
+excerpt: "An LLM privacy proxy tokenizes PII before prompts reach OpenAI, Anthropic or other providers. Learn how it works, where it fits and how to choose one."
+tags: ["llm-privacy-proxy", "nopii", "ai-security", "tokenization"]
+ogImage: "/assets/og/nopii-use-cases.jpg"
+ogImageAlt: "What Is an LLM Privacy Proxy? How It Protects PII in Every Model Call | Enigma Vault"
+ogType: article
+styles: ["blog.css", "pages/blog-pii-hero.css", "tr-pages.css"]
+scripts: ["blog-article.js"]
+faqSchema: true
+faqs:
+  - q: "Will an LLM Privacy Proxy Slow Down Our Streaming Chat?"
+    a: "It adds a processing step, so benchmark it on your own workload. A streaming-aware proxy restores tokens as each chunk arrives, which keeps responses appearing at a normal pace for most support chats and copilots."
+  - q: "Do We Keep Using Our Existing OpenAI or Anthropic API Keys?"
+    a: "With most hosted proxies, yes. You change the base URL in your SDK and keep your provider key, so billing and your provider relationship stay the same while every prompt passes through the proxy for tokenization first."
+  - q: "Does an LLM Privacy Proxy Work With LangChain or LiteLLM Agents?"
+    a: "Yes, when the framework lets you set a custom base URL, as LangChain and LiteLLM do. Confirm that tool-call content is covered by detection, since agents pass arguments to tools and pull results back into the prompt."
+  - q: "Can a Privacy Proxy Stop Employees Pasting Data Into ChatGPT?"
+    a: "No. A proxy protects traffic from applications routed through it. Staff using consumer chatbots in a browser need an AI use policy, approved alternatives and endpoint DLP to close that gap across the company."
+  - q: "What Happens if the Proxy Can't Tokenize a Request?"
+    a: "A well-built proxy blocks the request and returns an error, so raw PII never reaches the model provider. Check this behavior carefully during evaluation, since some tools forward requests when detection fails."
+---
+
+<p><strong>An LLM privacy proxy sits between your application and the model provider, replaces PII in each prompt with tokens before the request leaves, and restores the real values when the response comes back.</strong></p>
+<p>A support agent at a lending company pastes a customer's name, email, account number and recent transactions into the team's AI copilot. She just wants a faster reply. The draft comes back in seconds, and so does the problem: those details now sit with the model provider, in the copilot's trace logs and sometimes in an error report.</p>
+<p>That paste is the leak. If you're building AI into your product, you've probably felt the pressure it creates:</p>
+<ul>
+  <li><strong>Launch deadlines:</strong> The business wants AI features in customers' hands this quarter.</li>
+  <li><strong>Privacy review:</strong> Security and legal won't approve customer PII reaching a third party they don't control.</li>
+  <li><strong>Engineering drag:</strong> Each team writes its own scrubbing code, and none of it behaves the same way.</li>
+</ul>
+<p>In this post, we'll explore how an LLM privacy proxy resolves all three at one point in your architecture. We'll cover where PII leaks today, how a proxy handles real production traffic, how it compares with gateways and DLP tools, and what to ask before you choose one.</p>
+<h2>What Is an LLM Privacy Proxy?</h2>
+<p><strong>An LLM privacy proxy is a reverse proxy placed in front of LLM APIs that detects PII like names and emails in outgoing prompts, swaps it for tokens and restores the real values in the model's response.</strong></p>
+<p>Before going further, let's clarify what "proxy" means here.</p>
+<p>Your application already sends requests to a model endpoint, such as OpenAI's or Anthropic's API. With a privacy proxy, it sends those same requests to the proxy's endpoint instead. The proxy reads the text, replaces the PII it recognizes, forwards the protected request to the provider and reverses the swap when the answer comes back.</p>
+<p>For example, let's say your application asks a model to draft a payment reminder for a customer named Angela Brooks. Here's what each side sees:</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Who</th><th>What they see</th></tr></thead>
+    <tbody>
+      <tr><td>Application</td><td>"Draft a payment reminder for Angela Brooks."</td></tr>
+      <tr><td>Model provider</td><td>"Draft a payment reminder for [NAME: Ry0Ixd1]."</td></tr>
+      <tr><td>Agent</td><td>A finished reminder addressed to Angela Brooks</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>The model did all the work. It never learned who Angela is.</p>
+<p>Three properties separate a privacy proxy from a simple filter:</p>
+<ul>
+  <li><strong>Inline position:</strong> Every request on the protected route passes through it, so protection doesn't depend on each developer remembering to call a library.</li>
+  <li><strong>Reversibility:</strong> Tokens map back to real values inside your boundary, so outputs stay usable for the people reading them.</li>
+  <li><strong>Provider neutrality:</strong> One proxy can sit in front of several model providers, so your privacy rules live in one place.</li>
+</ul>
+<p>You'll also see the term used for two different designs. A reverse proxy runs at the API endpoint and protects traffic from your applications, wherever they run. A local forward proxy runs on one laptop or server and intercepts that machine's outbound traffic.</p>
+<p>Production AI features almost always use the reverse proxy model. That's the design we focus on in this post.</p>
+<h2>Where PII Leaks in AI Applications Without a Privacy Proxy</h2>
+<p><strong>PII leaks in AI applications at every component a prompt touches on its way to the model, including retrieval, provider APIs, logs, traces, tool calls and the outputs written back into your systems.</strong></p>
+<p>A generative AI feature is a chain of systems: the user interface, a prompt builder, a retrieval step, the model API, provider logs, tracing tools, tool connectors and wherever the output lands.</p>
+<p>PII that enters at the start can be copied into several of those places before anyone notices.</p>
+<p>Let's follow Angela through a contact-center platform that summarizes calls with an LLM:</p>
+<ol>
+  <li>Angela's name, phone number and account reference start in the agent's notes.</li>
+  <li>Next, the prompt builder adds her full CRM profile for context.</li>
+  <li>Everything then reaches the model provider.</li>
+  <li>For debugging, the platform's tracing tool stores the complete prompt.</li>
+  <li>Finally, the summary lands in the ticketing system with her details repeated.</li>
+</ol>
+<p>Five steps, and Angela's PII now lives in at least four systems. Here's how each leak point shows up:</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Leak point</th><th>What happens</th><th>In Angela's case</th></tr></thead>
+    <tbody>
+      <tr><td>Oversharing</td><td>More data goes into the prompt than the task needs</td><td>Full profile pasted when only her payment date mattered</td></tr>
+      <tr><td>Provider exposure</td><td>Raw identifiers reach the model API</td><td>Name, phone and account number sent to the provider</td></tr>
+      <tr><td>Logs and traces</td><td>Prompt and response bodies are stored for debugging</td><td>Call notes kept in full inside the tracing tool</td></tr>
+      <tr><td>Retrieval overreach</td><td>RAG pulls whole records into context</td><td>CRM lookup adds 40 fields to answer one question</td></tr>
+      <tr><td>Tool-call leakage</td><td>Agents pass PII to other services</td><td>Address sent to a third-party lookup tool by an agent</td></tr>
+      <tr><td>Output reproduction</td><td>PII reappears in what the model writes</td><td>Account number copied into the ticket summary</td></tr>
+      <tr><td>Unsanctioned tools</td><td>Staff use consumer AI outside approved apps</td><td>Supervisor pastes her call notes into a personal chatbot</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>This isn't a niche concern. The <a class="bl-link" href="https://genai.owasp.org/llmrisk/llm022025-sensitive-information-disclosure/" target="_blank" rel="noopener">OWASP Top 10 for LLM Applications</a> lists sensitive information disclosure as LLM02, and <a class="bl-link" href="https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf" target="_blank" rel="noopener">NIST's Generative AI Profile</a> names leakage and unauthorized disclosure of personal data among the privacy risks of generative AI.</p>
+<h2>Why Do Teams Route LLM Traffic Through a Privacy Proxy?</h2>
+<p><strong>Teams route LLM traffic through a privacy proxy to unblock compliance reviews, keep identifiers out of provider logs, honor erasure requests and stop rebuilding privacy controls inside every AI feature.</strong></p>
+<p>Now that we've seen where PII leaks, let's look at how those leaks turn into business problems for the teams building AI features:</p>
+<ul>
+  <li><strong>Stalled reviews:</strong> Security and legal hold AI launches because they can't sign off on customer data reaching a third party.</li>
+  <li><strong>Provider logs:</strong> Retention and jurisdiction at the provider decide what happens to anything you send. For law firms, privilege doesn't survive a provider log.</li>
+  <li><strong>Contract limits:</strong> Data processing agreements and BAAs assign responsibility once data has moved. Neither stops the data from moving.</li>
+  <li><strong>Erasure requests:</strong> Under GDPR or CCPA, customers can ask you to delete their data, and copies inside provider logs are hard to reach.</li>
+  <li><strong>Duplicated controls:</strong> Without a shared layer, every AI feature ships its own detection code, and each version drifts.</li>
+  <li><strong>Broken outputs:</strong> Redaction leaves blanks or generic labels, so the model can't tell people apart.</li>
+</ul>
+<p>The erasure problem shows why a proxy's design matters.</p>
+<p>For example, let's say Angela asks you to delete her data six months after her account closes. Here's what happens with and without a privacy proxy:</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Angela's deletion request</th><th>Without a privacy proxy</th><th>With a privacy proxy</th></tr></thead>
+    <tbody>
+      <tr><td>What the provider holds</td><td>Her name, phone and account number in old prompts</td><td>Tokens that mean nothing on their own</td></tr>
+      <tr><td>What you can delete</td><td>Your own records only</td><td>Records you hold plus the token mappings in the vault</td></tr>
+      <tr><td>What's left at the provider</td><td>Readable PII you can't recall</td><td>Orphaned tokens that point to nothing</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>Because the provider only ever held tokens, deleting the mapping is enough. That's a much easier answer to give a regulator.</p>
+<h2>How an LLM Privacy Proxy Handles a Request</h2>
+<p><strong>An LLM privacy proxy handles a request by intercepting it, detecting PII in the prompt, replacing each value with a token, forwarding the protected prompt and restoring real values in the response.</strong></p>
+<p>Let's stay with the contact-center platform. A collections agency uses it, and after each call, an LLM writes a summary for the next agent who speaks with Angela.</p>
+<p>Here's what happens when that request runs through a privacy proxy:</p>
+<ol>
+  <li><strong>Intercept:</strong> Your platform sends its normal API request, now addressed to the proxy endpoint.</li>
+  <li><strong>Detect:</strong> Messages, the system prompt and any tool-call content are scanned for the entity types you've enabled.</li>
+  <li><strong>Tokenize:</strong> Each recognized value becomes a token, and the original is stored in an encrypted vault.</li>
+  <li><strong>Forward:</strong> Only the protected prompt reaches the model provider, which writes a summary using tokens.</li>
+  <li><strong>Restore:</strong> On the way back, the proxy swaps tokens for real values before the summary reaches the agent.</li>
+</ol>
+<p>Here's the same call from each side. Token formats are illustrative.</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Who sees it</th><th>Content</th></tr></thead>
+    <tbody>
+      <tr><td>Agent's call notes</td><td>"Spoke with Angela Brooks, 555-0193, about account CA-88214. She'll pay on the 15th."</td></tr>
+      <tr><td>Model provider</td><td>"Spoke with [NAME: Ry0Ixd1], [PHONE: Lm4Qz8], about account [ACCOUNT: 7Qp2mX]. She'll pay on the 15th."</td></tr>
+      <tr><td>Next agent</td><td>"Angela Brooks agreed to pay on the 15th. Confirm the payment plan on account CA-88214."</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>Notice what stayed in the prompt. The payment date and the agreement are exactly what the model needs to write a useful summary, so they pass through untouched.</p>
+<p>Identity is the only thing removed.</p>
+<p>One exception is worth calling out. Card numbers shouldn't enter prompts at all, tokenized or not. Keep card capture in a separate, PCI-scoped payment flow.</p>
+<p>For your engineering team, adopting a hosted reverse proxy usually means changing one setting in the SDK you already use:</p>
+<div class="bl-docbox">
+<pre><code><span class="tok-k">from</span> openai <span class="tok-k">import</span> OpenAI
+
+client = OpenAI(
+    base_url=<span class="tok-s">"https://api.nopii.co"</span>,
+    api_key=<span class="tok-s">"YOUR_OPENAI_API_KEY"</span>,
+)</code></pre>
+</div>
+<p>The rest of your application stays as it is.</p>
+<h2>How an LLM Privacy Proxy Handles Streaming and Multi-Turn AI Workflows</h2>
+<p><strong>An LLM privacy proxy handles streaming and multi-turn workflows by restoring tokens as response chunks arrive, keeping each person's token consistent across turns and blocking requests it cannot protect.</strong></p>
+<p>A single request is the easy case. Production AI features stream their answers, hold long conversations and call tools halfway through a task.</p>
+<p>Each of those behaviors puts different demands on a proxy. This is where weaker tools tend to break.</p>
+<h3>Streaming Responses</h3>
+<p>Chat interfaces stream text in small chunks through server-sent events (SSE). If a proxy waits for the full response before restoring values, the chat freezes and then dumps the whole answer at once.</p>
+<p>A streaming-aware proxy restores tokens as each chunk arrives:</p>
+<div class="bl-docbox bl-docbox--plain">
+<pre><code>Provider sends:   "Hi [NAME: Ry0Ixd1], thanks for confirming"
+Agent sees:       "Hi Angela, thanks for confirming"
+
+Provider sends:   " your plan on [ACCOUNT: 7Qp2mX]."
+Agent sees:       " your plan on CA-88214."</code></pre>
+</div>
+<p>There's a subtle catch here. A token can be split across two chunks, with "[NAME: Ry0" in one and "Ixd1]" in the next. NoPII handles this by holding back the last few characters of each chunk until it knows whether a token is complete, then flushing everything when the stream ends.</p>
+<h3>Multi-Turn Conversations</h3>
+<p>Conversations fall apart when the same person gets a different placeholder in every message. Deterministic tokens fix that by giving the same value the same token each time.</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Turn</th><th>Per-request placeholders</th><th>Deterministic tokens</th></tr></thead>
+    <tbody>
+      <tr><td>1: "Angela called about her plan"</td><td>[PERSON_1]</td><td>[NAME: Ry0Ixd1]</td></tr>
+      <tr><td>4: "Angela's husband Mark called too"</td><td>[PERSON_1], [PERSON_2]</td><td>[NAME: Ry0Ixd1], [NAME: Pq7Lk2]</td></tr>
+      <tr><td>9: "Remind Angela about Friday"</td><td>[PERSON_1], which may now point to anyone</td><td>[NAME: Ry0Ixd1]</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>With per-request placeholders, the model can mix up Angela and her husband by turn nine. With deterministic tokens, it tracks both of them correctly for the whole conversation.</p>
+<h3>Agents and Tool Calls</h3>
+<p>AI agents gather data and act on it, which gives PII more places to travel. A typical renewal agent might:</p>
+<ol>
+  <li>Pull Angela's record from the CRM.</li>
+  <li>Call a scheduling tool to book a follow-up.</li>
+  <li>Draft an email confirming the new date.</li>
+</ol>
+<p>Each step sends content to the model or passes arguments to a tool. When detection covers tool-call content, Angela's details stay tokenized at every step, so her phone number doesn't end up inside an argument the model generated.</p>
+<h3>Failure in Both Directions</h3>
+<p>Every protection layer eventually hits an error. What matters is which way it fails:</p>
+<ul>
+  <li><strong>Outbound:</strong> If detection or tokenization fails, the request should be blocked. A proxy that forwards raw data when something breaks gives you a false sense of safety.</li>
+  <li><strong>Inbound:</strong> When restoring fails, the response should come back with tokens still in place. Nothing sensitive leaks, and the reader sees an obvious placeholder.</li>
+</ul>
+<p>When NoPII can't tokenize a request, it stops the call and returns a 503 error that reads, "Request blocked to prevent data leakage." Your application can retry safely, and nothing reaches the model.</p>
+<h3>Labels That Trigger Refusals</h3>
+<p>Models sometimes refuse or hedge when a prompt names a sensitive category. Context phrase neutralization rewrites those labels, so the model has no reason to refuse and can't guess what a token hides:</p>
+<div class="bl-docbox bl-docbox--plain">
+<pre><code>Before:  Update the record for Angela Brooks (social security number: 123-45-6789)
+After:   Update the record for [NAME: Ry0Ixd1] (ID number: [GOV_ID: k8Lm2n])</code></pre>
+</div>
+<h2>Which AI Traffic Should Run Through an LLM Privacy Proxy?</h2>
+<p><strong>Any AI traffic your application sends to a model API should run through an LLM privacy proxy, while consumer chatbots, browser extensions and image or audio files need separate controls.</strong></p>
+<p>A privacy proxy protects the route you integrate with it.</p>
+<p>That's its strength, because protection becomes part of how your application calls a model. It's also its boundary, because traffic that never touches the proxy never gets protected.</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>AI traffic</th><th>Route through the proxy?</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td>Customer-facing AI features</td><td>Yes</td><td>Chatbots, reply drafting and summaries carry the most customer data</td></tr>
+      <tr><td>Internal copilots</td><td>Yes</td><td>Staff paste customer records into internal tools every day</td></tr>
+      <tr><td>RAG and retrieved documents</td><td>Yes</td><td>Retrieved text travels inside the API request, so the proxy can inspect it</td></tr>
+      <tr><td>Agent tool calls</td><td>Yes</td><td>Agents build prompts and tool arguments from live records</td></tr>
+      <tr><td>Fallback providers</td><td>Yes</td><td>Unprotected backup routes undo the protection on the primary one</td></tr>
+      <tr><td>Batch jobs</td><td>Yes, after testing</td><td>Confirm the batch endpoint is supported before routing production volume</td></tr>
+      <tr><td>Consumer chatbot websites</td><td>No</td><td>Typing into a browser tab never touches your application's route</td></tr>
+      <tr><td>Browser extensions</td><td>Only if rebuilt to call the protected endpoint</td><td>Extensions usually send prompts straight to the model vendor</td></tr>
+      <tr><td>Images, audio and attachments</td><td>No</td><td>Text-based detection doesn't read them, so extract the text you need first</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>Coverage depends on discipline as much as on the proxy.</p>
+<p>For example, let's say your support app runs through the proxy, but a fallback route sends requests straight to a second provider during outages. Every outage now leaks PII, while your dashboard still shows the main route as protected.</p>
+<p>We also advise minimizing data before it reaches the proxy. A privacy proxy should make it safer to send what a task needs. It should never become the reason to send whole records by default.</p>
+<h2>LLM Privacy Proxy vs AI Gateway vs DLP vs Redaction Library</h2>
+<p><strong>An LLM privacy proxy tokenizes and restores PII in application traffic, while AI gateways manage routing, DLP tools watch employee activity and redaction libraries strip data inside one app.</strong></p>
+<p>These four categories overlap in marketing, which makes buying decisions harder than they need to be. Let's clarify what each one was built for.</p>
+<ul>
+  <li><strong>AI gateway:</strong> Manages model traffic, including routing between providers, API keys, rate limits, caching and cost tracking. Many gateways offer PII masking as a plugin, but it's usually one-way, so original values don't come back.</li>
+  <li><strong>DLP tool:</strong> Watches how employees move data through endpoints, browsers and email. That makes it the right control for consumer chatbots.</li>
+  <li><strong>Redaction library:</strong> Code your developers call inside each application to strip PII. Every team maintains its own copy.</li>
+  <li><strong>LLM privacy proxy:</strong> Sits in front of model APIs, tokenizes PII in prompts and restores real values in responses.</li>
+</ul>
+<p>Here's how they compare side by side:</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Question</th><th>LLM privacy proxy</th><th>AI gateway</th><th>DLP tool</th><th>Redaction library</th></tr></thead>
+    <tbody>
+      <tr><td>What job is it built for?</td><td>Protecting PII in model calls</td><td>Routing, cost and access control</td><td>Stopping employees from leaking data</td><td>Removing PII inside one app</td></tr>
+      <tr><td>How is data protected?</td><td>Deterministic tokens</td><td>Masking or blocking, often as a plugin</td><td>Blocking, alerts and warnings</td><td>Deletion or generic labels</td></tr>
+      <tr><td>Do real values come back in responses?</td><td>Yes</td><td>Usually no</td><td>Not applicable</td><td>Usually no</td></tr>
+      <tr><td>What happens if detection fails?</td><td>The request should be blocked</td><td>Depends on configuration</td><td>Set by security policy</td><td>Left to each developer</td></tr>
+      <tr><td>Does it cover consumer chatbots?</td><td>No</td><td>No</td><td>Yes</td><td>No</td></tr>
+      <tr><td>Who maintains it?</td><td>The proxy provider</td><td>Your platform team</td><td>Your security team</td><td>Each application team</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>Most mature AI programs use more than one. A gateway handles routing and spend, a privacy proxy protects the data inside each prompt, and endpoint DLP covers staff using consumer AI tools.</p>
+<h2>Hosted, Self-Hosted or Local: LLM Privacy Proxy Deployment Models</h2>
+<p><strong>LLM privacy proxies run as hosted services, self-hosted software or local forward proxies, and the choice decides who secures the token vault, maintains detection and produces audit evidence.</strong></p>
+<p>Before comparing models, it helps to know where the real risk sits.</p>
+<p>The most sensitive part of any privacy proxy is the token vault. It holds the mapping from every token back to the real value, so whoever runs the vault carries the security burden. That's the real difference between the three models.</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Factor</th><th>Hosted managed proxy</th><th>Self-hosted proxy</th><th>Local forward proxy</th></tr></thead>
+    <tbody>
+      <tr><td>Who runs the vault</td><td>The proxy provider, on certified infrastructure</td><td>Your team, in your cloud</td><td>Each machine, usually in local storage</td></tr>
+      <tr><td>Setup effort</td><td>A base URL change</td><td>Infrastructure, key management and integration work</td><td>Desktop app or proxy settings per machine</td></tr>
+      <tr><td>What it protects</td><td>All application traffic on the protected route</td><td>Any application traffic you route through it</td><td>One device's outbound traffic</td></tr>
+      <tr><td>Audit and retention</td><td>Built in</td><td>You design and build them</td><td>Usually minimal</td></tr>
+      <tr><td>Ongoing upkeep</td><td>Handled by the provider</td><td>Detection tuning, provider API changes, vault security</td><td>Per-device updates</td></tr>
+      <tr><td>Best fit</td><td>Product teams shipping AI features to production</td><td>Teams with strict residency mandates and platform engineers to spare</td><td>Individual developers and experiments</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>Self-hosting looks attractive until you list what it involves. Open-source proxies handle detection and token swapping, then leave the hard parts to you:</p>
+<ul>
+  <li>Encrypting the token map and managing its keys</li>
+  <li>Writing audit logs and retention rules</li>
+  <li>Tuning detection as new data formats appear</li>
+  <li>Updating integrations when providers change their APIs</li>
+</ul>
+<p>Each piece works on its own. The seams between them are where data leaks.</p>
+<p>A hosted proxy moves that burden to a provider whose whole job is running it. You keep your own model provider keys, your application changes one setting, and the vault inherits the provider's security certifications.</p>
+<h2>LLM Privacy Proxy Use Cases by Industry</h2>
+<p><strong>LLM privacy proxy use cases span customer support, financial services, legal, insurance, HR and accounting, wherever applications send customer, client or employee records to a model API.</strong></p>
+<p>The pattern is the same across industries. What changes is the data, the workflow and the regulator watching it.</p>
+<h3>Customer Support and SaaS Platforms</h3>
+<p>A help-desk software company adds AI reply drafting and ticket summaries for its customers. Every ticket carries names, emails, phone numbers and account IDs, and chats run at high volume with streaming responses.</p>
+<p>Routing those calls through a privacy proxy changes three things:</p>
+<ul>
+  <li><strong>Speed:</strong> Streaming restore keeps replies appearing at normal pace.</li>
+  <li><strong>Coherence:</strong> Each customer keeps one token across a conversation, so summaries stay accurate.</li>
+  <li><strong>Erasure:</strong> Purging a customer's tokens leaves nothing meaningful in provider logs when a deletion request arrives.</li>
+</ul>
+<h3>Financial Services and Fintech</h3>
+<p>Support agents at a lending platform paste account details into an internal copilot many times a day. Engineers on the same team paste API keys and connection strings into AI coding assistants while debugging.</p>
+<p>A privacy proxy with secrets detection catches both. Token formats are illustrative:</p>
+<div class="bl-docbox bl-docbox--plain">
+<pre><code>Engineer pastes:  Why does this fail? key=sk_live_51Hx... db=postgres://admin:pass@prod-db
+Model receives:   Why does this fail? key=[SECRET: a8Kd2p] db=[SECRET: Qw9Lm3]</code></pre>
+</div>
+<p>Fraud teams get the same benefit when they summarize transaction narratives, because customer names and account numbers stay tokenized throughout.</p>
+<h3>Law Firms and Legal Tech</h3>
+<p>A personal injury practice uses AI to build medical chronologies from claimant files. Those files hold client names, opposing parties, matter numbers, medical history and sometimes minors' records.</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Legal AI task</th><th>What the proxy tokenizes</th><th>What the model still works with</th></tr></thead>
+    <tbody>
+      <tr><td>Chronology building</td><td>Client and provider names, dates of birth</td><td>Treatment sequence and dates of care</td></tr>
+      <tr><td>Demand drafting</td><td>Party names, addresses, matter references</td><td>Injuries, liability facts and damages</td></tr>
+      <tr><td>Deposition summaries</td><td>Witness names and contact details</td><td>Testimony and key admissions</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>Deterministic tokens keep a long chronology coherent, with each person tracked as one token across hundreds of pages. Bar ethics guidance asks firms to assess confidentiality before adopting AI tools, and a proxy gives that assessment a concrete data flow to point to.</p>
+<h3>Insurance Carriers, TPAs and MGAs</h3>
+<p>A single claims file can hold medical records, bank details, a driver's license and payment information. Here's how an adjuster's AI assistant handles one with a proxy in place:</p>
+<ol>
+  <li>First, the adjuster asks for a summary of a 60-page claim file.</li>
+  <li>Next, the proxy tokenizes identifiers across every regulated category in one pass.</li>
+  <li>Then the model summarizes injuries, coverage questions and next steps using tokens.</li>
+  <li>Finally, the adjuster reads the summary with real names restored, while the audit log records every detection for market-conduct exams.</li>
+</ol>
+<h3>HR and People Platforms</h3>
+<p>HR tech vendors are building recruiting assistants that screen resumes and summarize interview feedback. Many of these pilots start before legal has reviewed the tool.</p>
+<p>That's a problem, because candidate names, contact details and salary figures belong to people who never agreed to share them with an AI provider. A proxy tokenizes them before the model scores or summarizes anything, and the audit trail gives legal the evidence it needs to approve the pilot.</p>
+<h3>Accounting and Tax Firms</h3>
+<p>Every spring, accounting firms collect tax returns, bank statements and payroll records by the thousand. When a firm uses AI to review those documents and draft summaries for preparers, tax IDs and bank account numbers get tokenized in the extracted text.</p>
+<p>Preparers get usable summaries. The provider never holds a client's financial identifiers.</p>
+<h2>How to Choose an LLM Privacy Proxy: 8 Questions to Ask Vendors</h2>
+<p><strong>Choosing an LLM privacy proxy means asking vendors how it fails, how it handles streaming, how consistent its tokens are and what audit evidence, retention controls and agreements it offers.</strong></p>
+<p>Feature pages tend to look alike. The fastest way to separate vendors is to ask how their proxy behaves when things get difficult.</p>
+<p>Bring these questions to your next vendor call:</p>
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Question</th><th>Why it matters</th><th>A strong answer</th></tr></thead>
+    <tbody>
+      <tr><td>What happens when detection fails?</td><td>Forwarding raw data on error leaks silently</td><td>Blocked request plus a logged event</td></tr>
+      <tr><td>Are values restored in streamed responses?</td><td>Chat features freeze without streaming restore</td><td>Chunk-by-chunk replacement, with supported providers named</td></tr>
+      <tr><td>Does the same value always get the same token?</td><td>Conversations and agents lose track of people without it</td><td>Deterministic tokens across a conversation</td></tr>
+      <tr><td>Can we add our own entity rules?</td><td>Account numbers and claim IDs follow local formats</td><td>Configurable entity types plus custom phrase rules</td></tr>
+      <tr><td>Is secrets detection included?</td><td>API keys leak through prompts as often as names do</td><td>Credentials detected in the same pass as PII</td></tr>
+      <tr><td>Will our providers and frameworks work through one route?</td><td>Fallback providers and agents need the same protection</td><td>Your providers, plus LangChain or LiteLLM, on one endpoint</td></tr>
+      <tr><td>How detailed is the audit log?</td><td>Reviewers want evidence for every request</td><td>Entity type, confidence score, provider and model, exportable</td></tr>
+      <tr><td>Can we control retention and sign the agreements we need?</td><td>Erasure requests and regulated data depend on it</td><td>Token retention controls, purge on request and a BAA where needed</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>Then test before you buy. Take a set of synthetic or approved prompts from your real workflow and replay them through each shortlisted proxy.</p>
+<p>Measure five things:</p>
+<ol>
+  <li>Entity recognition across your real formats</li>
+  <li>Token consistency across turns</li>
+  <li>Restoration accuracy in responses</li>
+  <li>Added latency on your workload</li>
+  <li>Sensitive context left after tokenization</li>
+</ol>
+<p>A week of replay testing usually settles an evaluation faster than a month of feature comparisons.</p>
+<h2>NoPII: Enigma Vault's Managed LLM Privacy Proxy</h2>
+<p>At Enigma Vault, we built <a class="bl-link" href="https://www.enigmavault.io/nopii/" target="_blank" rel="noopener">NoPII</a> for one job: tokenizing PII in the LLM traffic your applications generate. Our view is simple. What the model never sees, it can never leak.</p>
+<p>NoPII is a hosted reverse proxy. Your team changes the base URL in the SDK it already uses, keeps its own provider keys and goes live in under five minutes.</p>
+<p>The same endpoint covers OpenAI, Anthropic, Google Gemini, xAI, DeepSeek, Mistral, Groq, Together and Fireworks. It also works with LangChain, LangGraph, LlamaIndex, LiteLLM and the Vercel AI SDK, so your primary provider, your fallback and your agent framework can share one protected route.</p>
+<p>Where many tools treat privacy as a plugin, NoPII treats it as the whole product. When your security team reviews it, here's what they'll find:</p>
+<ul>
+  <li><strong>Blocking by design:</strong> If detection or tokenization fails, the request is blocked and logged.</li>
+  <li><strong>Broad detection:</strong> 30+ configurable entity types, plus 14 secret pattern families checked in the same pass.</li>
+  <li><strong>Published testing:</strong> Detection is validated in a published 109-test report across providers.</li>
+  <li><strong>Audit evidence:</strong> Every detection is logged with entity type, confidence score, provider and model.</li>
+  <li><strong>Erasure support:</strong> Token purge for GDPR and CCPA requests, with configurable retention on paid plans.</li>
+  <li><strong>Certified infrastructure:</strong> Tokens live in the Enigma Vault, which is PCI DSS Level 1 and SOC 2 Type II certified, with AES-256 encryption and per-customer keys.</li>
+</ul>
+<p>NoPII is also one layer of a wider platform. The tokens it creates are held in the Enigma Vault, the same infrastructure that protects card, data and file workloads, and Triplets checks AI answers against evidence you approve, so teams can govern what goes into a model and what comes out of it from one place.</p>
+<p>The best way to judge a privacy proxy is to watch it work. <a class="bl-link" href="https://www.enigmavault.io/nopii/demo/" target="_blank" rel="noopener">Try the NoPII live demo</a> to see a message detected, tokenized and restored, or <a class="bl-link" href="https://app.nopii.co" target="_blank" rel="noopener">start free</a> with one million protected tokens a month and no credit card. Plan details are on our <a class="bl-link" href="https://www.enigmavault.io/pricing/#nopii" target="_blank" rel="noopener">pricing page</a>.</p>

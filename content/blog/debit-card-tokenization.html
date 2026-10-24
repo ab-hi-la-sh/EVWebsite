@@ -1,0 +1,290 @@
+---
+title: "What Is Debit Card Tokenization? How It Works and Why It Matters"
+titleEmphasis: "How It Works and Why It Matters"
+slug: "debit-card-tokenization"
+layout: "pii-style"
+metaTitle: "What Is Debit Card Tokenization? How It Works and Why It Matters"
+description: "Learn what debit card tokenization is, how it protects card data for payments and recurring billing, and how it affects debit routing and PCI scope."
+subtitle: "Learn what debit card tokenization is, how it protects card data for payments and recurring billing, and how it affects debit routing and PCI scope."
+date: 2026-10-24
+category: "Card Vault"
+author: "abhilash-kumar"
+readTime: 16
+heroImage: "/assets/blog/img-05.png"
+heroAlt: "Layered translucent panels representing a debit card number replaced by a token"
+excerpt: "Learn what debit card tokenization is, how it protects card data for payments and recurring billing, and how it affects debit routing and PCI scope."
+tags: ["debit-card", "tokenization", "pci-dss", "card-vault"]
+ogImage: "/assets/og/vault-data.jpg"
+ogImageAlt: "What Is Debit Card Tokenization? How It Works and Why It Matters | Enigma Vault"
+ogType: article
+styles: ["blog.css", "pages/blog-pii-hero.css", "tr-pages.css"]
+scripts: ["blog-article.js"]
+faqSchema: true
+faqs:
+  - q: "How Do I Tokenize My Debit Card?"
+    a: "As a cardholder, adding a debit card to Apple Pay or Google Pay tokenizes it automatically. As a business, customer debit cards are tokenized through a vault or gateway when they're captured on a secure form."
+  - q: "Is Debit Card Tokenization PCI DSS Compliant?"
+    a: "Tokenization supports PCI DSS compliance by keeping card numbers out of business systems. The vault and capture pages stay in scope, so a provider with a current PCI DSS Level 1 attestation is essential."
+  - q: "Do Tokenized Debit Cards Still Work With a PIN?"
+    a: "Yes, at the point of sale. The PIN is entered separately and is never stored or tokenized. Online, most debit payments run without a PIN, using PINless routing or signature-style debit processing instead."
+  - q: "Does Tokenization Change How Debit Transactions Are Routed?"
+    a: "It can. Regulation II requires a second unaffiliated network for every debit transaction, tokenized ones included. Merchants should confirm with their processor that tokenized debit can route to that network."
+  - q: "Can One Debit Card Token Work Across Multiple Payment Gateways?"
+    a: "Only when it lives in an independent vault. Gateway-issued tokens usually work with that gateway alone, while a vault token can be routed to any connected processor without collecting the card from the customer again."
+---
+
+<p><strong>Debit card tokenization is the process of replacing a debit card's 16-digit number with a unique token, so businesses can store and charge the card without keeping the real card number in their own systems.</strong></p>
+
+<h2>Key Takeaways</h2>
+<ul>
+  <li>A debit token stands in for the card number everywhere outside the vault or card network.</li>
+  <li>Debit cards follow extra rules on PIN handling and network routing that shape how tokens work.</li>
+  <li>Tokenization keeps stored cards out of CRMs and billing tools, which shrinks PCI DSS scope.</li>
+  <li>An independent vault lets a business change gateways without asking customers for their cards again.</li>
+</ul>
+
+<p>Debit cards pull money straight from a customer's bank account. A stolen debit number can empty that account before anyone notices.</p>
+<p>That risk shows up in ordinary workflows. An insurer keeps debit cards on file for monthly premiums. A clinic runs patient payment plans on them. A travel agency takes them over the phone for booking deposits, and the numbers end up in emails and spreadsheets.</p>
+<p>At Enigma Vault, the debit card problems we see usually start outside the checkout page. A travel agent hears a card number on a recorded call, or a client emails one to a law firm for a retainer. Card Vault replaces those paths with one secure capture point, so the business record keeps a token while the vault protects the card.</p>
+<p>The sections below explain how debit tokens work, then show what they change for card-on-file billing and the debit rules on network routing.</p>
+
+<h2>What Is Debit Card Tokenization?</h2>
+<p><strong>Debit card tokenization is a security method that swaps the primary account number (PAN) on a debit card for a random token, which has no value to attackers and can only be turned back into the card inside a secure vault.</strong></p>
+<p>Once a card is tokenized, the token becomes its stand-in. Billing systems and CRMs hold the token, while the real number stays inside a vault built to protect it.</p>
+<p>Here's how one stored debit card changes:</p>
+<div class="bl-tablewrap"><table class="bl-table"><thead><tr><th>Field</th><th>Before tokenization</th><th>After tokenization</th></tr></thead><tbody>
+<tr><td>Card number</td><td>4012 8888 8888 1881</td><td>tok_8Kq2Lm9Xa41</td></tr>
+<tr><td>What staff see</td><td>The full card number</td><td>Card type and last four digits</td></tr>
+<tr><td>Where it's stored</td><td>The company's own database</td><td>A PCI DSS Level 1 vault</td></tr>
+<tr><td>Value if stolen</td><td>Usable for fraud</td><td>Useless outside the vault</td></tr>
+</tbody></table></div>
+<p>Three kinds of organizations issue debit card tokens:</p>
+<ol>
+  <li><strong>Card networks:</strong> Visa and Mastercard issue network tokens tied to the card account.</li>
+  <li><strong>Vaults and processors:</strong> Tokenization platforms and payment gateways issue tokens on behalf of merchants.</li>
+  <li><strong>Phone wallets:</strong> Apple Pay and Google Pay create device tokens when a cardholder adds a card.</li>
+</ol>
+<p>Debit card tokenization follows the same core principles as <a class="bl-link" href="/blog/card-vault-tokenization/">card tokenization</a> in general. The differences come from how debit payments move, which the next sections cover.</p>
+
+<h2>How Does Debit Card Tokenization Work?</h2>
+<p><strong>Debit card tokenization works in five steps: capture the card securely, send it to a vault or network, receive a token, store only the token, then swap it back to the real card number when a payment runs.</strong></p>
+<ol>
+  <li><strong>Capture:</strong> The customer enters the card on a hosted form, through a phone IVR or via an API. The card number goes straight to the vault and never touches the merchant's servers.</li>
+  <li><strong>Tokenize:</strong> The vault encrypts the card number and returns a token, usually with safe display details such as the card type and last four digits.</li>
+  <li><strong>Store:</strong> The merchant saves the token against the customer record. No card number lands in its databases or logs.</li>
+  <li><strong>Charge:</strong> When a payment is due, the application sends the token. The vault or network fills in the real card number for the processor.</li>
+  <li><strong>Respond:</strong> The processor approves or declines the payment, and the result comes back without the card number.</li>
+</ol>
+<p>Here's how that looks at a property management company collecting monthly rent:</p>
+<ul>
+  <li>The tenant enters a debit card once, on a secure form sent by text or email.</li>
+  <li>The property software stores a token on the tenant's ledger.</li>
+  <li>Each month, the billing run sends that token, and rent is collected with no one on staff seeing the card.</li>
+</ul>
+<p>Detokenization, where a token becomes a card number again, happens only inside the vault or card network. That separation keeps the merchant's environment clean.</p>
+
+<h2>What Is the Difference Between Debit and Credit Card Tokenization?</h2>
+<p><strong>The difference between debit and credit card tokenization lies in the payment underneath, since debit cards add rules on PIN handling, dual-network routing and regulated interchange that shape how tokens are processed.</strong></p>
+<p>The token technology is identical. What changes is how the money moves once the token is used.</p>
+<div class="bl-tablewrap"><table class="bl-table"><thead><tr><th>Factor</th><th>Debit cards</th><th>Credit cards</th></tr></thead><tbody>
+<tr><td>Source of funds</td><td>The customer's bank account, debited right away</td><td>A credit line, repaid later</td></tr>
+<tr><td>PIN</td><td>Common in stores, rarely used online</td><td>Not used in most US transactions</td></tr>
+<tr><td>Network routing</td><td>At least two unaffiliated networks required by law</td><td>Usually one network per card</td></tr>
+<tr><td>Interchange</td><td>Capped for large issuers under Regulation II</td><td>Set by the card networks</td></tr>
+<tr><td>Dispute protections</td><td>Regulation E</td><td>Fair Credit Billing Act</td></tr>
+<tr><td>Fraud impact</td><td>Money leaves the account immediately</td><td>Charges can be disputed before payment</td></tr>
+</tbody></table></div>
+<p>Two of these differences change how a tokenization program should be designed:</p>
+<ol>
+  <li><strong>Routing:</strong> A debit token has to work on every network the card supports. If it only works on one, the merchant loses the routing choice the law guarantees.</li>
+  <li><strong>Fraud impact:</strong> Debit fraud drains real bank balances, so customers judge a business more harshly when debit numbers leak.</li>
+</ol>
+<p>Teams that already tokenize credit cards can apply the same vault to debit. Our guide to <a class="bl-link" href="/blog/credit-card-tokenization/">credit card tokenization</a> covers the credit-specific details.</p>
+
+<h2>What Are the Types of Debit Card Tokens?</h2>
+<p><strong>The main types of debit card tokens are network tokens issued by Visa and Mastercard, vault and processor tokens issued for merchants and device tokens created when a card is added to a phone wallet.</strong></p>
+
+<h3>Network Tokens</h3>
+<p>Visa Token Service and the Mastercard Digital Enablement Service (MDES) issue tokens linked to the card account itself. When a bank reissues a card after expiry or loss, the network can update the token automatically. Stored payments keep running without a new card on file.</p>
+
+<h3>Vault and Processor Tokens</h3>
+<p>A tokenization vault or payment gateway creates these tokens for the merchant. The distinction between the two matters:</p>
+<ul>
+  <li><strong>Processor tokens</strong> work only inside the gateway that issued them.</li>
+  <li><strong>Vault tokens</strong> sit with an independent provider and can be sent to any gateway the vault connects to.</li>
+</ul>
+
+<h3>Device Tokens</h3>
+<p>Apple Pay and Google Pay create a separate token for each phone or watch when a cardholder adds a debit card. At checkout, the device shares that token, and the merchant never receives the real number.</p>
+<div class="bl-tablewrap"><table class="bl-table"><thead><tr><th>Token type</th><th>Issued by</th><th>Where it works</th><th>Portability</th></tr></thead><tbody>
+<tr><td>Network token</td><td>Visa or Mastercard</td><td>Merchants on that network</td><td>Tied to the network</td></tr>
+<tr><td>Vault token</td><td>Independent tokenization platform</td><td>Any connected gateway</td><td>High</td></tr>
+<tr><td>Processor token</td><td>Payment gateway</td><td>That gateway only</td><td>Low</td></tr>
+<tr><td>Device token</td><td>Phone wallet</td><td>Wallet payments on that device</td><td>Tied to the device</td></tr>
+</tbody></table></div>
+<p>Many merchants combine types, pairing a vault token for portability with a network token for automatic card updates.</p>
+
+<h2>What Are the Benefits of Debit Card Tokenization?</h2>
+<p><strong>The benefits of debit card tokenization include keeping card numbers out of company systems, a smaller PCI DSS scope, safer repeat payments, fewer declines from outdated cards and freedom to change payment processors.</strong></p>
+<div class="bl-tablewrap"><table class="bl-table"><thead><tr><th>Benefit</th><th>What changes</th><th>Who feels it most</th></tr></thead><tbody>
+<tr><td>Lower breach impact</td><td>A stolen database holds tokens, which can't drain a bank account</td><td>Security and risk teams</td></tr>
+<tr><td>Smaller PCI DSS scope</td><td>Systems with only tokens can sit outside the cardholder data environment</td><td>Compliance and IT teams</td></tr>
+<tr><td>Safer repeat payments</td><td>Subscriptions and payment plans run on tokens</td><td>Billing and finance teams</td></tr>
+<tr><td>Fewer declines</td><td>Network tokens update when cards are reissued</td><td>Revenue and collections teams</td></tr>
+<tr><td>Gateway freedom</td><td>Vault tokens move to a new processor</td><td>Payments and procurement teams</td></tr>
+<tr><td>Customer trust</td><td>Customers save cards more readily when the business never holds the number</td><td>Customer experience teams</td></tr>
+</tbody></table></div>
+<p>Gateway freedom tends to be the benefit teams discover too late. A business that stores processor tokens finds out at contract renewal that its saved cards can't move, and every customer has to re-enter a card.</p>
+<p>At Enigma Vault, we believe the merchant should own the choice of processor. Card Vault keeps every token in the vault, and its<a class="bl-link" href="https://www.enigmavault.io/vault/card-vault/" target="_blank" rel="noopener"> payment proxy</a> fills in card details on the way to Authorize.net, Stripe, Braintree, PayPal or any REST-based gateway. Moving to a new processor becomes a configuration change, and customers never re-enter a card.</p>
+
+<h2>How Debit Card Tokenization Works for Card-on-File and Recurring Payments</h2>
+<p><strong>Debit card tokenization supports card-on-file and recurring payments by storing a reusable token that can be charged on schedule, with customer consent recorded and the real card number never kept on file.</strong></p>
+<p>Most businesses store debit cards so they can charge them again. Remote service businesses often collect a card once, over the phone or through a payment link, and keep charging it for years. Tokens keep that reuse safe, but the billing design around the token matters just as much.</p>
+
+<h3>Customer-Initiated vs Merchant-Initiated Charges</h3>
+<p>Card network stored-credential rules split repeat charges into two groups:</p>
+<ul>
+  <li><strong>Customer-initiated transactions (CIT):</strong> The customer starts the payment, such as approving a deposit on a booking call or paying an invoice through a link. The first charge on a new card is usually a CIT, and it's often the only point where the CVV is checked.</li>
+  <li><strong>Merchant-initiated transactions (MIT):</strong> The business charges a stored card under an earlier agreement, such as a monthly premium or a scheduled installment. No CVV is involved, since it can't be stored after authorization.</li>
+</ul>
+<p>Card Vault handles this split by holding the CVV encrypted for at most 30 minutes for the first charge, then deleting it, while the token stays available for every later MIT.</p>
+
+<h3>Recurring Debit Patterns Across Industries</h3>
+<div class="bl-tablewrap"><table class="bl-table"><thead><tr><th>Billing pattern</th><th>Industry example</th><th>Charge schedule</th><th>What the token replaces</th></tr></thead><tbody>
+<tr><td>Subscriptions</td><td>SaaS platforms</td><td>Monthly or annual</td><td>Card numbers in the billing database</td></tr>
+<tr><td>Premiums</td><td>Insurance agencies</td><td>Monthly</td><td>Cards written on applications or spoken on calls</td></tr>
+<tr><td>Payment plans</td><td>Healthcare practices, collection agencies</td><td>Weekly or monthly installments</td><td>Cards kept in practice notes or call recordings</td></tr>
+<tr><td>Rent and deposits</td><td>Property management</td><td>Monthly, plus move-in deposits</td><td>Card details stored in the property system</td></tr>
+<tr><td>Bookings and incidentals</td><td>Hotels, travel agencies</td><td>Deposit, balance and extras</td><td>Card authorization forms sent by email</td></tr>
+<tr><td>Retainers</td><td>Law firms, accounting practices</td><td>Per engagement or monthly</td><td>Card numbers shared in client emails</td></tr>
+<tr><td>Dues</td><td>Private clubs, membership organizations</td><td>Monthly or annual</td><td>Cards kept on file in membership records</td></tr>
+</tbody></table></div>
+<p>Deterministic tokens add one more advantage for these patterns. One card always maps to one token, so billing teams can spot duplicate signups and link the same card across accounts without seeing the number.</p>
+
+<h3>Why Debit Cards on File Need Extra Care</h3>
+<p>Debit charges pull money from a bank balance right away, which changes how recurring billing should run:</p>
+<ul>
+  <li><strong>Insufficient funds:</strong> A debit charge can decline when the account balance is low, so retry timing matters more than with credit.</li>
+  <li><strong>Authorization records:</strong> Regulation E treats recurring charges to a consumer's account as preauthorized transfers, which need signed or similarly authenticated customer authorization.</li>
+  <li><strong>Customer sensitivity:</strong> An unexpected debit charge hits a customer's spending money, so advance notice of each charge reduces disputes.</li>
+</ul>
+<p><strong>Responsibilities that stay with the merchant:</strong></p>
+<ol>
+  <li>Record the customer's consent and the agreed billing terms before the first charge.</li>
+  <li>Flag each transaction as customer-initiated or merchant-initiated under stored-credential rules.</li>
+  <li>Keep tokens current when cards are reissued, through network tokens or an account updater service.</li>
+  <li>Make cancellation and card updates easy, through the same secure form or payment link used at signup.</li>
+</ol>
+
+<h2>How Does Tokenization Affect Debit Routing and the Durbin Amendment?</h2>
+<p><strong>Tokenization affects debit routing because the Durbin Amendment requires every debit card to be routable over at least two unaffiliated networks, and tokens must not block merchants from using that second network.</strong></p>
+<p>The Durbin Amendment, put into effect through the Federal Reserve's Regulation II, gives merchants a choice of debit network on each transaction. Picking the lower-cost network can reduce processing fees.</p>
+<p>Tokens entered the routing debate through two regulatory actions:</p>
+<ol>
+  <li><strong>October 2022, Federal Reserve rule:</strong> The Fed confirmed that the two-network requirement covers all debit transactions, including online and other card-not-present payments. The rule took effect on July 1, 2023.</li>
+  <li><strong>December 2022, FTC order:</strong> The Federal Trade Commission ordered Mastercard to stop blocking competing debit networks from processing tokenized transactions, after finding its token practices limited merchant routing choice.</li>
+</ol>
+<p>Wallets and network tokens now carry a growing share of debit payments. If a token can only travel over one network, the routing choice the law intended disappears.</p>
+<div class="bl-tablewrap"><table class="bl-table"><thead><tr><th>Question for the processor</th><th>Why it matters</th></tr></thead><tbody>
+<tr><td>Can tokenized debit transactions route to a second, unaffiliated network?</td><td>Confirms the token doesn't lock routing to one network</td></tr>
+<tr><td>Is PINless debit routing enabled for card-not-present payments?</td><td>Determines whether online debit can use lower-cost networks</td></tr>
+<tr><td>Do reports show which network carried each tokenized transaction?</td><td>Lets finance teams verify routing and fees</td></tr>
+</tbody></table></div>
+<p>Routing decisions sit with networks and processors. A merchant's job is to ask these questions and get the answers in writing.</p>
+
+<h2>How Does Debit Card Tokenization Reduce PCI DSS Scope?</h2>
+<p><strong>Debit card tokenization reduces PCI DSS scope by removing card numbers from the systems that store and process customer records, while the vault and any system that touches real card data remain in scope.</strong></p>
+<p>Tokenization isn't a certification. It's an architecture choice that changes which systems the standard applies to.</p>
+<div class="bl-tablewrap"><table class="bl-table"><thead><tr><th>Can move out of scope</th><th>Stays in scope</th></tr></thead><tbody>
+<tr><td>CRMs and billing tools that store only tokens</td><td>The vault holding real card numbers</td></tr>
+<tr><td>Reporting and analytics built on tokenized records</td><td>Payment pages that capture card data directly</td></tr>
+<tr><td>Support tools showing only the last four digits</td><td>Phone systems where agents hear card numbers</td></tr>
+<tr><td>Data warehouses and backups with tokens only</td><td>Any system that receives a detokenized card</td></tr>
+</tbody></table></div>
+<p><strong>Data that can never be stored:</strong> PCI DSS prohibits keeping sensitive authentication data after authorization, tokenized or not. That covers:</p>
+<ul>
+  <li>The PIN and the encrypted PIN block</li>
+  <li>The card verification code (CVV or CVC)</li>
+  <li>Full magnetic stripe or chip data</li>
+</ul>
+<p><strong>Effect on the SAQ:</strong> Moving capture to a hosted form or IVR, then storing only tokens, can lead to a shorter Self-Assessment Questionnaire. The final SAQ depends on the full setup, and the acquirer or QSA confirms it.</p>
+<p>The vault provider becomes part of the compliance chain, so a current PCI DSS Level 1 attestation and a SOC 2 Type II report are the two documents worth requesting first.</p>
+
+<h2>What Are the Challenges of Debit Card Tokenization?</h2>
+<p><strong>The main challenges of debit card tokenization are uneven network-token support across issuers, limited routing visibility, keeping tokens current, processor lock-in and the absence of PIN entry online.</strong></p>
+<div class="bl-tablewrap"><table class="bl-table"><thead><tr><th>Challenge</th><th>Why it happens</th><th>How to handle it</th></tr></thead><tbody>
+<tr><td>Uneven network-token support</td><td>Some issuers don't support network tokens for every card</td><td>Keep a vault token as the fallback</td></tr>
+<tr><td>Routing visibility</td><td>Tokenized transactions can hide which network carried them</td><td>Request network-level reporting from the processor</td></tr>
+<tr><td>Stale tokens</td><td>Reissued or expired cards break stored payments</td><td>Use network tokens or an account updater</td></tr>
+<tr><td>Processor lock-in</td><td>Gateway-issued tokens work only with that gateway</td><td>Store tokens in an independent vault</td></tr>
+<tr><td>No PIN online</td><td>PIN entry isn't used for most card-not-present payments</td><td>Rely on PINless routing and strong authentication</td></tr>
+<tr><td>Phone capture</td><td>Agents who hear card numbers pull call recordings into scope</td><td>Capture cards through an IVR that sends them to the vault</td></tr>
+</tbody></table></div>
+<p>Processor lock-in causes the most damage because it surfaces late. Here's how it usually plays out:</p>
+<ol>
+  <li>A business saves thousands of debit cards as gateway tokens.</li>
+  <li>Years later, a better rate or a new market makes switching gateways attractive.</li>
+  <li>The old gateway won't release the cards in usable form.</li>
+  <li>Every customer has to re-enter a card, and some never do.</li>
+</ol>
+<p>Deciding where tokens live before the first card is stored avoids all four steps.</p>
+
+<h2>How to Implement Debit Card Tokenization</h2>
+<p><strong>Implementing debit card tokenization means choosing a token model, setting up secure capture, storing only tokens, connecting your gateway, managing token updates and confirming PCI scope.</strong></p>
+<ol>
+  <li><strong>Choose a token model:</strong> Network tokens, processor tokens or an independent vault. A vault paired with network tokens gives the best balance of portability and approval rates.</li>
+  <li><strong>Set up secure capture:</strong> Use hosted or embedded forms for online payments, an IVR connector for phone payments and an API for back-office imports.</li>
+  <li><strong>Remove stored card numbers:</strong> Clear card data from every place it has collected, including email threads and call recordings, keeping only tokens and safe display details.</li>
+  <li><strong>Connect the gateway:</strong> Send tokens at charge time and let the vault or processor supply the real card number to the network.</li>
+  <li><strong>Turn on token updates:</strong> Enable network-token lifecycle management or an account updater so reissued cards keep working.</li>
+  <li><strong>Test every flow:</strong> Run test cards through each payment channel, including recurring charges, before going live.</li>
+  <li><strong>Confirm scope:</strong> Review the new setup with your QSA or acquirer and update the SAQ.</li>
+</ol>
+<p><strong>Migrating existing cards:</strong> Businesses that already hold debit cards don't need to start over. Cards can be imported into a vault in bulk, the originals deleted and every customer's next payment charged against the new token, with nothing for the customer to re-enter.</p>
+
+<h2>Why Enigma Card Vault for Debit Card Tokenization</h2>
+<p><a class="bl-link" href="https://www.enigmavault.io/vault/card-vault/" target="_blank" rel="noopener">Enigma Card Vault</a> tokenizes debit and credit cards at the moment of capture and charges them through the gateway a business already uses. Card numbers never sit in company systems, and gateway choice stays open.</p>
+
+<h3>How Card Vault Tokenizes Debit Cards</h3>
+<ol>
+  <li><strong>Capture:</strong> Cards arrive through a hosted or embedded form, a Twilio Pay phone IVR or a direct API call.</li>
+  <li><strong>Tokenize:</strong> Card Vault replaces the card number with a token in a single step.</li>
+  <li><strong>Charge:</strong> The payment proxy sends each charge to the gateway, filling in card details inside the vault.</li>
+</ol>
+
+<h3>Capture and Token Options</h3>
+<div class="bl-tablewrap"><table class="bl-table"><thead><tr><th>Option</th><th>What it does</th></tr></thead><tbody>
+<tr><td>Hosted and embedded forms</td><td>Iframe forms in 13 languages, including Magento and WooCommerce checkouts</td></tr>
+<tr><td>Twilio Pay IVR</td><td>Phone payments go straight to the vault, away from agents and servers</td></tr>
+<tr><td>Direct API</td><td>One REST call returns a token, with OAuth2 authentication</td></tr>
+<tr><td>Random tokens</td><td>The default, with no structure to reverse</td></tr>
+<tr><td>Luhn-passable tokens</td><td>Keep the first six and last four digits, or use your own BIN range</td></tr>
+<tr><td>Deterministic tokens</td><td>One card always maps to one token for card-on-file logic</td></tr>
+<tr><td>CVV handling</td><td>Held encrypted for 30 minutes at most, then deleted</td></tr>
+</tbody></table></div>
+
+<h3>Charge Through Any Gateway</h3>
+<p>The payment proxy forwards charges to Authorize.net, Stripe, Braintree, PayPal, Mastercard APIs and any REST-based gateway. Requests are signed with HMAC-SHA256, or OAuth 1.0a for Mastercard, and destinations can be locked to an allowlist of approved domains.</p>
+
+<h3>Use Cases by Industry</h3>
+<ul>
+  <li><strong>Insurance:</strong> Premium billing through the carrier's existing processor</li>
+  <li><strong>Healthcare:</strong> Patient payment plans run on tokens instead of card numbers in practice systems</li>
+  <li><strong>Legal:</strong> Retainers collected through a secure link in place of emailed card details</li>
+  <li><strong>Travel and hospitality:</strong> Cards on file for bookings, plus IVR phone capture</li>
+  <li><strong>Contact centers:</strong> Twilio Pay IVR capture keeps debit numbers off agent screens and call recordings</li>
+  <li><strong>SaaS and platforms:</strong> Subscription billing where the vault, rather than the platform, holds card data</li>
+  <li><strong>Property management:</strong> Rent and deposits charged from a stored token</li>
+  <li><strong>Aviation, cruise and clubs:</strong> Bulk migration of existing card-on-file records into the vault</li>
+</ul>
+
+<h3>Security and Compliance</h3>
+<p>Card Vault runs on PCI DSS Level 1 and SOC 2 Type II certified infrastructure, logs every API request and is backed by Enigma's status as an AWS Partner.</p>
+
+<h3>Card Vault Pricing</h3>
+<div class="bl-tablewrap"><table class="bl-table"><thead><tr><th>Plan</th><th>Monthly price</th><th>Included requests</th><th>Overage per request</th><th>Includes</th></tr></thead><tbody>
+<tr><td>Lite</td><td>$0, free forever</td><td>1,000 per month</td><td>$0.08</td><td>Tokenization, gateway proxy and community support</td></tr>
+<tr><td>Plus</td><td>$49.99</td><td>20,000 (roughly 200 to 300 daily transactions)</td><td>$0.04</td><td>Ephemeral key sharing and email support</td></tr>
+<tr><td>Premium</td><td>$249.99</td><td>250,000 (roughly 2,000 daily transactions)</td><td>$0.02</td><td>Highest request volume and priority support</td></tr>
+</tbody></table></div>
+<p>Every plan is billed through AWS Marketplace, and overage is metered per request with no hard stop. Teams needing custom volume or dedicated infrastructure can request an enterprise plan. Full details are on the<a class="bl-link" href="https://www.enigmavault.io/pricing/#vault" target="_blank" rel="noopener"> pricing page</a>, and the<a class="bl-link" href="https://www.enigmavault.io/vault/card-vault-demo/" target="_blank" rel="noopener"> Card Vault live demo</a> tokenizes a test card in seconds.</p>

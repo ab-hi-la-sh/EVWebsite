@@ -1,0 +1,731 @@
+---
+title: "Best Tokenization Software for Fintech (2026): 9 Platforms Compared"
+titleEmphasis: "9 Platforms Compared"
+slug: "best-tokenization-software-for-fintech"
+layout: "pii-style"
+metaTitle: "Best Tokenization Software for Fintech (2026)"
+description: "Compare 9 tokenization platforms for fintech: cards, bank accounts, SSNs, and KYC files; network vs vault tokens; issuing support; audit evidence; pricing."
+subtitle: "Which vault fits a neobank, lender, payment facilitator, or wealth and insurtech app that holds cards, bank accounts, SSNs, and KYC documents, and has a partner bank asking for proof."
+date: 2026-10-23T00:06:00
+category: "Vault"
+author: "tony-alex"
+readTime: 30
+heroImage: "/assets/blog/img-02.png"
+heroAlt: "Layered panels representing card, bank account, and identity data replaced by tokens in a fintech app"
+excerpt: "Nine tokenization platforms compared for fintech builders on card and bank account coverage, network tokens, issuing support, audit evidence, and price."
+tags: ["tokenization", "fintech", "pci-dss", "card-vault", "data-vault"]
+ogImage: "/assets/og/nopii-overview.jpg"
+ogImageAlt: "Best Tokenization Software for Fintech (2026): 9 Platforms Compared | Enigma Vault"
+ogType: article
+styles: ["blog.css", "pages/blog-pii-hero.css", "tr-pages.css"]
+scripts: ["blog-article.js"]
+faqSchema: true
+faqs:
+  - q: "What Is the Best Tokenization Software for Fintech in 2026?"
+    a: "It depends on what your app holds. Enigma Vault is best for fintechs that need cards, bank accounts, SSNs, and KYC files behind one vault with published pricing and a free start; VGS is best for card issuers and money-movement apps that want tokenized account numbers and card reveal from one vendor; Basis Theory suits teams that want a PCI AOC included in the first paid plan; Evervault suits developer teams that want every usage fee published; IXOPAY suits enterprises that need routing across hundreds of acquirers; Thales CipherTrust Tokenization suits banks and large lenders that want tokenization inside an existing enterprise key-management estate."
+  - q: "Do I Need Network Tokens if I Already Use a Vault?"
+    a: "Usually both. A vault token keeps the card number out of your systems and lets you route to any processor you connect. A network token, issued by Visa or Mastercard, is what lifts authorization rates and survives card reissues. Enigma Vault does not issue network tokens; VGS, Basis Theory, Evervault, IXOPAY, Spreedly, and Bluefin sell them as add-ons or usage fees, and your processor may already offer them."
+  - q: "Can Enigma Vault Tokenize Bank Account and Routing Numbers?"
+    a: "Yes. Data Vault stores structured secrets such as account numbers, routing numbers, SSNs, and tax IDs with field-level AES-256 encryption, deterministic tokens for exact-match lookups, and batch calls of up to 5,000 values. It is priced separately from Card Vault, starting with a free Lite tier."
+  - q: "Which Tokenization Vendors Support Card Issuing Programs?"
+    a: "VGS has the deepest issuing feature set in this list: card reveal, push provisioning, virtual card activation, and direct ISO 8583 connectivity to Visa and Mastercard. Evervault offers card reveal through an iframe and a Relay that encrypts PANs returned by an issuer. Skyflow publishes a card issuance solution. Enigma Vault’s proxy signs requests to Mastercard APIs with OAuth 1.0a, which fits push-to-card and issuer API calls, but it is not an issuer processor."
+  - q: "What Audit Evidence Will Our Partner Bank Ask For?"
+    a: "Expect requests for the vendor’s PCI DSS Attestation of Compliance, a SOC 2 Type II report under NDA, data-flow diagrams showing where plaintext lives, and logs that prove who detokenized what and when. IXOPAY and Spreedly post AOCs publicly, Basis Theory includes an AOC in its paid plan, and Evervault shares its AOC through its trust center. Ask every vendor, including Enigma Vault, for the current reports before you sign."
+  - q: "Does Tokenization Take Our Fintech Out of PCI DSS Scope?"
+    a: "No vendor can promise that. Keeping card numbers out of your systems can significantly reduce the part of your environment in PCI scope, but your acquirer or QSA confirms the final scope and questionnaire. A service provider’s PCI certification does not make your company PCI exempt."
+  - q: "Does a Vault Replace KYC, AML, or Fraud Programs?"
+    a: "No. Vaulting changes where sensitive values live and who can see them. It does not replace financial licensing, KYC, AML, fraud, model risk, or consumer-compliance programs, which stay with you and your bank partner."
+  - q: "How Much Does Fintech Tokenization Software Cost?"
+    a: "Published prices in October 2026 run from $0 (Enigma Vault Lite, free forever) and $49.99 a month (Enigma Vault Plus) to $750 a month (Spreedly Independent Vault), $995 a month (Basis Theory and Evervault), and $1,000 a month (VGS Starter). IXOPAY, Skyflow, Bluefin ShieldConex, and Thales CipherTrust Tokenization are quote-only. Network tokens, account updater, and issuing features usually cost extra."
+---
+<style>
+/* Wide tables: tighter cell padding so they fit the article column. */
+.bl-content .bl-table--wide td, .bl-content .bl-table--wide th { padding-left: 8px; padding-right: 8px; }
+.bl-content blockquote.bl-quote-cta{margin:24px 0;padding:14px 20px;border-left:3px solid var(--ev-mineral-blue);background:var(--ev-warm-cloud);border-radius:0 10px 10px 0}.bl-content blockquote.bl-quote-cta p{margin:0;font-size:16px}
+.bl-content figure.bl-shot{margin:20px 0 24px;padding:10px;border:1px solid var(--ev-cool-stone);border-radius:10px;background:var(--ev-warm-cloud)}.bl-content figure.bl-shot img{display:block;width:100%;height:auto;border-radius:6px}.bl-content figure.bl-shot figcaption{margin-top:8px;text-align:center;font-size:13px;color:var(--ev-slate)}
+/* Vendor header card: rank, name, best-for pill, review scores, key facts. */
+.bl-content .vc { margin: 40px 0 20px; }
+.bl-content .vc__head { display: grid; grid-template-columns: auto 1fr auto; gap: 18px; align-items: center; margin-bottom: 14px; }
+.bl-content .vc__num { font-size: 34px; font-weight: 600; line-height: 1; color: var(--ev-mineral-blue); font-variant-numeric: tabular-nums; }
+.bl-content h3.vc__name { margin: 0; padding: 0; font-size: 26px; line-height: 1.25; font-weight: 600; color: var(--ev-ink); }
+.bl-content .vc__sep { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.bl-content .vc__pill { display: table; margin-top: 10px; padding: 6px 12px; border-radius: 6px; background: var(--ev-mineral-blue); color: #fff; font-size: 12px; line-height: 1.4; font-weight: 600; text-transform: none; letter-spacing: 0; font-size: 13px; }
+.bl-content .vc__rates { display: flex; flex-direction: column; gap: 8px; align-items: stretch; }
+.bl-content .vc__rate { display: flex; flex-direction: column; align-items: flex-end; padding: 8px 14px; border: 1px solid var(--ev-cool-stone); border-radius: 10px; background: #fff; text-decoration: none !important; min-width: 128px; }
+.bl-content a.vc__rate:hover { border-color: var(--ev-mineral-blue); }
+.bl-content .vc__score { font-size: 20px; font-weight: 700; color: var(--ev-ink); line-height: 1.2; }
+.bl-content .vc__score small { font-size: 13px; font-weight: 500; color: var(--ev-slate); }
+.bl-content .vc__src { font-size: 12px; color: var(--ev-slate); line-height: 1.3; }
+.bl-content .vc__rate--new .vc__score { font-size: 15px; }
+.bl-content .vc__facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px 24px; margin: 0; padding: 18px 22px; border-radius: 12px; background: var(--ev-warm-cloud); }
+.bl-content .vc__facts div { margin: 0; }
+.bl-content .vc__facts .vc__best { grid-column: 1 / -1; padding-top: 14px; border-top: 1px solid var(--ev-cool-stone); }
+.bl-content .vc__facts dt { margin: 0 0 4px; font-size: 11.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ev-slate); }
+.bl-content .vc__facts dd { margin: 0; font-size: 15px; line-height: 1.5; color: var(--ev-ink); }
+@media (max-width: 700px) {
+  .bl-content .vc__head { grid-template-columns: auto 1fr; }
+  .bl-content .vc__rates { grid-column: 1 / -1; flex-direction: row; flex-wrap: wrap; }
+  .bl-content .vc__rate { align-items: flex-start; }
+  .bl-content .vc__num { font-size: 26px; }
+  .bl-content h3.vc__name { font-size: 22px; }
+  .bl-content .vc__facts { grid-template-columns: 1fr; }
+}
+.bl-content .bl-ranked { font-size: 15px; color: var(--ev-slate); }
+.bl-content .tldr { margin: 8px 0 32px; padding: 22px 26px; border-radius: 12px; background: var(--ev-warm-cloud); border-left: 3px solid var(--ev-mineral-blue); }
+.bl-content .tldr .tldr__label { margin: 0 0 12px; padding: 0; border: 0; font-size: 13px; line-height: 1.4; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--ev-mineral-blue); }
+.bl-content .tldr .tldr__list { margin: 0; padding-left: 20px; }
+.bl-content .tldr .tldr__list li { margin: 0 0 10px; font-size: 16px; line-height: 1.6; color: var(--ev-ink); }
+.bl-content .tldr .tldr__list li::marker { color: var(--ev-mineral-blue); }
+.bl-content .tldr .tldr__list li:last-child { margin-bottom: 0; }
+.bl-content .tldr strong a { font-weight: 600; }
+</style>
+
+<p>Comparing the best tokenization software for fintech of 2026: 1. Enigma Vault, 2. VGS, 3. Basis Theory, 4. Evervault, 5. IXOPAY (formerly TokenEx), 6. Spreedly, 7. Skyflow, 8. Bluefin ShieldConex, and 9. Thales CipherTrust Tokenization.</p>
+
+<p><strong>About the author:</strong> I’m <a class="bl-link" href="https://www.linkedin.com/in/tony-alex-enigma-vault/" target="_blank" rel="noopener">Dr. Tony Alex</a>, Chief Executive Officer of Enigma Vault, where I lead our work in encryption, tokenization, and sensitive-data protection. I have more than two decades of experience building enterprise software businesses.</p>
+<p>In 1999 I founded US eDirect to develop software for parks, campgrounds, and recreation agencies, bringing reservations and payments into one cloud system, and led it through its acquisition by Tyler Technologies in 2022.</p>
+<p><em>Disclosure: I work at Enigma Vault, which appears first in this list. Every platform here is judged on the same criteria, and the review ratings come from G2 and Capterra.</em></p>
+
+<div class="tldr" id="tldr">
+  <h2 class="tldr__label">TL;DR</h2>
+  <ul class="tldr__list">
+    <li><strong><a class="bl-link" href="#enigma-vault">Enigma Vault</a>:</strong> best for cards, bank accounts, SSNs, and KYC files behind one vault.</li>
+    <li><strong><a class="bl-link" href="#vgs">VGS</a>:</strong> best for card issuers and money-movement apps.</li>
+    <li><strong><a class="bl-link" href="#basis-theory">Basis Theory</a>:</strong> best for startups that want a PCI AOC in the first paid plan.</li>
+    <li><strong><a class="bl-link" href="#evervault">Evervault</a>:</strong> best for developer teams that want every usage fee published.</li>
+    <li><strong><a class="bl-link" href="#ixopay">IXOPAY (formerly TokenEx)</a>:</strong> best for enterprises routing across hundreds of acquirers.</li>
+    <li><strong><a class="bl-link" href="#spreedly">Spreedly</a>:</strong> best for payment facilitators that want token ownership plus recovery.</li>
+    <li><strong><a class="bl-link" href="#skyflow">Skyflow</a>:</strong> best for lenders and wealth apps with multi-region residency rules.</li>
+    <li><strong><a class="bl-link" href="#bluefin-shieldconex">Bluefin ShieldConex</a>:</strong> best for vaultless tokens and NACHA file tokenization.</li>
+    <li><strong><a class="bl-link" href="#thales-ciphertrust-tokenization">Thales CipherTrust Tokenization</a>:</strong> best for banks standardizing on enterprise key management.</li>
+  </ul>
+</div>
+<h2 id="best-tokenization-software-for-fintech-compared">Best Tokenization Software for Fintech Compared</h2>
+<p>A fintech app rarely stores just card numbers. A lender holds bank accounts for disbursement and SSNs for credit pulls; a neobank holds card data for issuing and KYC images for onboarding; a payment facilitator holds sub-merchant bank details and tax IDs.</p>
+<p>This table compares nine platforms on that mix. Every price, rating, and feature was checked on October 23, 2026.</p>
+<div class="bl-tablewrap"><table class="bl-table bl-table--wide">
+<thead><tr><th>Platform</th><th>Best for</th><th>Starting price</th><th>Free trial or tier</th><th>G2 rating</th></tr></thead>
+<tbody>
+<tr><td><a class="bl-link" href="#enigma-vault">Enigma Vault</a></td><td>Cards, bank accounts, SSNs, and KYC files behind one vault with a free start</td><td>$0, then $49.99 a month per vault</td><td>Lite tier, free forever</td><td><a class="bl-link" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener">4.4/5 (6 reviews)</a></td></tr>
+<tr><td><a class="bl-link" href="#vgs">VGS</a></td><td>Card issuers and money-movement apps that want account-number tokens and card reveal</td><td>From $1,000 a month</td><td>“Try for Free” on Starter</td><td><a class="bl-link" href="https://www.g2.com/products/very-good-security-vgs-platform/reviews" target="_blank" rel="noopener">4.7/5 (47 reviews)</a></td></tr>
+<tr><td><a class="bl-link" href="#basis-theory">Basis Theory</a></td><td>Startups that want a PCI AOC included in the first paid plan</td><td>$995 a month</td><td>Free to get started</td><td><a class="bl-link" href="https://www.g2.com/products/basis-theory/reviews" target="_blank" rel="noopener">No reviews yet</a></td></tr>
+<tr><td><a class="bl-link" href="#evervault">Evervault</a></td><td>Developer teams that want every usage fee published</td><td>$995 a month plus usage</td><td>Free sandbox, no time limit</td><td><a class="bl-link" href="https://www.g2.com/products/evervault-2022-11-22/reviews" target="_blank" rel="noopener">4.4/5 (17 reviews)</a></td></tr>
+<tr><td><a class="bl-link" href="#ixopay">IXOPAY (formerly TokenEx)</a></td><td>Enterprises routing across hundreds of acquirers</td><td>Custom quote</td><td>Sandbox or demo</td><td><a class="bl-link" href="https://www.g2.com/products/tokenex-ixopay/reviews" target="_blank" rel="noopener">4.6/5 (17 reviews)</a></td></tr>
+<tr><td><a class="bl-link" href="#spreedly">Spreedly</a></td><td>Payment facilitators and platforms that want token ownership plus recovery features</td><td>From $750 a month</td><td>Demo</td><td><a class="bl-link" href="https://www.g2.com/products/spreedly/reviews" target="_blank" rel="noopener">4.4/5 (35 reviews)</a></td></tr>
+<tr><td><a class="bl-link" href="#skyflow">Skyflow</a></td><td>Lenders and wealth apps with residency rules across many regions</td><td>Custom quote</td><td>Demo</td><td><a class="bl-link" href="https://www.g2.com/products/payments-data-privacy-vault/reviews" target="_blank" rel="noopener">5.0/5 (1 review, Payments vault)</a></td></tr>
+<tr><td><a class="bl-link" href="#bluefin-shieldconex">Bluefin ShieldConex</a></td><td>Vaultless tokens and NACHA file tokenization</td><td>Custom quote</td><td>Demo through sales</td><td><a class="bl-link" href="https://www.g2.com/products/shieldconex/reviews" target="_blank" rel="noopener">No reviews yet</a></td></tr>
+<tr><td><a class="bl-link" href="#thales-ciphertrust-tokenization">Thales CipherTrust Tokenization</a></td><td>Banks and large lenders standardizing tokenization on an enterprise key-management estate</td><td>Custom quote</td><td>Demo</td><td><a class="bl-link" href="https://www.g2.com/products/thales-ciphertrust-tokenization/reviews" target="_blank" rel="noopener">4.0/5 (6 reviews)</a></td></tr>
+</tbody></table></div>
+<blockquote class="bl-quote-cta"><p>Holding cards and bank data in the same product database today? Tell us which values you store and which processors and bank partners you work with, and we’ll sketch the token-only version with you. <a class="bl-link" href="/request-demo/">Get in touch</a></p></blockquote>
+
+<h2 id="how-we-chose">How We Chose</h2>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Criterion</th><th>Weight</th><th>What we checked</th></tr></thead>
+<tbody>
+<tr><td>Data-type coverage</td><td>25%</td><td>Cards plus bank accounts, SSNs, tax IDs, and KYC documents in one vault</td></tr>
+<tr><td>Audit evidence</td><td>20%</td><td>Published PCI DSS level, AOC access, SOC 2 Type II, ISO 27001, detokenization logs</td></tr>
+<tr><td>Processor and bank portability</td><td>20%</td><td>Proxy or routing to more than one processor, issuer, or ACH provider</td></tr>
+<tr><td>Fintech payment features</td><td>15%</td><td>Network tokens, account updater, issuing support, message signing</td></tr>
+<tr><td>Price to first production token</td><td>10%</td><td>Published plans, free tiers, usage fees</td></tr>
+<tr><td>Reviews</td><td>10%</td><td>G2 and Capterra ratings and review themes</td></tr>
+</tbody></table></div>
+<p>Sources: each vendor’s product, pricing, documentation, and trust pages, plus its G2 and Capterra listings, all read on October 23, 2026.</p>
+
+<h2 id="vault-tokens-vs-network-tokens">Vault Tokens vs Network Tokens: The Decision That Shapes Your Stack</h2>
+<p>Most fintech teams meet two kinds of tokens in the same quarter, and vendors blur them. Getting this right decides whether you can switch processors, how much your partner bank can audit, and whether your authorization rates move.</p>
+<p><strong>A vault token</strong> is issued by your tokenization provider. It stands in for a card number, account number, or SSN inside your own databases, logs, and support systems. Only the vault can swap it back, and only for requests your policy allows. Its job is to keep plaintext out of your systems and to keep stored data portable across processors.</p>
+<p><strong>A network token</strong> is issued by a card network (Visa Token Service, Mastercard Digital Enablement Service) for one card and one merchant or device. It is used in the authorization itself, gets updated when a card is reissued, and can lift approval rates. It only applies to cards, and it is tied to your merchant relationship.</p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Question</th><th>Vault token</th><th>Network token</th></tr></thead>
+<tbody>
+<tr><td>Who issues it</td><td>Your tokenization provider</td><td>Visa, Mastercard, and other networks</td></tr>
+<tr><td>What it covers</td><td>Cards, bank accounts, SSNs, tax IDs, any field</td><td>Cards only</td></tr>
+<tr><td>Main benefit</td><td>Plaintext out of your systems; processor portability</td><td>Authorization rates; automatic lifecycle updates</td></tr>
+<tr><td>Portability</td><td>High with an independent vault</td><td>Tied to the network and merchant relationship</td></tr>
+<tr><td>Where you get it</td><td>All nine platforms here</td><td>Your processor, or VGS, Basis Theory, Evervault, IXOPAY, Spreedly, Bluefin</td></tr>
+</tbody></table></div>
+<p>The two are not rivals. A lender pulling repayments from debit cards wants network tokens for approvals and a vault for the PAN, the bank account fallback, and the borrower’s SSN.</p>
+<p>An issuing program wants neither in the usual sense: it needs a vault that can receive PANs from an issuer processor and reveal them to the cardholder without your servers seeing them. Decide which of those three jobs you have before you compare vendors.</p>
+<p>Related reading: <a class="bl-link" href="/blog/vault-vs-vaultless-tokenization/">vault vs vaultless tokenization</a> and <a class="bl-link" href="/blog/best-payment-tokenization-software/">the best payment tokenization software for merchants</a>.</p>
+
+<h2 id="the-9-best-tokenization-software-for-fintech">The 9 Best Tokenization Software for Fintech in 2026</h2>
+
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">01</span>
+    <div class="vc__id">
+      <h3 id="enigma-vault" class="vc__name"><span class="vc__sep">1. </span>Enigma Vault<span class="vc__sep">: </span><span class="vc__pill">Best for Cards, Bank Accounts, SSNs, and KYC Files Behind One Vault</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener"><span class="vc__score">4.4<small>/5</small></span><span class="vc__src">G2 · 6 reviews</span></a><a class="vc__rate" href="https://www.capterra.com/p/241650/Enigma-Vault/reviews/" target="_blank" rel="noopener"><span class="vc__score">4.8<small>/5</small></span><span class="vc__src">Capterra · 4 reviews</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>$0, then $49.99 a month per vault</dd></div>
+    <div><dt>Free tier or trial</dt><dd>Lite: free forever, 1,000 Card Vault requests a month</dd></div>
+    <div><dt>Data covered</dt><dd>Cards, bank accounts, SSNs, IDs, files</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Neobanks, lenders, payment facilitators, and wealth or insurtech apps that want card, account, identity, and document data out of the product database, with published prices and no single-processor lock-in.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/enigma-vault.jpg" alt="Enigma Vault homepage" >}}
+  <figcaption>Enigma Vault homepage. Source: enigmavault.io</figcaption>
+</figure>
+<p>Enigma Vault is a tokenization platform that splits fintech data protection into API primitives for cards, bank accounts, SSNs, and KYC files. Card Vault captures cards on hosted forms, by phone through Twilio Pay, or by API, returns a token, and charges through a gateway proxy that injects the card only on the way to the processor.</p>
+<p>Data Vault holds account numbers, routing numbers, SSNs, and tax IDs as encrypted fields with deterministic tokens, so joins and duplicate checks still work.</p>
+<p>File Vault takes underwriting packets and KYC images up to 5 GB by presigned upload, so they never pass through your app servers. Our own site describes financial services customers keeping “ACH data, account numbers, and loan documents vaulted under per-customer keys.”</p>
+<p><strong>What’s Great</strong></p>
+<ul>
+  <li><strong>One vault for every field:</strong> Cards, bank accounts, SSNs, and KYC files share one account and audit log for simpler bank reviews.</li>
+  <li><strong>Deterministic tokens for identity data:</strong> The same SSN or account number always gets the same token, so duplicate checks keep working.</li>
+  <li><strong>Prices you can model:</strong> A free Lite tier and published Plus and Premium plans let finance forecast cost from request volume.</li>
+</ul>
+<p><strong>Watch-Outs</strong></p>
+<ul>
+  <li><strong>No network tokens or account updater:</strong> Enigma Vault issues vault tokens only, so card-on-file recovery still depends on your processor.</li>
+  <li><strong>Not an issuer processor:</strong> It proxies issuer API calls but does not run card programs, PIN services, or ISO 8583 links.</li>
+  <li><strong>ISO 27001 in progress:</strong> PCI DSS Level 1 and SOC 2 Type II are in place; some bank partners require ISO 27001.</li>
+</ul>
+<p><strong>Our take:</strong> Pick Enigma Vault when the problem is the mix of data, not the card alone. A lender that keeps SSNs in Postgres and bank accounts in a support app gets more risk reduction from Data Vault than from any card-only vault, and the free tier lets an engineer prove one data element and one transaction path in a week.</p>
+<p>Against VGS, you give up tokenized account numbers built for ACH processors and a deep issuing toolkit; against Spreedly or IXOPAY, you give up routing and recovery. It is the wrong pick if you need network tokens, account updater, or issuer-side card programs from your vault vendor.</p>
+<p>What we hear from fintech buyers matches this split: one wanted a vault that “proxies directly to payment gateways” and its card issuer to reduce PCI scope; another needed message signing their incumbent’s proxy could not meet.</p>
+<p><strong>Pricing tiers</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>Lite</td><td>$0, free forever</td><td>Card Vault 1,000 requests ($0.08 overage); Data Vault 1,500 ($0.06); File Vault 5 GB; tokenization and gateway proxy</td></tr>
+<tr><td>Plus</td><td>$49.99 a month per vault</td><td>Card Vault 20,000 requests ($0.04); Data Vault 30,000 ($0.03); File Vault 150 GB; ephemeral key sharing, email support</td></tr>
+<tr><td>Premium</td><td>$249.99 a month per vault</td><td>Card Vault 250,000 requests ($0.02); Data Vault 400,000 ($0.01); File Vault 1 TB; priority support</td></tr>
+<tr><td>Enterprise</td><td>Custom quote</td><td>Volume, support, and deployment terms</td></tr>
+</tbody></table></div>
+<p><strong>Security and Compliance</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Control</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>PCI DSS</td><td>Level 1 service provider</td></tr>
+<tr><td>SOC 2</td><td>Type II</td></tr>
+<tr><td>ISO 27001</td><td>In progress</td></tr>
+<tr><td>AOC on request</td><td>Ask sales</td></tr>
+<tr><td>SSO</td><td>OAuth2 machine-to-machine for APIs; enterprise SSO in hosted agent deployments</td></tr>
+<tr><td>Audit logs</td><td>Every plan: client ID, IP, path, status, tracing</td></tr>
+</tbody></table></div>
+<p><strong>What Reviewers Say:</strong> Very positive. Enigma Vault holds <a class="bl-link" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener">4.4/5 from 6 reviews on G2</a> and <a class="bl-link" href="https://www.capterra.com/p/241650/Enigma-Vault/reviews/" target="_blank" rel="noopener">4.8/5 from 4 on Capterra</a>. Reviewers praise a simple API and predictable PCI de-scoping; one asks for better reporting and visibility. The sample is small.</p>
+
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">02</span>
+    <div class="vc__id">
+      <h3 id="vgs" class="vc__name"><span class="vc__sep">2. </span>VGS<span class="vc__sep">: </span><span class="vc__pill">Best for Card Issuers and Money-Movement Apps</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/very-good-security-vgs-platform/reviews" target="_blank" rel="noopener"><span class="vc__score">4.7<small>/5</small></span><span class="vc__src">G2 · 47 reviews</span></a><a class="vc__rate" href="https://www.capterra.com/p/195135/VGS-Platform/reviews/" target="_blank" rel="noopener"><span class="vc__score">0<small> reviews</small></span><span class="vc__src">Capterra</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>From $1,000 a month</dd></div>
+    <div><dt>Free tier or trial</dt><dd>“Try for Free” on Starter</dd></div>
+    <div><dt>Data covered</dt><dd>Cards, bank accounts (TANs), PII</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Card issuers, earned wage access, payroll, and lending apps that want tokenized account numbers, card reveal, and network tokens from one vendor.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/vgs.jpg" alt="VGS homepage" >}}
+  <figcaption>VGS homepage. Source: verygoodsecurity.com</figcaption>
+</figure>
+<p>VGS (Very Good Security) is a tokenization platform that runs a vault behind a proxy with inbound and outbound routes. For bank data it replaces routing and account numbers with tokenized account numbers (TANs) that “work with any ACH processor” and pair with Plaid, MX, and Finicity.</p>
+<p>Its card issuer page covers card reveal, push provisioning, virtual card activation for Apple, Google, and Samsung Pay, and direct ISO 8583 connectivity to Visa and Mastercard, with Texas Capital Bank cited for a commercial card launch “6-9 months faster.”</p>
+<p><strong>What’s Great</strong></p>
+<ul>
+  <li><strong>Issuing depth in one vendor:</strong> Card reveal, push provisioning, and direct ISO 8583 links to Visa and Mastercard cover most card-program plumbing.</li>
+  <li><strong>Bank data built for ACH:</strong> Tokenized account numbers work with any ACH processor, keeping raw bank details out of your systems.</li>
+  <li><strong>Batch files and AI traffic covered:</strong> An SFTP proxy redacts batch files, and the AI Data Firewall tokenizes sensitive fields before prompts.</li>
+</ul>
+<p><strong>Watch-Outs</strong></p>
+<ul>
+  <li><strong>High floor for a young fintech:</strong> Starter begins at $1,000 a month, and network tokens and account updater sit in quoted Growth.</li>
+  <li><strong>Every request rides the VGS proxy:</strong> Its availability and rate limits become part of your own uptime and incident story.</li>
+  <li><strong>Add-on fees appear in reviews:</strong> G2 reviewers mention extra charges such as additional CNAMEs, so request a full price sheet first.</li>
+</ul>
+<p><strong>Our take:</strong> For a neobank launching debit or commercial cards, VGS is the most complete issuing toolkit in this list, ahead of Evervault’s card reveal and Skyflow’s issuance connectors.</p>
+<p>For a lender that mostly needs to store account numbers and SSNs, it is more platform than you need at ten to twenty times Enigma Vault’s Plus price. It is the wrong pick if you want a self-serve start under $1,000 a month or prefer not to route every request through a third-party proxy.</p>
+<p><strong>Pricing tiers</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>Starter</td><td>From $1,000 a month</td><td>Vault and tokenization</td></tr>
+<tr><td>Growth</td><td>Custom quote</td><td>Network tokens, account updater, PCI compliance subscription (L1, L2-L4), VGS-provided auditor, large file transfers, VGS Compute, card attributes</td></tr>
+</tbody></table></div>
+<p><strong>Security and Compliance</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Control</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>PCI DSS</td><td>Ask for the AOC via the VGS trust center</td></tr>
+<tr><td>SOC 2</td><td>Ask via the trust center</td></tr>
+<tr><td>ISO 27001</td><td>Schellman certification badge on site</td></tr>
+<tr><td>AOC on request</td><td>Ask sales</td></tr>
+<tr><td>SSO</td><td>Ask sales</td></tr>
+<tr><td>Audit logs</td><td>“Every tokenization and detokenization is logged”</td></tr>
+</tbody></table></div>
+<p><strong>What Reviewers Say:</strong> Very positive. VGS holds <a class="bl-link" href="https://www.g2.com/products/very-good-security-vgs-platform/reviews" target="_blank" rel="noopener">4.7/5 from 47 reviews on G2</a>; its <a class="bl-link" href="https://www.capterra.com/p/195135/VGS-Platform/reviews/" target="_blank" rel="noopener">Capterra listing</a> has no reviews yet. Reviewers cite quick integration, a lighter compliance burden, and helpful chat support; complaints include add-on fees such as extra CNAMEs.</p>
+<p>Need bank-account tokens without a $1,000 floor? <a class="bl-link" href="/vault/data-vault/">See how Enigma Vault’s Data Vault handles account numbers</a>.</p>
+
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">03</span>
+    <div class="vc__id">
+      <h3 id="basis-theory" class="vc__name"><span class="vc__sep">3. </span>Basis Theory<span class="vc__sep">: </span><span class="vc__pill">Best for Startups That Want a PCI AOC in the First Paid Plan</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate vc__rate--new" href="https://www.g2.com/products/basis-theory/reviews" target="_blank" rel="noopener"><span class="vc__score">No reviews</span><span class="vc__src">G2</span></a><a class="vc__rate vc__rate--new" href="https://www.capterra.com/p/10002181/Basis-Theory/reviews/" target="_blank" rel="noopener"><span class="vc__score">No reviews</span><span class="vc__src">Capterra</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>$995 a month (20,000 tokens)</dd></div>
+    <div><dt>Free tier or trial</dt><dd>Free to get started</dd></div>
+    <div><dt>Data covered</dt><dd>Cards, bank accounts, PII</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Seed to Series B fintechs that need PCI paperwork for a sponsor bank fast and want multi-PSP routing with retries.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/basis-theory.jpg" alt="Basis Theory homepage" >}}
+  <figcaption>Basis Theory homepage. Source: basistheory.com</figcaption>
+</figure>
+<p>Basis Theory is a token platform for fintech builders that includes a production PCI environment. Its $995 plan also includes a PCI Attestation of Compliance, so a startup gets an AOC with its first paid plan.</p>
+<p>Its fintech page pitches routing to multiple PSPs “without bringing your systems in scope” and a backup processor for retries, and it sells network tokens, batch and real-time account updater, BIN details, and 3D Secure as add-ons. Its security page lists PCI Level 1, SOC 2 Type II, ISO 27001, and HIPAA.</p>
+<p><strong>What’s Great</strong></p>
+<ul>
+  <li><strong>AOC included with the first paid plan:</strong> The $995 plan ships a PCI environment and the AOC sponsor banks request.</li>
+  <li><strong>Full certification set published:</strong> PCI DSS Level 1, SOC 2 Type II, ISO 27001, and HIPAA cover most bank-partner questionnaires.</li>
+  <li><strong>Recovery features from the same vendor:</strong> Network tokens, account updater, and 3D Secure are add-ons, so card-heavy lenders avoid a second contract.</li>
+</ul>
+<p><strong>Watch-Outs</strong></p>
+<ul>
+  <li><strong>US-only with short logs on the Entry Plan:</strong> The $995 plan keeps 24 hours of US-hosted logs, limiting EU launches and audits.</li>
+  <li><strong>Token overage adds up quickly:</strong> The $995 plan caps you at 20,000 tokens and network tokens count toward it, so ask for the overage rate before you grow.</li>
+  <li><strong>Compliance help sits on Enterprise:</strong> SAQ D assistance, SSO/SAML, and custom log retention are only on the custom-priced Enterprise tier.</li>
+</ul>
+<p><strong>Our take:</strong> Basis Theory and Evervault both start near $1,000 a month; Basis Theory wins when you want the AOC and SAQ help bundled, Evervault when you want every fee itemized.</p>
+<p>Against Enigma Vault, you pay more to start but get network tokens and account updater from the same vendor. It is the wrong pick for an EU-first fintech on the standard plan, or for teams that need long log retention to answer a bank examiner months later.</p>
+<p><strong>Pricing tiers</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>Entry plan</td><td>$995 a month</td><td>20,000 tokens (overage rate on request), PCI environment, AOC, 1 MB payloads, 24 hours of logs, US only</td></tr>
+<tr><td>Enterprise</td><td>Custom quote</td><td>PII and PHI compliance options, SAQ D help, unlimited interactions per token, custom logs, uptime guarantees, SSO/SAML, dedicated IP</td></tr>
+</tbody></table></div>
+<p><strong>Security and Compliance</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Control</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>PCI DSS</td><td>Level 1</td></tr>
+<tr><td>SOC 2</td><td>Type II</td></tr>
+<tr><td>ISO 27001</td><td>Certified</td></tr>
+<tr><td>AOC on request</td><td>Included on the $995 plan</td></tr>
+<tr><td>SSO</td><td>SSO/SAML on the custom tier</td></tr>
+<tr><td>Audit logs</td><td>24 hours on the $995 plan; custom retention on Enterprise</td></tr>
+</tbody></table></div>
+<p><strong>What Reviewers Say:</strong> No reviews yet on <a class="bl-link" href="https://www.g2.com/products/basis-theory/reviews" target="_blank" rel="noopener">G2</a> or <a class="bl-link" href="https://www.capterra.com/p/10002181/Basis-Theory/reviews/" target="_blank" rel="noopener">Capterra</a>. Its fintech page quotes the CEO of Union saying the company became PCI compliant “in a day, rather than months.”</p>
+<p>Want to compare an AOC-first plan with a free start? <a class="bl-link" href="/pricing/">Check Enigma Vault’s published pricing</a>.</p>
+
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">04</span>
+    <div class="vc__id">
+      <h3 id="evervault" class="vc__name"><span class="vc__sep">4. </span>Evervault<span class="vc__sep">: </span><span class="vc__pill">Best for Developer Teams That Want Every Usage Fee Published</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/evervault-2022-11-22/reviews" target="_blank" rel="noopener"><span class="vc__score">4.4<small>/5</small></span><span class="vc__src">G2 · 17 reviews</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>$995 a month plus usage</dd></div>
+    <div><dt>Free tier or trial</dt><dd>Free sandbox, no time limit</dd></div>
+    <div><dt>Data covered</dt><dd>Cards, any field via encryption</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Engineering-led fintechs building card programs or payment routing that want encryption-based protection and a price for every operation.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/evervault.jpg" alt="Evervault homepage" >}}
+  <figcaption>Evervault homepage. Source: evervault.com</figcaption>
+</figure>
+<p>Evervault is an encryption platform that encrypts data at the edge rather than mapping it to a stored token, then decrypts only inside its Relay proxy or Functions. Its card reveal shows a PAN in an Evervault-served iframe, and Relay can encrypt PANs “returned by a third party, such as a card issuer.”</p>
+<p>The headline fintech proof is XP, which Evervault describes as Brazil’s largest independent brokerage, launching a debit card program for its 1M+ investors and reaching PCI DSS compliance “in less than 4 weeks.”</p>
+<p><strong>What’s Great</strong></p>
+<ul>
+  <li><strong>Every fee itemized:</strong> Network tokens, account updates, 3DS, and decrypts each carry a published price, so unit economics model to the cent.</li>
+  <li><strong>Issuing-friendly building blocks:</strong> Card reveal iframes and Relay encryption of issuer-returned PANs let a debit program avoid touching plaintext.</li>
+  <li><strong>AOC through the trust center:</strong> The PCI AOC and other assurance documents sit in its trust center, shortening bank vendor-risk reviews.</li>
+</ul>
+<p><strong>Watch-Outs</strong></p>
+<ul>
+  <li><strong>Encryption rather than a token vault:</strong> Values are encrypted rather than tokenized, so searchable SSN or account fields need extra design.</li>
+  <li><strong>No dedicated bank account product:</strong> Account and routing numbers use generic field encryption, with no ACH-specific token like VGS offers.</li>
+  <li><strong>Region pinning carries no SLA:</strong> Requests can be pinned to US or EU infrastructure, but strict residency commitments get no SLA.</li>
+</ul>
+<p><strong>Our take:</strong> Evervault fits a team that likes to model unit economics to the cent and is building card features first. Compared with VGS it is lighter on bank-account tooling; compared with Enigma Vault it adds network tokens and reveal but starts at $995 a month.</p>
+<p>It is the wrong pick if your bank partner wants SSNs and account numbers in a searchable vault with deterministic tokens rather than ciphertext spread across your database.</p>
+<p><strong>Pricing tiers</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>Sandbox</td><td>Free</td><td>No credit card, no sales call, no time limit</td></tr>
+<tr><td>Platform</td><td>$995 a month plus usage</td><td>Under 25,000 transactions a month; card collection, 3DS, network tokens, wallets, encryption</td></tr>
+<tr><td>Custom</td><td>Custom quote</td><td>25,000+ transactions, volume discounts, 24/7 support, solutions engineer, SAML SSO</td></tr>
+</tbody></table></div>
+<p><strong>Security and Compliance</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Control</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>PCI DSS</td><td>Level 1 service provider</td></tr>
+<tr><td>SOC 2</td><td>Type II</td></tr>
+<tr><td>ISO 27001</td><td>Not stated in docs; ask sales</td></tr>
+<tr><td>AOC on request</td><td>Yes, via trust center</td></tr>
+<tr><td>SSO</td><td>SAML SSO on Custom</td></tr>
+<tr><td>Audit logs</td><td>Logs and observability in dashboard; Admin, Developer, Viewer roles</td></tr>
+</tbody></table></div>
+<p><strong>What Reviewers Say:</strong> Mostly positive. Evervault holds <a class="bl-link" href="https://www.g2.com/products/evervault-2022-11-22/reviews" target="_blank" rel="noopener">4.4/5 from 17 reviews on G2</a>. Reviewers highlight easy integration and developer-friendly encryption; one notes the dependency on a third party for data security.</p>
+<p>Prefer a vault with deterministic tokens for SSNs and accounts? <a class="bl-link" href="/vault/">Compare Enigma Vault’s three vaults</a>.</p>
+
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">05</span>
+    <div class="vc__id">
+      <h3 id="ixopay" class="vc__name"><span class="vc__sep">5. </span>IXOPAY (Formerly TokenEx)<span class="vc__sep">: </span><span class="vc__pill">Best for Enterprises Routing Across Hundreds of Acquirers</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/tokenex-ixopay/reviews" target="_blank" rel="noopener"><span class="vc__score">4.6<small>/5</small></span><span class="vc__src">G2 · 17 reviews</span></a><a class="vc__rate vc__rate--new" href="https://www.capterra.com/p/181731/Cloud-Based-Tokenization/reviews/" target="_blank" rel="noopener"><span class="vc__score">No reviews</span><span class="vc__src">Capterra (TokenEx)</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>Custom quote</dd></div>
+    <div><dt>Free tier or trial</dt><dd>Sandbox or demo</dd></div>
+    <div><dt>Data covered</dt><dd>Cards and payment methods</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Large payment facilitators, crypto exchanges, and brokerages running many acquirers across regions that want tokens and orchestration from one contract.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/ixopay.jpg" alt="IXOPAY homepage" >}}
+  <figcaption>IXOPAY homepage. Source: ixopay.com</figcaption>
+</figure>
+<p>IXOPAY (formerly TokenEx) is a payment orchestration platform that sells its tokenization as TokenEx Core and TokenEx Connect. It lists an adapter catalog of 500+ connections, with pre-built adapters for 200+ acquirers and 300+ payment methods, plus network tokens, account updater, and intelligent routing.</p>
+<p>Its fintech customers include crypto.com, eToro, and Bankart.</p>
+<p><strong>What’s Great</strong></p>
+<ul>
+  <li><strong>Evidence you can download:</strong> Public AOCs, an ISO 27001:2022 certificate, and a SOC 3 report give a bank partner ready evidence.</li>
+  <li><strong>Routing breadth:</strong> A 500+ connection adapter catalog reaches 200+ acquirers, the widest coverage here for multi-region payment facilitators.</li>
+  <li><strong>Universal tokens beyond cards:</strong> Processor-agnostic tokens can cover PII as well as cards, so a gateway switch keeps stored records intact.</li>
+</ul>
+<p><strong>Watch-Outs</strong></p>
+<ul>
+  <li><strong>Fixed-format data tokenizes best:</strong> IXOPAY says variable-length personal data is harder to format-preserve, so test names and foreign accounts early.</li>
+  <li><strong>No KYC document or file vault:</strong> There is no documented home for ID images, bank statements, or underwriting packets alongside field tokens.</li>
+  <li><strong>Two brand names in one offer:</strong> Tokenization packages keep the TokenEx name under IXOPAY, so confirm the contracting entity and package.</li>
+</ul>
+<p><strong>Our take:</strong> IXOPAY competes with Spreedly for the multi-acquirer fintech, and wins where audit evidence matters, since its AOCs and ISO certificate are public.</p>
+<p>Next to Enigma Vault it is an orchestration purchase, not a vault purchase. It is the wrong pick for a lender or neobank whose risk lives in SSNs and account numbers, or for anyone who needs a price before a sales call.</p>
+<p><strong>Pricing tiers</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>TokenEx Core, TokenEx Connect</td><td>Custom quote</td><td>Tokenization packages by use case</td></tr>
+<tr><td>Orchestration and intelligence modules</td><td>Custom quote</td><td>Routing, network tokens, account updater, risk, reconciliation</td></tr>
+</tbody></table></div>
+<p><strong>Security and Compliance</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Control</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>PCI DSS</td><td>Level 1 service provider</td></tr>
+<tr><td>SOC 2</td><td>SOC 2 Type 2 on request; SOC 3 public</td></tr>
+<tr><td>ISO 27001</td><td>ISO 27001:2022 certified</td></tr>
+<tr><td>AOC on request</td><td>Posted publicly</td></tr>
+<tr><td>SSO</td><td>Ask sales</td></tr>
+<tr><td>Audit logs</td><td>Internal audit logging stated; ask about customer-facing logs</td></tr>
+</tbody></table></div>
+<p><strong>What Reviewers Say:</strong> Very positive. IXOPAY holds <a class="bl-link" href="https://www.g2.com/products/tokenex-ixopay/reviews" target="_blank" rel="noopener">4.6/5 from 17 reviews on G2</a>; the TokenEx <a class="bl-link" href="https://www.capterra.com/p/181731/Cloud-Based-Tokenization/reviews/" target="_blank" rel="noopener">Capterra listing</a> has none. Reviewers like the secure iframe, tokens that survive gateway switches, and a lower per-token cost.</p>
+<p>Moving off TokenEx? <a class="bl-link" href="/request-demo/">Ask us how a card migration into Enigma Vault works</a>.</p>
+
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">06</span>
+    <div class="vc__id">
+      <h3 id="spreedly" class="vc__name"><span class="vc__sep">6. </span>Spreedly<span class="vc__sep">: </span><span class="vc__pill">Best for Payment Facilitators That Want Token Ownership Plus Recovery</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/spreedly/reviews" target="_blank" rel="noopener"><span class="vc__score">4.4<small>/5</small></span><span class="vc__src">G2 · 35 reviews</span></a><a class="vc__rate" href="https://www.capterra.com/p/114956/Spreedly/reviews/" target="_blank" rel="noopener"><span class="vc__score">4.5<small>/5</small></span><span class="vc__src">Capterra · 13 reviews</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>From $750 a month</dd></div>
+    <div><dt>Free tier or trial</dt><dd>Demo</dd></div>
+    <div><dt>Data covered</dt><dd>Cards, bank accounts (ACH)</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Payment facilitators, insurtechs, and platforms that bill through several gateways and want network tokens, account updater, and smart retries next to the vault.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/spreedly.jpg" alt="Spreedly homepage" >}}
+  <figcaption>Spreedly homepage. Source: spreedly.com</figcaption>
+</figure>
+<p>Spreedly is a payment platform whose Independent Vault is a PCI Level 1 vault with unlimited storage and token ownership. Its Performance Optimization package adds network tokenization, account updater, smart retries, and PSP-agnostic routing across 150+ gateway connections.</p>
+<p>The API accepts bank account and ACH payment methods, and insurtech Lemonade appears among its customer logos.</p>
+<p><strong>What’s Great</strong></p>
+<ul>
+  <li><strong>Public AOC and SOC 2 under NDA:</strong> A downloadable PCI AOC and SOC 2 Type 2 report under NDA cover bank-partner requests.</li>
+  <li><strong>Recovery features in one package:</strong> Network tokens, account updater, and routing across 150+ gateways help a payment facilitator recover failed renewals.</li>
+  <li><strong>Cards and ACH in one API:</strong> Bank accounts sit beside cards as payment methods, so one integration stores both premium payment options.</li>
+</ul>
+<p><strong>Watch-Outs</strong></p>
+<ul>
+  <li><strong>$750 floor for the vault alone:</strong> The Independent Vault starts at $750 a month, with optimization features quoted separately on top.</li>
+  <li><strong>No home for SSNs or KYC files:</strong> Spreedly stores payment methods only, so a lender needs a second system for identity data.</li>
+  <li><strong>Dashboard and cost draw complaints:</strong> G2 reviewers mention a slow dashboard and sparse doc examples; Capterra reviewers call it a bit pricey and cite frequent gateway upgrades.</li>
+</ul>
+<p><strong>Our take:</strong> For a payment facilitator whose pain is failed renewals across several gateways, Spreedly is a sharper fit than Enigma Vault, which does not sell retries or network tokens.</p>
+<p>Against IXOPAY it has a published starting price and a lighter footprint. It is the wrong pick for a lender or wealth app whose sensitive data is mostly identity and account records rather than payment methods.</p>
+<p><strong>Pricing tiers</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>Independent Vault</td><td>From $750 a month</td><td>PCI Level 1 vault, unlimited storage, token ownership, vault health insights</td></tr>
+<tr><td>Performance Optimization</td><td>Custom quote</td><td>Network tokens, account updater, smart retries, routing, 3DS, fraud and chargeback controls</td></tr>
+</tbody></table></div>
+<p><strong>Security and Compliance</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Control</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>PCI DSS</td><td>Level 1</td></tr>
+<tr><td>SOC 2</td><td>Type 2, under NDA</td></tr>
+<tr><td>ISO 27001</td><td>Ask sales (CSA STAR Level 1 listed)</td></tr>
+<tr><td>AOC on request</td><td>Public PDF</td></tr>
+<tr><td>SSO</td><td>Ask sales; role-based access documented</td></tr>
+<tr><td>Audit logs</td><td>Logging of key activities; payment-method event API</td></tr>
+</tbody></table></div>
+<p><strong>What Reviewers Say:</strong> Mostly positive. Spreedly holds <a class="bl-link" href="https://www.g2.com/products/spreedly/reviews" target="_blank" rel="noopener">4.4/5 from 35 reviews on G2</a> and <a class="bl-link" href="https://www.capterra.com/p/114956/Spreedly/reviews/" target="_blank" rel="noopener">4.5/5 from 13 on Capterra</a>. Reviewers value one vault across many gateways and responsive support; per-call pricing and a slow dashboard draw complaints.</p>
+<p>Only need the vault, not the optimization layer? <a class="bl-link" href="/vault/card-vault/">Start with Enigma Vault’s Card Vault for free</a>.</p>
+
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">07</span>
+    <div class="vc__id">
+      <h3 id="skyflow" class="vc__name"><span class="vc__sep">7. </span>Skyflow<span class="vc__sep">: </span><span class="vc__pill">Best for Lenders and Wealth Apps With Multi-Region Residency Rules</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/payments-data-privacy-vault/reviews" target="_blank" rel="noopener"><span class="vc__score">5.0<small>/5</small></span><span class="vc__src">G2 · 1 review</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>Custom quote</dd></div>
+    <div><dt>Free tier or trial</dt><dd>Demo</dd></div>
+    <div><dt>Data covered</dt><dd>Cards, bank accounts, PII, PHI</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Lenders, wealth managers, and cross-border fintechs that must keep customer data in specific countries and run KYC and credit pulls from the vault.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/skyflow.jpg" alt="Skyflow homepage" >}}
+  <figcaption>Skyflow homepage. Source: skyflow.com</figcaption>
+</figure>
+<p>Skyflow is a data privacy vault with field-level policies. Its money-movement solution tokenizes bank details and registers accounts with providers such as Moov through Skyflow Connections; its card issuance solution connects to “any card issuance platform,” with ISO 8583 and SFTP file handling.</p>
+<p>Its residency page lists vaults in the US, Europe, India, South America, the Middle East, Japan, Indonesia, Australia, and more. Its payments page shows Scalapay and JULO among its logos.</p>
+<p><strong>What’s Great</strong></p>
+<ul>
+  <li><strong>Residency breadth:</strong> Vaults run in the US, Europe, India, Japan, Australia, and more, the most named regions here.</li>
+  <li><strong>KYC and credit pulls from the vault:</strong> Data goes from the vault to KYC, AML, and credit-history providers, with Experian among listed integrations.</li>
+  <li><strong>Files and AI covered:</strong> Its Data API attaches uploaded files to vault records, and its LLM Privacy Vault de-identifies data for AI use.</li>
+</ul>
+<p><strong>Watch-Outs</strong></p>
+<ul>
+  <li><strong>No network tokens or account updater documented:</strong> The payments pages we read omit both, so card-on-file recovery needs your processor.</li>
+  <li><strong>Homepage focus has shifted to AI agents:</strong> Ask how much product investment still goes to core fintech storage and money movement.</li>
+  <li><strong>Enterprise contract to start:</strong> With no self-serve tier or published plan, a seed-stage team faces a sales cycle first.</li>
+</ul>
+<p><strong>Our take:</strong> Skyflow and Enigma Vault both cover cards plus identity data; Skyflow wins on residency regions and bureau connections, Enigma Vault on a free start and published prices. Against VGS, Skyflow is less of an issuing toolkit. It is the wrong pick for a seed-stage team that wants to tokenize the first record this week without an enterprise contract.</p>
+<p><strong>Pricing tiers</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>Skyflow Data Privacy Vault</td><td>Custom quote</td><td>Not published on an accessible page; contact sales</td></tr>
+</tbody></table></div>
+<p><strong>Security and Compliance</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Control</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>PCI DSS</td><td>Level 1</td></tr>
+<tr><td>SOC 2</td><td>Type II</td></tr>
+<tr><td>ISO 27001</td><td>ISO 27001:2022 certified</td></tr>
+<tr><td>AOC on request</td><td>Ask sales</td></tr>
+<tr><td>SSO</td><td>Ask sales</td></tr>
+<tr><td>Audit logs</td><td>Detailed audit logging of security-sensitive events</td></tr>
+</tbody></table></div>
+<p><strong>What Reviewers Say:</strong> Too few to judge. Skyflow’s Payments Data Privacy Vault shows <a class="bl-link" href="https://www.g2.com/products/payments-data-privacy-vault/reviews" target="_blank" rel="noopener">5.0/5 from 1 review on G2</a>, with no Capterra listing.</p>
+<p>Want cards and identity data in one vault with a price you can see? <a class="bl-link" href="/pricing/">Review Enigma Vault plans</a>.</p>
+
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">08</span>
+    <div class="vc__id">
+      <h3 id="bluefin-shieldconex" class="vc__name"><span class="vc__sep">8. </span>Bluefin ShieldConex<span class="vc__sep">: </span><span class="vc__pill">Best for Vaultless Tokens and NACHA File Tokenization</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate vc__rate--new" href="https://www.g2.com/products/shieldconex/reviews" target="_blank" rel="noopener"><span class="vc__score">No reviews</span><span class="vc__src">G2</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>Custom quote</dd></div>
+    <div><dt>Free tier or trial</dt><dd>Demo through sales</dd></div>
+    <div><dt>Data covered</dt><dd>Cards, PII, PHI, ACH files</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Payment facilitators and bill-pay platforms that move NACHA and fixed-width files and prefer tokens generated without a central token store.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/bluefin.jpg" alt="Bluefin ShieldConex product page" >}}
+  <figcaption>Bluefin ShieldConex page. Source: bluefin.com/shieldconex/</figcaption>
+</figure>
+<p>Bluefin ShieldConex is a vaultless tokenization service for PANs, PII, and PHI, with tokens generated by hardware security modules. Its FileGuard option tokenizes “NACHA, CSV, and fixed-width” files over SFTP, which suits operations teams that still exchange ACH batches with a bank. Bluefin says the same input always yields the same token, so records still link.</p>
+<p><strong>What’s Great</strong></p>
+<ul>
+  <li><strong>Batch ACH files:</strong> FileGuard tokenizes NACHA, CSV, and fixed-width files over SFTP, the only NACHA-specific option in this list.</li>
+  <li><strong>Vaultless design:</strong> Tokens are generated by hardware security modules without a central token store, which removes one database a breach could target.</li>
+  <li><strong>Network tokens added:</strong> Bluefin added network tokenization to ShieldConex in 2025, so card-on-file programs can keep one vendor.</li>
+</ul>
+<p><strong>Watch-Outs</strong></p>
+<ul>
+  <li><strong>Certifications to request:</strong> Bluefin’s pages cite PCI-validated P2PE but list no SOC 2 or ISO 27001, so request that evidence directly.</li>
+  <li><strong>No published price or self-serve start:</strong> ShieldConex is sold by quote, so a seed-stage team starts with a sales conversation.</li>
+  <li><strong>No home for KYC images:</strong> FileGuard covers structured batch files only, so ID scans and bank statements need another store.</li>
+</ul>
+<p><strong>Our take:</strong> ShieldConex suits back-office fintech work, such as bill-pay or payout operations still built on NACHA files. For API-first neobanks, Enigma Vault, VGS, or Basis Theory fit the request-by-request model better. It is the wrong pick if you need card issuing or self-serve pricing.</p>
+<p><strong>Pricing tiers</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>ShieldConex</td><td>Custom quote</td><td>Tokenization as a service via API, iFrame, and FileGuard SFTP</td></tr>
+</tbody></table></div>
+<p><strong>Security and Compliance</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Control</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>PCI DSS</td><td>Ask sales for the AOC</td></tr>
+<tr><td>SOC 2</td><td>Ask sales; confirm type</td></tr>
+<tr><td>ISO 27001</td><td>Ask sales</td></tr>
+<tr><td>AOC on request</td><td>Ask sales</td></tr>
+<tr><td>SSO</td><td>Ask sales</td></tr>
+<tr><td>Audit logs</td><td>Ask sales</td></tr>
+</tbody></table></div>
+<p><strong>What Reviewers Say:</strong> Too few to judge. There are no reviews yet on <a class="bl-link" href="https://www.g2.com/products/shieldconex/reviews" target="_blank" rel="noopener">G2</a> and no Capterra listing.</p>
+<p>Moving from batch files to real-time APIs? <a class="bl-link" href="/vault/data-vault/">See Data Vault’s batch calls of up to 5,000 values</a>.</p>
+
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">09</span>
+    <div class="vc__id">
+      <h3 id="thales-ciphertrust-tokenization" class="vc__name"><span class="vc__sep">9. </span>Thales CipherTrust Tokenization<span class="vc__sep">: </span><span class="vc__pill">Best for Banks Standardizing on Enterprise Key Management</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/thales-ciphertrust-tokenization/reviews" target="_blank" rel="noopener"><span class="vc__score">4.0<small>/5</small></span><span class="vc__src">G2 · 6 reviews</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>Custom quote</dd></div>
+    <div><dt>Free tier or trial</dt><dd>Demo</dd></div>
+    <div><dt>Token types</dt><dd>Vaulted and vaultless, format-preserving</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Banks, card issuers, and large lenders that already run Thales CipherTrust key management and want card data tokenized inside their own databases and applications rather than through a third-party proxy.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v3/thales.jpg" alt="Thales homepage" >}}
+  <figcaption>Thales homepage. Source: cpl.thalesgroup.com</figcaption>
+</figure>
+<p>Thales CipherTrust Tokenization is a vaulted and vaultless tokenization product within the CipherTrust Data Security Platform. Its format-preserving tokens “eliminate the need to change database schemas,” and both models can run alone or with data masking or redaction.</p>
+<p>The page uses the card number as its main example and frames the product around PCI DSS, and Thales says cloud providers “never have access to token vaults or keys.”</p>
+<p><strong>What’s Great</strong></p>
+<ul>
+  <li><strong>Vaulted or vaultless:</strong> Both token models run alone or with data masking or redaction, so non-production copies stay safe.</li>
+  <li><strong>No schema changes:</strong> Format-preserving tokens fit existing core-banking and loan-servicing tables, which avoids a database migration project inside a regulated bank.</li>
+  <li><strong>You hold the keys:</strong> Cloud providers never access token vaults or keys, which suits banks whose regulators expect in-house key custody.</li>
+</ul>
+<p><strong>Watch-Outs</strong></p>
+<ul>
+  <li><strong>Cost is a recurring complaint:</strong> G2 reviewers flag cost for smaller businesses, so a startup lender may pay for unneeded enterprise capability.</li>
+  <li><strong>Implementation takes real effort:</strong> G2 reviewers mention implementation and token-management complexity, so plan for security-engineering time rather than a one-week API integration.</li>
+  <li><strong>No payment features:</strong> Network tokens, account updater, routing, and bank-account tokens are absent, so payment flows need another vendor.</li>
+</ul>
+<p><strong>Our take:</strong> Thales is the pick when the buyer is a bank or a lender with its own data centers and a security team that already manages Thales keys. It protects data where it sits, which a payment-proxy vendor such as VGS or Spreedly does not.</p>
+<p>Against Enigma Vault, you trade a free start and published prices for deployment control inside your own estate. It is the wrong pick for an API-first startup that wants to tokenize its first card this week, or for anyone who needs network tokens or processor routing from the same vendor.</p>
+<p><strong>Pricing tiers</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>CipherTrust Tokenization</td><td>Custom quote</td><td>Not published on an accessible page; contact sales</td></tr>
+</tbody></table></div>
+<p><strong>Security and Compliance</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Control</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>PCI DSS</td><td>Positioned to help customers comply; Thales’s own service-provider status not published on the product page</td></tr>
+<tr><td>SOC 2</td><td>Not published on the product page; ask sales</td></tr>
+<tr><td>ISO 27001</td><td>Not published on the product page; ask sales</td></tr>
+<tr><td>AOC on request</td><td>Ask sales</td></tr>
+<tr><td>SSO</td><td>Ask sales</td></tr>
+<tr><td>Audit logs</td><td>Ask sales</td></tr>
+</tbody></table></div>
+<p><strong>What Reviewers Say:</strong> Positive. Thales CipherTrust Tokenization holds <a class="bl-link" href="https://www.g2.com/products/thales-ciphertrust-tokenization/reviews" target="_blank" rel="noopener">4.0/5 from 6 reviews on G2</a>, with no tokenization listing on Capterra. Reviewers say it protects data well and offers on-premises and cloud consoles; complaints center on cost and implementation complexity.</p>
+<p>Want vault tokens without running the infrastructure yourself? <a class="bl-link" href="/vault/">See how Enigma Vault’s hosted vaults work</a>.</p>
+
+<h2 id="sensitive-data-coverage-by-platform">Sensitive Data Coverage by Platform</h2>
+<p>A fintech holds more than card numbers. This table shows how each platform covers the five kinds of sensitive data a lender, neobank, or payment facilitator usually stores, based on vendor pages and documentation read on October 23, 2026.</p>
+<div class="bl-tablewrap"><table class="bl-table bl-table--wide">
+<thead><tr><th>Platform</th><th>Cards</th><th>Bank account numbers</th><th>SSNs and tax IDs</th><th>KYC documents and files</th><th>AI prompts</th></tr></thead>
+<tbody>
+<tr><td>Enigma Vault</td><td>Covered by Card Vault with hosted capture, phone capture, and a gateway proxy</td><td>Covered by Data Vault with deterministic tokens</td><td>Covered by Data Vault with field-level AES-256 encryption</td><td>Covered by File Vault, up to 5 GB per file by presigned upload</td><td>Covered by NoPII, which tokenizes sensitive data before it reaches the model provider</td></tr>
+<tr><td>VGS</td><td>Covered, with card reveal and issuing features</td><td>Covered by tokenized account numbers for ACH</td><td>Covered as general PII tokens</td><td>Batch files redacted through the SFTP proxy; no document vault described</td><td>Covered by the AI Data Firewall</td></tr>
+<tr><td>Basis Theory</td><td>Covered, with proxy charging and migrations</td><td>Covered as tokenized sensitive data</td><td>Covered as tokenized sensitive data</td><td>Encrypted file exchange for card migrations; no KYC document storage described</td><td>Not described; its AI work focuses on agent payments</td></tr>
+<tr><td>Evervault</td><td>Covered, with card collection, reveal, and network tokens</td><td>Generic field encryption only</td><td>Generic field encryption only</td><td>Not described</td><td>Not described; its AI work focuses on agentic payments</td></tr>
+<tr><td>IXOPAY (formerly TokenEx)</td><td>Covered, with universal tokens across acquirers</td><td>Covered as payment data (bank account and routing numbers)</td><td>Covered as PII tokens, best for fixed-format values</td><td>Not described</td><td>Not described</td></tr>
+<tr><td>Spreedly</td><td>Covered by the Independent Vault</td><td>Covered as ACH payment methods</td><td>Not covered</td><td>Not covered</td><td>Not described</td></tr>
+<tr><td>Skyflow</td><td>Covered, with card issuance connectors</td><td>Covered by its money-movement solution</td><td>Covered in the privacy vault</td><td>Covered by file upload to vault records in the Data API</td><td>Covered by its LLM Privacy Vault</td></tr>
+<tr><td>Bluefin ShieldConex</td><td>Covered, with vaultless HSM tokens</td><td>Covered as ACH account and routing fields, and inside NACHA files through FileGuard</td><td>Covered as general PII</td><td>NACHA, CSV, and fixed-width files only</td><td>Not described</td></tr>
+<tr><td>Thales CipherTrust Tokenization</td><td>Covered, with format-preserving tokens</td><td>Any database column, self-managed</td><td>Any database column, self-managed</td><td>Not covered by this product</td><td>Not described</td></tr>
+</tbody></table></div>
+<p>Network tokens, account updater, and issuing support are covered inside each vendor entry above. Coverage and packaging change often; confirm each item in your quote.</p>
+
+<h2 id="how-vendors-describe-fintech-tokenization">How Each Vendor Describes Its Tokenization for Fintech</h2>
+<p>This table sets how each vendor positions its tokenization next to the fintech evidence it publishes, as of October 23, 2026.</p>
+<div class="bl-tablewrap"><table class="bl-table bl-table--wide">
+<thead><tr><th>Vendor</th><th>How it positions itself</th><th>Fintech proof it publishes</th><th>Source</th></tr></thead>
+<tbody>
+<tr><td>Enigma Vault</td><td>Separate Card, Data, and File Vaults for cards, structured secrets, and documents</td><td>Site describes financial services customers keeping ACH data, account numbers, and loan documents vaulted under per-customer keys; no named fintech case study</td><td>Vault overview page</td></tr>
+<tr><td>VGS</td><td>“The World’s Leader in Payment Tokenization,” with a financial institutions page covering issuing, account opening, and Pay by Bank</td><td>Texas Capital Bank commercial card launch; TANs for ACH processors</td><td>VGS homepage and financial institutions page</td></tr>
+<tr><td>Basis Theory</td><td>Fintech page: “Scale your fintech” by controlling payment data and connecting it to any partner</td><td>Quote from Union’s CEO on PCI compliance in a day; multi-PSP retries</td><td>Basis Theory fintech page</td></tr>
+<tr><td>Evervault</td><td>“Take control of your payments” by separating card collection from processors</td><td>XP case study: debit card program for 1M+ investors</td><td>Evervault homepage and XP case study</td></tr>
+<tr><td>IXOPAY</td><td>Payment orchestration platform for fintech and financial services, with tokenization packaged as TokenEx Core and Connect</td><td>500+ connection adapter catalog; fintech customer logos such as crypto.com and Bankart</td><td>IXOPAY fintech page</td></tr>
+<tr><td>Spreedly</td><td>An open payments platform with a vault for payment token ownership and portability</td><td>Lemonade among customer logos; ACH payment methods in the API</td><td>Spreedly homepage</td></tr>
+<tr><td>Skyflow</td><td>Homepage now leads with AI agent data security; money-movement page covers bank data collection and descoping</td><td>Step-by-step bank-account flow through Skyflow Connections; fintech logos on payments page</td><td>Skyflow money-movement page</td></tr>
+<tr><td>Bluefin ShieldConex</td><td>“Tokenization as a Service” with cloud-based vaultless tokenization for payments, PII, and PHI</td><td>FileGuard for NACHA files with payroll and vendor-payment examples; no named financial-services customer</td><td>ShieldConex page</td></tr>
+<tr><td>Thales CipherTrust Tokenization</td><td>Tokenization that cuts the cost of complying with security policies, inside an end-to-end data security platform</td><td>PCI DSS framing and PAN examples; no fintech case study on the product page</td><td>CipherTrust Tokenization page</td></tr>
+</tbody></table></div>
+<p>The gap that matters most for fintech is identity and bank data.</p>
+<p>Most vendors here lead with cards and payment orchestration, yet a lender’s or neobank’s largest exposure is often SSNs, account numbers, and KYC files. Only Enigma Vault and Skyflow describe a home for identity records, bank data, and documents in the same platform.</p>
+<p>Skyflow’s homepage now leads with AI agents and VGS’s with agentic commerce right under its tokenization headline, so ask how much of the roadmap still serves core fintech storage. Bluefin and Thales publish the least fintech-specific proof, which does not make them weak products, but it means your references must come from sales.</p>
+
+<h2 id="pricing-compared">Pricing Compared</h2>
+<p>Only prices read on each vendor’s own pricing page on October 23, 2026 appear here. Network tokens, account updater, and issuing features often sit outside the base price.</p>
+<div class="bl-tablewrap"><table class="bl-table bl-table--wide">
+<thead><tr><th>Vendor and plan</th><th>Monthly price</th><th>What’s included</th><th>Overage or usage fees</th><th>Free tier or trial</th><th>Source</th></tr></thead>
+<tbody>
+<tr><td>Enigma Vault Lite</td><td>$0</td><td>Card Vault 1,000 requests, Data Vault 1,500 requests, File Vault 5 GB</td><td>$0.08 (Card), $0.06 (Data) per request</td><td>Free forever</td><td><a class="bl-link" href="/pricing/">Pricing</a></td></tr>
+<tr><td>Enigma Vault Plus</td><td>$49.99 per vault</td><td>Card Vault 20,000 requests, Data Vault 30,000, File Vault 150 GB</td><td>$0.04 (Card), $0.03 (Data) per request</td><td>Lite tier</td><td><a class="bl-link" href="/pricing/">Pricing</a></td></tr>
+<tr><td>Enigma Vault Premium</td><td>$249.99 per vault</td><td>Card Vault 250,000 requests, Data Vault 400,000, File Vault 1 TB</td><td>$0.02 (Card), $0.01 (Data) per request</td><td>Lite tier</td><td><a class="bl-link" href="/pricing/">Pricing</a></td></tr>
+<tr><td>VGS Starter</td><td>From $1,000</td><td>Vault and tokenization</td><td>Not published</td><td>“Try for Free”</td><td>VGS pricing page</td></tr>
+<tr><td>Basis Theory $995 plan</td><td>$995</td><td>20,000 tokens, PCI environment, AOC, 24 hours of logs, US only</td><td>Overage rate not published; ask sales</td><td>Free to get started</td><td>Basis Theory pricing page</td></tr>
+<tr><td>Evervault Platform</td><td>$995 plus usage</td><td>Card collection, 3DS, network tokens, wallets, encryption</td><td>Decrypts $0.005; network tokens $0.03; account updates $0.25 per card; 3DS $0.03 per success</td><td>Free sandbox</td><td>Evervault pricing page</td></tr>
+<tr><td>Spreedly Independent Vault</td><td>From $750</td><td>PCI Level 1 vault, unlimited storage, token ownership</td><td>Not published</td><td>Demo</td><td>Spreedly pricing page</td></tr>
+<tr><td>VGS Growth, Spreedly Performance Optimization, Evervault Custom, Basis Theory Enterprise</td><td>Custom quote</td><td>Network tokens, account updater, routing, and support tiers drive the quote</td><td>Quoted</td><td>Not applicable</td><td>Vendor pricing pages above</td></tr>
+<tr><td>IXOPAY, Skyflow, Bluefin ShieldConex, Thales CipherTrust Tokenization</td><td>Custom quote</td><td>Not published on an accessible page</td><td>Not published</td><td>Sandbox or demo</td><td>Vendor sites</td></tr>
+</tbody></table></div>
+
+<h2 id="questions-to-ask-a-fintech-tokenization-vendor">Questions to Ask a Fintech Tokenization Vendor</h2>
+<p>Bring these six questions to every demo. Each one maps to something a sponsor bank, auditor, or future processor will eventually ask you.</p>
+<div class="bl-tablewrap"><table class="bl-table bl-table--wide">
+<thead><tr><th>Question</th><th>Why it matters for a fintech</th><th>A good answer looks like</th></tr></thead>
+<tbody>
+<tr><td>Will you share your PCI DSS AOC and SOC 2 Type II report with our bank?</td><td>Sponsor banks request both in vendor-risk reviews.</td><td>Both on request; ISO 27001 status stated plainly.</td></tr>
+<tr><td>Can you show a sample detokenization log?</td><td>Auditors want proof of who revealed raw values.</td><td>A real entry with user, timestamp, and source.</td></tr>
+<tr><td>Can the same vault tokenize bank accounts, SSNs, tax IDs, and KYC files?</td><td>A card-only vault leaves most sensitive data exposed.</td><td>Named support per field type, plus deterministic tokens.</td></tr>
+<tr><td>Do you issue network tokens and run account updater?</td><td>Card-on-file products depend on both for approvals.</td><td>A clear yes or no, with add-on pricing.</td></tr>
+<tr><td>If we leave, how do tokens and raw values reach a new provider?</td><td>Re-collecting every customer’s details is not an option.</td><td>Documented bulk export, with migration cost in the contract.</td></tr>
+<tr><td>Which regions does the vault run in, with a residency SLA?</td><td>Expansion beyond the US brings data residency rules.</td><td>Named regions and a contractual residency SLA.</td></tr>
+</tbody></table></div>
+<p>Vaulting does not replace financial licensing, KYC, AML, fraud, or consumer-compliance programs, and while tokenization can significantly reduce PCI scope, your acquirer or QSA confirms it.</p>
+
+<h2 id="protect-fintech-data-with-enigma-vault">Protect Fintech Data With Enigma Vault</h2>
+<p>If your fintech holds cards next to bank accounts and SSNs, start with one data element and one transaction path: tokenize a card and an account number, keep only tokens in your records, run an approved test charge through your current processor, and pull the audit events. Enigma Vault lets you do that on the free Lite tier.</p>
+<div class="bl-inlinecta">
+  <div>
+    <p class="bl-inlinecta__t">Show your bank partner token-only records.</p>
+    <p class="bl-inlinecta__s">Start free on Card Vault and Data Vault, or book a demo to scope your card, bank, and KYC data.</p>
+  </div>
+  <a class="np-btn np-btn--on-dark np-btn--primary" href="/request-demo/"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
+</div>
+<p><strong>Next step:</strong> <a class="bl-link" href="/pricing/">Start free</a> on the Lite tier, or <a class="bl-link" href="/request-demo/">book a demo</a> to map your card, bank, and KYC data.</p>
+

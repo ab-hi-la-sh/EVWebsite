@@ -1,0 +1,639 @@
+---
+title: "Best Card Tokenization Software for Cruise Bookings in 2026: Top 7 Ranked"
+titleEmphasis: "Top 7 Ranked"
+slug: "best-card-tokenization-software-for-cruise-bookings"
+layout: "pii-style"
+metaTitle: "Best Card Tokenization Software for Cruise Bookings (2026)"
+description: "The top 7 card tokenization platforms for cruise lines and cruise-specialist agencies, ranked on deposits, final payments, phone capture, portals, and price."
+subtitle: "How each platform keeps a guest’s card safe from the first deposit to the last onboard charge, without changing how your reservation team books."
+date: 2026-10-23T00:04:00
+category: "Card Vault"
+author: "tony-alex"
+readTime: 24
+heroImage: "/assets/blog/img-02.png"
+heroAlt: "Layered panels representing a cruise booking card stored as a token across deposit and final payment"
+excerpt: "The top 7 card tokenization platforms for cruise reservation teams and cruise-specialist agencies, ranked from deposit to onboard folio."
+tags: ["card-vault", "agent-vault", "tokenization", "travel", "cruise", "pci-dss"]
+ogImage: "/assets/og/vault-card.jpg"
+ogImageAlt: "Best Card Tokenization Software for Cruise Bookings in 2026: Top 7 Ranked | Enigma Vault"
+ogType: article
+styles: ["blog.css", "pages/blog-pii-hero.css", "tr-pages.css"]
+scripts: ["blog-article.js"]
+faqSchema: true
+faqs:
+  - q: "What Is the Best Card Tokenization Software for Cruise Bookings?"
+    a: "It depends on who holds the card. Enigma Vault is best for cruise lines and cruise-specialist agencies that keep cards on file for months and need staff to use them safely; PCI Booking is best for travel sellers that pass cards to suppliers and hotels; PCI Proxy suits travel brands that want one token across several payment providers; and Spreedly suits large operators already routing across many gateways."
+  - q: "Can We Keep a Guest’s Card Between the Deposit and the Final Payment?"
+    a: "Yes, as long as the guest has authorized it. Final payment often falls months before sailing (up to 120 days on Princess’s longest voyages), so the card sits on file for months. A vault stores the card number and returns a token you keep on the booking, and the final payment is charged from the token. The security code (CVV) can’t be kept after authorization; Enigma Vault holds it encrypted for at most 30 minutes, then deletes it."
+  - q: "How Can a Cruise Agency Key a Card Into a Cruise Line’s Booking Portal Without Storing It?"
+    a: "Use a vault with a controlled, logged view for authorized staff, so your own booking app holds only the token and last four digits. Where the supplier takes an API call instead, a proxy can inject the card into the request so nobody sees it. Confirm which plan includes staff viewing before you design the workflow, and check that the cruise line accepts the way you use the guest’s card."
+  - q: "Does Card Tokenization Take a Cruise Call Center Out of PCI Scope?"
+    a: "No platform can promise that. Capturing cards on a hosted form or by IVR keypad entry and storing only tokens can significantly reduce PCI scope, but call recordings, notes, and screens that still see card numbers stay in scope. Your acquirer or QSA confirms the final scope and which self-assessment questionnaire applies."
+  - q: "How Much Does Card Tokenization Cost for a Cruise Business?"
+    a: "Published prices start at $0 and reach about $1,000 a month for entry plans. Enigma Vault starts free (1,000 Card Vault requests a month) with Plus at $49.99 a month; PCI Vault lists $255 a month plus $0.02 per API operation; PCI Proxy starts at €350 a month plus usage; Spreedly at $750 a month; VGS at $1,000 a month; and PCI Booking and IXOPAY quote on request. Enigma’s Agent Vault migration is priced by engagement."
+---
+<style>
+.bl-content .bl-table--wide td, .bl-content .bl-table--wide th { padding-left: 8px; padding-right: 8px; }
+.bl-content .bl-ranked { font-size: 15px; color: var(--ev-slate); }
+/* Document360-style vendor body: booking-flow callout and verdict heading. */
+.bl-content .cr-flow { margin: 18px 0; padding: 14px 20px; border-left: 3px solid var(--ev-mineral-blue); background: var(--ev-warm-cloud); border-radius: 0 10px 10px 0; }
+.bl-content .cr-flow p { margin: 0; }
+.bl-content h4.cr-verdict { margin: 22px 0 8px; font-size: 18px; }
+.bl-content blockquote.bl-quote-cta{margin:24px 0;padding:14px 20px;border-left:3px solid var(--ev-mineral-blue);background:var(--ev-warm-cloud);border-radius:0 10px 10px 0}.bl-content blockquote.bl-quote-cta p{margin:0;font-size:16px}
+.bl-content figure.bl-shot{margin:20px 0 24px;padding:10px;border:1px solid var(--ev-cool-stone);border-radius:10px;background:var(--ev-warm-cloud)}.bl-content figure.bl-shot img{display:block;width:100%;height:auto;border-radius:6px}.bl-content figure.bl-shot figcaption{margin-top:8px;text-align:center;font-size:13px;color:var(--ev-slate)}
+.bl-content .tldr { margin: 8px 0 32px; padding: 22px 26px; border-radius: 12px; background: var(--ev-warm-cloud); border-left: 3px solid var(--ev-mineral-blue); }
+.bl-content .tldr .tldr__label { margin: 0 0 12px; padding: 0; border: 0; font-size: 13px; line-height: 1.4; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--ev-mineral-blue); }
+.bl-content .tldr .tldr__list { margin: 0; padding-left: 20px; }
+.bl-content .tldr .tldr__list li { margin: 0 0 10px; font-size: 16px; line-height: 1.6; color: var(--ev-ink); }
+.bl-content .tldr .tldr__list li::marker { color: var(--ev-mineral-blue); }
+.bl-content .tldr .tldr__list li:last-child { margin-bottom: 0; }
+.bl-content .tldr strong a { font-weight: 600; }
+/* Vendor header card: rank, name, best-for pill, review scores, key facts. */
+.bl-content .vc { margin: 40px 0 20px; }
+.bl-content .vc__head { display: grid; grid-template-columns: auto 1fr auto; gap: 18px; align-items: center; margin-bottom: 14px; }
+.bl-content .vc__num { font-size: 34px; font-weight: 600; line-height: 1; color: var(--ev-mineral-blue); font-variant-numeric: tabular-nums; }
+.bl-content h3.vc__name { margin: 0; padding: 0; font-size: 26px; line-height: 1.25; font-weight: 600; color: var(--ev-ink); }
+.bl-content .vc__sep { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.bl-content .vc__pill { display: table; margin-top: 10px; padding: 6px 12px; border-radius: 6px; background: var(--ev-mineral-blue); color: #fff; font-size: 12px; line-height: 1.4; font-weight: 600; text-transform: none; letter-spacing: 0; font-size: 13px; }
+.bl-content .vc__rates { display: flex; flex-direction: column; gap: 8px; align-items: stretch; }
+.bl-content .vc__rate { display: flex; flex-direction: column; align-items: flex-end; padding: 8px 14px; border: 1px solid var(--ev-cool-stone); border-radius: 10px; background: #fff; text-decoration: none !important; min-width: 128px; }
+.bl-content a.vc__rate:hover { border-color: var(--ev-mineral-blue); }
+.bl-content .vc__score { font-size: 20px; font-weight: 700; color: var(--ev-ink); line-height: 1.2; }
+.bl-content .vc__score small { font-size: 13px; font-weight: 500; color: var(--ev-slate); }
+.bl-content .vc__src { font-size: 12px; color: var(--ev-slate); line-height: 1.3; }
+.bl-content .vc__rate--new .vc__score { font-size: 15px; }
+.bl-content .vc__facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px 24px; margin: 0; padding: 18px 22px; border-radius: 12px; background: var(--ev-warm-cloud); }
+.bl-content .vc__facts div { margin: 0; }
+.bl-content .vc__facts .vc__best { grid-column: 1 / -1; padding-top: 14px; border-top: 1px solid var(--ev-cool-stone); }
+.bl-content .vc__facts dt { margin: 0 0 4px; font-size: 11.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ev-slate); }
+.bl-content .vc__facts dd { margin: 0; font-size: 15px; line-height: 1.5; color: var(--ev-ink); }
+@media (max-width: 700px) {
+  .bl-content .vc__head { grid-template-columns: auto 1fr; }
+  .bl-content .vc__rates { grid-column: 1 / -1; flex-direction: row; flex-wrap: wrap; }
+  .bl-content .vc__rate { align-items: flex-start; }
+  .bl-content .vc__num { font-size: 26px; }
+  .bl-content h3.vc__name { font-size: 22px; }
+  .bl-content .vc__facts { grid-template-columns: 1fr; }
+}
+</style>
+
+<p>Ranking the best card tokenization software for cruise bookings in 2026: 1. Enigma Vault, 2. PCI Booking, 3. PCI Proxy, 4. Spreedly, 5. IXOPAY (formerly TokenEx), 6. VGS, and 7. PCI Vault.</p>
+
+<p>A cruise card has a longer life than almost any other travel payment. The deposit is taken at booking, the final payment falls due months before sailing (up to 120 days on Princess’s longest voyages), and then a card is registered again at check-in to settle the onboard account. If plans change, part of the fare may come back as a refund or a future cruise credit.</p>
+<p>Along the way the card gets read out over the phone, typed into a cruise line’s booking portal by an advisor, and pasted into notes “just for now.”</p>
+<p>This guide ranks the platforms a cruise reservation team or a cruise-specialist agency would actually shortlist to keep that card in a vault and work from a token instead. Payment gateways aren’t on the list: they’re the processors these vaults send charges to, not alternatives to them.</p>
+
+<p><strong>About the author:</strong> I’m <a class="bl-link" href="https://www.linkedin.com/in/tony-alex-enigma-vault/" target="_blank" rel="noopener">Dr. Tony Alex</a>, Chief Executive Officer of Enigma Vault, where I lead our work in encryption, tokenization, and sensitive-data protection. I have more than two decades of experience building enterprise software businesses.</p>
+<p>In 1999 I founded US eDirect to develop software for parks, campgrounds, and recreation agencies, bringing reservations and payments into one cloud system, and led it through its acquisition by Tyler Technologies in 2022.</p>
+<p><em>Disclosure: I work at Enigma Vault, which appears first in this list. Every platform here is judged on the same criteria, and the review ratings come from G2 and Capterra.</em></p>
+
+<div class="tldr" id="tldr">
+  <h2 class="tldr__label">TL;DR</h2>
+  <ul class="tldr__list">
+    <li><strong><a class="bl-link" href="#enigma-vault">Enigma Vault</a>:</strong> best for holding cruise cards from deposit to final payment.</li>
+    <li><strong><a class="bl-link" href="#pci-booking">PCI Booking</a>:</strong> best for passing guest cards to suppliers and hotels.</li>
+    <li><strong><a class="bl-link" href="#pci-proxy">PCI Proxy</a>:</strong> best for travel brands running several payment providers.</li>
+    <li><strong><a class="bl-link" href="#spreedly">Spreedly</a>:</strong> best for routing cruise payments across many gateways.</li>
+    <li><strong><a class="bl-link" href="#ixopay">IXOPAY (formerly TokenEx)</a>:</strong> best for covering online deposits and onboard terminals.</li>
+    <li><strong><a class="bl-link" href="#vgs">VGS</a>:</strong> best for engineering-led cruise booking platforms.</li>
+    <li><strong><a class="bl-link" href="#pci-vault">PCI Vault</a>:</strong> best for small cruise agencies with a developer.</li>
+  </ul>
+</div>
+
+<h2 id="quick-rundown-cruise-card-tokenization-platforms">Best Card Tokenization Software for Cruise Bookings at a Glance</h2>
+<p>Prices, plans, and features were checked on October 23, 2026. The last column names the one capability that matters most for a cruise booking flow.</p>
+<div class="bl-tablewrap"><table class="bl-table bl-table--wide">
+<thead><tr><th>Platform</th><th>Best for</th><th>Starting price</th><th>Cruise workflow feature</th></tr></thead>
+<tbody>
+<tr><td><a class="bl-link" href="#enigma-vault">Enigma Vault</a></td><td>Cruise lines and cruise-specialist agencies holding cards from deposit to final payment</td><td>$0 (Lite), then $49.99 a month; Agent Vault by engagement</td><td>Twilio Pay phone capture, gateway proxy, and an eight-week card-on-file migration</td></tr>
+<tr><td><a class="bl-link" href="#pci-booking">PCI Booking</a></td><td>Travel sellers passing guest cards to suppliers and hotels</td><td>Custom quote</td><td>Card display with a one-time password for suppliers that aren’t customers</td></tr>
+<tr><td><a class="bl-link" href="#pci-proxy">PCI Proxy</a></td><td>Travel brands using several payment providers</td><td>€350 a month plus usage</td><td>One token across providers, plus network tokens and account updater</td></tr>
+<tr><td><a class="bl-link" href="#spreedly">Spreedly</a></td><td>Large operators routing across many gateways and regions</td><td>$750 a month</td><td>150+ gateway connections from one vault</td></tr>
+<tr><td><a class="bl-link" href="#ixopay">IXOPAY (formerly TokenEx)</a></td><td>Enterprise payment teams that also tokenize onboard terminals</td><td>Custom quote</td><td>Universal tokens plus a P2PE option for point-of-sale devices</td></tr>
+<tr><td><a class="bl-link" href="#vgs">VGS</a></td><td>Engineering-led booking platforms that want a proxy with few code changes</td><td>$1,000 a month</td><td>Proxy to supplier APIs and a headless browser that fills a supplier’s web page</td></tr>
+<tr><td><a class="bl-link" href="#pci-vault">PCI Vault</a></td><td>Small agencies with a developer and a tight budget</td><td>$255 a month plus $0.02 per operation</td><td>Zero-knowledge storage with hosted capture forms</td></tr>
+</tbody></table></div>
+<blockquote class="bl-quote-cta"><p>Still holding cruise cards in spreadsheets or an old reservation system? Tell us how cards reach your team and we’ll map a vaulted version of the same flow. <a class="bl-link" href="/request-demo/">Get in touch</a></p></blockquote>
+
+<h2 id="what-is-card-tokenization-software-for-cruise-bookings">What Is Card Tokenization Software for Cruise Bookings?</h2>
+<p>Card tokenization software stores a guest’s card number in a secure vault and gives your booking system a token to use in its place, so deposits, final payments, and later charges run from the token while the real number stays out of your apps, inboxes, and notes.</p>
+<p>For cruise, the token has to survive a long, multi-step booking.</p>
+<p>A good platform lets you capture the card once (online, by link, or over the phone), keep it on file under the guest’s authorization, charge it through your existing processor when each payment falls due, and give staff a controlled way to use it with a supplier that can only take a card typed into a portal.</p>
+
+<h2 id="basic-features-every-cruise-booking-team-needs">Basic Features Every Cruise Booking Team Needs</h2>
+<ul>
+  <li><strong>Capture without staff seeing the number:</strong> Hosted forms, pay-by-link, and IVR keypad capture keep card digits off agents’ screens and recordings.</li>
+  <li><strong>Card on file for months:</strong> Tokens must stay valid from deposit to a final payment up to 120 days before sailing.</li>
+  <li><strong>Charging through your own processor:</strong> A proxy injects the card into gateway requests, so switching processors never means re-collecting cards.</li>
+  <li><strong>Controlled use with cruise line portals:</strong> A logged, role-based card view lets an authorized advisor book on portals without an API.</li>
+  <li><strong>CVV handled separately:</strong> The security code can’t be stored after authorization, so the platform should hold it briefly, then delete it.</li>
+  <li><strong>Bulk import:</strong> A way to move thousands of existing cards out of a legacy reservation system into the vault.</li>
+  <li><strong>Audit trail:</strong> A record of who charged, viewed, or exported each card, ready for a dispute or your QSA.</li>
+</ul>
+<p>Related reading: <a class="bl-link" href="/blog/credit-card-tokenization/">how credit card tokenization works</a> and <a class="bl-link" href="/blog/best-credit-card-tokenization-software/">the best credit card tokenization software</a>.</p>
+
+<h2 id="how-these-were-tested-and-ranked">How We Tested and Ranked Card Tokenization Software for Cruise Bookings</h2>
+<p>Each platform was scored against one cruise booking, from phone deposit to final payment and cancellation, using vendor pages, documentation, pricing, and G2 and Capterra listings checked on October 23, 2026.</p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Criterion</th><th>Weight</th><th>What we checked</th></tr></thead>
+<tbody>
+<tr><td>Long-lived card on file</td><td>25%</td><td>Token life from deposit to final payment, re-use for later charges, keeping cards current, bulk import</td></tr>
+<tr><td>Phone and remote capture</td><td>20%</td><td>IVR keypad capture, pay-by-link, hosted forms; what agents see on a call</td></tr>
+<tr><td>Supplier and portal workflows</td><td>20%</td><td>Proxy to supplier APIs, controlled staff use for manual portals, logging</td></tr>
+<tr><td>Processor independence</td><td>15%</td><td>Gateways supported, cost of switching, multi-brand operators</td></tr>
+<tr><td>Price clarity for cruise volume</td><td>10%</td><td>Published plans, usage fees, minimums</td></tr>
+<tr><td>Compliance evidence and reviews</td><td>10%</td><td>Vendor-stated PCI DSS level and certifications, G2 and Capterra feedback</td></tr>
+</tbody></table></div>
+
+<h2 id="the-7-best-card-tokenization-platforms-for-cruise-bookings">Top 7 Card Tokenization Software for Cruise Bookings Compared</h2>
+
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">01</span>
+    <div class="vc__id">
+      <h3 id="enigma-vault" class="vc__name"><span class="vc__sep">1. </span>Enigma Vault<span class="vc__sep">: </span><span class="vc__pill">Best for Holding Cruise Cards From Deposit to Final Payment</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener"><span class="vc__score">4.4<small>/5</small></span><span class="vc__src">G2 · 6 reviews</span></a><a class="vc__rate" href="https://www.capterra.com/p/241650/Enigma-Vault/reviews/" target="_blank" rel="noopener"><span class="vc__score">4.8<small>/5</small></span><span class="vc__src">Capterra · 4 reviews</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>$0, then $49.99 a month; Agent Vault by engagement</dd></div>
+    <div><dt>Free tier or trial</dt><dd>Free Lite plan: 1,000 requests a month</dd></div>
+    <div><dt>Phone capture</dt><dd>Twilio Pay IVR straight to the vault</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Cruise lines with years of cards in a reservation system, and cruise-specialist agencies that want a card entered once and only a token in their own app.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/enigma-vault.jpg" alt="Enigma Vault homepage" >}}
+  <figcaption>Enigma Vault homepage. Source: enigmavault.io</figcaption>
+</figure>
+<p>Enigma Vault is an independent card vault that holds cruise cards from deposit to final payment, with two ways in. Card Vault is the self-serve API: hosted forms, Twilio Pay phone capture, and a gateway proxy that charges the card through your existing processor.</p>
+<p>Agent Vault is the operator package: a fixed-scope, eight-week engagement for card-on-file migration that our pricing page names for aviation, cruise, clubs, dental, and home services.</p>
+<p>Our own description of the pattern is an operator with “thousands of cards on file and no system of record,” and cruise lines are named in it.</p>
+<p>The representative deployment we describe on our site is in private aviation: existing cards imported into the vault in bulk, a branded card-management experience for account holders, staff access behind enterprise single sign-on, and every charge routed through the operator’s existing processor.</p>
+<p><strong>Key features</strong></p>
+<ul>
+  <li><strong>Twilio Pay IVR capture:</strong> Guests key their card into the phone keypad during deposit calls, so agents never see or hear it.</li>
+  <li><strong>Hosted card forms:</strong> Branded iframe forms in 13 languages let international guests pay deposits on a page that looks like yours.</li>
+  <li><strong>Gateway proxy:</strong> Charges run through Stripe, Braintree, Authorize.net, PayPal, or any REST gateway, so changing processors needs no card re-collection.</li>
+  <li><strong>Format-preserving tokens:</strong> Optional tokens keep the first six and last four digits, so legacy reservation fields accept them unchanged.</li>
+  <li><strong>Ephemeral CVV:</strong> The security code is held encrypted for at most 30 minutes, then deleted, keeping you clear of CVV storage rules.</li>
+  <li><strong>Per-customer keys and audit logs:</strong> AES-256 encryption and a log of every request give you a charge record for disputes and QSAs.</li>
+</ul>
+<p><strong>Pros</strong></p>
+<ul>
+  <li>The free Lite plan and published prices let a small cruise agency start without a sales call and know its monthly bill.</li>
+  <li>Packaged Twilio Pay phone capture keeps card numbers off agents’ screens and out of recordings during deposit and late-booking calls.</li>
+  <li>Agent Vault is the only offer here sold as a fixed-scope card-on-file migration, suiting a cruise line leaving a legacy system.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li>Our public pages don’t say which plan unlocks full card viewing for staff, so confirm advisor access in writing first.</li>
+  <li>There are no shipboard terminals or P2PE devices, so a cruise line still needs another provider for onboard point-of-sale cards.</li>
+  <li>ISO 27001 certification is still in progress, so buyers requiring it today must accept PCI DSS Level 1 and SOC 2 evidence.</li>
+</ul>
+<p><strong>Pricing</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>Card Vault Lite</td><td>$0</td><td>1,000 requests a month; $0.08 per extra request; tokenization and gateway proxy</td></tr>
+<tr><td>Card Vault Plus</td><td>$49.99 a month</td><td>20,000 requests; $0.04 per extra request; ephemeral key sharing, email support</td></tr>
+<tr><td>Card Vault Premium</td><td>$249.99 a month</td><td>250,000 requests; $0.02 per extra request; priority support</td></tr>
+<tr><td>Agent Vault</td><td>Priced by engagement</td><td>Fixed-scope, eight-week card-on-file migration</td></tr>
+</tbody></table></div>
+<p>Card Vault plans are billed through AWS Marketplace.</p>
+<div class="cr-flow"><p><strong>Booking-flow note:</strong> The deposit is taken by Twilio Pay or a hosted form, and the token is saved on the booking. At final payment, your system sends a tokenized request to the proxy, which injects the card and forwards it to your processor; your app gets the gateway response, never the number.</p>
+<p>Refunds go back through the same processor. For a cruise line portal that only accepts typed cards, the pattern we recommend is a controlled agent app under SSO and MFA with every access logged.</p></div>
+<p><strong>One honest limitation:</strong> Our public pages don’t yet say which plan unlocks staff viewing of the full card number, and that’s the first question cruise-focused advisors ask us.</p>
+<p>Confirm that access and the plan in writing during your demo before you design the advisor workflow around it.</p>
+<h4 class="cr-verdict">Final Verdict</h4>
+<p>For a cruise line, Agent Vault is the only offer on this list packaged as a fixed-scope card-on-file migration. For a small cruise agency, Card Vault’s free Lite plan is the cheapest way to stop keeping card numbers in a booking app.</p>
+<p>A vault doesn’t authenticate the cardholder or replace your fraud controls, and some suppliers set their own rules on third-party card use.</p>
+
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">02</span>
+    <div class="vc__id">
+      <h3 id="pci-booking" class="vc__name"><span class="vc__sep">2. </span>PCI Booking<span class="vc__sep">: </span><span class="vc__pill">Best for Passing Guest Cards to Suppliers and Hotels</span></h3>
+    </div>
+    <div class="vc__rates"><span class="vc__rate vc__rate--new"><span class="vc__score">No listing</span><span class="vc__src">G2 and Capterra</span></span></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>Custom quote</dd></div>
+    <div><dt>Free tier or trial</dt><dd>“Try for Free” signup on its homepage</dd></div>
+    <div><dt>Supplier step</dt><dd>Card display with a one-time password for non-customers</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Host agencies, tour operators, and travel platforms whose main job is moving a guest’s card to hotels and other suppliers.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/pci-booking.jpg" alt="PCI Booking homepage" >}}
+  <figcaption>PCI Booking homepage. Source: pcibooking.net</figcaption>
+</figure>
+<p>PCI Booking is an Ireland-based card tokenization company whose first market was travel, which it still serves alongside hospitality. It says it handles more than 500 million cards a year.</p>
+<p>Its first product, PCI Shield, launched in 2016 for the travel industry, and it became a standalone company in 2018.</p>
+<p>Its developer guides are written around hotels, online travel agencies, and channel managers, which makes it the most travel-native vendor here after Enigma Vault.</p>
+<p><strong>Key features</strong></p>
+<ul>
+  <li><strong>Card by Link:</strong> Sends a guest an email or SMS card-entry link, which suits a deposit taken after a phone quote.</li>
+  <li><strong>Card Entry Form:</strong> A hosted capture form drops into your booking pages, so card fields post to PCI Booking, not your servers.</li>
+  <li><strong>Card Display:</strong> Shows stored card details inside your own portal, giving authorized staff a view without the card in your database.</li>
+  <li><strong>Card Display with OTP:</strong> Lets a supplier that isn’t a PCI Booking customer view a card with a one-time password, not email.</li>
+  <li><strong>Token replacement:</strong> Swaps the token for the real card inside a request, such as a supplier booking API call or processor charge.</li>
+  <li><strong>Expiry date updates:</strong> Token management lets you update a stored card’s expiry date when a guest’s card is reissued before final payment.</li>
+</ul>
+<p><strong>Pros</strong></p>
+<ul>
+  <li>Developer guides written for hotels, online travel agencies, and channel managers make supplier delivery a documented flow, not a custom project.</li>
+  <li>Card Display with OTP gives a supplier a one-time card view, which removes the emailed card from handoffs to cruise lines.</li>
+  <li>A “Try for Free” signup lets your developer test the deposit and final-payment flow before committing, lowering pilot risk.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li>Every flow is API-first, so a cruise agency without a developer gets no ready-made staff screen for taking or using cards.</li>
+  <li>The guides don’t describe IVR keypad capture, so phone-heavy cruise call centers need guest links or a separate phone-payment provider.</li>
+  <li>Fees scale with the type and number of API actions, so a booking with deposit, final payment, and card views costs more.</li>
+</ul>
+<p><strong>Pricing</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>Sandbox</td><td>Free</td><td>Full testing environment before production</td></tr>
+<tr><td>Production</td><td>Custom quote</td><td>Billed by the type and number of API actions, invoiced monthly after go-live</td></tr>
+</tbody></table></div>
+<div class="cr-flow"><p><strong>Booking-flow note:</strong> A deposit can come in by Card by Link and be stored as a token. Final payment goes through token replacement to your processor. For a supplier that can’t take an API call, Card Display with OTP hands them a one-time view instead of an emailed card. Onboard folios aren’t covered.</p></div>
+<p><strong>One honest limitation:</strong> The use-case guides don’t describe IVR keypad capture, so phone-heavy cruise call centers will need a separate phone-payment provider or a pay-by-link habit.</p>
+<h4 class="cr-verdict">Final Verdict</h4>
+<p>A strong fit for an agency or tour operator whose main job is moving cards to suppliers. PCI Booking has no G2 or Capterra listing, so ask for two or three customer references in your segment before you sign.</p>
+<p>Phone bookings are most of your volume? Enigma Vault captures cards from the IVR directly. <a class="bl-link" href="/request-demo/">Talk to us</a></p>
+
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">03</span>
+    <div class="vc__id">
+      <h3 id="pci-proxy" class="vc__name"><span class="vc__sep">3. </span>PCI Proxy<span class="vc__sep">: </span><span class="vc__pill">Best for Travel Brands Running Several Payment Providers</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate vc__rate--new" href="https://www.g2.com/products/pci-proxy/reviews" target="_blank" rel="noopener"><span class="vc__score">No reviews yet</span><span class="vc__src">G2</span></a><a class="vc__rate vc__rate--new" href="https://www.capterra.com/p/10055014/PCI-Proxy/reviews/" target="_blank" rel="noopener"><span class="vc__score">No reviews yet</span><span class="vc__src">Capterra</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>€350 a month plus usage</dd></div>
+    <div><dt>Free tier or trial</dt><dd>Free trial “without restrictions”</dd></div>
+    <div><dt>Keeping cards current</dt><dd>Network tokens and account updater</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Multi-brand cruise and travel operators that want one token across the payment providers they’ve collected, billed in euros.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/pci-proxy.jpg" alt="PCI Proxy homepage" >}}
+  <figcaption>PCI Proxy homepage. Source: pci-proxy.com</figcaption>
+</figure>
+<p>PCI Proxy, powered by Planet, is a card tokenization service that pairs a token vault with a proxy that swaps the token for the real card on the way to your payment providers. Its homepage lists airlines and travel among its industries and carries testimonials from the founder of hotel software company Apaleo and an airline solutions director.</p>
+<p>The main draw for cruise is a single token that works across the processors a multi-brand operator tends to collect.</p>
+<p><strong>Key features</strong></p>
+<ul>
+  <li><strong>Token vault:</strong> Collects, stores, and uses card data on your behalf, so card numbers stay out of your reservation systems.</li>
+  <li><strong>Network tokens:</strong> Card-brand tokens help stored cards keep working when a guest’s card is reissued between deposit and sailing.</li>
+  <li><strong>Account updater:</strong> Part of its card intelligence set with BIN lookup, refreshing card details that change before final payment.</li>
+  <li><strong>3D Secure:</strong> Cardholder authentication for online deposits supports strong customer authentication rules for European guests booking a cruise.</li>
+  <li><strong>Payment gateway:</strong> Its own gateway product sits alongside the vault, for brands that want to process and tokenize with one vendor.</li>
+  <li><strong>No setup fees:</strong> The pricing page promises no setup fees or long-term contracts, and plan changes carry no penalty.</li>
+</ul>
+<p><strong>Pros</strong></p>
+<ul>
+  <li>One token works across several payment providers, which suits a multi-brand cruise operator that collected processors by brand or market.</li>
+  <li>Network tokens and account updater are in the product set, helping a stored card stay chargeable through a 120-day gap.</li>
+  <li>Plan prices and a free trial are public, so you can test real deposit and final-payment flows before committing to a contract.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li>The proxies are built for server-to-server traffic, so an advisor keying cards into a cruise line portal needs a display you build.</li>
+  <li>There’s no packaged phone or IVR capture, so call-center deposits need a separate phone-payment provider or a guest link.</li>
+  <li>Starter covers one brand only, so a multi-brand cruise group starts at Scale, €650 a month, before usage fees.</li>
+</ul>
+<p><strong>Pricing</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>Starter</td><td>€350 a month</td><td>One brand, core product suite, one project, email support</td></tr>
+<tr><td>Scale</td><td>€650 a month</td><td>Multiple brands, full suite, unlimited projects, prioritized support</td></tr>
+<tr><td>Enterprise</td><td>Custom quote</td><td>Volume tiers, custom integrations, SSO and SAML</td></tr>
+</tbody></table></div>
+<p>Usage fees are charged on top of each plan.</p>
+<div class="cr-flow"><p><strong>Booking-flow note:</strong> Deposits are stored as tokens, final payments are forwarded to whichever provider the brand uses, and network tokens and account updater help when a card changes between booking and sailing. Staff use with a cruise line portal isn’t a documented feature.</p></div>
+<p><strong>One honest limitation:</strong> There’s no ready-made staff screen for phone orders or cruise line portals, so call-center capture and advisor card use are things your developers build.</p>
+<h4 class="cr-verdict">Final Verdict</h4>
+<p>A sensible pick for an operator juggling processors across brands. With no G2 or Capterra reviews to lean on, ask for travel references.</p>
+<p>Want to test on real cruise bookings with no trial clock? Enigma Vault’s Lite plan stays free. <a class="bl-link" href="/pricing/">See pricing</a></p>
+
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">04</span>
+    <div class="vc__id">
+      <h3 id="spreedly" class="vc__name"><span class="vc__sep">4. </span>Spreedly<span class="vc__sep">: </span><span class="vc__pill">Best for Routing Cruise Payments Across Many Gateways</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/spreedly/reviews" target="_blank" rel="noopener"><span class="vc__score">4.4<small>/5</small></span><span class="vc__src">G2 · 35 reviews</span></a><a class="vc__rate" href="https://www.capterra.com/p/114956/Spreedly/reviews/" target="_blank" rel="noopener"><span class="vc__score">4.5<small>/5</small></span><span class="vc__src">Capterra · 13 reviews</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>$750 a month</dd></div>
+    <div><dt>Free tier or trial</dt><dd>Not published</dd></div>
+    <div><dt>Gateway reach</dt><dd>150+ gateway connections</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Global cruise groups taking payments in several markets through several processors.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/spreedly.jpg" alt="Spreedly homepage" >}}
+  <figcaption>Spreedly homepage. Source: spreedly.com</figcaption>
+</figure>
+<p>Spreedly is a payment orchestration platform built around an independent vault, so your tokens stay yours rather than a gateway’s. Its homepage shows travel brands such as Priceline, Hopper, and Hotel Engine among its logos.</p>
+<p>For a global cruise group, its value is reach: one integration to 150+ gateway connections, plus routing and retries on its quoted tier.</p>
+<p><strong>Key features</strong></p>
+<ul>
+  <li><strong>Independent vault:</strong> A PCI-1 vault with unlimited card storage on the entry plan, so years of guests’ cards don’t raise fees.</li>
+  <li><strong>Gateway reach:</strong> 150+ gateway connections let a global cruise group charge deposits through local processors without a second vault.</li>
+  <li><strong>Vault health insights:</strong> Included on the entry plan, giving your payments team visibility into the state of the cards it stores.</li>
+  <li><strong>Network tokens and account updater:</strong> On the Performance Optimization plan, keeping cards current through the long gap before final payment.</li>
+  <li><strong>Smart retries and PSP-agnostic routing:</strong> Also on the quoted plan, retrying a declined final payment or sending it to another processor.</li>
+  <li><strong>3DS, fraud, and chargeback reduction:</strong> Connected through the same platform, so authentication and dispute tools sit right next to the vault.</li>
+</ul>
+<p><strong>Pros</strong></p>
+<ul>
+  <li>Tokens live in an independent vault, so adding or switching processors doesn’t mean collecting cruise guests’ cards all over again.</li>
+  <li>Storage is unlimited on the base plan, so a growing file of repeat cruisers’ cards never changes the monthly fee.</li>
+  <li>G2 and Capterra reviewers praise having one vault across many gateways, along with responsive support when integrations need help.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li>The $750 monthly floor, $9,000 a year before usage, is hard to justify for an agency running one processor.</li>
+  <li>Network tokens and account updater sit on the quoted Performance Optimization plan, so keeping cards current costs more than entry pricing.</li>
+  <li>G2 reviewers report steep fee increases and no free automated test environment, so get price protection and test access in writing.</li>
+</ul>
+<p><strong>Pricing</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>Independent Vault</td><td>From $750 a month</td><td>PCI-1 vault, unlimited storage, vault health insights</td></tr>
+<tr><td>Performance Optimization</td><td>Custom quote</td><td>Network tokens, account updater, smart retries, PSP-agnostic routing, 3DS, fraud and chargeback tools</td></tr>
+</tbody></table></div>
+<div class="cr-flow"><p><strong>Booking-flow note:</strong> Tokens created at deposit can be routed to any connected gateway at final payment, and account updater (quoted tier) refreshes cards that change in between. Advisor use with cruise line portals and phone capture aren’t its focus.</p></div>
+<p><strong>One honest limitation:</strong> At $9,000 a year before usage, it only pays off if you genuinely run several gateways, and G2 reviewers report steep fee increases.</p>
+<h4 class="cr-verdict">Final Verdict</h4>
+<p>Mostly positive reviews on <a class="bl-link" href="https://www.g2.com/products/spreedly/reviews" target="_blank" rel="noopener">G2</a> and <a class="bl-link" href="https://www.capterra.com/p/114956/Spreedly/reviews/" target="_blank" rel="noopener">Capterra</a>, with praise for one vault across many gateways and support, and complaints about cost and no free test mode. Right for big routing estates, heavy for one processor.</p>
+<p>One processor today? Enigma Vault’s gateway proxy keeps the option to switch for a fraction of that floor. <a class="bl-link" href="/request-demo/">Get in touch</a></p>
+
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">05</span>
+    <div class="vc__id">
+      <h3 id="ixopay" class="vc__name"><span class="vc__sep">5. </span>IXOPAY (Formerly TokenEx)<span class="vc__sep">: </span><span class="vc__pill">Best for Covering Online Deposits and Onboard Terminals</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/tokenex-ixopay/reviews" target="_blank" rel="noopener"><span class="vc__score">4.6<small>/5</small></span><span class="vc__src">G2 · 17 reviews</span></a><a class="vc__rate vc__rate--new" href="https://www.capterra.com/p/181731/Cloud-Based-Tokenization/reviews/" target="_blank" rel="noopener"><span class="vc__score">No reviews yet</span><span class="vc__src">Capterra</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>Custom quote</dd></div>
+    <div><dt>Free tier or trial</dt><dd>Not published; demo on request</dd></div>
+    <div><dt>Shipboard cards</dt><dd>P2PE for point-of-sale devices</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Cruise lines with an enterprise payments team that wants shore-side deposits and shipboard terminals under one tokenization vendor.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/ixopay.jpg" alt="IXOPAY homepage" >}}
+  <figcaption>IXOPAY homepage. Source: ixopay.com</figcaption>
+</figure>
+<p>IXOPAY (formerly TokenEx) is a payment platform that sells tokenization as the TokenEx Core and TokenEx Connect packages. Its universal tokens work across processors, and its documentation lists P2PE for card data collected from PIN pads and point-of-sale devices, so online deposits and onboard terminal payments can sit with one vendor.</p>
+<p><strong>Key features</strong></p>
+<ul>
+  <li><strong>Universal tokens:</strong> One portable token works across processors, so a cruise line can change acquirers without re-collecting guests’ cards.</li>
+  <li><strong>Transparent Gateway:</strong> Detokenizes and forwards card data to a payment provider or third-party API, covering final payments and supplier calls.</li>
+  <li><strong>Hosted iframe:</strong> Card fields on your booking form post straight to the vault, keeping deposit card data off your web servers.</li>
+  <li><strong>Network tokens with fallback:</strong> Uses network tokens where possible and universal tokens elsewhere, helping stored cards survive a reissue before sailing.</li>
+  <li><strong>Account updater:</strong> Offered as a separate payment module that refreshes stored cards before a final payment months after booking.</li>
+  <li><strong>P2PE for devices:</strong> Covers card data from PIN pads and terminals, so terminal payments sit with the same vendor as online deposits.</li>
+</ul>
+<p><strong>Pros</strong></p>
+<ul>
+  <li>It’s the only vendor here documenting P2PE for point-of-sale devices, which matters for a line covering onboard payments.</li>
+  <li>Universal tokens with network-token fallback suit a cruise line that works with several acquirers across different regions and currencies.</li>
+  <li>G2 reviewers praise its support and setup, which helps an enterprise payments team get a multi-acquirer rollout running sooner.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li>Onboarding is sales-led through a demo request, so even a small pilot waits on scoping and a custom quote.</li>
+  <li>There’s no advisor-facing card view or phone capture, so portal bookings and call-center deposits need your own build.</li>
+  <li>P2PE and Account Updater are listed under IXOPAY’s payment modules, so confirm which your package includes before planning terminals.</li>
+</ul>
+<p><strong>Pricing</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>TokenEx Core or TokenEx Connect</td><td>Custom quote</td><td>Tokenization packages with universal tokens, hosted iframe, and Transparent Gateway</td></tr>
+<tr><td>P2PE and Account Updater modules</td><td>Custom quote</td><td>Point-of-sale encryption and stored-card updates, added to a package</td></tr>
+</tbody></table></div>
+<div class="cr-flow"><p><strong>Booking-flow note:</strong> Deposits are tokenized in the iframe, final payments go through the Transparent Gateway, and terminals can be covered by P2PE, so one vendor can span shore-side and point-of-sale cards. A staff screen for cruise line portals isn’t part of the offer.</p></div>
+<p><strong>One honest limitation:</strong> Onboarding is sales-led through a demo request and there’s no advisor-facing card view, so it’s a weak fit for a small cruise agency.</p>
+<h4 class="cr-verdict">Final Verdict</h4>
+<p>Very positive but dated reviews on <a class="bl-link" href="https://www.g2.com/products/tokenex-ixopay/reviews" target="_blank" rel="noopener">G2</a>, praising support and setup. A credible enterprise option; ask for recent cruise or travel references.</p>
+<p>Replacing TokenEx is one of the migrations buyers bring to us. <a class="bl-link" href="/request-demo/">Ask how a move works</a></p>
+
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">06</span>
+    <div class="vc__id">
+      <h3 id="vgs" class="vc__name"><span class="vc__sep">6. </span>VGS<span class="vc__sep">: </span><span class="vc__pill">Best for Engineering-Led Cruise Booking Platforms</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/very-good-security-vgs-platform/reviews" target="_blank" rel="noopener"><span class="vc__score">4.7<small>/5</small></span><span class="vc__src">G2 · 47 reviews</span></a><a class="vc__rate vc__rate--new" href="https://www.capterra.com/p/195135/VGS-Platform/reviews/" target="_blank" rel="noopener"><span class="vc__score">No reviews yet</span><span class="vc__src">Capterra</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>$1,000 a month</dd></div>
+    <div><dt>Free tier or trial</dt><dd>Free signup and sandbox</dd></div>
+    <div><dt>Supplier step</dt><dd>Proxy or headless browser fills the supplier’s page</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Online cruise sellers and booking platforms with developers who want card data aliased in transit with few code changes.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/vgs.jpg" alt="VGS homepage" >}}
+  <figcaption>VGS homepage. Source: verygoodsecurity.com</figcaption>
+</figure>
+<p>Very Good Security (VGS) is a tokenization platform that swaps card data for aliases as it passes in or out of your systems. Its OTA and insurers page targets intermediary sellers: share the vaulted card with a provider by API, or fill in a provider’s web page through a headless browser and browser proxy without exposing the raw card.</p>
+<p>That is the closest any competitor here comes to automating a cruise line portal step.</p>
+<p><strong>Key features</strong></p>
+<ul>
+  <li><strong>Inbound and outbound proxy:</strong> Aliases card data before it reaches your servers and reveals it to approved APIs with minimal code changes.</li>
+  <li><strong>Headless browser for supplier pages:</strong> Fills a provider’s web page from the vault, so raw cards never reach your staff or servers.</li>
+  <li><strong>Card Management Platform:</strong> Bundles network tokens, account updater, card attributes, 3DS, and account validation behind one API integration.</li>
+  <li><strong>Network tokens and account updater:</strong> Add-ons on the Growth package that keep stored cards current between deposit and final payment.</li>
+  <li><strong>PCI Compliance Subscription:</strong> An add-on, with a VGS-provided auditor as an option for teams without their own QSA relationship.</li>
+</ul>
+<p><strong>Pros</strong></p>
+<ul>
+  <li>The proxy model means little rewrite of an existing cruise booking engine, so a pilot can run alongside current payment flows.</li>
+  <li>Supplier web pages can be filled from the vault without exposing the card, which suits online sellers automating bookings.</li>
+  <li>The G2 rating rests on 47 reviews, the largest sample on this list, with praise for the proxy and support.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li>The $1,000 monthly floor, $12,000 a year before usage, rules out most small and mid-size cruise agencies on budget alone.</li>
+  <li>Network tokens and account updater are paid Growth add-ons, so keeping cards current costs more than the Starter price.</li>
+  <li>There’s no advisor screen or phone capture, so call-center deposits and manual portal entry need your own build.</li>
+</ul>
+<p><strong>Pricing</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>Starter</td><td>From $1,000 a month</td><td>Free signup and sandbox to start</td></tr>
+<tr><td>Growth</td><td>Custom quote</td><td>Add-ons: network tokens, account updater, PCI Compliance Subscription, VGS-provided auditor</td></tr>
+</tbody></table></div>
+<div class="cr-flow"><p><strong>Booking-flow note:</strong> A deposit form posts through VGS, final payments and supplier API calls reveal the card in the outbound proxy, and a headless browser can fill a supplier’s page. A staff screen for phone orders is something you build.</p></div>
+<p><strong>One honest limitation:</strong> There’s no ready-made agent or phone capture experience, and the $1,000 monthly floor is high for an agency.</p>
+<h4 class="cr-verdict">Final Verdict</h4>
+<p>Very positive reviews on <a class="bl-link" href="https://www.g2.com/products/very-good-security-vgs-platform/reviews" target="_blank" rel="noopener">G2</a>, praising the proxy and support. Great for a booking platform’s developers; less so for a call center.</p>
+<p>Your reservation agents need a screen, not an SDK? <a class="bl-link" href="/request-demo/">See how Enigma Vault handles it</a></p>
+
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">07</span>
+    <div class="vc__id">
+      <h3 id="pci-vault" class="vc__name"><span class="vc__sep">7. </span>PCI Vault<span class="vc__sep">: </span><span class="vc__pill">Best for Small Cruise Agencies With a Developer</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/pci-vault/reviews" target="_blank" rel="noopener"><span class="vc__score">4.5<small>/5</small></span><span class="vc__src">G2 · 12 reviews</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>$255 a month plus $0.02 per operation (Growing)</dd></div>
+    <div><dt>Free tier or trial</dt><dd>No free trial; a staging account comes with a production signup</dd></div>
+    <div><dt>Key custody</dt><dd>Zero-knowledge: you hold the passphrase</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Small agencies with a freelance or in-house developer who are comfortable building their own capture and retrieval screens.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/pci-vault.jpg" alt="PCI Vault homepage" >}}
+  <figcaption>PCI Vault homepage. Source: pcivault.io</figcaption>
+</figure>
+<p>PCI Vault, a product of SnapBill, Inc., is a zero-knowledge, PCI DSS Level 1 compliant card vault. Each key pairs a private key PCI Vault holds with a passphrase only you hold, and its documentation warns that data locked with a lost passphrase stays locked forever. It’s self-serve, but storing and charging cards is API work.</p>
+<p><strong>Key features</strong></p>
+<ul>
+  <li><strong>Zero-knowledge storage:</strong> PCI Vault doesn’t store your passphrase, so it can’t open your cards on its own.</li>
+  <li><strong>Hosted PCD forms:</strong> Capture card details straight into the vault from a deposit page, keeping card numbers off your own servers.</li>
+  <li><strong>Bank accounts and payment cards:</strong> Both are documented data types, useful for an agency that holds bank details as well as cards.</li>
+  <li><strong>Proxy recipes:</strong> Documented for Stripe, PayPal, Authorize.net, Adyen, and Cybersource, so final payments use the processor you already have.</li>
+  <li><strong>Rules:</strong> Documented rules reshape incoming card payloads, such as a Stripe forward, into the vault’s format before storage.</li>
+</ul>
+<p><strong>Pros</strong></p>
+<ul>
+  <li>Plan prices are public on PCI Vault’s own site, so a small agency can budget the year without a sales call.</li>
+  <li>Zero-knowledge key custody limits what the vendor itself can access, which reassures agencies worried about a breach at the provider.</li>
+  <li>G2 reviewers praise its security and fast integration, so a developer can get hosted deposit forms live in days, not weeks.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li>Lose the passphrase and every card locked with it stays locked forever, so key management becomes your agency’s job.</li>
+  <li>There’s no staff screen or phone capture, so a developer must build how advisors view cards for cruise line portals.</li>
+  <li>A G2 reviewer notes there’s no phone support, and the entry Growing plan gets email support with 24-hour response.</li>
+</ul>
+<p><strong>Pricing</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>Growing</td><td>$255 a month plus $0.02 per operation</td><td>Card tokenization and storage vault; email support with 24-hour response</td></tr>
+<tr><td>Business</td><td>$965 a month plus $0.01 per operation</td><td>Email and chat support with 4-hour response</td></tr>
+<tr><td>High Volume Enterprise</td><td>$1,675 a month; $0.01 down to $0.0009 per operation</td><td>Phone, email, and chat support with 1-hour response</td></tr>
+</tbody></table></div>
+<div class="cr-flow"><p><strong>Booking-flow note:</strong> Deposits come in through a hosted form; final payments use the proxy to your gateway. Viewing a card to key into a cruise line portal requires your own retrieval screen.</p></div>
+<p><strong>One honest limitation:</strong> Lose the passphrase and the cards locked with it are gone, and there’s no phone capture.</p>
+<h4 class="cr-verdict">Final Verdict</h4>
+<p>Mostly positive reviews on <a class="bl-link" href="https://www.g2.com/products/pci-vault/reviews" target="_blank" rel="noopener">G2</a>, praising security and fast integration, with concerns about complexity for teams without IT. Migrating from PCI Vault is another move buyers ask us about.</p>
+<p>Want a free tier without the passphrase risk? <a class="bl-link" href="/pricing/">Compare Enigma Vault plans</a></p>
+
+<h2 id="how-a-cruise-booking-uses-a-card">How a Cruise Booking Uses a Card, Step by Step</h2>
+<p>Here is where the card goes at each stage, based on the cruise lines’ published terms read on October 23, 2026. Check the contract for the sailings you sell.</p>
+<div class="bl-tablewrap"><table class="bl-table bl-table--wide">
+<thead><tr><th>Booking stage</th><th>What the cruise line asks</th><th>What your card setup has to handle</th></tr></thead>
+<tbody>
+<tr><td>Deposit at booking</td><td>A deposit at booking (<a class="bl-link" href="https://www.princess.com/legal/passage_contract/" target="_blank" rel="noopener">Princess</a>: 10% on voyages of 45 days or more).</td><td>Capture once; keep only a token.</td></tr>
+<tr><td>Final payment</td><td>Due months before sailing: up to 120 days on Princess’s longest voyages; <a class="bl-link" href="https://www.carnival.com/popups/bookingengine/deposit-and-final-payment-cancellation-policy" target="_blank" rel="noopener">Carnival</a>’s fee-free cancellation ends 76 or 91 days out.</td><td>Charge the token months later, with the card kept current.</td></tr>
+<tr><td>Late booking</td><td>Paid in full by card within 14 days of sailing (<a class="bl-link" href="https://www.ncl.com/about/terms-and-conditions" target="_blank" rel="noopener">NCL</a>).</td><td>Fast phone capture straight to the vault.</td></tr>
+<tr><td>Group space</td><td>Individual bookings join a group once paid.</td><td>Many guests’ cards, each tied to its own booking.</td></tr>
+<tr><td>Cancellation and future cruise credit</td><td>Some fares turn the deposit into a future cruise credit.</td><td>Refund from the token; the credit stays with the line.</td></tr>
+<tr><td>Onboard account</td><td>A card registered at check-in for onboard charges.</td><td>Terminal capture for lines; usually nothing for agencies.</td></tr>
+</tbody></table></div>
+<p>Two different buyers sit in this flow. A cruise line charges its own guests through its own processor. A cruise-specialist or host agency usually pays the cruise line on the guest’s behalf by keying the card into the line’s portal. Each vendor above was judged on both.</p>
+
+<h2 id="how-each-vendor-describes-its-card-tokenization-for-cruise-and-travel">How Each Vendor Describes Its Card Tokenization for Cruise and Travel</h2>
+<p>What each vendor claims, and what it shows a cruise or travel buyer, as of October 23, 2026.</p>
+<div class="bl-tablewrap"><table class="bl-table bl-table--wide">
+<thead><tr><th>Vendor</th><th>How it positions itself</th><th>Proof it publishes for cruise or travel</th><th>Source</th></tr></thead>
+<tbody>
+<tr><td>Enigma Vault (Card Vault and Agent Vault)</td><td>Card Vault: “Accept payments without storing card numbers.” Agent Vault: an eight-week card-on-file migration named for aviation and cruise.</td><td>Cruise lines named in its card-on-file use case; an anonymized private aviation deployment; no named cruise customer.</td><td>Card Vault page; Vault page; Pricing page</td></tr>
+<tr><td>PCI Booking</td><td>“Your Secure Payment Processing Partner”; travel was its first market.</td><td>More than 500 million cards a year; hotel, OTA, and channel manager guides; no named customers.</td><td>pcibooking.net</td></tr>
+<tr><td>PCI Proxy</td><td>A “composable” card payment platform. Lists airlines and travel among industries.</td><td>Testimonials from Apaleo’s founder and an airline solutions director; no case studies on the homepage.</td><td>pci-proxy.com</td></tr>
+<tr><td>Spreedly</td><td>An open payments platform “built for global commerce.”</td><td>Travel logos (Priceline, Hopper, Hotel Engine); no travel industry page found.</td><td>spreedly.com</td></tr>
+<tr><td>IXOPAY</td><td>Travel page: “smooth, secure payment experiences for travelers worldwide.”</td><td>The travel page’s only named customer is Orvis, an outdoor retailer.</td><td>ixopay.com</td></tr>
+<tr><td>VGS</td><td>OTA page for “any type of intermediary seller.”</td><td>Describes sharing cards with providers and a headless browser for provider pages; no named customers.</td><td>verygoodsecurity.com</td></tr>
+<tr><td>PCI Vault</td><td>A “zero-knowledge PCI DSS Level 1 compliant environment.”</td><td>No travel page found.</td><td>docs.pcivault.io</td></tr>
+</tbody></table></div>
+<p>The gap is plain: on the pages we read, only Enigma Vault names cruise at all, and no vendor, us included, publishes a named cruise case study.</p>
+<p>PCI Booking and VGS document the supplier step best for agencies; IXOPAY is the only one documenting terminals, which matters for onboard folios. Treat every “travel” label as a reason to ask for a cruise reference, not as proof.</p>
+
+<h2 id="pricing-compared">Pricing Compared</h2>
+<p>Numbers come only from each vendor’s own pricing page, read on October 23, 2026.</p>
+<div class="bl-tablewrap"><table class="bl-table bl-table--wide">
+<thead><tr><th>Vendor and plan</th><th>Monthly price</th><th>What’s included</th><th>Overage or usage fees</th><th>Free tier or trial</th><th>Source</th></tr></thead>
+<tbody>
+<tr><td>Enigma Vault Card Vault Lite</td><td>$0</td><td>1,000 requests, tokenization and gateway proxy, community support</td><td>$0.08 per request</td><td>Yes, free forever</td><td><a class="bl-link" href="/pricing/">Pricing</a></td></tr>
+<tr><td>Enigma Vault Card Vault Plus</td><td>$49.99</td><td>20,000 requests, ephemeral key sharing, email support</td><td>$0.04 per request</td><td>Lite plan</td><td><a class="bl-link" href="/pricing/">Pricing</a></td></tr>
+<tr><td>Enigma Vault Card Vault Premium</td><td>$249.99</td><td>250,000 requests, priority support</td><td>$0.02 per request</td><td>Lite plan</td><td><a class="bl-link" href="/pricing/">Pricing</a></td></tr>
+<tr><td>Enigma Vault Agent Vault</td><td>Priced by engagement</td><td>Eight-week card-on-file migration</td><td>Not applicable</td><td>No</td><td><a class="bl-link" href="/pricing/">Pricing</a></td></tr>
+<tr><td>PCI Proxy Starter</td><td>€350</td><td>One brand, core product suite, one project, email support</td><td>Usage fees apply, not published</td><td>Yes, free trial</td><td>PCI Proxy pricing page</td></tr>
+<tr><td>PCI Proxy Scale</td><td>€650</td><td>Multiple brands, full suite, unlimited projects, prioritized support</td><td>Usage costs may apply, not published</td><td>Yes, free trial</td><td>PCI Proxy pricing page</td></tr>
+<tr><td>Spreedly Independent Vault</td><td>From $750</td><td>PCI-1 vault, unlimited storage, vault health insights</td><td>Not published</td><td>Not published</td><td>Spreedly pricing page</td></tr>
+<tr><td>VGS Starter</td><td>From $1,000</td><td>Not itemized on the page</td><td>Not published</td><td>Yes, free signup</td><td>VGS pricing page</td></tr>
+<tr><td>PCI Vault Growing</td><td>From $255</td><td>Card tokenization and storage vault</td><td>$0.02 per operation; $0.01 on Business ($965); $0.01 to $0.0009 on High Volume Enterprise ($1,675)</td><td>No free trial; a staging account comes with a production signup</td><td>PCI Vault pricing</td></tr>
+<tr><td>PCI Proxy Enterprise, Spreedly Performance Optimization, VGS Growth</td><td>Custom quote</td><td>Volume tiers and SSO (PCI Proxy); network tokens, account updater, routing (Spreedly); add-ons such as network tokens and account updater (VGS)</td><td>Quoted</td><td>No</td><td>Pricing pages above</td></tr>
+<tr><td>PCI Booking, IXOPAY</td><td>Custom quote</td><td>Drivers not stated publicly</td><td>Quoted</td><td>PCI Booking: “Try for Free” signup; IXOPAY: not published</td><td>PCI Booking and IXOPAY websites</td></tr>
+</tbody></table></div>
+
+<h2 id="how-to-choose-match-the-platform-to-your-booking-model">How to Choose: Match the Platform to Your Booking Model</h2>
+<p>I’d start with one question: does the card mostly go to your own processor, or to someone else’s portal? Cruise lines charge their own guests; agencies usually pay a cruise line or wholesaler on the guest’s behalf.</p>
+<p>What we hear from cruise-focused advisors is consistent: they want the card entered once, only a token and masked number in their own app, and a secure way to view it later to key into a cruise line’s booking system.</p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Booking model</th><th>Start with</th><th>Why</th></tr></thead>
+<tbody>
+<tr><td>Cruise line with years of cards in a legacy reservation system</td><td>Enigma Vault (Agent Vault)</td><td>Fixed-scope migration, SSO for staff, charges through your existing processor</td></tr>
+<tr><td>Cruise call center taking deposits and late bookings by phone</td><td>Enigma Vault (Card Vault with Twilio Pay)</td><td>IVR capture keeps card numbers off agents’ screens and recordings</td></tr>
+<tr><td>Cruise-specialist agency keying cards into cruise line portals</td><td>Enigma Vault or PCI Booking</td><td>Token in your app, controlled use for the portal step</td></tr>
+<tr><td>Host agency sharing cards with suppliers that aren’t customers</td><td>PCI Booking</td><td>One-time-password card display for third parties</td></tr>
+<tr><td>Online cruise seller with developers automating supplier pages</td><td>VGS</td><td>Outbound proxy and headless browser for provider pages</td></tr>
+<tr><td>Multi-brand operator with several providers</td><td>PCI Proxy</td><td>One token across payment providers, priced by brand count</td></tr>
+<tr><td>Global group routing across many gateways</td><td>Spreedly</td><td>150+ gateway connections and routing</td></tr>
+<tr><td>Line wanting deposits and point-of-sale terminals together</td><td>IXOPAY</td><td>Universal tokens plus P2PE devices</td></tr>
+</tbody></table></div>
+
+<h2 id="by-company-stage">Best Card Tokenization Software for Cruise Bookings by Company Stage</h2>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Stage</th><th>Start with</th><th>Why</th></tr></thead>
+<tbody>
+<tr><td>Solo or small cruise agency</td><td>Enigma Vault Lite or Plus</td><td>$0 to $49.99 a month, no contract</td></tr>
+<tr><td>Agency with an in-house developer</td><td>Enigma Vault Plus or PCI Vault</td><td>Published prices and self-serve APIs</td></tr>
+<tr><td>Host agency or consortium</td><td>Enigma Vault or PCI Booking</td><td>Many advisors, many suppliers, one audit trail</td></tr>
+<tr><td>Regional or river cruise line</td><td>Enigma Vault (Agent Vault)</td><td>Migration and staff access in eight weeks</td></tr>
+<tr><td>Global ocean cruise group</td><td>Enigma Vault, Spreedly, or IXOPAY</td><td>Processor independence at scale; terminals if needed</td></tr>
+</tbody></table></div>
+
+<h2 id="questions-to-ask-any-vendor">Questions to Ask Any Vendor</h2>
+<ul>
+  <li><strong>Can staff view a full card for a cruise line portal, and on which plan?</strong> This decides whether advisors can work.</li>
+  <li><strong>How do you capture cards by phone?</strong> Ask whether agents ever see or hear the number and whether recordings stay clean.</li>
+  <li><strong>How do you keep a card current between deposit and final payment?</strong> Ask about network tokens or account updater for 120-day gaps.</li>
+  <li><strong>How do we handle a group booking with dozens of guests’ cards?</strong> Each card needs its own booking link, authorization, and log.</li>
+  <li><strong>How do we import the cards we already hold, and how do we leave?</strong> Bulk import and export terms protect you.</li>
+  <li><strong>Which gateways do you support today?</strong> Get the list in writing for every brand and currency.</li>
+  <li><strong>Can we see your PCI DSS Attestation of Compliance and SOC 2 report?</strong> Vendor badges should come with documents.</li>
+</ul>
+
+<h2 id="start-protecting-cruise-booking-cards-with-enigma-vault">Start Protecting Cruise Booking Cards With Enigma Vault</h2>
+<p>A cruise card lives longer and travels further than most, so the right vault is the one that fits how your team takes and uses it.</p>
+<p>If you’re a cruise line or a cruise-specialist agency that wants guests to give a card once and staff to work from a token from deposit to final payment, start with Enigma Vault: Card Vault for the API, Agent Vault for the migration.</p>
+<p>A vault can significantly reduce your PCI scope, but your acquirer or QSA confirms the final scope. It doesn’t create the guest’s authorization, guarantee that every cruise line accepts third-party card use, or replace fraud controls and maritime or customs obligations.</p>
+<p>Next step: <a class="bl-link" href="/pricing/">start free on Card Vault Lite</a>, or <a class="bl-link" href="/request-demo/">book a demo</a> to plan your Agent Vault migration.</p>
+<div class="bl-inlinecta">
+  <div>
+    <p class="bl-inlinecta__t">Give cruise guests one place to hand over a card.</p>
+    <p class="bl-inlinecta__s">Start free on Card Vault Lite, or talk to us about moving your cards on file with Agent Vault.</p>
+  </div>
+  <a class="np-btn np-btn--on-dark np-btn--primary" href="/request-demo/"><span>Talk to sales</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
+</div>

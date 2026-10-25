@@ -1,0 +1,754 @@
+---
+title: "8 Best Card Tokenization Software for Travel Agencies (2026 Guide)"
+titleEmphasis: "8 Best Card Tokenization Software for Travel Agencies (2026 Guide)"
+slug: "best-card-tokenization-software-for-travel-agencies"
+layout: "pii-style"
+metaTitle: "Best Card Tokenization Software for Travel Agencies (2026)"
+description: "Compare 8 card tokenization platforms for travel agencies on phone and email card capture, supplier payments, virtual cards, staff card display, ratings, and pricing."
+subtitle: "How each platform keeps client cards out of inboxes, notes, and booking records while advisors still pay airlines, hotels, cruise lines, and tour suppliers."
+date: 2026-10-23T00:03:00
+category: "Card Vault"
+author: "tony-alex"
+readTime: 27
+heroImage: "/assets/blog/img-03.png"
+heroAlt: "A traveler card replaced by a token on its way from a client to a travel supplier"
+excerpt: "Eight card tokenization platforms compared for leisure, corporate, and host-agency travel advisors on capture, supplier payment, card display, ratings, and pricing."
+tags: ["card-vault", "tokenization", "travel", "pci-dss", "travel-agencies"]
+ogImage: "/assets/og/vault-card.jpg"
+ogImageAlt: "8 best card tokenization software for travel agencies (2026 guide) | Enigma Vault"
+ogType: article
+styles: ["blog.css", "pages/blog-pii-hero.css", "tr-pages.css"]
+scripts: ["blog-article.js"]
+faqSchema: true
+faqs:
+  - q: "What Is the Best Card Tokenization Software for Travel Agencies?"
+    a: "It depends on how cards reach your agency. Enigma Vault is best for agencies that take cards by phone, email, and links and pay independent suppliers; PCI Booking is best for travel sellers that send cards on to hotels and suppliers through display links; PCI Proxy is best for agencies forwarding cards to OTAs, airlines, and hotels through an API proxy; and Spreedly is best for travel platforms booking through many third-party APIs."
+  - q: "Can My Agents See a Client’s Full Card to Key It Into a Supplier Portal?"
+    a: "With the right setup, yes, but it should happen inside a controlled screen rather than in your booking app or inbox. Enigma Vault’s Customer Vault gives authorized staff reveal, hide, and delete controls on each sensitive value and logs every reveal, and PCI Booking documents secure view links for hotels. Confirm with any vendor which roles and plans include full-card display before you sign."
+  - q: "Does Tokenizing Cards Take My Travel Agency Out of PCI DSS Scope?"
+    a: "No vendor can promise that. A hosted form and a vault can significantly reduce the systems that touch card data, but your acquirer or QSA confirms your final scope and which Self-Assessment Questionnaire applies. Agents who still read a card aloud or key it into a portal keep part of that workflow in scope."
+  - q: "Can I Store the CVV So We Don’t Have to Call the Client Back?"
+    a: "No. PCI DSS doesn’t allow storing the CVV after authorization. Some vaults hold it briefly for a pending charge: Enigma Vault keeps it encrypted for at most 30 minutes, then deletes it. Plan to ask the client again for a later charge if the supplier insists on the code."
+  - q: "How Do Travel Agencies Handle Virtual Cards From OTAs and Wholesalers?"
+    a: "Treat a virtual card like any other card: tokenize it on arrival and keep only the token and last four digits in your booking record. PCI Booking can request virtual cards from connected issuers and tokenize them, and PCI Proxy’s filter proxy can tokenize card data found in inbound API traffic."
+  - q: "Should Card Numbers Live in GDS PNR Remarks?"
+    a: "Keep full card numbers out of free-text remarks, notes, and email. Store a token or reference in your own records and pass the real card only through the form of payment a supplier or GDS requires, at the moment you book. Ask your GDS and host agency how they mask and retain payment data."
+  - q: "Which Card Tokenization Platform Is Cheapest for a Small Travel Agency?"
+    a: "Enigma Vault has a free Lite plan with 1,000 Card Vault requests a month and a Plus plan at $49.99 a month. PCI Vault lists $255 a month plus $0.02 per API operation, PCI Proxy at €350 a month plus usage, Spreedly at $750 a month, Basis Theory at $995 a month, and VGS at $1,000 a month. PCI Booking and IXOPAY quote on request."
+  - q: "Can I Move Cards Out of TokenEx or PCI Vault Into Another Vault?"
+    a: "Usually, yes, through a vendor-to-vendor export between PCI-compliant providers. Enigma Vault has imported existing cards in bulk for card-on-file operators, and Agent Vault packages that migration as a fixed eight-week engagement. Ask your current vendor how it releases card data before you give notice."
+  - q: "Do Host Agencies and Independent Advisors Need Different Platforms?"
+    a: "Often. A host agency usually needs one vault with many advisors, roles, and audit logs, while an independent advisor needs a no-code way to collect a card once and view it later. Customer Vault covers the second case without a developer; Card Vault’s API suits a host building it into its own back office."
+  - q: "Is Tokenization the Same as Fraud Protection for Phone and Email Bookings?"
+    a: "No. Tokenization protects a stored card from being copied, but it doesn’t prove the caller is the cardholder. Phone and email bookings still carry higher fraud and chargeback risk, so keep signed authorizations, verify unusual requests, and follow each supplier’s rules for third-party card use."
+---
+<style>
+/* Wide tables: tighter cell padding so they fit the article column. */
+.bl-content .bl-table--wide td, .bl-content .bl-table--wide th { padding-left: 8px; padding-right: 8px; }
+.bl-content blockquote.bl-quote-cta{margin:24px 0;padding:14px 20px;border-left:3px solid var(--ev-mineral-blue);background:var(--ev-warm-cloud);border-radius:0 10px 10px 0}.bl-content blockquote.bl-quote-cta p{margin:0;font-size:16px}
+.bl-content figure.bl-shot{margin:20px 0 24px;padding:10px;border:1px solid var(--ev-cool-stone);border-radius:10px;background:var(--ev-warm-cloud)}.bl-content figure.bl-shot img{display:block;width:100%;height:auto;border-radius:6px}.bl-content figure.bl-shot figcaption{margin-top:8px;text-align:center;font-size:13px;color:var(--ev-slate)}
+/* Vendor header card: rank, name, best-for pill, review scores, key facts. */
+.bl-content .vc { margin: 40px 0 20px; }
+.bl-content .vc__head { display: grid; grid-template-columns: auto 1fr auto; gap: 18px; align-items: center; margin-bottom: 14px; }
+.bl-content .vc__num { font-size: 34px; font-weight: 600; line-height: 1; color: var(--ev-mineral-blue); font-variant-numeric: tabular-nums; }
+.bl-content h3.vc__name { margin: 0; padding: 0; font-size: 26px; line-height: 1.25; font-weight: 600; color: var(--ev-ink); }
+.bl-content .vc__sep { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.bl-content .vc__pill { display: table; margin-top: 10px; padding: 6px 12px; border-radius: 6px; background: var(--ev-mineral-blue); color: #fff; font-size: 12px; line-height: 1.4; font-weight: 600; text-transform: none; letter-spacing: 0; font-size: 13px; }
+.bl-content .vc__rates { display: flex; flex-direction: column; gap: 8px; align-items: stretch; }
+.bl-content .vc__rate { display: flex; flex-direction: column; align-items: flex-end; padding: 8px 14px; border: 1px solid var(--ev-cool-stone); border-radius: 10px; background: #fff; text-decoration: none !important; min-width: 128px; }
+.bl-content a.vc__rate:hover { border-color: var(--ev-mineral-blue); }
+.bl-content .vc__score { font-size: 20px; font-weight: 700; color: var(--ev-ink); line-height: 1.2; }
+.bl-content .vc__score small { font-size: 13px; font-weight: 500; color: var(--ev-slate); }
+.bl-content .vc__src { font-size: 12px; color: var(--ev-slate); line-height: 1.3; }
+.bl-content .vc__rate--new .vc__score { font-size: 15px; }
+.bl-content .vc__facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px 24px; margin: 0; padding: 18px 22px; border-radius: 12px; background: var(--ev-warm-cloud); }
+.bl-content .vc__facts div { margin: 0; }
+.bl-content .vc__facts .vc__best { grid-column: 1 / -1; padding-top: 14px; border-top: 1px solid var(--ev-cool-stone); }
+.bl-content .vc__facts dt { margin: 0 0 4px; font-size: 11.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ev-slate); }
+.bl-content .vc__facts dd { margin: 0; font-size: 15px; line-height: 1.5; color: var(--ev-ink); }
+@media (max-width: 700px) {
+  .bl-content .vc__head { grid-template-columns: auto 1fr; }
+  .bl-content .vc__rates { grid-column: 1 / -1; flex-direction: row; flex-wrap: wrap; }
+  .bl-content .vc__rate { align-items: flex-start; }
+  .bl-content .vc__num { font-size: 26px; }
+  .bl-content h3.vc__name { font-size: 22px; }
+  .bl-content .vc__facts { grid-template-columns: 1fr; }
+}
+.bl-content .tldr { margin: 8px 0 32px; padding: 22px 26px; border-radius: 12px; background: var(--ev-warm-cloud); border-left: 3px solid var(--ev-mineral-blue); }
+.bl-content .tldr .tldr__label { margin: 0 0 12px; padding: 0; border: 0; font-size: 13px; line-height: 1.4; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--ev-mineral-blue); }
+.bl-content .tldr .tldr__list { margin: 0; padding-left: 20px; }
+.bl-content .tldr .tldr__list li { margin: 0 0 10px; font-size: 16px; line-height: 1.6; color: var(--ev-ink); }
+.bl-content .tldr .tldr__list li::marker { color: var(--ev-mineral-blue); }
+.bl-content .tldr .tldr__list li:last-child { margin-bottom: 0; }
+.bl-content .tldr strong a { font-weight: 600; }
+</style>
+
+<p>Comparing the best card tokenization software for travel agencies of 2026: 1. Enigma Vault, 2. PCI Booking, 3. PCI Proxy (Planet), 4. Spreedly, 5. PCI Vault, 6. IXOPAY (formerly TokenEx), 7. VGS, and 8. Basis Theory.</p>
+<p><strong>About the author:</strong> I’m <a class="bl-link" href="https://www.linkedin.com/in/tony-alex-enigma-vault/" target="_blank" rel="noopener">Dr. Tony Alex</a>, Chief Executive Officer of Enigma Vault, where I lead our work in encryption, tokenization, and sensitive-data protection. I have more than two decades of experience building enterprise software businesses.</p>
+<p>In 1999 I founded US eDirect to develop software for parks, campgrounds, and recreation agencies, bringing reservations and payments into one cloud system, and led it through its acquisition by Tyler Technologies in 2022.</p>
+<p><em>Disclosure: I work at Enigma Vault, which appears first in this list. Every platform here is judged on the same criteria, and the review ratings come from G2 and Capterra.</em></p>
+
+<div class="tldr" id="tldr">
+  <h2 class="tldr__label">TL;DR</h2>
+  <ul class="tldr__list">
+    <li><strong><a class="bl-link" href="#enigma-vault">Enigma Vault</a>:</strong> best for agencies taking cards by phone, email, and link.</li>
+    <li><strong><a class="bl-link" href="#pci-booking">PCI Booking</a>:</strong> best for travel sellers that send cards on to hotels.</li>
+    <li><strong><a class="bl-link" href="#pci-proxy">PCI Proxy (Planet)</a>:</strong> best for forwarding cards to OTAs, airlines, and hotels by API.</li>
+    <li><strong><a class="bl-link" href="#spreedly">Spreedly</a>:</strong> best for travel platforms booking through many third-party APIs.</li>
+    <li><strong><a class="bl-link" href="#pci-vault">PCI Vault</a>:</strong> best for small agencies with a freelance developer.</li>
+    <li><strong><a class="bl-link" href="#ixopay">IXOPAY (formerly TokenEx)</a>:</strong> best for large TMCs standardizing on one universal token.</li>
+    <li><strong><a class="bl-link" href="#vgs">VGS</a>:</strong> best for travel tech teams that strip card data in transit.</li>
+    <li><strong><a class="bl-link" href="#basis-theory">Basis Theory</a>:</strong> best for travel startups building their own payment product.</li>
+  </ul>
+</div>
+<h2 id="leading-card-tokenization-software-for-travel-agencies-at-a-glance">Leading Card Tokenization Software for Travel Agencies at a Glance</h2>
+<p>Here’s how the 8 platforms compare for an agency owner or operations lead whose advisors take cards by phone and email, then pay airlines, hotels, cruise lines, and tour operators on the client’s behalf. Every rating, price, and feature was checked on October 23, 2026.</p>
+<div class="bl-tablewrap"><table class="bl-table bl-table--wide">
+<thead><tr><th>Platform</th><th>Best for</th><th>Starting price</th><th>Free trial or tier</th><th>Phone and email capture</th><th>Paying suppliers</th><th>G2 rating</th></tr></thead>
+<tbody>
+<tr><td><a class="bl-link" href="#enigma-vault">Enigma Vault</a></td><td>Agencies taking cards by phone, email, and link that pay independent suppliers</td><td>$0, then $49.99 a month</td><td>Free Lite plan</td><td>Twilio Pay IVR, hosted forms, no-code intake links</td><td>Gateway proxy, or logged staff reveal in Customer Vault</td><td><a class="bl-link" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener">4.4/5 (6 reviews)</a></td></tr>
+<tr><td><a class="bl-link" href="#pci-booking">PCI Booking</a></td><td>Travel sellers that pass cards on to hotels and suppliers</td><td>Custom quote, usage-based</td><td>“Try for Free” signup</td><td>Card By Link by email or SMS</td><td>Secure view links, supplier API, gateway charge</td><td>No reviews yet</td></tr>
+<tr><td><a class="bl-link" href="#pci-proxy">PCI Proxy (Planet)</a></td><td>Agencies forwarding cards to OTAs, airlines, and hotels by API</td><td>€350 a month plus usage</td><td>Free trial</td><td>Secure Fields and tokenization links</td><td>Forward proxy to travel partners</td><td><a class="bl-link" href="https://www.g2.com/products/pci-proxy/reviews" target="_blank" rel="noopener">No reviews yet</a></td></tr>
+<tr><td><a class="bl-link" href="#spreedly">Spreedly</a></td><td>Travel platforms booking through many third-party APIs</td><td>From $750 a month</td><td>Demo</td><td>API and SDKs</td><td>Payment Method Distribution to receivers</td><td><a class="bl-link" href="https://www.g2.com/products/spreedly/reviews" target="_blank" rel="noopener">4.4/5 (35 reviews)</a></td></tr>
+<tr><td><a class="bl-link" href="#pci-vault">PCI Vault</a></td><td>Small agencies with a freelance developer and a tight budget</td><td>$255 a month plus $0.02 per operation</td><td>No free trial</td><td>Hosted PCD capture forms</td><td>PCI payment proxy</td><td><a class="bl-link" href="https://www.g2.com/products/pci-vault/reviews" target="_blank" rel="noopener">4.5/5 (12 reviews)</a></td></tr>
+<tr><td><a class="bl-link" href="#ixopay">IXOPAY (formerly TokenEx)</a></td><td>Large TMCs and travel groups standardizing on one universal token</td><td>Custom quote</td><td>Demo</td><td>Hosted iframe, API</td><td>Transparent gateway to PSPs and third-party APIs</td><td><a class="bl-link" href="https://www.g2.com/products/tokenex-ixopay/reviews" target="_blank" rel="noopener">4.6/5 (17 reviews)</a></td></tr>
+<tr><td><a class="bl-link" href="#vgs">VGS</a></td><td>Travel tech teams that want card data stripped in transit</td><td>From $1,000 a month</td><td>Free signup</td><td>Collect forms and inbound proxy</td><td>Outbound proxy to any API</td><td><a class="bl-link" href="https://www.g2.com/products/very-good-security-vgs-platform/reviews" target="_blank" rel="noopener">4.7/5 (47 reviews)</a></td></tr>
+<tr><td><a class="bl-link" href="#basis-theory">Basis Theory</a></td><td>Travel startups building their own booking and payment product</td><td>$995 a month</td><td>Free start to build</td><td>Web and mobile elements</td><td>Proxy and custom card logic</td><td><a class="bl-link" href="https://www.g2.com/products/basis-theory/reviews" target="_blank" rel="noopener">No reviews yet</a></td></tr>
+</tbody></table></div>
+<blockquote class="bl-quote-cta"><p>Still writing card numbers into booking notes or forwarding them by email? Show us how a card travels through your agency and we’ll map where the token should go. <a class="bl-link" href="/request-demo/">Get in touch</a></p></blockquote>
+
+<h2 id="what-is-card-tokenization-software-for-travel-agencies">What Is Card Tokenization Software for Travel Agencies?</h2>
+<p>Card tokenization software for travel agencies captures a client’s card once, locks the real number in a secure vault, and gives the agency a token to keep on the booking, so advisors can still pay suppliers without card numbers sitting in email, notes, call recordings, or the CRM.</p>
+<p>Related reading: <a class="bl-link" href="/blog/credit-card-tokenization/">how credit card tokenization works</a> and <a class="bl-link" href="/blog/best-pci-dss-compliant-tokenization-software/">the best PCI DSS compliant tokenization software</a>.</p>
+
+<h2 id="how-we-tested-and-ranked-card-tokenization-software-for-travel-agencies">How We Tested and Ranked Card Tokenization Software for Travel Agencies</h2>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Criterion</th><th>Weight</th><th>What we checked</th></tr></thead>
+<tbody>
+<tr><td>Remote card capture</td><td>25%</td><td>Secure links, hosted forms, phone and IVR capture, virtual card intake</td></tr>
+<tr><td>Supplier payment paths</td><td>25%</td><td>Proxy to gateways and supplier APIs, controlled card display for portals that need manual entry</td></tr>
+<tr><td>Staff controls and audit</td><td>15%</td><td>Roles, SSO or MFA, per-view and per-use logs, CVV handling</td></tr>
+<tr><td>Setup without a developer</td><td>15%</td><td>No-code options, plugins, onboarding help, time to first tokenized booking</td></tr>
+<tr><td>Cost at agency volume</td><td>10%</td><td>Published prices, free tiers, usage fees, contract minimums</td></tr>
+<tr><td>Compliance evidence and reviews</td><td>10%</td><td>Vendor-stated PCI DSS level and SOC 2, AOC access, G2 and Capterra feedback</td></tr>
+</tbody></table></div>
+<p>Sources are each vendor’s product, documentation, pricing, and trust pages, AWS Marketplace listings, and G2 and Capterra reviews, all checked on October 23, 2026.</p>
+
+<h2 id="the-8-best-card-tokenization-software-for-travel-agencies-in-2026">The 8 Best Card Tokenization Software for Travel Agencies in 2026</h2>
+
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">01</span>
+    <div class="vc__id">
+      <h3 id="enigma-vault" class="vc__name"><span class="vc__sep">1. </span>Enigma Vault<span class="vc__sep">: </span><span class="vc__pill">Best for Agencies Taking Cards by Phone, Email, and Link</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener"><span class="vc__score">4.4<small>/5</small></span><span class="vc__src">G2 · 6 reviews</span></a><a class="vc__rate" href="https://www.capterra.com/p/241650/Enigma-Vault/reviews/" target="_blank" rel="noopener"><span class="vc__score">4.8<small>/5</small></span><span class="vc__src">Capterra · 4 reviews</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>$0, then $49.99 a month</dd></div>
+    <div><dt>Free tier or trial</dt><dd>Lite: 1,000 Card Vault requests a month, free forever</dd></div>
+    <div><dt>Supplier payment</dt><dd>Gateway proxy, or logged staff reveal for manual portals</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Leisure agencies, host agencies, and corporate travel desks that collect cards remotely and pay a mix of integrated and independent suppliers.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/enigma-vault.jpg" alt="Enigma Vault homepage" >}}
+  <figcaption>Enigma Vault homepage. Source: enigmavault.io</figcaption>
+</figure>
+<p>Enigma Vault is a card tokenization platform with two ways in for agencies: Card Vault, an API with hosted forms, Twilio Pay phone capture, and a gateway proxy, and Customer Vault, a no-code app that sends clients a branded link to enter their card, passport, and signature once. Your booking record keeps a token; the card stays in a PCI DSS Level 1 vault.</p>
+<p>For suppliers that can’t take an API call, authorized staff reveal the card inside Customer Vault, and every reveal is logged. Agent Vault packages card-on-file migration as an eight-week engagement.</p>
+<ul>
+  <li>Clients enter a card once, so it never lands in an email thread or a booking note.</li>
+  <li>Start on the free Lite plan and move to Plus at $49.99 a month as bookings grow.</li>
+  <li>Keep your merchant account: the proxy charges through Authorize.net, Stripe, Braintree, PayPal, or any REST gateway.</li>
+</ul>
+<p><strong>Key Features</strong></p>
+<ul>
+  <li><strong>No-code intake links:</strong> Branded links collect a traveler’s card, passport copy, and signature without a client login.</li>
+  <li><strong>Logged reveal for manual portals:</strong> Each sensitive value has reveal, hide, and delete controls, and every reveal is recorded.</li>
+  <li><strong>Phone capture through Twilio Pay:</strong> Cards read into the IVR go straight to the vault, never your advisors’ screens.</li>
+  <li><strong>Gateway proxy charging:</strong> Card placeholders are swapped for real values inside the vault before the request reaches your gateway.</li>
+  <li><strong>Ephemeral CVV:</strong> The security code is held encrypted for at most 30 minutes, then deleted, which covers a same-call deposit.</li>
+  <li><strong>Time-limited document sharing:</strong> Itineraries and visa documents go out through links that expire after 24 hours, with optional passwords and download tracking.</li>
+</ul>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Agency workflow</th><th>How Enigma Vault handles it</th></tr></thead>
+<tbody>
+<tr><td>Card by phone</td><td>Twilio Pay IVR capture straight into Card Vault</td></tr>
+<tr><td>Card by email or text</td><td>Customer Vault branded intake link replaces the emailed card or photo</td></tr>
+<tr><td>Integrated supplier or merchant account</td><td>Gateway proxy injects the card into the approved REST request</td></tr>
+<tr><td>Supplier portal needing manual entry</td><td>Authorized reveal in Customer Vault, logged per view</td></tr>
+<tr><td>Staff access</td><td>Passkeys or TOTP with tenant-enforced MFA; SSO on Agent Vault deployments</td></tr>
+<tr><td>Compliance evidence</td><td>PCI DSS Level 1, SOC 2 Type II; ISO 27001 in progress</td></tr>
+</tbody></table></div>
+<p><strong>Pricing tiers</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>Lite</td><td>$0 a month</td><td>1,000 Card Vault requests, then $0.08 each; tokenization and gateway proxy</td></tr>
+<tr><td>Plus</td><td>$49.99 a month</td><td>20,000 requests, then $0.04 each; ephemeral key sharing, email support</td></tr>
+<tr><td>Premium</td><td>$249.99 a month</td><td>250,000 requests, then $0.02 each; priority support</td></tr>
+<tr><td>Customer Vault and Agent Vault</td><td>Priced by engagement</td><td>No-code intake app; eight-week card-on-file migration</td></tr>
+</tbody></table></div>
+<p><strong>Pros</strong></p>
+<ul>
+  <li>One platform covers both supplier types: the gateway proxy for integrated charges and a logged reveal for manual portals.</li>
+  <li>Published pricing from $0 lets a small agency know its monthly bill before procurement, with AWS Marketplace billing available.</li>
+  <li>Customer Vault needs no developer, so an independent advisor can send a secure card link the day the account opens.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li>Tokenizing a card doesn’t prove the caller is the cardholder, so phone and email bookings still need signed authorizations.</li>
+  <li>The no-code Customer Vault app is priced by engagement, so only the Card Vault API tiers are self-serve.</li>
+  <li>There are no prebuilt GDS or OTA connectors, so a GDS form of payment needs proxy configuration or a manual step.</li>
+</ul>
+<p><strong>What travel advisors say in reviews:</strong> Very positive. Enigma Vault holds <a class="bl-link" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener">4.4/5 from 6 reviews on G2</a> and <a class="bl-link" href="https://www.capterra.com/p/241650/Enigma-Vault/reviews/" target="_blank" rel="noopener">4.8/5 from 4 on Capterra</a>. Reviewers like a simple API, clear PCI de-scoping, and how quickly the team added requested features.</p>
+<p>The complaints are a wish for deeper reporting dashboards and one reviewer who found pricing a bit high. What we hear from small agencies is consistent: they want the client to enter the card once and never have the full number pass through their own booking app.</p>
+<blockquote class="bl-quote-cta"><p>Want to see one booking go from phone call to supplier payment with no card in your inbox? We’ll walk it through with your own suppliers. <a class="bl-link" href="/request-demo/">Get in touch</a></p></blockquote>
+
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">02</span>
+    <div class="vc__id">
+      <h3 id="pci-booking" class="vc__name"><span class="vc__sep">2. </span>PCI Booking<span class="vc__sep">: </span><span class="vc__pill">Best for Travel Sellers That Send Cards On to Hotels</span></h3>
+    </div>
+    <div class="vc__rates"><span class="vc__rate vc__rate--new"><span class="vc__score">New</span><span class="vc__src">No reviews yet</span></span></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>Custom quote, billed by API actions</dd></div>
+    <div><dt>Free tier or trial</dt><dd>“Try for Free” signup on its homepage</dd></div>
+    <div><dt>Supplier payment</dt><dd>Secure view links, supplier API, or gateway charge</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>OTAs, bed banks, and agencies with developers that relay client and virtual cards to hotels and other suppliers.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/pci-booking.jpg" alt="PCI Booking homepage" >}}
+  <figcaption>PCI Booking homepage. Source: pcibooking.net</figcaption>
+</figure>
+<p>PCI Booking is a tokenization service built around travel, documented for OTAs, booking engines, TMCs, and tour operators, and it states PCI DSS Level 1 service provider status. Pricing depends on the type and number of API actions each month, and its homepage offers a “Try for Free” signup before production billing.</p>
+<p><strong>Key Features</strong></p>
+<ul>
+  <li><strong>Card By Link:</strong> Emails or texts a secure link, so a phone client enters the card and advisors never hear it.</li>
+  <li><strong>Send cards to hotels:</strong> Hotels receive the card through a one-time-code view link, an iframe in their portal, or their API, ending emailed card details.</li>
+  <li><strong>Virtual card requests:</strong> It requests a card from a connected issuer, then tokenizes, relays, displays, or charges it for hotel payments.</li>
+  <li><strong>Card capture and display forms:</strong> Embedded forms tokenize the card and show it to an authorized agent, once a developer embeds them.</li>
+  <li><strong>Universal payment gateway:</strong> Stored tokens are charged through connected gateways, so a deposit is taken without the card reaching your systems.</li>
+</ul>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Agency workflow</th><th>How PCI Booking handles it</th></tr></thead>
+<tbody>
+<tr><td>Card by phone</td><td>Card By Link sent to the traveler by email or SMS</td></tr>
+<tr><td>Virtual cards</td><td>Requested from connected issuers and tokenized</td></tr>
+<tr><td>Paying hotels</td><td>Secure view link, portal iframe, or hotel API</td></tr>
+<tr><td>Setup</td><td>API integration; “Try for Free” signup for testing</td></tr>
+<tr><td>Compliance evidence</td><td>PCI DSS Level 1 (vendor-stated)</td></tr>
+</tbody></table></div>
+<p><strong>Pricing tiers</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>Trial</td><td>“Try for Free” signup</td><td>Test flows before production billing</td></tr>
+<tr><td>Production</td><td>Custom quote</td><td>Monthly invoice driven by the type and number of API actions</td></tr>
+</tbody></table></div>
+<p><strong>Pros</strong></p>
+<ul>
+  <li>Its documentation targets OTAs and hotels, so hotel card delivery and virtual cards are built-in flows, not custom projects.</li>
+  <li>Secure view links give a hotel the card it needs for a guarantee without anyone emailing or reading out the number.</li>
+  <li>A “Try for Free” signup lets your developer test each flow before production billing starts.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li>Every flow is API-first with forms embedded in your software, so an agency without a developer gets no ready-made advisor screen.</li>
+  <li>Gateways outside its list of 100+ need a request to PCI Booking support, so confirm your merchant account is supported before committing.</li>
+  <li>There’s no published phone or IVR capture, so a phone booking waits until the client opens a link and enters the card.</li>
+</ul>
+<p><strong>What travel advisors say in reviews:</strong> PCI Booking has no G2 or Capterra listing, so there are no public reviews to summarize yet. Ask the vendor for two or three customer references in your segment before you sign.</p>
+<blockquote class="bl-quote-cta"><p>No developer to wire up an API? Customer Vault sends the same secure card link with no code at all. <a class="bl-link" href="/request-demo/">Get in touch</a></p></blockquote>
+
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">03</span>
+    <div class="vc__id">
+      <h3 id="pci-proxy" class="vc__name"><span class="vc__sep">3. </span>PCI Proxy (Planet)<span class="vc__sep">: </span><span class="vc__pill">Best for Forwarding Cards to OTAs, Airlines, and Hotels by API</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate vc__rate--new" href="https://www.g2.com/products/pci-proxy/reviews" target="_blank" rel="noopener"><span class="vc__score">No reviews yet</span><span class="vc__src">G2</span></a><a class="vc__rate vc__rate--new" href="https://www.capterra.com/p/10055014/PCI-Proxy/reviews/" target="_blank" rel="noopener"><span class="vc__score">No reviews yet</span><span class="vc__src">Capterra</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>€350 a month plus usage</dd></div>
+    <div><dt>Free tier or trial</dt><dd>Free trial</dd></div>
+    <div><dt>Supplier payment</dt><dd>Forward proxy to travel partners and PSPs</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Agencies and tour operators with in-house developers, often in Europe, that exchange cards with OTAs, airlines, hotels, and car rental firms over APIs.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/pci-proxy.jpg" alt="PCI Proxy homepage" >}}
+  <figcaption>PCI Proxy homepage. Source: pci-proxy.com</figcaption>
+</figure>
+<p>PCI Proxy, powered by Planet, is a card tokenization service that pairs a token vault with filter and forward proxies, and its site lists Travel and Airlines among its use cases. Starter is €350 a month plus usage fees, with no setup fee or long-term contract.</p>
+<p><strong>Key Features</strong></p>
+<ul>
+  <li><strong>Filter proxy for inbound cards:</strong> Virtual cards arriving in booking feeds or API traffic are tokenized before they reach you.</li>
+  <li><strong>Forward proxy to travel partners:</strong> Your token is swapped for the real card on the way to an OTA, hotel, or airline.</li>
+  <li><strong>Secure Fields:</strong> Prebuilt iframes capture cards on your booking pages, so typed card numbers never pass through your web server.</li>
+  <li><strong>Network tokens and 3D Secure:</strong> Card-brand tokens and cardholder authentication sit together, which helps agencies taking online deposits from European travelers.</li>
+  <li><strong>Multi-currency billing:</strong> Plans bill in euros, dollars, or pounds, with upgrades and downgrades as seasonal booking volume changes.</li>
+</ul>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Agency workflow</th><th>How PCI Proxy handles it</th></tr></thead>
+<tbody>
+<tr><td>Card by phone or email</td><td>Tokenization links and Secure Fields; no staff intake screen</td></tr>
+<tr><td>Virtual cards in booking feeds</td><td>Filter proxy tokenizes card data in inbound traffic</td></tr>
+<tr><td>Paying suppliers</td><td>Forward proxy to travel partners and PSPs</td></tr>
+<tr><td>Setup</td><td>Developer integration; concierge onboarding on Scale</td></tr>
+<tr><td>Support on entry plan</td><td>Weekday email support</td></tr>
+</tbody></table></div>
+<p><strong>Pricing tiers</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>Starter</td><td>€350 a month plus usage</td><td>One brand, one project, core suite, self onboarding</td></tr>
+<tr><td>Scale</td><td>€650 a month plus usage</td><td>Multiple brands, unlimited projects, full suite, concierge onboarding</td></tr>
+<tr><td>Enterprise</td><td>Custom quote</td><td>Volume tiers, custom integrations, SSO</td></tr>
+</tbody></table></div>
+<p><strong>Pros</strong></p>
+<ul>
+  <li>Travel and airlines are named use cases, and the forward proxy sends real card data to any PCI-compliant partner you configure.</li>
+  <li>The filter proxy catches card data in inbound traffic you don’t control, such as virtual cards from wholesalers and OTAs.</li>
+  <li>Plan prices, no setup fee, no long-term contract, and a free trial are public, so developers can test before paying.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li>The proxies move cards between systems by API, so manual cruise or hotel portal bookings need a developer-built way to view cards.</li>
+  <li>Every forward-proxy receiver needs a valid PCI DSS AOC, so a small tour operator without one can’t receive cards this way.</li>
+  <li>The €4,200 yearly Starter floor, before usage fees, is a large fixed cost for an agency taking a few hundred cards monthly.</li>
+</ul>
+<p><strong>What travel advisors say in reviews:</strong> PCI Proxy has no <a class="bl-link" href="https://www.g2.com/products/pci-proxy/reviews" target="_blank" rel="noopener">G2</a> or <a class="bl-link" href="https://www.capterra.com/p/10055014/PCI-Proxy/reviews/" target="_blank" rel="noopener">Capterra</a> reviews yet, so ask Planet for references from a travel seller of your size.</p>
+<blockquote class="bl-quote-cta"><p>Need the proxy plus a screen your advisors can actually use? <a class="bl-link" href="/request-demo/">Talk to us</a></p></blockquote>
+
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">04</span>
+    <div class="vc__id">
+      <h3 id="spreedly" class="vc__name"><span class="vc__sep">4. </span>Spreedly<span class="vc__sep">: </span><span class="vc__pill">Best for Travel Platforms Booking Through Many Third-Party APIs</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/spreedly/reviews" target="_blank" rel="noopener"><span class="vc__score">4.4<small>/5</small></span><span class="vc__src">G2 · 35 reviews</span></a><a class="vc__rate" href="https://www.capterra.com/p/114956/Spreedly/reviews/" target="_blank" rel="noopener"><span class="vc__score">4.5<small>/5</small></span><span class="vc__src">Capterra · 13 reviews</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>From $750 a month</dd></div>
+    <div><dt>Free tier or trial</dt><dd>Demo</dd></div>
+    <div><dt>Supplier payment</dt><dd>Payment Method Distribution to API and SFTP receivers</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Online agencies and travel platforms that store a card once and then book flights, hotels, and extras through many supplier APIs.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/spreedly.jpg" alt="Spreedly homepage" >}}
+  <figcaption>Spreedly homepage. Source: spreedly.com</figcaption>
+</figure>
+<p>Spreedly is a card vault provider whose Independent Vault starts at $750 a month with unlimited storage. Its Payment Method Distribution feature sends vaulted cards to third-party “receivers,” and its docs use a travel company booking flights and hotels as the example.</p>
+<p><strong>Key Features</strong></p>
+<ul>
+  <li><strong>Payment Method Distribution:</strong> Sends a stored card to any HTTPS API or SFTP endpoint, so one card can pay several suppliers.</li>
+  <li><strong>Templated receiver requests:</strong> You define headers and body, so each supplier request can carry booking details such as a flight number.</li>
+  <li><strong>Test receiver:</strong> Echoes the formatted request with card data scrubbed, so developers debug supplier integrations without exposing real cards.</li>
+  <li><strong>Gateway reach:</strong> 150+ gateways and 60+ payment methods from one integration, so adding an acquirer doesn’t mean recollecting cards.</li>
+  <li><strong>Performance add-ons:</strong> Network tokens, account updater, retries, and routing are available on a quoted plan for platforms that charge stored cards repeatedly.</li>
+</ul>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Agency workflow</th><th>How Spreedly handles it</th></tr></thead>
+<tbody>
+<tr><td>Card by phone or email</td><td>API and SDKs; you build the agent screen</td></tr>
+<tr><td>Paying suppliers with APIs</td><td>Receivers, single-card or batch</td></tr>
+<tr><td>Supplier portals needing manual entry</td><td>Not a built-in flow</td></tr>
+<tr><td>Setup</td><td>API first</td></tr>
+<tr><td>Year-one floor</td><td>$9,000</td></tr>
+</tbody></table></div>
+<p><strong>Pricing tiers</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>Independent Vault</td><td>From $750 a month</td><td>PCI-1 vault, unlimited storage, vault health insights</td></tr>
+<tr><td>Performance Optimization</td><td>Custom quote</td><td>Network tokens, account updater, retries, routing, 3D Secure</td></tr>
+</tbody></table></div>
+<p><strong>Pros</strong></p>
+<ul>
+  <li>Receivers fit the “store once, book with many suppliers” pattern, and Spreedly’s docs use a flight-and-hotel booking as the example.</li>
+  <li>The gateway network is broad, so adding new markets, currencies, or acquirers later doesn’t require moving traveler cards to a new vault.</li>
+  <li>Storage is unlimited on the Independent Vault plan, so a growing file of repeat travelers’ cards doesn’t push the monthly fee higher.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li>There’s no advisor screen for manual portal bookings or phone capture, so a developer must build both on the API.</li>
+  <li>Every API call is billed and a G2 reviewer notes no free test environment, so supplier integration testing adds cost.</li>
+  <li>G2 reviewers report steep fee increases at renewal, so get multi-year price protection in writing before moving traveler cards.</li>
+</ul>
+<p><strong>What travel advisors say in reviews:</strong> Mostly positive, with a cost warning. Spreedly holds <a class="bl-link" href="https://www.g2.com/products/spreedly/reviews" target="_blank" rel="noopener">4.4/5 from 35 reviews on G2</a> and <a class="bl-link" href="https://www.capterra.com/p/114956/Spreedly/reviews/" target="_blank" rel="noopener">4.5/5 from 13 on Capterra</a>. Reviewers value one vault across many gateways and responsive support; the complaints are a slow dashboard, no free test mode, and sharp price increases.</p>
+<blockquote class="bl-quote-cta"><p>Booking mostly by phone with a few integrated suppliers? Card Vault’s proxy costs a fraction of that floor. <a class="bl-link" href="/request-demo/">Get in touch</a></p></blockquote>
+
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">05</span>
+    <div class="vc__id">
+      <h3 id="pci-vault" class="vc__name"><span class="vc__sep">5. </span>PCI Vault<span class="vc__sep">: </span><span class="vc__pill">Best for Small Agencies With a Freelance Developer</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/pci-vault/reviews" target="_blank" rel="noopener"><span class="vc__score">4.5<small>/5</small></span><span class="vc__src">G2 · 12 reviews</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>$255 a month plus $0.02 per API operation (Growing)</dd></div>
+    <div><dt>Free tier or trial</dt><dd>No free trial; a staging account comes with a production signup</dd></div>
+    <div><dt>Supplier payment</dt><dd>PCI payment proxy</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Small agencies and tour operators with a part-time developer who can wire up a capture form and an API.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/pci-vault.jpg" alt="PCI Vault homepage" >}}
+  <figcaption>PCI Vault homepage. Source: pcivault.io</figcaption>
+</figure>
+<p>PCI Vault is a zero-knowledge card tokenization service: you hold a passphrase the vendor never stores. Its Growing plan costs $255 a month plus $0.02 per API operation, and its PCD capture forms send card data to the vault without touching your servers, but viewing and using cards is API work.</p>
+<p><strong>Key Features</strong></p>
+<ul>
+  <li><strong>PCD capture forms:</strong> Hosted iframe forms collect card or bank account details straight into the vault, bypassing your website and booking software.</li>
+  <li><strong>Zero-knowledge keys:</strong> Each key pairs a vendor-held part with your unstored passphrase, so the vendor alone can’t decrypt cards.</li>
+  <li><strong>PCI proxy:</strong> Proxy calls forward card data to a payment provider, so a developer charges stored cards without handling the number.</li>
+  <li><strong>Browser-testable API:</strong> Endpoints can be tried in the browser before coding, which shortens work for a freelance developer on a budget.</li>
+</ul>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Agency workflow</th><th>How PCI Vault handles it</th></tr></thead>
+<tbody>
+<tr><td>Card by email or link</td><td>Hosted PCD form</td></tr>
+<tr><td>Card by phone</td><td>No IVR capture; advisor enters it in a form</td></tr>
+<tr><td>Supplier portals needing manual entry</td><td>You build the display through the API</td></tr>
+<tr><td>Storage model</td><td>Zero-knowledge, you hold the passphrase</td></tr>
+<tr><td>Year-one base cost</td><td>$3,060 on the Growing plan, plus usage</td></tr>
+</tbody></table></div>
+<p><strong>Pricing tiers</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>Growing</td><td>$255 a month plus $0.02 per operation</td><td>Card tokenization and storage; email support with 24-hour response</td></tr>
+<tr><td>Business</td><td>$965 a month plus $0.01 per operation</td><td>Email and chat support with 4-hour response</td></tr>
+<tr><td>High Volume Enterprise</td><td>$1,675 a month; $0.01 down to $0.0009 per operation</td><td>Phone, email, and chat support with 1-hour response</td></tr>
+</tbody></table></div>
+<p><strong>Pros</strong></p>
+<ul>
+  <li>Plan prices are public on PCI Vault’s own site, so a small agency can budget the year without a sales call.</li>
+  <li>Hosted PCD forms keep card numbers off the agency’s website and booking software, so capture needs no rebuild of booking pages.</li>
+  <li>Zero-knowledge storage limits what the vendor itself can read, which reassures agencies that worry about a provider-side breach exposing client cards.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li>If your agency loses the passphrase, every card locked with it is unrecoverable and clients must share cards again.</li>
+  <li>There’s no staff screen or phone capture, so a developer must build how advisors view cards for cruise or hotel portals.</li>
+  <li>G2 reviewers say there’s no phone support, which hurts when a booking is stuck on a busy day.</li>
+</ul>
+<p><strong>What travel advisors say in reviews:</strong> Mostly positive. PCI Vault holds <a class="bl-link" href="https://www.g2.com/products/pci-vault/reviews" target="_blank" rel="noopener">4.5/5 from 12 reviews on G2</a> and has no Capterra listing. Reviewers praise the security model and a fast API integration; the recurring concern is complexity for a team without IT support. Agencies tell us they’ve moved off it when they wanted a ready-made staff view.</p>
+<blockquote class="bl-quote-cta"><p>Want a staff view without paying a developer to build one? <a class="bl-link" href="/request-demo/">See Customer Vault</a></p></blockquote>
+
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">06</span>
+    <div class="vc__id">
+      <h3 id="ixopay" class="vc__name"><span class="vc__sep">6. </span>IXOPAY (Formerly TokenEx)<span class="vc__sep">: </span><span class="vc__pill">Best for Large TMCs Standardizing on One Universal Token</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/tokenex-ixopay/reviews" target="_blank" rel="noopener"><span class="vc__score">4.6<small>/5</small></span><span class="vc__src">G2 · 17 reviews</span></a><a class="vc__rate vc__rate--new" href="https://www.capterra.com/p/181731/Cloud-Based-Tokenization/reviews/" target="_blank" rel="noopener"><span class="vc__score">No reviews yet</span><span class="vc__src">Capterra</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>Custom quote</dd></div>
+    <div><dt>Free tier or trial</dt><dd>Demo</dd></div>
+    <div><dt>Supplier payment</dt><dd>Transparent gateway to PSPs and third-party APIs</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Travel management companies and travel groups with payments engineers, several acquirers, and both online and in-person channels.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/ixopay.jpg" alt="IXOPAY homepage" >}}
+  <figcaption>IXOPAY homepage. Source: ixopay.com</figcaption>
+</figure>
+<p>IXOPAY (formerly TokenEx) is a payment platform whose universal tokens work across processors, backed by a public PCI DSS v4.0.1 AOC dated June 2026. Pricing is quote-only.</p>
+<p><strong>Key Features</strong></p>
+<ul>
+  <li><strong>Universal tokens:</strong> One token works across processors, so adding an acquirer or region doesn’t mean asking travelers for cards again.</li>
+  <li><strong>Transparent gateway:</strong> Detokenizes card data for a payment provider or third-party API, which Trust My Travel used for about 22 million transactions.</li>
+  <li><strong>Hosted iframe:</strong> Replaces only the card fields on your booking form, so the rest of your booking flow stays yours.</li>
+  <li><strong>Network tokens:</strong> Offered as a module alongside universal tokens, for platforms that charge stored traveler cards repeatedly.</li>
+  <li><strong>P2PE for devices:</strong> Covers point-of-sale terminals, which matters for travel groups that also take cards in retail storefronts or at events.</li>
+</ul>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Agency workflow</th><th>How IXOPAY handles it</th></tr></thead>
+<tbody>
+<tr><td>Card by email or link</td><td>Hosted iframe in your own form</td></tr>
+<tr><td>Card in a storefront</td><td>P2PE devices</td></tr>
+<tr><td>Paying suppliers with APIs</td><td>Transparent gateway</td></tr>
+<tr><td>Setup</td><td>Sales-led integration</td></tr>
+<tr><td>Compliance evidence</td><td>Public PCI DSS v4.0.1 AOC, June 2026</td></tr>
+</tbody></table></div>
+<p><strong>Pricing tiers</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>TokenEx Core and Connect</td><td>Custom quote</td><td>Tokenization packages; scope set in a sales quote</td></tr>
+</tbody></table></div>
+<p><strong>Pros</strong></p>
+<ul>
+  <li>Its PCI DSS AOC is public, so your QSA or acquirer gets compliance evidence on day one, without an NDA.</li>
+  <li>Universal tokens suit a TMC with several acquirers and regions, since one stored card can route to whichever processor fits.</li>
+  <li>Online bookings and storefront payments share one vault, so a travel group doesn’t run two card stores with separate controls.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li>Onboarding is sales-led with no self-serve plan, so even a one-branch pilot waits on scoping calls before anything is built.</li>
+  <li>There’s no advisor-facing card view, so bookings in cruise, hotel, or tour portals need a screen your own developers build and secure.</li>
+  <li>Buyers we hear from have left it over small-volume cost, so get a written quote for your real card count.</li>
+</ul>
+<p><strong>What travel advisors say in reviews:</strong> Very positive, but dated. IXOPAY holds <a class="bl-link" href="https://www.g2.com/products/tokenex-ixopay/reviews" target="_blank" rel="noopener">4.6/5 from 17 reviews on G2</a> (the TokenEx listing), and its <a class="bl-link" href="https://www.capterra.com/p/181731/Cloud-Based-Tokenization/reviews/" target="_blank" rel="noopener">Capterra listing</a> has no reviews yet. Reviewers single out support and ease of setup, and many visible reviews date from 2019, so ask for recent travel references.</p>
+<blockquote class="bl-quote-cta"><p>Moving cards off TokenEx? Agent Vault includes the migration. <a class="bl-link" href="/request-demo/">Ask about it</a></p></blockquote>
+
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">07</span>
+    <div class="vc__id">
+      <h3 id="vgs" class="vc__name"><span class="vc__sep">7. </span>VGS<span class="vc__sep">: </span><span class="vc__pill">Best for Travel Tech Teams That Strip Card Data in Transit</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/very-good-security-vgs-platform/reviews" target="_blank" rel="noopener"><span class="vc__score">4.7<small>/5</small></span><span class="vc__src">G2 · 47 reviews</span></a><a class="vc__rate vc__rate--new" href="https://www.capterra.com/p/195135/VGS-Platform/reviews/" target="_blank" rel="noopener"><span class="vc__score">No reviews yet</span><span class="vc__src">Capterra</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>From $1,000 a month</dd></div>
+    <div><dt>Free tier or trial</dt><dd>Free signup</dd></div>
+    <div><dt>Supplier payment</dt><dd>Outbound proxy to any API</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Funded travel startups and booking platforms that want card data swapped for aliases before it reaches their servers.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/vgs.jpg" alt="VGS homepage" >}}
+  <figcaption>VGS homepage. Source: verygoodsecurity.com</figcaption>
+</figure>
+<p>VGS (Very Good Security) is a tokenization platform that swaps card data for aliases in transit through inbound and outbound proxies, so existing booking code changes little. The Starter package begins at $1,000 a month, a $12,000 yearly floor.</p>
+<p><strong>Key Features</strong></p>
+<ul>
+  <li><strong>Inbound and outbound proxy:</strong> Card data is aliased on entry and restored only on the way to an approved supplier API.</li>
+  <li><strong>VGS Collect forms:</strong> Hosted fields capture cards on web and mobile booking flows, so the card number never reaches your own servers.</li>
+  <li><strong>Network tokens and account updater:</strong> Available as add-ons on the Growth package for platforms that charge stored traveler cards repeatedly.</li>
+  <li><strong>Compliance add-ons:</strong> A PCI Compliance Subscription and a VGS-provided auditor are listed add-ons, which help a startup without compliance staff.</li>
+</ul>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Agency workflow</th><th>How VGS handles it</th></tr></thead>
+<tbody>
+<tr><td>Card by email or link</td><td>VGS Collect forms</td></tr>
+<tr><td>Paying suppliers with APIs</td><td>Outbound proxy routes</td></tr>
+<tr><td>Supplier portals needing manual entry</td><td>Not a built-in flow</td></tr>
+<tr><td>Setup</td><td>Proxy routes need configuring</td></tr>
+<tr><td>Year-one floor</td><td>$12,000</td></tr>
+</tbody></table></div>
+<p><strong>Pricing tiers</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>Starter</td><td>From $1,000 a month</td><td>Starter package; inclusions not itemized</td></tr>
+<tr><td>Growth</td><td>Custom quote</td><td>Vault plus chosen add-ons</td></tr>
+</tbody></table></div>
+<p><strong>Pros</strong></p>
+<ul>
+  <li>The proxy model means an existing booking engine needs little rewriting, because aliases replace card data in transit.</li>
+  <li>Its 4.7 G2 rating rests on 47 reviews, the largest sample here, and reviewers say the proxy is quick to learn.</li>
+  <li>Auditor help through the VGS-provided auditor add-on can shorten the first assessment for a travel startup with no compliance staff.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li>Proxy routes are configured per supplier destination, so an agency without engineers can’t add a new hotel or tour API alone.</li>
+  <li>G2 reviewers flag add-on fees, such as a charge per extra custom domain, which grow as you add booking brands.</li>
+  <li>There’s no advisor screen for phone bookings or manual portal entry, so those workflows need custom development on top of the proxy.</li>
+</ul>
+<p><strong>What travel advisors say in reviews:</strong> Very positive. VGS holds <a class="bl-link" href="https://www.g2.com/products/very-good-security-vgs-platform/reviews" target="_blank" rel="noopener">4.7/5 from 47 reviews on G2</a>, and its <a class="bl-link" href="https://www.capterra.com/p/195135/VGS-Platform/reviews/" target="_blank" rel="noopener">Capterra listing</a> has no reviews yet. Reviewers praise how quickly the proxy is learned and chat support; the one cost complaint is the $40 fee per extra CNAME, which a reviewer calls too expensive.</p>
+<blockquote class="bl-quote-cta"><p>If a $12,000 floor stalls the decision, start Card Vault free. <a class="bl-link" href="/request-demo/">Get in touch</a></p></blockquote>
+
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">08</span>
+    <div class="vc__id">
+      <h3 id="basis-theory" class="vc__name"><span class="vc__sep">8. </span>Basis Theory<span class="vc__sep">: </span><span class="vc__pill">Best for Travel Startups Building Their Own Payment Product</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate vc__rate--new" href="https://www.g2.com/products/basis-theory/reviews" target="_blank" rel="noopener"><span class="vc__score">No reviews yet</span><span class="vc__src">G2</span></a><a class="vc__rate vc__rate--new" href="https://www.capterra.com/p/10002181/Basis-Theory/reviews/" target="_blank" rel="noopener"><span class="vc__score">No reviews yet</span><span class="vc__src">Capterra</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>$995 a month</dd></div>
+    <div><dt>Free tier or trial</dt><dd>Free start to build</dd></div>
+    <div><dt>Supplier payment</dt><dd>Proxy and custom card logic in a PCI environment</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Travel software startups building booking or virtual-card products that need to run their own card logic.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/basis-theory.jpg" alt="Basis Theory homepage" >}}
+  <figcaption>Basis Theory homepage. Source: basistheory.com</figcaption>
+</figure>
+<p>Basis Theory is a set of payment building blocks for a product team, not an agency back-office app. Its $995 plan includes 20,000 tokens, a production PCI environment, and a PCI Attestation of Compliance (AOC).</p>
+<p><strong>Key Features</strong></p>
+<ul>
+  <li><strong>Included AOC:</strong> A PCI Attestation of Compliance comes with the $995 plan, ready to hand to your assessor or acquirer.</li>
+  <li><strong>Production PCI environment:</strong> Your engineers can run their own card logic, such as virtual-card or split-payment rules, without building a compliant environment.</li>
+  <li><strong>20,000 tokens included:</strong> The $995 plan covers 20,000 tokens; ask for the overage rate, since costs scale with stored traveler cards.</li>
+  <li><strong>Entry-plan limits:</strong> The $995 plan caps payloads at 1 MB, keeps 24 hours of logs, and runs in a US-only environment.</li>
+</ul>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Agency workflow</th><th>How Basis Theory handles it</th></tr></thead>
+<tbody>
+<tr><td>Card by email or link</td><td>Web and mobile elements you build into</td></tr>
+<tr><td>Paying suppliers</td><td>Proxy or your own code in the PCI environment</td></tr>
+<tr><td>Audit lookback on entry plan</td><td>24 hours of logs</td></tr>
+<tr><td>Setup</td><td>Developer-built</td></tr>
+<tr><td>Year-one cost</td><td>$11,940</td></tr>
+</tbody></table></div>
+<p><strong>Pricing tiers</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>Free start</td><td>$0</td><td>Build before production</td></tr>
+<tr><td>Entry plan</td><td>$995 a month</td><td>20,000 tokens, PCI environment, AOC</td></tr>
+<tr><td>Enterprise</td><td>Custom quote</td><td>SAQ D responses, SSO, uptime guarantees</td></tr>
+</tbody></table></div>
+<p><strong>Pros</strong></p>
+<ul>
+  <li>Your engineers get a compliant place to run custom card logic, suiting a travel startup building its own booking product.</li>
+  <li>The AOC is included in the plan, which shortens conversations with your assessor and with enterprise travel buyers asking for evidence.</li>
+  <li>You can build free and pay only at production, so prototyping a new booking flow costs nothing upfront for the team.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li>It ships building blocks, not an agency app, so an agency without engineers pays almost $12,000 yearly for unassembled parts.</li>
+  <li>The entry plan keeps only 24 hours of logs, which can’t show which advisor viewed a client’s card last week.</li>
+  <li>The entry plan runs in a US-only environment, which limits agencies that need card data kept in the EU for European travelers.</li>
+</ul>
+<p><strong>What travel advisors say in reviews:</strong> Basis Theory has no <a class="bl-link" href="https://www.g2.com/products/basis-theory/reviews" target="_blank" rel="noopener">G2</a> or <a class="bl-link" href="https://www.capterra.com/p/10002181/Basis-Theory/reviews/" target="_blank" rel="noopener">Capterra</a> reviews yet, so ask for references from a travel product team.</p>
+<blockquote class="bl-quote-cta"><p>Running an agency, not a payments startup? Skip the build. <a class="bl-link" href="/request-demo/">Get in touch</a></p></blockquote>
+
+<h2 id="key-features-to-look-for-in-card-tokenization-software-for-travel-agencies">Key Features to Look for in Card Tokenization Software for Travel Agencies</h2>
+<p>Agency workflows are messier than a web checkout, so these are worth checking first in any demo:</p>
+<ul>
+  <li><strong>Capture that matches how clients pay:</strong> Secure email or text links, hosted forms, and phone capture that keeps numbers off advisors’ screens.</li>
+  <li><strong>A safe way to pay manual suppliers:</strong> Hotel extranets and cruise portals often need typed cards, so look for a logged view.</li>
+  <li><strong>Proxy charging for integrated suppliers:</strong> Where suppliers or gateways have APIs, the vault injects the card so you send only tokens.</li>
+  <li><strong>Virtual card handling:</strong> Cards issued by OTAs, wholesalers, and corporate travel programs should be tokenized on arrival, just like a client’s card.</li>
+  <li><strong>Short-lived CVV handling:</strong> PCI DSS bans storing the security code after authorization, so the vault should hold it briefly and delete it.</li>
+  <li><strong>Roles and audit logs per advisor:</strong> Host agencies and TMCs need to see which advisor viewed or used which card, and when.</li>
+  <li><strong>Pricing that fits agency volume:</strong> A small agency storing a few hundred cards monthly can overpay badly on a $1,000 platform floor.</li>
+</ul>
+
+<h2 id="how-a-client-card-should-move-through-a-travel-agency">How a Client Card Should Move Through a Travel Agency</h2>
+<p>Most agencies can’t replace every airline, hotel, cruise, or consolidator portal, so the goal is to keep the advisor’s workflow and take the card number out of email, notes, call recordings, spreadsheets, and the CRM. A typical reference flow looks like this:</p>
+<ol>
+  <li>The agency creates a client record and sends a branded secure intake link.</li>
+  <li>The client enters the card on a vendor-hosted form, so it goes straight to the vault, not through your website or booking app.</li>
+  <li>The vault returns a token and safe display details (such as the last four digits), which you store against the client and booking.</li>
+  <li>The client’s authorization, permitted purposes, and expiry are recorded separately, because a token isn’t consent.</li>
+  <li>For an integrated gateway or supplier API, the vault’s proxy swaps the real card into the request on the way out.</li>
+  <li>For a supplier that needs a typed card, an authorized advisor opens it in a logged screen, never in email or notes.</li>
+  <li>You set retention rules: delete on card expiry, client request, or account inactivity.</li>
+</ol>
+<p>Passports, visas, and loyalty or trusted-traveler numbers follow the same pattern, which is why many agencies want one place for cards and travel documents.</p>
+<p>Two cautions apply to every vendor above: vaulting doesn’t authenticate the cardholder on a phone or email booking, and some suppliers restrict third-party card use or require specific authorization evidence.</p>
+
+<h2 id="how-each-vendor-describes-its-card-tokenization-for-travel-agencies">How Each Vendor Describes Its Card Tokenization for Travel Agencies</h2>
+<div class="bl-tablewrap"><table class="bl-table bl-table--wide">
+<thead><tr><th>Vendor</th><th>How it positions itself</th><th>Proof it publishes for travel</th><th>Source</th></tr></thead>
+<tbody>
+<tr><td>Enigma Vault</td><td>Card tokenization API with a gateway proxy</td><td>Twilio Pay phone capture; Agent Vault card-on-file migration</td><td>Card Vault page; Agent Vault pricing page</td></tr>
+<tr><td>PCI Booking</td><td>“Your Secure Payment Processing Partner”</td><td>OTA developer guide; no named travel case studies</td><td>PCI Booking OTA guide</td></tr>
+<tr><td>PCI Proxy (Planet)</td><td>“Your payment stack, fully composable”</td><td>Travel and Airlines use cases; RoomBoss hotel case study</td><td>pci-proxy.com</td></tr>
+<tr><td>Spreedly</td><td>“Payment Orchestration for the Agentic Era”</td><td>Homepage logos include Priceline, Hopper, Busbud, and Hotel Engine; travel insurance case study</td><td>spreedly.com</td></tr>
+<tr><td>PCI Vault</td><td>Zero-knowledge PCI DSS Level 1 environment</td><td>No travel mentions in its docs</td><td>PCI Vault docs</td></tr>
+<tr><td>IXOPAY (formerly TokenEx)</td><td>“The Performance Layer Driving Agentic Payments”</td><td>Trust My Travel: about 150,000 cards migrated by batch</td><td>IXOPAY case study</td></tr>
+<tr><td>VGS</td><td>“The World’s Leader in Payment Tokenization”</td><td>Lists OTAs; 2019 TravelBank customer spotlight</td><td>VGS TravelBank spotlight</td></tr>
+<tr><td>Basis Theory</td><td>“Built to keep customers transacting”</td><td>Travel not mentioned on the homepage</td><td>basistheory.com</td></tr>
+</tbody></table></div>
+<p>The gap: most of these platforms serve payment and engineering teams moving cards between systems by API. Agencies also need a staff-facing, logged way to view a card for manual supplier portals, phone bookings, and email intake, and none of the seven competitors publishes one that works without a developer building it.</p>
+<p>Enigma Vault covers both sides, based on its own product pages. Card Vault handles hosted capture forms, Twilio Pay phone capture, and a gateway proxy for charging. Customer Vault adds branded, no-login intake links and a staff inbox, and authorized staff can reveal a card number when needed, with every reveal logged. Confirm which plan fits your workflow in a demo.</p>
+
+<h2 id="pricing-compared">Card Tokenization Software Pricing for Travel Agencies Compared</h2>
+<p>Only figures read on each vendor’s own pricing page on October 23, 2026 are shown. Usage fees matter for agencies: a few hundred bookings a month on a $0.04 rate costs far less than a high monthly floor.</p>
+<div class="bl-tablewrap"><table class="bl-table bl-table--wide">
+<thead><tr><th>Vendor and plan</th><th>Monthly price</th><th>What’s included</th><th>Overage or usage fees</th><th>Free tier or trial</th><th>Source</th></tr></thead>
+<tbody>
+<tr><td>Enigma Vault Lite (Card Vault)</td><td>$0</td><td>1,000 Card Vault requests; tokenization and gateway proxy</td><td>$0.08 per request</td><td>Free forever</td><td><a class="bl-link" href="/pricing/">Enigma Vault pricing</a></td></tr>
+<tr><td>Enigma Vault Plus (Card Vault)</td><td>$49.99</td><td>20,000 requests</td><td>$0.04 per request</td><td>Start on Lite</td><td><a class="bl-link" href="/pricing/">Enigma Vault pricing</a></td></tr>
+<tr><td>Enigma Vault Premium (Card Vault)</td><td>$249.99</td><td>250,000 requests</td><td>$0.02 per request</td><td>Start on Lite</td><td><a class="bl-link" href="/pricing/">Enigma Vault pricing</a></td></tr>
+<tr><td>Enigma Vault Customer Vault and Agent Vault</td><td>Priced by engagement</td><td>Turnkey intake tenant; eight-week card-on-file migration</td><td>Not applicable</td><td>Demo</td><td><a class="bl-link" href="/pricing/">Enigma Vault pricing</a></td></tr>
+<tr><td>PCI Proxy Starter</td><td>€350</td><td>One brand, one project, core suite, self onboarding, weekday email support</td><td>Usage fees by product; rates not published</td><td>Free trial</td><td>PCI Proxy pricing</td></tr>
+<tr><td>PCI Proxy Scale</td><td>€650</td><td>Multiple brands, unlimited projects, full suite, concierge onboarding</td><td>Usage fees by product; rates not published</td><td>Free trial</td><td>PCI Proxy pricing</td></tr>
+<tr><td>Spreedly Independent Vault</td><td>From $750</td><td>PCI-1 vault, unlimited storage, vault health insights</td><td>Not published</td><td>Not published</td><td>Spreedly pricing</td></tr>
+<tr><td>PCI Vault Growing</td><td>$255</td><td>Credit card tokenization and storage</td><td>$0.02 per operation; $0.01 on Business ($965); $0.01 to $0.0009 on High Volume Enterprise ($1,675)</td><td>No free trial; a staging account comes with a production signup</td><td>PCI Vault pricing</td></tr>
+<tr><td>Basis Theory</td><td>$995</td><td>20,000 tokens, 24-hour log retention, US environment</td><td>Not stated on the plan card</td><td>Free to start building</td><td>Basis Theory pricing</td></tr>
+<tr><td>VGS Starter</td><td>From $1,000</td><td>Starter package</td><td>Not published</td><td>Free signup</td><td>VGS pricing</td></tr>
+<tr><td>PCI Booking</td><td>Custom quote</td><td>Driven by the type and number of API actions each month, invoiced monthly</td><td>Usage-based</td><td>“Try for Free” signup</td><td>PCI Booking pricing</td></tr>
+<tr><td>IXOPAY (formerly TokenEx)</td><td>Custom quote</td><td>Not published on an accessible page</td><td>Not published</td><td>Demo</td><td>ixopay.com</td></tr>
+</tbody></table></div>
+<p>Enterprise tiers at PCI Proxy, Spreedly, VGS, and Basis Theory are custom quotes on top of the plans above.</p>
+
+<h2 id="key-features-compared-side-by-side">Key Features of Card Tokenization Software for Travel Agencies Compared</h2>
+<p>Only Enigma Vault ships phone IVR capture and a no-code staff view in the same platform, and only Enigma Vault publishes an entry price under $250 a month. Each cell comes from the vendor’s own pages, checked October 23, 2026.</p>
+<div class="bl-tablewrap"><table class="bl-table bl-table--wide">
+<thead><tr><th>Platform</th><th>Secure link capture</th><th>Phone IVR capture</th><th>Staff card view</th><th>Proxy to gateways or suppliers</th><th>Virtual card intake</th><th>No-code option</th></tr></thead>
+<tbody>
+<tr><td>Enigma Vault</td><td>Yes, Customer Vault</td><td>Yes, Twilio Pay</td><td>Yes, logged reveal</td><td>Yes, any REST gateway</td><td>Via form or API</td><td>Yes</td></tr>
+<tr><td>PCI Booking</td><td>Yes, Card By Link</td><td>Not published</td><td>Display forms and view links</td><td>Yes</td><td>Yes, from connected issuers</td><td>No</td></tr>
+<tr><td>PCI Proxy</td><td>Tokenization links</td><td>Not published</td><td>No</td><td>Yes, forward proxy</td><td>Yes, filter proxy</td><td>No</td></tr>
+<tr><td>Spreedly</td><td>Via API</td><td>No</td><td>No</td><td>Yes, receivers</td><td>Via API</td><td>No</td></tr>
+<tr><td>PCI Vault</td><td>Yes, PCD forms</td><td>No</td><td>You build it</td><td>Yes, payment proxy</td><td>Via API</td><td>No</td></tr>
+<tr><td>IXOPAY</td><td>Hosted iframe</td><td>No</td><td>No</td><td>Yes, transparent gateway</td><td>Via API</td><td>No</td></tr>
+<tr><td>VGS</td><td>Collect forms</td><td>No</td><td>No</td><td>Yes, outbound proxy</td><td>Inbound proxy</td><td>No</td></tr>
+<tr><td>Basis Theory</td><td>Elements</td><td>No</td><td>You build it</td><td>Yes</td><td>Via API</td><td>No</td></tr>
+</tbody></table></div>
+<p>Packaging changes often, so confirm the cells that matter most to you in the vendor’s quote.</p>
+
+<h2 id="how-to-pick-the-right-card-tokenization-software-for-your-travel-agency">How to Pick the Right Card Tokenization Software for Your Travel Agency</h2>
+<p>In my experience, two questions settle most shortlists: how do cards reach your advisors, and how many of your suppliers can take an API call instead of a typed card number?</p>
+<h3 id="recommended-card-tokenization-software-for-each-agency-type">Recommended Card Tokenization Software for Each Agency Type</h3>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Agency type</th><th>Start with</th><th>Why</th></tr></thead>
+<tbody>
+<tr><td>Independent leisure advisor booking independent hotels and tours</td><td>Enigma Vault (Customer Vault)</td><td>Secure link in, logged reveal out, no developer</td></tr>
+<tr><td>Cruise-focused agency keying cards into cruise line portals</td><td>Enigma Vault (Customer Vault)</td><td>Masked card in your app, full card only in a logged view</td></tr>
+<tr><td>Host agency with dozens of advisors</td><td>Enigma Vault (Card Vault plus Customer Vault)</td><td>Per-advisor access logs and one vault under your own processor</td></tr>
+<tr><td>Corporate TMC with call center bookings</td><td>Enigma Vault, or IXOPAY for multi-acquirer groups</td><td>IVR capture keeps cards off agent screens; universal tokens across acquirers</td></tr>
+<tr><td>OTA or bed bank relaying cards to hotels</td><td>PCI Booking or PCI Proxy</td><td>Built-in hotel delivery and forward proxies</td></tr>
+<tr><td>Online platform booking through many supplier APIs</td><td>Spreedly</td><td>Receivers deliver one stored card to many APIs</td></tr>
+</tbody></table></div>
+<h3 id="which-card-tokenization-software-fits-your-agency-size">Which Card Tokenization Software Fits Your Agency Size</h3>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Size</th><th>Start with</th><th>Why</th></tr></thead>
+<tbody>
+<tr><td>Solo advisor or 2–5 person agency</td><td>Enigma Vault Lite or Plus</td><td>Free to start, $49.99 a month at growth</td></tr>
+<tr><td>Agency with a part-time developer</td><td>Enigma Vault Card Vault or PCI Vault</td><td>Hosted forms and an API at a published price</td></tr>
+<tr><td>Mid-size or host agency</td><td>Enigma Vault Premium or Agent Vault</td><td>Higher volume, migration, staff access controls</td></tr>
+<tr><td>Large TMC or online travel company</td><td>IXOPAY, Spreedly, or PCI Proxy</td><td>Multi-acquirer tokens and API distribution at scale</td></tr>
+</tbody></table></div>
+
+<h2 id="common-mistakes-travel-agencies-make-when-buying-card-tokenization-software">Common Mistakes Travel Agencies Make When Buying Card Tokenization Software</h2>
+<ul>
+  <li><strong>Tokenizing the web form but not the phone line:</strong> If advisors still write numbers down during calls, the riskiest copy is untouched.</li>
+  <li><strong>Forgetting the manual supplier:</strong> A proxy is useless for a portal that needs typed entry, so plan a controlled view.</li>
+  <li><strong>Leaving cards in PNR remarks and email:</strong> New captures go to the vault, but old copies stay until you clean them up.</li>
+  <li><strong>Assuming tokenization means PCI-free:</strong> It can significantly reduce scope; your acquirer or QSA confirms the rest.</li>
+  <li><strong>Forgetting call recordings:</strong> A card read aloud can sit in a recording or transcript long after the booking, so audit recordings.</li>
+  <li><strong>Setting no retention rule:</strong> Decide when stored cards and passports are deleted, such as at card expiry or client request.</li>
+  <li><strong>Treating the token as consent:</strong> Keep the client’s authorization per supplier and amount, since some suppliers demand proof of third-party use.</li>
+</ul>
+
+<h2 id="questions-to-ask-a-card-tokenization-software-vendor-before-you-sign">Questions to Ask a Card Tokenization Software Vendor Before You Sign</h2>
+<ul>
+  <li>Which roles and plans let an advisor see the full card, and is each view logged?</li>
+  <li>Can the full card be shown without passing through our own booking app or server?</li>
+  <li>How do you handle the CVV, how long do you keep it, and when is it deleted?</li>
+  <li>Can the same platform hold passports and visas, with expiry, permissions, and an access log?</li>
+  <li>Can you capture cards from a phone call without the advisor hearing or typing the number?</li>
+  <li>Which gateways and supplier APIs can your proxy reach today, and which need custom work?</li>
+  <li>How do we import existing cards from our current vault, and how do we get them out if we leave?</li>
+  <li>Can you share your current PCI DSS AOC and SOC 2 report?</li>
+</ul>
+
+<h2 id="take-client-cards-out-of-your-agency-inbox-with-enigma-vault">Take Client Cards Out of Your Agency’s Inbox With Enigma Vault</h2>
+<p>Your advisors shouldn’t have to choose between serving a client quickly and keeping their card safe. Card Vault captures cards by link, form, or phone and charges them through your own gateway, and Customer Vault gives your team a logged way to use them with suppliers that still need a typed number.</p>
+<p>Try the live card demo and compare plans on the pricing page, then <a class="bl-link" href="/vault/card-vault/">start free</a> or <a class="bl-link" href="/request-demo/">book a demo</a> with one of your real booking flows.</p>
+<div class="bl-inlinecta">
+  <div>
+    <p class="bl-inlinecta__t">Take the card numbers out of your agency’s inbox.</p>
+    <p class="bl-inlinecta__s">Start free with 1,000 Card Vault requests a month, or book a demo to map one booking end to end.</p>
+  </div>
+  <a class="np-btn np-btn--on-dark np-btn--primary" href="/vault/card-vault/"><span>Get started free</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
+</div>

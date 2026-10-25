@@ -1,0 +1,553 @@
+---
+title: "7 Best Card Tokenization Software for Private Aviation in 2026"
+titleEmphasis: "7 Best Card Tokenization Software for Private Aviation in 2026"
+slug: "best-card-tokenization-software-for-private-aviation"
+layout: "pii-style"
+metaTitle: "Card Tokenization Software for Private Aviation (2026)"
+description: "Compare 7 card tokenization platforms for charter operators, brokers, and jet-card programs on phone and email capture, migration, and published pricing."
+subtitle: "How each platform handles the high-value cards charter desks take by phone and email for quotes, deposits, repositioning, and incidentals."
+date: 2026-10-23T00:05:00
+category: "Card Vault"
+author: "tony-alex"
+readTime: 18
+heroImage: "/assets/blog/img-03.png"
+heroAlt: "Layered panels representing a client card tokenized before it reaches a charter operator’s systems"
+excerpt: "Seven card tokenization platforms compared for private aviation on capture, card-on-file migration, multi-gateway charging, and pricing."
+tags: ["card-vault", "tokenization", "private-aviation", "pci-dss", "card-on-file"]
+ogImage: "/assets/og/vault-card.jpg"
+ogImageAlt: "7 Best Card Tokenization Software for Private Aviation in 2026 | Enigma Vault"
+ogType: article
+styles: ["blog.css", "pages/blog-pii-hero.css", "tr-pages.css"]
+scripts: ["blog-article.js"]
+faqSchema: true
+faqs:
+  - q: "What Is the Best Card Tokenization Software for Private Aviation?"
+    a: "For most charter operators and jet-card programs, Enigma Vault, because Agent Vault migrates existing cards on file in a fixed eight-week engagement and Card Vault charges them through your existing processor. PCI Booking suits capture by link mid-call, PCI Proxy suits euro-first acquiring, and Spreedly or IXOPAY suit multi-brand routing."
+  - q: "Can a Charter Desk Take a Card by Phone Without Hearing It?"
+    a: "Yes. Phone IVR capture such as Twilio Pay with Enigma Card Vault tokenizes the card straight from the keypad, and link-based capture such as PCI Booking’s Card By Link sends the client a secure page during the call."
+  - q: "Can One Token Pay a Deposit Now and the Final Invoice Later?"
+    a: "Yes. The token sits on the trip or client record and can be charged through the vault’s proxy whenever finance needs it. The CVV can’t be kept after authorization; Enigma Vault holds it encrypted for at most 30 minutes."
+  - q: "Does Card Tokenization Take an Operator Out of PCI Scope?"
+    a: "No vendor can promise that. Keeping cards off your systems can significantly reduce PCI scope, but your acquirer or QSA confirms the final scope and SAQ, and a vault doesn’t satisfy aviation, customs, or sanctions obligations automatically."
+  - q: "How Much Does Card Tokenization Cost for a Charter Operator?"
+    a: "Enigma Card Vault starts free and runs $49.99 or $249.99 a month, with Agent Vault priced by engagement. PCI Proxy starts at €350 a month, PCI Vault lists from $255 a month plus $0.02 per operation, Spreedly’s vault at $750, and VGS at $1,000; PCI Booking and IXOPAY quote."
+---
+<style>
+/* Wide tables: tighter cell padding so they fit the article column. */
+.bl-content .bl-table--wide td, .bl-content .bl-table--wide th { padding-left: 8px; padding-right: 8px; }
+.bl-content blockquote.bl-quote-cta{margin:24px 0;padding:14px 20px;border-left:3px solid var(--ev-mineral-blue);background:var(--ev-warm-cloud);border-radius:0 10px 10px 0}.bl-content blockquote.bl-quote-cta p{margin:0;font-size:16px}
+.bl-content figure.bl-shot{margin:20px 0 24px;padding:10px;border:1px solid var(--ev-cool-stone);border-radius:10px;background:var(--ev-warm-cloud)}.bl-content figure.bl-shot img{display:block;width:100%;height:auto;border-radius:6px}.bl-content figure.bl-shot figcaption{margin-top:8px;text-align:center;font-size:13px;color:var(--ev-slate)}
+/* Vendor header card: rank, name, best-for pill, review scores, key facts. */
+.bl-content .vc { margin: 40px 0 20px; }
+.bl-content .vc__head { display: grid; grid-template-columns: auto 1fr auto; gap: 18px; align-items: center; margin-bottom: 14px; }
+.bl-content .vc__num { font-size: 34px; font-weight: 600; line-height: 1; color: var(--ev-mineral-blue); font-variant-numeric: tabular-nums; }
+.bl-content h3.vc__name { margin: 0; padding: 0; font-size: 26px; line-height: 1.25; font-weight: 600; color: var(--ev-ink); }
+.bl-content .vc__sep { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.bl-content .vc__pill { display: table; margin-top: 10px; padding: 6px 12px; border-radius: 6px; background: var(--ev-mineral-blue); color: #fff; font-size: 12px; line-height: 1.4; font-weight: 600; text-transform: none; letter-spacing: 0; font-size: 13px; }
+.bl-content .vc__rates { display: flex; flex-direction: column; gap: 8px; align-items: stretch; }
+.bl-content .vc__rate { display: flex; flex-direction: column; align-items: flex-end; padding: 8px 14px; border: 1px solid var(--ev-cool-stone); border-radius: 10px; background: #fff; text-decoration: none !important; min-width: 128px; }
+.bl-content a.vc__rate:hover { border-color: var(--ev-mineral-blue); }
+.bl-content .vc__score { font-size: 20px; font-weight: 700; color: var(--ev-ink); line-height: 1.2; }
+.bl-content .vc__score small { font-size: 13px; font-weight: 500; color: var(--ev-slate); }
+.bl-content .vc__src { font-size: 12px; color: var(--ev-slate); line-height: 1.3; }
+.bl-content .vc__rate--new .vc__score { font-size: 15px; }
+.bl-content .vc__facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px 24px; margin: 0; padding: 18px 22px; border-radius: 12px; background: var(--ev-warm-cloud); }
+.bl-content .vc__facts div { margin: 0; }
+.bl-content .vc__facts .vc__best { grid-column: 1 / -1; padding-top: 14px; border-top: 1px solid var(--ev-cool-stone); }
+.bl-content .vc__facts dt { margin: 0 0 4px; font-size: 11.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ev-slate); }
+.bl-content .vc__facts dd { margin: 0; font-size: 15px; line-height: 1.5; color: var(--ev-ink); }
+@media (max-width: 700px) {
+  .bl-content .vc__head { grid-template-columns: auto 1fr; }
+  .bl-content .vc__rates { grid-column: 1 / -1; flex-direction: row; flex-wrap: wrap; }
+  .bl-content .vc__rate { align-items: flex-start; }
+  .bl-content .vc__num { font-size: 26px; }
+  .bl-content h3.vc__name { font-size: 22px; }
+  .bl-content .vc__facts { grid-template-columns: 1fr; }
+}
+.bl-content .tldr { margin: 8px 0 32px; padding: 22px 26px; border-radius: 12px; background: var(--ev-warm-cloud); border-left: 3px solid var(--ev-mineral-blue); }
+.bl-content .tldr .tldr__label { margin: 0 0 12px; padding: 0; border: 0; font-size: 13px; line-height: 1.4; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--ev-mineral-blue); }
+.bl-content .tldr .tldr__list { margin: 0; padding-left: 20px; }
+.bl-content .tldr .tldr__list li { margin: 0 0 10px; font-size: 16px; line-height: 1.6; color: var(--ev-ink); }
+.bl-content .tldr .tldr__list li::marker { color: var(--ev-mineral-blue); }
+</style>
+
+<p>Comparing the 7 best card tokenization software for private aviation in 2026: 1. Enigma Vault (Agent Vault and Card Vault), 2. PCI Booking, 3. PCI Proxy, 4. Spreedly, 5. IXOPAY (formerly TokenEx), 6. VGS, and 7. PCI Vault.</p>
+<p><strong>About the author:</strong> I’m <a class="bl-link" href="https://www.linkedin.com/in/tony-alex-enigma-vault/" target="_blank" rel="noopener">Dr. Tony Alex</a>, Chief Executive Officer of Enigma Vault, where I lead our work in encryption, tokenization, and sensitive-data protection. I have more than two decades of experience building enterprise software businesses.</p>
+<p>In 1999 I founded US eDirect to develop software for parks, campgrounds, and recreation agencies, bringing reservations and payments into one cloud system, and led it through its acquisition by Tyler Technologies in 2022.</p>
+<p><em>Disclosure: I work at Enigma Vault, which appears first in this list. Every platform here is judged on the same criteria, and the review ratings come from G2 and Capterra.</em></p>
+
+<div class="tldr" id="tldr">
+  <h2 class="tldr__label">TL;DR</h2>
+  <ul class="tldr__list">
+    <li><strong><a class="bl-link" href="#enigma-vault">Enigma Vault</a>:</strong> best for migrating stored client cards into a vault without changing the processor you already use.</li>
+    <li><strong><a class="bl-link" href="#pci-booking">PCI Booking</a>:</strong> best for sending a secure card link to the client or their assistant during the call.</li>
+    <li><strong><a class="bl-link" href="#pci-proxy">PCI Proxy</a>:</strong> best for euro-first operators settling through several acquirers who need one token across all of them.</li>
+    <li><strong><a class="bl-link" href="#spreedly">Spreedly</a>:</strong> best for owning your tokens across many gateways so a processor switch never forces recollection.</li>
+    <li><strong><a class="bl-link" href="#ixopay">IXOPAY (formerly TokenEx)</a>:</strong> best for multi-brand aviation groups that need one tokenization contract across several trading names.</li>
+    <li><strong><a class="bl-link" href="#vgs">VGS</a>:</strong> best for developer-led charter platforms that want a proxy to keep cards out of their apps.</li>
+    <li><strong><a class="bl-link" href="#pci-vault">PCI Vault</a>:</strong> best for small brokers with a developer who want low entry pricing and strict key separation.</li>
+  </ul>
+</div>
+
+<h2 id="top-7-card-tokenization-software-for-private-aviation-compared">Top 7 Card Tokenization Software for Private Aviation Compared</h2>
+<p>Here’s the short version for an operator, broker, or jet-card program. Each column answers a question a charter desk actually asks, and every price and feature was checked on October 23, 2026.</p>
+<div class="bl-tablewrap"><table class="bl-table bl-table--wide">
+<thead><tr><th>Platform</th><th>Best for</th><th>Phone and email card capture</th><th>Multi-gateway charging</th><th>Deposits and final settlement</th><th>Implementation time</th><th>Pricing model</th></tr></thead>
+<tbody>
+<tr><td><a class="bl-link" href="#enigma-vault">Enigma Vault</a></td><td>Operators moving years of stored cards into one vault without changing how they charge</td><td>Yes: Twilio Pay IVR capture, hosted forms, and branded intake links (Customer Vault)</td><td>Yes: proxy to Authorize.net, Stripe, Braintree, PayPal, Mastercard APIs, or any REST gateway</td><td>Yes: token on the client or trip record, charged later through the proxy</td><td>Agent Vault: fixed eight-week engagement; Card Vault: self-serve</td><td>Agent Vault by engagement; Card Vault $0, $49.99, or $249.99 a month</td></tr>
+<tr><td><a class="bl-link" href="#pci-booking">PCI Booking</a></td><td>Charter desks that want to send a secure card link while the client is still on the phone</td><td>Yes: Card By Link by email or SMS; capture and display forms</td><td>Yes: universal gateway with a published list of supported gateways</td><td>Yes: charge, pre-authorize, or save to e-wallet from the token</td><td>Free sandbox first, then integration</td><td>Custom quote; SMS links billed per message</td></tr>
+<tr><td><a class="bl-link" href="#pci-proxy">PCI Proxy</a></td><td>Operators selling in euros and other currencies through several European acquirers</td><td>Partial: capture components you build into your flow</td><td>Yes: tokens shared with any PSP; gateway to 25+ acquirers</td><td>Yes: token reuse plus a shared 3D Secure result</td><td>Self onboarding on Starter, concierge on Scale</td><td>From €350 a month plus usage</td></tr>
+<tr><td><a class="bl-link" href="#spreedly">Spreedly</a></td><td>Larger operators that want to own card tokens and route across many gateways</td><td>Partial: developer-built capture</td><td>Yes: 150+ gateway connections</td><td>Yes: stored token charged through any connected gateway</td><td>Developer integration</td><td>Vault from $750 a month</td></tr>
+<tr><td><a class="bl-link" href="#ixopay">IXOPAY (formerly TokenEx)</a></td><td>Enterprise groups standardizing tokens across many acquirers and brands</td><td>Partial: developer-built capture</td><td>Yes: 500+ payment adapters</td><td>Yes: universal tokens reused by any connected processor</td><td>Enterprise project</td><td>Custom quote</td></tr>
+<tr><td><a class="bl-link" href="#vgs">VGS</a></td><td>Tech-led charter platforms that want a proxy with few code changes</td><td>Partial: collect forms and proxy</td><td>Yes: forwards tokenized requests to your processors</td><td>Yes: proxy substitutes the card at charge time</td><td>Developer integration, free start</td><td>From $1,000 a month</td></tr>
+<tr><td><a class="bl-link" href="#pci-vault">PCI Vault</a></td><td>Small brokers with a developer and a tight budget</td><td>Partial: capture guide and form script for developers</td><td>Not stated on pages we could read</td><td>Partial: store and retrieve through the API</td><td>Self-serve signup</td><td>From $255 a month plus $0.02 per operation</td></tr>
+</tbody></table></div>
+
+
+
+<h2 id="what-is-card-tokenization-software-for-private-aviation">What Is Card Tokenization Software for Private Aviation?</h2>
+<p>Card tokenization software for private aviation is software that replaces a client’s card number with a token at capture and keeps the real card in a certified vault, so trip records, CRM, and inboxes hold only the token. The vault charges the card through your gateway when needed.</p>
+<ul>
+  <li>Who buys it: operations, charter sales, client services, finance, and security at flight departments, brokers, and jet-card programs, often collecting cards through an executive assistant.</li>
+  <li>Remote capture and card on file: a secure link, hosted form, or phone IVR, then one reusable token per client for quotes, deposits, repositioning legs, and incidentals.</li>
+  <li>Proxy charging and portability: the vault inserts the real card into your gateway request, tokens aren’t locked to one gateway, and existing cards in spreadsheets or legacy systems can be imported.</li>
+  <li>Documents and audit: expiring-link sharing for passports and manifests, plus a log of who captured, viewed, or charged each card.</li>
+</ul>
+<p>Related reading: <a class="bl-link" href="/blog/credit-card-tokenization/">how credit card tokenization works</a> and <a class="bl-link" href="/blog/best-credit-card-tokenization-software/">the best credit card tokenization software overall</a>.</p>
+
+<h2 id="how-we-evaluated-card-tokenization-software-for-private-aviation">How We Evaluated Card Tokenization Software for Private Aviation</h2>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Criterion</th><th>Weight</th><th>What we checked</th></tr></thead>
+<tbody>
+<tr><td>Phone and email capture</td><td>25%</td><td>Whether a rep can get a card from a client or assistant without hearing, typing, or forwarding it</td></tr>
+<tr><td>Card on file and migration</td><td>20%</td><td>Bulk import of cards you already hold and one reusable token per client</td></tr>
+<tr><td>Multi-gateway and multi-currency charging</td><td>20%</td><td>Whether the same token can be charged through more than one gateway</td></tr>
+<tr><td>Deposits, final settlement, and incidentals</td><td>15%</td><td>A stored token that supports a deposit now and a final charge after the flight</td></tr>
+<tr><td>Security evidence</td><td>10%</td><td>Vendor-stated PCI DSS level, SOC 2, audit logs, and access controls</td></tr>
+<tr><td>Pricing clarity and reviews</td><td>10%</td><td>Published prices and live G2 or Capterra feedback</td></tr>
+</tbody></table></div>
+<p><strong>Sources:</strong> Vendor product, pricing, docs, and compliance pages, AWS Marketplace listings, and G2 and Capterra reviews, all read on October 23, 2026.</p>
+
+<h2 id="the-7-best-card-tokenization-platforms-for-private-aviation">The 7 Best Card Tokenization Platforms for Private Aviation</h2>
+
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">01</span>
+    <div class="vc__id">
+      <h3 id="enigma-vault" class="vc__name"><span class="vc__sep">1. </span>Enigma Vault<span class="vc__sep">: </span><span class="vc__pill">Best for Migrating Cards on File Without Changing Processors</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener"><span class="vc__score">4.4<small>/5</small></span><span class="vc__src">G2 · 6 reviews</span></a><a class="vc__rate" href="https://www.capterra.com/p/241650/Enigma-Vault/reviews/" target="_blank" rel="noopener"><span class="vc__score">4.8<small>/5</small></span><span class="vc__src">Capterra · 4 reviews</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>$0, then $49.99 a month (Card Vault)</dd></div>
+    <div><dt>Free tier or trial</dt><dd>Lite plan: 1,000 requests a month</dd></div>
+    <div><dt>Phone capture</dt><dd>Twilio Pay IVR, so a card is never spoken to a screen</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Charter operators, brokers, and jet-card programs holding years of client cards in spreadsheets, legacy systems, and terminal profiles that want them vaulted without changing the processor they charge through.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/enigma-vault.jpg" alt="Enigma Vault homepage" >}}
+  <figcaption>Enigma Vault homepage. Source: enigmavault.io</figcaption>
+</figure>
+<p>Enigma Vault is a tokenization platform with three offerings that fit private aviation. Its <a class="bl-link" href="/vault/card-vault/">Card Vault</a> is a card tokenization API with a gateway proxy: cards are tokenized at capture and charged through the gateway you already use.</p>
+<p>Agent Vault is a fixed-scope, eight-week engagement that takes a card-on-file operation “from scattered custody to vaulted custody,” migration included, and our pricing page names aviation as one of the businesses it’s built for.</p>
+<p><a class="bl-link" href="/vault/customer-vault/">Customer Vault</a> covers the rest of a trip file: branded intake links, passport fields tokenized through Data Vault, and files shared through expiring links.</p>
+<p>The proof is on our <a class="bl-link" href="/vault/#card-on-file">Vault page</a>: in one private aviation deployment, existing cards were imported into the vault in bulk, account holders got a branded card-management experience, staff access sits behind enterprise single sign-on, and every charge still runs through the operator’s existing processor.</p>
+<p><strong>Key Features</strong></p>
+<ul>
+  <li>Agent Vault bulk-imports cards from spreadsheets, legacy systems, and terminal profiles in a fixed eight-week migration.</li>
+  <li>Twilio Pay IVR capture sends the card from the caller’s keypad into the vault, so reps never hear it.</li>
+  <li>Branded hosted iframe forms in 13 languages let international clients and assistants enter cards on a page you control.</li>
+  <li>The gateway proxy charges Authorize.net, Stripe, Braintree, PayPal, or any REST gateway, so you keep your processor.</li>
+  <li>The CVV is held encrypted for at most 30 minutes, which supports a deposit taken on the call.</li>
+  <li>Customer Vault adds passport fields and expiring file links, so passenger documents stay with the trip, not email.</li>
+  
+</ul>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>Card Vault Lite</td><td>$0</td><td>1,000 requests a month; $0.08 per extra request</td></tr>
+<tr><td>Card Vault Plus</td><td>$49.99 a month</td><td>20,000 requests; $0.04 per extra request</td></tr>
+<tr><td>Card Vault Premium</td><td>$249.99 a month</td><td>250,000 requests; $0.02 per extra request</td></tr>
+<tr><td>Agent Vault and Customer Vault</td><td>Custom quote</td><td>Agent Vault: fixed eight-week card-on-file migration; Customer Vault: branded intake tenant</td></tr>
+</tbody></table></div>
+<p><strong>Pros</strong></p>
+<ul>
+  <li>The migration is the product, so scattered cards become tokens on a known eight-week timeline, not an open-ended project.</li>
+  <li>Your processor relationship stays put, and adding a second gateway later is a proxy configuration change rather than a card migration.</li>
+  <li>A free Lite plan lets your developer test capture and charging on your own gateway before paying.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li>Packaged phone capture runs through Twilio Pay, so other telephony platforms need Twilio’s connector or a hosted-form link.</li>
+  <li>The proxy targets REST gateways, so a processor reached only through a legacy terminal needs scoping first.</li>
+  <li>ISO 27001 certification is still in progress, which may add a review step for corporate client questionnaires.</li>
+</ul>
+<p><strong>What Users Say</strong></p>
+<p><em>Love:</em> a simple API, clear PCI de-scoping, and a team that added requested card types quickly. <em>Complain:</em> a wish for deeper reporting dashboards, and one reviewer found the price a little high. (<a class="bl-link" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener">G2</a>, <a class="bl-link" href="https://www.capterra.com/p/241650/Enigma-Vault/reviews/" target="_blank" rel="noopener">Capterra</a>)</p>
+<blockquote class="bl-quote-cta"><p>Holding client cards in spreadsheets or old terminal profiles? Ask us how Agent Vault would move them into vaulted custody in eight weeks. <a class="bl-link" href="/request-demo/">Talk to us</a></p></blockquote>
+
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">02</span>
+    <div class="vc__id">
+      <h3 id="pci-booking" class="vc__name"><span class="vc__sep">2. </span>PCI Booking<span class="vc__sep">: </span><span class="vc__pill">Best for Sending a Card Link During the Call</span></h3>
+    </div>
+    <div class="vc__rates"><span class="vc__rate vc__rate--new"><span class="vc__score">Not listed</span><span class="vc__src">G2 · no listing</span></span><span class="vc__rate vc__rate--new"><span class="vc__score">Not listed</span><span class="vc__src">Capterra · no listing</span></span></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>Custom quote</dd></div>
+    <div><dt>Free tier or trial</dt><dd>Free sandbox</dd></div>
+    <div><dt>Phone capture</dt><dd>Card By Link sent by email or SMS mid-call</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Charter desks and brokers whose clients or assistants pay during a quote call and who want the card masked from the rep.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/pci-booking.jpg" alt="PCI Booking homepage" >}}
+  <figcaption>PCI Booking homepage. Source: pcibooking.net</figcaption>
+</figure>
+<p>PCI Booking is a card tokenization provider with a universal gateway. It grew up in hospitality and travel, and its universal gateway page speaks to lodging businesses and travel and tourism operators.</p>
+<p>Its most useful feature for a charter desk is Card By Link: during a call, the rep enters the client’s email or phone number, the client gets a capture page, and the operator receives a token it can charge, pre-authorize, or save, with the card staying masked.</p>
+<p>That maps cleanly onto a quote-to-deposit call with a principal’s assistant. The trade-off is that it’s a hospitality-shaped product, so aviation flows like repositioning fees are yours to model.</p>
+<p><strong>Key Features</strong></p>
+<ul>
+  <li>Card By Link lets a rep send a capture page to the client’s email or phone mid-call.</li>
+  <li>Capture and display forms keep the full card number masked from staff while authorized users can still view it.</li>
+  <li>A universal payment gateway with a published gateway list lets one token be charged in different currencies.</li>
+  <li>A proxy service sends tokenized card data to third-party APIs when a broker platform needs the card later.</li>
+  <li>3D Secure and card risk assessment add authentication on high-value remote charges, where charter deposit chargebacks hurt most.</li>
+  <li>States PCI DSS Level 1 and PCI v4 compliance on its compliance page, which simplifies vendor due diligence.</li>
+</ul>
+<p><strong>Pricing:</strong> Custom quote with a free sandbox. Card capture pages sent by SMS carry an extra per-message fee that varies by country.</p>
+<p><strong>Pros</strong></p>
+<ul>
+  <li>Reps never hear or type the card, yet the client or their assistant can pay before the quote call ends.</li>
+  <li>A broad published gateway list makes multi-currency charging straightforward for operators selling to clients in several countries.</li>
+  <li>3D Secure and risk checks on high-value remote charges help protect charter deposits from chargebacks.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li>After the client submits the link you receive a token, so charging or pre-authorizing it is your build.</li>
+  <li>Its gateway page targets lodging and travel, so aviation flows like repositioning legs and incidentals are yours to model.</li>
+  <li>SMS capture links cost extra per message at unlisted country rates, so phone-first international desks should budget for them.</li>
+</ul>
+<p><strong>What Users Say</strong></p>
+<p>PCI Booking isn’t listed on G2 or Capterra. Ask the vendor for two or three customer references in your segment before you sign.</p>
+<p>If you’d rather capture by phone without sending links at all, Enigma Vault’s <a class="bl-link" href="/vault/card-vault/">Twilio Pay capture</a> tokenizes straight from the IVR.</p>
+
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">03</span>
+    <div class="vc__id">
+      <h3 id="pci-proxy" class="vc__name"><span class="vc__sep">3. </span>PCI Proxy<span class="vc__sep">: </span><span class="vc__pill">Best for Euro-First Operators With Several Acquirers</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate vc__rate--new" href="https://www.g2.com/products/pci-proxy/reviews" target="_blank" rel="noopener"><span class="vc__score">No reviews</span><span class="vc__src">G2 · 0 reviews</span></a><a class="vc__rate vc__rate--new" href="https://www.capterra.com/p/10055014/PCI-Proxy/reviews/" target="_blank" rel="noopener"><span class="vc__score">No reviews</span><span class="vc__src">Capterra · 0 reviews</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>€350 a month plus usage</dd></div>
+    <div><dt>Free tier or trial</dt><dd>Free trial, no setup fees</dd></div>
+    <div><dt>Phone capture</dt><dd>Not packaged; built from its components</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>European operators that bill in several currencies through more than one acquirer and have developers to assemble capture.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/pci-proxy.jpg" alt="PCI Proxy homepage" >}}
+  <figcaption>PCI Proxy homepage. Source: pci-proxy.com</figcaption>
+</figure>
+<p>PCI Proxy, powered by Planet, is a composable card stack: a token vault that shares tokens with any PSP, a payment gateway connecting to 25+ card acquirers, network tokens, and card intelligence. Its homepage lists Airlines and Travel among the sectors it serves.</p>
+<p>For a European charter operator that settles in several currencies, running 3D Secure once and reusing the result with another PSP is genuinely handy. Phone capture is something you assemble from its components rather than buy as a ready flow.</p>
+<p><strong>Key Features</strong></p>
+<ul>
+  <li>A token vault that shares tokens with any PSP, so the same client card can move between acquirers without being recollected.</li>
+  <li>A payment gateway connecting to 25+ card acquirers suits operators settling in several currencies through European banks.</li>
+  <li>3D Secure can be run once and the result reused across PSPs, which avoids asking a high-value client to authenticate twice.</li>
+  <li>Network tokens and card intelligence help keep stored cards usable over the months between a jet-card deposit and later charges.</li>
+  <li>The Scale plan supports multiple brands and unlimited projects, which fits groups operating under several trading names.</li>
+  <li>SSO/SAML for staff access is available on the Enterprise plan, for teams that require single sign-on.</li>
+</ul>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>Starter</td><td>€350 a month plus usage</td><td>One brand, core suite, one project, self onboarding</td></tr>
+<tr><td>Scale</td><td>€650 a month plus usage</td><td>Multiple brands, full suite, unlimited projects, concierge onboarding</td></tr>
+<tr><td>Enterprise</td><td>Custom quote</td><td>Adds SSO/SAML</td></tr>
+</tbody></table></div>
+<p>Free trial, no setup fees, billing in EUR, USD, or GBP.</p>
+<p><strong>Pros</strong></p>
+<ul>
+  <li>Multiple brands on Scale suit operators with several certificates or trading names under one contract.</li>
+  <li>Billing in EUR, USD, or GBP fits cross-border fleets that don’t want currency conversion on their software bill.</li>
+  <li>Reusing a single 3D Secure result across PSPs spares high-value clients a second authentication step.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li>Starter covers one brand and one project, so a group with charter and management brands needs Scale (€650+).</li>
+  <li>Staff SSO/SAML sits only on custom-priced Enterprise, which matters if security requires single sign-on for card access.</li>
+  <li>Its site shows no packaged phone or pay-by-link flow, so capturing cards from calls means building it yourself.</li>
+</ul>
+<p><strong>What Users Say</strong></p>
+<p>PCI Proxy’s listings on <a class="bl-link" href="https://www.g2.com/products/pci-proxy/reviews" target="_blank" rel="noopener">G2</a> or <a class="bl-link" href="https://www.capterra.com/p/10055014/PCI-Proxy/reviews/" target="_blank" rel="noopener">Capterra</a> carry no ratings, so ask for references from travel customers.</p>
+<p>Need a free starting point before committing to a monthly floor? Enigma Vault’s <a class="bl-link" href="/pricing/">Lite plan</a> costs nothing for the first 1,000 requests a month.</p>
+
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">04</span>
+    <div class="vc__id">
+      <h3 id="spreedly" class="vc__name"><span class="vc__sep">4. </span>Spreedly<span class="vc__sep">: </span><span class="vc__pill">Best for Owning Tokens Across Many Gateways</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/spreedly/reviews" target="_blank" rel="noopener"><span class="vc__score">4.4<small>/5</small></span><span class="vc__src">G2 · 35 reviews</span></a><a class="vc__rate" href="https://www.capterra.com/p/114956/Spreedly/reviews/" target="_blank" rel="noopener"><span class="vc__score">4.5<small>/5</small></span><span class="vc__src">Capterra · 13 reviews</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>Vault from $750 a month</dd></div>
+    <div><dt>Free tier or trial</dt><dd>Not published</dd></div>
+    <div><dt>Phone capture</dt><dd>Not packaged; developer-built</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Fractional and jet-card programs billing members through more than one processor, with engineers to build capture.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/spreedly.jpg" alt="Spreedly homepage" >}}
+  <figcaption>Spreedly homepage. Source: spreedly.com</figcaption>
+</figure>
+<p>Spreedly is a card vault and payment optimization platform that sells its Independent Vault separately, built around token ownership: stored cards stay usable whichever of its 150+ connected gateways you send them to. For a fractional or jet-card program billing members through more than one processor, that portability is the reason to look.</p>
+<p>It’s an engineering product, though, and nothing on its pricing page speaks to phone capture.</p>
+<p><strong>Key Features</strong></p>
+<ul>
+  <li>The PCI-1 Independent Vault offers unlimited card storage, so a long client list costs no more to hold than a short one.</li>
+  <li>150+ gateway connections let one stored token be charged through whichever processor fits the client’s currency.</li>
+  <li>Payment token ownership means your stored cards stay usable if you change processors, which avoids recollecting cards from principals.</li>
+  <li>Vault health insights show the state of stored cards so finance can spot expiring or failing cards before a final invoice.</li>
+  <li>Network tokens, account updater, and smart routing on the optimization tier keep long-held member cards current.</li>
+  <li>3DS and fraud prevention on the optimization tier add authentication checks for high-value remote charter charges.</li>
+</ul>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>Independent Vault</td><td>From $750 a month</td><td>PCI-1 vault, unlimited storage, vault health insights</td></tr>
+<tr><td>Performance Optimization</td><td>Custom quote</td><td>Network tokens, account updater, routing, 3DS, and fraud prevention</td></tr>
+</tbody></table></div>
+<p><strong>Pros</strong></p>
+<ul>
+  <li>Token ownership protects you if you change processors, which matters for programs billing members over many years.</li>
+  <li>Account updater, on the optimization tier, helps keep jet-card and fractional member cards current between charges.</li>
+  <li>150+ gateway connections give multi-currency operators room to add processors without moving their stored cards.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li>The $750 monthly floor, about $9,000 a year before usage, is steep for an operator taking few cards.</li>
+  <li>Network tokens, account updater, and 3DS sit on the quote-priced optimization tier, so the entry vault alone lacks them.</li>
+  <li>Capture for phone and email requests is yours to build, and reviewers mention a slow dashboard and steep fee increases.</li>
+</ul>
+<p><strong>What Users Say</strong></p>
+<p><em>Love:</em> one central vault across many gateways and quick, detailed support. <em>Complain:</em> a slow dashboard and a long-time customer’s report of a steep fee increase. (<a class="bl-link" href="https://www.g2.com/products/spreedly/reviews" target="_blank" rel="noopener">G2</a>, <a class="bl-link" href="https://www.capterra.com/p/114956/Spreedly/reviews/" target="_blank" rel="noopener">Capterra</a>)</p>
+<p>Want multi-gateway charging at a fraction of that floor? Enigma Vault’s proxy works with any REST-based gateway on every plan.</p>
+
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">05</span>
+    <div class="vc__id">
+      <h3 id="ixopay" class="vc__name"><span class="vc__sep">5. </span>IXOPAY (Formerly TokenEx)<span class="vc__sep">: </span><span class="vc__pill">Best for Multi-Brand Aviation Groups</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/tokenex-ixopay/reviews" target="_blank" rel="noopener"><span class="vc__score">4.6<small>/5</small></span><span class="vc__src">G2 · 17 reviews</span></a><a class="vc__rate vc__rate--new" href="https://www.capterra.com/p/181731/Cloud-Based-Tokenization/reviews/" target="_blank" rel="noopener"><span class="vc__score">No reviews</span><span class="vc__src">Capterra · 0 reviews</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>Custom quote</dd></div>
+    <div><dt>Free tier or trial</dt><dd>Sandbox access and demo on request</dd></div>
+    <div><dt>Gateway reach</dt><dd>500+ pre-built payment adapters</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Aviation groups running charter, management, and other brands on different acquirers that want one token standard.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/ixopay.jpg" alt="IXOPAY homepage" >}}
+  <figcaption>IXOPAY homepage. Source: ixopay.com</figcaption>
+</figure>
+<p>IXOPAY (formerly TokenEx) is a payment platform whose universal tokens are built to avoid PSP lock-in and work across more than 500 pre-built payment adapters, covering over 200 acquirers and 300 payment methods. Its homepage shows an airline, Aer Lingus, among its client logos, without a case study.</p>
+<p>For an aviation group running several brands on different acquirers, that breadth is the draw. For a single-base operator, it’s more platform than you need, and pricing is by quote only.</p>
+<p><strong>Key Features</strong></p>
+<ul>
+  <li>Universal tokens are independent of any one PSP, so cards stay usable when an aviation group adds, removes, or switches providers.</li>
+  <li>More than 500 pre-built payment adapters connect to 200+ acquirers and 300+ payment methods for groups selling in many markets.</li>
+  <li>Network tokens and account updater help keep stored client cards current between trips months apart.</li>
+  <li>Payment orchestration with smart routing and automated reconciliation sits alongside tokenization in one API.</li>
+  <li>Sandbox access lets your developers test the token and adapter flow before a contract is signed.</li>
+  <li>A secure iframe for card capture is praised by reviewers on G2 for keeping cards off your pages.</li>
+</ul>
+<p><strong>Pricing:</strong> Custom quote through sales; sandbox access, a demo, and an ROI estimator are offered.</p>
+<p><strong>Pros</strong></p>
+<ul>
+  <li>The breadth of adapters covers almost any acquirer you add later, including region-specific payment methods.</li>
+  <li>Mature enterprise tokenization lineage through TokenEx, with tokens that reviewers say survive gateway switches without recollection.</li>
+  <li>Sandbox access lets developers prove the token and adapter flow before signing an enterprise contract.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li>It’s sold as enterprise-grade payment orchestration with routing and reconciliation, so a single-base operator pays for scope it won’t use.</li>
+  <li>Its site lists no small-business segment, so smaller brokers should confirm minimums and eligibility with sales early.</li>
+  <li>Phone or pay-by-link capture isn’t presented as a packaged flow, so remote capture from calls and emails is developer work.</li>
+</ul>
+<p><strong>What Users Say</strong></p>
+<p><em>Love:</em> the secure iframe, tokens that survive gateway switches, and responsive support. <em>Complain:</em> no clear theme, but many visible reviews are years old, so ask for recent references. (<a class="bl-link" href="https://www.g2.com/products/tokenex-ixopay/reviews" target="_blank" rel="noopener">G2</a>)</p>
+<p>We also hear from buyers replacing an incumbent vault; Enigma Vault’s <a class="bl-link" href="/vault/#card-on-file">migration pattern</a> was built for that move.</p>
+
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">06</span>
+    <div class="vc__id">
+      <h3 id="vgs" class="vc__name"><span class="vc__sep">6. </span>VGS<span class="vc__sep">: </span><span class="vc__pill">Best for Developer-Led Charter Platforms</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/very-good-security-vgs-platform/reviews" target="_blank" rel="noopener"><span class="vc__score">4.7<small>/5</small></span><span class="vc__src">G2 · 47 reviews</span></a><a class="vc__rate vc__rate--new" href="https://www.capterra.com/p/195135/VGS-Platform/reviews/" target="_blank" rel="noopener"><span class="vc__score">No reviews</span><span class="vc__src">Capterra · 0 reviews</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>$1,000 a month</dd></div>
+    <div><dt>Free tier or trial</dt><dd>Yes: “Try for Free” start</dd></div>
+    <div><dt>Phone capture</dt><dd>Not packaged; collect forms and proxy</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Charter booking apps and marketplaces with their own engineers that want cards swapped in transit with few code changes.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/vgs.jpg" alt="VGS homepage" >}}
+  <figcaption>VGS homepage. Source: verygoodsecurity.com</figcaption>
+</figure>
+<p>VGS (Very Good Security) is a proxy-based card tokenization platform that intercepts card data in transit and swaps it for aliases, so your app never holds the real number. That suits a booking marketplace or charter app with its own engineers, especially one that wants network tokens and an account updater as add-ons.</p>
+<p>A traditional operator whose cards arrive on calls will find more to build than to configure.</p>
+<p><strong>Key Features</strong></p>
+<ul>
+  <li>An inbound and outbound proxy substitutes card data in transit, so your booking app never holds the real number.</li>
+  <li>VGS Collect forms capture cards on your web pages and return aliases, which suits charter booking apps and marketplaces.</li>
+  <li>A network tokens add-on keeps stored cards working after reissue, useful for clients billed over several trips.</li>
+  <li>An account updater add-on refreshes expired or replaced cards before a final invoice is charged.</li>
+  <li>A PCI compliance subscription and VGS-provided auditor options can help with your own PCI assessment.</li>
+  <li>Card attributes and VGS Compute let you run logic on card data without bringing it into your systems.</li>
+</ul>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>Starter</td><td>From $1,000 a month</td><td>Not itemized on the page; free start</td></tr>
+<tr><td>Growth</td><td>Custom quote</td><td>Add-ons such as network tokens and account updater</td></tr>
+</tbody></table></div>
+<p><strong>Pros</strong></p>
+<ul>
+  <li>Little code change keeps cards out of your stack, since the proxy swaps data on requests you already make.</li>
+  <li>Optional help with your own PCI assessment through VGS-provided auditor options reduces the work of preparing for audits.</li>
+  <li>Network token and account updater add-ons keep stored client cards working between trips months apart.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li>The $1,000 monthly Starter floor, $12,000 a year, is high for a broker taking a few cards a week.</li>
+  <li>Reviewers report per-CNAME fees on top of the plan, which adds cost for operators with several booking domains.</li>
+  <li>Phone-heavy operations need extra components, because capture is built around web forms and the proxy rather than calls.</li>
+</ul>
+<p><strong>What Users Say</strong></p>
+<p><em>Love:</em> a proxy that’s quick to learn and helpful chat support. <em>Complain:</em> the $40 fee per extra CNAME, which one reviewer calls too expensive. (<a class="bl-link" href="https://www.g2.com/products/very-good-security-vgs-platform/reviews" target="_blank" rel="noopener">G2</a>)</p>
+<p>Prefer a proxy with a free tier? Try Enigma Vault’s <a class="bl-link" href="/vault/card-vault/">Card Vault</a> on your own gateway first.</p>
+
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">07</span>
+    <div class="vc__id">
+      <h3 id="pci-vault" class="vc__name"><span class="vc__sep">7. </span>PCI Vault<span class="vc__sep">: </span><span class="vc__pill">Best for Small Brokers With a Developer</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/pci-vault/reviews" target="_blank" rel="noopener"><span class="vc__score">4.5<small>/5</small></span><span class="vc__src">G2 · 12 reviews</span></a><span class="vc__rate vc__rate--new"><span class="vc__score">Not listed</span><span class="vc__src">Capterra · no listing</span></span></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>$255 a month plus $0.02 per operation (Growing)</dd></div>
+    <div><dt>Free tier or trial</dt><dd>No free trial; a staging account comes with a production signup</dd></div>
+    <div><dt>Key model</dt><dd>Zero-knowledge: you hold the passphrase</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Small brokers with a developer who want card storage where even the provider can’t open the data alone.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/pci-vault.jpg" alt="PCI Vault homepage" >}}
+  <figcaption>PCI Vault homepage. Source: pcivault.io</figcaption>
+</figure>
+<p>PCI Vault is a zero-knowledge PCI DSS Level 1 card vault run by SnapBill. Each key has a private half held by PCI Vault and a passphrase held only by you, so the provider can’t read what you store, and a lost passphrase means unrecoverable data. Its docs point developers to a capture guide and form script.</p>
+<p>For a broker sending a handful of quotes a week, the model is attractive, but storing, retrieving, and charging cards is API work, and plans start at $255 a month plus $0.02 per operation.</p>
+<p><strong>Key Features</strong></p>
+<ul>
+  <li>A zero-knowledge model splits each key between PCI Vault and your passphrase, so the provider can’t read cards.</li>
+  <li>States PCI DSS Level 1 for its vault environment, run by SnapBill, which supports your vendor due diligence.</li>
+  <li>A capture guide and form script in the docs show developers how to collect cards directly into the vault.</li>
+  <li>Per-request API pricing scales cost with the handful of quotes a small broker sends each week.</li>
+  <li>An AWS Marketplace listing lets you buy through an existing AWS account and consolidate it on that bill.</li>
+  <li>A production signup includes a staging account, so a developer can test the vault without waiting on a sales cycle.</li>
+</ul>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>Growing</td><td>$255 a month plus $0.02 per operation</td><td>Card tokenization and storage vault; email support with 24-hour response</td></tr>
+<tr><td>Business</td><td>$965 a month plus $0.01 per operation</td><td>Email and chat support with 4-hour response</td></tr>
+<tr><td>High Volume Enterprise</td><td>$1,675 a month; $0.01 down to $0.0009 per operation</td><td>Phone, email, and chat support with 1-hour response</td></tr>
+</tbody></table></div>
+<p><strong>Pros</strong></p>
+<ul>
+  <li>A lower published entry price than the other paid monthly floors on this list suits small brokers.</li>
+  <li>A strong key-separation story helps brokers whose high-profile clients ask exactly who can see their card.</li>
+  <li>Per-request API pricing keeps costs proportional to the handful of quotes a small broker sends weekly.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li>Lose the passphrase and the data stored under that key can’t be recovered, so key custody becomes an operations task.</li>
+  <li>Storing, retrieving, and charging cards is all API work, which reviewers say can feel complex without IT support.</li>
+  <li>There’s little workflow help for staff taking cards by phone, so call-based capture needs a developer to build it.</li>
+</ul>
+<p><strong>What Users Say</strong></p>
+<p><em>Love:</em> the security model and fast API integration. <em>Complain:</em> it can feel complex for a team without IT support. (<a class="bl-link" href="https://www.g2.com/products/pci-vault/reviews" target="_blank" rel="noopener">G2</a>)</p>
+<p>No developer on staff? Enigma Vault’s hosted forms and Twilio Pay capture need far less code to get a card into the vault.</p>
+
+<h2 id="how-each-vendor-describes-its-card-tokenization-for-private-aviation">How Each Vendor Describes Its Card Tokenization for Private Aviation</h2>
+<p>How each vendor positions itself and what it publishes for aviation or travel, as of October 23, 2026.</p>
+<div class="bl-tablewrap"><table class="bl-table bl-table--wide">
+<thead><tr><th>Vendor</th><th>How it positions itself</th><th>Proof it publishes for this use case</th><th>Source</th></tr></thead>
+<tbody>
+<tr><td>Enigma Vault</td><td>Card Vault tokenizes cards at capture and charges them through the gateway you already use; Agent Vault takes card-on-file operations “from scattered custody to vaulted custody”</td><td>An anonymized private aviation deployment: bulk card import, branded card management, SSO for staff, existing processor kept</td><td>Card Vault page; Vault page</td></tr>
+<tr><td>PCI Booking</td><td>“Your Secure Payment Processing Partner”</td><td>Gateway page names lodging and travel and tourism operators; no aviation case study</td><td>PCI Booking homepage</td></tr>
+<tr><td>PCI Proxy</td><td>“Your payment stack, fully composable.”</td><td>Airlines and Travel listed as sectors; an airline-solutions testimonial from an unnamed company</td><td>PCI Proxy homepage</td></tr>
+<tr><td>Spreedly</td><td>“Payment Orchestration for the Agentic Era”</td><td>A Berkshire Hathaway Travel Protection case study; Priceline and Hopper among its homepage logos</td><td>Spreedly homepage</td></tr>
+<tr><td>IXOPAY</td><td>“The Performance Layer Driving Agentic Payments”</td><td>Aer Lingus logo only; no case study</td><td>IXOPAY homepage</td></tr>
+<tr><td>VGS</td><td>“The Trusted Agentic Commerce Infrastructure”</td><td>“OTA and Insurers” listed as an industry; no travel case study</td><td>VGS homepage</td></tr>
+<tr><td>PCI Vault</td><td>A “zero-knowledge PCI DSS Level 1 compliant environment”</td><td>None found on accessible pages</td><td>PCI Vault docs</td></tr>
+</tbody></table></div>
+<p>Most of these vendors now lead with payment orchestration or agentic commerce, not with the card a charter client reads out over the phone.</p>
+<p>Only Enigma Vault publishes a private aviation deployment, and only PCI Booking publishes a ready-made mid-call capture flow among the rest; travel proof elsewhere is logos and airline or OTA sector labels. If phone and email capture is your main risk, treat a sector label as a reason to ask for a reference, not as evidence.</p>
+
+<h2 id="card-tokenization-pricing-for-private-aviation-compared">Card Tokenization Pricing for Private Aviation Compared</h2>
+<p>Numbers come only from each vendor’s own pricing page, read on October 23, 2026.</p>
+<div class="bl-tablewrap"><table class="bl-table bl-table--wide">
+<thead><tr><th>Vendor and plan</th><th>Monthly price</th><th>What’s included</th><th>Overage or usage fees</th><th>Free tier or trial</th><th>Source</th></tr></thead>
+<tbody>
+<tr><td>Enigma Card Vault Lite</td><td>$0</td><td>1,000 requests; tokenization and gateway proxy</td><td>$0.08 per request</td><td>Yes, free forever</td><td><a class="bl-link" href="/pricing/">Enigma pricing</a></td></tr>
+<tr><td>Enigma Card Vault Plus</td><td>$49.99</td><td>20,000 requests; ephemeral key sharing, email support</td><td>$0.04 per request</td><td>Lite plan</td><td><a class="bl-link" href="/pricing/">Enigma pricing</a></td></tr>
+<tr><td>Enigma Card Vault Premium</td><td>$249.99</td><td>250,000 requests; priority support</td><td>$0.02 per request</td><td>Lite plan</td><td><a class="bl-link" href="/pricing/">Enigma pricing</a></td></tr>
+<tr><td>Enigma Agent Vault and Customer Vault</td><td>Custom quote</td><td>Agent Vault: fixed eight-week card-on-file migration; Customer Vault: branded intake tenant</td><td>Scoped by engagement</td><td>No</td><td><a class="bl-link" href="/pricing/">Enigma pricing</a></td></tr>
+<tr><td>PCI Proxy Starter</td><td>€350</td><td>One brand, core suite, one project, self onboarding</td><td>Usage fees, not published</td><td>Free trial</td><td>PCI Proxy pricing page</td></tr>
+<tr><td>PCI Proxy Scale</td><td>€650</td><td>Multiple brands, full suite, unlimited projects, concierge onboarding</td><td>Usage fees, not published</td><td>Free trial</td><td>PCI Proxy pricing page</td></tr>
+<tr><td>Spreedly Independent Vault</td><td>From $750</td><td>PCI-1 vault, unlimited storage, vault health insights</td><td>Not published</td><td>Not published</td><td>Spreedly pricing page</td></tr>
+<tr><td>VGS Starter</td><td>From $1,000</td><td>Not itemized on the page</td><td>Not published</td><td>“Try for Free”</td><td>VGS pricing page</td></tr>
+<tr><td>PCI Vault Growing</td><td>From $255</td><td>Card tokenization and storage vault</td><td>$0.02 per operation; $0.01 on Business ($965); $0.01 to $0.0009 on High Volume Enterprise ($1,675)</td><td>No free trial; a staging account comes with a production signup</td><td>PCI Vault pricing</td></tr>
+<tr><td>PCI Booking</td><td>Custom quote</td><td>Not stated; SMS capture links billed per message by country</td><td>Per SMS message</td><td>Free sandbox</td><td>PCI Booking Card By Link page</td></tr>
+<tr><td>IXOPAY</td><td>Custom quote</td><td>Not stated; sandbox, ROI estimator, and demo offered</td><td>Not published</td><td>Not published</td><td>IXOPAY homepage</td></tr>
+<tr><td>Spreedly Performance Optimization and VGS Growth</td><td>Custom quote</td><td>Spreedly: network tokens, account updater, routing, 3DS; VGS: add-ons such as network tokens and account updater</td><td>Not published</td><td>Not published</td><td>Spreedly pricing page, VGS pricing page</td></tr>
+</tbody></table></div>
+
+<h2 id="how-to-choose">How to Choose Card Tokenization Software for Private Aviation</h2>
+<p>Five questions sort this list quickly:</p>
+<ol>
+  <li><strong>How do cards reach you today?</strong> If by phone and assistants’ emails, weight capture (IVR or secure link) highest.</li>
+  <li><strong>How many cards do you already hold?</strong> Years of stored cards make migration the real project, so ask about bulk import.</li>
+  <li><strong>How many gateways and currencies do you charge through?</strong> One processor makes most vaults equal; several make token portability decisive.</li>
+  <li><strong>Who charges and approves the final invoice?</strong> If finance charges weeks after capture, you need a trip-record token and a proxy.</li>
+  <li><strong>Who sees passenger documents before departure?</strong> If brokers and ground vendors do, prefer expiring, revocable links over attachments.</li>
+</ol>
+<p>On weighting: for most charter operators and brokers, capture and migration matter more than the length of a gateway list, because the risk lives in the card that’s read aloud, typed into a notes field, or kept in an old spreadsheet.</p>
+<p>A good pilot is one real trip: build the client profile, collect passenger documents and a card, approve the charter payment, share one document by expiring link, and revoke it. A design that keeps cards off your systems can significantly reduce PCI scope, but your acquirer or QSA confirms the final scope and SAQ.</p>
+<p>A vault doesn’t replace fraud, approval, and treasury controls on high-value charges, data minimization still has to coexist with manifest and recordkeeping rules, and no vault satisfies aviation, customs, or sanctions obligations automatically.</p>
+
+<h2 id="try-enigma-vault-for-your-charter-desk">Try Enigma Vault for Your Charter Desk</h2>
+<p>If your cards arrive by phone and email and you already hold years of them, start with Enigma Vault: Agent Vault moves them into vaulted custody in a fixed eight weeks, Card Vault keeps charging through the processor you already use, and Customer Vault handles passports and expiring document links.</p>
+<p>The next step is simple: <a class="bl-link" href="/pricing/">start free</a> on the Card Vault Lite plan to test capture and charging on your own gateway, then <a class="bl-link" href="/request-demo/">book a scoping call</a> so we can map your stored cards to an eight-week Agent Vault migration.</p>
+<div class="bl-inlinecta">
+  <div>
+    <p class="bl-inlinecta__t">Get client cards out of inboxes and into a vault.</p>
+    <p class="bl-inlinecta__s">Start free with Card Vault, or ask about an eight-week Agent Vault migration.</p>
+  </div>
+  <a class="np-btn np-btn--on-dark np-btn--primary" href="/request-demo/"><span>Ask about Agent Vault</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
+</div>

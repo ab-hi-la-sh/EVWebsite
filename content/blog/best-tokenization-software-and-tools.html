@@ -1,0 +1,847 @@
+---
+title: "14 Best Tokenization Software and Tools for 2026 (Compared)"
+titleEmphasis: "14 Best Tokenization Software and Tools for 2026 (Compared)"
+slug: "best-tokenization-software-and-tools"
+layout: "pii-style"
+metaTitle: "Best Tokenization Software and Tools for 2026: 14 Compared"
+description: "Compare 14 tokenization platforms for cards, PII, files, and AI prompts: vault vs. vaultless, SaaS vs. self-hosted, pricing, and sourced reviews."
+subtitle: "One buyer’s guide for every kind of sensitive value: which platforms tokenize cards, personal data, files, and AI prompts, and how their token models, deployment, and prices really differ."
+date: 2026-10-23T00:07:00
+category: "Vault"
+author: "tony-alex"
+readTime: 27
+heroImage: "/assets/blog/img-08.png"
+heroAlt: "Abstract panels representing sensitive values replaced by tokens across different systems"
+excerpt: "Ten full reviews and four shorter picks of tokenization software, compared on data coverage, token model, deployment, pricing, and reviews."
+tags: ["tokenization", "vault", "pci-dss", "pii", "format-preserving-encryption"]
+ogImage: "/assets/og/vault-data.jpg"
+ogImageAlt: "14 best tokenization software and tools for 2026, compared | Enigma Vault"
+ogType: article
+styles: ["blog.css", "pages/blog-pii-hero.css", "tr-pages.css"]
+scripts: ["blog-article.js"]
+faqSchema: true
+faqs:
+  - q: "What Is the Best Tokenization Software in 2026?"
+    a: "It depends on what you need to protect. Enigma Vault is best for one vendor across cards, personal data, files, and AI prompts with self-serve pricing; IXOPAY suits teams that want vaulted or vaultless tokens inside payment orchestration; VGS suits proxy-based tokenization of cards, bank accounts, and PII; and Protegrity or Thales CipherTrust suit large enterprises that want to run vaultless tokenization themselves."
+  - q: "What Is the Difference Between Vaulted and Vaultless Tokenization?"
+    a: "Vaulted tokenization stores the original value in a secure database and hands back a random token that has no mathematical link to it, so only the vault can swap it back. Vaultless tokenization derives the token from the value with a secret key (often format-preserving encryption), so there is no lookup database to replicate, but the key becomes the thing you must protect above all else."
+  - q: "Is Format-Preserving Encryption the Same as Tokenization?"
+    a: "Not quite. Format-preserving encryption (NIST FF1) turns a value into ciphertext with the same length and character set, and anyone with the key can reverse it. Many vendors sell it as vaultless tokenization. A vaulted random token can also be format-preserving (for example, a 16-digit Luhn-passable token), but it is reversed by lookup, not by math."
+  - q: "Does Tokenization Take My Business Out of PCI DSS Scope?"
+    a: "No platform can promise that. A hosted capture form and a token vault can significantly reduce the systems that touch card data, and therefore your PCI scope, but your acquirer or QSA confirms your final scope and which Self-Assessment Questionnaire applies."
+  - q: "How Much Does Tokenization Software Cost?"
+    a: "Published prices range from $0 to about $1,000 a month to start. Enigma Vault starts at $0 and $49.99 a month per vault, PCI Vault from $255 a month plus $0.02 per operation, PCI Proxy from €350 a month, Spreedly from $750 a month, Basis Theory and Evervault from $995 a month, and VGS from $1,000 a month. Enterprise platforms such as Protegrity, Thales, Skyflow, Bluefin, and IXOPAY are quoted."
+  - q: "Can I Tokenize PII as Well as Card Numbers?"
+    a: "Yes. Enigma Vault (Data Vault), VGS, Skyflow, IXOPAY, Bluefin ShieldConex, Protegrity, Thales, and Fortanix all tokenize or encrypt non-card values such as Social Security numbers, bank accounts, and health data. Spreedly, PCI Vault, and PCI Proxy focus mainly on payment and financial data."
+  - q: "Should I Use My Payment Gateway’s Tokens Instead of a Separate Vault?"
+    a: "For many businesses with one gateway, the gateway’s own tokens are enough. A separate vault makes sense when you use more than one gateway, want tokens you can move if you switch processors, need staff or supplier workflows the gateway can’t support, or want fewer of your own systems touching the card number."
+  - q: "Is There Open-Source Tokenization Software?"
+    a: "Not as a ready-made token vault. HashiCorp Vault’s Transform engine does tokenization and format-preserving encryption, but it requires a paid Vault Enterprise module. Open-source PII detection libraries can find and mask values, but you build key management, storage, and compliance evidence yourself."
+  - q: "How Do I Tokenize Data Before It Reaches an LLM?"
+    a: "Put an application-level proxy between your app and the model provider that detects PII, swaps it for consistent tokens, and restores the real values in the response. Enigma Vault’s NoPII, Skyflow’s LLM gateway, and Protecto do this; test detection on your own records, because unrecognized PII can pass through."
+  - q: "How Long Does It Take to Implement Tokenization Software?"
+    a: "A hosted capture form or a single API field can go live in days on self-serve platforms with a free tier or sandbox. Self-managed enterprise deployments that tokenize warehouses and many applications usually run for months because of key management, policy design, and integration work."
+---
+<style>
+/* Wide tables: tighter cell padding so they fit the article column. */
+.bl-content .bl-table--wide td, .bl-content .bl-table--wide th { padding-left: 8px; padding-right: 8px; }
+.bl-content blockquote.bl-quote-cta{margin:24px 0;padding:14px 20px;border-left:3px solid var(--ev-mineral-blue);background:var(--ev-warm-cloud);border-radius:0 10px 10px 0}.bl-content blockquote.bl-quote-cta p{margin:0;font-size:16px}
+.bl-content figure.bl-shot{margin:20px 0 24px;padding:10px;border:1px solid var(--ev-cool-stone);border-radius:10px;background:var(--ev-warm-cloud)}.bl-content figure.bl-shot img{display:block;width:100%;height:auto;border-radius:6px}.bl-content figure.bl-shot figcaption{margin-top:8px;text-align:center;font-size:13px;color:var(--ev-slate)}
+/* Vendor header card: rank, name, best-for pill, review scores, key facts. */
+.bl-content .vc { margin: 40px 0 20px; }
+.bl-content .vc__head { display: grid; grid-template-columns: auto 1fr auto; gap: 18px; align-items: center; margin-bottom: 14px; }
+.bl-content .vc__num { font-size: 34px; font-weight: 600; line-height: 1; color: var(--ev-mineral-blue); font-variant-numeric: tabular-nums; }
+.bl-content h3.vc__name { margin: 0; padding: 0; font-size: 26px; line-height: 1.25; font-weight: 600; color: var(--ev-ink); }
+.bl-content .vc__sep { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.bl-content .vc__pill { display: table; margin-top: 10px; padding: 6px 12px; border-radius: 6px; background: var(--ev-mineral-blue); color: #fff; font-size: 12px; line-height: 1.4; font-weight: 600; text-transform: none; letter-spacing: 0; font-size: 13px; }
+.bl-content .vc__rates { display: flex; flex-direction: column; gap: 8px; align-items: stretch; }
+.bl-content .vc__rate { display: flex; flex-direction: column; align-items: flex-end; padding: 8px 14px; border: 1px solid var(--ev-cool-stone); border-radius: 10px; background: #fff; text-decoration: none !important; min-width: 128px; }
+.bl-content a.vc__rate:hover { border-color: var(--ev-mineral-blue); }
+.bl-content .vc__score { font-size: 20px; font-weight: 700; color: var(--ev-ink); line-height: 1.2; }
+.bl-content .vc__score small { font-size: 13px; font-weight: 500; color: var(--ev-slate); }
+.bl-content .vc__src { font-size: 12px; color: var(--ev-slate); line-height: 1.3; }
+.bl-content .vc__rate--new .vc__score { font-size: 15px; }
+.bl-content .vc__facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px 24px; margin: 0; padding: 18px 22px; border-radius: 12px; background: var(--ev-warm-cloud); }
+.bl-content .vc__facts div { margin: 0; }
+.bl-content .vc__facts .vc__best { grid-column: 1 / -1; padding-top: 14px; border-top: 1px solid var(--ev-cool-stone); }
+.bl-content .vc__facts dt { margin: 0 0 4px; font-size: 11.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ev-slate); }
+.bl-content .vc__facts dd { margin: 0; font-size: 15px; line-height: 1.5; color: var(--ev-ink); }
+@media (max-width: 700px) {
+  .bl-content .vc__head { grid-template-columns: auto 1fr; }
+  .bl-content .vc__rates { grid-column: 1 / -1; flex-direction: row; flex-wrap: wrap; }
+  .bl-content .vc__rate { align-items: flex-start; }
+  .bl-content .vc__num { font-size: 26px; }
+  .bl-content h3.vc__name { font-size: 22px; }
+  .bl-content .vc__facts { grid-template-columns: 1fr; }
+}
+.bl-content .bl-tagline { margin: 6px 0 4px; color: var(--ev-slate); }
+.bl-content .bl-ratingline { margin: 0 0 14px; font-size: 15px; }
+.bl-content .bl-compact { margin: 28px 0; padding: 18px 22px; border: 1px solid var(--ev-cool-stone); border-radius: 12px; background: #fff; }
+.bl-content .bl-compact h3 { margin-top: 0; }
+/* TL;DR summary box, same treatment as the site's uc2-cta callout. */
+.bl-content .tldr { margin: 8px 0 32px; padding: 22px 26px; border-radius: 12px; background: var(--ev-warm-cloud); border-left: 3px solid var(--ev-mineral-blue); }
+.bl-content .tldr .tldr__label { margin: 0 0 12px; padding: 0; border: 0; font-size: 13px; line-height: 1.4; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--ev-mineral-blue); }
+.bl-content .tldr .tldr__list { margin: 0; padding-left: 20px; }
+.bl-content .tldr .tldr__list li { margin: 0 0 10px; font-size: 16px; line-height: 1.6; color: var(--ev-ink); }
+.bl-content .tldr .tldr__list li::marker { color: var(--ev-mineral-blue); }
+.bl-content .tldr .tldr__list li:last-child { margin-bottom: 0; }
+.bl-content .tldr strong a { font-weight: 600; }
+.bl-content .tldr .tldr__tail { margin: 16px 0 0; padding-top: 14px; border-top: 1px solid var(--ev-cool-stone); font-size: 15px; }
+</style>
+
+
+<p>Comparing the best tokenization software and tools of 2026: 1. Enigma Vault, 2. IXOPAY (formerly TokenEx), 3. Very Good Security (VGS), 4. Skyflow, 5. Basis Theory, 6. Evervault, 7. Spreedly, 8. Protegrity, 9. Thales CipherTrust Tokenization, 10. Fortanix Data Security Manager, 11. PCI Vault, 12. PCI Proxy, 13. Bluefin ShieldConex, and 14. Protecto.</p>
+<p><strong>About the author:</strong> I’m <a class="bl-link" href="https://www.linkedin.com/in/tony-alex-enigma-vault/" target="_blank" rel="noopener">Dr. Tony Alex</a>, Chief Executive Officer of Enigma Vault, where I lead our work in encryption, tokenization, and sensitive-data protection. I have more than two decades of experience building enterprise software businesses.</p>
+<p>In 1999 I founded US eDirect to develop software for parks, campgrounds, and recreation agencies, bringing reservations and payments into one cloud system, and led it through its acquisition by Tyler Technologies in 2022.</p>
+<p><em>Disclosure: I work at Enigma Vault, which appears first in this list. Every platform here is judged on the same criteria, and the review ratings come from G2 and Capterra.</em></p>
+<p>This guide compares tokenization software across cards, business data, files, and AI prompts. If you only need cards, see our <a class="bl-link" href="/blog/best-payment-tokenization-software/">payment tokenization comparison</a>.</p>
+
+<div class="tldr" id="tldr">
+  <h2 class="tldr__label">TL;DR</h2>
+  <ul class="tldr__list">
+    <li><strong><a class="bl-link" href="#enigma-vault">Enigma Vault</a>:</strong> best for one vendor across cards, data, files, and AI prompts.</li>
+    <li><strong><a class="bl-link" href="#ixopay">IXOPAY (formerly TokenEx)</a>:</strong> best for vaulted or vaultless tokens inside payment orchestration.</li>
+    <li><strong><a class="bl-link" href="#vgs">Very Good Security (VGS)</a>:</strong> best for proxy-based tokenization of cards, bank accounts, and PII.</li>
+    <li><strong><a class="bl-link" href="#skyflow">Skyflow</a>:</strong> best for a privacy vault for PII, PHI, and data residency.</li>
+    <li><strong><a class="bl-link" href="#basis-theory">Basis Theory</a>:</strong> best for developers building custom payment flows.</li>
+    <li><strong><a class="bl-link" href="#evervault">Evervault</a>:</strong> best for encryption-first data protection with per-use pricing.</li>
+    <li><strong><a class="bl-link" href="#spreedly">Spreedly</a>:</strong> best for a card vault plus routing to 150+ gateways.</li>
+    <li><strong><a class="bl-link" href="#protegrity">Protegrity</a>:</strong> best for vaultless tokenization in data warehouses.</li>
+    <li><strong><a class="bl-link" href="#thales-ciphertrust">Thales CipherTrust Tokenization</a>:</strong> best for self-managed vaulted and vaultless tokens under one key manager.</li>
+    <li><strong><a class="bl-link" href="#fortanix">Fortanix Data Security Manager</a>:</strong> best for HSM-backed format-preserving tokenization, SaaS or on-premises.</li>
+    <li><strong><a class="bl-link" href="#pci-vault">PCI Vault</a>:</strong> best for a low-cost card vault with a zero-knowledge design.</li>
+    <li><strong><a class="bl-link" href="#pci-proxy">PCI Proxy</a>:</strong> best for travel and hospitality card vaulting in Europe.</li>
+    <li><strong><a class="bl-link" href="#bluefin-shieldconex">Bluefin ShieldConex</a>:</strong> best for vaultless tokenization of cards, PII, and batch files.</li>
+    <li><strong><a class="bl-link" href="#protecto">Protecto</a>:</strong> best for tokenizing sensitive data in AI agents and RAG pipelines.</li>
+  </ul>
+</div>
+<h2 id="top-14-tokenization-software-at-a-glance">Top 14 Tokenization Software at a Glance</h2>
+<p>Here’s how all 14 compare. Prices, features, and ratings were checked on October 23, 2026.</p>
+<div class="bl-tablewrap"><table class="bl-table bl-table--wide">
+<thead><tr><th>Platform</th><th>Best for</th><th>Data it tokenizes</th><th>Token model</th><th>Deployment</th><th>Starting price</th><th>G2</th><th>Gartner Peer Insights</th></tr></thead>
+<tbody>
+<tr><td><a class="bl-link" href="#enigma-vault">Enigma Vault</a></td><td>One vendor across cards, data, files, and AI prompts</td><td>Cards, PII, files, LLM prompts</td><td>Vaulted, optional format-preserving</td><td>SaaS (AWS)</td><td>$0, then $49.99 a month</td><td><a class="bl-link" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener">4.4 (6)</a></td><td>Not listed</td></tr>
+<tr><td><a class="bl-link" href="#ixopay">IXOPAY</a></td><td>Vaulted or vaultless tokens inside payment orchestration</td><td>Cards, PII, PHI</td><td>Vaulted or vaultless</td><td>SaaS</td><td>Custom quote</td><td><a class="bl-link" href="https://www.g2.com/products/tokenex-ixopay/reviews" target="_blank" rel="noopener">4.6 (17)</a></td><td>Not listed</td></tr>
+<tr><td><a class="bl-link" href="#vgs">VGS</a></td><td>Proxy-based tokenization of cards, bank accounts, and PII</td><td>Cards, bank data, PII</td><td>Vaulted proxy</td><td>SaaS</td><td>$1,000 a month</td><td><a class="bl-link" href="https://www.g2.com/products/very-good-security-vgs-platform/reviews" target="_blank" rel="noopener">4.7 (47)</a></td><td>Not listed</td></tr>
+<tr><td><a class="bl-link" href="#skyflow">Skyflow</a></td><td>A privacy vault for PII, PHI, and data residency</td><td>PII, PHI, cards, AI prompts</td><td>Vaulted, polymorphic encryption</td><td>SaaS (AWS)</td><td>Custom quote</td><td><a class="bl-link" href="https://www.g2.com/products/payments-data-privacy-vault/reviews" target="_blank" rel="noopener">5.0 (1)</a></td><td>Not listed</td></tr>
+<tr><td><a class="bl-link" href="#basis-theory">Basis Theory</a></td><td>Developers building custom payment flows</td><td>Cards, some PII</td><td>Vaulted</td><td>SaaS (US on Starter)</td><td>$995 a month</td><td><a class="bl-link" href="https://www.g2.com/products/basis-theory/reviews" target="_blank" rel="noopener">No reviews</a></td><td>Not listed</td></tr>
+<tr><td><a class="bl-link" href="#evervault">Evervault</a></td><td>Encryption-first protection with per-use pricing</td><td>Cards, PII, files</td><td>Encryption, Relay, Enclaves</td><td>SaaS</td><td>$995 a month plus usage</td><td><a class="bl-link" href="https://www.g2.com/products/evervault-2022-11-22/reviews" target="_blank" rel="noopener">4.4 (17)</a></td><td>Not listed</td></tr>
+<tr><td><a class="bl-link" href="#spreedly">Spreedly</a></td><td>A card vault plus routing to 150+ gateways</td><td>Cards</td><td>Vaulted</td><td>SaaS</td><td>$750 a month</td><td><a class="bl-link" href="https://www.g2.com/products/spreedly/reviews" target="_blank" rel="noopener">4.4 (35)</a></td><td>Not listed</td></tr>
+<tr><td><a class="bl-link" href="#protegrity">Protegrity</a></td><td>Vaultless tokenization in data warehouses</td><td>PII, PCI, PHI in structured data</td><td>Vaultless, format-preserving</td><td>SaaS, cloud, hybrid, on-premises</td><td>Custom quote</td><td><a class="bl-link" href="https://www.g2.com/products/protegrity/reviews" target="_blank" rel="noopener">4.5 (14)</a></td><td><a class="bl-link" href="https://www.gartner.com/reviews/product/protegrity-data-security-platform" target="_blank" rel="nofollow noopener">4.4 (4)</a></td></tr>
+<tr><td><a class="bl-link" href="#thales-ciphertrust">Thales CipherTrust</a></td><td>Self-managed vaulted and vaultless tokens under one key manager</td><td>Any structured value</td><td>Vaulted and vaultless</td><td>Self-managed VM or cloud image</td><td>Custom quote</td><td><a class="bl-link" href="https://www.g2.com/products/thales-ciphertrust-tokenization/reviews" target="_blank" rel="noopener">4.0 (6)</a></td><td><a class="bl-link" href="https://www.gartner.com/reviews/product/ciphertrust-tokenization" target="_blank" rel="nofollow noopener">4.7 (11)</a></td></tr>
+<tr><td><a class="bl-link" href="#fortanix">Fortanix DSM</a></td><td>HSM-backed format-preserving tokenization</td><td>Any structured value</td><td>Vaultless FPE</td><td>SaaS or on-premises</td><td>Quote (infrastructure from $1.95 an hour)</td><td><a class="bl-link" href="https://www.g2.com/products/fortanix/reviews" target="_blank" rel="noopener">4.5 (2)</a></td><td><a class="bl-link" href="https://www.gartner.com/reviews/product/data-security-manager" target="_blank" rel="nofollow noopener">4.6 (26)</a></td></tr>
+<tr><td><a class="bl-link" href="#pci-vault">PCI Vault</a></td><td>A low-cost card vault with a zero-knowledge design</td><td>Cards</td><td>Vaulted</td><td>SaaS</td><td>$255 a month plus $0.02 per operation</td><td><a class="bl-link" href="https://www.g2.com/products/pci-vault/reviews" target="_blank" rel="noopener">4.5 (12)</a></td><td>Not listed</td></tr>
+<tr><td><a class="bl-link" href="#pci-proxy">PCI Proxy</a></td><td>Travel and hospitality card vaulting in Europe</td><td>Cards</td><td>Vaulted</td><td>SaaS</td><td>€350 a month plus usage</td><td><a class="bl-link" href="https://www.g2.com/products/pci-proxy/reviews" target="_blank" rel="noopener">No reviews</a></td><td>Not listed</td></tr>
+<tr><td><a class="bl-link" href="#bluefin-shieldconex">Bluefin ShieldConex</a></td><td>Vaultless tokenization of cards, PII, and batch files</td><td>Cards, PII, batch files</td><td>Vaultless, deterministic</td><td>SaaS</td><td>Custom quote</td><td><a class="bl-link" href="https://www.g2.com/products/shieldconex/reviews" target="_blank" rel="noopener">No reviews</a></td><td><a class="bl-link" href="https://www.gartner.com/reviews/product/shieldconex" target="_blank" rel="nofollow noopener">4.0 (1)</a></td></tr>
+<tr><td><a class="bl-link" href="#protecto">Protecto</a></td><td>Tokenizing sensitive data in AI agents and RAG pipelines</td><td>PII in AI prompts and pipelines</td><td>Format-preserving, consistent tokens</td><td>SaaS, your VPC, or air-gapped</td><td>Talk to sales</td><td><a class="bl-link" href="https://www.g2.com/products/protecto/reviews" target="_blank" rel="noopener">No reviews</a></td><td>Not listed</td></tr>
+</tbody></table></div>
+<blockquote class="bl-quote-cta"><p>Have cards, IDs, and files in the same workflow? Tell us what you collect and we’ll show you which vault each value belongs in. <a class="bl-link" href="/request-demo/">Get in touch</a></p></blockquote>
+
+<h2 id="what-is-tokenization-software">What Is Tokenization Software?</h2>
+<p><strong>Tokenization software replaces a sensitive value, such as a card number, Social Security number, or file, with a stand-in token that is useless outside an authorized system, so your ordinary apps store the token while the real value stays protected.</strong></p>
+<p>Unlike encrypted data, a vault token has no mathematical link to the original, so a stolen token is useless on its own. In a card payment, the customer enters their card at checkout, the service stores the real number in a secure vault, and your system keeps only the token; at charge time, the service swaps it back and sends the card to your payment processor.</p>
+
+<h2 id="vault-vs-vaultless-tokenization">Vault vs. Vaultless Tokenization</h2>
+<p><strong>The difference is where the link between a token and its original value lives: a vault keeps it in a protected database, while vaultless tokenization recomputes it from a secret key.</strong></p>
+<ul>
+  <li><strong>Vault tokenization:</strong> The original is stored encrypted in a central vault and swapped for a random token, so a stolen token reveals nothing. Enigma Vault, VGS, Spreedly, Basis Theory, Skyflow, PCI Vault, and PCI Proxy work this way.</li>
+  <li><strong>Vaultless tokenization:</strong> The token is computed from the value with a secret key, so there is no token database to grow or replicate. Protegrity, Fortanix, and Bluefin ShieldConex work this way.</li>
+  <li><strong>Both:</strong> IXOPAY and Thales CipherTrust offer vaulted and vaultless tokens, so you can choose per data type within one product.</li>
+</ul>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Question</th><th>Vault</th><th>Vaultless</th></tr></thead>
+<tbody>
+<tr><td>Where the original lives</td><td>Encrypted in the vault</td><td>Nowhere; it’s recomputed with the key</td></tr>
+<tr><td>What you must protect most</td><td>The vault and who can call detokenize</td><td>The key, since anyone holding it can reverse tokens</td></tr>
+<tr><td>Scaling and regions</td><td>The vault must be available and, for multi-region, replicated</td><td>No token database to replicate; each node needs the key</td></tr>
+<tr><td>Who runs it</td><td>Usually a hosted service that also holds your PCI or privacy burden</td><td>Often run inside your own warehouse, cloud, or data center</td></tr>
+<tr><td>Typical fit</td><td>Card capture, gateway proxies, PII in apps, files</td><td>High-volume structured data in warehouses and analytics</td></tr>
+</tbody></table></div>
+<p>Choose a vault when you want the sensitive value held by a specialist and kept out of your systems entirely, which is the usual goal for card data and a smaller PCI footprint.</p>
+<p>Choose vaultless when tokens must be produced at very high volume close to the data, such as across a warehouse, and you have a team that can run key management. Format-preserving tokens (for example, a 16-digit, Luhn-passable “card number”) are a token format available in both models, not a third model.</p>
+<p>Related reading: <a class="bl-link" href="/blog/vault-vs-vaultless-tokenization/">vault vs. vaultless tokenization</a> and <a class="bl-link" href="/blog/tokenization-vs-masking-vs-redaction-ai/">tokenization vs. masking vs. redaction for AI</a>.</p>
+
+<h2 id="how-we-ranked-tokenization-software">How We Ranked Tokenization Software</h2>
+<p>Every platform was scored on the same weighted rubric, built for a buyer who may need more than one kind of token over the next few years.</p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Criterion</th><th>Weight</th><th>What we checked</th></tr></thead>
+<tbody>
+<tr><td>Data coverage</td><td>25%</td><td>Cards, PII, bank data, files, and AI prompts from one vendor</td></tr>
+<tr><td>Token model flexibility</td><td>20%</td><td>Random, deterministic, format-preserving, vaulted, or vaultless options</td></tr>
+<tr><td>Deployment fit</td><td>15%</td><td>SaaS, self-hosted, regions, and how much you must operate yourself</td></tr>
+<tr><td>Pricing transparency</td><td>15%</td><td>Published prices, free tier or sandbox, what drives a quote</td></tr>
+<tr><td>Compliance evidence</td><td>15%</td><td>Vendor-stated PCI DSS Level 1, SOC 2 Type II, ISO 27001, FIPS</td></tr>
+<tr><td>Integrations and reviews</td><td>10%</td><td>Gateways, warehouses, LLM providers; G2 and Capterra feedback</td></tr>
+</tbody></table></div>
+<p>Sources: each vendor’s own product, pricing, documentation, and trust pages, official cloud marketplace listings, and review pages on G2, Capterra, and Gartner Peer Insights, checked on October 23, 2026.</p>
+
+<h3 id="excluded-and-why">Excluded and Why</h3>
+<ul>
+  <li><strong>Payment gateways and processors (Stripe, Adyen, Braintree, PayPal, Authorize.net):</strong> They tokenize cards for their own processing, so we treat them as partners that vaults route to.</li>
+  <li><strong>HashiCorp Vault Transform secrets engine:</strong> It needs the paid Vault Enterprise Advanced Data Protection module, and you run it yourself; Gartner lists it as IBM Vault (<a class="bl-link" href="https://www.gartner.com/reviews/product/ibm-vault" target="_blank" rel="nofollow noopener">4.4/5 from 19 ratings</a>).</li>
+  <li><strong>Processor and bank tokenization services (Worldpay OmniToken, FIS, ACI Omni-Tokens, Capital One Databolt):</strong> They tokenize inside a processor or bank relationship rather than as independent software.</li>
+  <li><strong>Other platforms on Gartner’s list (comforte TAMUNIO, Acra, Ubiq, ALTR, Titaniam, Baffle, EncryptRIGHT, eperi, Sotero):</strong> They focus on database encryption and access control rather than tokenizing cards, files, and AI prompts.</li>
+  <li><strong>Cloud key management services:</strong> They manage keys, not tokens; you’d still build the tokenization layer.</li>
+  <li><strong>Data loss prevention and AI firewalls:</strong> They detect and block rather than issue reversible tokens.</li>
+  <li><strong>Database-native dynamic masking:</strong> It hides values from some users but leaves the plaintext in the database.</li>
+</ul>
+
+<h2 id="the-10-best-tokenization-software-for-2026">The 10 Best Tokenization Software Platforms for 2026</h2>
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">01</span>
+    <div class="vc__id">
+      <h3 id="enigma-vault" class="vc__name"><span class="vc__sep">1. </span>Enigma Vault<span class="vc__sep">: </span><span class="vc__pill">Best for One Vendor Across Cards, Data, Files, and AI Prompts</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener"><span class="vc__score">4.4<small>/5</small></span><span class="vc__src">G2 · 6 reviews</span></a><a class="vc__rate" href="https://www.capterra.com/p/241650/Enigma-Vault/reviews/" target="_blank" rel="noopener"><span class="vc__score">4.8<small>/5</small></span><span class="vc__src">Capterra · 4 reviews</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>$0 (Lite), then $49.99 a month per vault</dd></div><div><dt>Free tier or trial</dt><dd>Lite tier is free forever, not a trial</dd></div><div><dt>Token model</dt><dd>Vaulted; random by default, optional format-preserving</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Teams that need cards, personal data, files, and AI prompts protected by one vendor, with published prices and a free start.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/enigma-vault.jpg" alt="Enigma Vault homepage" >}}
+  <figcaption>Enigma Vault homepage. Source: enigmavault.io</figcaption>
+</figure>
+<p>Enigma Vault is a tokenization platform that protects card data, personal data, files, and AI prompts through one vendor. Card Vault captures cards through hosted forms (13 languages), the REST API, or phone payments through Twilio Pay, and CVVs are held encrypted for at most 30 minutes before deletion.</p>
+<p>Data Vault tokenizes structured secrets such as SSNs and account numbers with deterministic tokens that keep joins and exact-match lookups working, in batches of up to 5,000 per request.</p>
+<p>File Vault handles files up to 5 GB with a unique data key per file and presigned uploads, so files can skip your application server. NoPII sits in front of LLM API calls and tokenizes recognized PII before it reaches the model provider.</p>
+<p class="bl-tagline"><em>Four API vaults plus an LLM proxy, priced self-serve from $0 on AWS Marketplace.</em></p>
+<p><strong>What’s Great</strong></p>
+<ul>
+  <li>One platform covers cards, data, files, and LLM traffic, each priced separately, so you pay only for the data you protect.</li>
+  <li>Card tokens can be format-preserving and Luhn-passable with the first six and last four kept, so legacy validation keeps working.</li>
+  <li>The gateway proxy charges Stripe, Braintree, Authorize.net, PayPal, or any REST gateway, so your application never receives the card number.</li>
+</ul>
+<p><strong>Watch-Outs</strong></p>
+<ul>
+  <li>Network tokens and card account updater are not on the product pages, so card-on-file lifecycle features look thinner than payments-first vaults.</li>
+  <li>Customer Vault and Agent Vault are priced by engagement rather than published, so budgeting those two products takes a sales conversation.</li>
+  <li>ISO 27001 certification is in progress rather than held, which matters if procurement requires a current certificate before signing.</li>
+</ul>
+<p>Security is the same on every tier: AES-256 with per-customer keys, audit logs on every request, PCI DSS Level 1 Service Provider status, and SOC 2 Type II. A hosted form or vault integration can significantly reduce PCI scope; your acquirer or QSA confirms the final scope.</p>
+<p>The honest trade-off is depth in card lifecycle tooling: if network tokens and account updater are your main need, a payments-first vault in this list is a better match.</p>
+<p><strong>Pricing</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>What you get</th></tr></thead>
+<tbody>
+<tr><td>Lite</td><td>$0 a month, free forever</td><td>Card Vault 1,000 requests ($0.08 overage), Data Vault 1,500 ($0.06), File Vault 5 GB; tokenization and gateway proxy</td></tr>
+<tr><td>Plus</td><td>$49.99 a month per vault</td><td>Card Vault 20,000 requests ($0.04 overage), Data Vault 30,000 ($0.03), File Vault 150 GB; ephemeral key sharing, email support</td></tr>
+<tr><td>Premium</td><td>$249.99 a month per vault</td><td>Card Vault 250,000 requests ($0.02 overage), Data Vault 400,000 ($0.01), File Vault 1 TB; priority support</td></tr>
+<tr><td>NoPII</td><td>$0 or $50 a month</td><td>Free: 1M protected tokens a month; Pro: 50M, then $1 per extra million; Enterprise custom</td></tr>
+</tbody></table></div>
+<p><strong>What Reviewers Say</strong></p>
+<ul>
+  <li><strong>Praise:</strong> Reviewers describe a simple API and fewer PCI DSS responsibilities, and one calls Card Vault the best option they found (<a class="bl-link" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener">G2</a>).</li>
+  <li><strong>Praise:</strong> Another reviewer values one vendor for cards, personal data, and files, plus “PCI friendly” format-preserving tokens (<a class="bl-link" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener">G2</a>).</li>
+  <li><strong>Faults:</strong> Reviewers want deeper reporting and audit dashboards, one finds the price a bit high, and the sample is six reviews (<a class="bl-link" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener">G2</a>).</li>
+</ul>
+<blockquote class="bl-quote-cta"><p>Not sure which of your fields need a vault? Start on the free Lite tier, or tell us your data shapes and we’ll map them to the right vault with you. <a class="bl-link" href="/request-demo/">Get in touch</a></p></blockquote>
+
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">02</span>
+    <div class="vc__id">
+      <h3 id="ixopay" class="vc__name"><span class="vc__sep">2. </span>IXOPAY (formerly TokenEx)<span class="vc__sep">: </span><span class="vc__pill">Best for Vaulted or Vaultless Tokens Inside Payment Orchestration</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/tokenex-ixopay/reviews" target="_blank" rel="noopener"><span class="vc__score">4.6<small>/5</small></span><span class="vc__src">G2 · 17 reviews</span></a><a class="vc__rate vc__rate--new" href="https://www.capterra.com/p/181731/Cloud-Based-Tokenization/reviews/" target="_blank" rel="noopener"><span class="vc__score">No reviews yet</span><span class="vc__src">Capterra</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>Custom quote</dd></div><div><dt>Free tier or trial</dt><dd>Sandbox access on request</dd></div><div><dt>Token model</dt><dd>Vaulted or vaultless (FPE with lookup tables)</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Merchants and platforms that want one token across many processors and the option to choose vaulted or vaultless storage.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/ixopay.jpg" alt="IXOPAY homepage" >}}
+  <figcaption>IXOPAY homepage. Source: ixopay.com</figcaption>
+</figure>
+<p>IXOPAY (formerly TokenEx) is a payment orchestration platform with a token vault that can also handle your non-card data. Its vaultless option uses format-preserving encryption plus customer-specific lookup tables, so there is no vault to replicate across regions, while the vaulted option keeps a one-to-one mapping for lookup-based reversal.</p>
+<p>Since the 2024 merger the TokenEx vault sits inside a wider orchestration platform claiming 200+ acquirers and 300+ payment methods, so the same token can route to whichever processor wins on cost or approval rate.</p>
+<p class="bl-tagline"><em>The TokenEx vault, now packaged with IXOPAY’s orchestration and 200+ acquirers.</em></p>
+<p><strong>What’s Great</strong></p>
+<ul>
+  <li>Offers vaulted and vaultless storage under one contract for cards, PII, and PHI, so you choose the model per data type.</li>
+  <li>January 2026 TokenEx packages split into Core, Connect (20+ PSP integrations), and Alternative Payments, so you buy only the layer you need.</li>
+  <li>Network tokens and account updater are sold as payment modules, which help keep stored cards current and approvable.</li>
+</ul>
+<p><strong>Watch-Outs</strong></p>
+<ul>
+  <li>Network token operations are billed on top of the subscription, so model per-transaction fees before comparing it with flat-priced vaults.</li>
+  <li>TokenEx documentation now sits inside IXOPAY’s module docs, so developers should confirm which doc set covers their integration.</li>
+  <li>The vault ships inside a full orchestration platform, so teams tokenizing a few database fields pay for routing they won’t use.</li>
+</ul>
+<p>It’s the wrong pick if you need a self-serve price today or only want to tokenize a few database fields; that buyer pays for orchestration they won’t use.</p>
+<p><strong>Pricing</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>What you get</th></tr></thead>
+<tbody>
+<tr><td>TokenEx Core</td><td>Custom quote</td><td>Vault, universal tokens, network tokens</td></tr>
+<tr><td>TokenEx Connect</td><td>Custom quote</td><td>Core plus 20+ prebuilt PSP integrations</td></tr>
+<tr><td>Orchestration and add-ons</td><td>Custom quote</td><td>Routing, account updater, network token operations billed separately</td></tr>
+</tbody></table></div>
+<p><strong>What Reviewers Say</strong></p>
+<ul>
+  <li><strong>Praise:</strong> Reviewers like the secure payment iframe, gateway-independent tokens, and a vault that sharply reduced their PCI exposure (<a class="bl-link" href="https://www.g2.com/products/tokenex-ixopay/reviews" target="_blank" rel="noopener">G2</a>).</li>
+  <li><strong>Faults:</strong> Reporting is limited, and many visible reviews date from the 2019 TokenEx era, so ask for recent references (<a class="bl-link" href="https://www.g2.com/products/tokenex-ixopay/reviews" target="_blank" rel="noopener">G2</a>).</li>
+</ul>
+<p>Want vault-level token portability without a quote cycle? <a class="bl-link" href="/vault/card-vault/">Compare Enigma Vault’s Card Vault</a>, which starts free.</p>
+
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">03</span>
+    <div class="vc__id">
+      <h3 id="vgs" class="vc__name"><span class="vc__sep">3. </span>Very Good Security (VGS)<span class="vc__sep">: </span><span class="vc__pill">Best for Proxy-Based Tokenization of Cards, Bank Accounts, and PII</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/very-good-security-vgs-platform/reviews" target="_blank" rel="noopener"><span class="vc__score">4.7<small>/5</small></span><span class="vc__src">G2 · 47 reviews</span></a><a class="vc__rate vc__rate--new" href="https://www.capterra.com/p/195135/VGS-Platform/reviews/" target="_blank" rel="noopener"><span class="vc__score">No reviews yet</span><span class="vc__src">Capterra</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>From $1,000 a month</dd></div><div><dt>Free tier or trial</dt><dd>Free sandbox</dd></div><div><dt>Token model</dt><dd>Vaulted, proxy-based</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Product teams that want cards, bank account numbers, and PII tokenized in transit with minimal code changes.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/vgs.jpg" alt="Very Good Security homepage" >}}
+  <figcaption>VGS homepage. Source: verygoodsecurity.com</figcaption>
+</figure>
+<p>Very Good Security (VGS) is a proxy-based tokenization platform that keeps cards, bank accounts, and PII off your servers. Instead of calling a tokenize API from your code, you route traffic through VGS, which swaps sensitive fields for aliases on the way in and reveals them on the way out to approved destinations.</p>
+<p>That pattern suits teams who need to keep raw values away from their own servers across many integrations at once. It also sells PCI compliance subscriptions and an auditor, which helps smaller teams get to an AOC.</p>
+<p class="bl-tagline"><em>A proxy that intercepts sensitive fields in traffic, so your code changes stay small.</em></p>
+<p><strong>What’s Great</strong></p>
+<ul>
+  <li>Proxy routes redact and reveal selected fields in API traffic, so many integrations need routing configuration, not new code.</li>
+  <li>Coverage spans cards, bank account numbers, and PII for GDPR and CCPA programs, so one vendor can protect several sensitive fields.</li>
+  <li>PCI DSS Level 1, SOC 2 Type II, and a Schellman-certified ISO 27001 badge give security reviewers a strong evidence pack.</li>
+</ul>
+<p><strong>Watch-Outs</strong></p>
+<ul>
+  <li>The $1,000 monthly Starter floor is the highest published entry price here, which is hard to justify at low volumes.</li>
+  <li>Network tokens, account updater, and large file transfers are custom-priced Growth add-ons, so lifecycle features push you off published pricing.</li>
+  <li>Reviewers report a $40 fee for each extra custom domain, a recurring cost if you run several branded capture pages.</li>
+</ul>
+<p>Compared with Spreedly, VGS covers more data types; compared with Basis Theory, the entry price is similar but the proxy is the center of gravity rather than front-end Elements. It’s the wrong pick for a small business that only needs a few thousand tokens a month.</p>
+<p><strong>Pricing</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>What you get</th></tr></thead>
+<tbody>
+<tr><td>Sandbox</td><td>$0</td><td>Test vault and proxy routes</td></tr>
+<tr><td>Starter</td><td>From $1,000 a month</td><td>Live vault, tokenization, proxy</td></tr>
+<tr><td>Growth</td><td>Custom quote</td><td>Adds network tokens, account updater, large file transfers, Compute, card attributes, PCI compliance subscription</td></tr>
+</tbody></table></div>
+<p><strong>What Reviewers Say</strong></p>
+<ul>
+  <li><strong>Praise:</strong> Reviewers say the proxy integration was fast, gateway switching got easier, and PCI compliance came at an affordable price (<a class="bl-link" href="https://www.g2.com/products/very-good-security-vgs-platform/reviews" target="_blank" rel="noopener">G2</a>).</li>
+  <li><strong>Faults:</strong> Reviewers call the $40 fee per extra CNAME too expensive, and G2’s summary says the documentation can be challenging to navigate (<a class="bl-link" href="https://www.g2.com/products/very-good-security-vgs-platform/reviews" target="_blank" rel="noopener">G2</a>).</li>
+</ul>
+<p>Need PII and card tokenization for less than a four-figure monthly floor? <a class="bl-link" href="/pricing/">See Enigma Vault’s published prices</a>.</p>
+
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">04</span>
+    <div class="vc__id">
+      <h3 id="skyflow" class="vc__name"><span class="vc__sep">4. </span>Skyflow<span class="vc__sep">: </span><span class="vc__pill">Best for a Privacy Vault for PII, PHI, and Data Residency</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/payments-data-privacy-vault/reviews" target="_blank" rel="noopener"><span class="vc__score">5.0<small>/5</small></span><span class="vc__src">G2 · 1 review</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>Custom quote</dd></div><div><dt>Free tier or trial</dt><dd>Demo</dd></div><div><dt>Token model</dt><dd>Vaulted, with tokenization and polymorphic encryption</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Companies building a privacy program around customer PII and PHI, especially across regions with residency rules.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/skyflow.jpg" alt="Skyflow homepage" >}}
+  <figcaption>Skyflow homepage. Source: skyflow.com</figcaption>
+</figure>
+<p>Skyflow is a data privacy vault that treats PII as the primary data type and cards as one case among many. It sells residency handling and AI de-identification as part of the same vault, and its security page lists PCI DSS Level 1, SOC 2 Type II, and ISO 27001:2022 on AWS across multiple availability zones.</p>
+<p class="bl-tagline"><em>A data privacy vault with polymorphic encryption, residency controls, and an LLM gateway.</em></p>
+<p><strong>What’s Great</strong></p>
+<ul>
+  <li>Combines tokenization, per-field encryption, and polymorphic encryption in one vault, so some operations can run on protected data without revealing the plaintext.</li>
+  <li>Handles data residency rules “without adding instances,” per its pricing page, which helps companies storing customer PII across several regulated regions.</li>
+  <li>Skyflow LLM Gateway de-identifies sensitive data before it reaches AI systems, so the same vault can cover application data and AI prompts.</li>
+</ul>
+<p><strong>Watch-Outs</strong></p>
+<ul>
+  <li>HIPAA is “assessed and eligible” rather than certified, so healthcare buyers should request the assessment report and a signed BAA.</li>
+  <li>Its security page describes AWS hosting, so teams that must stay on Azure, Google Cloud, or their own servers should confirm options.</li>
+  <li>It is built around PII and AI runtime control, so payments teams should confirm gateway connections before shortlisting it for checkout.</li>
+</ul>
+<p>Pick it when legal, privacy, and engineering are buying together and residency is a deal-breaker. Skip it if you need a price this week or a lightweight card vault.</p>
+<p><strong>Pricing</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>What you get</th></tr></thead>
+<tbody>
+<tr><td>All plans</td><td>Custom quote</td><td>Vault, tokenization, polymorphic encryption, LLM gateway; priced after a demo</td></tr>
+</tbody></table></div>
+<p><strong>What Reviewers Say</strong></p>
+<ul>
+  <li><strong>Praise:</strong> The Payments Data Privacy Vault listing shows 5.0/5 from a single review (<a class="bl-link" href="https://www.g2.com/products/payments-data-privacy-vault/reviews" target="_blank" rel="noopener">G2</a>).</li>
+  <li><strong>Note:</strong> A single review isn’t a trend, so ask for references in your industry (<a class="bl-link" href="https://www.g2.com/products/payments-data-privacy-vault/reviews" target="_blank" rel="noopener">G2</a>).</li>
+</ul>
+<p>Want PII tokenization with a price you can see before a demo? <a class="bl-link" href="/vault/data-vault/">Look at Enigma Vault’s Data Vault</a>.</p>
+
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">05</span>
+    <div class="vc__id">
+      <h3 id="basis-theory" class="vc__name"><span class="vc__sep">5. </span>Basis Theory<span class="vc__sep">: </span><span class="vc__pill">Best for Developers Building Custom Payment Flows</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate vc__rate--new" href="https://www.g2.com/products/basis-theory/reviews" target="_blank" rel="noopener"><span class="vc__score">No reviews yet</span><span class="vc__src">G2</span></a><a class="vc__rate vc__rate--new" href="https://www.capterra.com/p/10002181/Basis-Theory/reviews/" target="_blank" rel="noopener"><span class="vc__score">No reviews yet</span><span class="vc__src">Capterra</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>$995 a month, 20,000 tokens included</dd></div><div><dt>Free tier or trial</dt><dd>“Get started for free” account</dd></div><div><dt>Token model</dt><dd>Vaulted, with Elements and Proxy</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Engineering-led payments teams that want to route to any PSP and build custom flows on prebuilt card fields.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/basis-theory.jpg" alt="Basis Theory homepage" >}}
+  <figcaption>Basis Theory homepage. Source: basistheory.com</figcaption>
+</figure>
+<p>Basis Theory is a developer platform with a built-in token vault for custom payment flows. You combine Elements, Proxy, and Reactors (code that runs against tokens) to build flows the big processors don’t offer. The footer lists PCI Level 1, SOC 2 Type II, ISO 27001, and HIPAA.</p>
+<p class="bl-tagline"><em>Elements, Proxy, and Reactors for teams that want to own their payment stack.</em></p>
+<p><strong>What’s Great</strong></p>
+<ul>
+  <li>Elements, Proxy, network tokens, account updater, 3DS, and BIN lookup sit under one API, so payments engineers can assemble custom flows.</li>
+  <li>Tokens route to any PSP with backup routing for failover, so one processor outage doesn’t stop you charging stored cards.</li>
+  <li>Starter includes a PCI Attestation of Compliance, while Enterprise adds PII and PHI compliance, SSO, and a dedicated IP for security reviews.</li>
+</ul>
+<p><strong>Watch-Outs</strong></p>
+<ul>
+  <li>Starter runs in a US environment with 24-hour log retention, which rules it out for EU data residency or longer audit trails.</li>
+  <li>PII and PHI compliance, SAQ D answers, and SSO are Enterprise-only, so teams protecting more than cards need a custom quote.</li>
+  <li>The site documents PII and file handling thinly, so teams tokenizing SSNs or documents should test those flows in the sandbox first.</li>
+</ul>
+<p>It overlaps most with Evervault at the same $995 entry price. Basis Theory is the better match if your team thinks in tokens and proxies; Evervault if it thinks in encryption and enclaves.</p>
+<p><strong>Pricing</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>What you get</th></tr></thead>
+<tbody>
+<tr><td>Starter</td><td>$995 a month</td><td>20,000 tokens, 1 MB payload, 24-hour logs, PCI AOC, US environment</td></tr>
+<tr><td>Enterprise</td><td>Custom quote</td><td>PII and PHI compliance, SAQ D answers, SSO/SAML, dedicated IP</td></tr>
+</tbody></table></div>
+<p><strong>What Reviewers Say</strong></p>
+<ul>
+  <li><strong>Note:</strong> Its <a class="bl-link" href="https://www.g2.com/products/basis-theory/reviews" target="_blank" rel="noopener">G2</a> and <a class="bl-link" href="https://www.capterra.com/p/10002181/Basis-Theory/reviews/" target="_blank" rel="noopener">Capterra</a> listings carry no ratings yet, so ask for references from a business at your volume.</li>
+</ul>
+<p>Card fields and proxy charging without a $995 floor: <a class="bl-link" href="/vault/card-vault-demo/">try the Card Vault demo</a>.</p>
+
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">06</span>
+    <div class="vc__id">
+      <h3 id="evervault" class="vc__name"><span class="vc__sep">6. </span>Evervault<span class="vc__sep">: </span><span class="vc__pill">Best for Encryption-First Data Protection With Per-Use Pricing</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/evervault-2022-11-22/reviews" target="_blank" rel="noopener"><span class="vc__score">4.4<small>/5</small></span><span class="vc__src">G2 · 17 reviews</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>$995 a month plus usage</dd></div><div><dt>Free tier or trial</dt><dd>Free sandbox, no time limit</dd></div><div><dt>Token model</dt><dd>Encryption-based, with Relay proxy and Enclaves</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Teams that want field-level encryption and confidential computing more than a classic lookup vault.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/evervault.jpg" alt="Evervault homepage" >}}
+  <figcaption>Evervault homepage. Source: evervault.com</figcaption>
+</figure>
+<p>Evervault is an encryption platform that encrypts data at the edge (forms, Relay, SDKs) and decrypts only in approved places, a cousin of tokenization rather than a lookup vault. It suits teams that want to process data, for example in an enclave, without holding plaintext in their main stack. It raised a $25M Series B in March 2026.</p>
+<p class="bl-tagline"><em>Encrypt everywhere, decrypt only where needed, and pay per operation.</em></p>
+<p><strong>What’s Great</strong></p>
+<ul>
+  <li>Publishes the most itemized price list here, such as $0.005 per decrypt and $0.25 per account update, so you can model cost.</li>
+  <li>Enclaves run Docker containers in isolated environments, so you can process card or identity data without exposing your main stack.</li>
+  <li>Lists PCI DSS 4.0.1 Level 1, SOC 2 Type II, and CSA STAR Level 1, giving reviewers current payments and cloud evidence.</li>
+</ul>
+<p><strong>Watch-Outs</strong></p>
+<ul>
+  <li>The Platform plan targets businesses under 25,000 transactions a month, so growing merchants soon move to a custom contract.</li>
+  <li>Base-plan support runs 9 a.m. to 5 p.m. GMT, leaving US and Asia-Pacific teams without live help for most of the day.</li>
+  <li>Data is encrypted rather than swapped for stable tokens, which can complicate joins and lookups, and one reviewer needed vendor help connecting it to their own system.</li>
+</ul>
+<p>Choose it over Basis Theory if confidential computing matters; choose a lookup vault if your systems expect stable token strings to store and join on.</p>
+<p><strong>Pricing</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>What you get</th></tr></thead>
+<tbody>
+<tr><td>Sandbox</td><td>$0</td><td>Unlimited time, no card required</td></tr>
+<tr><td>Platform</td><td>$995 a month plus usage</td><td>Under 25K transactions a month; unlimited encrypts, $0.005 per decrypt</td></tr>
+<tr><td>Custom</td><td>Custom quote</td><td>25K+ transactions a month, 99.99% uptime SLA, Enclaves</td></tr>
+</tbody></table></div>
+<p><strong>What Reviewers Say</strong></p>
+<ul>
+  <li><strong>Praise:</strong> Reviewers like the developer-friendly integration and documentation (<a class="bl-link" href="https://www.g2.com/products/evervault-2022-11-22/reviews" target="_blank" rel="noopener">G2</a>).</li>
+  <li><strong>Faults:</strong> Cost is the recurring complaint, and one reviewer says setting up a secure environment takes effort despite an intuitive interface (<a class="bl-link" href="https://www.g2.com/products/evervault-2022-11-22/reviews" target="_blank" rel="noopener">G2</a>).</li>
+</ul>
+<p>Prefer stable, storable tokens with a free start? <a class="bl-link" href="/vault/">See how Enigma Vault’s vaults work</a>.</p>
+
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">07</span>
+    <div class="vc__id">
+      <h3 id="spreedly" class="vc__name"><span class="vc__sep">7. </span>Spreedly<span class="vc__sep">: </span><span class="vc__pill">Best for a Card Vault Plus Routing to 150+ Gateways</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/spreedly/reviews" target="_blank" rel="noopener"><span class="vc__score">4.4<small>/5</small></span><span class="vc__src">G2 · 35 reviews</span></a><a class="vc__rate" href="https://www.capterra.com/p/114956/Spreedly/reviews/" target="_blank" rel="noopener"><span class="vc__score">4.5<small>/5</small></span><span class="vc__src">Capterra · 13 reviews</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>From $750 a month</dd></div><div><dt>Free tier or trial</dt><dd>Not listed on pricing page</dd></div><div><dt>Token model</dt><dd>Vaulted, card data</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Merchants and platforms routing card payments across many gateways who want the vault and orchestration in one place.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/spreedly.jpg" alt="Spreedly homepage" >}}
+  <figcaption>Spreedly homepage. Source: spreedly.com</figcaption>
+</figure>
+<p>Spreedly is an independent card vault with routing to many payment gateways, built around payment data. If you use four gateways and want one card token, it is a mature answer with a large connector catalog; if SSNs and uploaded IDs are also leaking into your CRM, it covers only the card part.</p>
+<p class="bl-tagline"><em>An independent card vault built around gateway choice.</em></p>
+<p><strong>What’s Great</strong></p>
+<ul>
+  <li>Connects to 150+ gateways, 60+ payment methods, and 32+ fraud integrations, so one card token can follow you across processors.</li>
+  <li>The Independent Vault starts at $750 a month with unlimited storage, so the cost doesn’t rise as your stored card base grows.</li>
+  <li>Its security page lists PCI Level 1 and SOC 2 Type II, which covers the evidence most card-payment security reviews ask for.</li>
+</ul>
+<p><strong>Watch-Outs</strong></p>
+<ul>
+  <li>It is payments-focused, with no general PII or file tokenization listed, so SSNs or uploaded IDs need a second vendor.</li>
+  <li>Network tokens and account updater sit in the custom-priced Performance tier, so the $750 entry plan lacks card-on-file approval features.</li>
+  <li>Reviewers report a slow dashboard and no automated test mode, and one G2 reviewer reports a sudden threefold price hike after 10 years as a customer.</li>
+</ul>
+<p>Against IXOPAY, Spreedly publishes an entry price; against VGS, it has more gateway connectors but narrower data scope.</p>
+<p><strong>Pricing</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>What you get</th></tr></thead>
+<tbody>
+<tr><td>Independent Vault</td><td>From $750 a month</td><td>PCI Level 1 vault, unlimited storage</td></tr>
+<tr><td>Performance Optimization</td><td>Custom quote</td><td>Network tokens, account updater, smart retries, routing, 3DS, fraud</td></tr>
+</tbody></table></div>
+<p><strong>What Reviewers Say</strong></p>
+<ul>
+  <li><strong>Praise:</strong> Reviewers value one central vault across 100-plus gateways, which simplifies processor changes, and describe the support as excellent (<a class="bl-link" href="https://www.g2.com/products/spreedly/reviews" target="_blank" rel="noopener">G2</a>).</li>
+  <li><strong>Faults:</strong> Reviewers cite a slow dashboard, sparse documentation examples, and one customer’s sudden threefold price hike after 10 years (<a class="bl-link" href="https://www.g2.com/products/spreedly/reviews" target="_blank" rel="noopener">G2</a>).</li>
+</ul>
+<p>Gateway-agnostic card tokens from $0: <a class="bl-link" href="/vault/card-vault/">explore Card Vault</a>.</p>
+
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">08</span>
+    <div class="vc__id">
+      <h3 id="protegrity" class="vc__name"><span class="vc__sep">8. </span>Protegrity<span class="vc__sep">: </span><span class="vc__pill">Best for Vaultless Tokenization in Data Warehouses</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/protegrity/reviews" target="_blank" rel="noopener"><span class="vc__score">4.5<small>/5</small></span><span class="vc__src">G2 · 14 reviews</span></a><a class="vc__rate" href="https://www.gartner.com/reviews/product/protegrity-data-security-platform" target="_blank" rel="nofollow noopener"><span class="vc__score">4.4<small>/5</small></span><span class="vc__src">Gartner Peer Insights · 4 ratings</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>Custom quote</dd></div><div><dt>Free tier or trial</dt><dd>Free Developer Edition and API Playground</dd></div><div><dt>Token model</dt><dd>Vaultless, format-preserving</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Large enterprises protecting PII, PCI, and PHI across warehouses, lakes, and analytics without a central vault.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/protegrity.jpg" alt="Protegrity homepage" >}}
+  <figcaption>Protegrity homepage. Source: protegrity.com</figcaption>
+</figure>
+<p>Protegrity is a vaultless tokenization platform for large analytics estates where sensitive data lives in columns, not in a checkout form. Tokens are generated from the value and a secret key, so there is no vault to replicate across regions, and policy decides who sees the real value at query time.</p>
+<p class="bl-tagline"><em>Policy-driven, format-preserving tokens enforced inside Snowflake, Databricks, and the cloud.</em></p>
+<p><strong>What’s Great</strong></p>
+<ul>
+  <li>Vaultless tokens are format-preserving and policy-reversible, so analytics, joins, and reports keep working on protected warehouse columns.</li>
+  <li>Native Databricks (Unity Catalog UDFs with Luhn-valid tokens) and Snowflake (Cloud Protect) integrations enforce protection inside the platforms where analysts already work.</li>
+  <li>Runs cloud-native, hybrid, on-premises, or as SaaS, and the April 2026 AI Team Edition extends policies to AI inference.</li>
+</ul>
+<p><strong>Watch-Outs</strong></p>
+<ul>
+  <li>The vaultless page lists PCI DSS and HIPAA support but names no certifications, so request audit reports during procurement.</li>
+  <li>Policy design and key management need an experienced data security team, which is heavy for a startup protecting one checkout form.</li>
+  <li>A Gartner Peer Insights reviewer found integration difficult, so test your own stack in the free Developer Edition before committing.</li>
+</ul>
+<p>It is the wrong tool for a startup protecting one form. It is the right short-list entry for a bank or insurer tokenizing a warehouse.</p>
+<p><strong>Pricing</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>What you get</th></tr></thead>
+<tbody>
+<tr><td>Developer Edition</td><td>Free</td><td>API Playground and sandbox</td></tr>
+<tr><td>Team Edition</td><td>Custom quote</td><td>Smaller deployments, AI use cases</td></tr>
+<tr><td>Enterprise</td><td>Custom quote</td><td>Full platform, protectors, integrations</td></tr>
+</tbody></table></div>
+<p><strong>What Reviewers Say</strong></p>
+<ul>
+  <li><strong>Praise:</strong> Reviewers say it protects data well and is easy to use, highlighting deterministic vaultless tokens that scale across clouds (<a class="bl-link" href="https://www.g2.com/products/protegrity/reviews" target="_blank" rel="noopener">G2</a>).</li>
+  <li><strong>Praise:</strong> The featured review praises protection that works across environments (<a class="bl-link" href="https://www.gartner.com/reviews/product/protegrity-data-security-platform" target="_blank" rel="nofollow noopener">Gartner Peer Insights</a>).</li>
+  <li><strong>Faults:</strong> Integration options could be broader, and some reviewers find the price a little high (<a class="bl-link" href="https://www.g2.com/products/protegrity/reviews" target="_blank" rel="noopener">G2</a>).</li>
+  <li><strong>Faults:</strong> The featured critique says integration with existing systems was hard and some needed customizations weren’t available (<a class="bl-link" href="https://www.gartner.com/reviews/product/protegrity-data-security-platform" target="_blank" rel="nofollow noopener">Gartner Peer Insights</a>).</li>
+</ul>
+<p>Need deterministic tokens that keep joins working, without a warehouse-scale project? <a class="bl-link" href="/vault/data-vault/">See Data Vault</a>.</p>
+
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">09</span>
+    <div class="vc__id">
+      <h3 id="thales-ciphertrust" class="vc__name"><span class="vc__sep">9. </span>Thales CipherTrust Tokenization<span class="vc__sep">: </span><span class="vc__pill">Best for Self-Managed Vaulted and Vaultless Tokens Under One Key Manager</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/thales-ciphertrust-tokenization/reviews" target="_blank" rel="noopener"><span class="vc__score">4.0<small>/5</small></span><span class="vc__src">G2 · 6 reviews</span></a><a class="vc__rate" href="https://www.gartner.com/reviews/product/ciphertrust-tokenization" target="_blank" rel="nofollow noopener"><span class="vc__score">4.7<small>/5</small></span><span class="vc__src">Gartner Peer Insights · 11 ratings</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>Custom quote</dd></div><div><dt>Free tier or trial</dt><dd>Not stated on the product page</dd></div><div><dt>Token model</dt><dd>Vaulted and vaultless; FPE, random, or masked</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Enterprises that must run tokenization in their own data centers or clouds with keys they control.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v3/thales.jpg" alt="Thales CipherTrust Tokenization page" >}}
+  <figcaption>Thales CipherTrust Tokenization page. Source: cpl.thalesgroup.com</figcaption>
+</figure>
+<p>Thales CipherTrust Tokenization is a self-managed product that gives you both vaulted and vaultless tokens on your own infrastructure. That suits regulated enterprises that can’t send data to a SaaS vault, at the cost of running it yourself. AWS has documented it as a PCI DSS tokenization pattern.</p>
+<p class="bl-tagline"><em>Both token models, on your own infrastructure, rooted in CipherTrust Manager.</em></p>
+<p><strong>What’s Great</strong></p>
+<ul>
+  <li>Provides vaulted tokens in your own database and vaultless FPE or random tokens, so each data set can use the right model.</li>
+  <li>Dynamic masking by LDAP or Active Directory group plus regex-defined token formats let you control exactly what each user sees.</li>
+  <li>Deploys as OVA, Hyper-V, or AWS, Azure, and GCP images, with keys rooted in FIPS 140-2 Level 3 hardware.</li>
+</ul>
+<p><strong>Watch-Outs</strong></p>
+<ul>
+  <li>You run several components yourself, including tokenization servers and CipherTrust Manager, so plan for patching, scaling, and monitoring staff time.</li>
+  <li>Vaulted mode needs your own MSSQL, Oracle, MySQL, or Cassandra database, which you must back up, replicate, and secure.</li>
+  <li>The product helps reduce PCI scope but claims no PCI certification itself, so your own assessment carries that burden.</li>
+</ul>
+<p>Compared with Protegrity, Thales is stronger on vaulted options and key management lineage; Protegrity is stronger on native warehouse protectors.</p>
+<p><strong>Pricing</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>What you get</th></tr></thead>
+<tbody>
+<tr><td>Subscription</td><td>Custom quote</td><td>Contact sales; no public price list</td></tr>
+</tbody></table></div>
+<p><strong>What Reviewers Say</strong></p>
+<ul>
+  <li><strong>Praise:</strong> Reviewers say it protects important data, is easy to use, and runs from on-premises or cloud consoles (<a class="bl-link" href="https://www.g2.com/products/thales-ciphertrust-tokenization/reviews" target="_blank" rel="noopener">G2</a>).</li>
+  <li><strong>Praise:</strong> The featured review calls it easy to deploy across several environments (<a class="bl-link" href="https://www.gartner.com/reviews/product/ciphertrust-tokenization" target="_blank" rel="nofollow noopener">Gartner Peer Insights</a>).</li>
+  <li><strong>Faults:</strong> Cost for smaller businesses and the complexity of implementation and token management (<a class="bl-link" href="https://www.g2.com/products/thales-ciphertrust-tokenization/reviews" target="_blank" rel="noopener">G2</a>).</li>
+  <li><strong>Faults:</strong> The featured critique is high operational cost, so budget for the team time a self-managed deployment demands (<a class="bl-link" href="https://www.gartner.com/reviews/product/ciphertrust-tokenization" target="_blank" rel="nofollow noopener">Gartner Peer Insights</a>).</li>
+</ul>
+<p>Don’t want to run tokenization servers? <a class="bl-link" href="/pricing/">Compare a hosted vault</a>.</p>
+
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">10</span>
+    <div class="vc__id">
+      <h3 id="fortanix" class="vc__name"><span class="vc__sep">10. </span>Fortanix Data Security Manager<span class="vc__sep">: </span><span class="vc__pill">Best for HSM-Backed Format-Preserving Tokenization, SaaS or On-Premises</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/fortanix/reviews" target="_blank" rel="noopener"><span class="vc__score">4.5<small>/5</small></span><span class="vc__src">G2 · 2 reviews</span></a><a class="vc__rate" href="https://www.capterra.com/p/191860/Self-Defending-Key-Management-Service/reviews/" target="_blank" rel="noopener"><span class="vc__score">5.0<small>/5</small></span><span class="vc__src">Capterra · 1 review</span></a><a class="vc__rate" href="https://www.gartner.com/reviews/product/data-security-manager" target="_blank" rel="nofollow noopener"><span class="vc__score">4.6<small>/5</small></span><span class="vc__src">Gartner Peer Insights · 26 ratings</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>AWS Marketplace infrastructure from $1.95 an hour; tokenization quoted</dd></div><div><dt>Free tier or trial</dt><dd>Free trial offered on the tokenization page</dd></div><div><dt>Token model</dt><dd>Vaultless, NIST-approved FPE</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Security teams that want tokenization and key management on the same HSM-backed platform.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/fortanix.jpg" alt="Fortanix homepage" >}}
+  <figcaption>Fortanix homepage. Source: fortanix.com</figcaption>
+</figure>
+<p>Fortanix Data Security Manager is a key management platform that adds HSM-backed format-preserving tokenization, as SaaS or on-premises. If you are consolidating KMS, HSM, and secrets anyway, adding FPE tokenization there keeps one policy engine. If you only need tokens, a dedicated vault is simpler.</p>
+<p class="bl-tagline"><em>Key management, HSM, and FPE tokenization in one platform.</em></p>
+<p><strong>What’s Great</strong></p>
+<ul>
+  <li>Vaultless tokenization uses NIST-approved cryptography and keeps the original format, so tokens fit existing column formats without a token database.</li>
+  <li>Full or partial masking by permission, with RBAC and quorum approvals, lets you control exactly what each user sees.</li>
+  <li>Available as SaaS or on-premises with FIPS 140-2 Level 3 HSM backing, so keys and tokenization share one hardened platform.</li>
+</ul>
+<p><strong>Watch-Outs</strong></p>
+<ul>
+  <li>The AWS Marketplace base package excludes tokenization and caps clusters at five apps, so hourly pricing understates real cost.</li>
+  <li>Its tokenization page cites FIPS 140-2 Level 3 HSMs, so confirm current validation status if your contracts require FIPS 140-3.</li>
+  <li>It delivers best value alongside key management, HSM, and secrets; buyers needing only tokens will run more platform than they use.</li>
+</ul>
+<p><strong>Pricing</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>What you get</th></tr></thead>
+<tbody>
+<tr><td>AWS Marketplace cluster</td><td>$1.95 to $4.11 an hour</td><td>DSM cluster infrastructure (m5.2xlarge to m5.8xlarge); base package excludes tokenization</td></tr>
+<tr><td>Tokenization license</td><td>Custom quote</td><td>Through sales or a private offer</td></tr>
+</tbody></table></div>
+<p><strong>What Reviewers Say</strong></p>
+<ul>
+  <li><strong>Praise:</strong> Reviewers like the data-centric approach and keys separated from hardware, though the sample is two reviews (<a class="bl-link" href="https://www.g2.com/products/fortanix/reviews" target="_blank" rel="noopener">G2</a>).</li>
+  <li><strong>Praise:</strong> The featured review praises centralized key and secret management and strong encryption (<a class="bl-link" href="https://www.gartner.com/reviews/product/data-security-manager" target="_blank" rel="nofollow noopener">Gartner Peer Insights</a>).</li>
+  <li><strong>Faults:</strong> Configuring and monitoring many encryption devices gets strenuous in large organizations (<a class="bl-link" href="https://www.g2.com/products/fortanix/reviews" target="_blank" rel="noopener">G2</a>).</li>
+  <li><strong>Faults:</strong> The featured critique says initial setup and integration can be complex in some environments (<a class="bl-link" href="https://www.gartner.com/reviews/product/data-security-manager" target="_blank" rel="nofollow noopener">Gartner Peer Insights</a>).</li>
+</ul>
+<p>Want tokens without running a key platform? <a class="bl-link" href="/request-demo/">Talk to Enigma Vault</a>.</p>
+
+
+<h2 id="more-options-worth-a-look">More Options Worth a Look</h2>
+<p>These four are strong in a narrower lane, so they get a shorter entry.</p>
+
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">11</span>
+    <div class="vc__id">
+      <h3 id="pci-vault" class="vc__name"><span class="vc__sep">11. </span>PCI Vault<span class="vc__sep">: </span><span class="vc__pill">Best for a Low-Cost Card Vault With a Zero-Knowledge Design</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/pci-vault/reviews" target="_blank" rel="noopener"><span class="vc__score">4.5<small>/5</small></span><span class="vc__src">G2 · 12 reviews</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>$255 a month plus $0.02 per API operation (Growing)</dd></div><div><dt>Free tier or trial</dt><dd>No free trial; a staging account comes with a production signup</dd></div><div><dt>Design</dt><dd>Zero-knowledge, vendor-neutral (per its AWS listing)</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Small and mid-size teams that want a card and bank-account vault on a budget and have developers to run the integration.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/pci-vault.jpg" alt="PCI Vault homepage" >}}
+  <figcaption>PCI Vault homepage. Source: pcivault.io</figcaption>
+</figure>
+<p>PCI Vault is a low-cost card vault that offers full, partial, or Luhn-compliant token algorithms, hosted capture forms, and a payment proxy. Its docs describe a zero-knowledge design, and the entry Growing plan includes email support with a 24-hour response.</p>
+<p>On <a class="bl-link" href="https://www.g2.com/products/pci-vault/reviews" target="_blank" rel="noopener">G2</a>, a travel-company CTO says it let the business keep card data off its own systems on a budget, and a compliance specialist praises throughput and multi-PSP routing; the complaints are no telephone support, no PCI consulting (you need a partner), and complexity for smaller teams.</p>
+<p><strong>Pricing</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>What you get</th></tr></thead>
+<tbody>
+<tr><td>Growing</td><td>$255 a month plus $0.02 per operation</td><td>Card tokenization and storage vault; email support with 24-hour response</td></tr> <tr><td>Business</td><td>$965 a month plus $0.01 per operation</td><td>Email and chat support with 4-hour response</td></tr> <tr><td>High Volume Enterprise</td><td>$1,675 a month; $0.01 down to $0.0009 per operation</td><td>Phone, email, and chat support with 1-hour response</td></tr>
+</tbody></table></div>
+
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">12</span>
+    <div class="vc__id">
+      <h3 id="pci-proxy" class="vc__name"><span class="vc__sep">12. </span>PCI Proxy<span class="vc__sep">: </span><span class="vc__pill">Best for Travel and Hospitality Card Vaulting in Europe</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate vc__rate--new" href="https://www.g2.com/products/pci-proxy/reviews" target="_blank" rel="noopener"><span class="vc__score">No reviews yet</span><span class="vc__src">G2</span></a><a class="vc__rate vc__rate--new" href="https://www.capterra.com/p/10055014/PCI-Proxy/reviews/" target="_blank" rel="noopener"><span class="vc__score">No reviews yet</span><span class="vc__src">Capterra</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>€350 a month (Starter), plus usage fees</dd></div><div><dt>Free tier or trial</dt><dd>Free trial of the full suite</dd></div><div><dt>Acquirer reach</dt><dd>Payment gateway to 25+ card acquirers</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Travel, airline, and hospitality businesses that collect cards from many channels and settle in Europe.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/pci-proxy.jpg" alt="PCI Proxy homepage" >}}
+  <figcaption>PCI Proxy homepage. Source: pci-proxy.com</figcaption>
+</figure>
+<p>PCI Proxy, part of Planet, is a card-only tokenization service that accepts cards from any source and shares tokens with any payment provider. It adds 3D Secure, network tokens, account updater, and a gateway to 25+ acquirers; a free trial opens the full suite with no setup fees or long-term contracts.</p>
+<p><strong>Pricing</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>What you get</th></tr></thead>
+<tbody>
+<tr><td>Starter</td><td>€350 a month plus usage</td><td>Core product suite</td></tr>
+<tr><td>Scale</td><td>€650 a month plus usage</td><td>Multiple brands, full product suite, unlimited projects, prioritized support</td></tr>
+</tbody></table></div>
+
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">13</span>
+    <div class="vc__id">
+      <h3 id="bluefin-shieldconex" class="vc__name"><span class="vc__sep">13. </span>Bluefin ShieldConex<span class="vc__sep">: </span><span class="vc__pill">Best for Vaultless Tokenization of Cards, PII, and Batch Files</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate vc__rate--new" href="https://www.g2.com/products/shieldconex/reviews" target="_blank" rel="noopener"><span class="vc__score">No reviews yet</span><span class="vc__src">G2</span></a><a class="vc__rate" href="https://www.gartner.com/reviews/product/shieldconex" target="_blank" rel="nofollow noopener"><span class="vc__score">4.0<small>/5</small></span><span class="vc__src">Gartner Peer Insights · 1 rating</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>Custom quote</dd></div><div><dt>Free tier or trial</dt><dd>Not published</dd></div><div><dt>Batch files</dt><dd>FileGuard tokenizes ACH, CSV, and fixed-width files over SFTP</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Higher education, government, financial services, and healthcare teams that also tokenize batch files such as ACH payments.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/bluefin.jpg" alt="Bluefin ShieldConex page" >}}
+  <figcaption>Bluefin ShieldConex. Source: bluefin.com</figcaption>
+</figure>
+<p>Bluefin ShieldConex is a vaultless tokenization service that combines hardware-based encryption with tokens generated consistently for matching inputs, plus format-preserving tokenization or encryption and FileGuard for batch files over SFTP. Pricing isn’t public.</p>
+
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">14</span>
+    <div class="vc__id">
+      <h3 id="protecto" class="vc__name"><span class="vc__sep">14. </span>Protecto<span class="vc__sep">: </span><span class="vc__pill">Best for Tokenizing Sensitive Data in AI Agents and RAG Pipelines</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate vc__rate--new" href="https://www.g2.com/products/protecto/reviews" target="_blank" rel="noopener"><span class="vc__score">No reviews yet</span><span class="vc__src">G2</span></a><a class="vc__rate vc__rate--new" href="https://www.capterra.com/p/10006145/Protecto/reviews/" target="_blank" rel="noopener"><span class="vc__score">No reviews yet</span><span class="vc__src">Capterra</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>Talk to sales</dd></div><div><dt>Free tier or trial</dt><dd>Free trial</dd></div><div><dt>Deployment</dt><dd>SaaS, your VPC, or air-gapped</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>AI teams that need masking inside their own VPC or on-premises.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/protecto.jpg" alt="Protecto homepage" >}}
+  <figcaption>Protecto homepage. Source: protecto.ai</figcaption>
+</figure>
+<p>Protecto is a tokenization platform for AI workloads that masks data before it reaches LLMs, agents, RAG pipelines, or MCP servers. Its format-preserving, entropy-based tokens stay consistent within a namespace, it decides at inference time what each user may see, and it runs as SaaS, in your VPC, or air-gapped.</p>
+
+<h2 id="which-tokenization-platform-fits-your-use-case">Which Tokenization Platform Fits Your Use Case?</h2>
+<p>Start with the situation that matches your biggest risk today, then check the row for anything you expect to add within a year.</p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Use case</th><th>Start with</th><th>Why</th></tr></thead>
+<tbody>
+<tr><td>Card payments across more than one gateway</td><td>Enigma Vault Card Vault, Spreedly, or IXOPAY</td><td>Card Vault’s proxy charges Authorize.net, Stripe, Braintree, PayPal, or any REST gateway from $0; Spreedly connects 150+ gateways from $750 a month; IXOPAY adds orchestration across 200+ acquirers</td></tr>
+<tr><td>Card payments that need network tokens and account updater</td><td>IXOPAY, VGS, or Basis Theory</td><td>All three sell network tokens and account updater, which Enigma Vault’s product pages don’t list</td></tr>
+<tr><td>Card, bank, and PII values in API traffic with little code change</td><td>VGS</td><td>Proxy routes redact and reveal fields in transit</td></tr>
+<tr><td>PII in application databases (SSNs, account numbers, IDs)</td><td>Enigma Vault Data Vault or Skyflow</td><td>Data Vault’s deterministic tokens keep joins and lookups working, with published prices; Skyflow adds residency controls for privacy programs</td></tr>
+<tr><td>PII already in data warehouses and lakes</td><td>Protegrity</td><td>Vaultless, format-preserving tokens with native Snowflake and Databricks integrations</td></tr>
+<tr><td>Files and documents</td><td>Enigma Vault File Vault; Bluefin ShieldConex for batch payment files</td><td>File Vault stores files up to 5 GB with a unique key per file; ShieldConex FileGuard tokenizes ACH, CSV, and fixed-width files over SFTP</td></tr>
+<tr><td>AI prompts and LLM calls</td><td>Enigma Vault NoPII, Protecto, or Skyflow</td><td>NoPII tokenizes PII before it reaches the model provider and restores it in the response; Protecto runs in your VPC or air-gapped; Skyflow offers an LLM gateway</td></tr>
+<tr><td>Self-hosted or heavily regulated environments</td><td>Thales CipherTrust, Fortanix, or Protegrity</td><td>Run on your own infrastructure with keys you control and HSM-backed roots of trust</td></tr>
+<tr><td>Travel and hospitality card vaulting in Europe</td><td>PCI Proxy</td><td>Accepts cards from any channel and shares tokens with 25+ acquirers, priced in euros</td></tr>
+<tr><td>Small team on a budget</td><td>Enigma Vault Lite, then Plus; or PCI Vault</td><td>Enigma Vault starts at $0 and $49.99 a month per vault; PCI Vault starts at $255 a month plus $0.02 per operation</td></tr>
+</tbody></table></div>
+
+<h2 id="how-vendors-describe-their-tokenization">How Each Vendor Describes Its Tokenization</h2>
+<p>A vendor’s own headline tells you which buyer it is building for this year.</p>
+<div class="bl-tablewrap"><table class="bl-table bl-table--wide">
+<thead><tr><th>Vendor</th><th>How it positions itself</th><th>Proof it publishes for tokenization</th><th>Source</th></tr></thead>
+<tbody>
+<tr><td>Enigma Vault</td><td>One trust layer for applications and AI: four vaults plus NoPII for LLM calls</td><td>Published rate card from $0; PCI DSS Level 1 and SOC 2 Type II; live Card Vault demo</td><td>Vault overview page</td></tr>
+<tr><td>IXOPAY</td><td>Payment orchestration with Universal Tokens (“Own Your Data”) and AI-powered payments intelligence</td><td>$171B orchestrated in 2025, 500+ payment adapters (vendor figures); TokenEx docs</td><td>ixopay.com</td></tr>
+<tr><td>VGS</td><td>“The World’s Leader in Payment Tokenization”; now led by agentic commerce</td><td>10 billion tokens held (vendor figure); public pricing from $1,000 a month</td><td>verygoodsecurity.com</td></tr>
+<tr><td>Skyflow</td><td>“Runtime AI Data Control” for data flowing across datastores, models, and agents</td><td>Named customer quotes (ServiceNow, GoodRx); framework pages for PCI, HIPAA, GDPR</td><td>skyflow.com</td></tr>
+<tr><td>Basis Theory</td><td>“More than a token vault”: routing, tokenization, and payment optimization</td><td>Published $995 plan with AOC; PCI Level 1, SOC 2 Type II, ISO 27001, HIPAA badges</td><td>basistheory.com</td></tr>
+<tr><td>Evervault</td><td>“Flexible Payments Security” built on an encryption model</td><td>Per-unit public pricing; customer stories with acceptance and chargeback figures</td><td>evervault.com</td></tr>
+<tr><td>Spreedly</td><td>“Payment Orchestration for the Agentic Era”</td><td>Independent vault from $750 a month; 150+ gateways</td><td>spreedly.com</td></tr>
+<tr><td>Protegrity</td><td>Vaultless, format-preserving tokens for cardholder data, PII, and PHI across cloud and hybrid</td><td>Snowflake and Databricks integrations; compliance framed as “supports” PCI DSS and HIPAA</td><td>protegrity.com</td></tr>
+<tr><td>Thales CipherTrust</td><td>Vaulted or vaultless tokenization in the data center, big data, or cloud</td><td>FIPS 140-2 Level 3 root of trust; AWS PCI reference pattern</td><td>cpl.thalesgroup.com</td></tr>
+<tr><td>Fortanix DSM</td><td>Data tokenization and format-preserving encryption on one security platform</td><td>FIPS 140-2 Level 3 HSM key storage; AWS Marketplace listing</td><td>fortanix.com</td></tr>
+<tr><td>PCI Vault</td><td>“PCI DSS Compliant Credit Card Tokenization &amp; Storage Vault” (AWS listing)</td><td>AWS Marketplace pricing and listing</td><td>AWS Marketplace</td></tr>
+<tr><td>PCI Proxy</td><td>“Your payment stack, fully composable”</td><td>Public euro pricing; 25+ acquirers; customer quotes</td><td>pci-proxy.com</td></tr>
+<tr><td>Bluefin ShieldConex</td><td>Cloud-based vaultless tokenization as a service</td><td>Vaultless platform; FileGuard for ACH, CSV, and fixed-width files</td><td>bluefin.com</td></tr>
+<tr><td>Protecto</td><td>“AI Data Control Plane” for agentic AI</td><td>SOC 2 Type II and ISO 27001 badges; AI case studies</td><td>protecto.ai</td></tr>
+</tbody></table></div>
+<p>Two shifts stand out. Payments-first vendors (VGS, Spreedly, IXOPAY) now lead with agentic commerce and orchestration, and Skyflow leads with AI runtime control, so the classic “token vault” message is quieter even where the vault is still the core product. Ask each vendor which product you’d actually be buying, and price that SKU rather than the platform.</p>
+<p>The gap between positioning and proof is widest on compliance. Several vendors show badges or say they “support” or “align with” PCI DSS, HIPAA, or GDPR without naming report dates; only a current PCI AOC and SOC 2 report settle it.</p>
+<p>Performance and cost claims on vendor homepages (scope reduction percentages, transactions per second) are marketing figures, so test them in your trial.</p>
+
+<h2 id="pricing-compared">Pricing Compared</h2>
+<p>Only vendors whose prices appear on their own pricing page or an official cloud marketplace listing get numbers here, read on October 23, 2026. Everyone else is “Custom quote.”</p>
+<div class="bl-tablewrap"><table class="bl-table bl-table--wide">
+<thead><tr><th>Vendor and plan</th><th>Monthly price</th><th>What’s included</th><th>Overage or usage fees</th><th>Free tier or trial</th><th>Source</th></tr></thead>
+<tbody>
+<tr><td>Enigma Vault Lite</td><td>$0</td><td>Card Vault 1,000 requests, Data Vault 1,500, File Vault 5 GB</td><td>$0.08 (Card), $0.06 (Data) per request</td><td>Free forever, not a trial</td><td><a class="bl-link" href="/pricing/">Enigma Vault pricing</a></td></tr>
+<tr><td>Enigma Vault Plus</td><td>$49.99 per vault</td><td>Card 20,000, Data 30,000, File 150 GB</td><td>$0.04 (Card), $0.03 (Data)</td><td>Start on Lite</td><td><a class="bl-link" href="/pricing/">Enigma Vault pricing</a></td></tr>
+<tr><td>Enigma Vault Premium</td><td>$249.99 per vault</td><td>Card 250,000, Data 400,000, File 1 TB</td><td>$0.02 (Card), $0.01 (Data)</td><td>Start on Lite</td><td><a class="bl-link" href="/pricing/">Enigma Vault pricing</a></td></tr>
+<tr><td>Enigma Vault NoPII</td><td>$0 or $50 (Pro)</td><td>1M or 50M protected tokens</td><td>$1 per extra million on Pro</td><td>Free plan</td><td><a class="bl-link" href="/pricing/">Enigma Vault pricing</a></td></tr>
+<tr><td>VGS Starter</td><td>From $1,000</td><td>Starter package</td><td>Not published</td><td>Free to start</td><td>VGS pricing</td></tr>
+<tr><td>Basis Theory</td><td>$995</td><td>20,000 tokens, 1 MB payload, 24 hours of logs, AOC, US environment only</td><td>Not published</td><td>Not stated</td><td>Basis Theory pricing</td></tr>
+<tr><td>Evervault</td><td>$995 plus usage</td><td>Platform for under 25K transactions a month</td><td>For example, $0.005 per decrypt, $0.03 per successful 3D Secure</td><td>Free sandbox</td><td>Evervault pricing</td></tr>
+<tr><td>Spreedly Independent Vault</td><td>From $750</td><td>PCI Level 1 vault with unlimited storage</td><td>Not published</td><td>Not stated</td><td>Spreedly pricing</td></tr>
+<tr><td>PCI Vault Growing</td><td>$255</td><td>Credit card tokenization</td><td>$0.02 per API operation; $0.01 on Business ($965); $0.01 to $0.0009 on High Volume Enterprise ($1,675)</td><td>No free trial; a staging account comes with a production signup</td><td>PCI Vault pricing</td></tr>
+<tr><td>PCI Proxy</td><td>€350 (Starter) or €650 (Scale)</td><td>Core product suite; Scale adds multiple brands, the full suite, and unlimited projects</td><td>Usage fees by product</td><td>Free trial</td><td>PCI Proxy pricing</td></tr>
+<tr><td>Fortanix DSM (AWS Marketplace)</td><td>$1.95 to $4.11 an hour per instance</td><td>Base package; tokenization not listed in it</td><td>AWS infrastructure extra</td><td>Not stated</td><td>AWS Marketplace</td></tr>
+<tr><td>IXOPAY, Skyflow, Protegrity, Thales, Bluefin, Protecto</td><td>Custom quote</td><td>None of these vendors publish quote drivers</td><td>Quote</td><td>IXOPAY sandbox; Protecto free trial; Protegrity free Developer Edition</td><td>Vendor sites</td></tr>
+</tbody></table></div>
+
+<h2 id="what-to-test-in-a-trial">What to Test in a Trial</h2>
+<p>Free tiers and sandboxes make it cheap to test before you sign. Here’s the plan I’d run in two weeks:</p>
+<ol>
+  <li><strong>Tokenize your messiest real field:</strong> Push a sample of the value found in the most systems, often a card number or SSN.</li>
+  <li><strong>Check the token shape:</strong> Confirm your database columns, validation rules, and reports accept it, or that a format-preserving option exists.</li>
+  <li><strong>Prove the reverse path:</strong> Charge a test card through the proxy, or detokenize under a scoped credential, and confirm nobody else can.</li>
+  <li><strong>Test deterministic behavior:</strong> The same input should give the same token where you need joins, and different tokens elsewhere.</li>
+  <li><strong>Read the audit log:</strong> Every tokenize, reveal, and charge should show who, when, and from where.</li>
+  <li><strong>Measure latency and failure:</strong> Time a few thousand calls and see what happens when the vault is unreachable.</li>
+  <li><strong>Plan the exit:</strong> Ask how you’d export tokens and values if you leave, and get the answer in writing.</li>
+</ol>
+
+<h2 id="where-tokenization-is-heading">Where Tokenization Is Heading</h2>
+<ul>
+  <li><strong>AI prompts are a new token surface:</strong> Enigma Vault NoPII, Skyflow, Protecto, and Protegrity now tokenize data on its way to models.</li>
+  <li><strong>Agentic commerce:</strong> IXOPAY’s 2026 TokenEx packages and VGS’s agentic work point to tokens AI agents can pay with blind.</li>
+  <li><strong>Network tokens become table stakes for payments vaults:</strong> Most payments-first vendors here now sell them, usually as a metered add-on.</li>
+  <li><strong>FPE standards tighten:</strong> HashiCorp’s documentation notes FF3-1 is deprecated and no longer NIST-approved, so ask any FPE vendor which mode they use.</li>
+  <li><strong>Consolidation continues:</strong> TokenEx merged with IXOPAY, IBM bought HashiCorp in 2025, and Evervault raised a $25M Series B.</li>
+</ul>
+
+<h2 id="protect-cards-data-files-and-ai-prompts-with-enigma-vault">Protect Cards, Data, Files, and AI Prompts With Enigma Vault</h2>
+<p>If your sensitive data comes in more than one shape, you don’t need a vendor for each. Card Vault, Data Vault, File Vault, and NoPII share one security model, one audit trail, and published prices that start at $0. Try the Card Vault demo, compare plans on the pricing page, or <a class="bl-link" href="/request-demo/">book a demo</a> to map your data.</p>
+<div class="bl-inlinecta">
+  <div>
+    <p class="bl-inlinecta__t">One vault for cards, data, files, and AI prompts.</p>
+    <p class="bl-inlinecta__s">Start free on AWS Marketplace, or book a demo to map which values belong in which vault.</p>
+  </div>
+  <a class="np-btn np-btn--on-dark np-btn--primary" href="/pricing/"><span>Start free</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
+</div>

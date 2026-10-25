@@ -1,0 +1,682 @@
+---
+title: "Best Card Tokenization Software for Hotel Bookings in 2026: Top 6 Picks"
+titleEmphasis: "Top 6 Picks"
+slug: "best-card-tokenization-software-for-hotel-bookings"
+layout: "pii-style"
+metaTitle: "Best Card Tokenization Software for Hotel Bookings 2026"
+description: "Compare 6 card tokenization platforms for hotels by booking channel: phone and email, OTA virtual cards, front desk, and group deposits, with pricing."
+subtitle: "Picks grouped by how cards reach your hotel, so every channel from the reservations phone to Expedia virtual cards has a token instead of a card number."
+date: 2026-10-23T00:02:00
+category: "Card Vault"
+author: "tony-alex"
+readTime: 22
+heroImage: "/assets/blog/img-05.png"
+heroAlt: "Hotel booking channels feeding card data into a secure vault"
+excerpt: "Six card tokenization platforms for hotels, grouped by booking channel, with pricing and PMS fit."
+tags: ["tokenization", "card-vault", "hotels", "hospitality", "pci-dss"]
+ogImage: "/assets/og/vault-card.jpg"
+ogImageAlt: "Best Card Tokenization Software for Hotel Bookings in 2026: Top 6 Picks | Enigma Vault"
+ogType: article
+styles: ["blog.css", "pages/blog-pii-hero.css", "tr-pages.css"]
+scripts: ["blog-article.js"]
+faqSchema: true
+faqs:
+  - q: "What Is the Best Card Tokenization Software for Hotel Bookings?"
+    a: "It depends on how cards reach you. Enigma Vault is best for phone, email, and direct reservations plus third-party authorizations; PCI Booking is best for capturing OTA virtual cards and channel manager card data as tokens; PCI Proxy is best for PMS teams that want a SiteMinder-certified proxy; and Bluefin is best for front desk P2PE through a POS reseller."
+  - q: "How Do Hotels Handle Expedia and Booking.com Virtual Cards Securely?"
+    a: "The safest pattern is to have a tokenization proxy intercept the card data the OTA or channel manager sends, store it in a PCI DSS validated vault, and pass only a token to your PMS. When the stay is billable, the proxy injects the real card into the charge request to your gateway, so staff and the PMS never hold the full number."
+  - q: "Does Card Tokenization Take My Hotel Out of PCI Scope?"
+    a: "No vendor can promise that. A hosted form or vault integration can significantly reduce PCI scope because fewer systems and people touch the card, but your acquirer or QSA confirms the final scope and SAQ for your property. Front desk terminals, call recordings, and emailed forms all still count."
+  - q: "Can Hotel Staff See the Full Card Number After It’s Tokenized?"
+    a: "Most vaults offer a controlled reveal for authorized users, with every view logged; PCI Booking documents secure card display, and Enigma Vault’s Customer Vault lets authorized staff reveal a card number with each reveal logged. Which plan and role unlocks reveal varies by vendor, so confirm it in your quote."
+  - q: "Can I Keep the CVV for a Guaranteed Reservation?"
+    a: "Not after authorization. PCI DSS forbids storing the CVV once a card is authorized. Some vaults hold it briefly before the first charge; Enigma Vault keeps CVVs encrypted for at most 30 minutes and then deletes them. For OTA cards, SiteMinder notes the CVV is usually retrieved from the channel’s extranet."
+  - q: "How Much Does Card Tokenization Cost for a Small Hotel?"
+    a: "Published prices range from $0 to a few hundred dollars a month. Enigma Vault Card Vault is free for 1,000 requests a month and $49.99 a month for 20,000; PCI Vault starts at $255 a month plus $0.02 per operation; PCI Proxy starts at €350 a month plus usage. PCI Booking, Bluefin, and IXOPAY quote by deal."
+  - q: "Is a Third-Party Credit Card Authorization Form by Email Safe?"
+    a: "Not really. A PDF with a full card number and a copy of an ID sitting in a shared reservations inbox is an uncontrolled copy of cardholder data. A branded secure link that tokenizes the card, captures a signature, and logs access replaces the attachment with a traceable record, though it doesn’t remove chargeback risk on its own."
+  - q: "Do I Still Need Tokenization If My PMS Has Integrated Payments?"
+    a: "Maybe not for every flow. Many PMS payment integrations already tokenize cards they take directly. A separate vault earns its place where cards arrive outside the PMS: emailed authorization forms, phone bookings, group deposits for the sales team, or cards you want to keep portable across gateways and properties."
+---
+<style>
+/* Wide tables: tighter cell padding so they fit the article column. */
+.bl-content .bl-table--wide td, .bl-content .bl-table--wide th { padding-left: 8px; padding-right: 8px; }
+.bl-content blockquote.bl-quote-cta{margin:24px 0;padding:14px 20px;border-left:3px solid var(--ev-mineral-blue);background:var(--ev-warm-cloud);border-radius:0 10px 10px 0}.bl-content blockquote.bl-quote-cta p{margin:0;font-size:16px}
+.bl-content figure.bl-shot{margin:20px 0 24px;padding:10px;border:1px solid var(--ev-cool-stone);border-radius:10px;background:var(--ev-warm-cloud)}.bl-content figure.bl-shot img{display:block;width:100%;height:auto;border-radius:6px}.bl-content figure.bl-shot figcaption{margin-top:8px;text-align:center;font-size:13px;color:var(--ev-slate)}
+/* Vendor header card: rank, name, best-for pill, review scores, key facts. */
+.bl-content .vc { margin: 40px 0 20px; }
+.bl-content .vc__head { display: grid; grid-template-columns: auto 1fr auto; gap: 18px; align-items: center; margin-bottom: 14px; }
+.bl-content .vc__num { font-size: 34px; font-weight: 600; line-height: 1; color: var(--ev-mineral-blue); font-variant-numeric: tabular-nums; }
+.bl-content h3.vc__name { margin: 0; padding: 0; font-size: 26px; line-height: 1.25; font-weight: 600; color: var(--ev-ink); }
+.bl-content .vc__sep { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.bl-content .vc__pill { display: table; margin-top: 10px; padding: 6px 12px; border-radius: 6px; background: var(--ev-mineral-blue); color: #fff; font-size: 12px; line-height: 1.4; font-weight: 600; text-transform: none; letter-spacing: 0; font-size: 13px; }
+.bl-content .vc__rates { display: flex; flex-direction: column; gap: 8px; align-items: stretch; }
+.bl-content .vc__rate { display: flex; flex-direction: column; align-items: flex-end; padding: 8px 14px; border: 1px solid var(--ev-cool-stone); border-radius: 10px; background: #fff; text-decoration: none !important; min-width: 128px; }
+.bl-content a.vc__rate:hover { border-color: var(--ev-mineral-blue); }
+.bl-content .vc__score { font-size: 20px; font-weight: 700; color: var(--ev-ink); line-height: 1.2; }
+.bl-content .vc__score small { font-size: 13px; font-weight: 500; color: var(--ev-slate); }
+.bl-content .vc__src { font-size: 12px; color: var(--ev-slate); line-height: 1.3; }
+.bl-content .vc__rate--new .vc__score { font-size: 15px; }
+.bl-content .vc__facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px 24px; margin: 0; padding: 18px 22px; border-radius: 12px; background: var(--ev-warm-cloud); }
+.bl-content .vc__facts div { margin: 0; }
+.bl-content .vc__facts .vc__best { grid-column: 1 / -1; padding-top: 14px; border-top: 1px solid var(--ev-cool-stone); }
+.bl-content .vc__facts dt { margin: 0 0 4px; font-size: 11.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ev-slate); }
+.bl-content .vc__facts dd { margin: 0; font-size: 15px; line-height: 1.5; color: var(--ev-ink); }
+@media (max-width: 700px) {
+  .bl-content .vc__head { grid-template-columns: auto 1fr; }
+  .bl-content .vc__rates { grid-column: 1 / -1; flex-direction: row; flex-wrap: wrap; }
+  .bl-content .vc__rate { align-items: flex-start; }
+  .bl-content .vc__num { font-size: 26px; }
+  .bl-content h3.vc__name { font-size: 22px; }
+  .bl-content .vc__facts { grid-template-columns: 1fr; }
+}
+.bl-content .bl-imgph { padding: 28px 18px; border: 1px dashed var(--ev-silver); border-radius: 10px; text-align: center; font-size: 13px; color: var(--ev-slate); background: var(--ev-warm-cloud); }
+.bl-content .tldr { margin: 8px 0 32px; padding: 22px 26px; border-radius: 12px; background: var(--ev-warm-cloud); border-left: 3px solid var(--ev-mineral-blue); }
+.bl-content .tldr .tldr__label { margin: 0 0 12px; padding: 0; border: 0; font-size: 13px; line-height: 1.4; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--ev-mineral-blue); }
+.bl-content .tldr .tldr__list { margin: 0; padding-left: 20px; }
+.bl-content .tldr .tldr__list li { margin: 0 0 10px; font-size: 16px; line-height: 1.6; color: var(--ev-ink); }
+.bl-content .tldr .tldr__list li::marker { color: var(--ev-mineral-blue); }
+.bl-content .tldr .tldr__list li:last-child { margin-bottom: 0; }
+.bl-content .tldr strong a { font-weight: 600; }
+.bl-content .bl-uc { margin: 8px 0 4px; font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--ev-mineral-blue); }
+</style>
+
+<p>Comparing the best card tokenization software for hotel bookings of 2026: 1. Enigma Vault, 2. PCI Booking, 3. PCI Proxy (Planet), 4. Bluefin ShieldConex, 5. PCI Vault, and 6. IXOPAY (TokenEx).</p>
+
+<p><strong>About the author:</strong> I’m <a class="bl-link" href="https://www.linkedin.com/in/tony-alex-enigma-vault/" target="_blank" rel="noopener">Dr. Tony Alex</a>, Chief Executive Officer of Enigma Vault, where I lead our work in encryption, tokenization, and sensitive-data protection. I have more than two decades of experience building enterprise software businesses.</p>
+<p>In 1999 I founded US eDirect to develop software for parks, campgrounds, and recreation agencies, bringing reservations and payments into one cloud system, and led it through its acquisition by Tyler Technologies in 2022.</p>
+<p><em>Disclosure: I work at Enigma Vault, which appears first in this list. Every platform here is judged on the same criteria, and the review ratings come from G2 and Capterra.</em></p>
+
+<p>Card tokenization software for hotel bookings replaces a guest’s card number with a token your PMS, sales team, and staff can store and charge, while the real number stays in a PCI DSS validated vault. It protects the cards that arrive by phone, email, OTA virtual card, front desk, and group contract.</p>
+<p>The best options in 2026 are Enigma Vault for phone, email, direct, and group authorizations; PCI Booking and PCI Proxy for OTA and channel manager cards; Bluefin ShieldConex for the front desk; and PCI Vault and IXOPAY for teams with developers.</p>
+<p>To choose, list where your cards come from in a normal month, then pick the platform that covers your riskiest channel and charges through the gateway you already use. The picks below are grouped by booking channel.</p>
+
+<div class="tldr" id="tldr">
+  <h2 class="tldr__label">TL;DR</h2>
+  <ul class="tldr__list">
+    <li><strong><a class="bl-link" href="#enigma-vault">Enigma Vault</a>:</strong> best for phone, email, and direct reservations.</li>
+    <li><strong><a class="bl-link" href="#pci-booking">PCI Booking</a>:</strong> best for capturing OTA virtual cards as tokens.</li>
+    <li><strong><a class="bl-link" href="#pci-proxy">PCI Proxy (Planet)</a>:</strong> best for a SiteMinder-certified tokenization proxy.</li>
+    <li><strong><a class="bl-link" href="#bluefin">Bluefin ShieldConex</a>:</strong> best for front desk P2PE with tokens for card-on-file.</li>
+    <li><strong><a class="bl-link" href="#pci-vault">PCI Vault</a>:</strong> best for a developer-run zero-knowledge vault.</li>
+    <li><strong><a class="bl-link" href="#ixopay">IXOPAY (TokenEx)</a>:</strong> best for booking platforms forwarding cards to many partners.</li>
+  </ul>
+</div>
+
+<h2 id="best-card-tokenization-software-for-hotel-bookings-which-to-consider">Best Card Tokenization Software for Hotel Bookings: Which One Should You Consider?</h2>
+
+<p>Here’s the overall summary for an independent hotel, a small group, or a central reservations team. Every rating, price, and feature was checked on October 23, 2026.</p>
+
+<div class="bl-tablewrap"><table class="bl-table bl-table--wide">
+<thead><tr><th>Platform</th><th>Best for</th><th>Strongest booking channel</th><th>Starting price</th><th>Free tier or trial</th><th>G2 rating</th></tr></thead>
+<tbody>
+<tr><td><a class="bl-link" href="#enigma-vault">Enigma Vault</a></td><td>Phone, email, and direct reservations plus third-party authorizations</td><td>Phone and email; groups</td><td>$0, then $49.99 a month</td><td>Free Lite plan</td><td><a class="bl-link" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener">4.4/5 (6 reviews)</a></td></tr>
+<tr><td><a class="bl-link" href="#pci-booking">PCI Booking</a></td><td>Capturing OTA virtual cards and channel manager card data as tokens</td><td>OTAs and channel managers</td><td>Custom quote</td><td>“Try for Free” signup</td><td>No reviews yet</td></tr>
+<tr><td><a class="bl-link" href="#pci-proxy">PCI Proxy (Planet)</a></td><td>PMS and booking engine teams that want a SiteMinder-certified proxy</td><td>Channel manager delivery</td><td>€350 a month plus usage</td><td>Free trial</td><td><a class="bl-link" href="https://www.g2.com/products/pci-proxy/reviews" target="_blank" rel="noopener">No reviews yet</a></td></tr>
+<tr><td><a class="bl-link" href="#bluefin">Bluefin ShieldConex</a></td><td>Front desk P2PE with tokens for card-on-file</td><td>Front desk and POS</td><td>Custom quote</td><td>Demo</td><td><a class="bl-link" href="https://www.g2.com/products/shieldconex/reviews" target="_blank" rel="noopener">No reviews yet</a></td></tr>
+<tr><td><a class="bl-link" href="#pci-vault">PCI Vault</a></td><td>A developer-run vault with published pricing</td><td>Direct and phone (via capture links)</td><td>From $255 a month plus $0.02 per operation</td><td>No free trial</td><td><a class="bl-link" href="https://www.g2.com/products/pci-vault/reviews" target="_blank" rel="noopener">4.5/5 (12 reviews)</a></td></tr>
+<tr><td><a class="bl-link" href="#ixopay">IXOPAY (TokenEx)</a></td><td>Booking platforms forwarding cards to many OTAs and PSPs</td><td>OTA and channel distribution</td><td>Custom quote</td><td>Demo</td><td><a class="bl-link" href="https://www.g2.com/products/tokenex-ixopay/reviews" target="_blank" rel="noopener">4.6/5 (17 reviews)</a></td></tr>
+</tbody></table></div>
+
+<blockquote class="bl-quote-cta"><p>Still taking card authorization forms by email? Show us one and we’ll map how it would work as a secure link. <a class="bl-link" href="/request-demo/">Get in touch</a></p></blockquote>
+
+<h2 id="what-is-card-tokenization-software-for-hotels">What Is Card Tokenization Software for Hotels?</h2>
+
+<p><strong>Hotel card tokenization software swaps a guest’s card number for a meaningless token that your PMS, sales system, and staff can store and use, while the real number sits in a PCI DSS validated vault and is only released to your payment gateway or an authorized user.</strong></p>
+
+<p>A hotel needs this more than most merchants because cards rarely arrive in one clean checkout.</p>
+<p>They come by phone from a guest’s assistant, by email from a corporate travel desk, as a virtual card from Expedia or Booking.com, through a channel manager’s reservation feed, and across the front desk for incidentals. The PMS may already tokenize the cards it takes itself; the gaps are usually everywhere else.</p>
+
+<h3 id="key-features-to-look-for">Key Features to Look For in Hotel Card Tokenization Software</h3>
+
+<p>In a demo, check these first:</p>
+
+<ul>
+  <li><strong>Capture for every channel:</strong> Booking engine forms, email and SMS links, and phone capture that keeps digits out of call recordings.</li>
+  <li><strong>OTA and channel manager interception:</strong> Catches cards, including virtual cards, in the reservation feed and hands the PMS a token.</li>
+  <li><strong>Charge through your own gateway:</strong> A proxy that injects the card into the request to your existing processor, so you don’t switch acquirers.</li>
+  <li><strong>Controlled reveal:</strong> Authorized staff can view a card to key it into a portal or terminal, with each view logged.</li>
+  <li><strong>CVV handling:</strong> Short-lived CVV storage for the first authorization, then automatic deletion.</li>
+  <li><strong>Third-party authorization records:</strong> Signature, card, and ID in one link, giving each reservation a traceable record instead of a PDF.</li>
+  <li><strong>Pricing you can model:</strong> A per-request or per-month rate you can forecast against room nights and stored cards.</li>
+</ul>
+
+<p>Related reading: <a class="bl-link" href="/blog/best-credit-card-tokenization-software/">best credit card tokenization software</a> and <a class="bl-link" href="/blog/vault-vs-vaultless-tokenization/">vault vs. vaultless tokenization</a>.</p>
+
+<h2 id="how-we-evaluated">How We Evaluated Hotel Card Tokenization Software</h2>
+
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Criterion</th><th>Weight</th><th>What we checked</th></tr></thead>
+<tbody>
+<tr><td>Channel coverage</td><td>25%</td><td>Phone, email link, booking engine, OTA virtual card, channel manager, front desk</td></tr>
+<tr><td>Charging without holding the card</td><td>20%</td><td>Proxy to existing gateways, multi-property routing, card-on-file reuse</td></tr>
+<tr><td>Staff controls</td><td>15%</td><td>Controlled reveal, roles, MFA or SSO, audit logs, CVV deletion</td></tr>
+<tr><td>Hotel system fit</td><td>15%</td><td>Documented PMS, channel manager, and sales and catering integrations</td></tr>
+<tr><td>Compliance evidence</td><td>15%</td><td>Vendor-stated PCI DSS level and SOC 2</td></tr>
+<tr><td>Pricing transparency and reviews</td><td>10%</td><td>Published prices, free tier or trial, G2 and Capterra feedback</td></tr>
+</tbody></table></div>
+
+<p>Sources: each vendor’s own product, developer, and pricing pages, SiteMinder’s developer documentation, and G2 and Capterra, checked October 23, 2026.</p>
+
+<h2 id="best-card-tokenization-software-for-hotel-bookings-by-channel">The Best Card Tokenization Software for Hotel Bookings, by Booking Channel</h2>
+
+<p>Each section names a top pick and a runner-up for one way cards reach a hotel. Numbers follow the overall ranking.</p>
+
+<h2 id="for-direct-and-phone-reservations">For Direct and Phone Reservations</h2>
+
+<p>This is the channel where card numbers leak most: a guest reads digits to a reservations agent, an assistant emails a card “for the deposit,” or the website form posts straight to your server. The goal is to capture once, keep a token on the reservation, and charge later through the gateway you already use.</p>
+
+<p class="bl-uc">Top pick: direct and phone reservations</p>
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">01</span>
+    <div class="vc__id">
+      <h3 id="enigma-vault" class="vc__name"><span class="vc__sep">1. </span>Enigma Vault<span class="vc__sep">: </span><span class="vc__pill">Best for Phone, Email, and Direct Reservations</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener"><span class="vc__score">4.4<small>/5</small></span><span class="vc__src">G2 · 6 reviews</span></a><a class="vc__rate" href="https://www.capterra.com/p/241650/Enigma-Vault/reviews/" target="_blank" rel="noopener"><span class="vc__score">4.8<small>/5</small></span><span class="vc__src">Capterra · 4 reviews</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>$0, then $49.99 a month</dd></div>
+    <div><dt>Free tier or trial</dt><dd>Free Lite plan: 1,000 Card Vault requests a month</dd></div>
+    <div><dt>Phone capture</dt><dd>Twilio Pay IVR straight to the vault</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Independent hotels, small groups, and central reservations teams that take cards by phone, email, and their own booking engine, and want to charge through their existing gateway.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/enigma-vault.jpg" alt="Enigma Vault homepage" >}}
+  <figcaption>Enigma Vault homepage. Source: enigmavault.io</figcaption>
+</figure>
+<p>Enigma Vault is a card tokenization platform whose Card Vault covers phone, email, and direct reservations. It gives you hosted card forms for the booking engine (13 languages, custom CSS, and embeds for WooCommerce and Magento sites), direct API capture, and Twilio Pay phone capture, and your PMS or booking record stores the token.</p>
+<p>When the stay is billable, the gateway proxy injects the card into the request to Authorize.net, Stripe, Braintree, PayPal, or any REST-based gateway, so changing processors later is a configuration change.</p>
+<p>Customer Vault, the turnkey app on top of the same vault, sends a branded no-login link that collects a card, a signature, and an ID upload in one record, so an assistant or a corporate booker can authorize a stay without emailing a PDF.</p>
+<p>Authorized staff can reveal a card number, and every reveal is logged. CVVs are held encrypted for at most 30 minutes, then deleted.</p>
+<p><strong>Key Features</strong></p>
+<ul>
+  <li><strong>Hosted card forms:</strong> A booking engine iframe in 13 languages, so the card goes straight to the vault, never your server.</li>
+  <li><strong>Twilio Pay phone capture:</strong> Guests key cards into a tokenizing IVR, so agents never hear digits and recordings stay clean.</li>
+  <li><strong>Gateway proxy:</strong> Injects the card only into approved gateways such as Authorize.net or Stripe, so you keep your processor.</li>
+  <li><strong>Format-preserving tokens:</strong> Optional tokens keep the first six and last four digits, so card-shaped PMS fields still work.</li>
+  <li><strong>Ephemeral CVV:</strong> The CVV is held encrypted for at most 30 minutes, then deleted, matching the PCI DSS storage rule.</li>
+  <li><strong>Audit logs on every plan:</strong> Each request logs client ID, IP, path, and status, so you can show who touched a card.</li>
+</ul>
+<p><strong>Pricing</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>Lite</td><td>$0 a month</td><td>1,000 Card Vault requests, then $0.08 each; tokenization and gateway proxy</td></tr>
+<tr><td>Plus</td><td>$49.99 a month</td><td>20,000 requests (about 200 to 300 daily transactions), then $0.04; email support</td></tr>
+<tr><td>Premium</td><td>$249.99 a month</td><td>250,000 requests, then $0.02; priority support</td></tr>
+<tr><td>Customer Vault</td><td>Priced by engagement</td><td>Branded intake links, staff inbox, e-signature, MFA</td></tr>
+</tbody></table></div>
+<p><strong>Cost at 2,000 Stored Cards a Month:</strong> About $49.99 a month on Plus. Assuming three requests per card (tokenize, one charge, one reveal or refund), 2,000 cards is roughly 6,000 requests, well inside Plus’s 20,000. The same volume on Lite would be 1,000 free plus 5,000 at $0.08, or $400. Customer Vault is quoted separately.</p>
+<p><strong>Who Should Not Buy:</strong> A hotel whose every card already flows through PMS-integrated payments and an OTA-collect model, with no phone, email, or group deposits outside it. Your PMS’s own tokenization may be enough.</p>
+<p>Also not a fit if you need pre-built PMS or channel manager connectors: Enigma Vault works through APIs, hosted forms, and its gateway proxy, and doesn’t list named PMS integrations.</p>
+<p><strong>Pros</strong></p>
+<ul>
+  <li>Reservations agents stop hearing, typing, and seeing full card numbers, because phone, link, and web capture all write straight to the vault.</li>
+  <li>A free Lite plan and a $49.99 Plus plan let a 40-room independent start without a procurement cycle.</li>
+  <li>The gateway proxy lets you keep your processor and add or switch one later without asking guests for their cards again.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li>There is no documented OTA virtual card interception, so Expedia and Booking.com cards need your channel manager’s proxy or a second vendor.</li>
+  <li>There are no named PMS connectors; your developer or PMS vendor has to wire tokens into the reservation record through the API or webhooks.</li>
+  <li>ISO 27001 certification is still in progress (PCI DSS Level 1 and SOC 2 Type II are in place), so ask for the timeline.</li>
+</ul>
+<p><strong>What Hoteliers and Reviewers Say:</strong> Very positive. Enigma Vault holds <a class="bl-link" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener">4.4/5 from 6 reviews on G2</a> and <a class="bl-link" href="https://www.capterra.com/p/241650/Enigma-Vault/reviews/" target="_blank" rel="noopener">4.8/5 from 4 on Capterra</a>. Reviewers like a simple, easy-to-understand API, clear de-scoping, and how quickly the team added requested features.</p>
+<p>The complaints are a wish for deeper reporting dashboards and one reviewer who found pricing a bit high. None of the reviews are from hotels specifically.</p>
+<p><strong>Our Verdict:</strong> The most practical choice for the cards that arrive outside your PMS, at a price a single property can carry.</p>
+
+<p class="bl-uc">Runner-up: direct and phone reservations</p>
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">05</span>
+    <div class="vc__id">
+      <h3 id="pci-vault" class="vc__name"><span class="vc__sep">5. </span>PCI Vault<span class="vc__sep">: </span><span class="vc__pill">Best for a Developer-Run Zero-Knowledge Vault</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/pci-vault/reviews" target="_blank" rel="noopener"><span class="vc__score">4.5<small>/5</small></span><span class="vc__src">G2 · 12 reviews</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>From $255 a month plus $0.02 per operation (Growing)</dd></div>
+    <div><dt>Free tier or trial</dt><dd>No free trial; a staging account comes with a production signup</dd></div>
+    <div><dt>Security model</dt><dd>Zero-knowledge PCI DSS Level 1 environment</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Hotel groups or hotel tech teams with a developer who can wire capture links and a proxy into their own booking stack.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/pci-vault.jpg" alt="PCI Vault homepage" >}}
+  <figcaption>PCI Vault homepage. Source: pcivault.io</figcaption>
+</figure>
+<p>PCI Vault is a zero-knowledge PCI DSS Level 1 card vault that doesn’t store the passphrase needed to retrieve your data. It offers capture forms and a zero-knowledge PCI proxy so cards reach your payment provider without touching your servers.</p>
+<p>Capture forms work for a direct booking engine and for links sent after a phone call, but storing, retrieving, and charging cards is API work. That suits a small group with an in-house developer or a hotel software vendor more than a front office team looking for a ready-made screen.</p>
+<p><strong>Key Features</strong></p>
+<ul>
+  <li><strong>Capture forms:</strong> Hosted card entry or a post-call link keeps card fields off your own booking servers.</li>
+  <li><strong>Zero-knowledge storage:</strong> Retrieving a card requires a passphrase PCI Vault doesn’t store, which limits what even the provider can see.</li>
+  <li><strong>PCI proxy:</strong> Forwards card data to your payment provider when you charge, so your booking stack only ever holds the token.</li>
+  <li><strong>API-first design:</strong> Storing, retrieving, and charging cards all run through a REST API, which suits teams that build their own booking flows.</li>
+  <li><strong>Published pricing:</strong> Monthly fees and per-operation rates are listed on PCI Vault’s site, so a developer can model cost before talking to sales.</li>
+</ul>
+<p><strong>Pricing</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>Growing</td><td>$255 a month plus $0.02 per operation</td><td>Card tokenization; email support with 24-hour response</td></tr>
+<tr><td>Business</td><td>$965 a month plus $0.01 per operation</td><td>Email and chat support with 4-hour response</td></tr>
+<tr><td>High Volume Enterprise</td><td>$1,675 a month; $0.01 down to $0.0009 per operation</td><td>Phone, email, and chat support with 1-hour response</td></tr>
+</tbody></table></div>
+<p><strong>Cost at 2,000 Stored Cards a Month:</strong> About $375 a month on the Growing plan: $255 plus roughly 6,000 operations at $0.02.</p>
+<p><strong>Who Should Not Buy:</strong> A hotel with no developer access. There’s no turnkey staff app or phone capture, so front office teams would still need someone to build the workflow.</p>
+<p><strong>Pros</strong></p>
+<ul>
+  <li>Per-operation rates are published on PCI Vault’s site, so a hotel tech team can forecast cost against room nights before a sales call.</li>
+  <li>Zero-knowledge storage means a breach at the provider alone doesn’t expose your guests’ cards without your passphrase.</li>
+  <li>Capture forms keep card fields off your booking engine’s servers, which shrinks the systems your QSA has to review.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li>There is no packaged phone capture, so your developer must build an IVR flow or send links after calls.</li>
+  <li>There are no hotel PMS or channel manager connectors, so OTA virtual cards and PMS records need custom integration work.</li>
+  <li>The $255 monthly base plus per-operation fees costs more than a small property’s phone and web volume usually justifies.</li>
+</ul>
+<p><strong>What Hoteliers and Reviewers Say:</strong> Mostly positive. PCI Vault holds <a class="bl-link" href="https://www.g2.com/products/pci-vault/reviews" target="_blank" rel="noopener">4.5/5 from 12 reviews on G2</a>. Reviewers praise responsive support and straightforward APIs; the main complaint is the integration effort, which reviewers say leans on developers.</p>
+<p><strong>Our Verdict:</strong> A solid vault for a technical team, but more build than most single properties want.</p>
+<p>Want phone capture and a staff app without writing the glue code? <a class="bl-link" href="/vault/card-vault/">See how Card Vault handles phone reservations</a>.</p>
+
+<h2 id="for-ota-virtual-cards-and-channel-managers">For OTA Virtual Cards and Channel Managers</h2>
+
+<p>When Expedia Collect or Booking.com Payments pays you with a virtual card, or a channel manager delivers a guest card inside the reservation, that card lands in your PMS feed. The right option here sits in that feed, swaps the card for a token before your systems store it, and injects it back when you charge.</p>
+
+<p class="bl-uc">Top pick: OTA virtual cards and channel managers</p>
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">02</span>
+    <div class="vc__id">
+      <h3 id="pci-booking" class="vc__name"><span class="vc__sep">2. </span>PCI Booking<span class="vc__sep">: </span><span class="vc__pill">Best for Capturing OTA Virtual Cards as Tokens</span></h3>
+    </div>
+    <div class="vc__rates"><span class="vc__rate vc__rate--new"><span class="vc__score">New</span><span class="vc__src">No reviews yet</span></span></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>Custom quote</dd></div>
+    <div><dt>Free tier or trial</dt><dd>“Try for Free” signup on its homepage</dd></div>
+    <div><dt>OTA capture</dt><dd>Intercepts card data from OTA and channel manager APIs</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Hotels, hotel groups, and booking platforms that receive card data from OTAs, channel managers, CRS, or GDS connectors and want only tokens in the PMS.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/pci-booking.jpg" alt="PCI Booking homepage" >}}
+  <figcaption>PCI Booking homepage. Source: pcibooking.net</figcaption>
+</figure>
+<p>PCI Booking is a card tokenization service that captures OTA virtual cards as tokens. Its developer documentation describes intercepting card data in a third party’s API response or webhook, storing it as a token, and returning the token to the hotel’s system.</p>
+<p>It says this works with any third party that sends card data via API, naming Booking.com, Expedia, and other major channel managers, and it covers CRS and GDS connectors as well.</p>
+<p>Hotels can view a card securely as an authorized user, manage CVV handling, and charge by having PCI Booking swap the token for card data and send it to the PSP on their behalf.</p>
+<p>A documented multi-hotel routing pattern lets one platform account charge each hotel’s own gateway, which suits small groups where each property keeps its own merchant account. Card-by-link capture via email or SMS and hosted forms cover direct bookings too.</p>
+<p><strong>Key Features</strong></p>
+<ul>
+  <li><strong>Third-party interception:</strong> Catches cards in OTA, channel manager, CRS, and GDS feeds and returns a token to your system.</li>
+  <li><strong>Card by link:</strong> Email or SMS links let a guest enter a card themselves, so staff never type the digits.</li>
+  <li><strong>Secure card display:</strong> Authorized staff can view a tokenized card to key a virtual card into a terminal when needed.</li>
+  <li><strong>Gateway relay:</strong> Swaps the token for card data on the way to your PSP, so the PMS never holds the number.</li>
+  <li><strong>Multi-hotel routing:</strong> One platform account can charge each property’s own gateway, which suits groups where every hotel keeps its own merchant account.</li>
+  <li><strong>Virtual card issuing:</strong> Requests a virtual card from a connected issuer and tokenizes it automatically, useful for paying suppliers.</li>
+</ul>
+<p><strong>Pricing</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>All plans</td><td>Custom quote</td><td>Pricing isn’t published; the homepage offers a “Try for Free” signup</td></tr>
+</tbody></table></div>
+<p><strong>Cost at 2,000 Stored Cards a Month:</strong> Quote. PCI Booking doesn’t publish prices, so ask for a rate based on monthly tokenizations, detokenizations, and card views.</p>
+<p><strong>Who Should Not Buy:</strong> A single property that only takes cards by phone and web with no OTA-collect business; a general vault will cost less to run. Also not for teams that want a no-code staff portal and nothing else.</p>
+<p><strong>Pros</strong></p>
+<ul>
+  <li>Expedia, Booking.com, and channel manager cards become tokens before your PMS stores them, closing most hotels’ biggest card feed.</li>
+  <li>Each hotel in a group can keep its own gateway and merchant account behind one integration.</li>
+  <li>One provider covers OTA interception, email and SMS links, and hosted forms, so you don’t need separate vendors per channel.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li>There is no packaged front office app, so your PMS vendor or developer has to build the integration on its APIs.</li>
+  <li>There is no documented phone IVR capture, so reservations agents must send a link or still hear the card on calls.</li>
+  <li>The PCI DSS level isn’t stated on the pages we read, so ask for the current Attestation of Compliance before you sign.</li>
+</ul>
+<p><strong>What Hoteliers and Reviewers Say:</strong> PCI Booking has no G2 or Capterra listing, so there are no public reviews to summarize yet. Ask the vendor for two or three customer references in your segment before you sign.</p>
+<p><strong>Our Verdict:</strong> The most hotel-native tokenization layer for OTA and channel manager cards we found.</p>
+<p>Need the phone and email side covered too? <a class="bl-link" href="/request-demo/">Talk to us about pairing Card Vault with your OTA flow</a>.</p>
+
+<p class="bl-uc">Runner-up: OTA virtual cards and channel managers</p>
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">03</span>
+    <div class="vc__id">
+      <h3 id="pci-proxy" class="vc__name"><span class="vc__sep">3. </span>PCI Proxy (Planet)<span class="vc__sep">: </span><span class="vc__pill">Best for a SiteMinder-Certified Tokenization Proxy</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate vc__rate--new" href="https://www.g2.com/products/pci-proxy/reviews" target="_blank" rel="noopener"><span class="vc__score">No reviews yet</span><span class="vc__src">G2</span></a><a class="vc__rate vc__rate--new" href="https://www.capterra.com/p/10055014/PCI-Proxy/reviews/" target="_blank" rel="noopener"><span class="vc__score">No reviews yet</span><span class="vc__src">Capterra</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>€350 a month plus usage</dd></div>
+    <div><dt>Free tier or trial</dt><dd>Free trial</dd></div>
+    <div><dt>Channel manager fit</dt><dd>Certified proxy for SiteMinder pmsXchange (PULL)</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>PMS and booking engine providers, and larger hotel groups, that pull reservations from SiteMinder and want cards delivered as tokens.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/pci-proxy.jpg" alt="PCI Proxy homepage" >}}
+  <figcaption>PCI Proxy homepage. Source: pci-proxy.com</figcaption>
+</figure>
+<p>PCI Proxy, powered by Planet, is a card tokenization service that pairs a token vault with detokenization, so you can tokenize cards from any source and share tokens with any PSP. It lists travel among its industries, and Starter is €350 a month plus usage fees, with no setup fee or long-term contract.</p>
+<p>SiteMinder’s pmsXchange documentation lists PCI Proxy among its certified PCI tokenization proxy providers for delivering credit cards to a PMS, using the PULL model, alongside FreedomPay, Payrails, and Shift4 (the last of which is a processor). That means a PMS pulling reservations through PCI Proxy receives tokens rather than raw card numbers.</p>
+<p><strong>Key Features</strong></p>
+<ul>
+  <li><strong>SiteMinder certification:</strong> Listed by SiteMinder as a certified proxy for pmsXchange card delivery (PULL), so a PMS receives tokens instead of raw cards.</li>
+  <li><strong>Token vault and detokenization:</strong> Tokenize cards from any source and share tokens with any PSP, so your systems store tokens alone.</li>
+  <li><strong>Multi-brand projects:</strong> The Scale plan supports several brands and projects, which suits groups running more than one booking engine.</li>
+  <li><strong>Enterprise options:</strong> SSO and SAML, custom integrations, and volume tiers on the Enterprise plan for larger hotel tech teams.</li>
+  <li><strong>No setup fee:</strong> Monthly plans without long-term contracts, so a team can test the flow before committing.</li>
+</ul>
+<p><strong>Pricing</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>Starter</td><td>€350 a month plus usage</td><td>One brand, one project, self-onboarding, email support</td></tr>
+<tr><td>Scale</td><td>€650 a month plus usage</td><td>Multiple brands and projects, concierge onboarding, Slack, prioritized support</td></tr>
+<tr><td>Enterprise</td><td>Custom quote</td><td>Volume tiers, custom integrations, SSO and SAML</td></tr>
+</tbody></table></div>
+<p><strong>Cost at 2,000 Stored Cards a Month:</strong> €350 a month plus usage fees on Starter. Usage rates aren’t published, so the full cost at 2,000 cards is a quote.</p>
+<p><strong>Who Should Not Buy:</strong> A single independent hotel without a PMS vendor or developer to integrate the proxy; PCI Proxy is sold to the software that runs the hotel more than to the front office.</p>
+<p><strong>Pros</strong></p>
+<ul>
+  <li>SiteMinder certification means a PMS pulling reservations can receive tokenized cards through a path SiteMinder already supports.</li>
+  <li>No setup fee or long-term contract lowers the risk of a pilot for a PMS or booking engine team.</li>
+  <li>A free trial lets your developer test the reservation and charge flow end to end before you pay.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li>The €350 Starter fee comes before usage fees, which is steep for a property storing a few hundred cards monthly.</li>
+  <li>It is infrastructure with no front office app, so reservations and sales staff get nothing to work in without a PMS integration.</li>
+  <li>There is no documented phone, email link, or group deposit capture, so those channels need another product.</li>
+</ul>
+<p><strong>What Hoteliers and Reviewers Say:</strong> Reviews: no G2 or Capterra reviews yet (<a class="bl-link" href="https://www.g2.com/products/pci-proxy/reviews" target="_blank" rel="noopener">G2</a>, <a class="bl-link" href="https://www.capterra.com/p/10055014/PCI-Proxy/reviews/" target="_blank" rel="noopener">Capterra</a>).</p>
+<p><strong>Our Verdict:</strong> The safest bet if your PMS pulls from SiteMinder and wants a certified proxy; overkill for a hotel without developers.</p>
+<p>Running a single property? <a class="bl-link" href="/pricing/">Compare Enigma Vault’s free and $49.99 plans</a>.</p>
+
+<p class="bl-uc">Also worth a look: OTA and channel distribution</p>
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">06</span>
+    <div class="vc__id">
+      <h3 id="ixopay" class="vc__name"><span class="vc__sep">6. </span>IXOPAY (TokenEx)<span class="vc__sep">: </span><span class="vc__pill">Best for Booking Platforms Forwarding Cards to Many Partners</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/tokenex-ixopay/reviews" target="_blank" rel="noopener"><span class="vc__score">4.6<small>/5</small></span><span class="vc__src">G2 · 17 reviews</span></a><a class="vc__rate vc__rate--new" href="https://www.capterra.com/p/181731/Cloud-Based-Tokenization/reviews/" target="_blank" rel="noopener"><span class="vc__score">No reviews yet</span><span class="vc__src">Capterra</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>Custom quote</dd></div>
+    <div><dt>Free tier or trial</dt><dd>Demo</dd></div>
+    <div><dt>Hotel proof</dt><dd>Tablet Hotels case study</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Hotel booking platforms and larger groups sending tokenized cards onward to channel managers, OTAs, and multiple PSPs.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/ixopay.jpg" alt="IXOPAY homepage" >}}
+  <figcaption>IXOPAY homepage. Source: ixopay.com</figcaption>
+</figure>
+<p>IXOPAY (formerly TokenEx) is a payment platform that tokenizes cards and uses the token to forward card data to partners. In its Tablet Hotels case study, cards are tokenized before they reach Tablet’s systems and forwarded to the OTAs, channel managers, and PSPs Tablet works with. Tablet reports a smaller PCI footprint and lower development costs.</p>
+<p>IXOPAY introduced new TokenEx packages in January 2026, but prices aren’t published. It’s a better match for a hotel distribution platform than for a 60-room property.</p>
+<p><strong>Key Features</strong></p>
+<ul>
+  <li><strong>Universal tokens:</strong> One token usable across processors, so a booking platform can route payments without re-collecting cards.</li>
+  <li><strong>Transparent gateway:</strong> Tokenizes cards in transit and forwards them to partners, which is how Tablet Hotels sends cards to OTAs and channel managers.</li>
+  <li><strong>Batch tokenization:</strong> Bulk vaulting of existing card files, useful when a platform migrates stored cards from another vault.</li>
+  <li><strong>Payment orchestration:</strong> IXOPAY routes transactions across several PSPs, which matters for platforms that settle in many markets.</li>
+  <li><strong>TokenEx packages:</strong> New tiers launched in January 2026 for token-first payments, giving buyers a lighter entry point than full orchestration.</li>
+</ul>
+<p><strong>Pricing</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>TokenEx packages</td><td>Custom quote</td><td>Prices not published</td></tr>
+</tbody></table></div>
+<p><strong>Cost at 2,000 Stored Cards a Month:</strong> Quote. IXOPAY doesn’t publish package prices.</p>
+<p><strong>Who Should Not Buy:</strong> Any single hotel or small group; this is enterprise payment infrastructure.</p>
+<p><strong>Pros</strong></p>
+<ul>
+  <li>The Tablet Hotels case study shows tokens forwarded to OTAs, channel managers, and PSPs, with a smaller PCI footprint reported.</li>
+  <li>Multi-processor routing lets a hotel booking platform switch or add PSPs without asking guests for cards again.</li>
+  <li>Bulk tokenization makes migrating an existing card file from another vault practical without asking guests to re-enter cards.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li>It is built for payment platforms with engineers; a reservations desk gets no screen to capture, reveal, or charge a card.</li>
+  <li>There is no documented phone capture, emailed authorization replacement, or group deposit workflow, so those channels need another tool.</li>
+  <li>Its positioning has moved toward orchestration and agentic payments, so a single hotel buys far more platform than it uses.</li>
+</ul>
+<p><strong>What Hoteliers and Reviewers Say:</strong> Mostly positive. IXOPAY (TokenEx) holds <a class="bl-link" href="https://www.g2.com/products/tokenex-ixopay/reviews" target="_blank" rel="noopener">4.6/5 from 17 reviews on G2</a>; the TokenEx Capterra listing has no reviews yet. Reviewers praise reliability and support; the main complaint is limited reporting.</p>
+<p><strong>Our Verdict:</strong> Worth shortlisting for hotel distribution platforms, not for individual properties.</p>
+<p>Moving cards off TokenEx? <a class="bl-link" href="/request-demo/">Ask us how a migration to Card Vault works</a>.</p>
+
+<h2 id="for-front-desk-and-incidentals">For Front Desk and Incidentals</h2>
+
+<p>At the front desk, the card is usually present, and the cleanest protection is a validated point-to-point encryption (P2PE) terminal that encrypts the card the moment it’s dipped or tapped. Tokenization matters for what happens next: holding that card for incidentals, late check-out charges, and no-shows without staff ever writing it down.</p>
+
+<p class="bl-uc">Top pick: front desk and incidentals</p>
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">04</span>
+    <div class="vc__id">
+      <h3 id="bluefin" class="vc__name"><span class="vc__sep">4. </span>Bluefin ShieldConex<span class="vc__sep">: </span><span class="vc__pill">Best for Front Desk P2PE With Tokens for Card-on-File</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate vc__rate--new" href="https://www.g2.com/products/shieldconex/reviews" target="_blank" rel="noopener"><span class="vc__score">No reviews yet</span><span class="vc__src">G2</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>Custom quote</dd></div>
+    <div><dt>Free tier or trial</dt><dd>Demo</dd></div>
+    <div><dt>Hotel route</dt><dd>Hospitality P2PE with Datacap via POS resellers</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>US and Canadian hotels buying through a POS reseller that want validated P2PE at the desk and reusable tokens afterward.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/bluefin.jpg" alt="Bluefin homepage" >}}
+  <figcaption>Bluefin homepage. Source: bluefin.com</figcaption>
+</figure>
+<p>Bluefin ShieldConex is a tokenization service that turns card data into reusable tokens for card-on-file billing, and its developer documentation describes auto-tokenization for card-present P2PE transactions.</p>
+<p>Bluefin and Datacap announced a partnership in October 2024 to deliver PCI-validated P2PE processing to hospitality businesses in the US and Canada, with Datacap as Bluefin’s preferred omnichannel provider for hospitality P2PE; merchants buy through their POS reseller.</p>
+<p>Bluefin added an enterprise security proxy to ShieldConex in 2024 that detokenizes in real time and forwards card data to any processor, which helps a hotel whose gateway isn’t tied to Bluefin.</p>
+<p><strong>Key Features</strong></p>
+<ul>
+  <li><strong>Validated P2PE:</strong> Cards are encrypted inside the terminal when dipped or tapped, the strongest protection for card-present payments.</li>
+  <li><strong>Vaultless tokens:</strong> ShieldConex tokenizes and detokenizes in real time without a stored card database, which narrows what a breach can expose.</li>
+  <li><strong>Auto-tokenization:</strong> Card-present P2PE and card-not-present transactions both produce reusable tokens for incidentals and late charges.</li>
+  <li><strong>Security proxy:</strong> Detokenizes in real time and forwards card data to any processor, so your gateway doesn’t have to be Bluefin’s.</li>
+  <li><strong>Data beyond cards:</strong> Also tokenizes PII and PHI fields, which helps if you collect guest IDs or accessibility details.</li>
+</ul>
+<p><strong>Pricing</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>ShieldConex and P2PE</td><td>Custom quote</td><td>Priced through Bluefin or a POS reseller</td></tr>
+</tbody></table></div>
+<p><strong>Cost at 2,000 Stored Cards a Month:</strong> Quote. Bluefin doesn’t publish pricing, and the P2PE route is priced through your POS reseller.</p>
+<p><strong>Who Should Not Buy:</strong> A hotel whose PMS payment partner already provides P2PE terminals, or one that mainly needs phone, email, or OTA capture.</p>
+<p><strong>Pros</strong></p>
+<ul>
+  <li>Validated P2PE is the strongest way to protect card-present payments at the desk and can shrink the PCI scope of front desk systems.</li>
+  <li>Tokens from the check-in swipe let you charge incidentals and no-shows later without re-collecting or writing down the card.</li>
+  <li>The security proxy works with processors beyond Bluefin’s own, so you aren’t locked to one acquirer.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li>The hospitality P2PE route is sold through a POS reseller with Datacap, which adds a third party to setup, support, and contract terms.</li>
+  <li>There is no documented OTA virtual card interception or emailed authorization replacement, so cards arriving before check-in need another tool.</li>
+  <li>The hospitality P2PE partnership covers the US and Canada only, so properties elsewhere need a different terminal route.</li>
+</ul>
+<p><strong>What Hoteliers and Reviewers Say:</strong> Reviews: no G2 or Capterra reviews yet (<a class="bl-link" href="https://www.g2.com/products/shieldconex/reviews" target="_blank" rel="noopener">G2</a>).</p>
+<p><strong>Our Verdict:</strong> The right first call if front desk card-present security is your gap.</p>
+<p>Front desk handled but guests still email cards before arrival? <a class="bl-link" href="/vault/customer-vault/">See how Customer Vault replaces those emails</a>.</p>
+
+<p>Also consider Enigma Vault here. If your terminals already come with P2PE from your PMS payment partner, the gap is the card that arrives before check-in.</p>
+<p>A Customer Vault link or Twilio Pay call captures it ahead of arrival, the token stays on the reservation, and staff charge incidentals through the gateway proxy. See the <a class="bl-link" href="#enigma-vault">full Enigma Vault entry above</a>; pricing and cons are the same.</p>
+
+<h2 id="for-groups-events-and-deposits">For Groups, Events, and Deposits</h2>
+
+<p>Group sales is where cards meet contracts. A wedding planner, a corporate travel manager, or a sports team coordinator signs a contract, pays a deposit, and authorizes a master account, often by emailing a scanned form. The goal is a single signed, tokenized record your sales team can trigger charges against without seeing the card.</p>
+
+<p class="bl-uc">Top pick: groups, events, and deposits</p>
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">01</span>
+    <div class="vc__id">
+      <h3 id="enigma-vault-groups" class="vc__name"><span class="vc__sep">1. </span>Enigma Vault Customer Vault<span class="vc__sep">: </span><span class="vc__pill">Best for Third-Party Authorizations and Group Deposits</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener"><span class="vc__score">4.4<small>/5</small></span><span class="vc__src">G2 · 6 reviews</span></a><a class="vc__rate" href="https://www.capterra.com/p/241650/Enigma-Vault/reviews/" target="_blank" rel="noopener"><span class="vc__score">4.8<small>/5</small></span><span class="vc__src">Capterra · 4 reviews</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>Priced by engagement</dd></div>
+    <div><dt>Free tier or trial</dt><dd>Card Vault Lite is free</dd></div>
+    <div><dt>Share links</dt><dd>Expire after 24 hours, optional password</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Independent hotels and small groups replacing emailed authorization forms and deposit cards with branded secure links.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/enigma-vault.jpg" alt="Enigma Vault homepage" >}}
+  <figcaption>Enigma Vault homepage. Source: enigmavault.io</figcaption>
+</figure>
+<p>Customer Vault is Enigma Vault’s branded intake app: it sends a no-login link that collects a card (tokenized through Card Vault), a canvas e-signature, and documents such as an ID in one customer profile. Staff work from a shared inbox; sensitive fields are auto-tokenized; every reveal is logged; staff sign in with WebAuthn passkeys or TOTP.</p>
+<p>Signed webhooks and a lifecycle API let you push the token to your sales or PMS records.</p>
+<p>Link the sales record to the token and charge deposits and final balances through your approved gateway with the Card Vault proxy, which keeps your sales system out of card handling. A signed form doesn’t eliminate fraud or chargeback liability, so keep your normal verification steps.</p>
+<p><strong>Key Features</strong></p>
+<ul>
+  <li><strong>Branded intake links:</strong> Planners open a no-login link, so you get the card without accounts or emailed PDF forms.</li>
+  <li><strong>Cards, signatures, and files together:</strong> Card, canvas e-signature, and documents such as an ID land in one record per group or event.</li>
+  <li><strong>Staff inbox and profiles:</strong> Sales staff assign and track each authorization, so deposits don’t get lost in personal mailboxes.</li>
+  <li><strong>Expiring sharing:</strong> Share links expire after 24 hours with an optional password and download tracking, limiting where records travel.</li>
+  <li><strong>MFA and passkeys:</strong> Staff sign in with WebAuthn passkeys or TOTP, and tenants can enforce it for everyone handling cards.</li>
+  <li><strong>Live the same day:</strong> No developer or integration is needed to send links, so sales can retire the PDF form quickly.</li>
+</ul>
+<p><strong>Pricing</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>Customer Vault</td><td>Priced by engagement</td><td>Branded app, intake links, e-signature, MFA</td></tr>
+<tr><td>Card Vault Plus (for charging)</td><td>$49.99 a month</td><td>20,000 requests, gateway proxy</td></tr>
+</tbody></table></div>
+<p><strong>Cost at 2,000 Stored Cards a Month:</strong> Customer Vault is quoted; the Card Vault charging side runs about $49.99 a month on Plus at this volume.</p>
+<p><strong>Who Should Not Buy:</strong> A large full-service hotel whose sales team already lives in a sales and catering suite with built-in contracts and payments; integration depth there will matter more than intake.</p>
+<p><strong>Pros</strong></p>
+<ul>
+  <li>Planners and assistants authorize a group without emailing a card, so the shared sales inbox stops holding cardholder data.</li>
+  <li>Sales teams charge deposits and final balances through the gateway proxy without seeing the full number.</li>
+  <li>Every reveal is logged, so the rare staff member who needs the card leaves an accountable trail.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li>There are no named sales and catering integrations such as Delphi; tokens move to your sales system by API or signed webhook.</li>
+  <li>Contract templates and BEOs aren’t part of the product, so the event contract itself still lives in your sales system.</li>
+  <li>A signed link doesn’t remove fraud or chargeback liability on its own, so keep your normal verification steps.</li>
+</ul>
+<p><strong>What Hoteliers and Reviewers Say:</strong> Very positive. Enigma Vault holds <a class="bl-link" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener">4.4/5 from 6 reviews on G2</a> and <a class="bl-link" href="https://www.capterra.com/p/241650/Enigma-Vault/reviews/" target="_blank" rel="noopener">4.8/5 from 4 on Capterra</a>. Reviewers like a simple, easy-to-understand API, clear de-scoping, and how quickly the team added requested features.</p>
+<p>The complaints are a wish for deeper reporting dashboards and one reviewer who found pricing a bit high. None of the reviews are from hotels specifically.</p>
+<p><strong>Our Verdict:</strong> The fastest way for an independent or small group to retire the emailed authorization form.</p>
+
+<h2 id="how-each-platform-handles-hotel-booking-channels">How Each Platform Handles Phone, OTA, Front Desk, and Group Cards</h2>
+
+<p>This table shows what each platform documents for the four ways cards reach a hotel. “Not documented” means we found nothing on the vendor’s own pages, checked October 23, 2026.</p>
+
+<div class="bl-tablewrap"><table class="bl-table bl-table--wide">
+<thead><tr><th>Platform</th><th>Phone and email bookings</th><th>OTA virtual cards</th><th>Front desk and incidentals</th><th>Group deposits</th></tr></thead>
+<tbody>
+<tr><td>Enigma Vault</td><td>Twilio Pay IVR capture; Customer Vault no-login links for email bookers</td><td>Not documented; pair with a channel manager proxy</td><td>No terminals; token on the reservation charged through the gateway proxy</td><td>Customer Vault links with card, e-signature, and ID in one record</td></tr>
+<tr><td>PCI Booking</td><td>Email and SMS card links; no IVR documented</td><td>Intercepts cards from Booking.com, Expedia, and major channel managers</td><td>Secure card display for authorized staff; no terminals</td><td>Not documented</td></tr>
+<tr><td>PCI Proxy (Planet)</td><td>Not documented</td><td>SiteMinder-certified proxy for pmsXchange card delivery (PULL)</td><td>Not documented</td><td>Not documented</td></tr>
+<tr><td>Bluefin ShieldConex</td><td>Card-not-present auto-tokenization through a checkout iframe</td><td>Not documented</td><td>Validated P2PE terminals via Datacap and POS resellers (US and Canada)</td><td>Not documented</td></tr>
+<tr><td>PCI Vault</td><td>Capture forms and links built by your developer</td><td>Not documented</td><td>Not documented</td><td>Not documented</td></tr>
+<tr><td>IXOPAY (TokenEx)</td><td>Not documented</td><td>Forwards tokenized cards to OTAs and channel managers (Tablet Hotels case)</td><td>Not documented</td><td>Not documented</td></tr>
+</tbody></table></div>
+
+<p>No single platform covers all four channels. Most hotels pair a vault for phone, email, and group cards with their channel manager’s proxy for OTA cards and their PMS partner’s P2PE terminals at the desk.</p>
+
+<h2 id="pricing-compared">Pricing Compared</h2>
+
+<p>Only numbers read on the vendor’s own pricing page or official marketplace listing are shown.</p>
+
+<div class="bl-tablewrap"><table class="bl-table bl-table--wide">
+<thead><tr><th>Vendor and plan</th><th>Monthly price</th><th>What’s included</th><th>Overage or usage fees</th><th>Free tier or trial</th><th>Source</th></tr></thead>
+<tbody>
+<tr><td>Enigma Vault Card Vault Lite</td><td>$0</td><td>1,000 requests; tokenization and gateway proxy; community support</td><td>$0.08 per request</td><td>Free plan</td><td><a class="bl-link" href="/pricing/">Pricing</a></td></tr>
+<tr><td>Enigma Vault Card Vault Plus</td><td>$49.99</td><td>20,000 requests (about 200 to 300 daily transactions); email support</td><td>$0.04 per request</td><td>Start on Lite</td><td><a class="bl-link" href="/pricing/">Pricing</a></td></tr>
+<tr><td>Enigma Vault Card Vault Premium</td><td>$249.99</td><td>250,000 requests (about 2,000 daily transactions); priority support</td><td>$0.02 per request</td><td>Start on Lite</td><td><a class="bl-link" href="/pricing/">Pricing</a></td></tr>
+<tr><td>Enigma Vault Customer Vault</td><td>Priced by engagement</td><td>Branded intake links, staff inbox, e-signature, MFA</td><td>Quoted</td><td>Demo</td><td><a class="bl-link" href="/pricing/">Pricing</a></td></tr>
+<tr><td>PCI Proxy Starter</td><td>€350</td><td>One brand, one project, self-onboarding, weekday email support</td><td>Usage fees, not published</td><td>Free trial</td><td>pci-proxy.com</td></tr>
+<tr><td>PCI Proxy Scale</td><td>€650</td><td>Multiple brands, unlimited projects, concierge onboarding, Slack, prioritized support</td><td>Usage fees, not published</td><td>Free trial</td><td>pci-proxy.com</td></tr>
+<tr><td>PCI Proxy Enterprise</td><td>Custom quote</td><td>Volume tiers, custom integrations, SSO and SAML</td><td>Usage fees, not published</td><td>Free trial</td><td>pci-proxy.com</td></tr>
+<tr><td>PCI Vault Growing</td><td>From $255</td><td>Card tokenization and storage vault</td><td>$0.02 per operation; $0.01 on Business ($965); $0.01 to $0.0009 on High Volume Enterprise ($1,675)</td><td>No free trial; a staging account comes with a production signup</td><td>PCI Vault pricing</td></tr>
+<tr><td>PCI Booking</td><td>Custom quote</td><td>Quote drivers not stated</td><td>Not published</td><td>“Try for Free” signup</td><td>pcibooking.net</td></tr>
+<tr><td>Bluefin ShieldConex</td><td>Custom quote</td><td>P2PE sold through Bluefin or a POS reseller</td><td>Not published</td><td>Demo</td><td>bluefin.com</td></tr>
+<tr><td>IXOPAY (TokenEx)</td><td>Custom quote</td><td>TokenEx packages (January 2026); ROI calculator, no prices</td><td>Not published</td><td>Demo</td><td>ixopay.com</td></tr>
+</tbody></table></div>
+
+<h2 id="pms-and-channel-manager-fit">PMS and Channel Manager Fit</h2>
+
+<p>None of these replaces your PMS or channel manager. This matrix shows what each vendor documents publicly about connecting to them. “API” means you or your PMS vendor wire it up.</p>
+
+<div class="bl-tablewrap"><table class="bl-table bl-table--wide">
+<thead><tr><th>Platform</th><th>PMS</th><th>Channel manager and OTA</th><th>Sales and catering</th><th>Gateway</th></tr></thead>
+<tbody>
+<tr><td>Enigma Vault</td><td>API, webhooks, format-preserving tokens</td><td>Not documented</td><td>API and webhooks</td><td>Authorize.net, Stripe, Braintree, PayPal, any REST gateway</td></tr>
+<tr><td>PCI Booking</td><td>Returns tokens to the hotel system</td><td>Booking.com, Expedia, major channel managers, CRS, GDS</td><td>Not documented</td><td>Relays to your PSP; multi-hotel routing</td></tr>
+<tr><td>PCI Proxy (Planet)</td><td>PMS pulls via proxy</td><td>SiteMinder pmsXchange certified (PULL)</td><td>Not documented</td><td>Shares tokens with any PSP</td></tr>
+<tr><td>Bluefin ShieldConex</td><td>Via POS and Datacap</td><td>Not documented</td><td>Not documented</td><td>Forwards to any processor</td></tr>
+<tr><td>PCI Vault</td><td>API</td><td>Not documented</td><td>Not documented</td><td>PCI proxy to your provider</td></tr>
+<tr><td>IXOPAY (TokenEx)</td><td>API</td><td>Forwards to channel managers and OTAs (Tablet Hotels case)</td><td>Not documented</td><td>Multi-PSP orchestration</td></tr>
+</tbody></table></div>
+
+<p>Confirm any integration with both vendors before you sign; partner lists change often.</p>
+
+<h2 id="how-to-choose">How to Choose Hotel Card Tokenization Software</h2>
+
+<p>Start by counting where your cards actually come from in a normal month. In my experience, most independents find that the PMS handles the booking engine well and that the trouble lives in three places: the reservations phone line, the shared inbox, and the group sales desk.</p>
+
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Your situation</th><th>Start with</th><th>Why</th></tr></thead>
+<tbody>
+<tr><td>40 to 150 rooms, lots of phone and email bookings</td><td>Enigma Vault</td><td>Phone and link capture at a published price</td></tr>
+<tr><td>Heavy Expedia Collect and Booking.com Payments volume</td><td>PCI Booking</td><td>Tokenizes cards in the OTA feed</td></tr>
+<tr><td>You’re a PMS or booking engine pulling from SiteMinder</td><td>PCI Proxy</td><td>Certified proxy for pmsXchange</td></tr>
+<tr><td>Front desk card-present security is the gap</td><td>Bluefin ShieldConex</td><td>Validated P2PE plus tokens</td></tr>
+<tr><td>Independent with weddings, teams, and corporate groups</td><td>Enigma Vault Customer Vault</td><td>Signed, tokenized authorizations without a sales suite</td></tr>
+</tbody></table></div>
+
+<h2 id="common-mistakes">Common Mistakes Hotels Make With Card Tokenization</h2>
+
+<ul>
+  <li><strong>Leaving the inbox alone:</strong> Tokenizing the booking engine while authorization PDFs sit in a shared mailbox ignores the riskiest channel.</li>
+  <li><strong>Storing the CVV “for the guarantee”:</strong> PCI DSS doesn’t allow it after authorization; use a vault that deletes it on a timer.</li>
+  <li><strong>Assuming tokens equal compliance:</strong> Call recordings, terminals, and staff screens still count; your acquirer or QSA confirms the final scope.</li>
+  <li><strong>Buying a gateway when you needed a vault:</strong> A new processor tokenizes its own cards, not your channel manager or email cards.</li>
+  <li><strong>Forgetting the sales team:</strong> Group deposits are often the largest charges and the least controlled.</li>
+  <li><strong>Treating every team the same:</strong> A concierge buying tickets with a guest’s card needs a logged reveal, not a number on a notepad.</li>
+</ul>
+
+<h2 id="questions-to-ask">Questions to Ask a Vendor Before You Sign</h2>
+
+<ul>
+  <li>Can you tokenize OTA virtual cards from our channel manager feed, and which channel managers have you certified with? <em>(Integration claims vary.)</em></li>
+  <li>Which roles can reveal a full card number, and is every reveal logged? <em>(Staff sometimes key cards into terminals.)</em></li>
+  <li>How long do you hold the CVV, and when is it deleted? <em>(PCI DSS forbids storing it after authorization.)</em></li>
+  <li>Can each of our properties keep its own gateway and merchant account? <em>(Groups rarely share one.)</em></li>
+  <li>Can you share your current PCI DSS AOC and SOC 2 report? <em>(Your QSA will ask.)</em></li>
+  <li>How do we export tokens and cards if we leave? <em>(Avoid lock-in.)</em></li>
+  <li>Will our PMS store the token or the full card, and how are authorization records deleted? <em>(Retention is where emailed forms pile up.)</em></li>
+  <li>Which staff need to use card data, and which only need to confirm it exists? <em>(Fewer people seeing full numbers is the goal.)</em></li>
+</ul>
+
+<h2 id="ready-to-try-enigma-vault">Start Protecting Hotel Guest Cards With Enigma Vault</h2>
+
+<p>If your reservations team still hears card numbers on the phone or opens them in email, start there. Card Vault captures by phone, link, or form and charges through the gateway you already use; Customer Vault turns third-party authorizations and group deposits into signed, tokenized records. Compare plans on the pricing page or <a class="bl-link" href="/request-demo/">book a demo</a>.</p>
+
+<div class="bl-inlinecta">
+  <div>
+    <p class="bl-inlinecta__t">Keep the booking. Lose the card number.</p>
+    <p class="bl-inlinecta__s">Start free on Card Vault Lite, or book a demo of a hotel authorization flow.</p>
+  </div>
+  <a class="np-btn np-btn--on-dark np-btn--primary" href="/request-demo/"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
+</div>

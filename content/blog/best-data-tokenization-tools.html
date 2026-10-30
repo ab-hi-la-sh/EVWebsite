@@ -1,0 +1,624 @@
+---
+title: "Best Data Tokenization Tools in 2026: When to Choose Vaulted vs Vaultless"
+titleEmphasis: "When to Choose Vaulted vs Vaultless"
+slug: "best-data-tokenization-tools"
+layout: "pii-style"
+metaTitle: "Best Data Tokenization Tools 2026: Vaulted vs Vaultless"
+description: "Compare 7 data tokenization tools by token model (vaulted, vaultless, entity-based), speed, analytics on tokens, deployment, detokenization controls, and pricing."
+subtitle: "Vaulted or vaultless? Seven platforms compared on token model, speed, analytics on tokens, deployment, reveal controls, and price."
+date: 2026-10-29T00:05:00
+category: "Vault"
+author: "tony-alex"
+readTime: 26
+heroImage: "/assets/blog/img-02.png"
+heroAlt: "Sensitive fields replaced by tokens, with one path into a vault and one path through a key"
+excerpt: "Seven data tokenization platforms compared on vaulted versus vaultless design: speed, analytics and joins, deployment, detokenization controls, and price."
+tags: ["tokenization", "data-vault", "vaultless-tokenization", "pii", "nopii"]
+ogImage: "/assets/og/nopii-overview.jpg"
+ogImageAlt: "Best Data Tokenization Tools in 2026: When to Choose Vaulted vs Vaultless | Enigma Vault"
+ogType: article
+styles: ["blog.css", "pages/blog-pii-hero.css", "tr-pages.css"]
+scripts: ["blog-article.js"]
+faqSchema: true
+faqs:
+  - q: "What Are Data Tokenization Tools?"
+    a: "Data tokenization tools replace a sensitive value, such as a Social Security number or card number, with a token that means nothing on its own. Only an authorized request can turn the token back into the original. The platforms differ mainly in where originals live: in a vault, or nowhere, rebuilt from a secret key."
+  - q: "What Are the Best Data Tokenization Tools in 2026?"
+    a: "Enigma Vault is best for a managed vaulted platform covering cards, fields, files, and AI prompts with published prices. Skyflow suits multi-region residency; Protegrity suits vaultless protection across data platforms; Thales CipherTrust Tokenization suits running both models on your own infrastructure; Fortanix suits vaultless tokens next to HSM-backed keys; Protecto suits AI and RAG pipelines; K2view suits entity-based tokens across many source systems."
+  - q: "What Is the Difference Between Vaulted and Vaultless Tokenization?"
+    a: "A vaulted platform stores the original in a protected vault and returns a random token; reversing it means asking the vault. A vaultless platform computes the token from the value with a secret key and stores nothing, so whoever holds the key and the algorithm can reverse it. The PCI SSC calls these reversible non-cryptographic and reversible cryptographic tokens."
+  - q: "Is Vaultless Tokenization Faster Than Vaulted?"
+    a: "Usually for reveals at high volume, since tokens are computed locally with no network call to a central store. A vaulted platform adds a call to the vault, so its speed depends on the vendor’s regions, batching, and capacity. Most vendors here publish no latency figures, so load-test both models from the region where your app runs."
+  - q: "How Is Tokenization Different From Encryption?"
+    a: "Encryption transforms a value with a key, and anyone with the key can decrypt the ciphertext. Vaulted tokenization swaps the value for a reference that has no meaning outside the vault. Vaultless tokenization often uses format-preserving encryption under the hood. The two work together: Enigma Vault encrypts every stored value with per-customer AES-256 keys and gives your systems random tokens."
+  - q: "Can You Run Analytics on Tokenized Data?"
+    a: "Yes, when tokens are deterministic: the same value always gives the same token, so joins, counts, and duplicate checks work without revealing originals. Vaultless tokens are deterministic under one key; vaulted platforms such as Enigma Vault, Skyflow, and Protecto offer deterministic tokens as an option, sometimes scoped to a namespace or column group."
+  - q: "Which Data Tokenization Tool Can Run On-Premises or Air-Gapped?"
+    a: "Thales CipherTrust Tokenization, Fortanix, Protegrity, K2view, and Protecto all describe on-premises deployment, and Protecto also lists air-gapped. Skyflow can run in your own AWS or GCP account, and Enigma Vault runs as a managed cloud service."
+  - q: "How Do I Choose a Data Tokenization Tool?"
+    a: "Decide the token model first: a managed vault if you want no key program to run, vaultless if you need local speed and can guard the keys. Then check analytics needs (deterministic tokens), schema fit (format-preserving tokens), where it must run, who may detokenize and whether each reveal is logged, and whether you can price a full year today."
+---
+<style>
+/* Wide tables: tighter cell padding so they fit the article column. */
+.bl-content .bl-table--wide td, .bl-content .bl-table--wide th { padding-left: 8px; padding-right: 8px; }
+.bl-content blockquote.bl-quote-cta{margin:24px 0;padding:14px 20px;border-left:3px solid var(--ev-mineral-blue);background:var(--ev-warm-cloud);border-radius:0 10px 10px 0}.bl-content blockquote.bl-quote-cta p{margin:0;font-size:16px}
+.bl-content figure.bl-shot{margin:20px 0 24px;padding:10px;border:1px solid var(--ev-cool-stone);border-radius:10px;background:var(--ev-warm-cloud)}.bl-content figure.bl-shot img{display:block;width:100%;height:auto;border-radius:6px}.bl-content figure.bl-shot figcaption{margin-top:8px;text-align:center;font-size:13px;color:var(--ev-slate)}
+/* Vendor header card: rank, name, best-for pill, review scores, key facts. */
+.bl-content .vc { margin: 40px 0 20px; }
+.bl-content .vc__head { display: grid; grid-template-columns: auto 1fr auto; gap: 18px; align-items: center; margin-bottom: 14px; }
+.bl-content .vc__num { font-size: 34px; font-weight: 600; line-height: 1; color: var(--ev-mineral-blue); font-variant-numeric: tabular-nums; }
+.bl-content h3.vc__name { margin: 0; padding: 0; font-size: 26px; line-height: 1.25; font-weight: 600; color: var(--ev-ink); }
+.bl-content .vc__sep { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.bl-content .vc__pill { display: table; margin-top: 10px; padding: 6px 12px; border-radius: 6px; background: var(--ev-mineral-blue); color: #fff; font-size: 12px; line-height: 1.4; font-weight: 600; text-transform: none; letter-spacing: 0; font-size: 13px; }
+.bl-content .vc__rates { display: flex; flex-direction: column; gap: 8px; align-items: stretch; }
+.bl-content .vc__rate { display: flex; flex-direction: column; align-items: flex-end; padding: 8px 14px; border: 1px solid var(--ev-cool-stone); border-radius: 10px; background: #fff; text-decoration: none !important; min-width: 128px; }
+.bl-content a.vc__rate:hover { border-color: var(--ev-mineral-blue); }
+.bl-content .vc__score { font-size: 20px; font-weight: 700; color: var(--ev-ink); line-height: 1.2; }
+.bl-content .vc__score small { font-size: 13px; font-weight: 500; color: var(--ev-slate); }
+.bl-content .vc__src { font-size: 12px; color: var(--ev-slate); line-height: 1.3; }
+.bl-content .vc__rate--new .vc__score { font-size: 15px; }
+.bl-content .vc__facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px 24px; margin: 0; padding: 18px 22px; border-radius: 12px; background: var(--ev-warm-cloud); }
+.bl-content .vc__facts div { margin: 0; }
+.bl-content .vc__facts .vc__best { grid-column: 1 / -1; padding-top: 14px; border-top: 1px solid var(--ev-cool-stone); }
+.bl-content .vc__facts dt { margin: 0 0 4px; font-size: 11.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ev-slate); }
+.bl-content .vc__facts dd { margin: 0; font-size: 15px; line-height: 1.5; color: var(--ev-ink); }
+@media (max-width: 700px) {
+  .bl-content .vc__head { grid-template-columns: auto 1fr; }
+  .bl-content .vc__rates { grid-column: 1 / -1; flex-direction: row; flex-wrap: wrap; }
+  .bl-content .vc__rate { align-items: flex-start; }
+  .bl-content .vc__num { font-size: 26px; }
+  .bl-content h3.vc__name { font-size: 22px; }
+  .bl-content .vc__facts { grid-template-columns: 1fr; }
+}
+.bl-content .bl-ranked { font-size: 15px; color: var(--ev-slate); }
+.bl-content .tldr { margin: 8px 0 32px; padding: 22px 26px; border-radius: 12px; background: var(--ev-warm-cloud); border-left: 3px solid var(--ev-mineral-blue); }
+.bl-content .tldr .tldr__label { margin: 0 0 12px; padding: 0; border: 0; font-size: 13px; line-height: 1.4; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--ev-mineral-blue); }
+.bl-content .tldr .tldr__list { margin: 0; padding-left: 20px; }
+.bl-content .tldr .tldr__list li { margin: 0 0 10px; font-size: 16px; line-height: 1.6; color: var(--ev-ink); }
+.bl-content .tldr .tldr__list li::marker { color: var(--ev-mineral-blue); }
+.bl-content .tldr .tldr__list li:last-child { margin-bottom: 0; }
+.bl-content .tldr strong a { font-weight: 600; }
+</style>
+<p>The best data tokenization tools for 2026: 1. Enigma Vault, 2. Skyflow, 3. Protegrity, 4. Thales CipherTrust Tokenization, 5. Fortanix Data Security Manager, 6. Protecto, and 7. K2view.</p>
+<p>Choosing a data tokenization tool starts with one question: does a vault keep the original value, or does a vaultless design rebuild it from a key? That choice decides speed, analytics, deployment, and who you have to trust.</p>
+<p>Running it yourself has a cost: a <a class="bl-link" href="https://www.g2.com/products/protegrity/reviews" target="_blank" rel="noopener">Protegrity reviewer on G2</a> cites a single-year license above $15,000, and a <a class="bl-link" href="https://www.g2.com/products/thales-ciphertrust-tokenization/reviews" target="_blank" rel="noopener">Thales reviewer</a> lists implementation complexity and token management.</p>
+<p>Enigma Vault leads this list because it runs the vault for you: Data, Card, and File Vault keep fields, cards, and files in one managed vault, and NoPII tokenizes PII before it reaches the model provider. It is PCI DSS Level 1 and SOC 2 Type II, rated <a class="bl-link" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener">4.4/5 on G2</a> and <a class="bl-link" href="https://www.capterra.com/p/241650/Enigma-Vault/reviews/" target="_blank" rel="noopener">4.8/5 on Capterra</a>, with a free Lite plan.</p>
+<p>Other strong options are:</p>
+<ul>
+  <li><a class="bl-link" href="https://www.g2.com/products/payments-data-privacy-vault/reviews" target="_blank" rel="noopener">Skyflow</a>: Built for vaulted tokenization with regional vaults for data residency (G2 rating 5.0 from 1 review, Payments vault).</li>
+  <li><a class="bl-link" href="https://www.g2.com/products/protegrity/reviews" target="_blank" rel="noopener">Protegrity</a>: Best for vaultless tokens computed across data and analytics platforms (G2 rating 4.5 from 14 reviews).</li>
+  <li><a class="bl-link" href="https://www.g2.com/products/thales-ciphertrust-tokenization/reviews" target="_blank" rel="noopener">Thales CipherTrust Tokenization</a>: Best suited for running vaulted and vaultless modes on your own infrastructure (G2 rating 4.0 from 6 reviews).</li>
+  <li><a class="bl-link" href="https://www.g2.com/products/fortanix/reviews" target="_blank" rel="noopener">Fortanix Data Security Manager</a>: Known for vaultless tokens next to HSM-backed key management (G2 rating 4.5 from 2 reviews).</li>
+  <li><a class="bl-link" href="https://www.g2.com/products/protecto/reviews" target="_blank" rel="noopener">Protecto</a>: Offers a vaulted privacy layer for agents and RAG pipelines (no G2 or Capterra reviews yet).</li>
+  <li><a class="bl-link" href="https://www.g2.com/products/k2view/reviews" target="_blank" rel="noopener">K2view</a>: A fit for entity-based micro-vaults kept consistent across many source systems (G2 rating 4.6 from 55 reviews, for its overall data platform).</li>
+</ul>
+<p><strong>About the author:</strong> I’m <a class="bl-link" href="https://www.linkedin.com/in/tony-alex-enigma-vault/" target="_blank" rel="noopener">Dr. Tony Alex</a>, Chief Executive Officer of Enigma Vault, where I lead our work in encryption, tokenization, and sensitive-data protection. I have more than two decades of experience building enterprise software businesses.</p>
+<p>In 1999 I founded US eDirect to develop software for parks, campgrounds, and recreation agencies, bringing reservations and payments into one cloud system, and led it through its acquisition by Tyler Technologies in 2022.</p>
+<p><em>Disclosure: Enigma Vault publishes this guide and appears first in it. Every platform here is judged on the same criteria, and the review ratings come from G2 and Capterra.</em></p>
+<div class="tldr" id="tldr">
+  <h2 class="tldr__label">TL;DR</h2>
+  <ul class="tldr__list">
+    <li><strong><a class="bl-link" href="#enigma-vault">Enigma Vault</a>:</strong> vaulted; best for one managed vault covering cards, fields, files, and AI prompts.</li>
+    <li><strong><a class="bl-link" href="#skyflow">Skyflow</a>:</strong> vaulted; best for multi-region data residency from one vault service.</li>
+    <li><strong><a class="bl-link" href="#protegrity">Protegrity</a>:</strong> vaultless; best for tokens computed in place across data and analytics platforms.</li>
+    <li><strong><a class="bl-link" href="#thales-ciphertrust-tokenization">Thales CipherTrust Tokenization</a>:</strong> vaulted and vaultless; best for running both modes on your own infrastructure.</li>
+    <li><strong><a class="bl-link" href="#fortanix">Fortanix Data Security Manager</a>:</strong> vaultless; best for tokens next to HSM-backed key management.</li>
+    <li><strong><a class="bl-link" href="#protecto">Protecto</a>:</strong> vaulted; best for masking PII in AI agents and RAG pipelines.</li>
+    <li><strong><a class="bl-link" href="#k2view">K2view</a>:</strong> entity-based; best for tokens kept consistent across many source systems.</li>
+  </ul>
+</div>
+<h2 id="best-data-tokenization-tools-at-a-glance">Best Data Tokenization Tools at a Glance</h2>
+<p>The token model comes first in every row, since it decides where originals live and who guards them. Every fact was checked on the vendor’s own pages on October 29, 2026.</p>
+<div class="bl-tablewrap"><table class="bl-table bl-table--wide">
+<thead><tr><th>Platform</th><th>Token model</th><th>Analytics on tokens</th><th>Deployment</th><th>Starting price</th><th>G2 rating</th></tr></thead>
+<tbody>
+<tr><td><a class="bl-link" href="#enigma-vault">Enigma Vault</a></td><td>Vaulted</td><td>Deterministic option; format-preserving card tokens</td><td>Managed cloud (EU and US regions)</td><td>$0, then $49.99 a month per vault</td><td><a class="bl-link" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener">4.4/5 (6 reviews)</a></td></tr>
+<tr><td><a class="bl-link" href="#skyflow">Skyflow</a></td><td>Vaulted</td><td>Deterministic or random per column; format-preserving</td><td>SaaS, dedicated VPC, or your own AWS or GCP account; regional vaults</td><td>Custom quote</td><td><a class="bl-link" href="https://www.g2.com/products/payments-data-privacy-vault/reviews" target="_blank" rel="noopener">5.0/5 (1 review, Payments vault)</a></td></tr>
+<tr><td><a class="bl-link" href="#protegrity">Protegrity</a></td><td>Vaultless</td><td>Deterministic; referential integrity</td><td>SaaS, cloud, or on-premises</td><td>Free Developer Edition; paid editions quoted</td><td><a class="bl-link" href="https://www.g2.com/products/protegrity/reviews" target="_blank" rel="noopener">4.5/5 (14 reviews)</a></td></tr>
+<tr><td><a class="bl-link" href="#thales-ciphertrust-tokenization">Thales CipherTrust Tokenization</a></td><td>Vaulted and vaultless (hybrid)</td><td>Format-preserving, random, or masked</td><td>Self-run on-premises or in AWS, Azure, or GCP</td><td>Custom quote</td><td><a class="bl-link" href="https://www.g2.com/products/thales-ciphertrust-tokenization/reviews" target="_blank" rel="noopener">4.0/5 (6 reviews)</a></td></tr>
+<tr><td><a class="bl-link" href="#fortanix">Fortanix Data Security Manager</a></td><td>Vaultless</td><td>Format-preserving</td><td>SaaS or on-premises</td><td>Custom quote; free trial</td><td><a class="bl-link" href="https://www.g2.com/products/fortanix/reviews" target="_blank" rel="noopener">4.5/5 (2 reviews)</a></td></tr>
+<tr><td><a class="bl-link" href="#protecto">Protecto</a></td><td>Vaulted</td><td>Consistent within a namespace; format-preserving</td><td>SaaS, on-premises, or air-gapped</td><td>Custom quote; API trial</td><td><a class="bl-link" href="https://www.g2.com/products/protecto/reviews" target="_blank" rel="noopener">No reviews yet</a></td></tr>
+<tr><td><a class="bl-link" href="#k2view">K2view</a></td><td>Entity-based (a micro-vault per entity)</td><td>Format-preserving; referential integrity</td><td>On-premises, cloud, or hybrid</td><td>Custom quote; product tour</td><td><a class="bl-link" href="https://www.g2.com/products/k2view/reviews" target="_blank" rel="noopener">4.6/5 (55 reviews)</a></td></tr>
+</tbody></table></div>
+<h2 id="vaulted-vs-vaultless-tokenization">Vaulted vs Vaultless Tokenization</h2>
+<p>Every platform in this list answers one question first: where does the original value go after it is tokenized? The PCI Security Standards Council’s Tokenization Product Security Guidelines (April 2015) name the two answers.</p>
+<h3 id="how-vaulted-tokenization-works">How Vaulted Tokenization Works</h3>
+<p>The original is encrypted and stored in a vault, and your systems get a random token back. The PCI SSC calls these reversible non-cryptographic tokens.</p>
+<p>A stolen token reveals nothing. To get the original, a caller must ask the vault, so the vault’s access rules and logs decide who sees what.</p>
+<h3 id="how-vaultless-tokenization-works">How Vaultless Tokenization Works Without a Vault</h3>
+<p>Nothing is stored. A secret key, usually through format-preserving encryption, turns the value into a token and turns it back; the PCI SSC calls these reversible cryptographic tokens.</p>
+<div class="bl-tablewrap"><table class="bl-table bl-table--wide">
+<thead><tr><th>Factor</th><th>Vaulted</th><th>Vaultless</th></tr></thead>
+<tbody>
+<tr><td>Who can reverse a token</td><td>Only callers the vault authorizes; Enigma Vault uses scoped OAuth2 credentials and RBAC</td><td>Any system or person holding the key</td></tr>
+<tr><td>Revoking one user’s access</td><td>Remove their credential or role at the vault</td><td>Withdraw key access; a copied key cannot be recalled</td></tr>
+<tr><td>Deleting one record (right to erasure)</td><td>Delete the vault entry and every token copy goes dead; Enigma Vault expires records from 60 seconds to 7 years</td><td>No original to delete; each token copy must be found and removed</td></tr>
+<tr><td>Rotating keys</td><td>Stored values are re-encrypted; tokens stay the same. Enigma Vault rotates per-customer AES-256 keys on schedule</td><td>New key, new tokens: re-tokenize stored data or keep the old key</td></tr>
+<tr><td>Evidence per reveal for auditors</td><td>One log at the vault; Enigma Vault records client ID, IP, path, and status per request</td><td>Spread across the key service and every app running the algorithm</td></tr>
+<tr><td>Blast radius of one leak</td><td>What the leaked credential may reveal</td><td>Every token made under that key, in every system</td></tr>
+<tr><td>Compliance scope</td><td>Originals and detokenization sit with the vault</td><td>Every system that holds the key or runs detokenization</td></tr>
+<tr><td>Team effort and cost</td><td>API integration; vendor runs the vault. Enigma Vault starts at $0, then $49.99 a month per vault</td><td>License fees plus staff and an HSM or key service</td></tr>
+<tr><td>Scaling across regions</td><td>Regional vaults keep originals in-region; each region is one more vault</td><td>No store to replicate; the key must be available and protected in every region</td></tr>
+</tbody></table></div>
+<p><strong>When each fits:</strong> choose a vault when you want one audited place for reveals, deletion that kills a token for good, and no key program to run. Choose vaultless when per-value network calls are too slow for your volume and your team can operate keys well.</p>
+<p>Related reading: <a class="bl-link" href="/blog/vault-vs-vaultless-tokenization/">vault vs vaultless tokenization explained</a> and <a class="bl-link" href="/blog/data-tokenization/">what data tokenization is and how it works</a>.</p>
+<h2 id="how-we-ranked">How We Ranked the Best Data Tokenization Tools</h2>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Criterion</th><th>Weight</th><th>What we checked</th></tr></thead>
+<tbody>
+<tr><td>Token model clarity</td><td>20%</td><td>Vaulted, vaultless, entity-based, or hybrid, stated plainly on the vendor’s own pages</td></tr>
+<tr><td>Detokenization control</td><td>20%</td><td>Who can reveal originals, how access is scoped, and whether every reveal is logged</td></tr>
+<tr><td>Analytics support</td><td>15%</td><td>Deterministic tokens for joins; format-preserving tokens that fit existing schemas</td></tr>
+<tr><td>Data coverage</td><td>15%</td><td>Structured fields, cards, files, and free text such as prompts</td></tr>
+<tr><td>Speed, scale, and deployment</td><td>15%</td><td>Documented performance facts, regions, and where the platform can run</td></tr>
+<tr><td>Time and price to first token</td><td>10%</td><td>Published pricing, free tiers or trials, self-serve start</td></tr>
+<tr><td>Evidence and reviews</td><td>5%</td><td>Stated certifications, plus G2 and Capterra ratings and what users say</td></tr>
+</tbody></table></div>
+<p>Sources: each vendor’s product, documentation, pricing, and security pages, the PCI SSC guidelines, and G2 and Capterra listings, all read in October 2026. Where a vendor does not document a fact, we write “Not published.”</p>
+<h2 id="the-7-best-data-tokenization-tools">The 7 Best Data Tokenization Tools in 2026</h2>
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">01</span>
+    <div class="vc__id">
+      <h3 id="enigma-vault" class="vc__name"><span class="vc__sep">1. </span>Enigma Vault<span class="vc__sep">: </span><span class="vc__pill">Best for One Managed Vault Covering Cards, Fields, Files, and AI Prompts</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener"><span class="vc__score">4.4<small>/5</small></span><span class="vc__src">G2 · 6 reviews</span></a><a class="vc__rate" href="https://www.capterra.com/p/241650/Enigma-Vault/reviews/" target="_blank" rel="noopener"><span class="vc__score">4.8<small>/5</small></span><span class="vc__src">Capterra · 4 reviews</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Token model</dt><dd>Vaulted, random by default, deterministic on request</dd></div>
+    <div><dt>Starting price</dt><dd>$0, then $49.99 a month per vault</dd></div>
+    <div><dt>Deployment</dt><dd>Managed cloud, EU and US regions</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Product and engineering teams that want SSNs, account numbers, cards, documents, and AI prompt data out of their own systems without running key infrastructure, and want to price it before talking to sales.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/enigma-vault.jpg" alt="Enigma Vault homepage" >}}
+  <figcaption>Enigma Vault homepage. Source: enigmavault.io</figcaption>
+</figure>
+<p>Enigma Vault is a vaulted tokenization platform delivered as APIs and a proxy. <a class="bl-link" href="/vault/data-vault/">Data Vault</a> holds structured secrets, <a class="bl-link" href="/vault/card-vault/">Card Vault</a> holds cards, and File Vault holds documents up to 5 GB.</p>
+<p>Customer Vault adds a no-code intake app, and <a class="bl-link" href="/nopii/">NoPII</a> tokenizes PII in LLM traffic. All of them share one vault, one key model, and one audit trail.</p>
+<p><strong>Token Model and How It Works</strong></p>
+<p>Vaulted. Default tokens are random, 128-bit values with no structure to reverse, and the mapping lives only in the vault. Each stored value is encrypted with per-customer AES-256 keys that rotate on schedule.</p>
+<p><strong>Speed and Scale</strong></p>
+<ul>
+  <li><strong>Batching:</strong> Data Vault tokenizes up to 5,000 secrets per request.</li>
+  <li><strong>Availability:</strong> The platform page states a 99.99% uptime SLA; SLA guarantees are part of the Enterprise plan.</li>
+  <li><strong>Streaming prompts:</strong> NoPII replaces tokens as response chunks arrive, which its page says keeps latency impact minimal.</li>
+  <li><strong>Per-call latency:</strong> Not published.</li>
+</ul>
+<p><strong>Analytics Support</strong></p>
+<p>Deterministic tokens are available on request, so the same value maps to the same token and joins and dedup still work. Data Vault also finds exact matches on encrypted values. Card tokens can be format-preserving and Luhn-passable, keeping first six and last four.</p>
+<p><strong>Deployment Options</strong></p>
+<p>A managed, per-tenant service hosted in EU and US regions, procured and billed directly or through AWS Marketplace on your existing AWS account; Enterprise adds dedicated infrastructure. Self-hosted or air-gapped: Not published.</p>
+<p>Apps integrate through a versioned REST API with OAuth2 credentials (no SDK required), cards come in through hosted or iframe forms and leave through a gateway proxy, and NoPII sits in front of LLM APIs as a proxy you reach by pointing your existing SDK at its base URL.</p>
+<p><strong>Detokenization Controls</strong></p>
+<p>Scoped OAuth2 credentials, role-based access, and opt-in IP allowlisting decide who can reveal. Every API request is logged with client ID, IP, and response status, and token expiry runs from 60 seconds to seven years.</p>
+<p><strong>Pricing</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>Lite</td><td>$0 (free plan)</td><td>Data Vault 1,500 requests ($0.06 overage); Card Vault 1,000 ($0.08); File Vault 5 GB</td></tr>
+<tr><td>Plus</td><td>$49.99 a month per vault</td><td>Data Vault 30,000 requests ($0.03); Card Vault 20,000 ($0.04); File Vault 150 GB; email support</td></tr>
+<tr><td>Premium</td><td>$249.99 a month per vault</td><td>Data Vault 400,000 requests ($0.01); Card Vault 250,000 ($0.02); File Vault 1 TB; priority support</td></tr>
+<tr><td>NoPII Free and Pro</td><td>$0 and $50 a month</td><td>1M protected tokens a month free; Pro includes 50M, then $1 per additional million</td></tr>
+<tr><td>Enterprise</td><td>Custom quote</td><td>Custom volume, dedicated infrastructure, and a BAA for healthcare</td></tr>
+</tbody></table></div>
+<p><strong>Pros</strong></p>
+<ul>
+  <li><strong>One vault for every data shape:</strong> Fields, cards, files, and prompt data share keys and one audit format, which shortens security reviews.</li>
+  <li><strong>Keys stay off your plate:</strong> Per-customer keys sit in a managed secrets store and roll over without engineer handling.</li>
+  <li><strong>A price you can model today:</strong> Published Lite, Plus, and Premium tiers let you cost a proof of concept before any sales call.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li><strong>Managed regions only:</strong> Teams that must run every component on their own hardware should look at the self-run options below.</li>
+  <li><strong>Prompt detection covers recognized PII only:</strong> Unrecognized PII can pass through NoPII, so test detection on your own data.</li>
+  <li><strong>ISO 27001 still in progress:</strong> PCI DSS Level 1 and SOC 2 Type II are in place; some procurement teams require ISO 27001 today.</li>
+</ul>
+<p><strong>Review Summary:</strong> Very positive, from a small sample. Enigma Vault holds <a class="bl-link" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener">4.4/5 from 6 reviews on G2</a> and <a class="bl-link" href="https://www.capterra.com/p/241650/Enigma-Vault/reviews/" target="_blank" rel="noopener">4.8/5 from 4 on Capterra</a>.</p>
+<p><strong>Likes:</strong> One G2 reviewer calls the API “simplistic and easy to understand,” and one values a single vendor handling card data, personal information, and multi-GB files; a CEO reviewer says support added their domestic card type and languages in under 24 hours.</p>
+<p><strong>Dislikes:</strong> One reviewer asks for more flexible reporting dashboards, one finds pricing a bit high, and one wants more documentation.</p>
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">02</span>
+    <div class="vc__id">
+      <h3 id="skyflow" class="vc__name"><span class="vc__sep">2. </span>Skyflow<span class="vc__sep">: </span><span class="vc__pill">Best for Multi-Region Data Residency From One Vault Service</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/payments-data-privacy-vault/reviews" target="_blank" rel="noopener"><span class="vc__score">5.0<small>/5</small></span><span class="vc__src">G2 · 1 review</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Token model</dt><dd>Vaulted, with per-column token formats</dd></div>
+    <div><dt>Starting price</dt><dd>Custom quote</dd></div>
+    <div><dt>Deployment</dt><dd>SaaS, dedicated VPC, or your own AWS or GCP account</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Enterprises with customer data in several jurisdictions that want regional vaults, warehouse integrations, and AI agent governance from one vendor.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/skyflow.jpg" alt="Skyflow homepage" >}}
+  <figcaption>Skyflow homepage. Source: skyflow.com</figcaption>
+</figure>
+<p>Skyflow is a data privacy vault service that detects and tokenizes sensitive values in databases, documents, and analytics platforms. Its homepage now leads with AI agents and describes data residency “without adding instances.”</p>
+<p><strong>Token Model and How It Works</strong></p>
+<p>Vaulted. Originals sit in a Skyflow vault, and each column is configured with its own token type. Its security page says each workspace and vault gets its own network security zone.</p>
+<p><strong>Speed and Scale</strong></p>
+<ul>
+  <li><strong>Batching:</strong> Its performance guide says requests default to 25 records per call, and the limit is configurable.</li>
+  <li><strong>Latency and throughput:</strong> Not published.</li>
+  <li><strong>Resilience:</strong> Its security page says services run in an AWS multi-availability-zone setup, with cross-region backups.</li>
+</ul>
+<p><strong>Analytics Support</strong></p>
+<p>Per column, tokens can be UUID or format-preserving, each deterministic or random, plus transient and email-domain formats. Column groups give the same deterministic token for the same value across tables.</p>
+<p><strong>Deployment Options</strong></p>
+<p>Three models, per its docs: multi-tenant SaaS (the default), Virtual Private Skyflow in a dedicated VPC that Skyflow manages, or Bring Your Own Cloud, where Skyflow runs inside your AWS or GCP account. Regional vaults keep sensitive values in-region while the central application holds tokens.</p>
+<p>Apps connect through Skyflow APIs and client-side SDKs, with AWS PrivateLink, GCP Private Service Connect, VPN, or hybrid links for on-premises systems. A fully on-premises or air-gapped install: Not published.</p>
+<p><strong>Detokenization Controls</strong></p>
+<p>A built-in policy-based access control system governs vault access, and detailed audit logging tracks security-sensitive events. Transient tokens expire, and expired tokens can no longer be detokenized.</p>
+<p><strong>Pricing</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>All plans</td><td>Custom quote</td><td>No public pricing page; the site offers demo and contact-sales only</td></tr>
+</tbody></table></div>
+<p><strong>Pros</strong></p>
+<ul>
+  <li><strong>Residency is the core design:</strong> Regional vaults let one application serve EU, Asian, and US customers without copying originals across borders.</li>
+  <li><strong>Full certification set:</strong> Its security page lists ISO 27001:2022, SOC 2 Type II, PCI DSS Level 1, and HIPAA assessment.</li>
+  <li><strong>Enterprise connectors:</strong> Its site lists Snowflake, Databricks, ServiceNow, HubSpot, and Glean among integrations.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li><strong>Deterministic tokens need resync:</strong> Its docs note the token changes when the value changes, so stored tokens must be refreshed.</li>
+  <li><strong>Column groups need matching settings:</strong> Every column in a group must share several tokenization options, which constrains schema design.</li>
+  <li><strong>No public price:</strong> Budgeting needs a sales conversation.</li>
+</ul>
+<p><strong>Review Summary:</strong> Too few to judge. The Skyflow Payments Data Privacy Vault holds <a class="bl-link" href="https://www.g2.com/products/payments-data-privacy-vault/reviews" target="_blank" rel="noopener">5.0/5 from a single G2 review</a>; Skyflow’s PII Data Privacy Vault has no G2 reviews, and we found no Capterra listing.</p>
+<p><strong>Likes:</strong> The one reviewer says the vault stopped one client’s payment data being mixed with another’s and removed manual checks.</p>
+<p><strong>Dislikes:</strong> The single review raises no dislikes, so there is nothing to weigh yet.</p>
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">03</span>
+    <div class="vc__id">
+      <h3 id="protegrity" class="vc__name"><span class="vc__sep">3. </span>Protegrity<span class="vc__sep">: </span><span class="vc__pill">Best for Vaultless Protection Across Data and Analytics Platforms</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/protegrity/reviews" target="_blank" rel="noopener"><span class="vc__score">4.5<small>/5</small></span><span class="vc__src">G2 · 14 reviews</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Token model</dt><dd>Vaultless, deterministic, format-preserving</dd></div>
+    <div><dt>Starting price</dt><dd>Free Developer Edition; paid editions quoted</dd></div>
+    <div><dt>Deployment</dt><dd>SaaS, cloud, or on-premises</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Data and security teams protecting the same fields across warehouses, lakehouses, and applications that want tokens computed in place with no central lookup.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/protegrity.jpg" alt="Protegrity homepage" >}}
+  <figcaption>Protegrity homepage. Source: protegrity.com</figcaption>
+</figure>
+<p>Protegrity is a data protection platform whose protectors run inside applications, clouds, and data stores through native integrations, proxies, or SDKs, all under one central policy.</p>
+<p><strong>Token Model and How It Works</strong></p>
+<p>Vaultless. Its page says tokens are generated “using a deterministic algorithm based on the original data and a secret key,” so there is no token vault to manage or synchronize.</p>
+<p><strong>Speed and Scale</strong></p>
+<ul>
+  <li><strong>Design claim:</strong> The page says removing real-time checks to a central vault reduces run-time overhead.</li>
+  <li><strong>Latency and throughput figures:</strong> Not published.</li>
+</ul>
+<p><strong>Analytics Support</strong></p>
+<p>Deterministic and format-preserving by design, and the page says referential integrity holds when values are restored. Documented Databricks Unity Catalog and Snowflake integrations let analysts work on tokens directly.</p>
+<p><strong>Deployment Options</strong></p>
+<p>Its page describes one policy across SaaS, cloud, on-premises, and hybrid environments, offered in Developer, AI Team, and Enterprise editions. Protection is applied through enforcement points: native integrations (such as Databricks and Snowflake), proxies, or SDKs.</p>
+<p>Developers can try it through an API Playground with an API access key. Specific clouds, regions, marketplace listings, and air-gapped support: Not published on the tokenization page.</p>
+<p><strong>Detokenization Controls</strong></p>
+<p>Originals are restored only under policies set by role, region, or data type, which the page says are centrally enforced and audited across systems.</p>
+<p><strong>Pricing</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>Developer Edition</td><td>Free</td><td>Build and test environment</td></tr>
+<tr><td>AI Team Edition</td><td>Custom quote</td><td>Protection for AI and analytics pipelines</td></tr>
+<tr><td>Enterprise Edition</td><td>Custom quote</td><td>Field-level protection, policy orchestration, high throughput</td></tr>
+</tbody></table></div>
+<p><strong>Pros</strong></p>
+<ul>
+  <li><strong>Suited to analytics at volume:</strong> Computing tokens in place avoids a network round trip per value on large tables.</li>
+  <li><strong>Free place to start:</strong> The Developer Edition lets engineers test protectors and token formats before any contract.</li>
+  <li><strong>Reviewers confirm scale:</strong> One G2 reviewer calls its vaultless tokenization easily scalable on-premises and in public cloud.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li><strong>Key custody becomes your risk:</strong> With no vault, protecting the secret key protects every token, so key operations need mature processes.</li>
+  <li><strong>No certifications on the product page:</strong> The page cites support for PCI DSS, HIPAA, and GDPR, so request audit reports directly.</li>
+  <li><strong>Price and integrations questioned:</strong> Two reviewers call the price high, one citing a single-year license above $15,000.</li>
+</ul>
+<p><strong>Review Summary:</strong> Positive. Protegrity holds <a class="bl-link" href="https://www.g2.com/products/protegrity/reviews" target="_blank" rel="noopener">4.5/5 from 14 reviews on G2</a>.</p>
+<p><strong>Likes:</strong> G2’s summary says users praise its data protection and ease of use; one reviewer describes “world class support” and notes deterministic tokens make matching for analytics easier.</p>
+<p><strong>Dislikes:</strong> G2’s summary says integration options could be more extensive (one reviewer says only popular ones such as AWS are covered); two reviewers call the price high, and two criticize support.</p>
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">04</span>
+    <div class="vc__id">
+      <h3 id="thales-ciphertrust-tokenization" class="vc__name"><span class="vc__sep">4. </span>Thales CipherTrust Tokenization<span class="vc__sep">: </span><span class="vc__pill">Best for Vaulted and Vaultless Modes on Your Own Infrastructure</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/thales-ciphertrust-tokenization/reviews" target="_blank" rel="noopener"><span class="vc__score">4.0<small>/5</small></span><span class="vc__src">G2 · 6 reviews</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Token model</dt><dd>Vaulted and vaultless, alone or combined</dd></div>
+    <div><dt>Starting price</dt><dd>Custom quote</dd></div>
+    <div><dt>Deployment</dt><dd>Self-run, on-premises or public cloud</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Large enterprises with existing Thales key management that want to pick vaulted or vaultless per workload and run both inside their own estate.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v3/thales.jpg" alt="Thales homepage" >}}
+  <figcaption>Thales homepage. Source: cpl.thalesgroup.com</figcaption>
+</figure>
+<p>Thales CipherTrust Tokenization is part of the CipherTrust data security family. It plugs in through native column-level protection, an application SDK, or a RESTful service.</p>
+<p><strong>Token Model and How It Works</strong></p>
+<p>Hybrid. Its product page says vaulted and vaultless options “can be used independently or in conjunction with data masking or redaction.” In vaulted mode, the vault runs on MSSQL, Oracle, MySQL, or Cassandra that your team operates.</p>
+<p><strong>Speed and Scale</strong></p>
+<ul>
+  <li><strong>Throughput:</strong> Its specifications cite more than 1 million card-size vaultless tokenizations a second per token server, using batch mode on a 32-core server; per-call latency is Not published.</li>
+  <li><strong>Operations:</strong> Thales states admins can replace a cipher in under a minute through central management.</li>
+  <li><strong>Reviewer view:</strong> One G2 reviewer notes the extra processing time each request takes.</li>
+</ul>
+<p><strong>Analytics Support</strong></p>
+<p>Format-preserving, random, and masked token formats; the page says format-preserving tokens avoid database schema changes. Whether tokens are deterministic for joins: Not published.</p>
+<p><strong>Deployment Options</strong></p>
+<p>Self-run: vaultless token servers ship as OVA or ISO images, Hyper-V VHD, an Amazon Machine Image, an Azure Marketplace image, or on Google Cloud Platform (minimum 4 cores and 16 GB RAM), with CipherTrust Manager as the key source and an optional FIPS 140-2 Level 3 root of trust.</p>
+<p>Apps integrate through native column-level protection, an application SDK, or RESTful APIs (vaulted mode adds Java and .NET), and Thales states cloud providers never have access to token vaults or keys.</p>
+<p><strong>Detokenization Controls</strong></p>
+<p>LDAP or Active Directory groups decide who sees full values, partial masks, or tokens only. Audit logging for reveals: Not published on the tokenization page.</p>
+<p><strong>Pricing</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>All deployments</td><td>Custom quote</td><td>Demo and contact-sales only on the product page</td></tr>
+</tbody></table></div>
+<p><strong>Pros</strong></p>
+<ul>
+  <li><strong>Model choice per workload:</strong> Teams avoid committing their whole estate to one tokenization design.</li>
+  <li><strong>Schema-friendly tokens:</strong> Format-preserving output lets legacy databases accept tokens without column changes.</li>
+  <li><strong>Fits an existing Thales estate:</strong> Organizations already on CipherTrust Manager add tokenization without a new key vendor.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li><strong>You run the vault database:</strong> Vaulted mode depends on a database your team operates and scales.</li>
+  <li><strong>Complexity noted by users:</strong> One G2 reviewer cites implementation complexity, token management, and cost.</li>
+  <li><strong>Fields only:</strong> The tokenization page covers database and application fields, with no files or prompts.</li>
+</ul>
+<p><strong>Review Summary:</strong> Mixed to positive. Thales CipherTrust Tokenization holds <a class="bl-link" href="https://www.g2.com/products/thales-ciphertrust-tokenization/reviews" target="_blank" rel="noopener">4.0/5 from 6 reviews on G2</a>. G2’s summary lists Ease of Use (1) and Expensive (1).</p>
+<p><strong>Likes:</strong> Reviewers like the data protection and the on-premises or cloud consoles.</p>
+<p><strong>Dislikes:</strong> One calls it expensive for small businesses, one lists implementation complexity, token management, cost, dependency on Thales, and limited compatibility, and one notes extra processing time per request.</p>
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">05</span>
+    <div class="vc__id">
+      <h3 id="fortanix" class="vc__name"><span class="vc__sep">5. </span>Fortanix Data Security Manager<span class="vc__sep">: </span><span class="vc__pill">Best for Vaultless Tokens Next to HSM-Backed Key Management</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/fortanix/reviews" target="_blank" rel="noopener"><span class="vc__score">4.5<small>/5</small></span><span class="vc__src">G2 · 2 reviews</span></a><a class="vc__rate" href="https://www.capterra.com/p/191860/Self-Defending-Key-Management-Service/reviews/" target="_blank" rel="noopener"><span class="vc__score">5.0<small>/5</small></span><span class="vc__src">Capterra · 1 review</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Token model</dt><dd>Vaultless, format-preserving encryption</dd></div>
+    <div><dt>Starting price</dt><dd>Custom quote; free 30-day trial</dd></div>
+    <div><dt>Deployment</dt><dd>SaaS, on-premises appliance, or AWS Marketplace</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Security teams consolidating keys, HSMs, and tokenization on one platform, delivered as SaaS or on-premises.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/fortanix.jpg" alt="Fortanix homepage" >}}
+  <figcaption>Fortanix homepage. Source: fortanix.com</figcaption>
+</figure>
+<p>Fortanix Data Security Manager is a key management and data security platform with tokenization built in, offered as a service your apps call.</p>
+<p><strong>Token Model and How It Works</strong></p>
+<p>Vaultless. Its tokenization page removes “the need for a centralized token database” and generates tokens with NIST-approved format-preserving encryption, keyed from FIPS 140-2 Level 3 HSMs.</p>
+<p><strong>Speed and Scale</strong></p>
+<ul>
+  <li><strong>Design claim:</strong> The page cites a cloud-scale architecture for faster performance.</li>
+  <li><strong>Latency and throughput figures:</strong> Not published.</li>
+</ul>
+<p><strong>Analytics Support</strong></p>
+<p>Tokens keep the format of the original dataset. Whether tokens are deterministic for joins: Not published on the tokenization page.</p>
+<p><strong>Deployment Options</strong></p>
+<p>Delivered as SaaS or as a physical or virtual appliance on-premises, with tokenization keys held in its FIPS 140-2 Level 3 HSMs; its trial page lists hybrid multicloud across on-premises, AWS, and Azure. It is also on AWS Marketplace as a CloudFormation-deployed cluster.</p>
+<p>Apps call it as Tokenization-as-a-Service through a REST API, with KMIP, PKCS#11, JCE, and CAPI interfaces listed for wider integration.</p>
+<p><strong>Detokenization Controls</strong></p>
+<p>Full or partial dynamic masking by permission, plus granular RBAC and quorum approvals on keys. Audit logging for reveals: Not published on the tokenization page.</p>
+<p><strong>Pricing</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>Free trial</td><td>$0</td><td>30-day trial of Data Security Manager, no credit card</td></tr>
+<tr><td>AWS Marketplace</td><td>From $1.95 an hour</td><td>Hourly by instance size (m5.2xlarge to m5.8xlarge), plus AWS infrastructure; every size includes tokenization</td></tr>
+<tr><td>Production</td><td>Custom quote</td><td>Customized offers through sales</td></tr>
+</tbody></table></div>
+<p><strong>Pros</strong></p>
+<ul>
+  <li><strong>One vendor for keys and tokens:</strong> Teams already buying key management avoid a separate tokenization contract.</li>
+  <li><strong>Strong key governance:</strong> RBAC plus quorum approvals are rare controls in this list.</li>
+  <li><strong>Try before buying:</strong> The tokenization page offers a free trial.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li><strong>Hourly costs add up:</strong> Its AWS Marketplace listing bills by the hour per instance size, plus AWS infrastructure, so model a full year before committing.</li>
+  <li><strong>Large estates take effort:</strong> A G2 reviewer calls configuring and monitoring many devices strenuous in large organizations.</li>
+  <li><strong>Fields only:</strong> The page names PANs, PHI, and PII, with no files or prompt traffic.</li>
+</ul>
+<p><strong>Review Summary:</strong> Positive, from very few reviews. Fortanix holds <a class="bl-link" href="https://www.g2.com/products/fortanix/reviews" target="_blank" rel="noopener">4.5/5 from 2 reviews on G2</a> and <a class="bl-link" href="https://www.capterra.com/p/191860/Self-Defending-Key-Management-Service/reviews/" target="_blank" rel="noopener">5.0/5 from 1 on Capterra</a>.</p>
+<p><strong>Likes:</strong> Reviewers like its data-centric approach, keys separated from hardware, and (on Capterra) a cloud-hosted HSM without owning the device.</p>
+<p><strong>Dislikes:</strong> One finds managing many devices strenuous, one wants more visibility into how keys are used, and one found device setup difficult to configure.</p>
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">06</span>
+    <div class="vc__id">
+      <h3 id="protecto" class="vc__name"><span class="vc__sep">6. </span>Protecto<span class="vc__sep">: </span><span class="vc__pill">Best for Masking PII in AI Agents and RAG Pipelines</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate vc__rate--new" href="https://www.g2.com/products/protecto/reviews" target="_blank" rel="noopener"><span class="vc__score">No reviews</span><span class="vc__src">G2</span></a><a class="vc__rate vc__rate--new" href="https://www.capterra.com/p/10006145/Protecto/reviews/" target="_blank" rel="noopener"><span class="vc__score">No reviews</span><span class="vc__src">Capterra</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Token model</dt><dd>Vaulted, with three token types</dd></div>
+    <div><dt>Starting price</dt><dd>Custom quote; API trial</dd></div>
+    <div><dt>Deployment</dt><dd>SaaS, on-premises, or air-gapped</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>AI and data teams feeding LLMs, agents, and RAG systems with customer records that need on-premises or air-gapped options.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/protecto.jpg" alt="Protecto homepage" >}}
+  <figcaption>Protecto homepage. Source: protecto.ai</figcaption>
+</figure>
+<p>Protecto is a data privacy vault focused on AI. It detects 200+ PII and PHI entity types in 50+ languages, so models and agents work with context while raw values stay behind role-based unmasking.</p>
+<p><strong>Token Model and How It Works</strong></p>
+<p>Vaulted. Detected values are replaced with tokens and the originals kept in its vault. It offers entropy-based tokens for security, format-preserving tokens for databases, and context-preserving tokens for AI.</p>
+<p><strong>Speed and Scale</strong></p>
+<ul>
+  <li><strong>Token generation:</strong> The page labels real-time token generation “Sub-sec,” with no per-request figure.</li>
+  <li><strong>Volume:</strong> It cites 13M documents processed a day and a bulk API for migrations of billions of rows.</li>
+  <li><strong>Rate limits:</strong> Vary by namespace and tier; Not published.</li>
+</ul>
+<p><strong>Analytics Support</strong></p>
+<p>The same input gives the same token within a namespace, so records stay linkable. Structured fields get fixed-length, format-preserving tokens. Its docs list string-only inputs.</p>
+<p><strong>Deployment Options</strong></p>
+<p>Protecto supports SaaS, on-premises, and air-gapped deployment, and its page offers the on-premises and air-gapped options for regulated industries. It runs in real time or asynchronously.</p>
+<p>Teams connect it to the data sources or AI pipelines where sensitive data flows through its APIs, including a bulk API for data lake migrations, and it masks before the prompt and unmasks in the response for authorized users. Specific clouds, regions, and marketplace listings: Not published.</p>
+<p><strong>Detokenization Controls</strong></p>
+<p>Authorized users unmask role by role, and every scan, mask, and unmask event is logged. It lists Active Directory, Okta, and SSO for identity.</p>
+<p><strong>Pricing</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>API trial</td><td>Through sales</td><td>POC or trial access arranged with Protecto sales</td></tr>
+<tr><td>Production</td><td>Custom quote</td><td>No prices published on the privacy vault page</td></tr>
+</tbody></table></div>
+<p><strong>Pros</strong></p>
+<ul>
+  <li><strong>Widest deployment range:</strong> The only vendor here that lists air-gapped deployment.</li>
+  <li><strong>Evidence on the page:</strong> Protecto lists SOC 2 Type II, ISO 27001, and a HIPAA BAA.</li>
+  <li><strong>Made for unstructured text:</strong> Entity detection across languages fits tickets, notes, and documents headed to models.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li><strong>Consistency stops at the namespace:</strong> Plan namespaces before joining data across teams.</li>
+  <li><strong>String inputs only:</strong> Other field types need conversion first.</li>
+  <li><strong>Rate limits are unpublished:</strong> Load-test before committing to production volume.</li>
+</ul>
+<p><strong>Review Summary:</strong> No reviews yet on <a class="bl-link" href="https://www.g2.com/products/protecto/reviews" target="_blank" rel="noopener">G2</a> or <a class="bl-link" href="https://www.capterra.com/p/10006145/Protecto/reviews/" target="_blank" rel="noopener">Capterra</a>, so ask for customer references during evaluation.</p>
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">07</span>
+    <div class="vc__id">
+      <h3 id="k2view" class="vc__name"><span class="vc__sep">7. </span>K2view<span class="vc__sep">: </span><span class="vc__pill">Best for Entity-Based Tokens Kept Consistent Across Many Source Systems</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/k2view/reviews" target="_blank" rel="noopener"><span class="vc__score">4.6<small>/5</small></span><span class="vc__src">G2 · 55 reviews</span></a><a class="vc__rate" href="https://www.capterra.com/p/212568/K2View-Fabric/reviews/" target="_blank" rel="noopener"><span class="vc__score">4.9<small>/5</small></span><span class="vc__src">Capterra · 8 reviews</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Token model</dt><dd>Entity-based: one encrypted micro-vault per customer or patient</dd></div>
+    <div><dt>Starting price</dt><dd>Custom quote; product tour</dd></div>
+    <div><dt>Deployment</dt><dd>On-premises, cloud, or hybrid</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Enterprises with one customer spread across dozens of systems that need tokens to stay referentially intact everywhere that customer appears.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v5/k2view.jpg" alt="K2view homepage" >}}
+  <figcaption>K2view homepage. Source: k2view.com</figcaption>
+</figure>
+<p>K2view is a data management platform that stores each business entity, such as a customer or patient, in its own Micro-Database, and pulls fresh data from many source systems as it arrives.</p>
+<p><strong>Token Model and How It Works</strong></p>
+<p>Entity-based. Each Micro-Database “serves as an individually encrypted and compressed ‘micro’ token vault,” so no single store holds every original. Data is encrypted with AES-256, and BYOK is supported.</p>
+<p><strong>Speed and Scale</strong></p>
+<ul>
+  <li><strong>Latency and throughput figures:</strong> Not published; the page claims low latency at high request volume, and high-performance token servers, without numbers.</li>
+  <li><strong>Scale example:</strong> The page describes 10 million customers held in 10 million micro-vaults, as an illustration.</li>
+</ul>
+<p><strong>Analytics Support</strong></p>
+<p>Format-preserving tokens, and the page says the business entity approach keeps referential integrity across all systems, which suits test and analytics copies.</p>
+<p><strong>Deployment Options</strong></p>
+<p>On-premises, cloud, or hybrid, as a software-only implementation that the page says rolls out in weeks. Token servers generate tokens and re-identify originals, while the platform ingests from any number of source systems with no impact on them.</p>
+<p>Integration runs through APIs that plug into CI/CD pipelines, plus a no-code GUI. Specific clouds, regions, and marketplace listings: Not published on the tokenization page.</p>
+<p><strong>Detokenization Controls</strong></p>
+<p>RBAC governs who can decrypt or detokenize, with LDAP for user management. Token rotation, time-to-live, and restore are listed. Audit logging for reveals: Not published on the tokenization page.</p>
+<p><strong>Pricing</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>Product tour</td><td>Free</td><td>Guided product tour and demo offered on the site</td></tr>
+<tr><td>Production</td><td>Custom quote</td><td>No prices published on the tokenization page</td></tr>
+</tbody></table></div>
+<p><strong>Pros</strong></p>
+<ul>
+  <li><strong>Smaller blast radius by design:</strong> Splitting originals by entity avoids one store holding every record.</li>
+  <li><strong>Strong for test and analytics copies:</strong> Referentially intact tokens keep downstream datasets usable.</li>
+  <li><strong>Flexible deployment:</strong> On-premises, cloud, and hybrid options fit mixed estates.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li><strong>Part of a larger platform:</strong> Tokenization sits inside a data integration product, which is more than one app needs for a few fields.</li>
+  <li><strong>Reveal logging undocumented:</strong> Ask for sample audit output.</li>
+  <li><strong>No certifications listed:</strong> The page cites HIPAA alignment only, so request current audit reports.</li>
+</ul>
+<p><strong>Review Summary:</strong> Positive. K2view holds <a class="bl-link" href="https://www.g2.com/products/k2view/reviews" target="_blank" rel="noopener">4.6/5 from 55 reviews on G2</a> and <a class="bl-link" href="https://www.capterra.com/p/212568/K2View-Fabric/reviews/" target="_blank" rel="noopener">4.9/5 from 8 on Capterra</a>; these reviews cover its overall data platform.</p>
+<p><strong>Likes:</strong> G2’s summary lists Ease of Use (3), Organization (3), and Data Management (3) among pros; reviewers praise the entity-based design for keeping customer data consistent across systems, and the support.</p>
+<p><strong>Dislikes:</strong> G2’s summary lists Learning Curve (3), Complex Setup (3), and High Technical Requirement (3); reviewers ask for more self-service training, and one reports support tickets taking up to seven days.</p>
+<h2 id="vaulted-vs-vaultless-by-vendor">Vaulted vs Vaultless: Speed, Analytics, and Deployment by Vendor</h2>
+<p>This table puts each platform’s token model, documented speed, analytics support, and deployment side by side. “Not published” means the vendor’s own pages give no figure or statement.</p>
+<div class="bl-tablewrap"><table class="bl-table bl-table--wide">
+<thead><tr><th>Vendor</th><th>Token Model</th><th>Speed and Scale</th><th>Analytics Support</th><th>Deployment</th></tr></thead>
+<tbody>
+<tr><td>Enigma Vault</td><td>Vaulted; random 128-bit tokens by default</td><td>Batch of 5,000 per request; 99.99% uptime SLA (Enterprise); latency Not published</td><td>Deterministic on request; exact-match lookup on encrypted values; format-preserving, Luhn-passable cards</td><td>Managed SaaS; EU and US regions; AWS Marketplace; self-hosted or air-gapped Not published</td></tr>
+<tr><td>Skyflow</td><td>Vaulted; token type set per column</td><td>25 records per call by default (configurable); latency Not published; AWS multi-AZ with cross-region backups</td><td>Deterministic or random, UUID or format-preserving; column groups join across tables</td><td>Multi-tenant SaaS, dedicated VPC, or your own AWS or GCP account (BYOC); regional vaults</td></tr>
+<tr><td>Protegrity</td><td>Vaultless; deterministic algorithm plus secret key</td><td>Not published; no real-time call to a central vault</td><td>Deterministic and format-preserving; referential integrity; Databricks and Snowflake integrations</td><td>SaaS, cloud, on-premises, hybrid; native integrations, proxies, or SDKs</td></tr>
+<tr><td>Thales CipherTrust Tokenization</td><td>Vaulted and vaultless, alone or combined</td><td>Vaultless: over 1 million tokenizations a second per token server (vendor benchmark); cipher swap in under a minute</td><td>Format-preserving, random, or masked; determinism Not published</td><td>Self-run on-premises (OVA, ISO, Hyper-V) or AWS, Azure, GCP</td></tr>
+<tr><td>Fortanix DSM</td><td>Vaultless; NIST-approved format-preserving encryption</td><td>Not published; “cloud-scale” claim only</td><td>Format-preserving; determinism Not published</td><td>SaaS, or a physical or virtual appliance on-premises; AWS Marketplace</td></tr>
+<tr><td>Protecto</td><td>Vaulted; entropy, format-preserving, or context-preserving tokens</td><td>“Sub-sec” generation; 13M documents a day; bulk API for billions of rows</td><td>Same token within a namespace; fixed-length format-preserving fields; strings only</td><td>SaaS, on-premises, air-gapped</td></tr>
+<tr><td>K2view</td><td>Entity-based; one micro-vault per entity</td><td>Not published; low-latency claim without figures</td><td>Format-preserving; referential integrity across source systems</td><td>On-premises, cloud, hybrid; software-only</td></tr>
+</tbody></table></div>
+<p><strong>Takeaway:</strong> for published speed figures, Thales (over 1 million vaultless tokenizations a second per server), Enigma Vault (5,000 per batch, 99.99% SLA), and Protecto (“Sub-sec”) lead; for analytics joins at volume, Protegrity and K2view keep referential integrity by design. For on-premises or air-gapped, look at Thales, Fortanix, and Protecto; for a vault inside your own cloud account, Skyflow BYOC; for a per-request audit trail with no keys to run, Enigma Vault.</p>
+<h2 id="how-vendors-describe-their-tokenization">How Each Vendor Describes Its Tokenization</h2>
+<p>Vendor pages use different words for similar designs. This table maps each one to the PCI SSC vocabulary, using only what the vendor states.</p>
+<div class="bl-tablewrap"><table class="bl-table bl-table--wide">
+<thead><tr><th>Vendor and product</th><th>How they describe it</th><th>PCI SSC class</th><th>Source</th></tr></thead>
+<tbody>
+<tr><td>Enigma Vault</td><td>Random tokens; “the mapping lives only in the vault”</td><td>Reversible non-cryptographic</td><td>Vendor site</td></tr>
+<tr><td>Skyflow</td><td>Data privacy vault with deterministic and format-preserving token columns</td><td>Reversible non-cryptographic</td><td>Vendor site</td></tr>
+<tr><td>Protegrity</td><td>Vaultless tokens from a deterministic algorithm and secret key</td><td>Reversible cryptographic</td><td>Vendor site</td></tr>
+<tr><td>Thales CipherTrust Tokenization</td><td>Vaulted and vaultless, with masking or redaction</td><td>Either, or hybrid</td><td>Vendor site</td></tr>
+<tr><td>Fortanix DSM</td><td>Vault-less tokenization, also called format-preserving encryption</td><td>Reversible cryptographic</td><td>Vendor site</td></tr>
+<tr><td>Protecto</td><td>Privacy vault with entropy-based, format-preserving, and context-preserving tokens</td><td>Reversible non-cryptographic</td><td>Vendor site</td></tr>
+<tr><td>K2view</td><td>Per-entity encrypted micro token vaults</td><td>Reversible non-cryptographic, partitioned</td><td>Vendor site</td></tr>
+</tbody></table></div>
+<h2 id="pricing-compared">Data Tokenization Tool Pricing Compared</h2>
+<p>Only prices read on each vendor’s own pages or marketplace listings in October 2026 appear here. Enigma Vault publishes plan prices, Fortanix lists hourly AWS Marketplace rates, and the other five quote through sales.</p>
+<div class="bl-tablewrap"><table class="bl-table bl-table--wide">
+<thead><tr><th>Vendor and plan</th><th>Token model</th><th>Monthly price</th><th>What’s included</th><th>Free start</th></tr></thead>
+<tbody>
+<tr><td>Enigma Vault Lite</td><td>Vaulted</td><td>$0</td><td>Data Vault 1,500 requests, Card Vault 1,000, File Vault 5 GB</td><td>Free plan</td></tr>
+<tr><td>Enigma Vault Plus</td><td>Vaulted</td><td>$49.99 per vault</td><td>Data Vault 30,000 requests, Card Vault 20,000, File Vault 150 GB</td><td>Lite tier</td></tr>
+<tr><td>Enigma Vault Premium</td><td>Vaulted</td><td>$249.99 per vault</td><td>Data Vault 400,000 requests, Card Vault 250,000, File Vault 1 TB</td><td>Lite tier</td></tr>
+<tr><td>Enigma Vault NoPII Pro</td><td>Vaulted</td><td>$50</td><td>50M protected tokens, then $1 per additional million</td><td>NoPII Free, 1M tokens a month</td></tr>
+<tr><td>Protegrity</td><td>Vaultless</td><td>Custom quote</td><td>AI Team and Enterprise editions</td><td>Developer Edition</td></tr>
+<tr><td>Fortanix DSM</td><td>Vaultless</td><td>Custom quote, or from $1.95 an hour on AWS Marketplace</td><td>Key management, HSM, tokenization, and secrets management</td><td>Free trial</td></tr>
+<tr><td>Protecto</td><td>Vaulted</td><td>Custom quote</td><td>Not published</td><td>API trial</td></tr>
+<tr><td>K2view</td><td>Entity-based</td><td>Custom quote</td><td>Not published</td><td>Product tour</td></tr>
+<tr><td>Skyflow, Thales CipherTrust Tokenization</td><td>Vaulted; hybrid</td><td>Custom quote</td><td>Not published</td><td>Demo only</td></tr>
+</tbody></table></div>
+<h2 id="how-to-choose-a-data-tokenization-tool">How to Choose a Data Tokenization Tool</h2>
+<p>Settle the vaulted or vaultless question first; the rest of the list narrows fast after that. Start by listing every place a sensitive value lands today, including logs, backups, file buckets, and AI prompts.</p>
+<div class="bl-tablewrap"><table class="bl-table bl-table--wide">
+<thead><tr><th>Question</th><th>If yes, lean</th><th>Where it points</th></tr></thead>
+<tbody>
+<tr><td>Do you want one place that enforces and logs every reveal?</td><td>Vaulted</td><td>Enigma Vault, Skyflow, Protecto</td></tr>
+<tr><td>Does your team lack a key management program?</td><td>Vaulted, managed</td><td>Enigma Vault, Skyflow</td></tr>
+<tr><td>Are per-value network calls too slow for your batch or warehouse volume?</td><td>Vaultless</td><td>Protegrity, Fortanix, Thales vaultless mode</td></tr>
+<tr><td>Must analysts join or count on tokenized fields?</td><td>Either, with deterministic tokens</td><td>Check scope: namespace, column group, or key</td></tr>
+<tr><td>Do downstream columns and validators need tokens that look like the original?</td><td>Either, with format-preserving tokens</td><td>Ask for format-preserving output per field</td></tr>
+<tr><td>Must every component run on your hardware, or air-gapped?</td><td>Self-run vault or vaultless</td><td>Thales, Fortanix, Protegrity, K2view, Protecto</td></tr>
+<tr><td>Must originals stay in specific regions?</td><td>Vaulted with regional vaults</td><td>Skyflow; Enigma Vault for EU and US</td></tr>
+<tr><td>Must deleting a record make its tokens dead for good?</td><td>Vaulted</td><td>Delete in the vault; vaultless needs key rotation</td></tr>
+<tr><td>Does data flow into LLMs, agents, or RAG?</td><td>Vaulted with prompt support</td><td>Enigma Vault NoPII, Protecto, Skyflow</td></tr>
+<tr><td>Can you price a full year today?</td><td>Published rates</td><td>Enigma Vault publishes plan rates; Fortanix lists hourly AWS Marketplace rates; others quote</td></tr>
+</tbody></table></div>
+<p>Tokenization reduces plaintext exposure; access control, key management, retention, and monitoring still matter. Where cards are involved, your QSA or acquirer confirms PCI scope; see the <a class="bl-link" href="/blog/best-pci-dss-compliant-tokenization-software/">best PCI DSS compliant tokenization software</a>.</p>
+<h2 id="start-with-enigma-vault">Why Teams Choosing a Vaulted Model Pick Enigma Vault</h2>
+<p>Most teams comparing the tools above end up at the same whiteboard question: vaulted or vaultless. Vaultless keeps tokens in your own systems and leaves key management to you; vaulted moves the sensitive values out and asks you to trust the vault’s controls.</p>
+<p>With Enigma Vault, the useful test is what happens later. A reveal is a permissioned call logged with client ID, IP, resource path, and status; a deletion request means removing one record from the vault; and expiry can be set from 60 seconds to 7 years.</p>
+<p>Reviewers rate it 4.4/5 on G2 (6 reviews) and 4.8/5 on Capterra (4), and Data Vault and File Vault both include a free Lite plan.</p>
+<p>Pick the first field you would tokenize and <a class="bl-link" href="/pricing/">run it through the Lite plan</a>; if vaultless is still on the table, <a class="bl-link" href="/request-demo/">bring both options to a demo</a> and compare them side by side.</p>
+
+
+

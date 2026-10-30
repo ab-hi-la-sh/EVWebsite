@@ -1,0 +1,620 @@
+---
+title: "Best PII Tokenization Software for SaaS (2026): 7 Platforms Compared"
+titleEmphasis: "7 Platforms Compared"
+slug: "best-pii-tokenization-software-for-saas"
+layout: "pii-style"
+metaTitle: "Best PII Tokenization Software for SaaS (2026)"
+description: "Compare 7 PII tokenization platforms for SaaS by integration pattern: API vault, proxy, SDK encryption, vaultless, and AI prompts; tenancy, residency, and price."
+subtitle: "How SaaS engineering and security leaders keep customer PII out of the app database, warehouse, logs, and LLM calls, and still pass the next enterprise security review."
+date: 2026-10-29T00:04:00
+category: "Vault"
+author: "tony-alex"
+readTime: 29
+heroImage: "/assets/blog/img-02.png"
+heroAlt: "Layered panels representing customer PII replaced by tokens across a multi-tenant SaaS application"
+excerpt: "Seven PII tokenization platforms for SaaS compared by integration pattern, tenant isolation, data residency, security-review evidence, and price."
+tags: ["tokenization", "saas", "pii", "data-vault", "nopii"]
+ogImage: "/assets/og/vault-data.jpg"
+ogImageAlt: "Best PII Tokenization Software for SaaS (2026): 7 Platforms Compared | Enigma Vault"
+ogType: article
+styles: ["blog.css", "pages/blog-pii-hero.css", "tr-pages.css"]
+scripts: ["blog-article.js"]
+faqSchema: true
+faqs:
+  - q: "What Is the Best PII Tokenization Software for SaaS in 2026?"
+    a: "It depends on your integration pattern. Enigma Vault is best for SaaS teams that want an API vault for fields, files, and LLM prompts with published prices and a free start; Skyflow suits platforms selling into many countries that need regional vaults; Basis Theory suits teams that want a programmable vault with proxy and serverless functions; VGS suits SaaS products that handle payments and want everything routed through a proxy; Evervault suits teams that prefer encryption at the edge; CipherStash suits Postgres-based products that want searchable encryption through an SDK; and Protegrity suits data-heavy SaaS that protects warehouse copies with vaultless, format-preserving tokens."
+  - q: "Should a SaaS Company Use an API Vault, a Proxy, or Field-Level Encryption?"
+    a: "Use an API vault when your code decides which fields to tokenize and you want the plaintext stored outside your database. Use a proxy when you would rather not change application code and the sensitive values mostly pass through to third parties. Use SDK field-level encryption when the data must stay in your own Postgres and stay queryable. Many SaaS teams combine two patterns: a vault for stored PII and a proxy for traffic to processors or model providers."
+  - q: "How Does Tokenization Help With Enterprise Security Questionnaires?"
+    a: "It changes the answers. When your database, warehouse, logs, and support desk all hold tokens, the questions about where customer PII lives, who can see it, and how it is deleted point at one controlled boundary with an audit log. You still answer for your own controls, and you should be ready to share your vendor’s SOC 2 Type II report and data-flow diagrams."
+  - q: "Can Tokenization Meet Customer Data Residency Requests?"
+    a: "Often, if the vault runs in the regions your customers ask for. The plaintext lives in the vault region while tokens can sit in your global application database. Enigma Vault runs in EU and US regions, Skyflow publishes regional vaults across many countries, and Basis Theory’s $995 plan is US only. Confirm the region list and any residency commitment in your contract."
+  - q: "Does Tokenization Work With Multi-Tenant SaaS Architecture?"
+    a: "Yes, but check how the vendor isolates tenants. Enigma Vault isolates by client ID with per-customer AES-256 keys, NoPII Pro adds multi-tenancy and roles, Skyflow scopes access across accounts, workspaces, and vaults, and CipherStash binds decryption to identity-based policies. Ask whether each of your own customers can get its own key or vault, and how a single tenant’s data is deleted."
+  - q: "Can We Tokenize PII Before It Reaches an LLM Provider?"
+    a: "Yes. Enigma Vault’s NoPII is a reverse proxy that tokenizes recognized PII before supported LLM API calls and restores values in the response; VGS, Skyflow, and Protegrity also sell AI protection products. Detection coverage must be tested on your own prompts, because no detector catches every value in free text."
+  - q: "Does Tokenization Make Our SaaS Product SOC 2 or GDPR Compliant?"
+    a: "No. Tokenization reduces where plaintext lives and can make audits and erasure requests simpler, but your SOC 2 report covers your own controls and GDPR obligations stay with you as controller or processor. Treat a vendor’s certifications as evidence for your vendor-risk file; your own compliance still rests on your controls."
+  - q: "How Much Does PII Tokenization Software for SaaS Cost?"
+    a: "Published prices in October 2026 run from $0 (Enigma Vault Lite, NoPII Free, CipherStash Dev, Evervault sandbox, Protegrity Developer Edition) through $20 a month (CipherStash Pro) and $49.99 a month (Enigma Vault Plus) to $870 a month (CipherStash Business), $995 a month (Basis Theory, Evervault Platform), and $1,000 a month (VGS Starter). Skyflow and Protegrity’s production editions are quote-only."
+---
+<style>
+/* Wide tables: tighter cell padding so they fit the article column. */
+.bl-content .bl-table--wide td, .bl-content .bl-table--wide th { padding-left: 8px; padding-right: 8px; }
+.bl-content figure.bl-shot{margin:20px 0 24px;padding:10px;border:1px solid var(--ev-cool-stone);border-radius:10px;background:var(--ev-warm-cloud)}.bl-content figure.bl-shot img{display:block;width:100%;height:auto;border-radius:6px}.bl-content figure.bl-shot figcaption{margin-top:8px;text-align:center;font-size:13px;color:var(--ev-slate)}
+/* Vendor header card: rank, name, best-for pill, review scores, key facts. */
+.bl-content .vc { margin: 40px 0 20px; }
+.bl-content .vc__head { display: grid; grid-template-columns: auto 1fr auto; gap: 18px; align-items: center; margin-bottom: 14px; }
+.bl-content .vc__num { font-size: 34px; font-weight: 600; line-height: 1; color: var(--ev-mineral-blue); font-variant-numeric: tabular-nums; }
+.bl-content h3.vc__name { margin: 0; padding: 0; font-size: 26px; line-height: 1.25; font-weight: 600; color: var(--ev-ink); }
+.bl-content .vc__sep { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.bl-content .vc__pill { display: table; margin-top: 10px; padding: 6px 12px; border-radius: 6px; background: var(--ev-mineral-blue); color: #fff; font-size: 12px; line-height: 1.4; font-weight: 600; text-transform: none; letter-spacing: 0; font-size: 13px; }
+.bl-content .vc__rates { display: flex; flex-direction: column; gap: 8px; align-items: stretch; }
+.bl-content .vc__rate { display: flex; flex-direction: column; align-items: flex-end; padding: 8px 14px; border: 1px solid var(--ev-cool-stone); border-radius: 10px; background: #fff; text-decoration: none !important; min-width: 128px; }
+.bl-content a.vc__rate:hover { border-color: var(--ev-mineral-blue); }
+.bl-content .vc__score { font-size: 20px; font-weight: 700; color: var(--ev-ink); line-height: 1.2; }
+.bl-content .vc__score small { font-size: 13px; font-weight: 500; color: var(--ev-slate); }
+.bl-content .vc__src { font-size: 12px; color: var(--ev-slate); line-height: 1.3; }
+.bl-content .vc__rate--new .vc__score { font-size: 15px; }
+.bl-content .vc__facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px 24px; margin: 0; padding: 18px 22px; border-radius: 12px; background: var(--ev-warm-cloud); }
+.bl-content .vc__facts div { margin: 0; }
+.bl-content .vc__facts .vc__best { grid-column: 1 / -1; padding-top: 14px; border-top: 1px solid var(--ev-cool-stone); }
+.bl-content .vc__facts dt { margin: 0 0 4px; font-size: 11.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ev-slate); }
+.bl-content .vc__facts dd { margin: 0; font-size: 15px; line-height: 1.5; color: var(--ev-ink); }
+@media (max-width: 700px) {
+  .bl-content .vc__head { grid-template-columns: auto 1fr; }
+  .bl-content .vc__rates { grid-column: 1 / -1; flex-direction: row; flex-wrap: wrap; }
+  .bl-content .vc__rate { align-items: flex-start; }
+  .bl-content .vc__num { font-size: 26px; }
+  .bl-content h3.vc__name { font-size: 22px; }
+  .bl-content .vc__facts { grid-template-columns: 1fr; }
+}
+.bl-content .bl-ranked { font-size: 15px; color: var(--ev-slate); }
+.bl-content .tldr { margin: 8px 0 32px; padding: 22px 26px; border-radius: 12px; background: var(--ev-warm-cloud); border-left: 3px solid var(--ev-mineral-blue); }
+.bl-content .tldr .tldr__label { margin: 0 0 12px; padding: 0; border: 0; font-size: 13px; line-height: 1.4; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--ev-mineral-blue); }
+.bl-content .tldr .tldr__list { margin: 0; padding-left: 20px; }
+.bl-content .tldr .tldr__list li { margin: 0 0 10px; font-size: 16px; line-height: 1.6; color: var(--ev-ink); }
+.bl-content .tldr .tldr__list li::marker { color: var(--ev-mineral-blue); }
+.bl-content .tldr .tldr__list li:last-child { margin-bottom: 0; }
+.bl-content .tldr strong a { font-weight: 600; }
+</style>
+
+<p>Comparing the best PII tokenization software for SaaS of 2026: 1. Enigma Vault, 2. Skyflow, 3. Basis Theory, 4. VGS, 5. Evervault, 6. CipherStash, and 7. Protegrity.</p>
+
+<p><strong>About the author:</strong> I’m <a class="bl-link" href="https://www.linkedin.com/in/tony-alex-enigma-vault/" target="_blank" rel="noopener">Dr. Tony Alex</a>, Chief Executive Officer of Enigma Vault, where I lead our work in encryption, tokenization, and sensitive-data protection. I have more than two decades of experience building enterprise software businesses.</p>
+<p>In 1999 I founded US eDirect to develop software for parks, campgrounds, and recreation agencies, bringing reservations and payments into one cloud system, and led it through its acquisition by Tyler Technologies in 2022.</p>
+<p><em>Disclosure: Enigma Vault publishes this guide and appears first in it. Every platform here is judged on the same criteria, and the review ratings come from G2 and Capterra.</em></p>
+
+
+<p>A SaaS product holds its customers’ customers: end-user names, emails, government IDs, bank accounts, credentials, uploaded files, support transcripts, and the prompts its AI features send to a model provider.</p>
+<p>That data rarely stays in one table; it copies itself into the warehouse, the logs, the support desk, and the LLM call, and the first enterprise security questionnaire asks where all of it lives.</p>
+<p>SaaS reviews of these vendors center on build effort: <a class="bl-link" href="https://www.g2.com/products/evervault-2022-11-22/reviews" target="_blank" rel="noopener">Evervault’s G2 reviewers</a> say integration takes time and cost can weigh on smaller teams; <a class="bl-link" href="https://www.g2.com/products/very-good-security-vgs-platform/reviews" target="_blank" rel="noopener">a VGS reviewer on G2</a> credits its team with guidance through PCI DSS. Everything below was checked on October 29, 2026.</p>
+<p>Enigma Vault ranks first for SaaS teams because it keeps customer PII out of your app: <a class="bl-link" href="/vault/data-vault/">Data Vault</a> tokenizes IDs, bank details, and credentials, File Vault takes uploads directly, and NoPII tokenizes prompts before they reach the model provider. It has PCI DSS Level 1 and SOC 2 Type II (ISO 27001 in progress), and a <a class="bl-link" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener">G2 reviewer</a> (4.4/5 from 6) praises its API-first integration. Data Vault and File Vault each have a free Lite plan; paid plans start at $49.99 a month per vault.</p>
+<p>Other strong options are:</p>
+<ul>
+  <li><a class="bl-link" href="https://www.g2.com/products/pii-data-privacy-vault/reviews" target="_blank" rel="noopener">Skyflow</a>: Built for SaaS vendors whose customers demand in-country storage across many regions (no G2 reviews yet for its PII Data Privacy Vault).</li>
+  <li><a class="bl-link" href="https://www.g2.com/products/basis-theory/reviews" target="_blank" rel="noopener">Basis Theory</a>: Offers developer-led platforms a programmable vault, hosted collection, and a proxy (no G2 reviews yet).</li>
+  <li><a class="bl-link" href="https://www.g2.com/products/very-good-security-vgs-platform/reviews" target="_blank" rel="noopener">VGS</a>: Best for routing SaaS payment and banking data to partners through a proxy (G2 rating 4.7 from 47 reviews).</li>
+  <li><a class="bl-link" href="https://www.g2.com/products/evervault-2022-11-22/reviews" target="_blank" rel="noopener">Evervault</a>: Known for encrypting data before it reaches a team’s servers, with every usage fee published (G2 rating 4.4 from 17 reviews).</li>
+  <li><a class="bl-link" href="https://www.g2.com/products/cipherstash/reviews" target="_blank" rel="noopener">CipherStash</a>: Best suited for Postgres-based products that must keep encrypted data in their own database and still query it (no G2 reviews yet).</li>
+  <li><a class="bl-link" href="https://www.g2.com/products/protegrity/reviews" target="_blank" rel="noopener">Protegrity</a>: Offers protection for data-heavy SaaS whose biggest exposure is warehouse and lakehouse copies (G2 rating 4.5 from 14 reviews).</li>
+</ul>
+
+<div class="tldr" id="tldr">
+  <h2 class="tldr__label">TL;DR</h2>
+  <ul class="tldr__list">
+    <li><strong><a class="bl-link" href="#enigma-vault">Enigma Vault</a>:</strong> best for an API vault that covers fields, files, and LLM prompts with a free start.</li>
+    <li><strong><a class="bl-link" href="#skyflow">Skyflow</a>:</strong> best for SaaS selling into many countries with residency demands.</li>
+    <li><strong><a class="bl-link" href="#basis-theory">Basis Theory</a>:</strong> best for a programmable vault with proxy and serverless functions.</li>
+    <li><strong><a class="bl-link" href="#vgs">VGS</a>:</strong> best for SaaS products with payment flows that want a zero-code proxy.</li>
+    <li><strong><a class="bl-link" href="#evervault">Evervault</a>:</strong> best for edge encryption with every usage fee published.</li>
+    <li><strong><a class="bl-link" href="#cipherstash">CipherStash</a>:</strong> best for searchable encryption inside your own Postgres.</li>
+    <li><strong><a class="bl-link" href="#protegrity">Protegrity</a>:</strong> best for vaultless tokens across warehouses and analytics copies.</li>
+  </ul>
+</div>
+<h2 id="best-pii-tokenization-software-for-saas-at-a-glance">Best PII Tokenization Software for SaaS at a Glance</h2>
+<p>Start with the home pattern column: it tells you whether a platform changes your code, your request path, or your database. Prices and ratings were read on October 29, 2026.</p>
+<div class="bl-tablewrap"><table class="bl-table bl-table--wide">
+<thead><tr><th>Platform</th><th>Home pattern</th><th>Starting price</th><th>Free tier or trial</th><th>G2 rating</th></tr></thead>
+<tbody>
+<tr><td><a class="bl-link" href="#enigma-vault">Enigma Vault</a></td><td>API vault plus AI prompt proxy</td><td>$0, then $49.99 a month per vault</td><td>Free Lite plan; NoPII Free</td><td><a class="bl-link" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener">4.4/5 (6 reviews)</a></td></tr>
+<tr><td><a class="bl-link" href="#skyflow">Skyflow</a></td><td>API vault with proxy Connections</td><td>Custom quote</td><td>Demo</td><td><a class="bl-link" href="https://www.g2.com/products/pii-data-privacy-vault/reviews" target="_blank" rel="noopener">No reviews yet (PII vault)</a></td></tr>
+<tr><td><a class="bl-link" href="#basis-theory">Basis Theory</a></td><td>API vault plus proxy</td><td>$995 a month</td><td>Free to get started</td><td><a class="bl-link" href="https://www.g2.com/products/basis-theory/reviews" target="_blank" rel="noopener">No reviews yet</a></td></tr>
+<tr><td><a class="bl-link" href="#vgs">VGS</a></td><td>Proxy</td><td>From $1,000 a month</td><td>Free to start</td><td><a class="bl-link" href="https://www.g2.com/products/very-good-security-vgs-platform/reviews" target="_blank" rel="noopener">4.7/5 (47 reviews)</a></td></tr>
+<tr><td><a class="bl-link" href="#evervault">Evervault</a></td><td>Edge encryption plus proxy</td><td>$995 a month plus usage</td><td>Free sandbox, no time limit</td><td><a class="bl-link" href="https://www.g2.com/products/evervault-2022-11-22/reviews" target="_blank" rel="noopener">4.4/5 (17 reviews)</a></td></tr>
+<tr><td><a class="bl-link" href="#cipherstash">CipherStash</a></td><td>SDK field-level encryption</td><td>$0, then $20 a month</td><td>Dev plan, free</td><td><a class="bl-link" href="https://www.g2.com/products/cipherstash/reviews" target="_blank" rel="noopener">No reviews yet</a></td></tr>
+<tr><td><a class="bl-link" href="#protegrity">Protegrity</a></td><td>Vaultless and format-preserving</td><td>Custom quote</td><td>Free Developer Edition</td><td><a class="bl-link" href="https://www.g2.com/products/protegrity/reviews" target="_blank" rel="noopener">4.5/5 (14 reviews)</a></td></tr>
+</tbody></table></div>
+
+<h2 id="what-is-pii-tokenization-software-for-saas">What Is PII Tokenization Software for SaaS?</h2>
+<p><strong>PII tokenization software for SaaS replaces customer personal data in your application with tokens, so your database, warehouse, and logs hold meaningless references while the real values stay in a controlled vault.</strong></p>
+<p>Think of a token as a stand-in. If your HR platform stores an employee’s SSN, the users table keeps something like “Ry0Ixd1qP8vKmN3a” instead. Your app can still find the record and show the last four digits; only an authorized call to the vault returns the real number.</p>
+<p>Related reading: <a class="bl-link" href="/blog/what-is-pii/">what counts as PII</a> and <a class="bl-link" href="/blog/data-tokenization/">how data tokenization works</a>.</p>
+
+<h2 id="how-we-chose">How We Chose the Best PII Tokenization Software for SaaS</h2>
+<p>Seven platforms made the final list after we scored each one on six weighted criteria drawn from what SaaS security reviews and engineering teams actually ask.</p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Criterion</th><th>Weight</th><th>What we checked</th></tr></thead>
+<tbody>
+<tr><td>Integration pattern fit</td><td>25%</td><td>API vault, proxy, SDK encryption, vaultless, or AI prompt support, and how much code changes</td></tr>
+<tr><td>Tenant isolation and residency</td><td>20%</td><td>Per-tenant keys or vaults, access policies, named regions</td></tr>
+<tr><td>Security-review evidence</td><td>20%</td><td>SOC 2 Type II, PCI DSS, ISO 27001, audit logs, SSO</td></tr>
+<tr><td>Data coverage</td><td>15%</td><td>Structured fields, files, payment data, and LLM prompts</td></tr>
+<tr><td>Price to first production token</td><td>10%</td><td>Published plans, free tiers, usage fees</td></tr>
+<tr><td>Reviews</td><td>10%</td><td>G2 and Capterra ratings and what reviewers say</td></tr>
+</tbody></table></div>
+<p>Sources: each vendor’s product, pricing, documentation, and security pages, plus its G2 and Capterra listings, read on October 29, 2026.</p>
+
+
+<h2 id="the-7-best-pii-tokenization-software-for-saas">The 7 Best PII Tokenization Software for SaaS in 2026</h2>
+<p>Each entry covers how the platform plugs in, its key features, how it handles tenants and regions, pricing, pros and cons, and what users say on G2 and Capterra.</p>
+
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">01</span>
+    <div class="vc__id">
+      <h3 id="enigma-vault" class="vc__name"><span class="vc__sep">1. </span>Enigma Vault<span class="vc__sep">: </span><span class="vc__pill">Best for an API Vault That Covers Fields, Files, and LLM Prompts</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener"><span class="vc__score">4.4<small>/5</small></span><span class="vc__src">G2 · 6 reviews</span></a><a class="vc__rate" href="https://www.capterra.com/p/241650/Enigma-Vault/reviews/" target="_blank" rel="noopener"><span class="vc__score">4.8<small>/5</small></span><span class="vc__src">Capterra · 4 reviews</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>$0, then $49.99 a month per vault</dd></div>
+    <div><dt>Free tier or trial</dt><dd>Free Lite plan: 1,500 Data Vault requests a month</dd></div>
+    <div><dt>Integration pattern</dt><dd>API vault, payment proxy, AI prompt proxy</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>SaaS engineering teams that want customer PII, uploaded files, and LLM prompts out of their own stack through REST calls and a base-URL swap, with prices they can model before talking to sales.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/enigma-vault.jpg" alt="Enigma Vault homepage" >}}
+  <figcaption>Enigma Vault homepage. Source: enigmavault.io</figcaption>
+</figure>
+<p>Enigma Vault is a tokenization platform that gives a SaaS product separate API primitives for each kind of sensitive data. Data Vault encrypts fields with AES-256 and returns tokens your database stores instead; deterministic tokens keep joins, lookups, and deduplication working.</p>
+<p>File Vault takes user uploads up to 5 GB through presigned URLs, so files never pass through your app servers. NoPII sits in front of LLM APIs and tokenizes recognized PII before it reaches the model provider, then restores values in the response.</p>
+<p><strong>Integration pattern:</strong> API vault for stored fields and files; gateway proxy for card traffic; reverse proxy for LLM calls.</p>
+<p><strong>Time to first token:</strong> Data Vault documents two REST calls, an OAuth2 token request and a store call, with no SDK required. NoPII deploys by changing your model client’s base URL.</p>
+<p><strong>Tenant isolation and residency:</strong> Multi-tenancy isolation by client ID, per-customer AES-256 keys, and per-tenant IP allowlisting. The Vault API runs in EU and US regions. NoPII Pro adds multi-tenancy and roles.</p>
+<p><strong>Key Features</strong></p>
+<ul>
+  <li>Data Vault: AES-256 field encryption with exact-match lookup and deterministic tokens, so login, dedup, and joins keep working.</li>
+  <li>Batch tokenization of up to 5,000 values per call for backfilling existing columns.</li>
+  <li>File Vault: direct uploads up to 5 GB through presigned URLs, with your app storing a file reference.</li>
+  <li>NoPII: a reverse proxy that tokenizes recognized PII before supported LLM API calls and restores values in the response.</li>
+  <li>Card Vault: hosted capture and gateway proxying to supported payment partners for SaaS products that take cards.</li>
+  <li>Token expiry from 60 seconds to 7 years, plus request logs with client ID, IP, path, and status.</li>
+</ul>
+<p><strong>SaaS fit:</strong> Enigma Vault maps to the four places a platform usually holds plaintext: structured secrets such as tax IDs and bank details move to Data Vault, sensitive uploads go straight to File Vault, card capture runs through Card Vault, and product AI calls route through <a class="bl-link" href="/nopii/">NoPII</a>.</p>
+<p>A thin proof of concept on one sample tenant shows capture, token storage, authorized use, and audit events while the app database stores references only.</p>
+<p><strong>What’s Great</strong></p>
+<ul>
+  <li><strong>One vendor across data shapes:</strong> Fields, files, cards, and prompts share one account, one audit log, and one security review answer.</li>
+  <li><strong>Searchable without plaintext columns:</strong> Exact-match lookup on encrypted values and deterministic tokens keep login, dedup, and joins working.</li>
+  <li><strong>Erasure resolves at the vault:</strong> Expiry from 60 seconds to 7 years and NoPII token purge let GDPR deletions finish in one place.</li>
+</ul>
+<p><strong>Watch-Outs</strong></p>
+<ul>
+  <li><strong>No in-database searchable encryption:</strong> Range queries and full-text search over protected values are not offered, only exact match.</li>
+  <li><strong>ISO 27001 in progress:</strong> PCI DSS Level 1 and SOC 2 Type II are in place; some enterprise questionnaires also ask for ISO 27001.</li>
+</ul>
+<p>Against CipherStash, the plaintext leaves your database entirely rather than staying as ciphertext in it.</p>
+<p><strong>Pricing tiers</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>Lite</td><td>$0 (free plan)</td><td>Data Vault 1,500 requests ($0.06 overage); Card Vault 1,000 ($0.08); File Vault 5 GB</td></tr>
+<tr><td>Plus</td><td>$49.99 a month per vault</td><td>Data Vault 30,000 requests ($0.03); Card Vault 20,000 ($0.04); File Vault 150 GB; ephemeral key sharing</td></tr>
+<tr><td>Premium</td><td>$249.99 a month per vault</td><td>Data Vault 400,000 requests ($0.01); Card Vault 250,000 ($0.02); File Vault 1 TB; priority support</td></tr>
+<tr><td>NoPII Free and Pro</td><td>$0, or $50 a month</td><td>1M protected tokens free; Pro 50M, then $1 per additional million, multi-tenancy and roles</td></tr>
+<tr><td>Enterprise</td><td>Custom quote</td><td>Volume pricing; NoPII Enterprise adds SSO, SLA, and a BAA for healthcare</td></tr>
+</tbody></table></div>
+<p><strong>What Reviewers Say:</strong> Very positive. Enigma Vault holds <a class="bl-link" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener">4.4/5 from 6 reviews on G2</a> and <a class="bl-link" href="https://www.capterra.com/p/241650/Enigma-Vault/reviews/" target="_blank" rel="noopener">4.8/5 from 4 on Capterra</a>. Reviewers praise a simple API and one vendor for cards, personal data, and files, and one CEO says support added a domestic card type and languages in under 24 hours.</p>
+<p>On the critical side, one reviewer asks for more flexible reporting dashboards, one finds pricing a bit high, and one wants more documentation. The sample is small.</p>
+
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">02</span>
+    <div class="vc__id">
+      <h3 id="skyflow" class="vc__name"><span class="vc__sep">2. </span>Skyflow<span class="vc__sep">: </span><span class="vc__pill">Best for SaaS Selling Into Many Countries With Residency Demands</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate vc__rate--new" href="https://www.g2.com/products/pii-data-privacy-vault/reviews" target="_blank" rel="noopener"><span class="vc__score">No reviews</span><span class="vc__src">G2 (PII vault)</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>Custom quote</dd></div>
+    <div><dt>Free tier or trial</dt><dd>Demo</dd></div>
+    <div><dt>Integration pattern</dt><dd>API vault, SDKs, proxy Connections</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Growth-stage and enterprise SaaS vendors whose customers in Europe, India, Japan, or the Middle East demand in-country storage, and whose security team wants fine-grained access policies.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/skyflow.jpg" alt="Skyflow homepage" >}}
+  <figcaption>Skyflow homepage. Source: skyflow.com</figcaption>
+</figure>
+<p>Skyflow is a data privacy vault that stores PII in regional vaults while your application keeps tokens. Its docs list APIs and SDKs, Connections that swap tokens for real values on calls to third parties, Pipelines for bulk import from S3 or SFTP, and a Detect API for de-identifying text.</p>
+<p><strong>Integration pattern:</strong> API vault first, with Connections acting as a proxy to outside services.</p>
+<p><strong>Time to first token:</strong> Not documented on the pages we read.</p>
+<p><strong>Tenant isolation and residency:</strong> Deployment as multi-tenant SaaS, Virtual Private Skyflow, or bring your own cloud, isolated in a VPC. Skyflow cites residency “across 100+ countries” and roles across accounts, workspaces, and vaults.</p>
+<p><strong>Key Features</strong></p>
+<ul>
+  <li>Vault APIs and SDKs for storing PII as tokenized records.</li>
+  <li>Connections that swap tokens for real values on calls to third parties.</li>
+  <li>Pipelines for bulk import from S3 or SFTP.</li>
+  <li>Detect API for de-identifying free text, plus Skyflow for GenAI, which redacts sensitive data during training, RAG, and inference.</li>
+  <li>Role and policy-based access control down to context-aware row-level rules.</li>
+  <li>Deployment as multi-tenant SaaS, Virtual Private Skyflow, or bring your own cloud.</li>
+</ul>
+<p><strong>SaaS fit:</strong> Regional vaults let one global application backend keep tokens while each customer’s plaintext sits in its own region, which answers residency clauses in enterprise contracts.</p>
+<p><strong>What’s Great</strong></p>
+<ul>
+  <li><strong>Residency breadth:</strong> Regional vaults let one global app backend hold tokens while each customer’s plaintext stays in its own region.</li>
+  <li><strong>Policy engine for multi-tenant access:</strong> Role and attribute policies plus context-aware row-level rules map well onto tenant and user boundaries.</li>
+  <li><strong>Deployment choice:</strong> Shared SaaS, a private instance, or your own cloud gives procurement an answer for strict enterprise buyers.</li>
+</ul>
+<p><strong>Watch-Outs</strong></p>
+<ul>
+  <li><strong>Enterprise sales cycle to start:</strong> With no self-serve tier or published plan, a seed-stage SaaS team waits on a contract before production.</li>
+  <li><strong>Policy model takes design time:</strong> Accounts, workspaces, vaults, roles, and policies are flexible, and need deliberate mapping to your tenant model.</li>
+  <li><strong>Homepage focus has shifted to AI agents:</strong> Ask how much roadmap still goes to core SaaS data storage and residency.</li>
+</ul>
+<p><strong>Pricing tiers</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>Skyflow Data Privacy Vault</td><td>Custom quote</td><td>Not published on an accessible page; contact sales</td></tr>
+</tbody></table></div>
+<p><strong>What Reviewers Say:</strong> Too few to judge. Skyflow’s <a class="bl-link" href="https://www.g2.com/products/pii-data-privacy-vault/reviews" target="_blank" rel="noopener">PII Data Privacy Vault listing on G2</a> has no reviews yet, and there is no Capterra listing.</p>
+
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">03</span>
+    <div class="vc__id">
+      <h3 id="basis-theory" class="vc__name"><span class="vc__sep">3. </span>Basis Theory<span class="vc__sep">: </span><span class="vc__pill">Best for a Programmable Vault With Proxy and Serverless Functions</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate vc__rate--new" href="https://www.g2.com/products/basis-theory/reviews" target="_blank" rel="noopener"><span class="vc__score">No reviews</span><span class="vc__src">G2</span></a><a class="vc__rate vc__rate--new" href="https://www.capterra.com/p/10002181/Basis-Theory/reviews/" target="_blank" rel="noopener"><span class="vc__score">No reviews</span><span class="vc__src">Capterra</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>$995 a month (20,000 tokens)</dd></div>
+    <div><dt>Free tier or trial</dt><dd>Free to get started</dd></div>
+    <div><dt>Integration pattern</dt><dd>API vault, hosted elements, proxy</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Developer-led SaaS platforms, often with embedded payments, that want to collect, store, and forward sensitive data through code they control.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/basis-theory.jpg" alt="Basis Theory homepage" >}}
+  <figcaption>Basis Theory homepage. Source: basistheory.com</figcaption>
+</figure>
+<p>Basis Theory is a token platform built for developers, with hosted elements for collection, a vault API for storage, and a proxy for sending data to third parties. Its security page lists PCI DSS Level 1, SOC 2 Type II, ISO 27001, and HIPAA.</p>
+<p><strong>Integration pattern:</strong> API vault, with a proxy for outbound calls.</p>
+<p><strong>Time to first token:</strong> Not documented as a time; the pricing page offers a free start.</p>
+<p><strong>Tenant isolation and residency:</strong> The $995 plan is a “US environment only” with 24 hours of logs. PII and PHI compliance options, custom logs, and SSO/SAML sit on Enterprise.</p>
+<p><strong>Key Features</strong></p>
+<ul>
+  <li>Hosted elements that collect sensitive fields before they touch your front end.</li>
+  <li>Vault API for storing tokens, with token delete APIs.</li>
+  <li>Proxy for forwarding real values to processors and partners.</li>
+  <li>Tenants with permission-scoped API keys.</li>
+  <li>Add-ons for network tokens, account updater, and 3D Secure.</li>
+</ul>
+<p><strong>What’s Great</strong></p>
+<ul>
+  <li><strong>Full certification set published:</strong> PCI DSS Level 1, SOC 2 Type II, ISO 27001, and HIPAA cover most enterprise questionnaires.</li>
+  <li><strong>Collection to forwarding in one stack:</strong> Hosted elements, vault, and proxy let one team own the whole sensitive-data path.</li>
+  <li><strong>Payments ready:</strong> Network tokens, account updater, and 3D Secure add-ons suit SaaS products with embedded card payments.</li>
+</ul>
+<p><strong>Watch-Outs</strong></p>
+<ul>
+  <li><strong>US only on the entry plan:</strong> EU customers asking for in-region storage push you toward a custom Enterprise contract.</li>
+  <li><strong>Short logs on the entry plan:</strong> Twenty-four hours of logs is thin evidence when a customer asks who accessed data last quarter.</li>
+  <li><strong>PII options sit on Enterprise:</strong> Additional compliance options for PII and PHI data are listed only on the custom tier.</li>
+</ul>
+<p><strong>Pricing tiers</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>Entry plan</td><td>$995 a month</td><td>20,000 tokens, PCI environment and AOC, 24 hours of logs, US environment only</td></tr>
+<tr><td>Enterprise</td><td>Custom quote</td><td>PII and PHI compliance options, custom logs, SSO/SAML, dedicated IP, whitelabel CNAME</td></tr>
+</tbody></table></div>
+<p><strong>What Reviewers Say:</strong> No reviews yet on <a class="bl-link" href="https://www.g2.com/products/basis-theory/reviews" target="_blank" rel="noopener">G2</a> or <a class="bl-link" href="https://www.capterra.com/p/10002181/Basis-Theory/reviews/" target="_blank" rel="noopener">Capterra</a>, so ask for references from SaaS customers your size.</p>
+
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">04</span>
+    <div class="vc__id">
+      <h3 id="vgs" class="vc__name"><span class="vc__sep">4. </span>VGS<span class="vc__sep">: </span><span class="vc__pill">Best for SaaS Products With Payment Flows That Want a Zero-Code Proxy</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/very-good-security-vgs-platform/reviews" target="_blank" rel="noopener"><span class="vc__score">4.7<small>/5</small></span><span class="vc__src">G2 · 47 reviews</span></a><a class="vc__rate" href="https://www.capterra.com/p/195135/VGS-Platform/reviews/" target="_blank" rel="noopener"><span class="vc__score">0<small> reviews</small></span><span class="vc__src">Capterra</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>From $1,000 a month</dd></div>
+    <div><dt>Free tier or trial</dt><dd>Free to start via sign-up</dd></div>
+    <div><dt>Integration pattern</dt><dd>Inbound and outbound proxy</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>SaaS platforms that move cards, bank details, or PII to processors and partners and would rather route traffic than rewrite data access code.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/vgs.jpg" alt="VGS homepage" >}}
+  <figcaption>VGS homepage. Source: verygoodsecurity.com</figcaption>
+</figure>
+<p>VGS (Very Good Security) is a tokenization platform that sits in front of your app as a proxy. Inbound routes replace sensitive fields with aliases before requests reach your servers; outbound routes swap them back on the way to a partner. Its AI Data Firewall tokenizes sensitive fields before prompts reach a model.</p>
+<p><strong>Integration pattern:</strong> Proxy, with an SFTP proxy for batch files.</p>
+<p><strong>Time to first token:</strong> Not documented as a time; G2 reviewers describe proxy setup as quick.</p>
+<p><strong>Tenant isolation and residency:</strong> Its docs list live vaults in the US, the EU, and Asia-Pacific, and each vault holds its own data. Admin access supports SAML SSO.</p>
+<p><strong>Key Features</strong></p>
+<ul>
+  <li>Inbound routes that replace sensitive fields with aliases before requests reach your servers.</li>
+  <li>Outbound routes that reveal values only on the way to a trusted partner.</li>
+  <li>SFTP proxy for redacting batch files.</li>
+  <li>AI Data Firewall that tokenizes sensitive fields before prompts reach a model.</li>
+  <li>Live vaults in the US, the EU, and Asia-Pacific, with SAML SSO for the dashboard.</li>
+</ul>
+<p><strong>What’s Great</strong></p>
+<ul>
+  <li><strong>Little application code:</strong> Route configuration replaces most SDK work, which suits older services nobody wants to touch.</li>
+  <li><strong>Batch and AI traffic covered:</strong> An SFTP proxy redacts files and the AI Data Firewall tokenizes fields before model calls.</li>
+  <li><strong>Strong review record:</strong> 47 G2 reviews at 4.7 is the deepest independent signal among these seven platforms.</li>
+</ul>
+<p><strong>Watch-Outs</strong></p>
+<ul>
+  <li><strong>High floor:</strong> Starter begins at $1,000 a month, a hard sell for a SaaS company with one sensitive column.</li>
+  <li><strong>Every request rides the proxy:</strong> Its availability and rate limits become part of your own uptime commitments to customers.</li>
+  <li><strong>Add-on fees appear in reviews:</strong> G2 reviewers mention charges such as $40 per extra CNAME, so request a full price sheet.</li>
+</ul>
+<p><strong>Pricing tiers</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>Starter</td><td>From $1,000 a month</td><td>Not itemized; contact sales for fit</td></tr>
+<tr><td>Growth</td><td>Custom quote</td><td>Network tokens, account updater, PCI compliance subscription, large file transfers, VGS Compute</td></tr>
+</tbody></table></div>
+<p><strong>What Reviewers Say:</strong> Very positive. VGS holds <a class="bl-link" href="https://www.g2.com/products/very-good-security-vgs-platform/reviews" target="_blank" rel="noopener">4.7/5 from 47 reviews on G2</a>; its <a class="bl-link" href="https://www.capterra.com/p/195135/VGS-Platform/reviews/" target="_blank" rel="noopener">Capterra listing</a> has none yet. Reviewers cite a proxy that is quick to learn and PCI compliance at an affordable cost; one says integration took about 10 minutes of developer time and moved SSNs to VGS within hours.</p>
+<p>Complaints center on add-on fees such as extra CNAMEs, and G2’s review summary notes that some users find the documentation hard to navigate. One reviewer keeps only its most sensitive data in VGS because of cost.</p>
+
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">05</span>
+    <div class="vc__id">
+      <h3 id="evervault" class="vc__name"><span class="vc__sep">5. </span>Evervault<span class="vc__sep">: </span><span class="vc__pill">Best for Edge Encryption With Every Usage Fee Published</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/evervault-2022-11-22/reviews" target="_blank" rel="noopener"><span class="vc__score">4.4<small>/5</small></span><span class="vc__src">G2 · 17 reviews</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>$995 a month plus usage</dd></div>
+    <div><dt>Free tier or trial</dt><dd>Free sandbox, no time limit</dd></div>
+    <div><dt>Integration pattern</dt><dd>Encryption SDKs plus Relay proxy</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Engineering-led SaaS teams that want data encrypted before it reaches their servers and decrypted only inside a proxy or function, with per-operation pricing.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/evervault.jpg" alt="Evervault homepage" >}}
+  <figcaption>Evervault homepage. Source: evervault.com</figcaption>
+</figure>
+<p>Evervault is an encryption platform that encrypts values at the edge rather than mapping them to stored tokens. Your database holds ciphertext, and plaintext appears only inside its Relay proxy on the way to a third party, or inside its Functions.</p>
+<p><strong>Integration pattern:</strong> Client and server encryption SDKs, plus Relay as an outbound proxy.</p>
+<p><strong>Time to first token:</strong> Not documented as a time; the sandbox needs “no credit card, no sales calls.”</p>
+<p><strong>Tenant isolation and residency:</strong> Requests can be pinned to US or EU infrastructure, but its docs say strict residency carries no SLA. The pricing page lists SOC 2 Type II, PCI DSS 4.0.1 Level One, and HIPAA.</p>
+<p><strong>Key Features</strong></p>
+<ul>
+  <li>Client and server encryption SDKs that encrypt values at the edge.</li>
+  <li>Relay, an outbound proxy that decrypts only on the way to a third party.</li>
+  <li>Functions for running code on decrypted data inside Evervault.</li>
+  <li>Fingerprints at $0.005 each that return a unique card identifier and BIN details for an encrypted card.</li>
+  <li>Teams and apps, with each app holding its own keys.</li>
+</ul>
+<p><strong>What’s Great</strong></p>
+<ul>
+  <li><strong>Every fee itemized:</strong> Encrypts are unlimited and decrypts cost $0.005, so finance can model cost per customer record.</li>
+  <li><strong>Plaintext never lands in your stack:</strong> Encrypted values flow through your services and decrypt only in Relay or Functions.</li>
+  <li><strong>Sandbox without a sales call:</strong> Engineers can prototype the full pattern before procurement starts, with no time limit.</li>
+</ul>
+<p><strong>Watch-Outs</strong></p>
+<ul>
+  <li><strong>Ciphertext is not searchable by default:</strong> Lookup by email or tax ID needs extra design, unlike deterministic vault tokens.</li>
+  <li><strong>Residency without a commitment:</strong> US or EU pinning exists, yet the lack of an SLA may not satisfy enterprise contracts.</li>
+  <li><strong>Payments-first product focus:</strong> Most product pages target card flows, so general SaaS PII use cases get less documentation.</li>
+</ul>
+<p><strong>Pricing tiers</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>Sandbox</td><td>Free</td><td>No credit card, no sales call, no time limit</td></tr>
+<tr><td>Platform</td><td>$995 a month plus usage</td><td>Recommended under 25,000 transactions a month; decrypts $0.005, file decrypts $0.02</td></tr>
+<tr><td>Custom</td><td>Custom quote</td><td>25,000+ transactions, SAML SSO, 24/7 support, 99.99% uptime SLA</td></tr>
+</tbody></table></div>
+<p><strong>What Reviewers Say:</strong> Mostly positive. Evervault holds <a class="bl-link" href="https://www.g2.com/products/evervault-2022-11-22/reviews" target="_blank" rel="noopener">4.4/5 from 17 reviews on G2</a>. Reviewers highlight easy integration and developer-friendly encryption, and one calls setting up inbound and outbound relays a breeze.</p>
+<p>Seven of the 17 reviewers raise cost, mostly for smaller organizations, and one notes the reliance on a third party.</p>
+
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">06</span>
+    <div class="vc__id">
+      <h3 id="cipherstash" class="vc__name"><span class="vc__sep">6. </span>CipherStash<span class="vc__sep">: </span><span class="vc__pill">Best for Searchable Encryption Inside Your Own Postgres</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate vc__rate--new" href="https://www.g2.com/products/cipherstash/reviews" target="_blank" rel="noopener"><span class="vc__score">No reviews</span><span class="vc__src">G2</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>$0, then $20 a month</dd></div>
+    <div><dt>Free tier or trial</dt><dd>Dev plan: 10,000 encryptions a month</dd></div>
+    <div><dt>Integration pattern</dt><dd>SDK field-level encryption, Postgres proxy</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Postgres-based SaaS teams, including Supabase users, that must keep data in their own database and still query encrypted fields.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v5/cipherstash.jpg" alt="CipherStash homepage" >}}
+  <figcaption>CipherStash homepage. Source: cipherstash.com</figcaption>
+</figure>
+<p>CipherStash is a queryable encryption product for Postgres. Its Encryption SDK encrypts fields such as names and emails in your application while keeping search and filtering, and CipherStash Proxy does the same between app and database for systems that cannot take an SDK.</p>
+<p><strong>Integration pattern:</strong> SDK field-level encryption, with a drop-in Postgres proxy.</p>
+<p><strong>Time to first token:</strong> Not documented as a time; the Dev plan is free up to 10,000 encryptions a month.</p>
+<p><strong>Tenant isolation and residency:</strong> ZeroKMS derives keys only when needed, bound to identity and access policies. Ciphertext stays wherever you host Postgres; Enterprise adds AWS PrivateLink and a bring-your-own KMS root key.</p>
+<p><strong>Key Features</strong></p>
+<ul>
+  <li>Open-source SDKs, starting with TypeScript, that keep encrypted fields searchable in Postgres.</li>
+  <li>CipherStash Proxy for systems that cannot take an SDK.</li>
+  <li>ZeroKMS, which derives keys only when needed and binds them to identity and access policies.</li>
+  <li>Every decryption recorded in a cryptographic audit trail.</li>
+  <li>Free decryptions on every plan and support for Supabase.</li>
+</ul>
+<p><strong>What’s Great</strong></p>
+<ul>
+  <li><strong>Search stays in your database:</strong> Encrypted fields remain queryable in Postgres, so you avoid a network hop per lookup.</li>
+  <li><strong>Lowest paid entry here:</strong> Pro costs $20 a month and decryptions are always free on every plan.</li>
+  <li><strong>SOC 2 Type II certified:</strong> Its security page offers reports and completed questionnaires through its trust center under NDA.</li>
+</ul>
+<p><strong>Watch-Outs</strong></p>
+<ul>
+  <li><strong>Built around Postgres:</strong> Searchable encryption centers on Postgres; the homepage also lists PlanetScale and DynamoDB, so confirm your exact store, and warehouse-first stacks need another approach.</li>
+  <li><strong>One SDK language so far:</strong> Its SDKs start with TypeScript; other stacks rely on the proxy for now.</li>
+  <li><strong>Data stays in your estate:</strong> Ciphertext still sits in your backups and replicas, so files and LLM prompts need separate handling.</li>
+</ul>
+<p><strong>Pricing tiers</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>Dev</td><td>$0</td><td>10,000 encryption operations a month (hard limit), community support</td></tr>
+<tr><td>Pro</td><td>$20 a month</td><td>25,000 operations, then $3.00 per 1,000</td></tr>
+<tr><td>Business</td><td>$870 a month</td><td>500,000 operations, then $2.00 per 1,000; unlimited OIDC providers</td></tr>
+<tr><td>Enterprise</td><td>Custom quote</td><td>SSO, 99.9% uptime SLA, AWS PrivateLink, bring-your-own KMS root key</td></tr>
+</tbody></table></div>
+<p><strong>What Reviewers Say:</strong> Too few to judge. CipherStash’s <a class="bl-link" href="https://www.g2.com/products/cipherstash/reviews" target="_blank" rel="noopener">G2 listing</a> has no reviews yet, and there is no Capterra listing.</p>
+
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">07</span>
+    <div class="vc__id">
+      <h3 id="protegrity" class="vc__name"><span class="vc__sep">7. </span>Protegrity<span class="vc__sep">: </span><span class="vc__pill">Best for Vaultless Tokens Across Warehouses and Analytics Copies</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/protegrity/reviews" target="_blank" rel="noopener"><span class="vc__score">4.5<small>/5</small></span><span class="vc__src">G2 · 14 reviews</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>Custom quote</dd></div>
+    <div><dt>Free tier or trial</dt><dd>Free Developer Edition and API Playground</dd></div>
+    <div><dt>Integration pattern</dt><dd>Vaultless, format-preserving tokenization</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Data-heavy SaaS companies whose largest PII exposure is warehouse and lakehouse copies used by analysts, data science, and AI teams.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/protegrity.jpg" alt="Protegrity homepage" >}}
+  <figcaption>Protegrity homepage. Source: protegrity.com</figcaption>
+</figure>
+<p>Protegrity is a data protection platform built on vaultless, format-preserving tokenization, masking, and encryption.</p>
+<p>It protects data inside databases and warehouses through native integrations, including Databricks Unity Catalog functions and Snowflake through its cloud protectors, and now sells AI guardrails and anonymization.</p>
+<p><strong>Integration pattern:</strong> Vaultless and format-preserving tokens enforced where data is stored.</p>
+<p><strong>Time to first token:</strong> Not documented as a time; the Developer Edition needs “no license or heavy infrastructure” and runs locally in containers.</p>
+<p><strong>Tenant isolation and residency:</strong> Deployed in SaaS, cloud, hybrid, or on-premises setups, so residency follows wherever you run it. Tenant mapping is done through its policies.</p>
+<p><strong>Key Features</strong></p>
+<ul>
+  <li>Vaultless, format-preserving tokenization, masking, and encryption.</li>
+  <li>Databricks Unity Catalog functions and Snowflake support through its cloud protectors.</li>
+  <li>AI guardrails and anonymization for model pipelines.</li>
+  <li>Audit Store that records protect and unprotect operations.</li>
+  <li>Free Developer Edition on GitHub and PyPI, plus an API Playground.</li>
+</ul>
+<p><strong>What’s Great</strong></p>
+<ul>
+  <li><strong>Protects the warehouse copy:</strong> Snowflake and Databricks integrations keep analysts working on tokens rather than raw customer PII.</li>
+  <li><strong>No schema changes:</strong> Format-preserving tokens fit existing column types, which avoids migrations across many downstream systems.</li>
+  <li><strong>Free evaluation path:</strong> The Developer Edition on GitHub and PyPI lets engineers test before a sales cycle.</li>
+</ul>
+<p><strong>Watch-Outs</strong></p>
+<ul>
+  <li><strong>Heavier to run:</strong> Policies, protectors, and deployment choices assume a security engineering team rather than a single developer.</li>
+  <li><strong>Certifications to request:</strong> Protegrity announced ISO 27001:2013 in August 2023; ask for the current certificate and any SOC 2 report.</li>
+  <li><strong>Price and integration complaints:</strong> G2 reviewers find the price a little high and want broader integration options.</li>
+</ul>
+<p><strong>Pricing tiers</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>Developer Edition</td><td>Free</td><td>GitHub and PyPI evaluation, API Playground</td></tr>
+<tr><td>AI Team Edition</td><td>Custom quote</td><td>Container-based deployment for smaller teams and AI pipelines</td></tr>
+<tr><td>Enterprise</td><td>Custom quote</td><td>Full platform, deployment options, and support</td></tr>
+</tbody></table></div>
+<p><strong>What Reviewers Say:</strong> Positive. Protegrity holds <a class="bl-link" href="https://www.g2.com/products/protegrity/reviews" target="_blank" rel="noopener">4.5/5 from 14 reviews on G2</a>, with no Capterra listing. Reviewers like the data protection and ease of use, and one calls the vaultless tokenization easily scalable.</p>
+<p>On the critical side, one wants broader integration options, one finds the price a little high, another says a single-year license exceeds $15,000, and two were unhappy with customer support.</p>
+
+<h2 id="five-integration-patterns">PII Tokenization Integration Patterns for SaaS Compared</h2>
+<p>The integration pattern decides your engineering cost more than any feature list. Pick the pattern first, then the vendor.</p>
+<div class="bl-tablewrap"><table class="bl-table bl-table--wide">
+<thead><tr><th>Pattern</th><th>When to use it</th><th>Listed platforms that offer it</th></tr></thead>
+<tbody>
+<tr><td>API vault</td><td>You know which fields are sensitive and want plaintext outside your database and backups</td><td>Enigma Vault, Skyflow, Basis Theory</td></tr>
+<tr><td>Proxy or interception</td><td>Data mostly flows through your product to a processor or partner, with few code changes</td><td>VGS, Basis Theory, Evervault, Skyflow, Enigma Vault (card traffic)</td></tr>
+<tr><td>SDK or field-level encryption</td><td>Data must stay in your own Postgres and stay queryable</td><td>CipherStash, Evervault</td></tr>
+<tr><td>Vaultless and format-preserving</td><td>Your biggest exposure is warehouse copies or fixed-format legacy columns</td><td>Protegrity</td></tr>
+<tr><td>AI prompt tokenization</td><td>Your product sends customer data to an LLM API</td><td>Enigma Vault NoPII, VGS, Skyflow, Protegrity</td></tr>
+</tbody></table></div>
+<p>Related reading: <a class="bl-link" href="/blog/vault-vs-vaultless-tokenization/">vault vs vaultless tokenization</a> and <a class="bl-link" href="/blog/best-pii-tokenization-software-for-llms/">the best PII tokenization software for LLM apps</a>.</p>
+
+<h2 id="what-enterprise-security-reviews-ask">SaaS Security Review Questions and How Each Platform Answers</h2>
+<p>Enterprise buyers send some version of these eight questions with every security questionnaire. Below they are mapped to what each vendor publishes. Answers come from vendor pages read on October 29, 2026; “ask sales” means we found no public answer.</p>
+<div class="bl-tablewrap"><table class="bl-table bl-table--wide">
+<thead><tr><th>Review question</th><th>Enigma Vault</th><th>Skyflow</th><th>Basis Theory</th><th>VGS</th><th>Evervault</th><th>CipherStash</th><th>Protegrity</th></tr></thead>
+<tbody>
+<tr><td>Where does customer PII physically live?</td><td>In the vault, EU or US region; your app keeps tokens</td><td>Regional vaults; app keeps tokens</td><td>In the vault, US on the entry plan</td><td>In the VGS vault behind the proxy</td><td>Ciphertext in your database; keys with Evervault</td><td>Ciphertext in your own database</td><td>Tokens in your stores; keys under your policy</td></tr>
+<tr><td>Can you meet in-region storage?</td><td>EU and US</td><td>Residency cited across 100+ countries</td><td>Enterprise only</td><td>US, EU, and APAC live regions</td><td>US or EU pinning, no SLA</td><td>Ciphertext stays where you host your database</td><td>Wherever you deploy it</td></tr>
+<tr><td>How are tenants isolated?</td><td>Client ID isolation, per-customer keys</td><td>Accounts, workspaces, vaults, policies</td><td>Tenants with permission-scoped API keys</td><td>Each vault holds its own data</td><td>Teams and apps, each app with its own keys</td><td>Identity-bound key derivation</td><td>Policy-based</td></tr>
+<tr><td>Which audits back the vendor?</td><td>PCI DSS L1, SOC 2 Type II; ISO 27001 in progress</td><td>SOC 2 Type II, PCI DSS L1, ISO 27001:2022; HIPAA eligible</td><td>PCI DSS L1, SOC 2 Type II, ISO 27001, HIPAA</td><td>ISO 27001 badge; others via trust center</td><td>SOC 2 Type II, PCI DSS L1, HIPAA</td><td>SOC 2 Type II</td><td>ISO 27001:2013 (announced 2023)</td></tr>
+<tr><td>Who accessed which value, and when?</td><td>Every request logged with client ID, IP, path, status</td><td>Audit logging of sensitive events</td><td>24 hours of logs on entry plan</td><td>Ask sales</td><td>Ask sales</td><td>Every decryption in a cryptographic audit trail</td><td>Protect and unprotect operations in its Audit Store</td></tr>
+<tr><td>How is a customer’s data deleted?</td><td>Expiry 60 seconds to 7 years; NoPII token purge</td><td>Delete Record API; transient tokens expire by TTL</td><td>Token and tenant delete APIs</td><td>Ask sales</td><td>Ask sales</td><td>Ask sales</td><td>Ask sales</td></tr>
+<tr><td>Do LLM prompts carry customer PII?</td><td>NoPII tokenizes before the model provider</td><td>Skyflow for GenAI</td><td>Not described</td><td>AI Data Firewall</td><td>Not described</td><td>Not described</td><td>AI guardrails and anonymization</td></tr>
+<tr><td>Is SSO available for admins?</td><td>NoPII Enterprise; OAuth2 machine credentials on APIs</td><td>Ask sales</td><td>Enterprise</td><td>SAML SSO for the dashboard</td><td>Custom plan</td><td>Enterprise</td><td>SAML SSO on its ESA appliances</td></tr>
+</tbody></table></div>
+<p>Whatever you choose, keep your own answers honest: a vendor’s certifications support your vendor-risk file, and your own SOC 2 still covers your controls.</p>
+
+<h2 id="where-pii-leaks-in-a-saas-stack">Where PII Leaks in a SaaS Stack</h2>
+<p>Six places hold most of the plaintext a SaaS security audit turns up.</p>
+<div class="bl-tablewrap"><table class="bl-table bl-table--wide">
+<thead><tr><th>Place PII ends up</th><th>Why it happens</th><th>Pattern that fits</th><th>Platforms to consider</th></tr></thead>
+<tbody>
+<tr><td>Application database</td><td>Features need names, IDs, bank details</td><td>API vault or SDK encryption</td><td>Enigma Vault, Skyflow, Basis Theory, CipherStash</td></tr>
+<tr><td>Warehouse and analytics copies</td><td>ETL copies whole tables nightly</td><td>Tokens at source, or vaultless in the warehouse</td><td>Protegrity; any vault if tokens are written first</td></tr>
+<tr><td>Logs and traces</td><td>Request bodies and errors get logged</td><td>Tokenize before the service, or proxy inbound</td><td>VGS, Evervault, any API vault</td></tr>
+<tr><td>Support desk and CRM</td><td>Agents paste customer details into tickets</td><td>Show tokens or masked values; reveal under policy</td><td>Enigma Vault, Skyflow</td></tr>
+<tr><td>User uploads</td><td>IDs and documents pass through app servers</td><td>Presigned direct upload to a file vault</td><td>Enigma Vault File Vault, Skyflow file records</td></tr>
+<tr><td>LLM features</td><td>Prompts include account and user data (see <a class="bl-link" href="/blog/llm-data-leakage/">LLM data leakage</a>)</td><td>AI prompt tokenization</td><td>Enigma Vault NoPII, VGS, Skyflow, Protegrity</td></tr>
+</tbody></table></div>
+
+<h2 id="pricing-compared">PII Tokenization Software for SaaS Pricing Compared</h2>
+<p>Only prices read on each vendor’s own pricing page on October 29, 2026 appear here.</p>
+<div class="bl-tablewrap"><table class="bl-table bl-table--wide">
+<thead><tr><th>Vendor and plan</th><th>Monthly price</th><th>What’s included</th><th>Overage or usage fees</th><th>Free option</th></tr></thead>
+<tbody>
+<tr><td>Enigma Vault Lite</td><td>$0</td><td>Data Vault 1,500 requests, Card Vault 1,000, File Vault 5 GB</td><td>$0.06 (Data), $0.08 (Card) per request</td><td>Free plan</td></tr>
+<tr><td>Enigma Vault Plus</td><td>$49.99 per vault</td><td>Data Vault 30,000 requests, Card Vault 20,000, File Vault 150 GB</td><td>$0.03 (Data), $0.04 (Card)</td><td>Lite tier</td></tr>
+<tr><td>Enigma Vault NoPII Pro</td><td>$50</td><td>50M protected tokens, multi-tenancy and roles</td><td>$1 per additional million</td><td>NoPII Free, 1M tokens</td></tr>
+<tr><td>CipherStash Pro</td><td>$20</td><td>25,000 encryption operations</td><td>$3.00 per 1,000</td><td>Dev plan</td></tr>
+<tr><td>CipherStash Business</td><td>$870</td><td>500,000 encryption operations</td><td>$2.00 per 1,000</td><td>Dev plan</td></tr>
+<tr><td>Basis Theory entry plan</td><td>$995</td><td>20,000 tokens, US only, 24 hours of logs</td><td>Not published</td><td>Free to get started</td></tr>
+<tr><td>Evervault Platform</td><td>$995 plus usage</td><td>Recommended under 25,000 transactions a month</td><td>Decrypts $0.005</td><td>Free sandbox</td></tr>
+<tr><td>VGS Starter</td><td>From $1,000</td><td>Not itemized</td><td>Not published</td><td>Free to start</td></tr>
+<tr><td>Skyflow, Protegrity production editions</td><td>Custom quote</td><td>Not published</td><td>Not published</td><td>Protegrity Developer Edition</td></tr>
+</tbody></table></div>
+
+<h2 id="which-pii-tokenization-software-should-saas-teams-choose">Which PII Tokenization Software Should SaaS Teams Choose?</h2>
+<p>Match your situation to a starting platform, then prove it on one field before you commit.</p>
+<div class="bl-tablewrap"><table class="bl-table bl-table--wide">
+<thead><tr><th>If your situation is</th><th>Start with</th><th>Why</th></tr></thead>
+<tbody>
+<tr><td>Seed to Series B, a few PII columns, AI feature coming</td><td>Enigma Vault</td><td>Free start, fields, files, and prompts behind one boundary</td></tr>
+<tr><td>Enterprise deals blocked on in-country storage</td><td>Skyflow</td><td>Regional vaults across the most countries</td></tr>
+<tr><td>Embedded payments plus PII, developer-built</td><td>Basis Theory or VGS</td><td>Vault plus proxy to processors and partners</td></tr>
+<tr><td>Zero plaintext allowed in your own services</td><td>Evervault</td><td>Edge encryption, decrypt only in Relay or Functions</td></tr>
+<tr><td>Data must stay in your Postgres, queryable</td><td>CipherStash</td><td>Searchable encryption through an SDK or proxy</td></tr>
+<tr><td>Biggest exposure is the warehouse</td><td>Protegrity</td><td>Vaultless tokens enforced in Snowflake and Databricks</td></tr>
+</tbody></table></div>
+
+<h2 id="questions-to-ask-a-saas-pii-tokenization-vendor">Questions to Ask a PII Tokenization Software Vendor for SaaS</h2>
+<p>Four questions settle most SaaS evaluations before a proof of concept starts:</p>
+<ul>
+  <li><strong>Which sensitive field creates the most engineering or compliance burden?</strong> Start there, because one field moved out of your database is a faster win than a platform-wide rollout.</li>
+  <li><strong>Must users see the value again, or can the product act by token?</strong> If a payout, lookup, or LLM call can run on a token, plaintext never needs to return to your app.</li>
+  <li><strong>Which processors, model providers, and storage regions must be supported?</strong> Check each against the vendor’s documented list rather than the sales deck.</li>
+  <li><strong>What availability, latency, tenancy, and deletion requirements apply?</strong> A vault becomes a critical dependency, so ask for uptime commitments, recovery plans, and how one tenant’s data is deleted.</li>
+</ul>
+<p>Two cautions apply to every platform here. Processor independence depends on which gateways a vendor actually supports and on your contract terms. And PII detection in free text, including prompts, cannot guarantee that every value is caught, so test it on your own data.</p>
+
+<h2 id="tokenize-customer-pii-in-your-saas-with-enigma-vault">Why SaaS Platforms Vault Customer PII With Enigma Vault</h2>
+<p>Somewhere in your next enterprise deal, a security questionnaire will ask where customer PII is stored, who can read it, and how you would prove it. That question is why this guide weighed vault placement, access logs, and audit reports ahead of feature counts.</p>
+<p>With Data Vault and File Vault, your database holds tokens and uploaded documents live in the vault, so your answer points to one system with its own controls. Each request is logged with client ID, IP, resource path, and status.</p>
+<p>The vault carries PCI DSS Level 1 and SOC 2 Type II, with ISO 27001 in progress, and NoPII has a free tier for the day your product adds an AI feature.</p>
+<p>You can <a class="bl-link" href="/pricing/">start on the free Lite plan</a> with one table today, then <a class="bl-link" href="/request-demo/">book a demo</a> to map the rest of your schema before the questionnaire arrives.</p>
+
+

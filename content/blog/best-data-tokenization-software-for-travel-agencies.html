@@ -1,0 +1,640 @@
+---
+title: "6 Best Data Tokenization Software for Travel Agencies in 2026"
+titleEmphasis: "6 Best"
+slug: "best-data-tokenization-software-for-travel-agencies"
+layout: "pii-style"
+metaTitle: "Best Data Tokenization Software for Travel Agencies (2026)"
+description: "Compare 6 data tokenization platforms for travel agencies on passports, dates of birth, Known Traveler and Redress numbers, loyalty IDs, PII in email and AI, and pricing."
+subtitle: "Which platform keeps passports, dates of birth, trusted-traveler numbers, and special-assistance notes out of inboxes, PNR remarks, CRMs, and AI assistants, field by field."
+date: 2026-10-29T00:02:00
+category: "Data Vault"
+author: "tony-alex"
+readTime: 27
+heroImage: "/assets/blog/img-06.png"
+heroAlt: "A traveler profile with passport, date of birth, and loyalty fields replaced by tokens"
+excerpt: "Six data tokenization platforms compared for leisure agencies, TMCs, and host agencies on traveler profile fields, PII in email and AI, agency fit, and price."
+tags: ["data-vault", "tokenization", "travel", "pii", "travel-agencies"]
+ogImage: "/assets/og/nopii-overview.jpg"
+ogImageAlt: "6 Best Data Tokenization Software for Travel Agencies in 2026 | Enigma Vault"
+ogType: article
+styles: ["blog.css", "pages/blog-pii-hero.css", "tr-pages.css"]
+scripts: ["blog-article.js"]
+faqSchema: true
+faqs:
+  - q: "What Is the Best Data Tokenization Software for Travel Agencies?"
+    a: "It depends on where your traveler data lives. Enigma Vault is best for agencies that want passports, dates of birth, trusted-traveler numbers, and cards collected and held in one vault without a developer; Skyflow suits travel platforms with residency rules across regions; Protegrity suits large TMCs protecting traveler data in analytics; VGS suits OTAs tokenizing payments and PII through one proxy; and Nightfall and Limina find or remove PII that has already spread into email, tickets, and transcripts."
+  - q: "Which Traveler Data Should a Travel Agency Tokenize First?"
+    a: "Start with the fields that do the most harm if copied: passport numbers and scans, dates of birth, Known Traveler and Redress numbers, and payment cards. Then move to loyalty numbers, emergency contacts, and special-assistance or medical notes. Keep names and itineraries readable where advisors need them to work."
+  - q: "Do Travel Agencies Have to Collect Secure Flight and APIS Data?"
+    a: "The legal duties sit mainly with airlines. Under 49 CFR 1560.101, covered aircraft operators must request full name, sex, date of birth, and Redress Number, and must make sure third parties that accept reservations on their behalf comply. APIS manifests under 19 CFR 122.49a, including passport details, are transmitted by carriers. Agencies often pass these details along, so they end up holding them."
+  - q: "Can We Tokenize Known Traveler Numbers and Loyalty Numbers?"
+    a: "Yes, as structured fields. Enigma Vault’s Customer Vault tokenizes custom sensitive fields through Data Vault, with presets for passport and date of birth and custom pattern validation for other identifiers. Data Vault’s deterministic tokens let you match a returning traveler’s number without revealing it."
+  - q: "How Do We Stop Passport Numbers Ending Up in AI Assistants?"
+    a: "Route the AI calls your own software makes through a tokenizing proxy. Enigma Vault’s NoPII tokenizes recognized PII, including passport numbers, before it reaches the model provider, then restores values in the response. It covers routed API traffic only; staff pasting into consumer chat apps need policy and DLP controls, and unrecognized PII can pass through, so test detection on your own data."
+  - q: "Is Redaction the Same as Tokenization for Traveler Data?"
+    a: "No. Redaction removes the value for good, which is right for an old email or ticket. Tokenization replaces it with a token an authorized system can swap back, which you need when the agency must use a passport number again for the next booking."
+  - q: "Should Passport Numbers Go in GDS PNR Remarks?"
+    a: "Keep them out of free-text remarks, notes, and email. Enter passport and secure flight details only in the fields a carrier or GDS requires at booking time, keep a token or reference in your own CRM, and ask your GDS and host agency how they mask and retain those fields."
+  - q: "What Does Data Tokenization Cost for a Small Travel Agency?"
+    a: "Enigma Vault has a free Lite plan with 1,500 Data Vault requests a month and Plus at $49.99 a month per vault; NoPII starts free. VGS starts at $1,000 a month. Protegrity and Limina offer free starting editions for testing, while Nightfall quotes on request and Skyflow doesn’t publish pricing."
+---
+<style>
+/* Wide tables: tighter cell padding so they fit the article column. */
+.bl-content .bl-table--wide td, .bl-content .bl-table--wide th { padding-left: 8px; padding-right: 8px; }
+.bl-content blockquote.bl-quote-cta{margin:24px 0;padding:14px 20px;border-left:3px solid var(--ev-mineral-blue);background:var(--ev-warm-cloud);border-radius:0 10px 10px 0}.bl-content blockquote.bl-quote-cta p{margin:0;font-size:16px}
+.bl-content figure.bl-shot{margin:20px 0 24px;padding:10px;border:1px solid var(--ev-cool-stone);border-radius:10px;background:var(--ev-warm-cloud)}.bl-content figure.bl-shot img{display:block;width:100%;height:auto;border-radius:6px}.bl-content figure.bl-shot figcaption{margin-top:8px;text-align:center;font-size:13px;color:var(--ev-slate)}
+/* Vendor header card: rank, name, best-for pill, review scores, key facts. */
+.bl-content .vc { margin: 40px 0 20px; }
+.bl-content .vc__head { display: grid; grid-template-columns: auto 1fr auto; gap: 18px; align-items: center; margin-bottom: 14px; }
+.bl-content .vc__num { font-size: 34px; font-weight: 600; line-height: 1; color: var(--ev-mineral-blue); font-variant-numeric: tabular-nums; }
+.bl-content h3.vc__name { margin: 0; padding: 0; font-size: 26px; line-height: 1.25; font-weight: 600; color: var(--ev-ink); }
+.bl-content .vc__sep { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.bl-content .vc__pill { display: table; margin-top: 10px; padding: 6px 12px; border-radius: 6px; background: var(--ev-mineral-blue); color: #fff; font-size: 12px; line-height: 1.4; font-weight: 600; text-transform: none; letter-spacing: 0; font-size: 13px; }
+.bl-content .vc__rates { display: flex; flex-direction: column; gap: 8px; align-items: stretch; }
+.bl-content .vc__rate { display: flex; flex-direction: column; align-items: flex-end; padding: 8px 14px; border: 1px solid var(--ev-cool-stone); border-radius: 10px; background: #fff; text-decoration: none !important; min-width: 128px; }
+.bl-content a.vc__rate:hover { border-color: var(--ev-mineral-blue); }
+.bl-content .vc__score { font-size: 20px; font-weight: 700; color: var(--ev-ink); line-height: 1.2; }
+.bl-content .vc__score small { font-size: 13px; font-weight: 500; color: var(--ev-slate); }
+.bl-content .vc__src { font-size: 12px; color: var(--ev-slate); line-height: 1.3; }
+.bl-content .vc__rate--new .vc__score { font-size: 15px; }
+.bl-content .vc__facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px 24px; margin: 0; padding: 18px 22px; border-radius: 12px; background: var(--ev-warm-cloud); }
+.bl-content .vc__facts div { margin: 0; }
+.bl-content .vc__facts .vc__best { grid-column: 1 / -1; padding-top: 14px; border-top: 1px solid var(--ev-cool-stone); }
+.bl-content .vc__facts dt { margin: 0 0 4px; font-size: 11.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ev-slate); }
+.bl-content .vc__facts dd { margin: 0; font-size: 15px; line-height: 1.5; color: var(--ev-ink); }
+@media (max-width: 700px) {
+  .bl-content .vc__head { grid-template-columns: auto 1fr; }
+  .bl-content .vc__rates { grid-column: 1 / -1; flex-direction: row; flex-wrap: wrap; }
+  .bl-content .vc__rate { align-items: flex-start; }
+  .bl-content .vc__num { font-size: 26px; }
+  .bl-content h3.vc__name { font-size: 22px; }
+  .bl-content .vc__facts { grid-template-columns: 1fr; }
+}
+.bl-content .tldr { margin: 8px 0 32px; padding: 22px 26px; border-radius: 12px; background: var(--ev-warm-cloud); border-left: 3px solid var(--ev-mineral-blue); }
+.bl-content .tldr .tldr__label { margin: 0 0 12px; padding: 0; border: 0; font-size: 13px; line-height: 1.4; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--ev-mineral-blue); }
+.bl-content .tldr .tldr__list { margin: 0; padding-left: 20px; }
+.bl-content .tldr .tldr__list li { margin: 0 0 10px; font-size: 16px; line-height: 1.6; color: var(--ev-ink); }
+.bl-content .tldr .tldr__list li::marker { color: var(--ev-mineral-blue); }
+.bl-content .tldr .tldr__list li:last-child { margin-bottom: 0; }
+.bl-content .tldr strong a { font-weight: 600; }
+</style>
+
+<p>The best data tokenization software for travel agencies for 2026: 1. Enigma Vault, 2. Skyflow, 3. Protegrity, 4. VGS, 5. Nightfall, and 6. Limina.</p>
+<p>A travel agency holds far more than cards: passports, dates of birth, Known Traveler and Redress numbers, loyalty IDs, visas, and special-assistance details arrive by phone and email, then sit in inboxes, booking notes, spreadsheets, and the CRM.</p>
+<p>Three review points matter most to agencies: a <a class="bl-link" href="https://www.g2.com/products/very-good-security-vgs-platform/reviews" target="_blank" rel="noopener">VGS reviewer on G2</a> says routing traffic through its proxy took very little time, <a class="bl-link" href="https://www.g2.com/products/nightfall-ai/reviews" target="_blank" rel="noopener">Nightfall reviewers on G2</a> flag false positives that need tuning, and <a class="bl-link" href="https://www.g2.com/products/limina/reviews" target="_blank" rel="noopener">Limina reviewers on G2</a> praise its multilingual accuracy.</p>
+<p>We ranked Enigma Vault first because it stops clients emailing passport photos to advisors: a branded <a class="bl-link" href="/vault/customer-vault/">Customer Vault</a> intake link tokenizes passports, dates of birth, and Known Traveler numbers into <a class="bl-link" href="/vault/data-vault/">Data Vault</a>, so your CRM holds tokens. It is PCI DSS Level 1 and SOC 2 Type II (ISO 27001 in progress), rated <a class="bl-link" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener">4.4/5 on G2</a> and <a class="bl-link" href="https://www.capterra.com/p/241650/Enigma-Vault/reviews/" target="_blank" rel="noopener">4.8/5 on Capterra</a>; Data Vault and File Vault each have a free Lite plan; paid plans start at $49.99 a month per vault.</p>
+<p>Other strong options are:</p>
+<ul>
+  <li><a class="bl-link" href="https://www.g2.com/products/payments-data-privacy-vault/reviews" target="_blank" rel="noopener">Skyflow</a>: Built for travel platforms that must keep traveler data in specific regions (G2 rating 5.0 from 1 review, Payments vault listing).</li>
+  <li><a class="bl-link" href="https://www.g2.com/products/protegrity/reviews" target="_blank" rel="noopener">Protegrity</a>: Best for large TMCs that run tokenized traveler data through analytics and AI (G2 rating 4.5 from 14 reviews).</li>
+  <li><a class="bl-link" href="https://www.g2.com/products/very-good-security-vgs-platform/reviews" target="_blank" rel="noopener">VGS</a>: Known for its proxy, which lets OTAs alias cards and traveler PII in transit (G2 rating 4.7 from 47 reviews).</li>
+  <li><a class="bl-link" href="https://www.g2.com/products/nightfall-ai/reviews" target="_blank" rel="noopener">Nightfall</a>: Best suited for discovering passports and traveler details already sitting in email and SaaS apps (G2 rating 4.6 from 101 reviews).</li>
+  <li><a class="bl-link" href="https://www.g2.com/products/limina/reviews" target="_blank" rel="noopener">Limina</a>: Offers de-identification of call transcripts and chat logs before AI use (G2 rating 4.6 from 22 reviews).</li>
+</ul>
+<p><strong>About the author:</strong> I’m <a class="bl-link" href="https://www.linkedin.com/in/tony-alex-enigma-vault/" target="_blank" rel="noopener">Dr. Tony Alex</a>, Chief Executive Officer of Enigma Vault, where I lead our work in encryption, tokenization, and sensitive-data protection. I have more than two decades of experience building enterprise software businesses.</p>
+<p>In 1999 I founded US eDirect to develop software for parks, campgrounds, and recreation agencies, bringing reservations and payments into one cloud system, and led it through its acquisition by Tyler Technologies in 2022.</p>
+<p><em>Disclosure: Enigma Vault publishes this guide and appears first in it. Every platform here is judged on the same criteria, and the review ratings come from G2 and Capterra.</em></p>
+
+
+<div class="tldr" id="tldr">
+  <h2 class="tldr__label">TL;DR</h2>
+  <ul class="tldr__list">
+    <li><strong><a class="bl-link" href="#enigma-vault">Enigma Vault</a>:</strong> best for agencies holding passports, cards, and traveler profiles in one vault.</li>
+    <li><strong><a class="bl-link" href="#skyflow">Skyflow</a>:</strong> best for travel platforms with residency rules across regions.</li>
+    <li><strong><a class="bl-link" href="#protegrity">Protegrity</a>:</strong> best for large TMCs protecting traveler data in analytics.</li>
+    <li><strong><a class="bl-link" href="#vgs">VGS</a>:</strong> best for OTAs tokenizing payments and PII through one proxy.</li>
+    <li><strong><a class="bl-link" href="#nightfall">Nightfall</a>:</strong> best for finding traveler PII already sitting in email and SaaS apps.</li>
+    <li><strong><a class="bl-link" href="#limina">Limina</a>:</strong> best for de-identifying call transcripts and chat logs before AI use.</li>
+  </ul>
+</div>
+<h2 id="data-tokenization-software-for-travel-agencies-at-a-glance">Data Tokenization Software for Travel Agencies at a Glance</h2>
+<p>This table is for an agency owner, operations lead, or TMC security manager whose risk is the traveler profile as a whole. Every rating, price, and feature was checked on October 29, 2026.</p>
+<div class="bl-tablewrap"><table class="bl-table bl-table--wide">
+<thead><tr><th>Platform</th><th>Best for</th><th>Approach</th><th>Starting price</th><th>Free trial or tier</th><th>G2 rating</th></tr></thead>
+<tbody>
+<tr><td><a class="bl-link" href="#enigma-vault">Enigma Vault</a></td><td>Passports, cards, and traveler profiles in one vault</td><td>Vault with no-code intake, plus AI proxy</td><td>$0, then $49.99 a month per vault</td><td>Free Lite plan</td><td><a class="bl-link" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener">4.4/5 (6 reviews)</a></td></tr>
+<tr><td><a class="bl-link" href="#skyflow">Skyflow</a></td><td>Travel platforms with residency rules across regions</td><td>Data privacy vault by API</td><td>Not published</td><td>Demo</td><td><a class="bl-link" href="https://www.g2.com/products/payments-data-privacy-vault/reviews" target="_blank" rel="noopener">5.0/5 (1 review, Payments vault)</a></td></tr>
+<tr><td><a class="bl-link" href="#protegrity">Protegrity</a></td><td>Large TMCs protecting traveler data in analytics</td><td>Vaultless tokenization</td><td>Custom quote</td><td>Free Developer Edition</td><td><a class="bl-link" href="https://www.g2.com/products/protegrity/reviews" target="_blank" rel="noopener">4.5/5 (14 reviews)</a></td></tr>
+<tr><td><a class="bl-link" href="#vgs">VGS</a></td><td>OTAs tokenizing payments and PII through one proxy</td><td>Proxy aliases in transit</td><td>From $1,000 a month</td><td>Free signup</td><td><a class="bl-link" href="https://www.g2.com/products/very-good-security-vgs-platform/reviews" target="_blank" rel="noopener">4.7/5 (47 reviews)</a></td></tr>
+<tr><td><a class="bl-link" href="#nightfall">Nightfall</a></td><td>Finding traveler PII already in email and SaaS apps</td><td>DLP detection and remediation</td><td>Annual per-user quote</td><td>7-day proof of value</td><td><a class="bl-link" href="https://www.g2.com/products/nightfall-ai/reviews" target="_blank" rel="noopener">4.6/5 (101 reviews)</a></td></tr>
+<tr><td><a class="bl-link" href="#limina">Limina</a></td><td>De-identifying transcripts and chat logs before AI use</td><td>De-identification in your own environment</td><td>$0 Starter, then quote</td><td>Free Starter, 75 calls a day</td><td><a class="bl-link" href="https://www.g2.com/products/limina/reviews" target="_blank" rel="noopener">4.6/5 (22 reviews)</a></td></tr>
+</tbody></table></div>
+<p>If your only concern is the card itself, our <a class="bl-link" href="/blog/best-card-tokenization-software-for-travel-agencies/">guide to card tokenization software for travel agencies</a> covers phone capture and supplier payment in depth.</p>
+<p>Related reading: <a class="bl-link" href="/blog/data-tokenization/">what data tokenization is</a> and <a class="bl-link" href="/blog/what-is-pii/">what counts as PII</a>.</p>
+
+<h2 id="what-is-data-tokenization-software-for-travel-agencies">What Is Data Tokenization Software for Travel Agencies?</h2>
+<p><strong>Data tokenization software for travel agencies swaps a traveler’s passport number, date of birth, trusted-traveler number, and other personal details for tokens, so the real values sit in a secure vault while your CRM, inbox, and booking notes hold only stand-ins.</strong></p>
+<p>A token is a random reference with no meaning outside the vault. Say a client’s passport number is stored as “tok_8f2c.” Your advisor sees the token and the expiry month; when the airline form needs the real number, an authorized person or system swaps it back, and the vault logs who did it.</p>
+
+<h2 id="how-we-ranked-data-tokenization-software-for-travel-agencies">How We Ranked Data Tokenization Software for Travel Agencies</h2>
+<p>Six weighted criteria decided the order, and each one reflects how an agency actually collects, stores, and reuses traveler details.</p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Criterion</th><th>Weight</th><th>What we checked</th></tr></thead>
+<tbody>
+<tr><td>Traveler field coverage</td><td>25%</td><td>Passport, date of birth, trusted-traveler, loyalty, emergency contact, and document scans as named or custom fields</td></tr>
+<tr><td>Where PII leaks</td><td>20%</td><td>Coverage for email, tickets, CRM notes, call transcripts, and AI prompts</td></tr>
+<tr><td>Fit for agencies without engineers</td><td>20%</td><td>No-code intake, advisor screens, setup effort, onboarding help</td></tr>
+<tr><td>Access control and audit</td><td>15%</td><td>Roles, MFA or SSO, logged reveals, expiry and deletion rules</td></tr>
+<tr><td>Cost at agency size</td><td>10%</td><td>Published prices, free tiers, usage fees, contract floors</td></tr>
+<tr><td>Evidence and reviews</td><td>10%</td><td>Vendor-stated certifications, travel references, G2 and Capterra feedback</td></tr>
+</tbody></table></div>
+<p>Sources are each vendor’s product, pricing, documentation, and industry pages, official US government regulations, and G2 and Capterra listings, all checked on October 29, 2026.</p>
+
+<h2 id="the-6-best-data-tokenization-software-for-travel-agencies-in-2026">The 6 Best Data Tokenization Software for Travel Agencies in 2026</h2>
+<p>Each entry below covers what the platform does, its key capabilities, how it fits leisure agencies, TMCs, and host agencies, pricing, pros, cons, and what users say on G2 and Capterra.</p>
+
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">01</span>
+    <div class="vc__id">
+      <h3 id="enigma-vault" class="vc__name"><span class="vc__sep">1. </span>Enigma Vault<span class="vc__sep">: </span><span class="vc__pill">Best for Agencies Holding Passports, Cards, and Traveler Profiles in One Vault</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener"><span class="vc__score">4.4<small>/5</small></span><span class="vc__src">G2 · 6 reviews</span></a><a class="vc__rate" href="https://www.capterra.com/p/241650/Enigma-Vault/reviews/" target="_blank" rel="noopener"><span class="vc__score">4.8<small>/5</small></span><span class="vc__src">Capterra · 4 reviews</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>$0, then $49.99 a month per vault</dd></div>
+    <div><dt>Free tier or trial</dt><dd>Free Lite plan: 1,500 Data Vault requests a month</dd></div>
+    <div><dt>Traveler data covered</dt><dd>Passports, dates of birth, custom IDs, cards, document scans</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Leisure agencies, host agencies, and corporate travel desks that want traveler profiles out of email and the CRM, with or without a developer.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/enigma-vault.jpg" alt="Enigma Vault homepage" >}}
+  <figcaption>Enigma Vault homepage. Source: enigmavault.io</figcaption>
+</figure>
+<p>Enigma Vault is a tokenization platform that holds the whole traveler profile: Data Vault for structured fields, <a class="bl-link" href="/vault/file-vault/">File Vault</a> for passport and visa scans, <a class="bl-link" href="/vault/card-vault/">Card Vault</a> for payments, and Customer Vault, a no-code app that collects all three through one branded link.</p>
+<p>NoPII adds a proxy for the AI features your own software calls.</p>
+<p><strong>Key Capabilities</strong></p>
+<ul>
+  <li><strong>Traveler field presets:</strong> Customer Vault ships presets for passport, date of birth, driver’s license, SSN, and tax ID, tokenized through Data Vault.</li>
+  <li><strong>Custom identifiers:</strong> Known Traveler, Redress, and loyalty numbers become custom fields with pattern validation, so typos are caught at intake.</li>
+  <li><strong>Deterministic tokens:</strong> The same passport or loyalty number always gets the same token, so returning travelers match without revealing values.</li>
+  <li><strong>Passport scans in File Vault:</strong> Each file gets a unique data key, and Customer Vault share links expire after 24 hours, with optional passwords.</li>
+  <li><strong>Logged reveal:</strong> Every sensitive value has reveal, hide, and delete controls, and every reveal is logged in the audit trail.</li>
+  <li><strong>NoPII for AI features:</strong> Recognized PII, including passport numbers, is tokenized before it reaches the model provider, then restored in the reply.</li>
+</ul>
+<p><strong>How It Handles Traveler Data</strong></p>
+<ul>
+  <li><strong>Passport and date of birth:</strong> Both are built-in Customer Vault presets, so the field is validated at intake and stored as a Data Vault token from the first keystroke.</li>
+  <li><strong>Known Traveler, Redress, and loyalty numbers:</strong> Each becomes a custom field with its own pattern check, and deterministic tokens let a repeat traveler match without the number being shown.</li>
+  <li><strong>Email and PNR text:</strong> The branded intake link replaces the emailed passport photo; advisors reveal the value in a logged session and type it only into the field the carrier requires.</li>
+  <li><strong>Integrations:</strong> Signed webhooks fire when a file is uploaded, a card is submitted, or a field is saved, and a lifecycle API lets you wire intake into your CRM later.</li>
+  <li><strong>EU travelers:</strong> Tokenizing at capture means a GDPR right-to-erasure request resolves at the vault, without hunting through every backup and inbox.</li>
+</ul>
+<p><strong>Agency Workflow Fit</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Agency type</th><th>How Enigma Vault fits</th></tr></thead>
+<tbody>
+<tr><td>Leisure agency</td><td>Customer Vault link collects passport, date of birth, and card once; advisors reveal only when booking</td></tr>
+<tr><td>Corporate travel or TMC</td><td>Data Vault API stores traveler profiles as tokens inside your own booking platform; NoPII covers AI assistants you build</td></tr>
+<tr><td>Host agency and independent advisors</td><td>One vault with role-based access, an audit trail, passkeys or TOTP, and tenant-enforced MFA</td></tr>
+</tbody></table></div>
+<p><strong>Pricing</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>Lite</td><td>$0 (free plan)</td><td>Data Vault 1,500 requests ($0.06 overage); Card Vault 1,000; File Vault 5 GB</td></tr>
+<tr><td>Plus</td><td>$49.99 a month per vault</td><td>Data Vault 30,000 requests ($0.03 overage); ephemeral key sharing; email support</td></tr>
+<tr><td>Premium</td><td>$249.99 a month per vault</td><td>Data Vault 400,000 requests ($0.01 overage); priority support</td></tr>
+<tr><td>NoPII</td><td>Free, then $50 a month on Pro</td><td>1 million protected tokens free; 50 million on Pro, then $1 per extra million</td></tr>
+<tr><td>Customer Vault</td><td>Priced by engagement</td><td>No-code intake, staff inbox, profiles, e-signatures</td></tr>
+</tbody></table></div>
+<p><strong>Pros</strong></p>
+<ul>
+  <li>Passports, screening numbers, cards, and scans share one profile and one audit log, so a client file lives in one place.</li>
+  <li>Customer Vault needs no developer or integration and can be live the same day, so a small agency can stop asking clients to email passport photos.</li>
+  <li>Published prices from $0 let an agency owner budget the year, with billing through AWS Marketplace and no contract.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li>It protects data you collect from now on and doesn’t scan old inboxes, so past email threads need cleanup elsewhere.</li>
+  <li>NoPII can let unrecognized PII pass through and only covers routed API traffic, so staff use of consumer chat apps needs separate controls.</li>
+  <li>There are no prebuilt GDS or CRM connectors, so linking profiles into a booking system takes webhooks or API work.</li>
+</ul>
+<p><strong>What Users Say:</strong> Very positive. Enigma Vault holds <a class="bl-link" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener">4.4/5 from 6 reviews on G2</a> and <a class="bl-link" href="https://www.capterra.com/p/241650/Enigma-Vault/reviews/" target="_blank" rel="noopener">4.8/5 from 4 on Capterra</a>.</p>
+<p><strong>Likes:</strong> One G2 reviewer calls the API simple and easy to understand and says the team added their domestic card and languages in less than 24 hours; another values having card data, personal information, and even large files handled by one vault. One Capterra reviewer describes it as very easy and fast to use.</p>
+<p><strong>Dislikes:</strong> A wish for more flexible reporting dashboards, one reviewer who found pricing a bit high, and another who sees more scope on the documentation side.</p>
+
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">02</span>
+    <div class="vc__id">
+      <h3 id="skyflow" class="vc__name"><span class="vc__sep">2. </span>Skyflow<span class="vc__sep">: </span><span class="vc__pill">Best for Travel Platforms With Residency Rules Across Regions</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/payments-data-privacy-vault/reviews" target="_blank" rel="noopener"><span class="vc__score">5.0<small>/5</small></span><span class="vc__src">G2 · 1 review</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>Not published</dd></div>
+    <div><dt>Free tier or trial</dt><dd>Demo</dd></div>
+    <div><dt>Traveler data covered</dt><dd>Any PII field you define in the vault schema</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Travel technology companies and large online agencies with engineers that serve travelers in several countries and must keep data in-region.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/skyflow.jpg" alt="Skyflow homepage" >}}
+  <figcaption>Skyflow homepage. Source: skyflow.com</figcaption>
+</figure>
+<p>Skyflow is a data privacy vault that isolates PII using tokenization and what it calls polymorphic encryption. Its site lists travel among its customer verticals, and its travel and hospitality webinar covers PII de-identification for identity checks, loyalty programs, and payments.</p>
+<p><strong>Key Capabilities</strong></p>
+<ul>
+  <li><strong>Regional vaults:</strong> Traveler data can stay in a vault in the required region while the central app stores tokens.</li>
+  <li><strong>Fine-grained access:</strong> Column- and row-level policies return masked formats, so a call-center role sees a partial passport number only.</li>
+  <li><strong>Encrypted analytics:</strong> Teams can query PII without decrypting it, which suits loyalty and traveler analytics at scale.</li>
+  <li><strong>LLM controls:</strong> Access rules can keep AI responses from showing data a given role shouldn’t see.</li>
+  <li><strong>Connectors:</strong> Skyflow lists ServiceNow and HubSpot integrations, two places where traveler PII often collects.</li>
+</ul>
+<p><strong>How It Handles Traveler Data</strong></p>
+<ul>
+  <li><strong>Passport and date of birth:</strong> Column- and row-level access policies decide which role sees a passport number or date of birth in full and which sees it masked.</li>
+  <li><strong>Known Traveler and loyalty numbers:</strong> Skyflow’s travel and hospitality webinar names PII de-identification for identity checks and loyalty programs as core travel uses.</li>
+  <li><strong>Email and PNR text:</strong> Skyflow lists unstructured data and AI customer service among its use cases, but it doesn’t scan agency inboxes; text must be sent to it by API.</li>
+  <li><strong>Integrations:</strong> Skyflow lists ServiceNow, HubSpot, Snowflake, Databricks, AWS, and Google Cloud, which suits a travel platform with its own data stack.</li>
+  <li><strong>EU travelers:</strong> Its data residency product keeps PII in the required region, and the site lists GDPR and the EU AI Act among the rules it helps with.</li>
+</ul>
+<p><strong>Agency Workflow Fit</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Agency type</th><th>How Skyflow fits</th></tr></thead>
+<tbody>
+<tr><td>Leisure agency</td><td>No advisor intake app</td></tr>
+<tr><td>Corporate travel or TMC</td><td>Strong fit for global traveler profiles with residency needs</td></tr>
+<tr><td>Host agency and independent advisors</td><td>Only if the host builds its own back office on the API</td></tr>
+</tbody></table></div>
+<p><strong>Pricing</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>All plans</td><td>Not published</td><td>Pricing set with sales after a demo</td></tr>
+</tbody></table></div>
+<p><strong>Pros</strong></p>
+<ul>
+  <li>Regional vaults answer GDPR and other residency questions for agencies serving travelers across several countries.</li>
+  <li>Masked, role-based views let support staff verify a traveler without seeing full passport or loyalty numbers.</li>
+  <li>Analytics on protected data lets a TMC report on traveler patterns without copying raw PII into a warehouse.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li>It’s an API platform with no intake or advisor screen, so an agency without engineers can’t use it directly.</li>
+  <li>All v1 server-side SDKs get only critical security patches, and only through October 31, 2026, so older integrations need an upgrade.</li>
+  <li>Quote-only pricing means a small agency can’t estimate the yearly cost before a sales cycle.</li>
+</ul>
+<p><strong>What Users Say:</strong> Too few reviews to judge. Skyflow’s <a class="bl-link" href="https://www.g2.com/products/payments-data-privacy-vault/reviews" target="_blank" rel="noopener">Payments Data Privacy Vault listing on G2</a> has one 5.0 review, its PII vault listing has none, and there’s no Capterra listing, so ask for travel references.</p>
+<p><strong>Likes:</strong> The single reviewer reports no hitch with the vault.</p>
+<p><strong>Dislikes:</strong> None recorded, but one review is too thin a sample to rely on.</p>
+
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">03</span>
+    <div class="vc__id">
+      <h3 id="protegrity" class="vc__name"><span class="vc__sep">3. </span>Protegrity<span class="vc__sep">: </span><span class="vc__pill">Best for Large TMCs Protecting Traveler Data in Analytics</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/protegrity/reviews" target="_blank" rel="noopener"><span class="vc__score">4.5<small>/5</small></span><span class="vc__src">G2 · 14 reviews</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>Custom quote</dd></div>
+    <div><dt>Free tier or trial</dt><dd>Free Developer Edition</dd></div>
+    <div><dt>Traveler data covered</dt><dd>PII, PCI, and PHI fields by policy</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Travel management companies and travel groups with data teams that run traveler data through warehouses, analytics, and AI pipelines.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/protegrity.jpg" alt="Protegrity homepage" >}}
+  <figcaption>Protegrity homepage. Source: protegrity.com</figcaption>
+</figure>
+<p>Protegrity is a data security platform built on vaultless tokenization: tokens are generated by algorithm and policy, with no central lookup table. It publishes a case study of a top travel management company that used its tokenization to shrink its PCI audit environment and use de-identified data for analytics.</p>
+<p><strong>Key Capabilities</strong></p>
+<ul>
+  <li><strong>Vaultless tokens:</strong> No token database to scale or replicate, which suits high-volume booking and profile data.</li>
+  <li><strong>Deterministic output:</strong> The same value always produces the same token, so joins across booking and loyalty tables keep working.</li>
+  <li><strong>Policy-controlled restore:</strong> Original values return only under policy, so analysts work on tokens while ticketing can see real data.</li>
+  <li><strong>AI Team Edition:</strong> Governs AI agents and secures departmental workloads with data-level protection and simple policy controls.</li>
+  <li><strong>Container and API deployment:</strong> Deploys by container and API into notebooks, AI pipelines, and agentic workflows.</li>
+</ul>
+<p><strong>How It Handles Traveler Data</strong></p>
+<ul>
+  <li><strong>Passport and date of birth:</strong> Fields are protected by central policy, so the same passport token appears in booking, profile, and reporting tables.</li>
+  <li><strong>Known Traveler and loyalty numbers:</strong> Deterministic tokens keep loyalty joins working, so a TMC can report on traveler activity without exposing the numbers.</li>
+  <li><strong>Email and PNR text:</strong> Protegrity protects data in systems and pipelines; it doesn’t scan inboxes or help desks, so email cleanup needs another product.</li>
+  <li><strong>Integrations:</strong> Container and API deployment drops protection into notebooks, AI pipelines, and agentic workflows a data team already runs.</li>
+  <li><strong>EU travelers:</strong> Protegrity deploys by container and API into the environments a data team already runs; ask in the demo which regions and clouds are supported.</li>
+</ul>
+<p><strong>Agency Workflow Fit</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Agency type</th><th>How Protegrity fits</th></tr></thead>
+<tbody>
+<tr><td>Leisure agency</td><td>Overbuilt; no intake or advisor screen</td></tr>
+<tr><td>Corporate travel or TMC</td><td>Strong fit where traveler data feeds reporting and AI</td></tr>
+<tr><td>Host agency and independent advisors</td><td>Not a natural fit without a data engineering team</td></tr>
+</tbody></table></div>
+<p><strong>Pricing</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Edition</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>Developer Edition</td><td>Free</td><td>Drop-in APIs for building and testing</td></tr>
+<tr><td>Team Edition</td><td>Custom quote</td><td>Departmental workloads with policy controls</td></tr>
+<tr><td>Enterprise Edition</td><td>Custom quote</td><td>Enterprise-wide policy orchestration and high throughput</td></tr>
+</tbody></table></div>
+<p><strong>Pros</strong></p>
+<ul>
+  <li>A published TMC case study shows the platform already running at the scale of a global business travel company.</li>
+  <li>Deterministic vaultless tokens keep traveler analytics working without a token vault becoming a bottleneck.</li>
+  <li>The free Developer Edition lets a data team test traveler fields before a sales conversation.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li>Protection is set up as data policy across systems, so a small agency gets no advisor screen.</li>
+  <li>G2’s review summary says integration options could be more extensive, so check your CRM and booking platform early.</li>
+  <li>One reviewer finds the price range a little higher, which favors larger travel groups over single offices.</li>
+</ul>
+<p><strong>What Users Say:</strong> Positive. Protegrity holds <a class="bl-link" href="https://www.g2.com/products/protegrity/reviews" target="_blank" rel="noopener">4.5/5 from 14 reviews on G2</a> and has no Capterra listing.</p>
+<p><strong>Likes:</strong> One reviewer calls it easy to use, and another describes its vaultless tokenization as easily scalable and praises world-class support.</p>
+<p><strong>Dislikes:</strong> One reviewer finds the price a little high, another says user friendliness could be improved, and a third wants data to stay tokenized in transit between businesses.</p>
+<p>G2’s summary says integration options could be more extensive, and one reviewer says only popular integrations such as AWS and TSQL are offered. Another found it nearly non-configurable, with an interface that isn’t user friendly, and customer support not the best.</p>
+
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">04</span>
+    <div class="vc__id">
+      <h3 id="vgs" class="vc__name"><span class="vc__sep">4. </span>VGS<span class="vc__sep">: </span><span class="vc__pill">Best for OTAs Tokenizing Payments and PII Through One Proxy</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/very-good-security-vgs-platform/reviews" target="_blank" rel="noopener"><span class="vc__score">4.7<small>/5</small></span><span class="vc__src">G2 · 47 reviews</span></a><a class="vc__rate vc__rate--new" href="https://www.capterra.com/p/195135/VGS-Platform/reviews/" target="_blank" rel="noopener"><span class="vc__score">No reviews yet</span><span class="vc__src">Capterra</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>From $1,000 a month</dd></div>
+    <div><dt>Free tier or trial</dt><dd>Free signup</dd></div>
+    <div><dt>Traveler data covered</dt><dd>Cards plus any field routed through the proxy</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Online travel agencies and booking platforms with engineers that want traveler PII aliased in transit next to card data.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/vgs.jpg" alt="VGS homepage" >}}
+  <figcaption>VGS homepage. Source: verygoodsecurity.com</figcaption>
+</figure>
+<p>VGS (Very Good Security) is a tokenization platform best known for payments that also tokenizes non-card sensitive information for privacy rules such as GDPR and CCPA.</p>
+<p>It has a page for OTAs and insurers describing the risk of agents emailing card details in spreadsheets to hotels or sharing them with car rental companies.</p>
+<p><strong>Key Capabilities</strong></p>
+<ul>
+  <li><strong>Inbound and outbound proxy:</strong> Traveler fields are aliased as they enter and restored only for approved supplier destinations.</li>
+  <li><strong>PII vault:</strong> The same vault that holds cards can hold passport and contact fields, so one platform covers both.</li>
+  <li><strong>Collect forms:</strong> Hosted web and mobile fields keep typed values off your servers during booking.</li>
+  <li><strong>Large file transfers:</strong> A listed add-on for moving bigger payloads, such as document batches, through the platform.</li>
+</ul>
+<p><strong>How It Handles Traveler Data</strong></p>
+<ul>
+  <li><strong>Passport and date of birth:</strong> Any field routed through the proxy can be aliased, so passport and contact data can share the vault that already holds cards.</li>
+  <li><strong>Supplier web portals:</strong> VGS describes pairing a headless browser with a forward browser proxy to fill a hotel or airline web page from the vault without staff seeing the data.</li>
+  <li><strong>Email and spreadsheet risk:</strong> Its OTA page names emailing spreadsheets to hotels and sharing sheets with car rental companies as the practices tokenization replaces.</li>
+  <li><strong>Double-loop payments:</strong> VGS frames OTA payments as a double loop: traveler to platform, then platform to the hotel or airline, with security needs at both steps.</li>
+  <li><strong>EU travelers:</strong> VGS positions its PII vault for privacy rules such as GDPR and CCPA; ask in the demo where vaults can be hosted.</li>
+</ul>
+<p><strong>Agency Workflow Fit</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Agency type</th><th>How VGS fits</th></tr></thead>
+<tbody>
+<tr><td>Leisure agency</td><td>Costly and developer-led for a small office</td></tr>
+<tr><td>Corporate travel or TMC</td><td>Fits TMCs running their own booking technology</td></tr>
+<tr><td>Host agency and independent advisors</td><td>Only for hosts with an engineering team</td></tr>
+</tbody></table></div>
+<p><strong>Pricing</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>Starter</td><td>From $1,000 a month</td><td>Starter package; free signup to begin building</td></tr>
+<tr><td>Growth and add-ons</td><td>Custom quote</td><td>Vault plus chosen add-ons such as large file transfers</td></tr>
+</tbody></table></div>
+<p><strong>Pros</strong></p>
+<ul>
+  <li>Cards and traveler PII can sit behind one proxy, so an OTA avoids running two separate protection systems.</li>
+  <li>The proxy model changes little in an existing booking engine, because aliases replace values in transit.</li>
+  <li>Its 4.7 G2 rating rests on 47 reviews, the largest review sample among the vaults in this list.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li>Plans start at $1,000 a month, or $12,000 a year.</li>
+  <li>Proxy routes are configured per destination, so each new supplier API needs engineering work.</li>
+  <li>There’s no advisor screen or no-code intake, so passports sent by email need a separate fix.</li>
+</ul>
+<p><strong>What Users Say:</strong> Very positive. VGS holds <a class="bl-link" href="https://www.g2.com/products/very-good-security-vgs-platform/reviews" target="_blank" rel="noopener">4.7/5 from 47 reviews on G2</a>, and its <a class="bl-link" href="https://www.capterra.com/p/195135/VGS-Platform/reviews/" target="_blank" rel="noopener">Capterra listing</a> has no reviews yet.</p>
+<p><strong>Likes:</strong> One reviewer says it took very little time to route traffic through the proxy, and another praises fast help over chat.</p>
+<p><strong>Dislikes:</strong> Reviewers mention the $40 fee per extra custom CNAME, costs on the high side, and form fields that can’t take initial values without a workaround.</p>
+<p>Two reviews call out the $40 fee for each extra CNAME, one says some documentation is out of date, and G2’s summary notes the documentation can be hard to navigate. G2 lists a typical contract price of $19,000 to $108,000 a year.</p>
+
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">05</span>
+    <div class="vc__id">
+      <h3 id="nightfall" class="vc__name"><span class="vc__sep">5. </span>Nightfall<span class="vc__sep">: </span><span class="vc__pill">Best for Finding Traveler PII Already in Email and SaaS Apps</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/nightfall-ai/reviews" target="_blank" rel="noopener"><span class="vc__score">4.6<small>/5</small></span><span class="vc__src">G2 · 101 reviews</span></a><a class="vc__rate" href="https://www.capterra.com/p/211481/Nightfall-DLP/reviews/" target="_blank" rel="noopener"><span class="vc__score">5.0<small>/5</small></span><span class="vc__src">Capterra · 2 reviews</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>Annual per-user quote</dd></div>
+    <div><dt>Free tier or trial</dt><dd>Free 7-day proof of value</dd></div>
+    <div><dt>Traveler data covered</dt><dd>PII found in email, chat, tickets, files, and AI apps</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>TMCs and larger agencies whose passports and traveler details have already spread across Gmail, Exchange, Slack, Zendesk, and Salesforce.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v5/nightfall.jpg" alt="Nightfall homepage" >}}
+  <figcaption>Nightfall homepage. Source: nightfall.ai</figcaption>
+</figure>
+<p>Nightfall is a data loss prevention (DLP) platform that detects sensitive data across SaaS apps, email, AI apps, and endpoints, then remediates it. It complements a vault: the vault stops new copies, and Nightfall finds the copies already sitting in your systems.</p>
+<p><strong>Key Capabilities</strong></p>
+<ul>
+  <li><strong>SaaS and email coverage:</strong> Integrations include Gmail, Microsoft Exchange Online, Slack, Zendesk, Salesforce, and Google Drive.</li>
+  <li><strong>Remediation options:</strong> Redact, delete, quarantine, block, revoke permissions, or coach the user, depending on the app.</li>
+  <li><strong>AI app controls:</strong> Blocks pastes of customer data into ChatGPT and redacts PII before it reaches an AI agent.</li>
+  <li><strong>Endpoint agent:</strong> Covers browser uploads, USB transfers, and printing where traveler documents can leave a laptop.</li>
+  <li><strong>Historical scans:</strong> Data scan packs from 1 TB to 20 TB a year cover old files in connected apps.</li>
+</ul>
+<p><strong>How It Handles Traveler Data</strong></p>
+<ul>
+  <li><strong>Passport and date of birth:</strong> Detection policies find these values in messages and files, then redact, quarantine, or block them depending on the app.</li>
+  <li><strong>Email and ticket text:</strong> Coverage includes Gmail, Exchange Online, Zendesk, Jira, Confluence, SharePoint, OneDrive, Teams, and Slack, where years of traveler details collect.</li>
+  <li><strong>Shadow AI:</strong> Nightfall says it stops corporate data leaving through personal ChatGPT, unmanaged copilots, and browser AI features, a real risk for busy advisors.</li>
+  <li><strong>Integrations:</strong> Salesforce is covered alongside the collaboration apps, so traveler details pasted into CRM notes can be found too.</li>
+  <li><strong>Industry fit:</strong> Its listed industries are AI-native, financial services, healthcare, technology, legal, and manufacturing, so ask for travel references.</li>
+</ul>
+<p><strong>Agency Workflow Fit</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Agency type</th><th>How Nightfall fits</th></tr></thead>
+<tbody>
+<tr><td>Leisure agency</td><td>Useful for an inbox cleanup, but priced for security teams</td></tr>
+<tr><td>Corporate travel or TMC</td><td>Strong fit for many staff across email, chat, and ticketing</td></tr>
+<tr><td>Host agency and independent advisors</td><td>Fits the host’s shared systems; advisors’ own inboxes need enrollment</td></tr>
+</tbody></table></div>
+<p><strong>Pricing</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Edition</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>Foundation</td><td>Annual per-user quote</td><td>Detection and response across SaaS apps, plus exfiltration prevention</td></tr>
+<tr><td>Premier</td><td>Annual per-user quote</td><td>Everything in Foundation, plus AI agent and MCP server controls</td></tr>
+</tbody></table></div>
+<p><strong>Pros</strong></p>
+<ul>
+  <li>It finds passports and traveler details already scattered across years of email and tickets, which a vault can’t see.</li>
+  <li>One detection engine spans email, chat, ticketing, files, and AI apps, so an agency writes its policy once.</li>
+  <li>Nightfall states SOC 2 Type II and ISO 27001 certification, which helps when corporate clients audit their TMC.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li>Redaction removes the value for good, so an advisor who needs the passport number for the next booking can’t get it back.</li>
+  <li>There’s no self-serve plan; pricing is a per-user annual quote, with a free 7-day proof of value instead of a trial.</li>
+  <li>It works on apps it connects to, so a GDS terminal or niche booking system needs its own controls.</li>
+</ul>
+<p><strong>What Users Say:</strong> Positive. Nightfall holds <a class="bl-link" href="https://www.g2.com/products/nightfall-ai/reviews" target="_blank" rel="noopener">4.6/5 from 101 reviews on G2</a> and <a class="bl-link" href="https://www.capterra.com/p/211481/Nightfall-DLP/reviews/" target="_blank" rel="noopener">5.0/5 from 2 on Capterra</a>.</p>
+<p><strong>Likes:</strong> Reviewers like the quick API integration, Slack alerting, and out-of-the-box detection policies.</p>
+<p><strong>Dislikes:</strong> Reviewers report false positives that need policy tuning, reporting and filters that need work, and one who had to learn regex to exclude some identifiers.</p>
+<p>The complaints center on false positives that need tuning and on reporting and filters that feel limited, and G2’s summary adds that reporting customization could be improved. G2’s Pros and Cons tally puts Ease of Use (12 mentions) first and Limited Features (4) as the top con.</p>
+
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">06</span>
+    <div class="vc__id">
+      <h3 id="limina" class="vc__name"><span class="vc__sep">6. </span>Limina<span class="vc__sep">: </span><span class="vc__pill">Best for De-Identifying Call Transcripts and Chat Logs Before AI Use</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/limina/reviews" target="_blank" rel="noopener"><span class="vc__score">4.6<small>/5</small></span><span class="vc__src">G2 · 22 reviews</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>$0 Starter, then quote</dd></div>
+    <div><dt>Free tier or trial</dt><dd>Starter: 75 API calls a day</dd></div>
+    <div><dt>Traveler data covered</dt><dd>50+ entity types, including passport numbers</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>TMCs and travel contact centers that want to use call recordings, transcripts, and chat logs for AI or analytics without exposing travelers.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v5/limina.jpg" alt="Limina homepage" >}}
+  <figcaption>Limina homepage. Source: getlimina.ai</figcaption>
+</figure>
+<p>Limina (formerly Private AI) is a de-identification platform that detects and removes PII, PHI, and payment data across 50+ entity types in 52 languages. It reads context, so it catches details spread across sentences, and it runs as a container in your own VPC or data center.</p>
+<p><strong>Key Capabilities</strong></p>
+<ul>
+  <li><strong>Many formats:</strong> Handles text, PDFs, images, and audio, which covers call recordings and scanned documents.</li>
+  <li><strong>52 languages:</strong> Handles multilingual and code-switching text, common in international traveler conversations.</li>
+  <li><strong>Transform choices:</strong> Redact, pseudonymize, generate synthetic PII, or generalize entities in transcripts and chat logs.</li>
+  <li><strong>Your infrastructure:</strong> The container makes no outbound calls, and a SaaS option is also offered.</li>
+</ul>
+<p><strong>How It Handles Traveler Data</strong></p>
+<ul>
+  <li><strong>Passport and date of birth:</strong> Both are among its 50+ entity types, which include passport numbers and international variants of identifiers.</li>
+  <li><strong>Phone bookings:</strong> Limina says it catches credit cards spoken across turns of a call, which matters when clients read card and passport details aloud.</li>
+  <li><strong>Multilingual travelers:</strong> Detection covers 52 languages and code-switching, common in calls with international travelers and overseas suppliers.</li>
+  <li><strong>Email and chat text:</strong> Transcripts, chat logs, and exported email are sent to the API, then redacted, pseudonymized, or replaced with synthetic values.</li>
+  <li><strong>EU travelers:</strong> The container runs in your VPC or data center with no outbound calls, and Limina lists deployments in the UK, Germany, and Switzerland among others.</li>
+</ul>
+<p><strong>Agency Workflow Fit</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Agency type</th><th>How Limina fits</th></tr></thead>
+<tbody>
+<tr><td>Leisure agency</td><td>Limited use unless you analyze calls or chats</td></tr>
+<tr><td>Corporate travel or TMC</td><td>Strong fit for contact-center data feeding AI or quality review</td></tr>
+<tr><td>Host agency and independent advisors</td><td>Fits a host building AI features on advisor conversations</td></tr>
+</tbody></table></div>
+<p><strong>Pricing</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>Starter</td><td>Free</td><td>Up to 75 API calls a day, 10 a minute; 250 KB text and 4 MB other files</td></tr>
+<tr><td>Batch</td><td>Volume quote</td><td>One-time processing of a large dataset</td></tr>
+<tr><td>Enterprise</td><td>Custom quote</td><td>Committed volume, regional deployment, dedicated success manager, custom SLA</td></tr>
+</tbody></table></div>
+<p><strong>Pros</strong></p>
+<ul>
+  <li>Audio and image support covers phone bookings and passport scans that text-only detection misses.</li>
+  <li>Running in your own environment means traveler data isn’t sent to another cloud to be cleaned.</li>
+  <li>A free Starter plan lets you test detection on real agency transcripts before buying.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li>It de-identifies data and doesn’t store it, so you still need a vault for passports you must reuse.</li>
+  <li>Self-hosting the container needs infrastructure staff that most leisure agencies don’t have.</li>
+  <li>The Starter plan’s 75 calls a day suits testing only, so production volume moves to a quote.</li>
+</ul>
+<p><strong>What Users Say:</strong> Positive. Limina holds <a class="bl-link" href="https://www.g2.com/products/limina/reviews" target="_blank" rel="noopener">4.6/5 from 22 reviews on G2</a>, with no Capterra listing.</p>
+<p><strong>Likes:</strong> Reviewers praise accurate, instant PII removal, strong multilingual accuracy, and a Docker container you can run in your own cluster.</p>
+<p><strong>Dislikes:</strong> One reviewer calls it quite pricey, and others note that balancing privacy and performance can take careful tuning.</p>
+<p>Two mention price, one reports a glitch on its site, and G2’s summary says the interface could be improved. Many reviews predate the rebrand and name the product Private AI.</p>
+
+<h2 id="traveler-data-a-travel-agency-holds">6 Types of Traveler Data a Travel Agency Holds</h2>
+<p>Strip a typical client file down and you find six layers of personal data. Each one arrives in a different way and leaks in a different place.</p>
+<div class="bl-tablewrap"><table class="bl-table bl-table--wide">
+<thead><tr><th>Profile layer</th><th>Typical fields</th><th>How it arrives</th><th>Where it usually leaks</th></tr></thead>
+<tbody>
+<tr><td>Identity and documents</td><td>Full name, date of birth, sex, passport number, issuing country, expiry, visa scans</td><td>Emailed photos, intake forms, phone calls</td><td>Inbox attachments, shared drives, PNR remarks</td></tr>
+<tr><td>Screening numbers</td><td>Known Traveler Number, Redress Number</td><td>Client email or profile form</td><td>CRM notes, spreadsheets, copied into every booking</td></tr>
+<tr><td>Loyalty and preferences</td><td>Airline, hotel, and car loyalty numbers; seat and meal choices</td><td>Corporate traveler onboarding, repeat clients</td><td>CRM fields readable by every advisor</td></tr>
+<tr><td>Payment</td><td>Cards, virtual cards, billing address</td><td>Phone, links, OTAs and wholesalers</td><td>Booking notes, call recordings</td></tr>
+<tr><td>Contacts and care</td><td>Emergency contacts, special-assistance needs, medical or mobility notes</td><td>Client conversations, group manifests</td><td>Free-text notes, supplier emails</td></tr>
+<tr><td>Conversation trail</td><td>Any of the above, typed in passing</td><td>Email threads, chat, support tickets</td><td>Ticketing systems, transcripts, AI assistant prompts</td></tr>
+</tbody></table></div>
+<p>Much of this exists because airlines need it. Under the TSA’s Secure Flight rule, <a class="bl-link" href="https://www.ecfr.gov/current/title-49/subtitle-B/chapter-XII/subchapter-C/part-1560" target="_blank" rel="noopener">49 CFR 1560.101</a>, covered aircraft operators must request a passenger’s full name, sex, date of birth, and Redress Number, and the Known Traveler Number once TSA tells them to.</p>
+<p>The same section says carriers must make sure third parties that accept reservations on their behalf comply. For international arrivals, carriers send CBP an APIS manifest under <a class="bl-link" href="https://www.ecfr.gov/current/title-19/chapter-I/part-122/subpart-E/section-122.49a" target="_blank" rel="noopener">19 CFR 122.49a</a>, which includes passport number, issuing country, expiry, citizenship, and the PNR locator.</p>
+<p>The legal duties sit with the carriers, but agencies collect and forward these details every day, so they end up holding a copy. The question for software is where that copy lives and who can read it.</p>
+
+<h2 id="traveler-data-fields-and-who-can-tokenize-them">Traveler Data Fields and Which Data Tokenization Software Can Tokenize Them</h2>
+<p>Read across a row to see which platform protects that field and how. “Detect and redact” means the platform finds the value and removes it; it doesn’t keep a token you can reuse on the next booking.</p>
+<div class="bl-tablewrap"><table class="bl-table bl-table--wide">
+<thead><tr><th>Traveler field</th><th>Enigma Vault</th><th>Skyflow</th><th>Protegrity</th><th>VGS</th><th>Nightfall</th><th>Limina</th></tr></thead>
+<tbody>
+<tr><td>Passport number</td><td>Token, built-in preset</td><td>Token, vault field by API</td><td>Vaultless token by policy</td><td>Alias through proxy</td><td>Detect and redact</td><td>Detect and de-identify</td></tr>
+<tr><td>Date of birth</td><td>Token, built-in preset</td><td>Token, vault field by API</td><td>Vaultless token by policy</td><td>Alias through proxy</td><td>Detect and redact</td><td>Detect and de-identify</td></tr>
+<tr><td>Known Traveler and Redress numbers</td><td>Token, custom field with pattern check</td><td>Token, custom vault field</td><td>Token, custom policy</td><td>Alias, custom route</td><td>Confirm in demo</td><td>Confirm in demo</td></tr>
+<tr><td>Loyalty numbers</td><td>Token, custom field</td><td>Token, custom vault field</td><td>Token, custom policy</td><td>Alias, custom route</td><td>Confirm in demo</td><td>Confirm in demo</td></tr>
+<tr><td>Passport and visa scans</td><td>Encrypted file with expiring share links</td><td>Confirm in demo</td><td>Not its focus</td><td>Large file transfer add-on</td><td>Scan in connected apps</td><td>De-identify images and PDFs</td></tr>
+<tr><td>Emergency contacts and care notes</td><td>Token, custom field</td><td>Token, vault field</td><td>Token by policy</td><td>Alias through proxy</td><td>Detect and redact</td><td>Detect and de-identify</td></tr>
+<tr><td>Visa documents and itinerary files</td><td>Encrypted file with expiring share links</td><td>Confirm in demo</td><td>Not its focus</td><td>Large file transfer add-on</td><td>Scan in connected apps</td><td>De-identify PDFs and images</td></tr>
+<tr><td>Details read aloud on calls</td><td>Keeps values out of notes via intake links</td><td>Not its focus</td><td>Not its focus</td><td>Not its focus</td><td>Not its focus</td><td>Detects card numbers spoken across turns of a call</td></tr>
+<tr><td>GDPR erasure and EU residency</td><td>Erasure resolves at the vault</td><td>Regional vaults for residency</td><td>Runs in your own deployment</td><td>Confirm hosting regions in demo</td><td>Confirm in demo</td><td>Container in your VPC; UK, Germany, and Switzerland among listed regions</td></tr>
+<tr><td>PII in email and tickets</td><td>Replaces email intake with secure links</td><td>No inbox scanning</td><td>No inbox scanning</td><td>No inbox scanning</td><td>Yes, Gmail, Exchange, Zendesk, and more</td><td>Via API on exported text</td></tr>
+<tr><td>PII in AI prompts</td><td>NoPII proxy for supported LLM APIs</td><td>LLM privacy controls</td><td>AI Team Edition</td><td>Not its focus</td><td>Blocks PII into AI apps</td><td>De-identify before model use</td></tr>
+</tbody></table></div>
+<p>Cells come from each vendor’s own pages. “Confirm in demo” means the vendor doesn’t publish support for that field, so ask for it to be shown on your own sample data.</p>
+
+<h2 id="pricing-compared">Data Tokenization Software Pricing for Travel Agencies Compared</h2>
+<p>Budgets differ more than features here: three platforms publish an entry price, and three quote only after a sales call.</p>
+<div class="bl-tablewrap"><table class="bl-table bl-table--wide">
+<thead><tr><th>Platform</th><th>Entry price</th><th>Billing model</th><th>Free option</th></tr></thead>
+<tbody>
+<tr><td>Enigma Vault</td><td>$0, then $49.99 a month per vault</td><td>Monthly by request volume; NoPII by protected tokens</td><td>Free Lite plan; NoPII Free</td></tr>
+<tr><td>Limina</td><td>$0 Starter</td><td>Volume quote or committed enterprise pricing</td><td>Starter, 75 calls a day</td></tr>
+<tr><td>VGS</td><td>From $1,000 a month</td><td>Package plus add-ons</td><td>Free signup</td></tr>
+<tr><td>Protegrity</td><td>Custom quote</td><td>By edition</td><td>Free Developer Edition</td></tr>
+<tr><td>Nightfall</td><td>Custom quote</td><td>Annual, per user</td><td>7-day proof of value</td></tr>
+<tr><td>Skyflow</td><td>Not published</td><td>Sales quote</td><td>Demo</td></tr>
+</tbody></table></div>
+<p>Ask Protegrity, Nightfall, and Skyflow for a written quote at your traveler count and staff headcount.</p>
+
+<h2 id="how-to-choose-data-tokenization-software-for-your-travel-agency">How to Choose Data Tokenization Software for Your Travel Agency</h2>
+<p>In my experience, the first question is whether traveler data is mostly coming in or mostly already spread around. A vault controls new data; DLP and de-identification clean up what’s already loose. Many agencies need one of each.</p>
+<p>If you are weighing Protegrity against a vault, our <a class="bl-link" href="/blog/vault-vs-vaultless-tokenization/">vault vs. vaultless tokenization</a> explainer covers the trade-off.</p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Your situation</th><th>Start with</th><th>Why</th></tr></thead>
+<tbody>
+<tr><td>Clients email passport photos and card details</td><td>Enigma Vault (Customer Vault)</td><td>Branded intake link replaces the email; logged reveal at booking</td></tr>
+<tr><td>Corporate traveler profiles inside your own booking platform</td><td>Enigma Vault (Data Vault), or Skyflow for multi-region residency</td><td>Tokens in your database, real values in the vault</td></tr>
+<tr><td>Traveler data feeding warehouses and AI models</td><td>Protegrity</td><td>Deterministic vaultless tokens keep analytics working</td></tr>
+<tr><td>OTA moving cards and PII through supplier APIs</td><td>VGS</td><td>One proxy aliases both in transit</td></tr>
+<tr><td>Years of passports in inboxes and tickets</td><td>Nightfall</td><td>Discovery and redaction across connected apps</td></tr>
+<tr><td>Call transcripts used for AI or quality review</td><td>Limina, or NoPII for live AI calls</td><td>De-identify recordings; tokenize live prompts</td></tr>
+</tbody></table></div>
+<h3 id="questions-to-ask-a-data-tokenization-vendor">Questions to Ask a Data Tokenization Vendor</h3>
+<ul>
+  <li>Can you tokenize a passport number, date of birth, and Known Traveler Number on our own sample data, live in the demo?</li>
+  <li>How do clients send passports and cards without phone, email, or chat: is there a secure intake link we can brand?</li>
+  <li>How do advisors use a tokenized passport or card at a supplier portal that needs manual entry: a logged reveal, an API call, or an authorized proxy?</li>
+  <li>Can the platform keep passport and card details out of call recordings, transcripts, and support tickets?</li>
+  <li>Who can reveal a value, is every reveal logged, and how do we delete a traveler’s data on request after travel?</li>
+  <li>Which regions can the data stay in?</li>
+</ul>
+<p>Start the pilot with one booking: a secure intake link, a token stored in the CRM, one authorized retrieval at the supplier step, and a controlled document share. If you are also adding AI assistants, see our guide to <a class="bl-link" href="/blog/pii-protection-for-llm/">PII protection for LLMs</a>.</p>
+
+<h2 id="why-travel-agencies-collect-passports-through-enigma-vault">Why Travel Agencies Collect Passports Through Enigma Vault</h2>
+<p>An advisor asks a couple for passport details, and one of them replies with a phone photo of the passport page. Every tool on this list exists to keep that photo out of the inbox, the CRM, and the shared drive.</p>
+<p>Enigma Vault sends the traveler a branded Customer Vault link, so the passport, date of birth, and Known Traveler Number go into the vault and your booking records keep tokens. At ticketing, an authorized advisor reveals the passport, and that access is logged.</p>
+<ul>
+<li>PCI DSS Level 1 and SOC 2 Type II, with ISO 27001 in progress</li>
+<li>Rated 4.4/5 on G2 (6 reviews) and 4.8/5 on Capterra (4)</li>
+<li>Customer Vault needs no developer and can be live the same day</li>
+</ul>
+<p>Before peak booking season, <a class="bl-link" href="/request-demo/">walk through one booking in a demo</a>, or <a class="bl-link" href="/contact/">tell us about your booking platform</a> if you need Data Vault behind your own systems.</p>
+
+

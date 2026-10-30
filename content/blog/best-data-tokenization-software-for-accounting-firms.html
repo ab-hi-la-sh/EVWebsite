@@ -1,0 +1,569 @@
+---
+title: "Best Data Tokenization Software for Accounting Firms in 2026: Top 6 Picks"
+titleEmphasis: "Top 6 Picks"
+slug: "best-data-tokenization-software-for-accounting-firms"
+layout: "pii-style"
+metaTitle: "Best Data Tokenization Software for Accounting Firms 2026"
+description: "Compare 6 data tokenization platforms for CPA and tax firms across client onboarding, tax season intake, workpapers, AI-assisted prep, and retention, with pricing."
+subtitle: "Which platform keeps SSNs, EINs, bank accounts, and tax documents out of inboxes, shared drives, and AI prompts at each stage of a firm’s year, from onboarding to offboarding."
+date: 2026-10-29T00:01:00
+category: "Data Vault"
+author: "tony-alex"
+readTime: 26
+heroImage: "/assets/blog/img-04.png"
+heroAlt: "Client tax documents and identifiers replaced by tokens as they move through an accounting firm"
+excerpt: "Six data tokenization platforms compared for accounting and tax firms, organized around how client data moves from onboarding through tax season, AI-assisted prep, and retention."
+tags: ["tokenization", "accounting", "tax", "data-vault", "customer-vault"]
+ogImage: "/assets/og/vault-data.jpg"
+ogImageAlt: "Best Data Tokenization Software for Accounting Firms in 2026: Top 6 Picks | Enigma Vault"
+ogType: article
+styles: ["blog.css", "pages/blog-pii-hero.css", "tr-pages.css"]
+scripts: ["blog-article.js"]
+faqSchema: true
+faqs:
+  - q: "What Is the Best Data Tokenization Software for Accounting Firms in 2026?"
+    a: "It depends on firm size and where client data leaks today. Enigma Vault is best for firms that want secure client intake, tokenized SSNs and bank accounts, encrypted document storage, and AI prompt protection from one vendor with a free start; Skyflow suits regional firms with client data in many countries; VGS suits firms with in-house engineers building client apps; Protecto suits firms building AI-assisted preparation; Protegrity and Thales CipherTrust Tokenization suit large firms with data warehouses and existing enterprise security teams."
+  - q: "Does Tokenization Make Our Firm Compliant With the FTC Safeguards Rule?"
+    a: "No software makes a firm compliant. The FTC Safeguards Rule requires a written information security program with a Qualified Individual, a risk assessment, encryption, multi-factor authentication, service provider oversight, staff training, and an incident response plan. Tokenization can help with the technical safeguards and reduce where client data lives, but your firm still owns the program."
+  - q: "Are Tax Preparers Covered by the FTC Safeguards Rule?"
+    a: "Yes. The FTC lists tax preparation firms among the businesses that count as financial institutions under the Safeguards Rule, and IRS Publication 4557 says the financial institutions definition includes professional tax preparers."
+  - q: "What Does IRS Publication 4557 Say About a WISP?"
+    a: "Publication 4557, Safeguarding Taxpayer Data (Rev. 6-2024), says that under the FTC Safeguards Rule tax return preparers must create and enact security plans to protect client data, and it points to Publication 5708 for help creating a written information security plan. It also recommends multi-factor authentication and encrypting sensitive files and emails."
+  - q: "Can We Use AI on Client Tax Documents Without Breaking Section 7216?"
+    a: "Section 7216 makes it a crime for a tax return preparer to knowingly or recklessly disclose or use tax return information for anything other than preparing the return, unless the regulations permit it, and many uses require the taxpayer’s signed consent. Tokenizing identifiers before a prompt reaches a model provider reduces what that provider sees, but it does not answer the consent question. Ask your counsel how your AI workflow fits the regulations."
+  - q: "Which Client Data Should an Accounting Firm Tokenize First?"
+    a: "Start with values that are high risk and copied often: Social Security numbers, EINs and other tax IDs, bank account and routing numbers for direct deposit and payments, and driver’s license or passport numbers collected for identity checks. Then move whole documents such as W-2s, 1099s, K-1s, and bank statements into encrypted storage with expiring access."
+  - q: "Do Small and Solo Tax Practices Need Data Tokenization Software?"
+    a: "A solo practice may not need a developer platform, but it still collects SSNs and bank details by email every spring. A turnkey intake product that tokenizes those fields and stores documents encrypted can be a better fit than building anything. The FTC Safeguards Rule exempts firms with fewer than 5,000 consumers from certain provisions; the rest of the rule still applies."
+  - q: "How Much Does Data Tokenization Software for Accounting Firms Cost?"
+    a: "Published prices on October 29, 2026 start at $0 (Enigma Vault Data Vault and File Vault Lite tiers, and NoPII Free) and $49.99 a month per vault (Enigma Vault Plus). VGS Starter starts at $1,000 a month. Skyflow, Protegrity, Thales CipherTrust Tokenization, Protecto, and Enigma Vault’s Customer Vault intake app are quoted by sales."
+---
+<style>
+/* Wide tables: tighter cell padding so they fit the article column. */
+.bl-content .bl-table--wide td, .bl-content .bl-table--wide th { padding-left: 8px; padding-right: 8px; }
+.bl-content figure.bl-shot{margin:20px 0 24px;padding:10px;border:1px solid var(--ev-cool-stone);border-radius:10px;background:var(--ev-warm-cloud)}.bl-content figure.bl-shot img{display:block;width:100%;height:auto;border-radius:6px}.bl-content figure.bl-shot figcaption{margin-top:8px;text-align:center;font-size:13px;color:var(--ev-slate)}
+/* Vendor header card: rank, name, best-for pill, review scores, key facts. */
+.bl-content .vc { margin: 40px 0 20px; }
+.bl-content .vc__head { display: grid; grid-template-columns: auto 1fr auto; gap: 18px; align-items: center; margin-bottom: 14px; }
+.bl-content .vc__num { font-size: 34px; font-weight: 600; line-height: 1; color: var(--ev-mineral-blue); font-variant-numeric: tabular-nums; }
+.bl-content h3.vc__name { margin: 0; padding: 0; font-size: 26px; line-height: 1.25; font-weight: 600; color: var(--ev-ink); }
+.bl-content .vc__sep { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.bl-content .vc__pill { display: table; margin-top: 10px; padding: 6px 12px; border-radius: 6px; background: var(--ev-mineral-blue); color: #fff; font-size: 12px; line-height: 1.4; font-weight: 600; text-transform: none; letter-spacing: 0; font-size: 13px; }
+.bl-content .vc__rates { display: flex; flex-direction: column; gap: 8px; align-items: stretch; }
+.bl-content .vc__rate { display: flex; flex-direction: column; align-items: flex-end; padding: 8px 14px; border: 1px solid var(--ev-cool-stone); border-radius: 10px; background: #fff; text-decoration: none !important; min-width: 128px; }
+.bl-content a.vc__rate:hover { border-color: var(--ev-mineral-blue); }
+.bl-content .vc__score { font-size: 20px; font-weight: 700; color: var(--ev-ink); line-height: 1.2; }
+.bl-content .vc__score small { font-size: 13px; font-weight: 500; color: var(--ev-slate); }
+.bl-content .vc__src { font-size: 12px; color: var(--ev-slate); line-height: 1.3; }
+.bl-content .vc__rate--new .vc__score { font-size: 15px; }
+.bl-content .vc__facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px 24px; margin: 0; padding: 18px 22px; border-radius: 12px; background: var(--ev-warm-cloud); }
+.bl-content .vc__facts div { margin: 0; }
+.bl-content .vc__facts .vc__best { grid-column: 1 / -1; padding-top: 14px; border-top: 1px solid var(--ev-cool-stone); }
+.bl-content .vc__facts dt { margin: 0 0 4px; font-size: 11.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ev-slate); }
+.bl-content .vc__facts dd { margin: 0; font-size: 15px; line-height: 1.5; color: var(--ev-ink); }
+@media (max-width: 700px) {
+  .bl-content .vc__head { grid-template-columns: auto 1fr; }
+  .bl-content .vc__rates { grid-column: 1 / -1; flex-direction: row; flex-wrap: wrap; }
+  .bl-content .vc__rate { align-items: flex-start; }
+  .bl-content .vc__num { font-size: 26px; }
+  .bl-content h3.vc__name { font-size: 22px; }
+  .bl-content .vc__facts { grid-template-columns: 1fr; }
+}
+.bl-content .bl-ranked { font-size: 15px; color: var(--ev-slate); }
+.bl-content .tldr { margin: 8px 0 32px; padding: 22px 26px; border-radius: 12px; background: var(--ev-warm-cloud); border-left: 3px solid var(--ev-mineral-blue); }
+.bl-content .tldr .tldr__label { margin: 0 0 12px; padding: 0; border: 0; font-size: 13px; line-height: 1.4; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--ev-mineral-blue); }
+.bl-content .tldr .tldr__list { margin: 0; padding-left: 20px; }
+.bl-content .tldr .tldr__list li { margin: 0 0 10px; font-size: 16px; line-height: 1.6; color: var(--ev-ink); }
+.bl-content .tldr .tldr__list li::marker { color: var(--ev-mineral-blue); }
+.bl-content .tldr .tldr__list li:last-child { margin-bottom: 0; }
+.bl-content .tldr strong a { font-weight: 600; }
+</style>
+
+<p>The best data tokenization software for accounting firms for 2026: 1. Enigma Vault, 2. Skyflow, 3. VGS, 4. Protecto, 5. Protegrity, and 6. Thales CipherTrust Tokenization.</p>
+
+<p><strong>About the author:</strong> I’m <a class="bl-link" href="https://www.linkedin.com/in/tony-alex-enigma-vault/" target="_blank" rel="noopener">Dr. Tony Alex</a>, Chief Executive Officer of Enigma Vault, where I lead our work in encryption, tokenization, and sensitive-data protection. I have more than two decades of experience building enterprise software businesses.</p>
+<p>In 1999 I founded US eDirect to develop software for parks, campgrounds, and recreation agencies, bringing reservations and payments into one cloud system, and led it through its acquisition by Tyler Technologies in 2022.</p>
+<p><em>Disclosure: Enigma Vault publishes this guide and appears first in it. Every platform here is judged on the same criteria, and the review ratings come from G2 and Capterra.</em></p>
+
+<p>Accounting firms collect Social Security numbers, EINs, bank accounts, payroll files, and government IDs from hundreds of clients, and most of it still arrives by email. Each April the same SSN ends up in an inbox, an organizer PDF, a payroll setup sheet, a shared drive, and sometimes an AI chat.</p>
+<p>Firms without their own engineers should weigh how easy a platform is to run and how fast support responds. One <a class="bl-link" href="https://www.g2.com/products/protegrity/reviews" target="_blank" rel="noopener">Protegrity reviewer on G2</a> calls it “nearly non configurable” and not user friendly, while an <a class="bl-link" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener">Enigma Vault reviewer on G2</a> says its support shipped a requested change in under 24 hours.</p>
+<p>Enigma Vault tops our list because it closes the emailed-SSN gap at intake: Customer Vault sends each client a branded intake link, tokenizes SSNs and tax IDs on submission, and stores W-2s and bank statements encrypted in File Vault. It runs on PCI DSS Level 1 and SOC 2 Type II infrastructure (ISO 27001 in progress), rated <a class="bl-link" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener">4.4/5 on G2</a> and <a class="bl-link" href="https://www.capterra.com/p/241650/Enigma-Vault/reviews/" target="_blank" rel="noopener">4.8/5 on Capterra</a>; Data Vault and File Vault each start on a free Lite plan, with paid plans from $49.99 a month per vault.</p>
+<p>Other strong options are:</p>
+<ul>
+  <li><a class="bl-link" href="https://www.g2.com/products/pii-data-privacy-vault/reviews" target="_blank" rel="noopener">Skyflow</a>: Built for regional and international firms that must keep client identifiers in specific countries (no G2 reviews yet on its PII Data Privacy Vault listing).</li>
+  <li><a class="bl-link" href="https://www.g2.com/products/very-good-security-vgs-platform/reviews" target="_blank" rel="noopener">VGS</a>: Best for firms and accounting platforms with engineers running their own client apps (G2 rating 4.7 from 47 reviews).</li>
+  <li><a class="bl-link" href="https://www.g2.com/products/protecto/reviews" target="_blank" rel="noopener">Protecto</a>: Offers AI-focused masking for firms building AI-assisted tax preparation and document review (no G2 or Capterra reviews yet).</li>
+  <li><a class="bl-link" href="https://www.g2.com/products/protegrity/reviews" target="_blank" rel="noopener">Protegrity</a>: Known for vaultless protection of client data in warehouses, analytics, and staff chat prompts (G2 rating 4.5 from 14 reviews).</li>
+  <li><a class="bl-link" href="https://www.g2.com/products/thales-ciphertrust-tokenization/reviews" target="_blank" rel="noopener">Thales CipherTrust Tokenization</a>: Best suited for large firms that already run Thales key management (G2 rating 4.0 from 6 reviews).</li>
+</ul>
+
+<div class="tldr" id="tldr">
+  <h2 class="tldr__label">TL;DR</h2>
+  <ul class="tldr__list">
+    <li><strong><a class="bl-link" href="#enigma-vault">Enigma Vault</a>:</strong> best for firms that want client intake, tokenized SSNs, encrypted documents, and AI prompt protection from one vendor.</li>
+    <li><strong><a class="bl-link" href="#skyflow">Skyflow</a>:</strong> best for regional firms holding client data from several countries.</li>
+    <li><strong><a class="bl-link" href="#vgs">VGS</a>:</strong> best for firms with in-house engineers building client apps.</li>
+    <li><strong><a class="bl-link" href="#protecto">Protecto</a>:</strong> best for firms building AI-assisted tax preparation and review.</li>
+    <li><strong><a class="bl-link" href="#protegrity">Protegrity</a>:</strong> best for large firms protecting client data in warehouses and analytics.</li>
+    <li><strong><a class="bl-link" href="#thales-ciphertrust-tokenization">Thales CipherTrust Tokenization</a>:</strong> best for firms already running Thales key management.</li>
+  </ul>
+</div>
+
+<h2 id="data-tokenization-software-for-accounting-firms-at-a-glance">Data Tokenization Software for Accounting Firms at a Glance</h2>
+<p>This table answers three questions for each of the six platforms: can clients send documents without email, can staff work without seeing every SSN, and what does it cost before tax season starts.</p>
+<p>Every price, rating, and feature below was checked on October 29, 2026. “Client intake” means the platform includes a branded intake link or form for clients to submit documents and fields; the rest need your own app or portal in front.</p>
+<div class="bl-tablewrap"><table class="bl-table bl-table--wide">
+<thead><tr><th>Platform</th><th>Best for</th><th>Starting price</th><th>Free tier or trial</th><th>Client intake included</th><th>AI prompt protection</th><th>G2 rating</th></tr></thead>
+<tbody>
+<tr><td><a class="bl-link" href="#enigma-vault">Enigma Vault</a></td><td>Intake, tokenized identifiers, documents, and AI prompts from one vendor</td><td>$0, then $49.99 a month per vault</td><td>Free Lite plans</td><td>Yes, Customer Vault (quoted)</td><td>Yes, NoPII</td><td><a class="bl-link" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener">4.4/5 (6 reviews)</a></td></tr>
+<tr><td><a class="bl-link" href="#skyflow">Skyflow</a></td><td>Regional firms with client data in several countries</td><td>Custom quote</td><td>Demo</td><td>No</td><td>Yes</td><td><a class="bl-link" href="https://www.g2.com/products/pii-data-privacy-vault/reviews" target="_blank" rel="noopener">No reviews yet</a></td></tr>
+<tr><td><a class="bl-link" href="#vgs">VGS</a></td><td>Firms with engineers building client apps</td><td>From $1,000 a month</td><td>“Get started for free”</td><td>No</td><td>Yes, AI Data Firewall</td><td><a class="bl-link" href="https://www.g2.com/products/very-good-security-vgs-platform/reviews" target="_blank" rel="noopener">4.7/5 (47 reviews)</a></td></tr>
+<tr><td><a class="bl-link" href="#protecto">Protecto</a></td><td>AI-assisted preparation and review</td><td>Custom quote</td><td>Free trial</td><td>No</td><td>Yes, its core focus</td><td><a class="bl-link" href="https://www.g2.com/products/protecto/reviews" target="_blank" rel="noopener">No reviews yet</a></td></tr>
+<tr><td><a class="bl-link" href="#protegrity">Protegrity</a></td><td>Large firms with warehouses and analytics</td><td>Custom quote</td><td>Free AI Developer Edition</td><td>No</td><td>Yes, gateway and browser plugin</td><td><a class="bl-link" href="https://www.g2.com/products/protegrity/reviews" target="_blank" rel="noopener">4.5/5 (14 reviews)</a></td></tr>
+<tr><td><a class="bl-link" href="#thales-ciphertrust-tokenization">Thales CipherTrust Tokenization</a></td><td>Firms already on Thales key management</td><td>Custom quote</td><td>Demo</td><td>No</td><td>No prompt-level protection described</td><td><a class="bl-link" href="https://www.g2.com/products/thales-ciphertrust-tokenization/reviews" target="_blank" rel="noopener">4.0/5 (6 reviews)</a></td></tr>
+</tbody></table></div>
+
+<h2 id="what-is-data-tokenization-software-for-accounting-firms">What Is Data Tokenization Software for Accounting Firms?</h2>
+<p><strong>Data tokenization software for accounting firms replaces a client’s sensitive values, such as an SSN, EIN, or bank account number, with a meaningless token and keeps the real value in a protected vault that only authorized staff and systems can reach.</strong></p>
+<p>Picture a client’s SSN on a tax organizer. With tokenization, your practice software, spreadsheets, and email threads hold something like “tok_8fQ2…” instead of the nine digits, and a preparer who needs the real number for the e-file reveals it through the vault, with that reveal logged.</p>
+<p>That matters because the <a class="bl-link" href="https://www.ftc.gov/business-guidance/resources/ftc-safeguards-rule-what-your-business-needs-know" target="_blank" rel="noopener">FTC Safeguards Rule</a> counts tax preparation firms as financial institutions and expects encryption and multi-factor authentication around customer information; tokenization helps with those controls, though no software makes a firm compliant on its own.</p>
+<p>Related reading: <a class="bl-link" href="/blog/data-tokenization/">how data tokenization works</a> and <a class="bl-link" href="/blog/vault-vs-vaultless-tokenization/">vault vs. vaultless tokenization</a>.</p>
+
+<h2 id="how-we-evaluated-data-tokenization-software-for-accounting-firms">How We Evaluated Data Tokenization Software for Accounting Firms</h2>
+<p>Our weighting follows the questions accounting firms ask in discovery: which documents arrive outside the portal, where tax IDs and bank details get copied, how seasonal staff are added and removed, and which AI applications read client content.</p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Criterion</th><th>Weight</th><th>What we checked</th></tr></thead>
+<tbody>
+<tr><td>Client-data coverage</td><td>25%</td><td>SSNs, EINs, bank accounts, ID numbers, and whole documents such as W-2s and bank statements</td></tr>
+<tr><td>Fit for staff without engineers</td><td>20%</td><td>Turnkey intake, hosted forms, or admin consoles versus API-only setup</td></tr>
+<tr><td>Access control and audit</td><td>20%</td><td>Role-based reveal, multi-factor sign-in, and logs showing who saw which value</td></tr>
+<tr><td>AI-assisted preparation</td><td>15%</td><td>Tokenizing identifiers before prompts reach a model provider</td></tr>
+<tr><td>Retention and deletion</td><td>10%</td><td>Expiry settings, deletion, and expiring links for offboarding</td></tr>
+<tr><td>Price and reviews</td><td>10%</td><td>Published plans, free tiers, and G2 and Capterra ratings</td></tr>
+</tbody></table></div>
+<p>Sources: each vendor’s product, pricing, and documentation pages and its G2 and Capterra listings, all read on or before October 29, 2026.</p>
+
+<h2 id="the-6-best-data-tokenization-software-for-accounting-firms-in-2026">The 6 Best Data Tokenization Software for Accounting Firms in 2026</h2>
+
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">01</span>
+    <div class="vc__id">
+      <h3 id="enigma-vault" class="vc__name"><span class="vc__sep">1. </span>Enigma Vault<span class="vc__sep">: </span><span class="vc__pill">Best for Client Intake, Tokenized Identifiers, and AI Prompts in One Platform</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener"><span class="vc__score">4.4<small>/5</small></span><span class="vc__src">G2 · 6 reviews</span></a><a class="vc__rate" href="https://www.capterra.com/p/241650/Enigma-Vault/reviews/" target="_blank" rel="noopener"><span class="vc__score">4.8<small>/5</small></span><span class="vc__src">Capterra · 4 reviews</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>$0, then $49.99 a month per vault</dd></div>
+    <div><dt>Free tier or trial</dt><dd>Free Lite plan for Data Vault and File Vault</dd></div>
+    <div><dt>Tax-season fit</dt><dd>SSN and tax ID presets in branded intake</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Solo practices through regional CPA firms that collect returns, IDs, and bank details by email today and want them tokenized, encrypted, and logged without a development project.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/enigma-vault.jpg" alt="Enigma Vault homepage" >}}
+  <figcaption>Enigma Vault homepage. Source: enigmavault.io</figcaption>
+</figure>
+<p>Enigma Vault is a data protection platform that covers each stage of a firm’s year with a separate product. <a class="bl-link" href="/vault/customer-vault/">Customer Vault</a> is a turnkey intake app: clients open a branded link with no account and submit documents, signatures, and sensitive fields, which are tokenized automatically.</p>
+<p>Behind it, <a class="bl-link" href="/vault/data-vault/">Data Vault</a> holds SSNs, tax IDs, and bank details as encrypted fields with tokens, <a class="bl-link" href="/vault/file-vault/">File Vault</a> stores the documents, and NoPII tokenizes recognized PII before it reaches the model provider in AI-assisted workflows. A firm can start with its highest-volume intake package and add the rest later.</p>
+<p><strong>Key Features</strong></p>
+<ul>
+  <li><strong>No-account intake links:</strong> Presets for SSN, driver’s license, passport, date of birth, and tax ID tokenize values as clients submit them.</li>
+  <li><strong>Encrypted tax documents:</strong> W-2s, bank statements, and returns go to File Vault, encrypted with a unique key per file and up to 5 GB each.</li>
+  <li><strong>Expiring return delivery:</strong> Completed returns go back through links that expire after 24 hours, with optional passwords and download tracking.</li>
+  <li><strong>Logged staff access:</strong> Staff sign in with passkeys or TOTP, tenants can require MFA, and every reveal of a sensitive value is logged.</li>
+  <li><strong>Retention controls:</strong> Data Vault expiry runs from 60 seconds to 7 years, with automatic deletion when a record expires.</li>
+  <li><strong>AI prompt protection:</strong> <a class="bl-link" href="/nopii/">NoPII</a> sits in front of supported LLM APIs and swaps recognized identifiers for deterministic tokens.</li>
+</ul>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Firm workflow</th><th>How Enigma Vault handles it</th></tr></thead>
+<tbody>
+<tr><td>Tax organizer intake</td><td>Client-specific Customer Vault link with tokenized fields and File Vault uploads</td></tr>
+<tr><td>Payroll onboarding</td><td>Bank accounts and tax IDs stored as Data Vault tokens instead of setup-sheet copies</td></tr>
+<tr><td>Advisory document room</td><td>Expiring, password-protected links with download tracking</td></tr>
+<tr><td>AI-assisted preparation</td><td>NoPII on approved application routes; file content handled separately</td></tr>
+<tr><td>Practice-management system</td><td>Tokens and status pushed through the API and webhooks</td></tr>
+<tr><td>Compliance evidence</td><td>PCI DSS Level 1, SOC 2 Type II; ISO 27001 in progress</td></tr>
+</tbody></table></div>
+<p><strong>Pricing tiers</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Product and plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>Data Vault Lite / Plus / Premium</td><td>$0 / $49.99 / $249.99 a month</td><td>1,500 / 30,000 / 400,000 requests; overage $0.06 / $0.03 / $0.01</td></tr>
+<tr><td>File Vault Lite / Plus / Premium</td><td>$0 / $49.99 / $249.99 a month</td><td>5 GB / 150 GB / 1 TB of encrypted storage</td></tr>
+<tr><td>Customer Vault</td><td>Priced by engagement</td><td>Branded tenant, staff onboarding, secure-link setup</td></tr>
+<tr><td>NoPII Free / Pro</td><td>$0 / $50 a month</td><td>1M / 50M protected tokens a month, then $1 per additional million on Pro</td></tr>
+</tbody></table></div>
+<p><strong>Pros</strong></p>
+<ul>
+  <li><strong>Covers the whole year:</strong> Intake, identifier tokens, document storage, and AI prompt protection come from one vendor and one audit trail.</li>
+  <li><strong>Usable without engineers:</strong> A small firm can replace emailed attachments with branded intake links without writing any code.</li>
+  <li><strong>Prices you can see:</strong> Free Lite tiers and published Plus and Premium plans let a managing partner budget before a sales call.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li><strong>Intake app is quoted:</strong> Customer Vault, the piece most small firms want first, is priced by engagement rather than listed.</li>
+  <li><strong>AI coverage has limits:</strong> NoPII protects routed API traffic only, and uploaded files need a workflow designed for it.</li>
+  <li><strong>ISO 27001 in progress:</strong> PCI DSS Level 1 and SOC 2 Type II are in place, but ISO 27001 certification is not yet complete.</li>
+</ul>
+<p><strong>What Customers Say:</strong> Very positive. Enigma Vault holds <a class="bl-link" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener">4.4/5 from 6 reviews on G2</a> and <a class="bl-link" href="https://www.capterra.com/p/241650/Enigma-Vault/reviews/" target="_blank" rel="noopener">4.8/5 from 4 on Capterra</a>, where reviewers score its ease of use 4.8 and value for money 4.7. The sample is small.</p>
+<p><strong>Likes:</strong> One G2 reviewer calls the API simple and easy to understand and says support added a domestic card and languages in less than 24 hours; another values handling card data, personal information, and multi-GB files in one vault system.</p>
+<p><strong>Dislikes:</strong> One reviewer asks for more flexible reporting dashboards, one calls pricing a bit high, and one wants more documentation.</p>
+
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">02</span>
+    <div class="vc__id">
+      <h3 id="skyflow" class="vc__name"><span class="vc__sep">2. </span>Skyflow<span class="vc__sep">: </span><span class="vc__pill">Best for Regional Firms With Client Data in Several Countries</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate vc__rate--new" href="https://www.g2.com/products/pii-data-privacy-vault/reviews" target="_blank" rel="noopener"><span class="vc__score">No reviews</span><span class="vc__src">G2 (PII vault)</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>Custom quote</dd></div>
+    <div><dt>Free tier or trial</dt><dd>Demo</dd></div>
+    <div><dt>Tax-season fit</dt><dd>Per-field encryption with data residency</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Regional and international firms with engineering teams that serve clients across borders and must keep identifiers in specific regions.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/skyflow.jpg" alt="Skyflow homepage" >}}
+  <figcaption>Skyflow homepage. Source: skyflow.com</figcaption>
+</figure>
+<p>Skyflow is a data privacy vault that detects and tokenizes sensitive values at runtime across “databases, documents, and analytics platforms.” It pairs per-field encryption and runtime policies with data residency, so a firm can keep client identifiers in the regions its engagements require.</p>
+<p>For an accounting firm, Skyflow is a back-end component: your developers connect it to the client portal, practice systems, and reporting stack, and the vault decides who sees which field.</p>
+<p><strong>Key Features</strong></p>
+<ul>
+  <li><strong>Per-field encryption:</strong> SSNs, tax IDs, and account numbers sit in the vault as encrypted fields behind runtime access policies.</li>
+  <li><strong>Data residency:</strong> Residency controls help a firm with international clients keep data in the required regions.</li>
+  <li><strong>Documents and analytics:</strong> Values detected in documents and analytics platforms can be tokenized, keeping raw identifiers out of reports.</li>
+  <li><strong>AI data control:</strong> Skyflow positions its vault to keep sensitive data out of AI workflows at runtime.</li>
+</ul>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Firm size</th><th>Fit</th></tr></thead>
+<tbody>
+<tr><td>Solo and small</td><td>Weak: API-first with quoted pricing and no intake app</td></tr>
+<tr><td>Mid-size</td><td>Possible with an in-house or contracted developer</td></tr>
+<tr><td>Large and regional</td><td>Strong where residency across countries matters</td></tr>
+</tbody></table></div>
+<p><strong>Pricing tiers</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>PII, AI, and residency products</td><td>Custom quote</td><td>Scoped with sales after a demo</td></tr>
+</tbody></table></div>
+<p><strong>Pros</strong></p>
+<ul>
+  <li><strong>Residency built in:</strong> Firms with clients in several countries can address location rules without running separate instances.</li>
+  <li><strong>Fine-grained policies:</strong> Per-field encryption and runtime policies let a firm decide exactly who sees which identifier.</li>
+  <li><strong>Broad data reach:</strong> One vault spans databases, documents, analytics platforms, and AI traffic.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li><strong>Needs engineering:</strong> There is no built-in client intake, so a firm must build or buy the portal in front.</li>
+  <li><strong>Cost is hard to model:</strong> Every product is quoted, which makes budgeting difficult for firms comparing options in one cycle.</li>
+  <li><strong>Built for platforms:</strong> Its product lines cover PII, AI security, healthcare, payments, and data residency, with no accounting-specific offering, so tax workflows need custom design.</li>
+</ul>
+<p><strong>What Customers Say:</strong> No reviews yet. Skyflow’s <a class="bl-link" href="https://www.g2.com/products/pii-data-privacy-vault/reviews" target="_blank" rel="noopener">PII Data Privacy Vault listing on G2</a> has no reviews yet, and Skyflow has no Capterra listing. Ask for references from a professional services firm before you sign.</p>
+
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">03</span>
+    <div class="vc__id">
+      <h3 id="vgs" class="vc__name"><span class="vc__sep">3. </span>VGS<span class="vc__sep">: </span><span class="vc__pill">Best for Firms With Engineers Building Client Apps</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/very-good-security-vgs-platform/reviews" target="_blank" rel="noopener"><span class="vc__score">4.7<small>/5</small></span><span class="vc__src">G2 · 47 reviews</span></a><a class="vc__rate vc__rate--new" href="https://www.capterra.com/p/195135/VGS-Platform/reviews/" target="_blank" rel="noopener"><span class="vc__score">No reviews</span><span class="vc__src">Capterra</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>From $1,000 a month</dd></div>
+    <div><dt>Free tier or trial</dt><dd>“Get started for free” on Starter</dd></div>
+    <div><dt>Tax-season fit</dt><dd>SFTP proxy for batch files</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Firms and accounting platforms with their own client apps that want sensitive fields stripped in transit and batch files redacted on the way in.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/vgs.jpg" alt="VGS homepage" >}}
+  <figcaption>VGS homepage. Source: verygoodsecurity.com</figcaption>
+</figure>
+<p>VGS (Very Good Security) runs a vault behind a proxy. Sensitive fields are swapped for aliases as requests pass through, so your own servers store tokens, and outbound routes pass real values only to the third parties you configure, such as a payment processor.</p>
+<p>That model suits a firm or accounting software company that already runs a client app and wants it to stop storing raw SSNs and bank numbers without rewriting its data layer.</p>
+<p><strong>Key Features</strong></p>
+<ul>
+  <li><strong>Inbound tokenization:</strong> Inbound routes tokenize SSNs and bank details before requests reach your own servers.</li>
+  <li><strong>Tokenized bank accounts:</strong> VGS says its account number tokens work with any ACH processor, which suits firms collecting fees by bank debit.</li>
+  <li><strong>SFTP proxy:</strong> Sensitive fields in payroll or bank batch files are replaced with aliases as files move between systems (enabled by contacting VGS support).</li>
+  <li><strong>AI Data Firewall:</strong> Sensitive fields are tokenized before prompts reach a model.</li>
+  <li><strong>Outbound routes:</strong> Real values are passed only to the destinations you configure.</li>
+</ul>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Firm size</th><th>Fit</th></tr></thead>
+<tbody>
+<tr><td>Solo and small</td><td>Weak: a $1,000 monthly floor and proxy setup</td></tr>
+<tr><td>Mid-size</td><td>Possible if the firm runs its own client app</td></tr>
+<tr><td>Large and regional</td><td>Strong for firms and accounting software platforms with engineering teams</td></tr>
+</tbody></table></div>
+<p><strong>Pricing tiers</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>Starter</td><td>From $1,000 a month</td><td>Inclusions not listed; “Get started for free”</td></tr>
+<tr><td>Growth</td><td>Custom quote</td><td>Network tokens, account updater, PCI compliance subscription, VGS-provided auditor, large file transfers, VGS Compute, card attributes</td></tr>
+</tbody></table></div>
+<p><strong>Pros</strong></p>
+<ul>
+  <li><strong>Little code change:</strong> The proxy model lets a client app stop storing raw identifiers without rewriting its data layer.</li>
+  <li><strong>Handles files and fields:</strong> Field tokenization and SFTP file redaction cover both web forms and batch payroll data.</li>
+  <li><strong>Strong review base:</strong> With 47 G2 reviews, VGS has the largest review sample among the vendors in this list.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li><strong>High entry price:</strong> Starter begins at $1,000 a month, and G2 lists a typical contract of $19k to $108k a year, far above what most small firms spend on security software.</li>
+  <li><strong>Proxy dependency:</strong> Every protected request passes through VGS, so its availability becomes part of your client portal’s uptime.</li>
+  <li><strong>No intake app:</strong> VGS protects an app you already have and does not give staff a built-in document request workflow.</li>
+</ul>
+<p><strong>What Customers Say:</strong> Very positive. VGS holds <a class="bl-link" href="https://www.g2.com/products/very-good-security-vgs-platform/reviews" target="_blank" rel="noopener">4.7/5 from 47 reviews on G2</a>, and its <a class="bl-link" href="https://www.capterra.com/p/195135/VGS-Platform/reviews/" target="_blank" rel="noopener">Capterra listing</a> has no reviews yet.</p>
+<p><strong>Likes:</strong> G2’s summary praises easy integration and responsive support. One reviewer says it took little time to understand the proxy and singles out chat support; another set up a proxy in about 10 minutes.</p>
+<p><strong>Dislikes:</strong> G2’s summary notes documentation can be hard to navigate for less technical users. Two reviewers object to the $40 fee per extra CNAME, several others call pricing high or not startup-friendly, and G2 users put average implementation time at 4 months.</p>
+
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">04</span>
+    <div class="vc__id">
+      <h3 id="protecto" class="vc__name"><span class="vc__sep">4. </span>Protecto<span class="vc__sep">: </span><span class="vc__pill">Best for Firms Building AI-Assisted Tax Preparation</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate vc__rate--new" href="https://www.g2.com/products/protecto/reviews" target="_blank" rel="noopener"><span class="vc__score">No reviews</span><span class="vc__src">G2</span></a><a class="vc__rate vc__rate--new" href="https://www.capterra.com/p/10006145/Protecto/reviews/" target="_blank" rel="noopener"><span class="vc__score">No reviews</span><span class="vc__src">Capterra</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>Custom quote</dd></div>
+    <div><dt>Free tier or trial</dt><dd>Free trial</dd></div>
+    <div><dt>Tax-season fit</dt><dd>Masks data for LLMs, RAG, and agents</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Firms and tax technology teams building document review, drafting, or research assistants that read client files and need identifiers masked first.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/protecto.jpg" alt="Protecto homepage" >}}
+  <figcaption>Protecto homepage. Source: protecto.ai</figcaption>
+</figure>
+<p>Protecto is an AI data control plane that detects, masks, and controls sensitive data before it reaches a model, an agent, or an MCP server. Its tokens preserve meaning so models stay accurate, and context-based access control decides what each user or agent sees at inference time.</p>
+<p>In a firm, it belongs where client files meet an AI application: a drafting assistant, a document summarizer, or a search tool over past returns.</p>
+<p><strong>Key Features</strong></p>
+<ul>
+  <li><strong>Prompt and response masking:</strong> Client names, SSNs, and account numbers are masked before a model processes a request.</li>
+  <li><strong>RAG protection:</strong> Pipelines that index client files return passages that carry tokens instead of identifiers.</li>
+  <li><strong>Agent and MCP coverage:</strong> Data flowing through MCP connections and multi-agent systems is masked under the same policies.</li>
+  <li><strong>Context-based access control:</strong> Policies limit which staff or agents receive unmasked values.</li>
+  <li><strong>Deployment choice:</strong> SaaS with a five-minute setup and a 99.9% SLA, your own VPC, or air-gapped on-premises.</li>
+</ul>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Firm size</th><th>Fit</th></tr></thead>
+<tbody>
+<tr><td>Solo and small</td><td>Weak: useful only if the firm builds its own AI app</td></tr>
+<tr><td>Mid-size</td><td>Good for firms with an internal AI project</td></tr>
+<tr><td>Large and regional</td><td>Strong, with SaaS, private VPC, or air-gapped on-premises options</td></tr>
+</tbody></table></div>
+<p><strong>Pricing tiers</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Deployment</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>SaaS</td><td>Custom quote; free trial</td><td>Listed with a five-minute setup and a 99.9% SLA</td></tr>
+<tr><td>Hosted in your VPC or on-premises</td><td>Custom quote</td><td>Full control, including air-gapped with zero data egress</td></tr>
+</tbody></table></div>
+<p><strong>Pros</strong></p>
+<ul>
+  <li><strong>Built for AI traffic:</strong> Masking covers prompts, RAG pipelines, and agents, which is where newer firm workflows send client data.</li>
+  <li><strong>Air-gapped option:</strong> On-premises deployment suits firms whose policies forbid client data leaving their network.</li>
+  <li><strong>Model accuracy kept:</strong> Meaning-preserving tokens let a model reason about a return without seeing the real identifiers.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li><strong>AI layer only:</strong> Protecto does not collect client documents, store files, or replace emailed attachments in intake.</li>
+  <li><strong>Detection-based:</strong> Like any detector, it can miss identifiers it does not recognize, so test it on real organizers and K-1s.</li>
+  <li><strong>Quoted pricing:</strong> No published plans make it hard for a mid-size firm to estimate cost before a sales call.</li>
+</ul>
+<p><strong>What Customers Say:</strong> No reviews yet. Protecto has no <a class="bl-link" href="https://www.g2.com/products/protecto/reviews" target="_blank" rel="noopener">G2</a> or <a class="bl-link" href="https://www.capterra.com/p/10006145/Protecto/reviews/" target="_blank" rel="noopener">Capterra</a> reviews yet, so ask for a reference from a financial services or professional services customer.</p>
+
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">05</span>
+    <div class="vc__id">
+      <h3 id="protegrity" class="vc__name"><span class="vc__sep">5. </span>Protegrity<span class="vc__sep">: </span><span class="vc__pill">Best for Large Firms Protecting Data in Warehouses and Analytics</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/protegrity/reviews" target="_blank" rel="noopener"><span class="vc__score">4.5<small>/5</small></span><span class="vc__src">G2 · 14 reviews</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>Custom quote</dd></div>
+    <div><dt>Free tier or trial</dt><dd>Free AI Developer Edition</dd></div>
+    <div><dt>Tax-season fit</dt><dd>Vaultless tokens in databases and warehouses</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Large and regional firms with data teams that run client data through warehouses, analytics, and AI pipelines and want one policy across them.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/protegrity.jpg" alt="Protegrity homepage" >}}
+  <figcaption>Protegrity homepage. Source: protegrity.com</figcaption>
+</figure>
+<p>Protegrity is a data protection platform offering vaultless tokenization, masking, and encryption. It protects data “stored in databases and data warehouses, through native integration,” data retrieved through a gateway, and data employees type into chat prompts through a browser plugin.</p>
+<p>Large firms whose client data feeds benchmarking, advisory analytics, or internal AI projects get one policy that follows the data across those systems.</p>
+<p><strong>Key Features</strong></p>
+<ul>
+  <li><strong>Vaultless tokenization:</strong> Tokens protect identifiers inside databases and warehouses without a central lookup table.</li>
+  <li><strong>Usable analytics:</strong> Tokens keep the original format and stay usable for certain operations, and anonymization supports analytics and model development.</li>
+  <li><strong>Gateway:</strong> Data retrieved through SaaS applications, REST endpoints, and MCP is protected in flight.</li>
+  <li><strong>Browser plugin:</strong> Covers client details employees type into chat prompts.</li>
+  <li><strong>Editions:</strong> A free AI Developer Edition with an API playground, then Team and Enterprise editions.</li>
+</ul>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Firm size</th><th>Fit</th></tr></thead>
+<tbody>
+<tr><td>Solo and small</td><td>Weak: enterprise platform sized for data teams</td></tr>
+<tr><td>Mid-size</td><td>Possible for firms with a data warehouse and IT staff</td></tr>
+<tr><td>Large and regional</td><td>Strong where client data feeds analytics and AI programs</td></tr>
+</tbody></table></div>
+<p><strong>Pricing tiers</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Edition</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>AI Developer Edition</td><td>Free</td><td>Documentation and an API playground</td></tr>
+<tr><td>AI Team and AI Enterprise</td><td>Custom quote</td><td>Protection for AI and analytics pipelines at firm scale</td></tr>
+</tbody></table></div>
+<p><strong>Pros</strong></p>
+<ul>
+  <li><strong>Scalable vaultless tokens:</strong> A G2 reviewer calls the vaultless tokenization easily scalable and deterministic for analytics matching, which suits firms with many systems.</li>
+  <li><strong>Covers employee AI use:</strong> The browser plugin reaches staff typing client details into chat, which API proxies cannot see.</li>
+  <li><strong>Free place to start:</strong> The Developer Edition lets a firm’s data team test tokenization before any contract.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li><strong>No intake or file storage:</strong> Protegrity protects data already in your systems and does not collect client documents.</li>
+  <li><strong>Enterprise effort:</strong> Rolling out policies across databases, gateways, and plugins needs a dedicated data or security team.</li>
+  <li><strong>Narrower integrations:</strong> Reviewers say integration options could be broader, so confirm support for your tax and practice software.</li>
+</ul>
+<p><strong>What Customers Say:</strong> Mostly positive. Protegrity holds <a class="bl-link" href="https://www.g2.com/products/protegrity/reviews" target="_blank" rel="noopener">4.5/5 from 14 reviews on G2</a> and has no Capterra listing.</p>
+<p><strong>Likes:</strong> G2’s summary says users praise its data protection and ease of use; one reviewer cites “world class support” and easily scalable vaultless tokenization.</p>
+<p><strong>Dislikes:</strong> Some mention integration options could be more extensive, and one says it supports only popular integrations such as AWS and T-SQL. On cost, one calls the price a little higher and another says a single-year license exceeds $15,000; one criticizes customer support.</p>
+
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">06</span>
+    <div class="vc__id">
+      <h3 id="thales-ciphertrust-tokenization" class="vc__name"><span class="vc__sep">6. </span>Thales CipherTrust Tokenization<span class="vc__sep">: </span><span class="vc__pill">Best for Firms Already Running Thales Key Management</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/thales-ciphertrust-tokenization/reviews" target="_blank" rel="noopener"><span class="vc__score">4.0<small>/5</small></span><span class="vc__src">G2 · 6 reviews</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Starting price</dt><dd>Custom quote</dd></div>
+    <div><dt>Free tier or trial</dt><dd>Demo</dd></div>
+    <div><dt>Tax-season fit</dt><dd>Format-preserving tokens, no schema changes</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Large firms with an enterprise security team that already use CipherTrust for encryption and key management and want tokenization from the same vendor.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v3/thales.jpg" alt="Thales CipherTrust homepage" >}}
+  <figcaption>Thales CipherTrust homepage. Source: cpl.thalesgroup.com</figcaption>
+</figure>
+<p>Thales CipherTrust Tokenization offers vaulted and vaultless tokens, plus static masking, dynamic masking, and redaction. Format-preserving tokenization “eliminates the need to change database schemas,” and it deploys as column-level protection, an SDK, or a REST service.</p>
+<p>For a firm with legacy databases full of SSN and account columns, that means protection can be added without rebuilding the tables the practice already depends on.</p>
+<p><strong>Key Features</strong></p>
+<ul>
+  <li><strong>Format-preserving tokens:</strong> Tokens replace SSNs or account numbers in existing tables without schema changes.</li>
+  <li><strong>Dynamic masking:</strong> Only some characters stay in the clear, so staff can work without seeing the full value.</li>
+  <li><strong>SDK and REST service:</strong> In-house apps tokenize and detokenize under central policy.</li>
+  <li><strong>Static masking and redaction:</strong> Static masking is reversible, while redaction permanently removes or obscures sensitive values.</li>
+  <li><strong>Vaulted or vaultless:</strong> Both token models are available, so the architecture can match the firm’s environment.</li>
+</ul>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Firm size</th><th>Fit</th></tr></thead>
+<tbody>
+<tr><td>Solo and small</td><td>Weak: enterprise licensing and implementation</td></tr>
+<tr><td>Mid-size</td><td>Weak unless CipherTrust is already in place</td></tr>
+<tr><td>Large and regional</td><td>Strong for firms standardizing on Thales key management</td></tr>
+</tbody></table></div>
+<p><strong>Pricing tiers</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>CipherTrust Tokenization</td><td>Custom quote</td><td>Scoped with Thales sales; demo available</td></tr>
+</tbody></table></div>
+<p><strong>Pros</strong></p>
+<ul>
+  <li><strong>No schema rewrites:</strong> Format-preserving tokens fit existing SSN and account columns, so legacy databases keep working.</li>
+  <li><strong>Several protection methods:</strong> Tokenization, dynamic masking, and redaction can be used on their own or together.</li>
+  <li><strong>Central management:</strong> Centralized management gives authorized users access to decrypted data across environments, and cloud providers never have access to token vaults or keys.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li><strong>Cost for smaller firms:</strong> A G2 reviewer calls it expensive for small businesses, and “Expensive” appears in G2’s pros and cons summary, which rules it out for most practices.</li>
+  <li><strong>Implementation complexity:</strong> One G2 reviewer names implementation complexity and token management among its dislikes.</li>
+  <li><strong>No client-facing layer:</strong> It protects internal systems, and the product page describes no intake, file sharing, or prompt-level AI protection.</li>
+</ul>
+<p><strong>What Customers Say:</strong> Mixed to positive. Thales CipherTrust Tokenization holds <a class="bl-link" href="https://www.g2.com/products/thales-ciphertrust-tokenization/reviews" target="_blank" rel="noopener">4.0/5 from 6 reviews on G2</a>, with no tokenization listing on Capterra. G2’s pros and cons summary shows one mention each of Ease of Use and Expensive.</p>
+<p><strong>Likes:</strong> One reviewer says it protects important data and is easy to use, and another values on-premises or cloud consoles.</p>
+<p><strong>Dislikes:</strong> One reviewer lists implementation complexity, token management, cost, dependency on Thales, and limited compatibility, and another notes the additional processing time each request takes.</p>
+
+<h2 id="which-data-tokenization-software-covers-each-accounting-workflow">Which Data Tokenization Software Covers Each Accounting Workflow</h2>
+<p>Copies are the real risk in a firm. The same SSN can sit in an email, an organizer PDF, a payroll sheet, and an AI chat by April, so match each platform to the workflows where your copies pile up.</p>
+<p>No platform here replaces your tax software, practice management system, or client portal. “Build in your app” means the vendor tokenizes data, but you build the client-facing step.</p>
+<div class="bl-tablewrap"><table class="bl-table bl-table--wide">
+<thead><tr><th>Firm workflow</th><th>Data exposed</th><th>Enigma Vault</th><th>Skyflow</th><th>VGS</th><th>Protegrity</th><th>Thales</th><th>Protecto</th></tr></thead>
+<tbody>
+<tr><td>Client onboarding</td><td>SSNs, EINs, bank details, licenses, letters; email, sheets, CRM</td><td>Customer Vault ID presets; Data Vault API</td><td>PII vault, per-field encryption API</td><td>Proxy tokenizes fields in transit</td><td>Vaultless tokens in databases, apps</td><td>Vaulted or vaultless, REST/SDK</td><td>Not its focus</td></tr>
+<tr><td>Tax-season intake</td><td>W-2s, 1099s, K-1s, statements; inboxes, drives</td><td>Branded intake links; File Vault (5 GB files, access log)</td><td>Tokenizes values in documents</td><td>SFTP proxy redacts batch files</td><td>Not its focus</td><td>Not its focus</td><td>Not its focus</td></tr>
+<tr><td>Payroll setup</td><td>Employee bank accounts, tax IDs, files; setup sheets, apps</td><td>Tokens plus restricted File Vault docs</td><td>Structured fields become tokens</td><td>Structured fields become tokens</td><td>Structured fields become tokens</td><td>Structured fields become tokens</td><td>Not its focus</td></tr>
+<tr><td>Workpapers and portal sharing</td><td>Statements, transaction files, returns; outside parties, emails</td><td>24-hour links, optional password, download tracking</td><td>Build in your app</td><td>Build in your app</td><td>Build in your app</td><td>Build in your app</td><td>Not its focus</td></tr>
+<tr><td>AI-assisted prep</td><td>Names, SSNs, account numbers in prompts; provider logs</td><td>NoPII tokenizes identifiers before provider</td><td>Keeps sensitive data out of AI</td><td>AI Data Firewall</td><td>Gateway and browser plugin</td><td>No prompt protection described</td><td>Masks, tokenizes for LLMs, RAG, agents</td></tr>
+<tr><td>Retention and offboarding</td><td>Everything above, for years; backups, old accounts, portals</td><td>60 seconds to 7 years, auto-delete</td><td>Ask sales</td><td>Ask sales</td><td>Ask sales</td><td>Masking and redaction options</td><td>Ask sales</td></tr>
+</tbody></table></div>
+<p><strong>By firm size:</strong> Enigma Vault fits every size; the other platforms fit firms with engineers or existing data infrastructure.</p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Firm size</th><th>What it needs</th><th>Best-fit platforms</th><th>Why</th></tr></thead>
+<tbody>
+<tr><td>Solo and small practices</td><td>Intake, sharing, and retention without developers</td><td>Enigma Vault (Customer Vault, File Vault)</td><td>Turnkey intake, no API integration; free Lite plans, then $49.99 a month per vault</td></tr>
+<tr><td>Mid-size and regional firms</td><td>Intake plus tokens in practice systems</td><td>Enigma Vault; VGS or Skyflow if you build your own client app</td><td>Enigma covers intake and the Data Vault API; VGS and Skyflow tokenize fields in your app</td></tr>
+<tr><td>Large and enterprise firms (engineers, data warehouses)</td><td>Custom volume, AI prompt protection, warehouse tokens</td><td>Enigma Vault Enterprise and NoPII; Protegrity or Thales for warehouses; Protecto for AI</td><td>Vault Enterprise adds custom volume and dedicated infrastructure; NoPII Enterprise adds SSO, SLA guarantees, and a dedicated account manager; Protegrity and Thales fit existing estates</td></tr>
+</tbody></table></div>
+<p>Two cautions apply to every option. Encrypted storage alone does not stop overbroad access by authorized staff, so reveal permissions matter as much as encryption.</p>
+<p>And tax record-retention duties can require long-lived storage, so set download and deletion rules before peak season. Related reading: <a class="bl-link" href="/blog/secure-client-intake-form/">how to build a secure client intake form</a>.</p>
+
+<h2 id="data-tokenization-software-pricing-for-accounting-firms-compared">Data Tokenization Software Pricing for Accounting Firms Compared</h2>
+<p>Only prices shown on each vendor’s own site on October 29, 2026 appear here. Most enterprise vendors quote after a demo.</p>
+<div class="bl-tablewrap"><table class="bl-table bl-table--wide">
+<thead><tr><th>Vendor and plan</th><th>Monthly price</th><th>What’s included</th><th>Free tier or trial</th></tr></thead>
+<tbody>
+<tr><td>Enigma Vault Data Vault Lite / Plus / Premium</td><td>$0 / $49.99 / $249.99</td><td>1,500 / 30,000 / 400,000 requests</td><td>Free Lite plan</td></tr>
+<tr><td>Enigma Vault File Vault Lite / Plus / Premium</td><td>$0 / $49.99 / $249.99</td><td>5 GB / 150 GB / 1 TB storage</td><td>Free Lite plan</td></tr>
+<tr><td>Enigma Vault NoPII Free / Pro</td><td>$0 / $50</td><td>1M / 50M protected tokens</td><td>Free tier</td></tr>
+<tr><td>Enigma Vault Customer Vault</td><td>Priced by engagement</td><td>Turnkey branded intake tenant</td><td>Demo</td></tr>
+<tr><td>VGS Starter</td><td>From $1,000</td><td>Inclusions not listed</td><td>“Get started for free”</td></tr>
+<tr><td>Protegrity AI Developer Edition</td><td>$0</td><td>Documentation and API playground</td><td>Free</td></tr>
+<tr><td>Protecto</td><td>Custom quote</td><td>SaaS, VPC, or on-premises</td><td>Free trial</td></tr>
+<tr><td>Skyflow, Protegrity Team and Enterprise, Thales CipherTrust Tokenization, VGS Growth</td><td>Custom quote</td><td>Scoped by sales</td><td>Demo</td></tr>
+</tbody></table></div>
+
+<h2 id="which-data-tokenization-software-should-accounting-firms-choose">Which Data Tokenization Software Should Your Accounting Firm Choose?</h2>
+<p>Firm size and engineering capacity decide more than any feature list. Use this as a starting point.</p>
+<ul>
+  <li><strong>Solo and small practices:</strong> Pick a turnkey intake product that tokenizes fields and stores documents encrypted; Enigma Vault’s Customer Vault fits without developers.</li>
+  <li><strong>Mid-size firms:</strong> Pair intake with an API vault so practice systems hold tokens; Enigma Vault covers both, and VGS fits if you run your own client app.</li>
+  <li><strong>Large and regional firms with AI programs:</strong> Add prompt protection with Enigma Vault NoPII or Protecto, and test detection on real organizers first (see <a class="bl-link" href="/blog/pii-protection-for-llm/">PII protection for LLMs</a>).</li>
+  <li><strong>Enterprise firms with data warehouses or existing key management:</strong> Enigma Vault Enterprise adds custom volume and dedicated infrastructure, and NoPII Enterprise adds SSO and SLA guarantees; Protegrity and Thales CipherTrust Tokenization fit a security team’s current warehouse or key-management estate.</li>
+  <li><strong>Firms serving clients across borders:</strong> Shortlist Skyflow for residency controls, and ask every vendor which regions it runs in.</li>
+</ul>
+
+<h2 id="questions-to-ask-a-data-tokenization-vendor-before-tax-season">Questions to Ask a Data Tokenization Vendor Before Tax Season</h2>
+<p>Bring these to every demo; the answers separate a platform that fits a firm from one built for a different buyer.</p>
+<div class="bl-tablewrap"><table class="bl-table bl-table--wide">
+<thead><tr><th>Question</th><th>Why it matters for a firm</th><th>A good answer looks like</th></tr></thead>
+<tbody>
+<tr><td>Which client documents arrive outside our portal today, and can you take them?</td><td>Emailed W-2s and K-1s are the biggest source of stray copies.</td><td>A branded request or upload path clients can use without an account.</td></tr>
+<tr><td>Where are tax IDs and bank details copied during preparation?</td><td>Setup sheets and project apps hold copies nobody tracks.</td><td>Tokens in practice systems, with real values revealed only on demand.</td></tr>
+<tr><td>Can preparers see a full SSN only when they need it, with a log?</td><td>Overbroad access is a risk even when storage is encrypted.</td><td>Role-based reveal, MFA, and a log entry per reveal.</td></tr>
+<tr><td>How are seasonal staff added and removed?</td><td>Temporary preparers often keep access after April.</td><td>Per-user accounts, enforced MFA, and same-day removal.</td></tr>
+<tr><td>What happens to identifiers inside AI prompts?</td><td>Section 7216 limits how return information is used and disclosed.</td><td>Tokenization before the model provider, with detection limits stated.</td></tr>
+<tr><td>Can expiry and deletion match our retention schedule?</td><td>Records may need to be kept for years, then removed.</td><td>Configurable expiry per record and automatic deletion.</td></tr>
+<tr><td>Will you share your SOC 2 Type II report and certifications?</td><td>The Safeguards Rule requires you to oversee service providers.</td><td>Current reports on request, with ISO 27001 status stated plainly.</td></tr>
+</tbody></table></div>
+
+<h2 id="why-accounting-firms-choose-enigma-vault-for-client-intake">Why Accounting Firms Choose Enigma Vault for Client Intake</h2>
+<p>It is February, and a client answers your organizer email with a photo of their W-2 and their spouse’s SSN typed into the reply. That message now sits in several inboxes and a backup, which is the exposure every tool in this guide was measured against.</p>
+<p>With Enigma Vault, the client gets a branded Customer Vault link instead. The SSN and bank details become tokens as they arrive, and the W-2 goes to File Vault, so your tax software and staff email hold references in place of the numbers.</p>
+<p>Every request to the vault is logged with client ID, IP, resource path, and status, so a partner can answer when a client asks who opened their file. Customer Vault needs no developer and can be live the same day.</p>
+<p>If you want intake changed before the next return comes in, <a class="bl-link" href="/request-demo/">book a demo</a> and bring a copy of your current organizer; smaller practices can <a class="bl-link" href="/pricing/">try the Lite plan free</a> first.</p>
+

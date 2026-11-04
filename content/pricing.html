@@ -13,20 +13,23 @@ pricing:
     description: "Card tokenization API with hosted forms, phone capture and gateway-agnostic payment processing."
     tiers:
       - {name: "Lite", price: 0}
-      - {name: "Plus", price: 49.99}
-      - {name: "Premium", price: 249.99}
+      - {name: "Starter", price: 49}
+      - {name: "Growth", price: 249}
+      - {name: "Business", price: 499}
   - name: "Data Vault"
     description: "Tokenize and store sensitive data fields through an API."
     tiers:
       - {name: "Lite", price: 0}
-      - {name: "Plus", price: 49.99}
-      - {name: "Premium", price: 249.99}
+      - {name: "Starter", price: 49}
+      - {name: "Growth", price: 249}
+      - {name: "Business", price: 499}
   - name: "File Vault"
     description: "Encrypted file storage with expiring access links and audit logging."
     tiers:
       - {name: "Lite", price: 0}
-      - {name: "Plus", price: 49.99}
-      - {name: "Premium", price: 249.99}
+      - {name: "Starter", price: 49}
+      - {name: "Growth", price: 249}
+      - {name: "Business", price: 499}
   - name: "NoPII"
     description: "Tokenizes detected PII before it reaches your LLM provider and restores it in the response."
     tiers:
@@ -39,7 +42,7 @@ pricing:
     <div class="np-container np-hero__inner">
       <div class="np-hero__copy">
         <h1 class="np-h1">Choose the right plan <em>for the data you protect</em>.</h1>
-        <p class="np-lead">Every product starts free or starts with a conversation. Card, Data and File Vault each have a free tier on AWS Marketplace, NoPII protects your first million tokens a month at no cost, and Triplets comes back with a scoped proposal in two business days. What you are pricing against is the exposure you already carry.</p>
+        <p class="np-lead">Every product starts free or starts with a conversation. Card, Data and File Vault each start with a free Lite sandbox, NoPII protects your first million tokens a month at no cost, and Triplets comes back with a scoped proposal in two business days. What you are pricing against is the exposure you already carry.</p>
         <div class="np-hero__ctas">
           <a class="np-btn np-btn--primary" href="#vault" data-jump="vault"><span>The Vault</span></a>
           <a class="np-btn np-btn--secondary" href="#nopii" data-jump="nopii"><span>NoPII</span></a>
@@ -53,12 +56,22 @@ pricing:
     </div>
   </header>
 
-  <!-- Tab rail -->
+  <!-- Tab rail: docks under the site header (sticky); compacts once docked -->
+  <div class="pr-rail-sentinel" aria-hidden="true"></div>
   <nav class="pr-rail" aria-label="Pricing by product">
     <div class="pr-rail__inner" role="tablist">
-      <button class="pr-tab is-active" type="button" role="tab" data-tab="vault" aria-selected="true">{{< img src="/assets/glyphs/vault-3d.png" alt="Enigma Vault product mark" loading="eager" >}}The Vault</button>
-      <button class="pr-tab" type="button" role="tab" data-tab="nopii" aria-selected="false">{{< img src="/assets/glyphs/nopii-3d.png" alt="NoPII product mark" loading="eager" >}}NoPII</button>
-      <button class="pr-tab" type="button" role="tab" data-tab="triplets" aria-selected="false">{{< img src="/assets/glyphs/triplets-3d.png" alt="Triplets product mark" loading="eager" >}}Triplets</button>
+      <button class="pr-tab is-active" type="button" role="tab" id="pr-tab-vault" aria-controls="vault" data-tab="vault" aria-selected="true">
+        <span class="pr-tab__art">{{< img src="/assets/glyphs/vault-3d.png" alt="" loading="eager" >}}</span>
+        <span class="pr-tab__tx"><span class="pr-tab__name">The Vault</span><span class="pr-tab__tag">Trust the data</span></span>
+      </button>
+      <button class="pr-tab" type="button" role="tab" id="pr-tab-nopii" aria-controls="nopii" data-tab="nopii" aria-selected="false">
+        <span class="pr-tab__art">{{< img src="/assets/glyphs/nopii-3d.png" alt="" loading="eager" >}}</span>
+        <span class="pr-tab__tx"><span class="pr-tab__name">NoPII</span><span class="pr-tab__tag">Trust the input</span></span>
+      </button>
+      <button class="pr-tab" type="button" role="tab" id="pr-tab-triplets" aria-controls="triplets" data-tab="triplets" aria-selected="false">
+        <span class="pr-tab__art">{{< img src="/assets/glyphs/triplets-3d.png" alt="" loading="eager" >}}</span>
+        <span class="pr-tab__tx"><span class="pr-tab__name">Triplets</span><span class="pr-tab__tag">Trust the output</span></span>
+      </button>
     </div>
   </nav>
 
@@ -66,50 +79,12 @@ pricing:
   <section class="np-section pr-panel is-active" id="vault" data-panel="vault" role="tabpanel">
     <div class="np-container">
       <div class="pr-phead"><span class="pr-phead__art">{{< img src="/assets/glyphs/vault-3d.png" alt="Enigma Vault product mark" loading="eager" >}}</span><div class="pr-phead__tx"><p class="pr-phead__tag">Trust the data</p><h2 class="np-h2">Vault <em>API pricing</em>.</h2></div></div>
-      <p class="pr-lead">Each vault is priced independently, so you pay only for the data shapes you actually protect. Billed through the AWS Marketplace account you already have. Start at zero.</p>
+      <p class="pr-lead">Each vault is priced independently, so you pay only for the data shapes you actually protect. Every vault starts with a free Lite sandbox.</p>
 
-      <h3 class="pr-tname">Card Vault</h3>
-      <div class="pr-scroll">
-        <table class="pr-table">
-          <thead><tr><th class="pr-rowh"></th><th>Lite</th><th class="is-pop">Plus &middot; most popular</th><th>Premium</th></tr></thead>
-          <tbody>
-            <tr><th class="pr-rowh">Price</th><td><span class="pr-price">$0</span><br>per month, free forever</td><td class="is-pop"><span class="pr-price">$49.99</span><br>per month</td><td><span class="pr-price">$249.99</span><br>per month</td></tr>
-            <tr><th class="pr-rowh">Volume</th><td>1,000 requests per month</td><td class="is-pop">20,000 requests, roughly 200 to 300 daily transactions</td><td>250,000 requests, roughly 2,000 daily transactions</td></tr>
-            <tr><th class="pr-rowh">Overage</th><td>$0.08 per request</td><td class="is-pop">$0.04 per request</td><td>$0.02 per request</td></tr>
-            <tr><th class="pr-rowh">Includes</th><td>Tokenization and gateway proxy, community support</td><td class="is-pop">Ephemeral key sharing, email support</td><td>Highest request volume, priority support</td></tr>
-            <tr><th class="pr-rowh"></th><td class="pr-go"><a class="pr-gobtn pr-gobtn--alt cta-pricing cta-vault--card-vault-lite" href="https://aws.amazon.com/marketplace/seller-profile?id=c77b8db1-5511-48b7-8ce5-9a8d4a1a8018" target="_blank" rel="noopener">Get started free<span aria-hidden="true">&#8594;</span></a></td><td class="pr-go is-pop"><a class="pr-gobtn cta-pricing cta-vault--card-vault-plus" href="https://aws.amazon.com/marketplace/seller-profile?id=c77b8db1-5511-48b7-8ce5-9a8d4a1a8018" target="_blank" rel="noopener">Get started<span aria-hidden="true">&#8594;</span></a></td><td class="pr-go"><a class="pr-gobtn pr-gobtn--alt cta-pricing cta-vault--card-vault-premium" href="https://aws.amazon.com/marketplace/seller-profile?id=c77b8db1-5511-48b7-8ce5-9a8d4a1a8018" target="_blank" rel="noopener">Get started<span aria-hidden="true">&#8594;</span></a></td></tr>
-          </tbody>
-        </table>
-      </div>
+      {{< vault-pricing >}}
 
-      <h3 class="pr-tname">Data Vault</h3>
-      <div class="pr-scroll">
-        <table class="pr-table">
-          <thead><tr><th class="pr-rowh"></th><th>Lite</th><th class="is-pop">Plus &middot; most popular</th><th>Premium</th></tr></thead>
-          <tbody>
-            <tr><th class="pr-rowh">Price</th><td><span class="pr-price">$0</span><br>per month, free forever</td><td class="is-pop"><span class="pr-price">$49.99</span><br>per month</td><td><span class="pr-price">$249.99</span><br>per month</td></tr>
-            <tr><th class="pr-rowh">Volume</th><td>1,500 requests per month</td><td class="is-pop">30,000 requests, small to mid-scale encryption</td><td>400,000 requests, large-scale requirements</td></tr>
-            <tr><th class="pr-rowh">Overage</th><td>$0.06 per request</td><td class="is-pop">$0.03 per request</td><td>$0.01 per request</td></tr>
-            <tr><th class="pr-rowh">Includes</th><td>AES-256 field encryption, community support</td><td class="is-pop">Ephemeral key sharing, email support</td><td>Highest request volume, priority support</td></tr>
-            <tr><th class="pr-rowh"></th><td class="pr-go"><a class="pr-gobtn pr-gobtn--alt cta-pricing cta-vault--data-vault-lite" href="https://aws.amazon.com/marketplace/seller-profile?id=c77b8db1-5511-48b7-8ce5-9a8d4a1a8018" target="_blank" rel="noopener">Get started free<span aria-hidden="true">&#8594;</span></a></td><td class="pr-go is-pop"><a class="pr-gobtn cta-pricing cta-vault--data-vault-plus" href="https://aws.amazon.com/marketplace/seller-profile?id=c77b8db1-5511-48b7-8ce5-9a8d4a1a8018" target="_blank" rel="noopener">Get started<span aria-hidden="true">&#8594;</span></a></td><td class="pr-go"><a class="pr-gobtn pr-gobtn--alt cta-pricing cta-vault--data-vault-premium" href="https://aws.amazon.com/marketplace/seller-profile?id=c77b8db1-5511-48b7-8ce5-9a8d4a1a8018" target="_blank" rel="noopener">Get started<span aria-hidden="true">&#8594;</span></a></td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <h3 class="pr-tname">File Vault</h3>
-      <div class="pr-scroll">
-        <table class="pr-table">
-          <thead><tr><th class="pr-rowh"></th><th>Lite</th><th class="is-pop">Plus &middot; most popular</th><th>Premium</th></tr></thead>
-          <tbody>
-            <tr><th class="pr-rowh">Price</th><td><span class="pr-price">$0</span><br>per month, free forever</td><td class="is-pop"><span class="pr-price">$49.99</span><br>per month</td><td><span class="pr-price">$249.99</span><br>per month</td></tr>
-            <tr><th class="pr-rowh">Storage</th><td>5GB per month</td><td class="is-pop">150GB per month</td><td>1TB per month</td></tr>
-            <tr><th class="pr-rowh">Includes</th><td>AES-GCM encryption, presigned URL upload, community support</td><td class="is-pop">Ephemeral key sharing, real-time file status, email support</td><td>Highest storage and request volume, priority support</td></tr>
-            <tr><th class="pr-rowh"></th><td class="pr-go"><a class="pr-gobtn pr-gobtn--alt cta-pricing cta-vault--file-vault-lite" href="https://aws.amazon.com/marketplace/seller-profile?id=c77b8db1-5511-48b7-8ce5-9a8d4a1a8018" target="_blank" rel="noopener">Get started free<span aria-hidden="true">&#8594;</span></a></td><td class="pr-go is-pop"><a class="pr-gobtn cta-pricing cta-vault--file-vault-plus" href="https://aws.amazon.com/marketplace/seller-profile?id=c77b8db1-5511-48b7-8ce5-9a8d4a1a8018" target="_blank" rel="noopener">Get started<span aria-hidden="true">&#8594;</span></a></td><td class="pr-go"><a class="pr-gobtn pr-gobtn--alt cta-pricing cta-vault--file-vault-premium" href="https://aws.amazon.com/marketplace/seller-profile?id=c77b8db1-5511-48b7-8ce5-9a8d4a1a8018" target="_blank" rel="noopener">Get started<span aria-hidden="true">&#8594;</span></a></td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="pr-cards">
+      <p class="pr-alsoh">Also priced by engagement</p>
+      <div class="pr-cards pr-cards--2">
         <article class="pr-card" id="customer-vault">
           <h3 class="pr-card__t">Customer Vault pricing</h3>
           <p class="pr-card__b">Secure intake deployment, priced by engagement. A turnkey Customer Vault tenant with branding, staff onboarding, and secure-link setup. No API integration is required.</p>
@@ -120,38 +95,121 @@ pricing:
           <p class="pr-card__b">A fixed-scope eight-week operational engagement for card-on-file migration, built for aviation, cruise, clubs, dental, and home services. Priced by engagement.</p>
           <a class="np-btn np-btn--secondary np-btn--sm cta-pricing cta-vault--agent-vault" href="/contact/"><span>Contact sales</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
         </article>
-        <article class="pr-card">
-          <h3 class="pr-card__t">Enterprise</h3>
-          <p class="pr-card__b">For custom volume, dedicated infrastructure, or enterprise requirements, contact our team for a tailored plan.</p>
-          <a class="np-btn np-btn--secondary np-btn--sm cta-pricing cta-vault--enterprise" href="mailto:hello@enigmavault.io"><span>Contact sales</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
-        </article>
       </div>
 
       <h3 class="pr-faqh">Vault pricing FAQ</h3>
+      <h4 class="pr-faqg"><span class="pr-faqg__n">01</span>Getting started</h4>
       <div class="np-acc np-acc--faq np-acc--left">
         <details open>
-          <summary>What does "per vault" mean?</summary>
-          <div class="np-acc__body">Each vault is priced independently. Running Card Vault on Premium and Data Vault on Lite is a perfectly normal setup, and you can add a vault later without touching the ones you have.</div>
+          <summary>Is Lite really free?</summary>
+          <div class="np-acc__body">Yes. Lite is a free sandbox for development and testing. There is no card to enter, limits are hard, and you are never billed. Card Vault Lite includes 1,000 requests a month and 100 stored card tokens, Data Vault Lite includes 1,500 requests a month and 100 stored data tokens, and File Vault Lite includes 5 GB of storage.</div>
         </details>
         <details>
-          <summary>Is the infrastructure different on Lite?</summary>
-          <div class="np-acc__body">No. Every tier runs on the same certified infrastructure with the same encryption and per-customer keys. Tiers change limits and support, never security.</div>
+          <summary>How do I subscribe?</summary>
+          <div class="np-acc__body">Sign in to the developer portal, open Billing, pick a product and a plan, and pay at a secure checkout run by Stripe. Your client ID and client secret appear on the portal dashboard within a minute of subscribing.</div>
         </details>
         <details>
-          <summary>What happens when I exceed my plan?</summary>
-          <div class="np-acc__body">Overage is metered per request at the rates above, with no hard stop. If you exceed consistently, the next tier up is almost always cheaper.</div>
+          <summary>Do I need a separate subscription for each Vault?</summary>
+          <div class="np-acc__body">Yes. Card Vault, Data Vault and File Vault are each priced on their own, per subscription. Prices are in US dollars and exclude tax.</div>
         </details>
         <details>
-          <summary>How does billing work?</summary>
-          <div class="np-acc__body">Through AWS Marketplace, on your existing AWS account and invoice. No new vendor onboarding for finance, and no contract to start.</div>
+          <summary>How can I pay?</summary>
+          <div class="np-acc__body">By card, by card wallet such as Apple Pay or Google Pay, with Link, or in some countries with a local payment method offered at checkout. Payment details are entered on the checkout page only and never reach Enigma Vault.</div>
         </details>
         <details>
-          <summary>Is there a free trial of Plus or Premium features?</summary>
-          <div class="np-acc__body">The Lite tier is not a trial; it is free forever. For evaluating higher volumes, contact sales and we will set up an evaluation.</div>
+          <summary>Who is the seller on my invoice?</summary>
+          <div class="np-acc__body">The subscription is sold through Link, Stripe&rsquo;s checkout service, which is the seller of record. The invoice comes from Link, and Link calculates and collects any tax from your billing address where it applies.</div>
         </details>
       </div>
-      <div class="np-ctas" style="margin-top:36px">
-        <a class="np-btn np-btn--primary cta-pricing cta-vault--start-free" href="https://aws.amazon.com/marketplace/seller-profile?id=c77b8db1-5511-48b7-8ce5-9a8d4a1a8018" target="_blank" rel="noopener"><span>Start free on AWS Marketplace</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
+      <h4 class="pr-faqg"><span class="pr-faqg__n">02</span>Usage and overage</h4>
+      <div class="np-acc np-acc--faq np-acc--left">
+        <details>
+          <summary>What counts as a request?</summary>
+          <div class="np-acc__body">Every authenticated call to the product&rsquo;s API counts toward the allowance, whichever endpoint it hits. Allowances are per subscription, so if several client IDs belong to one subscription their requests are pooled. Allowances reset at the start of each billing period and unused requests do not carry over.</div>
+        </details>
+        <details>
+          <summary>What happens when I go over my allowance?</summary>
+          <div class="np-acc__body">On Lite, the API stops at the limit and returns a 429 allowance_exhausted response until the period resets. On Starter, Growth and Business, Card Vault and Data Vault requests beyond the allowance are billed at the plan&rsquo;s per-request rate on the invoice issued at the end of the period. Usage is metered hourly, so the last hour of a period can appear on the following invoice.</div>
+        </details>
+        <details>
+          <summary>What happens when I hit the stored-token or storage limit?</summary>
+          <div class="np-acc__body">On Lite the limit is hard: Card Vault and Data Vault stop at 100 stored tokens and File Vault at 5 GB. On paid plans, reaching the limit moves you up to the next plan automatically, at once and prorated. Starter moves to Growth at 10,000 stored tokens or 150 GB, Growth moves to Business at 100,000 stored tokens or 1,000 GB. Business holds up to 1,000,000 stored tokens, and we contact you about Enterprise beyond that. File Vault storage beyond 5,000 GB on Business is billed at $0.15 per GB-month.</div>
+        </details>
+        <details>
+          <summary>How is File Vault storage overage calculated?</summary>
+          <div class="np-acc__body">Per GB-month: the average of the daily stored-GB readings over the month, less the allowance, in whole GB.</div>
+        </details>
+        <details>
+          <summary>Will I be warned before Lite runs out?</summary>
+          <div class="np-acc__body">Yes. When a Lite subscription reaches 80% of its allowance, and again at 100%, the portal and an email suggest a paid plan for production traffic.</div>
+        </details>
+      </div>
+      <h4 class="pr-faqg"><span class="pr-faqg__n">03</span>Annual billing</h4>
+      <div class="np-acc np-acc--faq np-acc--left">
+        <details>
+          <summary>How does annual billing work?</summary>
+          <div class="np-acc__body">Starter, Growth and Business can be paid yearly in the developer portal: $550 a year for Starter, $2,700 for Growth and $5,500 for Business, per product. The year is charged at checkout and renews every year until you cancel. Lite is monthly only.</div>
+        </details>
+        <details>
+          <summary>Do allowances change on an annual plan?</summary>
+          <div class="np-acc__body">No. Allowances stay monthly and overage is still invoiced monthly at the plan&rsquo;s rate, so an annual subscription receives one overage invoice a month, usually $0, in addition to the yearly invoice.</div>
+        </details>
+      </div>
+      <h4 class="pr-faqg"><span class="pr-faqg__n">04</span>Changing plans</h4>
+      <div class="np-acc np-acc--faq np-acc--left">
+        <details>
+          <summary>Can I change plans?</summary>
+          <div class="np-acc__body">Yes, under Change plan in the developer portal. On a monthly subscription the change takes effect at the next renewal with no proration; the current period stays on the current plan. Choosing your current plan again before renewal cancels a pending change.</div>
+        </details>
+        <details>
+          <summary>How do plan changes work on an annual subscription?</summary>
+          <div class="np-acc__body">A higher plan takes effect within the hour with a prorated charge for the rest of the annual term, and you receive an email stating the amount. A lower plan, or a switch to monthly billing, takes effect at the annual renewal. A switch from monthly to annual takes effect at the next monthly renewal, when the first year is charged.</div>
+        </details>
+      </div>
+      <h4 class="pr-faqg"><span class="pr-faqg__n">05</span>Cancellation and payments</h4>
+      <div class="np-acc np-acc--faq np-acc--left">
+        <details>
+          <summary>How do I cancel?</summary>
+          <div class="np-acc__body">From Manage billing in the developer portal. Cancellation takes effect at the end of the current period, or at the end of the paid year on an annual plan. You keep access until then, the client ID is deactivated when the period ends, and overage used in the final month is billed on the final invoice.</div>
+        </details>
+        <details>
+          <summary>Are annual fees refundable?</summary>
+          <div class="np-acc__body">Annual fees already paid are not refunded, except where the law requires it. Full terms are in the Terms of Service.</div>
+        </details>
+        <details>
+          <summary>What happens if a payment fails?</summary>
+          <div class="np-acc__body">You receive an email from Enigma Vault and from the payment processor, and the payment is retried over the following three weeks. Service continues during the retries. If every retry fails, the subscription is cancelled and the client ID deactivated. Paying the open invoice, or adding a working card in Manage billing, settles it.</div>
+        </details>
+        <details>
+          <summary>Where do I find invoices and receipts?</summary>
+          <div class="np-acc__body">They are emailed to the portal account's address and listed under Manage billing. For anything about an invoice, write to <a href="mailto:support@enigmavault.io">support@enigmavault.io</a>.</div>
+        </details>
+      </div>
+      <h4 class="pr-faqg"><span class="pr-faqg__n">06</span>Features and compliance</h4>
+      <div class="np-acc np-acc--faq np-acc--left">
+        <details>
+          <summary>Which features need a higher plan?</summary>
+          <div class="np-acc__body">Custom CSS on hosted forms and Data Vault batches over 500 plaintexts need Growth or Business. Twilio Pay capture on Card Vault needs Growth or Business. Raw card data access and the raw usage export need Business. The API tells you: a refused request returns a JSON body naming the limit, your plan, the plan that removes it and a link to the Billing page.</div>
+        </details>
+        <details>
+          <summary>Which compliance documents are included?</summary>
+          <div class="np-acc__body">The sub-processor list is included on every plan. The PCI AOC and responsibility matrix, the SOC 2 Type II report and the data processing agreement are included on Starter, Growth and Business.</div>
+        </details>
+        <details>
+          <summary>How many client IDs do I get?</summary>
+          <div class="np-acc__body">One on Lite and Starter, two on Growth, and unlimited on Business. Requests from all client IDs on one subscription are pooled against the same allowance.</div>
+        </details>
+      </div>
+      <h4 class="pr-faqg"><span class="pr-faqg__n">07</span>AWS Marketplace</h4>
+      <div class="np-acc np-acc--faq np-acc--left">
+        <details>
+          <summary>Can I buy through AWS Marketplace instead?</summary>
+          <div class="np-acc__body">Yes. Subscriptions bought through AWS Marketplace keep their own plans and features, which differ from the developer portal plans shown on this page. Custom pricing on Card Vault, Data Vault and File Vault is available through AWS Marketplace until February 15, 2027.</div>
+        </details>
+        <details>
+          <summary>How do I change or cancel an AWS Marketplace subscription?</summary>
+          <div class="np-acc__body">Plan changes and cancellation for subscriptions bought through AWS Marketplace are made in the AWS console, not the developer portal.</div>
+        </details>
       </div>
     </div>
   </section>
@@ -161,17 +219,44 @@ pricing:
     <div class="np-container">
       <div class="pr-phead"><span class="pr-phead__art">{{< img src="/assets/glyphs/nopii-3d.png" alt="NoPII product mark" loading="eager" >}}</span><div class="pr-phead__tx"><p class="pr-phead__tag">Trust the input</p><h2 class="np-h2">NoPII <em>pricing</em>.</h2></div></div>
       <p class="pr-lead">Protection for AI traffic should not need a procurement cycle to try. The free tier is real, and it does not expire.</p>
-      <div class="pr-scroll">
-        <table class="pr-table">
-          <thead><tr><th class="pr-rowh"></th><th>Free</th><th class="is-pop">Pro &middot; most popular</th><th>Enterprise</th></tr></thead>
-          <tbody>
-            <tr><th class="pr-rowh">Price</th><td><span class="pr-price">$0</span><br>per month</td><td class="is-pop"><span class="pr-price">$50</span><br>per month</td><td><span class="pr-price">Custom</span></td></tr>
-            <tr><th class="pr-rowh">Protected tokens</th><td>1M per month</td><td class="is-pop">50M included, then $1 per additional million, no hard cap</td><td>Volume pricing</td></tr>
-            <tr><th class="pr-rowh">Retention</th><td>1 day</td><td class="is-pop">Configurable, 1 day to permanent</td><td>Configurable</td></tr>
-            <tr><th class="pr-rowh">Includes</th><td>All 9+ providers, 30+ configurable entity types, deterministic tokenization, fail-safe blocking, audit logging, admin console, no credit card</td><td class="is-pop">Everything in Free, plus multi-tenancy and roles, custom phrase rules, priority support</td><td>Everything in Pro, plus SSO, SLA guarantees, volume discounts, dedicated account manager, BAA for healthcare</td></tr>
-            <tr><th class="pr-rowh"></th><td class="pr-go"><a class="pr-gobtn pr-gobtn--alt cta-pricing cta-nopii--free" href="https://app.nopii.co" target="_blank" rel="noopener">Get started free<span aria-hidden="true">&#8594;</span></a></td><td class="pr-go is-pop"><a class="pr-gobtn cta-pricing cta-nopii--pro" href="https://app.nopii.co" target="_blank" rel="noopener">Get started<span aria-hidden="true">&#8594;</span></a></td><td class="pr-go"><a class="pr-gobtn pr-gobtn--alt cta-pricing cta-nopii--enterprise" href="/contact/">Talk to sales<span aria-hidden="true">&#8594;</span></a></td></tr>
-          </tbody>
-        </table>
+      <!-- NoPII plans: same ledger system as the Vault (pricing.css .vpp-*) -->
+      <div class="vpp vpp--static">
+        <div class="vpp-ledger vpp-ledger--3">
+        <article class="vpp-plan">
+          <header class="vpp-plan__head"><h3 class="vpp-plan__name">Free</h3></header>
+          <div class="vpp-price"><p class="vpp-price__m"><b>$0</b><span>/month</span></p></div>
+          <div class="vpp-allow">
+            <p class="vpp-allow__n">1M</p>
+            <p class="vpp-allow__u">protected tokens a month</p>
+            <p class="vpp-allow__o">Retention: 1 day</p>
+          </div>
+          <div class="vpp-inc"><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>All 9+ providers</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>30+ configurable entity types</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Deterministic tokenization</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Fail-safe blocking</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Audit logging</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Admin console</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>No credit card</li></ul></div>
+          <a class="vpp-cta cta-pricing cta-nopii--free" href="https://app.nopii.co" target="_blank" rel="noopener"><span>Get started free</span><span aria-hidden="true">&#8594;</span></a>
+        </article>
+        <article class="vpp-plan is-pop">
+          <header class="vpp-plan__head"><h3 class="vpp-plan__name">Pro</h3><span class="vpp-chip">Popular</span></header>
+          <div class="vpp-price"><p class="vpp-price__m"><b>$50</b><span>/month</span></p></div>
+          <div class="vpp-allow">
+            <p class="vpp-allow__n">50M</p>
+            <p class="vpp-allow__u">protected tokens a month</p>
+            <p class="vpp-allow__o">then $1 per additional million, no hard cap</p>
+            <p class="vpp-allow__o">Retention: configurable, 1 day to permanent</p>
+          </div>
+          <div class="vpp-inc"><p class="vpp-inc__lead">Everything in Free, plus</p><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Multi-tenancy and roles</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Custom phrase rules</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Priority support</li></ul></div>
+          <a class="vpp-cta vpp-cta--solid cta-pricing cta-nopii--pro" href="https://app.nopii.co" target="_blank" rel="noopener"><span>Get started</span><span aria-hidden="true">&#8594;</span></a>
+        </article>
+        <article class="vpp-plan">
+          <header class="vpp-plan__head"><h3 class="vpp-plan__name">Enterprise</h3></header>
+          <div class="vpp-price"><p class="vpp-price__m"><b>Custom</b></p></div>
+          <div class="vpp-allow">
+            <p class="vpp-allow__n">Volume pricing</p>
+            <p class="vpp-allow__u">protected tokens sized to your traffic</p>
+            <p class="vpp-allow__o">Retention: configurable</p>
+          </div>
+          <div class="vpp-inc"><p class="vpp-inc__lead">Everything in Pro, plus</p><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>SSO</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>SLA guarantees</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Volume discounts</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Dedicated account manager</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>BAA for healthcare</li></ul></div>
+          <a class="vpp-cta cta-pricing cta-nopii--enterprise" href="/contact/"><span>Talk to sales</span><span aria-hidden="true">&#8594;</span></a>
+        </article>
+        </div>
       </div>
 
       <h3 class="pr-faqh">NoPII pricing FAQ</h3>

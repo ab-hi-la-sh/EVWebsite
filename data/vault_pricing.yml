@@ -1,0 +1,120 @@
+# Vault plan pricing — the single source for the Card/Data/File Vault slabs on
+# /pricing/ (rendered by layouts/shortcodes/vault-pricing.html). Prices mirror
+# the developer-portal billing rules at docs.enigmavault.io/pricing.html.
+# Per plan: monthly / annual price, the "save" figure on annual, the headline
+# allowance shown on the card, the line under it, and the plan's points.
+# Comparison rows: a value of true/false renders as a tick / dash.
+
+cta: "https://portal.enigmavault.io/Billing"
+toggleNote: "Prices are per product and exclude tax. Paying yearly saves on Starter, Growth and Business."
+finePrint: "Tax is calculated at checkout from your billing address where it applies. Card Vault and Data Vault requests beyond the allowance are billed at the end of each month. Automatic upgrades at the stored-token or storage limits take effect at once, prorated. File Vault storage beyond the Business allowance is billed per GB-month, based on the average of daily stored-GB readings over the month, less the allowance, in whole GB."
+
+tiers:
+  - {key: lite,     name: "Lite",     cta: "Start for free"}
+  - {key: starter,  name: "Starter",  cta: "Choose Starter"}
+  - {key: growth,   name: "Growth",   cta: "Choose Growth", popular: true}
+  - {key: business, name: "Business", cta: "Choose Business"}
+
+prices:
+  monthly: ["$0", "$49", "$249", "$499"]
+  annual:  [null, "$550", "$2,700", "$5,500"]
+  save:    [null, "$38", "$288", "$488"]
+
+products:
+  - key: card-vault
+    name: "Card Vault"
+    intro: "Tokenize cards once, keep raw card data out of your systems, and pay per request."
+    unit: "requests a month"
+    plans:
+      - {allow: "1,000",     over: "Hard limit",                  points: ["Free sandbox for development and testing", "No card needed", "Hard limits", "Never billed"]}
+      - {allow: "20,000",    over: "then $0.02 per request",      points: ["Overage instead of a hard limit", "PCI AOC", "SOC 2 Type II report", "DPA"]}
+      - {allow: "250,000",   over: "then $0.002 per request",     points: ["Custom CSS on hosted forms", "Twilio Pay", "A second client ID"]}
+      - {allow: "1,000,000", over: "then $0.001 per request",     points: ["Raw card data access", "Unlimited client IDs", "Raw usage export"]}
+    groups:
+      - name: "Usage"
+        rows:
+          - {label: "Requests included a month", values: ["1,000", "20,000", "250,000", "1,000,000"]}
+          - {label: "Requests beyond that", values: ["Hard limit", "$0.02 per request", "$0.002 per request", "$0.001 per request"]}
+          - {label: "Stored card tokens", values: ["100, hard limit", "10,000, then moves to Growth", "100,000, then moves to Business", "1,000,000, then we talk Enterprise"]}
+          - {label: "Client IDs per subscription", values: ["1", "1", "2", "Unlimited"]}
+      - name: "Features"
+        rows:
+          - {label: "Custom CSS on hosted forms", values: [false, false, true, true]}
+          - {label: "Twilio Pay", values: [false, false, true, true]}
+          - {label: "Raw card data access", values: [false, false, false, true]}
+          - {label: "Raw usage export", values: [false, false, false, true]}
+      - &compliance
+        name: "Compliance documents"
+        rows:
+          - {label: "Sub-processor list", values: [true, true, true, true]}
+          - {label: "PCI AOC and responsibility matrix", values: [false, true, true, true]}
+          - {label: "SOC 2 Type II report", values: [false, true, true, true]}
+          - {label: "Data processing agreement", values: [false, true, true, true]}
+
+  - key: data-vault
+    name: "Data Vault"
+    intro: "Tokenize any sensitive field, in single calls or batches, and pay per request."
+    unit: "requests a month"
+    plans:
+      - {allow: "1,500",     over: "Hard limit",                  points: ["Free sandbox for development and testing", "No card needed", "Hard limits", "Never billed"]}
+      - {allow: "30,000",    over: "then $0.013 per request",     points: ["Overage instead of a hard limit", "PCI AOC", "SOC 2 Type II report", "DPA"]}
+      - {allow: "400,000",   over: "then $0.0012 per request",    points: ["Batches of up to 5,000", "Custom CSS on hosted forms", "A second client ID"]}
+      - {allow: "2,000,000", over: "then $0.0006 per request",    points: ["Unlimited client IDs", "Raw usage export"]}
+    groups:
+      - name: "Usage"
+        rows:
+          - {label: "Requests included a month", values: ["1,500", "30,000", "400,000", "2,000,000"]}
+          - {label: "Requests beyond that", values: ["Hard limit", "$0.013 per request", "$0.0012 per request", "$0.0006 per request"]}
+          - {label: "Stored data tokens", values: ["100, hard limit", "10,000, then moves to Growth", "100,000, then moves to Business", "1,000,000, then we talk Enterprise"]}
+          - {label: "Batch size", values: ["500", "500", "5,000", "5,000"]}
+          - {label: "Client IDs per subscription", values: ["1", "1", "2", "Unlimited"]}
+      - name: "Features"
+        rows:
+          - {label: "Custom CSS on hosted forms", values: [false, false, true, true]}
+          - {label: "Raw usage export", values: [false, false, false, true]}
+      - *compliance
+
+  - key: file-vault
+    name: "File Vault"
+    intro: "Store sensitive files behind the Vault and pay for storage, not requests."
+    unit: "of storage"
+    plans:
+      - {allow: "5 GB",      over: "Hard limit",                         points: ["Free sandbox with 5 GB of storage", "No card needed", "Hard limits", "Never billed"]}
+      - {allow: "150 GB",    over: "then moves up to Growth, prorated",  points: ["150 GB of storage", "PCI AOC", "SOC 2 Type II report", "DPA"]}
+      - {allow: "1,000 GB",  over: "then moves up to Business, prorated", points: ["1,000 GB of storage", "A second client ID"]}
+      - {allow: "5,000 GB",  over: "then $0.15 per GB-month",            points: ["5,000 GB of storage", "Unlimited client IDs", "Raw usage export", "Then $0.15 per GB-month"]}
+    groups:
+      - name: "Usage"
+        rows:
+          - {label: "Storage included", values: ["5 GB", "150 GB", "1,000 GB", "5,000 GB"]}
+          - {label: "Storage beyond that", values: ["Hard limit", "Moves up to Growth, prorated", "Moves up to Business, prorated", "$0.15 per GB-month"]}
+          - {label: "Client IDs per subscription", values: ["1", "1", "2", "Unlimited"]}
+      - name: "Features"
+        rows:
+          - {label: "Raw usage export", values: [false, false, false, true]}
+      - *compliance
+
+marketplace:
+  eyebrow: "AWS Marketplace"
+  headline: "Looking for discounted pricing?"
+  sub: "Buy directly from AWS Marketplace. Valid until February 15, 2027."
+  body: "Custom pricing for Card Vault, Data Vault and File Vault is available when you subscribe through AWS Marketplace. The charge lands on your existing AWS bill, and plan changes and cancellation are handled in the AWS console. Marketplace subscriptions keep their own plans and features."
+  cta: "View on AWS Marketplace"
+  url: "https://aws.amazon.com/marketplace/seller-profile?id=c77b8db1-5511-48b7-8ce5-9a8d4a1a8018"
+  micro: "Custom pricing valid until February 15, 2027 on all three Vaults. Marketplace plans and features differ from the developer portal plans shown above."
+  until: "Feb 15, 2027"
+
+enterprise:
+  eyebrow: "Beyond Business"
+  headline: "Enterprise"
+  sub: "Volume above Business, on an annual contract with custom terms and an SLA."
+  body: "Business tops out at 1,000,000 stored tokens on Card Vault and Data Vault and 5,000 GB on File Vault. If your volume is above that, or you need commercial terms a card checkout cannot carry, Enterprise is the plan. It is quoted per product, like every other plan."
+  points:
+    - {t: "Volume above Business", b: "Allowances, overage rates and storage sized to your traffic rather than a published slab."}
+    - {t: "Annual contract", b: "A signed agreement with a fixed term in place of a monthly card subscription."}
+    - {t: "Custom terms and SLA", b: "Contractual commitments on uptime and support response, plus the terms your procurement and security teams need."}
+  keepLabel: "What you keep from Business"
+  keepIntro: "Every Business feature, including:"
+  keep: ["Unlimited client IDs", "Raw usage export", "Raw card data access on Card Vault", "PCI AOC and responsibility matrix", "SOC 2 Type II report", "Data processing agreement", "Sub-processor list"]
+  cta: "Contact us"
+  url: "/contact/"

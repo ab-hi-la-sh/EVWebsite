@@ -1,0 +1,128 @@
+{{- /* Vault pricing: product tabs, billing toggle, plan ledger, comparison
+       table, AWS Marketplace ticket and Enterprise row. Content lives in
+       data/vault_pricing.yml; behaviour in assets/js/pages/pricing.js.
+       Without JS every product shows stacked and prices show monthly. */ -}}
+{{- $d := hugo.Data.vault_pricing -}}
+{{- $tick := `<svg class="vpp-yes" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="Included" role="img"><path d="M20 6 9 17l-5-5"/></svg>` -}}
+{{- $dash := `<span class="vpp-no" aria-label="Not included" role="img"></span>` -}}
+<div class="vpp" data-vpp>
+  <div class="vpp-bar">
+    <div class="vpp-tabs" role="tablist" aria-label="Vault product">
+      {{- range $i, $p := $d.products }}
+      <button class="vpp-tab{{ if eq $i 0 }} is-active{{ end }}" type="button" role="tab" id="vpp-tab-{{ $p.key }}" aria-controls="vpp-{{ $p.key }}" aria-selected="{{ if eq $i 0 }}true{{ else }}false{{ end }}" data-vpp-tab="{{ $p.key }}">{{ $p.name }}</button>
+      {{- end }}
+    </div>
+    <div class="vpp-bill">
+      <div class="vpp-toggle" role="group" aria-label="Billing period">
+        <button type="button" class="is-on" aria-pressed="true" data-vpp-bill="monthly">Monthly</button>
+        <button type="button" aria-pressed="false" data-vpp-bill="annual">Annual</button>
+      </div>
+      <p class="vpp-note">{{ $d.toggleNote }}</p>
+    </div>
+  </div>
+
+  {{- range $i, $p := $d.products }}
+  <section class="vpp-panel{{ if eq $i 0 }} is-active{{ end }}" id="vpp-{{ $p.key }}" role="tabpanel" aria-labelledby="vpp-tab-{{ $p.key }}" data-vpp-panel="{{ $p.key }}">
+    <h3 class="vpp-pname">{{ $p.name }}</h3>
+    <p class="vpp-intro">{{ $p.intro }}</p>
+
+    <div class="vpp-ledger">
+      {{- range $t, $tier := $d.tiers }}
+      {{- $plan := index $p.plans $t }}
+      {{- $annual := index $d.prices.annual $t }}
+      <article class="vpp-plan{{ if $tier.popular }} is-pop{{ end }}">
+        <header class="vpp-plan__head">
+          <h4 class="vpp-plan__name">{{ $tier.name }}</h4>
+          {{- if $tier.popular }}<span class="vpp-chip">Popular</span>{{ end }}
+        </header>
+        <div class="vpp-price">
+          <p class="vpp-price__m"><b>{{ index $d.prices.monthly $t }}</b><span>/month</span></p>
+          <p class="vpp-price__a">{{ with $annual }}<b>{{ . }}</b><span>/year</span><em class="vpp-save">Save {{ index $d.prices.save $t }}</em>{{ else }}<b class="vpp-price__na">Monthly only</b>{{ end }}</p>
+        </div>
+        <div class="vpp-allow">
+          <p class="vpp-allow__n">{{ $plan.allow }}</p>
+          <p class="vpp-allow__u">{{ $p.unit }}</p>
+          <p class="vpp-allow__o">{{ $plan.over }}</p>
+        </div>
+        <ul class="vpp-inc vpp-inc--list">{{ range $plan.points }}<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>{{ . }}</li>{{ end }}</ul>
+        <a class="vpp-cta{{ if $tier.popular }} vpp-cta--solid{{ end }} cta-pricing cta-vault--{{ $p.key }}-{{ $tier.key }}" href="{{ $d.cta }}" target="_blank" rel="noopener"><span>{{ $tier.cta }}</span><span aria-hidden="true">&#8594;</span></a>
+      </article>
+      {{- end }}
+    </div>
+
+    <details class="vpp-compare">
+      <summary>
+        <span class="vpp-compare__btn"><span class="vpp-compare__show">Compare all {{ $p.name }} features</span><span class="vpp-compare__hide">Hide the {{ $p.name }} comparison</span><span class="vpp-compare__caret" aria-hidden="true"></span></span>
+        <span class="vpp-compare__meta">Price{{ range $p.groups }} &middot; {{ .name }}{{ end }}, across all four plans</span>
+      </summary>
+      <div class="vpp-scroll">
+        <table class="vpp-table">
+          <thead><tr><th scope="col"><span class="vpp-sr">Feature</span></th>{{ range $d.tiers }}<th scope="col"{{ if .popular }} class="is-pop"{{ end }}>{{ .name }}</th>{{ end }}</tr></thead>
+          <tbody>
+            <tr class="vpp-g"><th colspan="5" scope="colgroup">Price</th></tr>
+            <tr><th scope="row">Monthly</th>{{ range $t, $_ := $d.tiers }}<td{{ if .popular }} class="is-pop"{{ end }}>{{ index $d.prices.monthly $t }}/month</td>{{ end }}</tr>
+            <tr><th scope="row">Annual</th>{{ range $t, $_ := $d.tiers }}{{ $a := index $d.prices.annual $t }}<td{{ if .popular }} class="is-pop"{{ end }}>{{ with $a }}{{ . }}/year <span class="vpp-save vpp-save--sm">save {{ index $d.prices.save $t }}</span>{{ else }}<span class="vpp-muted">Not available</span>{{ end }}</td>{{ end }}</tr>
+            {{- range $p.groups }}
+            <tr class="vpp-g"><th colspan="5" scope="colgroup">{{ .name }}</th></tr>
+            {{- range .rows }}
+            <tr><th scope="row">{{ .label }}</th>
+              {{- range $t, $v := .values }}{{ $pop := (index $d.tiers $t).popular }}
+              <td{{ if $pop }} class="is-pop"{{ end }}>{{ if eq $v true }}{{ $tick | safeHTML }}{{ else if eq $v false }}{{ $dash | safeHTML }}{{ else }}{{ $v }}{{ end }}</td>
+              {{- end }}
+            </tr>
+            {{- end }}
+            {{- end }}
+          </tbody>
+        </table>
+      </div>
+    </details>
+  </section>
+  {{- end }}
+
+  {{- with $d.enterprise }}
+  <section class="vpp-ent" aria-labelledby="vpp-ent-h">
+    <div class="vpp-scale" aria-hidden="true">
+      {{- range $d.tiers }}<span class="vpp-scale__t{{ if eq .key "business" }} is-ceiling{{ end }}">{{ .name }}</span>{{ end }}
+      <span class="vpp-scale__t is-beyond">Enterprise</span>
+    </div>
+    <div class="vpp-ent__grid">
+      <div class="vpp-ent__lead">
+        <p class="vpp-ent__eyebrow">{{ .eyebrow }}</p>
+        <h3 class="vpp-ent__h" id="vpp-ent-h">{{ .headline }}</h3>
+        <p class="vpp-ent__sub">{{ .sub }}</p>
+        <p class="vpp-ent__body">{{ .body }}</p>
+        <a class="vpp-cta vpp-cta--light cta-pricing cta-vault--enterprise" href="{{ .url }}"><span>{{ .cta }}</span><span aria-hidden="true">&#8594;</span></a>
+      </div>
+      <ol class="vpp-ent__points">
+        {{- range $n, $pt := .points }}
+        <li><span class="vpp-ent__n">0{{ add $n 1 }}</span><div><h4>{{ $pt.t }}</h4><p>{{ $pt.b }}</p></div></li>
+        {{- end }}
+      </ol>
+    </div>
+    <div class="vpp-ent__keep">
+      <p class="vpp-ent__keepk">{{ .keepLabel }}</p>
+      <p class="vpp-ent__keepi">{{ .keepIntro }}</p>
+      <ul>{{ range .keep }}<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>{{ . }}</li>{{ end }}</ul>
+    </div>
+  </section>
+  {{- end }}
+
+  {{- with $d.marketplace }}
+  <aside class="vpp-ticket" aria-labelledby="vpp-mkt-h">
+    <div class="vpp-ticket__main">
+      <p class="vpp-ticket__eyebrow">{{ .eyebrow }}</p>
+      <h3 class="vpp-ticket__h" id="vpp-mkt-h">{{ .headline }}</h3>
+      <p class="vpp-ticket__sub">{{ .sub }}</p>
+      <p class="vpp-ticket__body">{{ .body }}</p>
+    </div>
+    <div class="vpp-ticket__stub">
+      <p class="vpp-ticket__k">Valid until</p>
+      <p class="vpp-ticket__date">{{ .until }}</p>
+      <a class="vpp-cta vpp-cta--solid cta-pricing cta-vault--aws-marketplace" href="{{ .url }}" target="_blank" rel="noopener"><span>{{ .cta }}</span><span aria-hidden="true">&#8594;</span></a>
+      <p class="vpp-ticket__micro">{{ .micro }}</p>
+    </div>
+  </aside>
+  {{- end }}
+
+  <p class="vpp-fine">{{ $d.finePrint }}</p>
+</div>

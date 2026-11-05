@@ -221,65 +221,86 @@ pricing:
     <div class="np-container">
       <div class="pr-phead"><span class="pr-phead__art">{{< img src="/assets/glyphs/nopii-3d.png" alt="NoPII product mark" loading="eager" >}}</span><div class="pr-phead__tx"><p class="pr-phead__tag">Trust the input</p><h2 class="np-h2">NoPII <em>pricing</em>.</h2></div></div>
       <p class="pr-lead">Protection for AI traffic should not need a procurement cycle to try. The free tier is real, and it does not expire.</p>
-      <!-- NoPII plans: same ledger system as the Vault (pricing.css .vpp-*); Enterprise spans the full width -->
-      <div class="vpp vpp--static">
+      <!-- NoPII plans: same ledger system and billing toggle as the Vault (pricing.css .vpp-*, pricing.js [data-vpp]); Enterprise spans the full width -->
+      <div class="vpp vpp--static" data-vpp>
+        <div class="vpp-bar vpp-bar--solo">
+          <div class="vpp-bill">
+            <div class="vpp-toggle" role="group" aria-label="NoPII billing period">
+              <button type="button" class="is-on" aria-pressed="true" data-vpp-bill="monthly">Monthly</button>
+              <button type="button" aria-pressed="false" data-vpp-bill="annual">Annual</button>
+            </div>
+            <p class="vpp-note">Prices exclude tax. Paying yearly saves on Starter, Growth and Business.</p>
+          </div>
+        </div>
         <div class="vpp-ledger vpp-ledger--np">
         <article class="vpp-plan">
           <header class="vpp-plan__head"><h3 class="vpp-plan__name">Lite</h3></header>
-          <div class="vpp-price"><p class="vpp-price__m"><b>$0</b><span>/month</span></p></div>
+          <div class="vpp-price">
+            <p class="vpp-price__m"><b>$0</b><span>/month</span></p>
+            <p class="vpp-price__a"><b class="vpp-price__na">Monthly only</b></p>
+          </div>
           <p class="vpp-desc">For developers getting started with PII protection.</p>
           <div class="vpp-allow">
             <p class="vpp-allow__n">1M</p>
             <p class="vpp-allow__u">protected tokens a month</p>
             <p class="vpp-allow__o">Hard cap</p>
           </div>
-          <div class="vpp-inc"><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>All LLM providers supported</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>PII detection and tokenization</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Full audit trail</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>1-day token retention</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>1 workspace, 1 user</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>No credit card required</li></ul></div>
+          <div class="vpp-inc"><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>All LLM providers supported</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>PII detection and tokenization</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Full audit trail</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>1-day token retention</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>1 workspace, 1 user</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>No credit card required</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>7-day log history</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>25 custom terms</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>60 requests/min per key</li></ul></div>
           <a class="vpp-cta cta-pricing cta-nopii--lite" href="https://app.nopii.co" target="_blank" rel="noopener"><span>Get started free</span><span aria-hidden="true">&#8594;</span></a>
         </article>
         <article class="vpp-plan">
           <header class="vpp-plan__head"><h3 class="vpp-plan__name">Starter</h3></header>
-          <div class="vpp-price"><p class="vpp-price__m"><b>$49</b><span>/month + tax</span></p></div>
+          <div class="vpp-price">
+            <p class="vpp-price__m"><b>$49</b><span>/month + tax</span></p>
+            <p class="vpp-price__a"><b>$550</b><span>/year + tax</span><em class="vpp-save">Save $38 a year vs monthly billing</em></p>
+          </div>
           <p class="vpp-desc">For developers shipping PII-safe AI to production.</p>
           <div class="vpp-allow">
             <p class="vpp-allow__n">50M</p>
             <p class="vpp-allow__u">protected tokens a month</p>
             <p class="vpp-allow__o">then $1.00 per million tokens</p>
           </div>
-          <div class="vpp-inc"><p class="vpp-inc__lead">Everything in Lite, plus</p><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>30-day token retention</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>1 workspace, 1 user</li></ul></div>
+          <div class="vpp-inc"><p class="vpp-inc__lead">Everything in Lite, plus</p><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>30-day token retention</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>1 workspace, 1 user</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>30-day log history</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Browser SDK client API</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>100 custom terms</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>120 requests/min per key</li></ul></div>
           <a class="vpp-cta cta-pricing cta-nopii--starter" href="https://app.nopii.co" target="_blank" rel="noopener"><span>Start free, upgrade anytime</span><span aria-hidden="true">&#8594;</span></a>
         </article>
         <article class="vpp-plan is-pop">
           <header class="vpp-plan__head"><h3 class="vpp-plan__name">Growth</h3><span class="vpp-chip">Most popular</span></header>
-          <div class="vpp-price"><p class="vpp-price__m"><b>$249</b><span>/month + tax</span></p></div>
+          <div class="vpp-price">
+            <p class="vpp-price__m"><b>$249</b><span>/month + tax</span></p>
+            <p class="vpp-price__a"><b>$2,700</b><span>/year + tax</span><em class="vpp-save">Save $288 a year vs monthly billing</em></p>
+          </div>
           <p class="vpp-desc">For teams running production AI workloads.</p>
           <div class="vpp-allow">
             <p class="vpp-allow__n">500M</p>
             <p class="vpp-allow__u">protected tokens a month</p>
             <p class="vpp-allow__o">then $0.80 per million tokens</p>
           </div>
-          <div class="vpp-inc"><p class="vpp-inc__lead">Everything in Starter, plus</p><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Token retention up to permanent</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Multiple workspaces</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>5 users with admin and member roles</li></ul></div>
+          <div class="vpp-inc"><p class="vpp-inc__lead">Everything in Starter, plus</p><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Token retention up to permanent</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Multiple workspaces</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>5 users with admin and member roles</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>90-day log history</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>CSV log export</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Langfuse integration</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>250 custom terms</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>300 requests/min per key</li></ul></div>
           <a class="vpp-cta vpp-cta--solid cta-pricing cta-nopii--growth" href="https://app.nopii.co" target="_blank" rel="noopener"><span>Start free, upgrade anytime</span><span aria-hidden="true">&#8594;</span></a>
         </article>
         <article class="vpp-plan">
           <header class="vpp-plan__head"><h3 class="vpp-plan__name">Business</h3></header>
-          <div class="vpp-price"><p class="vpp-price__m"><b>$499</b><span>/month + tax</span></p></div>
+          <div class="vpp-price">
+            <p class="vpp-price__m"><b>$499</b><span>/month + tax</span></p>
+            <p class="vpp-price__a"><b>$5,500</b><span>/year + tax</span><em class="vpp-save">Save $488 a year vs monthly billing</em></p>
+          </div>
           <p class="vpp-desc">For organizations scaling AI across teams.</p>
           <div class="vpp-allow">
             <p class="vpp-allow__n">2B</p>
             <p class="vpp-allow__u">protected tokens a month</p>
             <p class="vpp-allow__o">then $0.60 per million tokens</p>
           </div>
-          <div class="vpp-inc"><p class="vpp-inc__lead">Everything in Growth, plus</p><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Unlimited users</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Single sign-on (SSO)</li></ul></div>
+          <div class="vpp-inc"><p class="vpp-inc__lead">Everything in Growth, plus</p><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Unlimited users</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Single sign-on (SSO)</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>365-day log history</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Reveal grants, device enrollment and staff access log</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>500 custom terms</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>500 requests/min per key</li></ul></div>
           <a class="vpp-cta cta-pricing cta-nopii--business" href="https://app.nopii.co" target="_blank" rel="noopener"><span>Start free, upgrade anytime</span><span aria-hidden="true">&#8594;</span></a>
         </article>
         <article class="vpp-plan vpp-plan--ent">
           <div class="vpp-plan__entlead">
             <header class="vpp-plan__head"><h3 class="vpp-plan__name">Enterprise</h3></header>
-            <div class="vpp-price"><p class="vpp-price__m"><b>Custom</b></p></div>
+            <div class="vpp-price"><p><b>Custom</b></p></div>
             <p class="vpp-desc">For organizations with custom security, scale or deployment needs.</p>
             <a class="vpp-cta cta-pricing cta-nopii--enterprise" href="/contact/"><span>Contact sales</span><span aria-hidden="true">&#8594;</span></a>
           </div>
-          <div class="vpp-inc vpp-inc--cols"><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Custom commit and token band</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Overage negotiated or waived</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Custom token retention</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Multiple workspaces, unlimited users, SSO</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>NoPII Cloud, or the self-hosted edition under an annual license with no token meter</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Dedicated account manager</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>SLA guarantees</li></ul></div>
+          <div class="vpp-inc vpp-inc--cols"><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Custom commit and token band</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Overage negotiated or waived</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Custom token retention</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Multiple workspaces, unlimited users, SSO</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>NoPII Cloud, or the self-hosted edition under an annual license with no token meter</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Dedicated account manager</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>SLA guarantees</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Gateway header requirements</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Custom rate limits</li></ul></div>
         </article>
         </div>
       </div>

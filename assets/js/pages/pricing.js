@@ -65,10 +65,8 @@
   show(panelFor(location.hash.replace('#','')), false);
 })();
 
-/* Vault pricing ledger: product tabs + monthly/annual toggle (vault-pricing shortcode). */
-(function(){
-  var root = document.querySelector('[data-vpp]');
-  if (!root) return;
+/* Pricing ledgers: product tabs (Vault) + monthly/annual toggle (Vault and NoPII). */
+[].slice.call(document.querySelectorAll('[data-vpp]')).forEach(function(root){
   var tabs = [].slice.call(root.querySelectorAll('[data-vpp-tab]'));
   var panels = [].slice.call(root.querySelectorAll('[data-vpp-panel]'));
   var bills = [].slice.call(root.querySelectorAll('[data-vpp-bill]'));
@@ -102,7 +100,9 @@
   });
 
   // Deep link: /pricing/#vpp-data-vault opens that product.
-  var m = location.hash.match(/^#vpp-([a-z-]+)$/);
-  select(m && root.querySelector('[data-vpp-panel="' + m[1] + '"]') ? m[1] : tabs[0].getAttribute('data-vpp-tab'));
+  if (tabs.length){
+    var m = location.hash.match(/^#vpp-([a-z-]+)$/);
+    select(m && root.querySelector('[data-vpp-panel="' + m[1] + '"]') ? m[1] : tabs[0].getAttribute('data-vpp-tab'));
+  }
   root.classList.add('is-ready');
-})();
+});

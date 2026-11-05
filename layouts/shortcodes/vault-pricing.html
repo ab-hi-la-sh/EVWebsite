@@ -37,7 +37,7 @@
         </header>
         <div class="vpp-price">
           <p class="vpp-price__m"><b>{{ index $d.prices.monthly $t }}</b><span>/month</span></p>
-          <p class="vpp-price__a">{{ with $annual }}<b>{{ . }}</b><span>/year</span><em class="vpp-save">Save {{ index $d.prices.save $t }} a year on monthly</em>{{ else }}<b class="vpp-price__na">Monthly only</b>{{ end }}</p>
+          <p class="vpp-price__a">{{ with $annual }}<b>{{ . }}</b><span>/year</span><em class="vpp-save">Save {{ index $d.prices.save $t }} a year vs monthly billing</em>{{ else }}<b class="vpp-price__na">Monthly only</b>{{ end }}</p>
         </div>
         <div class="vpp-allow">
           <p class="vpp-allow__n">{{ $plan.allow }}</p>

@@ -366,3 +366,16 @@
   }
   .vpp-ledger--np .vpp-cta{text-align:center;padding-left:12px;padding-right:12px;gap:6px;}
   @media (min-width:1024px){.vpp-ledger--np .vpp-plan:not(.vpp-plan--ent){padding-left:20px;padding-right:20px;}.vpp-ledger--np .vpp-cta{font-size:13.5px;}}
+  /* NoPII: billing toggle on its own, no product tabs */
+  .vpp-bar--solo{border-bottom:0;margin-bottom:18px;}
+  .vpp-bar--solo .vpp-bill{padding-bottom:0;}
+/* Plan point lists: more air between points and above the buttons (Vault and NoPII) */
+  .vpp-inc{margin:22px 0 34px;}
+  .vpp-inc__lead{margin:0 0 12px;}
+  .vpp-inc ul,.vpp-inc--list{gap:12px;}
+  .vpp-inc li,.vpp-inc--list li{line-height:1.5;gap:10px;}
+  .vpp-inc li svg,.vpp-inc--list li svg{margin-top:4px;}
+  .vpp-addon{margin-top:20px;}
+  .vpp-plan--ent .vpp-inc{margin:6px 0 0;}
+  .vpp-inc--cols ul{gap:14px 36px;}
+  @media (max-width:640px){.vpp-inc{margin:20px 0 28px;}.vpp-inc ul,.vpp-inc--list{gap:11px;}.vpp-inc--cols ul{gap:11px;}}

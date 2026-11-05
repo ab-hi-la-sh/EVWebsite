@@ -29,18 +29,20 @@ products:
     plans:
       - {allow: "1,000",     over: "Hard limit",              points: ["Free sandbox, no card needed", "Hard limits, never billed", "Up to 100 stored card tokens", "1 client ID"]}
       - {allow: "20,000",    over: "then $0.02 per request",  points: ["Overage instead of a hard limit", "Up to 10,000 stored card tokens, then moves up to Growth", "PCI AOC, SOC 2 Type II report and DPA"]}
-      - {allow: "250,000",   over: "then $0.01 per request",  points: ["Custom CSS on hosted forms", "Twilio Pay", "2 client IDs per subscription", "Up to 100,000 stored card tokens, then moves up to Business"], addon: "EU data residency add-on, +$99/month"}
+      - {allow: "250,000",   over: "then $0.01 per request",  points: ["Custom CSS on hosted forms", "Twilio Pay", "Client certificates on the proxy", "2 client IDs per subscription", "Up to 100,000 stored card tokens, then moves up to Business"], addon: "EU data residency add-on, +$99/month"}
       - {allow: "1,000,000", over: "then $0.007 per request", points: ["Raw card data access", "Unlimited client IDs", "Raw usage export", "Up to 1,000,000 stored card tokens; we contact you about Enterprise beyond that"], addon: "EU data residency add-on, +$99/month"}
     groups:
       - name: "Usage"
         rows:
           - {label: "Requests included a month", values: ["1,000 requests", "20,000 requests", "250,000 requests", "1,000,000 requests"]}
           - {label: "Requests beyond that", values: ["Hard limit", "$0.02 per request", "$0.01 per request", "$0.007 per request"]}
+          - {label: "Request rate", values: ["10 per second", "Unlimited", "Unlimited", "Unlimited"]}
           - {label: "Stored card tokens", values: ["100, hard limit", "10,000, then Growth", "100,000, then Business", "1,000,000"]}
       - name: "Features"
         rows:
           - {label: "Custom CSS on hosted forms", values: [false, false, true, true]}
           - {label: "Twilio Pay", values: [false, false, true, true]}
+          - {label: "Proxy client certificates (mTLS)", values: [false, false, true, true]}
           - {label: "Raw card data access", values: [false, false, false, true]}
           - {label: "Client IDs per subscription", values: ["1", "1", "2", "Unlimited"]}
           - {label: "Raw usage export", values: [false, false, false, true]}
@@ -67,6 +69,7 @@ products:
         rows:
           - {label: "Requests included a month", values: ["1,500 requests", "30,000 requests", "400,000 requests", "2,000,000 requests"]}
           - {label: "Requests beyond that", values: ["Hard limit", "$0.013 per request", "$0.0065 per request", "$0.0045 per request"]}
+          - {label: "Request rate", values: ["10 per second", "Unlimited", "Unlimited", "Unlimited"]}
           - {label: "Stored data tokens", values: ["100, hard limit", "10,000, then Growth", "100,000, then Business", "1,000,000"]}
       - name: "Features"
         rows:
@@ -91,6 +94,7 @@ products:
         rows:
           - {label: "Storage included", values: ["5 GB", "150 GB", "1,000 GB", "5,000 GB"]}
           - {label: "Storage beyond that", values: ["Hard limit", "Moves up to Growth", "Moves up to Business", "$0.15 per GB-month"]}
+          - {label: "Request rate", values: ["10 per second", "Unlimited", "Unlimited", "Unlimited"]}
       - name: "Features"
         rows:
           - {label: "Client IDs per subscription", values: ["1", "1", "2", "Unlimited"]}

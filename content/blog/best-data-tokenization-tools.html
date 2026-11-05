@@ -112,7 +112,7 @@ faqs:
 <div class="bl-tablewrap"><table class="bl-table bl-table--wide">
 <thead><tr><th>Platform</th><th>Token model</th><th>Analytics on tokens</th><th>Deployment</th><th>Starting price</th><th>G2 rating</th></tr></thead>
 <tbody>
-<tr><td><a class="bl-link" href="#enigma-vault">Enigma Vault</a></td><td>Vaulted</td><td>Deterministic option; format-preserving card tokens</td><td>Managed cloud (EU and US regions)</td><td>$0, then $49.99 a month per vault</td><td><a class="bl-link" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener">4.4/5 (6 reviews)</a></td></tr>
+<tr><td><a class="bl-link" href="#enigma-vault">Enigma Vault</a></td><td>Vaulted</td><td>Deterministic option; format-preserving card tokens</td><td>Managed cloud (EU and US regions)</td><td>$0, then $49 a month per product</td><td><a class="bl-link" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener">4.4/5 (6 reviews)</a></td></tr>
 <tr><td><a class="bl-link" href="#skyflow">Skyflow</a></td><td>Vaulted</td><td>Deterministic or random per column; format-preserving</td><td>SaaS, dedicated VPC, or your own AWS or GCP account; regional vaults</td><td>Custom quote</td><td><a class="bl-link" href="https://www.g2.com/products/payments-data-privacy-vault/reviews" target="_blank" rel="noopener">5.0/5 (1 review, Payments vault)</a></td></tr>
 <tr><td><a class="bl-link" href="#protegrity">Protegrity</a></td><td>Vaultless</td><td>Deterministic; referential integrity</td><td>SaaS, cloud, or on-premises</td><td>Free Developer Edition; paid editions quoted</td><td><a class="bl-link" href="https://www.g2.com/products/protegrity/reviews" target="_blank" rel="noopener">4.5/5 (14 reviews)</a></td></tr>
 <tr><td><a class="bl-link" href="#thales-ciphertrust-tokenization">Thales CipherTrust Tokenization</a></td><td>Vaulted and vaultless (hybrid)</td><td>Format-preserving, random, or masked</td><td>Self-run on-premises or in AWS, Azure, or GCP</td><td>Custom quote</td><td><a class="bl-link" href="https://www.g2.com/products/thales-ciphertrust-tokenization/reviews" target="_blank" rel="noopener">4.0/5 (6 reviews)</a></td></tr>
@@ -137,7 +137,7 @@ faqs:
 <tr><td>Evidence per reveal for auditors</td><td>One log at the vault; Enigma Vault records client ID, IP, path, and status per request</td><td>Spread across the key service and every app running the algorithm</td></tr>
 <tr><td>Blast radius of one leak</td><td>What the leaked credential may reveal</td><td>Every token made under that key, in every system</td></tr>
 <tr><td>Compliance scope</td><td>Originals and detokenization sit with the vault</td><td>Every system that holds the key or runs detokenization</td></tr>
-<tr><td>Team effort and cost</td><td>API integration; vendor runs the vault. Enigma Vault starts at $0, then $49.99 a month per vault</td><td>License fees plus staff and an HSM or key service</td></tr>
+<tr><td>Team effort and cost</td><td>API integration; vendor runs the vault. Enigma Vault starts at $0, then $49 a month per product</td><td>License fees plus staff and an HSM or key service</td></tr>
 <tr><td>Scaling across regions</td><td>Regional vaults keep originals in-region; each region is one more vault</td><td>No store to replicate; the key must be available and protected in every region</td></tr>
 </tbody></table></div>
 <p><strong>When each fits:</strong> choose a vault when you want one audited place for reveals, deletion that kills a token for good, and no key program to run. Choose vaultless when per-value network calls are too slow for your volume and your team can operate keys well.</p>
@@ -166,7 +166,7 @@ faqs:
   </div>
   <dl class="vc__facts">
     <div><dt>Token model</dt><dd>Vaulted, random by default, deterministic on request</dd></div>
-    <div><dt>Starting price</dt><dd>$0, then $49.99 a month per vault</dd></div>
+    <div><dt>Starting price</dt><dd>$0, then $49 a month per product</dd></div>
     <div><dt>Deployment</dt><dd>Managed cloud, EU and US regions</dd></div>
     <div class="vc__best"><dt>Who it suits</dt><dd>Product and engineering teams that want SSNs, account numbers, cards, documents, and AI prompt data out of their own systems without running key infrastructure, and want to price it before talking to sales.</dd></div>
   </dl>
@@ -197,17 +197,18 @@ faqs:
 <div class="bl-tablewrap"><table class="bl-table">
 <thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
 <tbody>
-<tr><td>Lite</td><td>$0 (free plan)</td><td>Data Vault 1,500 requests ($0.06 overage); Card Vault 1,000 ($0.08); File Vault 5 GB</td></tr>
-<tr><td>Plus</td><td>$49.99 a month per vault</td><td>Data Vault 30,000 requests ($0.03); Card Vault 20,000 ($0.04); File Vault 150 GB; email support</td></tr>
-<tr><td>Premium</td><td>$249.99 a month per vault</td><td>Data Vault 400,000 requests ($0.01); Card Vault 250,000 ($0.02); File Vault 1 TB; priority support</td></tr>
-<tr><td>NoPII Free and Pro</td><td>$0 and $50 a month</td><td>1M protected tokens a month free; Pro includes 50M, then $1 per additional million</td></tr>
+<tr><td>Lite</td><td>$0 (free plan)</td><td>Data Vault 1,500 requests (hard limit); Card Vault 1,000 (hard limit); File Vault 5 GB</td></tr>
+<tr><td>Starter</td><td>$49 a month per product</td><td>Data Vault 30,000 requests ($0.013); Card Vault 20,000 ($0.02); File Vault 150 GB; PCI AOC, SOC 2 Type II report, and DPA</td></tr>
+<tr><td>Growth</td><td>$249 a month per product</td><td>Data Vault 400,000 requests ($0.0065); Card Vault 250,000 ($0.01); File Vault 1,000 GB; custom CSS on hosted forms, EU data residency add-on</td></tr>
+<tr><td>Business</td><td>$499 a month per product</td><td>Data Vault 2,000,000 requests ($0.0045); Card Vault 1,000,000 ($0.007); File Vault 5,000 GB ($0.15 per GB-month); unlimited client IDs, raw usage export</td></tr>
+<tr><td>NoPII Lite to Business</td><td>$0, $49, $249, and $499 a month</td><td>1M protected tokens a month free; Starter includes 50M, then $1.00 per additional million; Growth 500M; Business 2B</td></tr>
 <tr><td>Enterprise</td><td>Custom quote</td><td>Custom volume, dedicated infrastructure, and a BAA for healthcare</td></tr>
 </tbody></table></div>
 <p><strong>Pros</strong></p>
 <ul>
   <li><strong>One vault for every data shape:</strong> Fields, cards, files, and prompt data share keys and one audit format, which shortens security reviews.</li>
   <li><strong>Keys stay off your plate:</strong> Per-customer keys sit in a managed secrets store and roll over without engineer handling.</li>
-  <li><strong>A price you can model today:</strong> Published Lite, Plus, and Premium tiers let you cost a proof of concept before any sales call.</li>
+  <li><strong>A price you can model today:</strong> Published Lite, Starter, Growth, and Business tiers let you cost a proof of concept before any sales call.</li>
 </ul>
 <p><strong>Cons</strong></p>
 <ul>
@@ -560,7 +561,7 @@ faqs:
 <div class="bl-tablewrap"><table class="bl-table bl-table--wide">
 <thead><tr><th>Vendor</th><th>Token Model</th><th>Speed and Scale</th><th>Analytics Support</th><th>Deployment</th></tr></thead>
 <tbody>
-<tr><td>Enigma Vault</td><td>Vaulted; random 128-bit tokens by default</td><td>Batch of 5,000 per request; 99.99% uptime SLA (Enterprise); latency Not published</td><td>Deterministic on request; exact-match lookup on encrypted values; format-preserving, Luhn-passable cards</td><td>Managed SaaS; EU and US regions; AWS Marketplace; self-hosted or air-gapped Not published</td></tr>
+<tr><td>Enigma Vault</td><td>Vaulted; random 128-bit tokens by default</td><td>Batch of 5,000 per request on Growth and Business; 99.99% uptime SLA (Enterprise); latency Not published</td><td>Deterministic on request; exact-match lookup on encrypted values; format-preserving, Luhn-passable cards</td><td>Managed SaaS; EU and US regions; AWS Marketplace; self-hosted or air-gapped Not published</td></tr>
 <tr><td>Skyflow</td><td>Vaulted; token type set per column</td><td>25 records per call by default (configurable); latency Not published; AWS multi-AZ with cross-region backups</td><td>Deterministic or random, UUID or format-preserving; column groups join across tables</td><td>Multi-tenant SaaS, dedicated VPC, or your own AWS or GCP account (BYOC); regional vaults</td></tr>
 <tr><td>Protegrity</td><td>Vaultless; deterministic algorithm plus secret key</td><td>Not published; no real-time call to a central vault</td><td>Deterministic and format-preserving; referential integrity; Databricks and Snowflake integrations</td><td>SaaS, cloud, on-premises, hybrid; native integrations, proxies, or SDKs</td></tr>
 <tr><td>Thales CipherTrust Tokenization</td><td>Vaulted and vaultless, alone or combined</td><td>Vaultless: over 1 million tokenizations a second per token server (vendor benchmark); cipher swap in under a minute</td><td>Format-preserving, random, or masked; determinism Not published</td><td>Self-run on-premises (OVA, ISO, Hyper-V) or AWS, Azure, GCP</td></tr>
@@ -588,9 +589,9 @@ faqs:
 <thead><tr><th>Vendor and plan</th><th>Token model</th><th>Monthly price</th><th>What’s included</th><th>Free start</th></tr></thead>
 <tbody>
 <tr><td>Enigma Vault Lite</td><td>Vaulted</td><td>$0</td><td>Data Vault 1,500 requests, Card Vault 1,000, File Vault 5 GB</td><td>Free plan</td></tr>
-<tr><td>Enigma Vault Plus</td><td>Vaulted</td><td>$49.99 per vault</td><td>Data Vault 30,000 requests, Card Vault 20,000, File Vault 150 GB</td><td>Lite tier</td></tr>
-<tr><td>Enigma Vault Premium</td><td>Vaulted</td><td>$249.99 per vault</td><td>Data Vault 400,000 requests, Card Vault 250,000, File Vault 1 TB</td><td>Lite tier</td></tr>
-<tr><td>Enigma Vault NoPII Pro</td><td>Vaulted</td><td>$50</td><td>50M protected tokens, then $1 per additional million</td><td>NoPII Free, 1M tokens a month</td></tr>
+<tr><td>Enigma Vault Starter</td><td>Vaulted</td><td>$49 per product</td><td>Data Vault 30,000 requests, Card Vault 20,000, File Vault 150 GB</td><td>Lite tier</td></tr>
+<tr><td>Enigma Vault Growth</td><td>Vaulted</td><td>$249 per product</td><td>Data Vault 400,000 requests, Card Vault 250,000, File Vault 1,000 GB</td><td>Lite tier</td></tr>
+<tr><td>Enigma Vault NoPII Starter</td><td>Vaulted</td><td>$49</td><td>50M protected tokens, then $1.00 per additional million</td><td>NoPII Lite, 1M tokens a month</td></tr>
 <tr><td>Protegrity</td><td>Vaultless</td><td>Custom quote</td><td>AI Team and Enterprise editions</td><td>Developer Edition</td></tr>
 <tr><td>Fortanix DSM</td><td>Vaultless</td><td>Custom quote, or from $1.95 an hour on AWS Marketplace</td><td>Key management, HSM, tokenization, and secrets management</td><td>Free trial</td></tr>
 <tr><td>Protecto</td><td>Vaulted</td><td>Custom quote</td><td>Not published</td><td>API trial</td></tr>

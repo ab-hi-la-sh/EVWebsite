@@ -30,7 +30,7 @@ faqs:
   - q: "Does Tokenization Remove PCI DSS Requirements?"
     a: "No. Tokenization can significantly reduce the systems in PCI scope, but compliance and the questionnaire you qualify for are confirmed by your acquirer or a Qualified Security Assessor."
   - q: "How Much Does Payment Tokenization Software Cost?"
-    a: "Costs range from free tiers to about $1,000 a month for entry plans and custom enterprise quotes. Enigma Vault starts free and moves to $49.99 and $249.99 a month per vault, Spreedly starts at $750, Basis Theory and Evervault at $995, and VGS at $1,000."
+    a: "Costs range from free tiers to about $1,000 a month for entry plans and custom enterprise quotes. Enigma Vault starts free and moves to $49, $249, and $499 a month per product, Spreedly starts at $750, Basis Theory and Evervault at $995, and VGS at $1,000."
   - q: "Can I Switch Processors Without Re-Collecting Cards?"
     a: "Usually yes with an independent vault. A vault with a gateway proxy sends your tokenized request to the processor you choose and injects the real card number only inside the vault. Tokens held in a processor's native vault are generally tied to that processor."
   - q: "Can Tokenization Protect Data Sent to AI Models?"
@@ -58,7 +58,7 @@ faqs:
   <table class="bl-table bl-table--wide">
     <thead><tr><th>Platform</th><th>Best for</th><th>Architecture</th><th>G2 rating</th><th>How you start</th><th>Pricing model</th></tr></thead>
     <tbody>
-      <tr><td><a class="bl-link" href="#enigma-vault">Enigma Vault</a></td><td>Teams that want a free start and a gateway-agnostic vault</td><td>Vaulted, with gateway proxy</td><td>4.4/5 (6 reviews)</td><td>Self-serve free tier (Lite, free forever) through AWS Marketplace</td><td>Per vault: $0, $49.99, or $249.99 a month, plus metered overage</td></tr>
+      <tr><td><a class="bl-link" href="#enigma-vault">Enigma Vault</a></td><td>Teams that want a free start and a gateway-agnostic vault</td><td>Vaulted, with gateway proxy</td><td>4.4/5 (6 reviews)</td><td>Self-serve free tier (Lite, free sandbox) through AWS Marketplace</td><td>Per product: $0, $49, $249, or $499 a month, plus metered overage</td></tr>
       <tr><td><a class="bl-link" href="#spreedly">Spreedly</a></td><td>Multi-gateway merchants that want to own their vault</td><td>Independent vault plus orchestration</td><td>4.4/5 (35 reviews)</td><td>Sales conversation</td><td>Independent Vault from $750 a month; Performance Optimization by quote</td></tr>
       <tr><td><a class="bl-link" href="#ixopay">IXOPAY (formerly TokenEx)</a></td><td>Enterprises routing payments across many processors</td><td>Universal Tokens</td><td>4.6/5 (17 reviews)</td><td>Sandbox access or demo</td><td>Quote</td></tr>
       <tr><td><a class="bl-link" href="#vgs">VGS</a></td><td>Payments teams that want card management in one platform</td><td>Vault and proxy</td><td>4.7/5 (47 reviews)</td><td>"Try for free" on Starter</td><td>Starter from $1,000 a month; Growth by quote</td></tr>
@@ -141,9 +141,10 @@ faqs:
   <table class="bl-table">
     <thead><tr><th>Plan</th><th>Price</th><th>Card Vault requests</th><th>Overage</th></tr></thead>
     <tbody>
-      <tr><td>Lite</td><td>$0, free forever</td><td>1,000</td><td>$0.08 per request</td></tr>
-      <tr><td>Plus</td><td>$49.99 a month</td><td>20,000</td><td>$0.04 per request</td></tr>
-      <tr><td>Premium</td><td>$249.99 a month</td><td>250,000</td><td>$0.02 per request</td></tr>
+      <tr><td>Lite</td><td>$0, free sandbox</td><td>1,000</td><td>None, hard limit</td></tr>
+      <tr><td>Starter</td><td>$49 a month</td><td>20,000</td><td>$0.02 per request</td></tr>
+      <tr><td>Growth</td><td>$249 a month</td><td>250,000</td><td>$0.01 per request</td></tr>
+      <tr><td>Business</td><td>$499 a month</td><td>1,000,000</td><td>$0.007 per request</td></tr>
     </tbody>
   </table>
 </div>

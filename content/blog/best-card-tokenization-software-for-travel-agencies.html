@@ -34,7 +34,7 @@ faqs:
   - q: "Should Card Numbers Live in GDS PNR Remarks?"
     a: "Keep full card numbers out of free-text remarks, notes, and email. Store a token or reference in your own records and pass the real card only through the form of payment a supplier or GDS requires, at the moment you book. Ask your GDS and host agency how they mask and retain payment data."
   - q: "Which Card Tokenization Platform Is Cheapest for a Small Travel Agency?"
-    a: "Enigma Vault has a free Lite plan with 1,000 Card Vault requests a month and a Plus plan at $49.99 a month. PCI Vault lists $255 a month plus $0.02 per API operation, PCI Proxy at €350 a month plus usage, Spreedly at $750 a month, Basis Theory at $995 a month, and VGS at $1,000 a month. PCI Booking and IXOPAY quote on request."
+    a: "Enigma Vault has a free Lite plan with 1,000 Card Vault requests a month and a Starter plan at $49 a month. PCI Vault lists $255 a month plus $0.02 per API operation, PCI Proxy at €350 a month plus usage, Spreedly at $750 a month, Basis Theory at $995 a month, and VGS at $1,000 a month. PCI Booking and IXOPAY quote on request."
   - q: "Can I Move Cards Out of TokenEx or PCI Vault Into Another Vault?"
     a: "Usually, yes, through a vendor-to-vendor export between PCI-compliant providers. Enigma Vault has imported existing cards in bulk for card-on-file operators, and Agent Vault packages that migration as a fixed eight-week engagement. Ask your current vendor how it releases card data before you give notice."
   - q: "Do Host Agencies and Independent Advisors Need Different Platforms?"
@@ -106,7 +106,7 @@ faqs:
 <div class="bl-tablewrap"><table class="bl-table bl-table--wide">
 <thead><tr><th>Platform</th><th>Best for</th><th>Starting price</th><th>Free trial or tier</th><th>Phone and email capture</th><th>Paying suppliers</th><th>G2 rating</th></tr></thead>
 <tbody>
-<tr><td><a class="bl-link" href="#enigma-vault">Enigma Vault</a></td><td>Agencies taking cards by phone, email, and link that pay independent suppliers</td><td>$0, then $49.99 a month</td><td>Free Lite plan</td><td>Twilio Pay IVR, hosted forms, no-code intake links</td><td>Gateway proxy, or logged staff reveal in Customer Vault</td><td><a class="bl-link" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener">4.4/5 (6 reviews)</a></td></tr>
+<tr><td><a class="bl-link" href="#enigma-vault">Enigma Vault</a></td><td>Agencies taking cards by phone, email, and link that pay independent suppliers</td><td>$0, then $49 a month</td><td>Free Lite plan</td><td>Twilio Pay IVR, hosted forms, no-code intake links</td><td>Gateway proxy, or logged staff reveal in Customer Vault</td><td><a class="bl-link" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener">4.4/5 (6 reviews)</a></td></tr>
 <tr><td><a class="bl-link" href="#pci-booking">PCI Booking</a></td><td>Travel sellers that pass cards on to hotels and suppliers</td><td>Custom quote, usage-based</td><td>“Try for Free” signup</td><td>Card By Link by email or SMS</td><td>Secure view links, supplier API, gateway charge</td><td>No reviews yet</td></tr>
 <tr><td><a class="bl-link" href="#pci-proxy">PCI Proxy (Planet)</a></td><td>Agencies forwarding cards to OTAs, airlines, and hotels by API</td><td>€350 a month plus usage</td><td>Free trial</td><td>Secure Fields and tokenization links</td><td>Forward proxy to travel partners</td><td><a class="bl-link" href="https://www.g2.com/products/pci-proxy/reviews" target="_blank" rel="noopener">No reviews yet</a></td></tr>
 <tr><td><a class="bl-link" href="#spreedly">Spreedly</a></td><td>Travel platforms booking through many third-party APIs</td><td>From $750 a month</td><td>Demo</td><td>API and SDKs</td><td>Payment Method Distribution to receivers</td><td><a class="bl-link" href="https://www.g2.com/products/spreedly/reviews" target="_blank" rel="noopener">4.4/5 (35 reviews)</a></td></tr>
@@ -145,8 +145,8 @@ faqs:
     <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener"><span class="vc__score">4.4<small>/5</small></span><span class="vc__src">G2 · 6 reviews</span></a><a class="vc__rate" href="https://www.capterra.com/p/241650/Enigma-Vault/reviews/" target="_blank" rel="noopener"><span class="vc__score">4.8<small>/5</small></span><span class="vc__src">Capterra · 4 reviews</span></a></div>
   </div>
   <dl class="vc__facts">
-    <div><dt>Starting price</dt><dd>$0, then $49.99 a month</dd></div>
-    <div><dt>Free tier or trial</dt><dd>Lite: 1,000 Card Vault requests a month, free forever</dd></div>
+    <div><dt>Starting price</dt><dd>$0, then $49 a month</dd></div>
+    <div><dt>Free tier or trial</dt><dd>Lite: 1,000 Card Vault requests a month, free</dd></div>
     <div><dt>Supplier payment</dt><dd>Gateway proxy, or logged staff reveal for manual portals</dd></div>
     <div class="vc__best"><dt>Who it suits</dt><dd>Leisure agencies, host agencies, and corporate travel desks that collect cards remotely and pay a mix of integrated and independent suppliers.</dd></div>
   </dl>
@@ -159,7 +159,7 @@ faqs:
 <p>For suppliers that can’t take an API call, authorized staff reveal the card inside Customer Vault, and every reveal is logged. Agent Vault packages card-on-file migration as an eight-week engagement.</p>
 <ul>
   <li>Clients enter a card once, so it never lands in an email thread or a booking note.</li>
-  <li>Start on the free Lite plan and move to Plus at $49.99 a month as bookings grow.</li>
+  <li>Start on the free Lite plan and move to Starter at $49 a month as bookings grow.</li>
   <li>Keep your merchant account: the proxy charges through Authorize.net, Stripe, Braintree, PayPal, or any REST gateway.</li>
 </ul>
 <p><strong>Key Features</strong></p>
@@ -185,9 +185,10 @@ faqs:
 <div class="bl-tablewrap"><table class="bl-table">
 <thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
 <tbody>
-<tr><td>Lite</td><td>$0 a month</td><td>1,000 Card Vault requests, then $0.08 each; tokenization and gateway proxy</td></tr>
-<tr><td>Plus</td><td>$49.99 a month</td><td>20,000 requests, then $0.04 each; ephemeral key sharing, email support</td></tr>
-<tr><td>Premium</td><td>$249.99 a month</td><td>250,000 requests, then $0.02 each; priority support</td></tr>
+<tr><td>Lite</td><td>$0 a month</td><td>1,000 Card Vault requests, hard limit; tokenization and gateway proxy</td></tr>
+<tr><td>Starter</td><td>$49 a month</td><td>20,000 requests, then $0.02 each; PCI AOC, SOC 2 Type II report, and DPA</td></tr>
+<tr><td>Growth</td><td>$249 a month</td><td>250,000 requests, then $0.01 each; custom CSS on hosted forms, Twilio Pay</td></tr>
+<tr><td>Business</td><td>$499 a month</td><td>1,000,000 requests, then $0.007 each; raw card data access, unlimited client IDs</td></tr>
 <tr><td>Customer Vault and Agent Vault</td><td>Priced by engagement</td><td>No-code intake app; eight-week card-on-file migration</td></tr>
 </tbody></table></div>
 <p><strong>Pros</strong></p>
@@ -661,13 +662,13 @@ faqs:
 <p>Enigma Vault covers both sides, based on its own product pages. Card Vault handles hosted capture forms, Twilio Pay phone capture, and a gateway proxy for charging. Customer Vault adds branded, no-login intake links and a staff inbox, and authorized staff can reveal a card number when needed, with every reveal logged. Confirm which plan fits your workflow in a demo.</p>
 
 <h2 id="pricing-compared">Card Tokenization Software Pricing for Travel Agencies Compared</h2>
-<p>Only figures read on each vendor’s own pricing page on October 23, 2026 are shown. Usage fees matter for agencies: a few hundred bookings a month on a $0.04 rate costs far less than a high monthly floor.</p>
+<p>Only figures read on each vendor’s own pricing page on October 23, 2026 are shown. Usage fees matter for agencies: a few hundred bookings a month on a $0.02 rate costs far less than a high monthly floor.</p>
 <div class="bl-tablewrap"><table class="bl-table bl-table--wide">
 <thead><tr><th>Vendor and plan</th><th>Monthly price</th><th>What’s included</th><th>Overage or usage fees</th><th>Free tier or trial</th><th>Source</th></tr></thead>
 <tbody>
-<tr><td>Enigma Vault Lite (Card Vault)</td><td>$0</td><td>1,000 Card Vault requests; tokenization and gateway proxy</td><td>$0.08 per request</td><td>Free forever</td><td><a class="bl-link" href="/pricing/">Enigma Vault pricing</a></td></tr>
-<tr><td>Enigma Vault Plus (Card Vault)</td><td>$49.99</td><td>20,000 requests</td><td>$0.04 per request</td><td>Start on Lite</td><td><a class="bl-link" href="/pricing/">Enigma Vault pricing</a></td></tr>
-<tr><td>Enigma Vault Premium (Card Vault)</td><td>$249.99</td><td>250,000 requests</td><td>$0.02 per request</td><td>Start on Lite</td><td><a class="bl-link" href="/pricing/">Enigma Vault pricing</a></td></tr>
+<tr><td>Enigma Vault Lite (Card Vault)</td><td>$0</td><td>1,000 Card Vault requests; tokenization and gateway proxy</td><td>Hard limit</td><td>Free sandbox</td><td><a class="bl-link" href="/pricing/">Enigma Vault pricing</a></td></tr>
+<tr><td>Enigma Vault Starter (Card Vault)</td><td>$49</td><td>20,000 requests</td><td>$0.02 per request</td><td>Start on Lite</td><td><a class="bl-link" href="/pricing/">Enigma Vault pricing</a></td></tr>
+<tr><td>Enigma Vault Growth (Card Vault)</td><td>$249</td><td>250,000 requests</td><td>$0.01 per request</td><td>Start on Lite</td><td><a class="bl-link" href="/pricing/">Enigma Vault pricing</a></td></tr>
 <tr><td>Enigma Vault Customer Vault and Agent Vault</td><td>Priced by engagement</td><td>Turnkey intake tenant; eight-week card-on-file migration</td><td>Not applicable</td><td>Demo</td><td><a class="bl-link" href="/pricing/">Enigma Vault pricing</a></td></tr>
 <tr><td>PCI Proxy Starter</td><td>€350</td><td>One brand, one project, core suite, self onboarding, weekday email support</td><td>Usage fees by product; rates not published</td><td>Free trial</td><td>PCI Proxy pricing</td></tr>
 <tr><td>PCI Proxy Scale</td><td>€650</td><td>Multiple brands, unlimited projects, full suite, concierge onboarding</td><td>Usage fees by product; rates not published</td><td>Free trial</td><td>PCI Proxy pricing</td></tr>
@@ -713,9 +714,9 @@ faqs:
 <div class="bl-tablewrap"><table class="bl-table">
 <thead><tr><th>Size</th><th>Start with</th><th>Why</th></tr></thead>
 <tbody>
-<tr><td>Solo advisor or 2–5 person agency</td><td>Enigma Vault Lite or Plus</td><td>Free to start, $49.99 a month at growth</td></tr>
+<tr><td>Solo advisor or 2–5 person agency</td><td>Enigma Vault Lite or Starter</td><td>Free to start, $49 a month at growth</td></tr>
 <tr><td>Agency with a part-time developer</td><td>Enigma Vault Card Vault or PCI Vault</td><td>Hosted forms and an API at a published price</td></tr>
-<tr><td>Mid-size or host agency</td><td>Enigma Vault Premium or Agent Vault</td><td>Higher volume, migration, staff access controls</td></tr>
+<tr><td>Mid-size or host agency</td><td>Enigma Vault Growth or Agent Vault</td><td>Higher volume, migration, staff access controls</td></tr>
 <tr><td>Large TMC or online travel company</td><td>IXOPAY, Spreedly, or PCI Proxy</td><td>Multi-acquirer tokens and API distribution at scale</td></tr>
 </tbody></table></div>
 

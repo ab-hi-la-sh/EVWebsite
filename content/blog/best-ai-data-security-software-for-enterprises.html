@@ -40,7 +40,7 @@ faqs:
   - q: "Who Owns Lakera and Prompt Security Now?"
     a: "Check Point acquired Lakera (closed October 22, 2025), and SentinelOne completed its acquisition of Prompt Security on September 5, 2025."
   - q: "How Much Does AI Data Security Software Cost?"
-    a: "Prices range from free tiers to custom enterprise contracts. NoPII is free for 1 million protected tokens a month and $50 a month for 50 million, Lakera has a free Community tier, and most others are quoted per user, per data volume, or by deployment model."
+    a: "Prices range from free tiers to custom enterprise contracts. NoPII is free for 1 million protected tokens a month and $49 a month for 50 million, Lakera has a free Community tier, and most others are quoted per user, per data volume, or by deployment model."
 ---
 <style>
 /* Wide tables: tighter cell padding so they fit the article column. */
@@ -85,7 +85,7 @@ faqs:
 <div class="bl-tablewrap"><table class="bl-table bl-table--wide">
 <thead><tr><th>Platform</th><th>Best for</th><th>Starting price</th><th>Free trial or tier</th><th>Where it sits</th><th>Protection method</th><th>G2 rating</th></tr></thead>
 <tbody>
-<tr><td><a class="bl-link" href="#enigma-vault">Enigma Vault (NoPII)</a></td><td>Tokenizing PII in your own LLM API calls without losing multi-turn context</td><td>$0, then $50 a month</td><td>Free: 1M tokens a month</td><td>Application-level proxy</td><td>Deterministic, reversible tokens</td><td><a class="bl-link" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener">4.4/5 (6 reviews)</a></td></tr>
+<tr><td><a class="bl-link" href="#enigma-vault">Enigma Vault (NoPII)</a></td><td>Tokenizing PII in your own LLM API calls without losing multi-turn context</td><td>$0, then $49 a month</td><td>Lite: 1M tokens a month</td><td>Application-level proxy</td><td>Deterministic, reversible tokens</td><td><a class="bl-link" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener">4.4/5 (6 reviews)</a></td></tr>
 <tr><td><a class="bl-link" href="#protecto">Protecto</a></td><td>Reversible masking inside your own VPC or data center</td><td>Custom quote</td><td>Free trial</td><td>API layer and data pipelines</td><td>Consistent, reversible masking</td><td><a class="bl-link" href="https://www.g2.com/products/protecto/reviews" target="_blank" rel="noopener">No reviews yet</a></td></tr>
 <tr><td><a class="bl-link" href="#skyflow">Skyflow</a></td><td>An LLM privacy vault inside a wider privacy program</td><td>Custom quote</td><td>Demo</td><td>Data privacy vault plus API</td><td>Tokenization, redaction, re-identification</td><td><a class="bl-link" href="https://www.g2.com/products/payments-data-privacy-vault/reviews" target="_blank" rel="noopener">5.0/5 (1 review, Payments vault)</a></td></tr>
 <tr><td><a class="bl-link" href="#limina">Limina (formerly Private AI)</a></td><td>Self-hosted PII detection across many languages</td><td>Custom quote</td><td>Free trial</td><td>Container in your pipeline</td><td>Redaction, pseudonymization, synthetic data</td><td><a class="bl-link" href="https://www.g2.com/products/limina/reviews" target="_blank" rel="noopener">4.6/5 (22 reviews)</a></td></tr>
@@ -135,8 +135,8 @@ faqs:
     <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener"><span class="vc__score">4.4<small>/5</small></span><span class="vc__src">G2 · 6 reviews</span></a><a class="vc__rate" href="https://www.capterra.com/p/241650/Enigma-Vault/reviews/" target="_blank" rel="noopener"><span class="vc__score">4.8<small>/5</small></span><span class="vc__src">Capterra · 4 reviews</span></a></div>
   </div>
   <dl class="vc__facts">
-    <div><dt>Starting price</dt><dd>$0, then $50 a month</dd></div>
-    <div><dt>Free tier or trial</dt><dd>Free plan: 1M protected tokens a month</dd></div>
+    <div><dt>Starting price</dt><dd>$0, then $49 a month</dd></div>
+    <div><dt>Free tier or trial</dt><dd>Lite plan: 1M protected tokens a month</dd></div>
     <div><dt>Where it sits</dt><dd>Application-level reverse proxy for LLM API calls</dd></div>
     <div class="vc__best"><dt>Who it suits</dt><dd>Enterprises shipping their own AI features (support copilots, claims and case summaries, clinical or financial assistants, agents) that need customer data in the prompt but not at the model provider.</dd></div>
   </dl>
@@ -145,7 +145,7 @@ faqs:
 <p>One proxy fronts nine providers under one policy and one audit log. If detection errors, the request is blocked rather than forwarded.</p>
 <ul>
   <li>Keep multi-turn context: the same customer gets the same token in every turn.</li>
-  <li>Prove it on live traffic: the free plan covers 1M protected tokens a month.</li>
+  <li>Prove it on live traffic: the free Lite plan covers 1M protected tokens a month.</li>
   <li>Hand auditors evidence: every detection is logged per request.</li>
 </ul>
 <figure class="bl-shot">
@@ -167,21 +167,23 @@ faqs:
 <tr><td>Where it sits</td><td>Application-level reverse proxy for LLM API calls</td></tr>
 <tr><td>Protection method</td><td>Deterministic tokenization with round-trip detokenization; fail-safe blocking</td></tr>
 <tr><td>Deployment</td><td>Hosted proxy (api.nopii.co); base-URL change</td></tr>
-<tr><td>Governance</td><td>Per-request audit log; roles and multi-tenancy on Pro; SSO, SLA, and BAA on Enterprise</td></tr>
+<tr><td>Governance</td><td>Per-request audit log; workspaces and roles on Growth; SSO on Business; SLA and BAA on Enterprise</td></tr>
 <tr><td>Compliance evidence</td><td>Built on Enigma Vault: PCI DSS Level 1, SOC 2 Type II; ISO 27001 in progress</td></tr>
 </tbody></table></div>
 <p><strong>Pricing tiers</strong></p>
 <div class="bl-tablewrap"><table class="bl-table">
 <thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
 <tbody>
-<tr><td>Free</td><td>$0 a month</td><td>1M protected tokens a month, all 9 providers, 30+ entity types, audit logging, admin console</td></tr>
-<tr><td>Pro</td><td>$50 a month</td><td>50M tokens, then $1 per extra million; roles, multi-tenancy, custom phrase rules, priority support</td></tr>
-<tr><td>Enterprise</td><td>Custom quote</td><td>Volume pricing, SSO, SLA, dedicated account manager, BAA for healthcare</td></tr>
+<tr><td>Lite</td><td>$0 a month</td><td>1M protected tokens a month, all 9 providers, 30+ entity types, audit logging, admin console</td></tr>
+<tr><td>Starter</td><td>$49 a month</td><td>50M tokens, then $1.00 per extra million; 30-day token retention</td></tr>
+<tr><td>Growth</td><td>$249 a month</td><td>500M tokens, then $0.80 per extra million; retention up to permanent, multiple workspaces, 5 users with admin and member roles</td></tr>
+<tr><td>Business</td><td>$499 a month</td><td>2B tokens, then $0.60 per extra million; unlimited users, SSO</td></tr>
+<tr><td>Enterprise</td><td>Custom quote</td><td>Custom commit and token band, SSO, SLA, dedicated account manager, BAA for healthcare</td></tr>
 </tbody></table></div>
 <p><strong>Pros</strong></p>
 <ul>
   <li>Tokens preserve who is who across every turn, so your assistants and agents keep their reasoning while the provider never sees a real identifier.</li>
-  <li>The free plan runs on live traffic, so you can prove detection and latency to your risk committee before procurement even starts.</li>
+  <li>The free Lite plan runs on live traffic, so you can prove detection and latency to your risk committee before procurement even starts.</li>
   <li>Nine providers sit behind one policy and one log, so you keep model choice without rebuilding controls each time.</li>
 </ul>
 <p><strong>Cons</strong></p>
@@ -554,7 +556,7 @@ faqs:
 <div class="bl-tablewrap"><table class="bl-table bl-table--wide">
 <thead><tr><th>Platform</th><th>Where it sits</th><th>Protection method</th><th>Context across turns</th><th>Deployment</th><th>Coverage</th><th>Governance</th></tr></thead>
 <tbody>
-<tr><td>Enigma Vault (NoPII)</td><td>Reverse proxy, app to LLM API</td><td>Reversible tokens; blocks if detection fails</td><td>Yes, same token per session</td><td>Hosted proxy, base-URL change</td><td>9 LLM providers via API</td><td>Roles on Pro; SSO, SLA, BAA on Enterprise</td></tr>
+<tr><td>Enigma Vault (NoPII)</td><td>Reverse proxy, app to LLM API</td><td>Reversible tokens; blocks if detection fails</td><td>Yes, same token per session</td><td>Hosted proxy, base-URL change</td><td>9 LLM providers via API</td><td>Roles on Growth; SSO on Business; SLA, BAA on Enterprise</td></tr>
 <tr><td>Protecto</td><td>API layer before LLMs, agents, MCP</td><td>Consistent, reversible masking</td><td>Yes, within a namespace</td><td>SaaS, VPC, on-prem, air-gapped</td><td>AI apps, RAG, agents, pipelines</td><td>Context-based unmasking by role and task</td></tr>
 <tr><td>Skyflow</td><td>Vault plus detect-and-protect API</td><td>Tokenization, redaction, re-identification</td><td>Yes, through vault tokens</td><td>Cloud vault, regional residency</td><td>Training, RAG, inference, agents</td><td>Per-field access policies</td></tr>
 <tr><td>Limina</td><td>Container in your pipeline</td><td>Redaction, pseudonymization, synthetic</td><td>Only if you build the token store</td><td>Your VPC or on-prem (CPU or GPU)</td><td>Text in 52 languages</td><td>Your own access controls</td></tr>
@@ -581,8 +583,8 @@ faqs:
 <div class="bl-tablewrap"><table class="bl-table">
 <thead><tr><th>Size</th><th>Start with</th><th>Why</th></tr></thead>
 <tbody>
-<tr><td>One AI feature in production</td><td>Enigma Vault (NoPII) free plan</td><td>Prove protection on real traffic before procurement</td></tr>
-<tr><td>Several AI products and teams</td><td>NoPII Pro or Enterprise, plus Nightfall AI or Prompt Security</td><td>Cover product traffic and workforce use separately</td></tr>
+<tr><td>One AI feature in production</td><td>Enigma Vault (NoPII) Lite plan</td><td>Prove protection on real traffic before procurement</td></tr>
+<tr><td>Several AI products and teams</td><td>NoPII Growth or Enterprise, plus Nightfall AI or Prompt Security</td><td>Cover product traffic and workforce use separately</td></tr>
 <tr><td>Global enterprise with residency rules</td><td>Protecto or Limina</td><td>Keep processing in your own region and infrastructure</td></tr>
 <tr><td>Enterprise consolidating on one security vendor</td><td>Prompt Security via SentinelOne or Lakera via Check Point</td><td>Fit AI controls into the console you already run</td></tr>
 </tbody></table></div>

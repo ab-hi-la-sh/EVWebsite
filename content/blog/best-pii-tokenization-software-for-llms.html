@@ -36,7 +36,7 @@ faqs:
   - q: "Do PII Tokenization Platforms Work With Local Models Like Ollama?"
     a: "Some do. Philterd’s AI Proxy lists Ollama and vLLM, and self-hosted engines like Limina can sit in front of any model you call. Hosted proxies such as NoPII focus on commercial API providers, so check the provider list first."
   - q: "What Is the Cheapest Way to Tokenize PII for an LLM Prototype?"
-    a: "Start on a free tier. NoPII’s Free plan covers 1 million protected tokens a month with no card, Grepture’s free plan covers 1,000 requests, Limina’s Starter plan allows 75 API calls a day, and Philterd’s AI Proxy is free under Apache-2.0 if you host it alongside a Philter engine."
+    a: "Start on a free tier. NoPII’s Lite plan covers 1 million protected tokens a month with no card, Grepture’s free plan covers 1,000 requests, Limina’s Starter plan allows 75 API calls a day, and Philterd’s AI Proxy is free under Apache-2.0 if you host it alongside a Philter engine."
   - q: "Does a Tokenization Proxy Store My Prompts?"
     a: "It depends on the vendor. Some keep token mappings for a configurable retention period and log metadata per request, some process data statelessly, and some offer a zero-data mode. Ask what is stored, for how long, and where, and get it in the DPA."
 ---
@@ -88,7 +88,7 @@ faqs:
   <table class="bl-table bl-table--wide">
     <thead><tr><th>Platform</th><th>Best for</th><th>Starting price</th><th>Free trial or tier</th><th>Restores real values</th><th>How you integrate</th><th>G2 rating</th></tr></thead>
     <tbody>
-      <tr><td><a class="bl-link" href="#enigma-vault">Enigma Vault (NoPII)</a></td><td>Reversible, consistent tokens through a base-URL swap at developer-scale pricing</td><td>$0; Pro $50/mo</td><td>Free plan, 1M protected tokens/mo</td><td>Yes, in the response</td><td>Change base URL to the proxy</td><td><a class="bl-link" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener">4.4/5 (6 reviews)</a></td></tr>
+      <tr><td><a class="bl-link" href="#enigma-vault">Enigma Vault (NoPII)</a></td><td>Reversible, consistent tokens through a base-URL swap at developer-scale pricing</td><td>$0; Starter $49/mo</td><td>Lite plan, 1M protected tokens/mo</td><td>Yes, in the response</td><td>Change base URL to the proxy</td><td><a class="bl-link" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener">4.4/5 (6 reviews)</a></td></tr>
       <tr><td><a class="bl-link" href="#protecto">Protecto</a></td><td>Broad entity coverage and role-based unmasking in your VPC</td><td>$250/mo</td><td>14 days, 1,000 API calls</td><td>Yes, for authorized callers</td><td>REST API, Python SDK</td><td><a class="bl-link" href="https://www.g2.com/products/protecto/reviews" target="_blank" rel="noopener">G2 listing, 0 reviews</a></td></tr>
       <tr><td><a class="bl-link" href="#skyflow">Skyflow</a></td><td>A certified privacy vault that spans LLM and data stack</td><td>Custom quote</td><td>Demo only</td><td>Yes, policy-governed re-identification</td><td>Vault API, Kong AI Gateway plugin</td><td><a class="bl-link" href="https://www.g2.com/products/skyflow-for-genai/reviews" target="_blank" rel="noopener">No reviews on the GenAI listing</a></td></tr>
       <tr><td><a class="bl-link" href="#limina">Limina (formerly Private AI)</a></td><td>Accuracy-sensitive, multilingual text in your own infrastructure</td><td>$0 Starter</td><td>75 API calls/day</td><td>Yes, via returned entity mappings</td><td>Docker container, Python client</td><td><a class="bl-link" href="https://www.g2.com/products/limina/reviews" target="_blank" rel="noopener">4.6/5 (22 reviews)</a></td></tr>
@@ -142,8 +142,8 @@ faqs:
     <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener"><span class="vc__score">4.4<small>/5</small></span><span class="vc__src">G2 · 6 reviews</span></a><a class="vc__rate" href="https://www.capterra.com/p/241650/Enigma-Vault/reviews/" target="_blank" rel="noopener"><span class="vc__score">4.8<small>/5</small></span><span class="vc__src">Capterra · 4 reviews</span></a></div>
   </div>
   <dl class="vc__facts">
-    <div><dt>Starting price</dt><dd>$0 (Free), then Pro at $50 a month</dd></div>
-    <div><dt>Free tier or trial</dt><dd>Free plan, 1M protected tokens a month, no card</dd></div>
+    <div><dt>Starting price</dt><dd>$0 (Lite), then Starter at $49 a month</dd></div>
+    <div><dt>Free tier or trial</dt><dd>Lite plan, 1M protected tokens a month, no card</dd></div>
     <div><dt>Integration path</dt><dd>Change your SDK’s base URL</dd></div>
     <div class="vc__best"><dt>Who it suits</dt><dd>Developer and AI product teams shipping chatbots, RAG pipelines, or agents on OpenAI, Anthropic, or other hosted models who want real values back in every answer without rewriting prompt code.</dd></div>
   </dl>
@@ -186,9 +186,11 @@ faqs:
   <table class="bl-table">
     <thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
     <tbody>
-      <tr><td>Free</td><td>$0/mo</td><td>1M protected tokens a month, no credit card, all providers</td></tr>
-      <tr><td>Pro</td><td>$50/mo</td><td>50M protected tokens, then $1 per additional million, no hard cap</td></tr>
-      <tr><td>Enterprise</td><td>Custom</td><td>Volume pricing, SSO, SLA, dedicated account manager, BAA for healthcare</td></tr>
+      <tr><td>Lite</td><td>$0/mo</td><td>1M protected tokens a month, no credit card, all providers</td></tr>
+      <tr><td>Starter</td><td>$49/mo</td><td>50M protected tokens, then $1.00 per additional million, 30-day token retention</td></tr>
+      <tr><td>Growth</td><td>$249/mo</td><td>500M protected tokens, then $0.80 per additional million, retention up to permanent, 5 users with roles</td></tr>
+      <tr><td>Business</td><td>$499/mo</td><td>2B protected tokens, then $0.60 per additional million, unlimited users, SSO</td></tr>
+      <tr><td>Enterprise</td><td>Custom</td><td>Custom commit and token band, SSO, SLA, dedicated account manager, BAA for healthcare</td></tr>
     </tbody>
   </table>
 </div>
@@ -196,12 +198,12 @@ faqs:
 <ul>
   <li>Integration is a one-line base-URL change, so you can protect an existing feature without touching your prompt or retrieval code.</li>
   <li>Deterministic tokens and automatic detokenization keep multi-turn context intact, so your assistant still answers about the right customer.</li>
-  <li>The free plan covers 1 million protected tokens a month, so you can prove the approach in staging before you spend anything.</li>
+  <li>The free Lite plan covers 1 million protected tokens a month, so you can prove the approach in staging before you spend anything.</li>
 </ul>
 <p><strong>Cons</strong></p>
 <ul>
   <li>It runs as a managed service only, so teams that must keep every byte on their own servers will need a self-hosted engine instead.</li>
-  <li>The Free plan keeps token mappings for one day, so tokens that must persist across longer sessions need Pro, where retention is configurable.</li>
+  <li>The Lite plan keeps token mappings for one day, so tokens that must persist across longer sessions need a paid plan: 30 days on Starter, up to permanent on Growth.</li>
   <li>There’s no published entity list or accuracy benchmark, so you need to test coverage on your own traffic before launch.</li>
 </ul>
 <p><strong>What developers say in reviews:</strong> Very positive. Enigma Vault holds <a class="bl-link" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener">4.4/5 from 6 reviews on G2</a> and <a class="bl-link" href="https://www.capterra.com/p/241650/Enigma-Vault/reviews/" target="_blank" rel="noopener">4.8/5 from 4 on Capterra</a>. Reviewers mostly discuss the company’s vault products and like the simple, easy-to-follow tokenization API, the affordable pricing, and quick responses to feature requests. One reviewer wants deeper reporting dashboards and another found pricing a little high; NoPII doesn’t yet have its own review listing.</p>
@@ -579,8 +581,8 @@ faqs:
   <table class="bl-table">
     <thead><tr><th>Stage</th><th>Start with</th><th>Why</th></tr></thead>
     <tbody>
-      <tr><td>Prototype or hackathon</td><td>Enigma Vault (NoPII) Free</td><td>1M protected tokens a month, no card, live in minutes</td></tr>
-      <tr><td>Seed to Series A, first production feature</td><td>Enigma Vault (NoPII) Pro</td><td>$50 a month for 50M tokens with no rebuild of your prompt code</td></tr>
+      <tr><td>Prototype or hackathon</td><td>Enigma Vault (NoPII) Lite</td><td>1M protected tokens a month, no card, live in minutes</td></tr>
+      <tr><td>Seed to Series A, first production feature</td><td>Enigma Vault (NoPII) Starter</td><td>$49 a month for 50M tokens with no rebuild of your prompt code</td></tr>
       <tr><td>Scale-up with many LLM features</td><td>Enigma Vault (NoPII) or Protecto</td><td>Per-token pricing vs. deep entity catalog and role-based unmasking</td></tr>
       <tr><td>Regulated enterprise with a vault program</td><td>Skyflow</td><td>Certifications and one vault across AI and data platforms</td></tr>
       <tr><td>Team with a strict self-host mandate</td><td>Limina or Philterd</td><td>Detection runs entirely inside your network</td></tr>
@@ -608,7 +610,7 @@ faqs:
 </ul>
 
 <h2 id="ready-to-try-enigma-vaults-nopii">Ready to Try Enigma Vault’s NoPII?</h2>
-<p>If your LLM feature needs customer details to be useful, NoPII lets you keep them: detected values are tokenized before they reach the model provider, the same customer keeps the same token across the conversation, and real values come back in the response. Read how it works on the <a class="bl-link" href="/nopii/">NoPII product page</a>, check the <a class="bl-link" href="/pricing/">pricing</a> (the Free plan covers 1 million protected tokens a month), or run your own prompt through the <a class="bl-link" href="/nopii/demo/">live demo</a> and see exactly which entities it catches.</p>
+<p>If your LLM feature needs customer details to be useful, NoPII lets you keep them: detected values are tokenized before they reach the model provider, the same customer keeps the same token across the conversation, and real values come back in the response. Read how it works on the <a class="bl-link" href="/nopii/">NoPII product page</a>, check the <a class="bl-link" href="/pricing/">pricing</a> (the Lite plan covers 1 million protected tokens a month), or run your own prompt through the <a class="bl-link" href="/nopii/demo/">live demo</a> and see exactly which entities it catches.</p>
 <div class="bl-inlinecta">
   <div>
     <p class="bl-inlinecta__t">Ship the LLM feature without shipping your customers’ data.</p>

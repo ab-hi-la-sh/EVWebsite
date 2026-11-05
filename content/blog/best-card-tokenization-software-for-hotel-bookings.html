@@ -32,7 +32,7 @@ faqs:
   - q: "Can I Keep the CVV for a Guaranteed Reservation?"
     a: "Not after authorization. PCI DSS forbids storing the CVV once a card is authorized. Some vaults hold it briefly before the first charge; Enigma Vault keeps CVVs encrypted for at most 30 minutes and then deletes them. For OTA cards, SiteMinder notes the CVV is usually retrieved from the channel’s extranet."
   - q: "How Much Does Card Tokenization Cost for a Small Hotel?"
-    a: "Published prices range from $0 to a few hundred dollars a month. Enigma Vault Card Vault is free for 1,000 requests a month and $49.99 a month for 20,000; PCI Vault starts at $255 a month plus $0.02 per operation; PCI Proxy starts at €350 a month plus usage. PCI Booking, Bluefin, and IXOPAY quote by deal."
+    a: "Published prices range from $0 to a few hundred dollars a month. Enigma Vault Card Vault is free for 1,000 requests a month and $49 a month for 20,000; PCI Vault starts at $255 a month plus $0.02 per operation; PCI Proxy starts at €350 a month plus usage. PCI Booking, Bluefin, and IXOPAY quote by deal."
   - q: "Is a Third-Party Credit Card Authorization Form by Email Safe?"
     a: "Not really. A PDF with a full card number and a copy of an ID sitting in a shared reservations inbox is an uncontrolled copy of cardholder data. A branded secure link that tokenizes the card, captures a signature, and logs access replaces the attachment with a traceable record, though it doesn’t remove chargeback risk on its own."
   - q: "Do I Still Need Tokenization If My PMS Has Integrated Payments?"
@@ -110,7 +110,7 @@ faqs:
 <div class="bl-tablewrap"><table class="bl-table bl-table--wide">
 <thead><tr><th>Platform</th><th>Best for</th><th>Strongest booking channel</th><th>Starting price</th><th>Free tier or trial</th><th>G2 rating</th></tr></thead>
 <tbody>
-<tr><td><a class="bl-link" href="#enigma-vault">Enigma Vault</a></td><td>Phone, email, and direct reservations plus third-party authorizations</td><td>Phone and email; groups</td><td>$0, then $49.99 a month</td><td>Free Lite plan</td><td><a class="bl-link" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener">4.4/5 (6 reviews)</a></td></tr>
+<tr><td><a class="bl-link" href="#enigma-vault">Enigma Vault</a></td><td>Phone, email, and direct reservations plus third-party authorizations</td><td>Phone and email; groups</td><td>$0, then $49 a month</td><td>Free Lite plan</td><td><a class="bl-link" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener">4.4/5 (6 reviews)</a></td></tr>
 <tr><td><a class="bl-link" href="#pci-booking">PCI Booking</a></td><td>Capturing OTA virtual cards and channel manager card data as tokens</td><td>OTAs and channel managers</td><td>Custom quote</td><td>“Try for Free” signup</td><td>No reviews yet</td></tr>
 <tr><td><a class="bl-link" href="#pci-proxy">PCI Proxy (Planet)</a></td><td>PMS and booking engine teams that want a SiteMinder-certified proxy</td><td>Channel manager delivery</td><td>€350 a month plus usage</td><td>Free trial</td><td><a class="bl-link" href="https://www.g2.com/products/pci-proxy/reviews" target="_blank" rel="noopener">No reviews yet</a></td></tr>
 <tr><td><a class="bl-link" href="#bluefin">Bluefin ShieldConex</a></td><td>Front desk P2PE with tokens for card-on-file</td><td>Front desk and POS</td><td>Custom quote</td><td>Demo</td><td><a class="bl-link" href="https://www.g2.com/products/shieldconex/reviews" target="_blank" rel="noopener">No reviews yet</a></td></tr>
@@ -176,7 +176,7 @@ faqs:
     <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener"><span class="vc__score">4.4<small>/5</small></span><span class="vc__src">G2 · 6 reviews</span></a><a class="vc__rate" href="https://www.capterra.com/p/241650/Enigma-Vault/reviews/" target="_blank" rel="noopener"><span class="vc__score">4.8<small>/5</small></span><span class="vc__src">Capterra · 4 reviews</span></a></div>
   </div>
   <dl class="vc__facts">
-    <div><dt>Starting price</dt><dd>$0, then $49.99 a month</dd></div>
+    <div><dt>Starting price</dt><dd>$0, then $49 a month</dd></div>
     <div><dt>Free tier or trial</dt><dd>Free Lite plan: 1,000 Card Vault requests a month</dd></div>
     <div><dt>Phone capture</dt><dd>Twilio Pay IVR straight to the vault</dd></div>
     <div class="vc__best"><dt>Who it suits</dt><dd>Independent hotels, small groups, and central reservations teams that take cards by phone, email, and their own booking engine, and want to charge through their existing gateway.</dd></div>
@@ -203,18 +203,19 @@ faqs:
 <div class="bl-tablewrap"><table class="bl-table">
 <thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
 <tbody>
-<tr><td>Lite</td><td>$0 a month</td><td>1,000 Card Vault requests, then $0.08 each; tokenization and gateway proxy</td></tr>
-<tr><td>Plus</td><td>$49.99 a month</td><td>20,000 requests (about 200 to 300 daily transactions), then $0.04; email support</td></tr>
-<tr><td>Premium</td><td>$249.99 a month</td><td>250,000 requests, then $0.02; priority support</td></tr>
+<tr><td>Lite</td><td>$0 a month</td><td>1,000 Card Vault requests, hard limit; tokenization and gateway proxy</td></tr>
+<tr><td>Starter</td><td>$49 a month</td><td>20,000 requests (about 200 to 300 daily transactions), then $0.02; up to 10,000 stored cards</td></tr>
+<tr><td>Growth</td><td>$249 a month</td><td>250,000 requests, then $0.01; up to 100,000 stored cards; Twilio Pay</td></tr>
+<tr><td>Business</td><td>$499 a month</td><td>1,000,000 requests, then $0.007; up to 1,000,000 stored cards</td></tr>
 <tr><td>Customer Vault</td><td>Priced by engagement</td><td>Branded intake links, staff inbox, e-signature, MFA</td></tr>
 </tbody></table></div>
-<p><strong>Cost at 2,000 Stored Cards a Month:</strong> About $49.99 a month on Plus. Assuming three requests per card (tokenize, one charge, one reveal or refund), 2,000 cards is roughly 6,000 requests, well inside Plus’s 20,000. The same volume on Lite would be 1,000 free plus 5,000 at $0.08, or $400. Customer Vault is quoted separately.</p>
+<p><strong>Cost at 2,000 Stored Cards a Month:</strong> About $49 a month on Starter. Assuming three requests per card (tokenize, one charge, one reveal or refund), 2,000 cards is roughly 6,000 requests, well inside Starter’s 20,000; once more than 10,000 cards are stored at once, the account moves up to Growth at $249. Lite would not cover this volume, since it stops at 1,000 requests and 100 stored cards. Customer Vault is quoted separately.</p>
 <p><strong>Who Should Not Buy:</strong> A hotel whose every card already flows through PMS-integrated payments and an OTA-collect model, with no phone, email, or group deposits outside it. Your PMS’s own tokenization may be enough.</p>
 <p>Also not a fit if you need pre-built PMS or channel manager connectors: Enigma Vault works through APIs, hosted forms, and its gateway proxy, and doesn’t list named PMS integrations.</p>
 <p><strong>Pros</strong></p>
 <ul>
   <li>Reservations agents stop hearing, typing, and seeing full card numbers, because phone, link, and web capture all write straight to the vault.</li>
-  <li>A free Lite plan and a $49.99 Plus plan let a 40-room independent start without a procurement cycle.</li>
+  <li>A free Lite plan and a $49 Starter plan let a 40-room independent start without a procurement cycle.</li>
   <li>The gateway proxy lets you keep your processor and add or switch one later without asking guests for their cards again.</li>
 </ul>
 <p><strong>Cons</strong></p>
@@ -398,7 +399,7 @@ faqs:
 </ul>
 <p><strong>What Hoteliers and Reviewers Say:</strong> Reviews: no G2 or Capterra reviews yet (<a class="bl-link" href="https://www.g2.com/products/pci-proxy/reviews" target="_blank" rel="noopener">G2</a>, <a class="bl-link" href="https://www.capterra.com/p/10055014/PCI-Proxy/reviews/" target="_blank" rel="noopener">Capterra</a>).</p>
 <p><strong>Our Verdict:</strong> The safest bet if your PMS pulls from SiteMinder and wants a certified proxy; overkill for a hotel without developers.</p>
-<p>Running a single property? <a class="bl-link" href="/pricing/">Compare Enigma Vault’s free and $49.99 plans</a>.</p>
+<p>Running a single property? <a class="bl-link" href="/pricing/">Compare Enigma Vault’s free and $49 plans</a>.</p>
 
 <p class="bl-uc">Also worth a look: OTA and channel distribution</p>
 <div class="vc">
@@ -557,9 +558,9 @@ faqs:
 <thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
 <tbody>
 <tr><td>Customer Vault</td><td>Priced by engagement</td><td>Branded app, intake links, e-signature, MFA</td></tr>
-<tr><td>Card Vault Plus (for charging)</td><td>$49.99 a month</td><td>20,000 requests, gateway proxy</td></tr>
+<tr><td>Card Vault Starter (for charging)</td><td>$49 a month</td><td>20,000 requests, gateway proxy</td></tr>
 </tbody></table></div>
-<p><strong>Cost at 2,000 Stored Cards a Month:</strong> Customer Vault is quoted; the Card Vault charging side runs about $49.99 a month on Plus at this volume.</p>
+<p><strong>Cost at 2,000 Stored Cards a Month:</strong> Customer Vault is quoted; the Card Vault charging side runs about $49 a month on Starter at this volume.</p>
 <p><strong>Who Should Not Buy:</strong> A large full-service hotel whose sales team already lives in a sales and catering suite with built-in contracts and payments; integration depth there will matter more than intake.</p>
 <p><strong>Pros</strong></p>
 <ul>
@@ -601,9 +602,9 @@ faqs:
 <div class="bl-tablewrap"><table class="bl-table bl-table--wide">
 <thead><tr><th>Vendor and plan</th><th>Monthly price</th><th>What’s included</th><th>Overage or usage fees</th><th>Free tier or trial</th><th>Source</th></tr></thead>
 <tbody>
-<tr><td>Enigma Vault Card Vault Lite</td><td>$0</td><td>1,000 requests; tokenization and gateway proxy; community support</td><td>$0.08 per request</td><td>Free plan</td><td><a class="bl-link" href="/pricing/">Pricing</a></td></tr>
-<tr><td>Enigma Vault Card Vault Plus</td><td>$49.99</td><td>20,000 requests (about 200 to 300 daily transactions); email support</td><td>$0.04 per request</td><td>Start on Lite</td><td><a class="bl-link" href="/pricing/">Pricing</a></td></tr>
-<tr><td>Enigma Vault Card Vault Premium</td><td>$249.99</td><td>250,000 requests (about 2,000 daily transactions); priority support</td><td>$0.02 per request</td><td>Start on Lite</td><td><a class="bl-link" href="/pricing/">Pricing</a></td></tr>
+<tr><td>Enigma Vault Card Vault Lite</td><td>$0</td><td>1,000 requests; tokenization and gateway proxy</td><td>Hard limit</td><td>Free plan</td><td><a class="bl-link" href="/pricing/">Pricing</a></td></tr>
+<tr><td>Enigma Vault Card Vault Starter</td><td>$49</td><td>20,000 requests (about 200 to 300 daily transactions)</td><td>$0.02 per request</td><td>Start on Lite</td><td><a class="bl-link" href="/pricing/">Pricing</a></td></tr>
+<tr><td>Enigma Vault Card Vault Growth</td><td>$249</td><td>250,000 requests (about 2,000 daily transactions)</td><td>$0.01 per request</td><td>Start on Lite</td><td><a class="bl-link" href="/pricing/">Pricing</a></td></tr>
 <tr><td>Enigma Vault Customer Vault</td><td>Priced by engagement</td><td>Branded intake links, staff inbox, e-signature, MFA</td><td>Quoted</td><td>Demo</td><td><a class="bl-link" href="/pricing/">Pricing</a></td></tr>
 <tr><td>PCI Proxy Starter</td><td>€350</td><td>One brand, one project, self-onboarding, weekday email support</td><td>Usage fees, not published</td><td>Free trial</td><td>pci-proxy.com</td></tr>
 <tr><td>PCI Proxy Scale</td><td>€650</td><td>Multiple brands, unlimited projects, concierge onboarding, Slack, prioritized support</td><td>Usage fees, not published</td><td>Free trial</td><td>pci-proxy.com</td></tr>

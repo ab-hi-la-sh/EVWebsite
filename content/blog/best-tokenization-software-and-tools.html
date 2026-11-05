@@ -30,7 +30,7 @@ faqs:
   - q: "Does Tokenization Take My Business Out of PCI DSS Scope?"
     a: "No platform can promise that. A hosted capture form and a token vault can significantly reduce the systems that touch card data, and therefore your PCI scope, but your acquirer or QSA confirms your final scope and which Self-Assessment Questionnaire applies."
   - q: "How Much Does Tokenization Software Cost?"
-    a: "Published prices range from $0 to about $1,000 a month to start. Enigma Vault starts at $0 and $49.99 a month per vault, PCI Vault from $255 a month plus $0.02 per operation, PCI Proxy from €350 a month, Spreedly from $750 a month, Basis Theory and Evervault from $995 a month, and VGS from $1,000 a month. Enterprise platforms such as Protegrity, Thales, Skyflow, Bluefin, and IXOPAY are quoted."
+    a: "Published prices range from $0 to about $1,000 a month to start. Enigma Vault starts at $0 and $49 a month per product, PCI Vault from $255 a month plus $0.02 per operation, PCI Proxy from €350 a month, Spreedly from $750 a month, Basis Theory and Evervault from $995 a month, and VGS from $1,000 a month. Enterprise platforms such as Protegrity, Thales, Skyflow, Bluefin, and IXOPAY are quoted."
   - q: "Can I Tokenize PII as Well as Card Numbers?"
     a: "Yes. Enigma Vault (Data Vault), VGS, Skyflow, IXOPAY, Bluefin ShieldConex, Protegrity, Thales, and Fortanix all tokenize or encrypt non-card values such as Social Security numbers, bank accounts, and health data. Spreedly, PCI Vault, and PCI Proxy focus mainly on payment and financial data."
   - q: "Should I Use My Payment Gateway’s Tokens Instead of a Separate Vault?"
@@ -120,7 +120,7 @@ faqs:
 <div class="bl-tablewrap"><table class="bl-table bl-table--wide">
 <thead><tr><th>Platform</th><th>Best for</th><th>Data it tokenizes</th><th>Token model</th><th>Deployment</th><th>Starting price</th><th>G2</th><th>Gartner Peer Insights</th></tr></thead>
 <tbody>
-<tr><td><a class="bl-link" href="#enigma-vault">Enigma Vault</a></td><td>One vendor across cards, data, files, and AI prompts</td><td>Cards, PII, files, LLM prompts</td><td>Vaulted, optional format-preserving</td><td>SaaS (AWS)</td><td>$0, then $49.99 a month</td><td><a class="bl-link" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener">4.4 (6)</a></td><td>Not listed</td></tr>
+<tr><td><a class="bl-link" href="#enigma-vault">Enigma Vault</a></td><td>One vendor across cards, data, files, and AI prompts</td><td>Cards, PII, files, LLM prompts</td><td>Vaulted, optional format-preserving</td><td>SaaS (AWS)</td><td>$0, then $49 a month</td><td><a class="bl-link" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener">4.4 (6)</a></td><td>Not listed</td></tr>
 <tr><td><a class="bl-link" href="#ixopay">IXOPAY</a></td><td>Vaulted or vaultless tokens inside payment orchestration</td><td>Cards, PII, PHI</td><td>Vaulted or vaultless</td><td>SaaS</td><td>Custom quote</td><td><a class="bl-link" href="https://www.g2.com/products/tokenex-ixopay/reviews" target="_blank" rel="noopener">4.6 (17)</a></td><td>Not listed</td></tr>
 <tr><td><a class="bl-link" href="#vgs">VGS</a></td><td>Proxy-based tokenization of cards, bank accounts, and PII</td><td>Cards, bank data, PII</td><td>Vaulted proxy</td><td>SaaS</td><td>$1,000 a month</td><td><a class="bl-link" href="https://www.g2.com/products/very-good-security-vgs-platform/reviews" target="_blank" rel="noopener">4.7 (47)</a></td><td>Not listed</td></tr>
 <tr><td><a class="bl-link" href="#skyflow">Skyflow</a></td><td>A privacy vault for PII, PHI, and data residency</td><td>PII, PHI, cards, AI prompts</td><td>Vaulted, polymorphic encryption</td><td>SaaS (AWS)</td><td>Custom quote</td><td><a class="bl-link" href="https://www.g2.com/products/payments-data-privacy-vault/reviews" target="_blank" rel="noopener">5.0 (1)</a></td><td>Not listed</td></tr>
@@ -196,7 +196,7 @@ faqs:
     <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener"><span class="vc__score">4.4<small>/5</small></span><span class="vc__src">G2 · 6 reviews</span></a><a class="vc__rate" href="https://www.capterra.com/p/241650/Enigma-Vault/reviews/" target="_blank" rel="noopener"><span class="vc__score">4.8<small>/5</small></span><span class="vc__src">Capterra · 4 reviews</span></a></div>
   </div>
   <dl class="vc__facts">
-    <div><dt>Starting price</dt><dd>$0 (Lite), then $49.99 a month per vault</dd></div><div><dt>Free tier or trial</dt><dd>Lite tier is free forever, not a trial</dd></div><div><dt>Token model</dt><dd>Vaulted; random by default, optional format-preserving</dd></div>
+    <div><dt>Starting price</dt><dd>$0 (Lite), then $49 a month per product</dd></div><div><dt>Free tier or trial</dt><dd>Lite sandbox is free and never billed, not a trial</dd></div><div><dt>Token model</dt><dd>Vaulted; random by default, optional format-preserving</dd></div>
     <div class="vc__best"><dt>Who it suits</dt><dd>Teams that need cards, personal data, files, and AI prompts protected by one vendor, with published prices and a free start.</dd></div>
   </dl>
 </div>
@@ -205,7 +205,7 @@ faqs:
   <figcaption>Enigma Vault homepage. Source: enigmavault.io</figcaption>
 </figure>
 <p>Enigma Vault is a tokenization platform that protects card data, personal data, files, and AI prompts through one vendor. Card Vault captures cards through hosted forms (13 languages), the REST API, or phone payments through Twilio Pay, and CVVs are held encrypted for at most 30 minutes before deletion.</p>
-<p>Data Vault tokenizes structured secrets such as SSNs and account numbers with deterministic tokens that keep joins and exact-match lookups working, in batches of up to 5,000 per request.</p>
+<p>Data Vault tokenizes structured secrets such as SSNs and account numbers with deterministic tokens that keep joins and exact-match lookups working, in batches of up to 5,000 per request on Growth and Business.</p>
 <p>File Vault handles files up to 5 GB with a unique data key per file and presigned uploads, so files can skip your application server. NoPII sits in front of LLM API calls and tokenizes recognized PII before it reaches the model provider.</p>
 <p class="bl-tagline"><em>Four API vaults plus an LLM proxy, priced self-serve from $0 on AWS Marketplace.</em></p>
 <p><strong>What’s Great</strong></p>
@@ -226,10 +226,11 @@ faqs:
 <div class="bl-tablewrap"><table class="bl-table">
 <thead><tr><th>Plan</th><th>Price</th><th>What you get</th></tr></thead>
 <tbody>
-<tr><td>Lite</td><td>$0 a month, free forever</td><td>Card Vault 1,000 requests ($0.08 overage), Data Vault 1,500 ($0.06), File Vault 5 GB; tokenization and gateway proxy</td></tr>
-<tr><td>Plus</td><td>$49.99 a month per vault</td><td>Card Vault 20,000 requests ($0.04 overage), Data Vault 30,000 ($0.03), File Vault 150 GB; ephemeral key sharing, email support</td></tr>
-<tr><td>Premium</td><td>$249.99 a month per vault</td><td>Card Vault 250,000 requests ($0.02 overage), Data Vault 400,000 ($0.01), File Vault 1 TB; priority support</td></tr>
-<tr><td>NoPII</td><td>$0 or $50 a month</td><td>Free: 1M protected tokens a month; Pro: 50M, then $1 per extra million; Enterprise custom</td></tr>
+<tr><td>Lite</td><td>$0 a month, free sandbox</td><td>Card Vault 1,000 requests (hard limit), Data Vault 1,500 (hard limit), File Vault 5 GB; tokenization and gateway proxy</td></tr>
+<tr><td>Starter</td><td>$49 a month per product</td><td>Card Vault 20,000 requests ($0.02 overage), Data Vault 30,000 ($0.013), File Vault 150 GB; PCI AOC, SOC 2 Type II report, and DPA</td></tr>
+<tr><td>Growth</td><td>$249 a month per product</td><td>Card Vault 250,000 requests ($0.01 overage), Data Vault 400,000 ($0.0065), File Vault 1,000 GB; custom CSS on hosted forms, Twilio Pay</td></tr>
+<tr><td>Business</td><td>$499 a month per product</td><td>Card Vault 1,000,000 requests ($0.007 overage), Data Vault 2,000,000 ($0.0045), File Vault 5,000 GB; raw card data access, unlimited client IDs</td></tr>
+<tr><td>NoPII</td><td>$0, $49, $249, or $499 a month</td><td>Lite: 1M protected tokens a month; Starter: 50M, then $1.00 per extra million; Growth: 500M; Business: 2B; Enterprise custom</td></tr>
 </tbody></table></div>
 <p><strong>What Reviewers Say</strong></p>
 <ul>
@@ -769,7 +770,7 @@ faqs:
 <tr><td>AI prompts and LLM calls</td><td>Enigma Vault NoPII, Protecto, or Skyflow</td><td>NoPII tokenizes PII before it reaches the model provider and restores it in the response; Protecto runs in your VPC or air-gapped; Skyflow offers an LLM gateway</td></tr>
 <tr><td>Self-hosted or heavily regulated environments</td><td>Thales CipherTrust, Fortanix, or Protegrity</td><td>Run on your own infrastructure with keys you control and HSM-backed roots of trust</td></tr>
 <tr><td>Travel and hospitality card vaulting in Europe</td><td>PCI Proxy</td><td>Accepts cards from any channel and shares tokens with 25+ acquirers, priced in euros</td></tr>
-<tr><td>Small team on a budget</td><td>Enigma Vault Lite, then Plus; or PCI Vault</td><td>Enigma Vault starts at $0 and $49.99 a month per vault; PCI Vault starts at $255 a month plus $0.02 per operation</td></tr>
+<tr><td>Small team on a budget</td><td>Enigma Vault Lite, then Starter; or PCI Vault</td><td>Enigma Vault starts at $0 and $49 a month per product; PCI Vault starts at $255 a month plus $0.02 per operation</td></tr>
 </tbody></table></div>
 
 <h2 id="how-vendors-describe-their-tokenization">How Each Vendor Describes Its Tokenization</h2>
@@ -801,10 +802,10 @@ faqs:
 <div class="bl-tablewrap"><table class="bl-table bl-table--wide">
 <thead><tr><th>Vendor and plan</th><th>Monthly price</th><th>What’s included</th><th>Overage or usage fees</th><th>Free tier or trial</th><th>Source</th></tr></thead>
 <tbody>
-<tr><td>Enigma Vault Lite</td><td>$0</td><td>Card Vault 1,000 requests, Data Vault 1,500, File Vault 5 GB</td><td>$0.08 (Card), $0.06 (Data) per request</td><td>Free forever, not a trial</td><td><a class="bl-link" href="/pricing/">Enigma Vault pricing</a></td></tr>
-<tr><td>Enigma Vault Plus</td><td>$49.99 per vault</td><td>Card 20,000, Data 30,000, File 150 GB</td><td>$0.04 (Card), $0.03 (Data)</td><td>Start on Lite</td><td><a class="bl-link" href="/pricing/">Enigma Vault pricing</a></td></tr>
-<tr><td>Enigma Vault Premium</td><td>$249.99 per vault</td><td>Card 250,000, Data 400,000, File 1 TB</td><td>$0.02 (Card), $0.01 (Data)</td><td>Start on Lite</td><td><a class="bl-link" href="/pricing/">Enigma Vault pricing</a></td></tr>
-<tr><td>Enigma Vault NoPII</td><td>$0 or $50 (Pro)</td><td>1M or 50M protected tokens</td><td>$1 per extra million on Pro</td><td>Free plan</td><td><a class="bl-link" href="/pricing/">Enigma Vault pricing</a></td></tr>
+<tr><td>Enigma Vault Lite</td><td>$0</td><td>Card Vault 1,000 requests, Data Vault 1,500, File Vault 5 GB</td><td>Hard limit</td><td>Free forever, not a trial</td><td><a class="bl-link" href="/pricing/">Enigma Vault pricing</a></td></tr>
+<tr><td>Enigma Vault Starter</td><td>$49 per product</td><td>Card 20,000, Data 30,000, File 150 GB</td><td>$0.02 (Card), $0.013 (Data)</td><td>Start on Lite</td><td><a class="bl-link" href="/pricing/">Enigma Vault pricing</a></td></tr>
+<tr><td>Enigma Vault Growth</td><td>$249 per product</td><td>Card 250,000, Data 400,000, File 1,000 GB</td><td>$0.01 (Card), $0.0065 (Data)</td><td>Start on Lite</td><td><a class="bl-link" href="/pricing/">Enigma Vault pricing</a></td></tr>
+<tr><td>Enigma Vault NoPII</td><td>$0, $49, $249, or $499</td><td>1M, 50M, 500M, or 2B protected tokens</td><td>$1.00 to $0.60 per extra million on paid plans</td><td>Lite plan</td><td><a class="bl-link" href="/pricing/">Enigma Vault pricing</a></td></tr>
 <tr><td>VGS Starter</td><td>From $1,000</td><td>Starter package</td><td>Not published</td><td>Free to start</td><td>VGS pricing</td></tr>
 <tr><td>Basis Theory</td><td>$995</td><td>20,000 tokens, 1 MB payload, 24 hours of logs, AOC, US environment only</td><td>Not published</td><td>Not stated</td><td>Basis Theory pricing</td></tr>
 <tr><td>Evervault</td><td>$995 plus usage</td><td>Platform for under 25K transactions a month</td><td>For example, $0.005 per decrypt, $0.03 per successful 3D Secure</td><td>Free sandbox</td><td>Evervault pricing</td></tr>

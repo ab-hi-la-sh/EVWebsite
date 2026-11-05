@@ -24,7 +24,7 @@ faqs:
   - q: "Will Our AI Governance Committee Accept Tokenization as a PHI Control?"
     a: "Committees usually approve on evidence. Per-request audit logs, replay results on synthetic notes and a data flow showing the provider never received identifiers give them something concrete to review before go-live."
   - q: "Which NoPII Plan Do We Need to Get a BAA?"
-    a: "A BAA for healthcare workloads comes with NoPII Enterprise. Many teams test one workflow on the Free plan with synthetic notes first, then move to Enterprise before real patient data flows through the proxy."
+    a: "A BAA for healthcare workloads comes with NoPII Enterprise. Many teams test one workflow on the Lite plan with synthetic notes first, then move to Enterprise before real patient data flows through the proxy."
   - q: "Can Our Ambient Scribe Vendor Use PII Protection?"
     a: "Yes, if the vendor routes its model calls through a protected endpoint. When a third-party scribe calls the model directly, ask the vendor to integrate a proxy or confirm how identifiers are handled before go-live."
   - q: "Will Tokenization Slow Down Live Clinical Documentation?"
@@ -262,7 +262,7 @@ faqs:
       <tr><td>Fail-safe design</td><td>Requests are blocked if tokenization fails</td></tr>
       <tr><td>Streaming</td><td>Real values restored as chunks arrive</td></tr>
       <tr><td>Audit logs</td><td>Entity type, confidence score, provider and model for every request</td></tr>
-      <tr><td>Retention and purge</td><td>Token retention from one day to permanent on paid plans, plus purge on request</td></tr>
+      <tr><td>Retention and purge</td><td>Token retention of 30 days on Starter and up to permanent on Growth and above, plus purge on request</td></tr>
       <tr><td>BAA</td><td>Available for healthcare deployments on NoPII Enterprise</td></tr>
     </tbody>
   </table>
@@ -273,10 +273,12 @@ faqs:
   <table class="bl-table">
     <thead><tr><th>Plan</th><th>Price</th><th>Protected tokens</th><th>Overage</th><th>Token retention</th><th>What's included</th></tr></thead>
     <tbody>
-      <tr><td>Free</td><td>$0 per month</td><td>1 million per month</td><td>None, with a prompt to upgrade</td><td>1 day</td><td>All providers, 30+ entity types, deterministic tokens, fail-safe blocking, audit logs, admin console</td></tr>
-      <tr><td>Pro</td><td>$50 per month</td><td>50 million per month</td><td>$1 per additional million</td><td>1 day to permanent</td><td>Everything in Free, plus multi-tenancy and roles, custom phrase rules and priority support</td></tr>
-      <tr><td>Enterprise</td><td>Custom</td><td>Volume pricing</td><td>Volume discounts</td><td>Configurable</td><td>SSO, SLA, a dedicated account manager and a BAA for healthcare</td></tr>
+      <tr><td>Lite</td><td>$0 per month</td><td>1 million per month</td><td>None, with a prompt to upgrade</td><td>1 day</td><td>All providers, 30+ entity types, deterministic tokens, fail-safe blocking, audit logs, admin console, 1 workspace and 1 user</td></tr>
+      <tr><td>Starter</td><td>$49 per month</td><td>50 million per month</td><td>$1.00 per additional million</td><td>30 days</td><td>Everything in Lite, with 1 workspace and 1 user</td></tr>
+      <tr><td>Growth</td><td>$249 per month</td><td>500 million per month</td><td>$0.80 per additional million</td><td>Up to permanent</td><td>Everything in Starter, plus multiple workspaces and 5 users with admin and member roles</td></tr>
+      <tr><td>Business</td><td>$499 per month</td><td>2 billion per month</td><td>$0.60 per additional million</td><td>Up to permanent</td><td>Everything in Growth, plus unlimited users and SSO</td></tr>
+      <tr><td>Enterprise</td><td>Custom</td><td>Custom commit and token band</td><td>Negotiated or waived</td><td>Custom</td><td>Multiple workspaces, unlimited users, SSO, SLA, a dedicated account manager, a self-hosted edition option and a BAA for healthcare</td></tr>
     </tbody>
   </table>
 </div>
-<p>Most healthcare teams start by routing one administrative workflow through the Free plan with synthetic notes and reading the detection log, then move to Enterprise for the BAA before real patient data flows. <a class="bl-link" href="https://www.enigmavault.io/nopii/demo/">Try the NoPII live demo</a>, or <a class="bl-link" href="https://www.enigmavault.io/request-demo/">request a demo</a> to walk through your clinical AI routes with our team.</p>
+<p>Most healthcare teams start by routing one administrative workflow through the Lite plan with synthetic notes and reading the detection log, then move to Enterprise for the BAA before real patient data flows. <a class="bl-link" href="https://www.enigmavault.io/nopii/demo/">Try the NoPII live demo</a>, or <a class="bl-link" href="https://www.enigmavault.io/request-demo/">request a demo</a> to walk through your clinical AI routes with our team.</p>

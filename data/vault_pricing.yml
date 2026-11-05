@@ -2,7 +2,8 @@
 # /pricing/ (rendered by layouts/shortcodes/vault-pricing.html). Prices mirror
 # the developer-portal billing rules at docs.enigmavault.io/pricing.html.
 # Per plan: monthly / annual price, the "save" figure on annual, the headline
-# allowance shown on the card, the line under it, and the plan's points.
+# allowance shown on the card, the overage line, the plan's points (paid
+# plans read "Everything in <previous plan>, plus"), and an optional add-on.
 # Comparison rows: a value of true/false renders as a tick / dash.
 
 cta: "https://portal.enigmavault.io/Billing"
@@ -26,23 +27,24 @@ products:
     intro: "Tokenize cards once, keep raw card data out of your systems, and pay per request."
     unit: "requests a month"
     plans:
-      - {allow: "1,000",     over: "Hard limit",                  points: ["Free sandbox for development and testing", "No card needed", "Hard limits", "Never billed"]}
-      - {allow: "20,000",    over: "then $0.02 per request",      points: ["Overage instead of a hard limit", "PCI AOC", "SOC 2 Type II report", "DPA"]}
-      - {allow: "250,000",   over: "then $0.002 per request",     points: ["Custom CSS on hosted forms", "Twilio Pay", "A second client ID"]}
-      - {allow: "1,000,000", over: "then $0.001 per request",     points: ["Raw card data access", "Unlimited client IDs", "Raw usage export"]}
+      - {allow: "1,000",     over: "Hard limit",              points: ["Free sandbox, no card needed", "Hard limits, never billed", "Up to 100 stored card tokens", "1 client ID"]}
+      - {allow: "20,000",    over: "then $0.02 per request",  points: ["Overage instead of a hard limit", "Up to 10,000 stored card tokens, then moves up to Growth", "PCI AOC, SOC 2 Type II report and DPA"]}
+      - {allow: "250,000",   over: "then $0.01 per request",  points: ["Custom CSS on hosted forms", "Twilio Pay", "2 client IDs per subscription", "Up to 100,000 stored card tokens, then moves up to Business"], addon: "EU data residency add-on, +$99/month"}
+      - {allow: "1,000,000", over: "then $0.007 per request", points: ["Raw card data access", "Unlimited client IDs", "Raw usage export", "Up to 1,000,000 stored card tokens; we contact you about Enterprise beyond that"], addon: "EU data residency add-on, +$99/month"}
     groups:
       - name: "Usage"
         rows:
-          - {label: "Requests included a month", values: ["1,000", "20,000", "250,000", "1,000,000"]}
-          - {label: "Requests beyond that", values: ["Hard limit", "$0.02 per request", "$0.002 per request", "$0.001 per request"]}
-          - {label: "Stored card tokens", values: ["100, hard limit", "10,000, then moves to Growth", "100,000, then moves to Business", "1,000,000, then we talk Enterprise"]}
-          - {label: "Client IDs per subscription", values: ["1", "1", "2", "Unlimited"]}
+          - {label: "Requests included a month", values: ["1,000 requests", "20,000 requests", "250,000 requests", "1,000,000 requests"]}
+          - {label: "Requests beyond that", values: ["Hard limit", "$0.02 per request", "$0.01 per request", "$0.007 per request"]}
+          - {label: "Stored card tokens", values: ["100, hard limit", "10,000, then Growth", "100,000, then Business", "1,000,000"]}
       - name: "Features"
         rows:
           - {label: "Custom CSS on hosted forms", values: [false, false, true, true]}
           - {label: "Twilio Pay", values: [false, false, true, true]}
           - {label: "Raw card data access", values: [false, false, false, true]}
+          - {label: "Client IDs per subscription", values: ["1", "1", "2", "Unlimited"]}
           - {label: "Raw usage export", values: [false, false, false, true]}
+          - {label: "EU data residency add-on", values: [false, false, "+$99/month", "+$99/month"]}
       - &compliance
         name: "Compliance documents"
         rows:
@@ -56,22 +58,23 @@ products:
     intro: "Tokenize any sensitive field, in single calls or batches, and pay per request."
     unit: "requests a month"
     plans:
-      - {allow: "1,500",     over: "Hard limit",                  points: ["Free sandbox for development and testing", "No card needed", "Hard limits", "Never billed"]}
-      - {allow: "30,000",    over: "then $0.013 per request",     points: ["Overage instead of a hard limit", "PCI AOC", "SOC 2 Type II report", "DPA"]}
-      - {allow: "400,000",   over: "then $0.0012 per request",    points: ["Batches of up to 5,000", "Custom CSS on hosted forms", "A second client ID"]}
-      - {allow: "2,000,000", over: "then $0.0006 per request",    points: ["Unlimited client IDs", "Raw usage export"]}
+      - {allow: "1,500",     over: "Hard limit",               points: ["Free sandbox, no card needed", "Hard limits, never billed", "Up to 100 stored data tokens", "1 client ID"]}
+      - {allow: "30,000",    over: "then $0.013 per request",  points: ["Overage instead of a hard limit", "Up to 10,000 stored data tokens, then moves up to Growth", "PCI AOC, SOC 2 Type II report and DPA"]}
+      - {allow: "400,000",   over: "then $0.0065 per request", points: ["Custom CSS on hosted forms", "Batches of up to 5,000", "2 client IDs per subscription", "Up to 100,000 stored data tokens, then moves up to Business"], addon: "EU data residency add-on, +$99/month"}
+      - {allow: "2,000,000", over: "then $0.0045 per request", points: ["Unlimited client IDs", "Raw usage export", "Up to 1,000,000 stored data tokens; we contact you about Enterprise beyond that"], addon: "EU data residency add-on, +$99/month"}
     groups:
       - name: "Usage"
         rows:
-          - {label: "Requests included a month", values: ["1,500", "30,000", "400,000", "2,000,000"]}
-          - {label: "Requests beyond that", values: ["Hard limit", "$0.013 per request", "$0.0012 per request", "$0.0006 per request"]}
-          - {label: "Stored data tokens", values: ["100, hard limit", "10,000, then moves to Growth", "100,000, then moves to Business", "1,000,000, then we talk Enterprise"]}
-          - {label: "Batch size", values: ["500", "500", "5,000", "5,000"]}
-          - {label: "Client IDs per subscription", values: ["1", "1", "2", "Unlimited"]}
+          - {label: "Requests included a month", values: ["1,500 requests", "30,000 requests", "400,000 requests", "2,000,000 requests"]}
+          - {label: "Requests beyond that", values: ["Hard limit", "$0.013 per request", "$0.0065 per request", "$0.0045 per request"]}
+          - {label: "Stored data tokens", values: ["100, hard limit", "10,000, then Growth", "100,000, then Business", "1,000,000"]}
       - name: "Features"
         rows:
           - {label: "Custom CSS on hosted forms", values: [false, false, true, true]}
+          - {label: "Batch size", values: ["500", "500", "5,000", "5,000"]}
+          - {label: "Client IDs per subscription", values: ["1", "1", "2", "Unlimited"]}
           - {label: "Raw usage export", values: [false, false, false, true]}
+          - {label: "EU data residency add-on", values: [false, false, "+$99/month", "+$99/month"]}
       - *compliance
 
   - key: file-vault
@@ -79,18 +82,18 @@ products:
     intro: "Store sensitive files behind the Vault and pay for storage, not requests."
     unit: "of storage"
     plans:
-      - {allow: "5 GB",      over: "Hard limit",                         points: ["Free sandbox with 5 GB of storage", "No card needed", "Hard limits", "Never billed"]}
-      - {allow: "150 GB",    over: "then moves up to Growth, prorated",  points: ["150 GB of storage", "PCI AOC", "SOC 2 Type II report", "DPA"]}
-      - {allow: "1,000 GB",  over: "then moves up to Business, prorated", points: ["1,000 GB of storage", "A second client ID"]}
-      - {allow: "5,000 GB",  over: "then $0.15 per GB-month",            points: ["5,000 GB of storage", "Unlimited client IDs", "Raw usage export", "Then $0.15 per GB-month"]}
+      - {allow: "5 GB",     over: "Hard limit", points: ["Free sandbox, no card needed", "Hard limits, never billed", "1 client ID"]}
+      - {allow: "150 GB",   points: ["Moves up to Growth at 150 GB, prorated", "PCI AOC, SOC 2 Type II report and DPA"]}
+      - {allow: "1,000 GB", points: ["2 client IDs per subscription", "Moves up to Business at 1,000 GB, prorated"]}
+      - {allow: "5,000 GB", points: ["Unlimited client IDs", "Raw usage export", "Storage beyond 5,000 GB at $0.15 per GB-month"]}
     groups:
       - name: "Usage"
         rows:
           - {label: "Storage included", values: ["5 GB", "150 GB", "1,000 GB", "5,000 GB"]}
-          - {label: "Storage beyond that", values: ["Hard limit", "Moves up to Growth, prorated", "Moves up to Business, prorated", "$0.15 per GB-month"]}
-          - {label: "Client IDs per subscription", values: ["1", "1", "2", "Unlimited"]}
+          - {label: "Storage beyond that", values: ["Hard limit", "Moves up to Growth", "Moves up to Business", "$0.15 per GB-month"]}
       - name: "Features"
         rows:
+          - {label: "Client IDs per subscription", values: ["1", "1", "2", "Unlimited"]}
           - {label: "Raw usage export", values: [false, false, false, true]}
       - *compliance
 

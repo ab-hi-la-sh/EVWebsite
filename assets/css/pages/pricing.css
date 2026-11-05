@@ -342,3 +342,27 @@
   .vpp-inc--list{list-style:none;padding:0;display:flex;flex-direction:column;gap:7px;}
   .vpp-inc--list li{display:flex;gap:9px;align-items:flex-start;font-size:14px;line-height:1.45;color:var(--text-body);}
   .vpp-inc--list li svg{width:14px;height:14px;flex:none;margin-top:3px;color:var(--ev-mineral-blue);}
+
+  /* EU data residency add-on chip */
+  .vpp-addon{display:inline-block;margin:16px 0 0;padding:5px 11px;border:1px solid var(--vpp-line);border-radius:999px;background:var(--ev-warm-cloud);font-family:var(--ev-font-sans);font-size:12px;font-weight:500;line-height:1.35;color:var(--ev-slate);font-variant-numeric:tabular-nums;}
+
+/* NoPII ledger: four self-serve plans as columns, Enterprise as a full-width
+   closing row (lead on the left, two-column tick list on the right). */
+  .vpp-desc{margin:12px 0 0;font-size:14px;line-height:1.5;color:var(--text-body);min-height:42px;}
+  .vpp-ledger--np .vpp-allow{margin-top:18px;}
+  .vpp-plan--ent{grid-column:1 / -1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:12px 48px;align-items:start;border-left:0;border-top:1px solid var(--vpp-line);background:var(--ev-warm-cloud);}
+  .vpp-plan__entlead{display:flex;flex-direction:column;}
+  .vpp-plan__entlead .vpp-desc{min-height:0;margin-bottom:20px;}
+  .vpp-plan__entlead .vpp-cta{width:auto;align-self:flex-start;padding-left:22px;padding-right:22px;}
+  .vpp-plan--ent .vpp-inc{margin:6px 0 0;}
+  .vpp-inc--cols ul{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 32px;}
+  @media (max-width:1023px){
+    .vpp-ledger--np .vpp-plan--ent{border-top:1px solid var(--vpp-line);}
+    .vpp-plan--ent{grid-template-columns:1fr;gap:4px;}
+    .vpp-desc{min-height:0;}
+  }
+  @media (max-width:640px){
+    .vpp-inc--cols ul{grid-template-columns:1fr;gap:7px;}
+  }
+  .vpp-ledger--np .vpp-cta{text-align:center;padding-left:12px;padding-right:12px;gap:6px;}
+  @media (min-width:1024px){.vpp-ledger--np .vpp-plan:not(.vpp-plan--ent){padding-left:20px;padding-right:20px;}.vpp-ledger--np .vpp-cta{font-size:13.5px;}}

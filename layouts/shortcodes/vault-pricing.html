@@ -37,14 +37,18 @@
         </header>
         <div class="vpp-price">
           <p class="vpp-price__m"><b>{{ index $d.prices.monthly $t }}</b><span>/month</span></p>
-          <p class="vpp-price__a">{{ with $annual }}<b>{{ . }}</b><span>/year</span><em class="vpp-save">Save {{ index $d.prices.save $t }}</em>{{ else }}<b class="vpp-price__na">Monthly only</b>{{ end }}</p>
+          <p class="vpp-price__a">{{ with $annual }}<b>{{ . }}</b><span>/year</span><em class="vpp-save">Save {{ index $d.prices.save $t }} a year on monthly</em>{{ else }}<b class="vpp-price__na">Monthly only</b>{{ end }}</p>
         </div>
         <div class="vpp-allow">
           <p class="vpp-allow__n">{{ $plan.allow }}</p>
           <p class="vpp-allow__u">{{ $p.unit }}</p>
-          <p class="vpp-allow__o">{{ $plan.over }}</p>
+          {{- with $plan.over }}<p class="vpp-allow__o">{{ . }}</p>{{ end }}
         </div>
-        <ul class="vpp-inc vpp-inc--list">{{ range $plan.points }}<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>{{ . }}</li>{{ end }}</ul>
+        <div class="vpp-inc">
+        {{- if gt $t 0 }}<p class="vpp-inc__lead">Everything in {{ (index $d.tiers (sub $t 1)).name }}, plus</p>{{ end }}
+        <ul class="vpp-inc--list">{{ range $plan.points }}<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>{{ . }}</li>{{ end }}</ul>
+        {{- with $plan.addon }}<p class="vpp-addon">{{ . }}</p>{{ end }}
+        </div>
         <a class="vpp-cta{{ if $tier.popular }} vpp-cta--solid{{ end }} cta-pricing cta-vault--{{ $p.key }}-{{ $tier.key }}" href="{{ $d.cta }}" target="_blank" rel="noopener"><span>{{ $tier.cta }}</span><span aria-hidden="true">&#8594;</span></a>
       </article>
       {{- end }}

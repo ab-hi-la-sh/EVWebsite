@@ -1,0 +1,261 @@
+---
+title: "Basis Theory vs Skyflow: Payments Vault or Data Privacy Platform in 2026?"
+slug: "basis-theory-vs-skyflow"
+layout: "pii-style"
+metaTitle: "Basis Theory vs Skyflow (2026): Features, Pricing, and Fit"
+description: "Basis Theory vs Skyflow compared on architecture, payments depth, governance, AI data, pricing, compliance, and reviews, with Enigma Vault as a third option."
+subtitle: "Choose Basis Theory if your engineers want a payments-first vault with a published price, choose Skyflow to govern sensitive data and AI workflows across a company, and look at Enigma Vault if you want published prices for more than cards."
+date: 2026-11-08
+category: "Data Vault"
+allOnly: true
+author: "abhilash-kumar"
+readTime: 16
+heroImage: "/assets/blog/img-12.png"
+heroAlt: "Basis Theory vs Skyflow comparison"
+excerpt: "A payments-first token vault against a governed data privacy platform, compared feature by feature, with Enigma Vault as a third column."
+tags: ["tokenization", "comparison", "data-privacy-vault"]
+ogType: article
+styles: ["blog.css", "pages/blog-pii-hero.css", "tr-pages.css", "pages/vs-tri-table.css"]
+scripts: ["blog-article.js", "pages/vs-tri-table.js"]
+faqSchema: true
+faqs:
+  - q: "Is Basis Theory or Skyflow Cheaper?"
+    a: "Basis Theory publishes a price: $995 a month for 20,000 stored tokens, then $0.05 for each extra token. Skyflow publishes no prices, quotes after a demo, and bills on a count of unique identifiers, invoiced annually in advance. Without a Skyflow quote at your volume you cannot compare them. Enigma Vault publishes every tier, starting free, with Card Vault and Data Vault at $49, $249, and $499 a month."
+  - q: "What Is the Main Difference Between Basis Theory and Skyflow?"
+    a: "Basis Theory is a payments-first token vault: your application sends data to it, keeps tokens, and works with the data through Elements, a proxy, and Reactors. Skyflow is a data privacy vault with policy-based access control for PII, PHI, and card data, and it now leads with runtime data control for AI agents."
+  - q: "Does Basis Theory Include Network Tokens and Account Updater in Its $995 Plan?"
+    a: "Not according to its docs. Basis Theory labels network tokens, account updater, Universal 3D Secure, and BIN and card-detail enrichments as Enterprise features, and its pricing page gives no prices for them. Its pricing page lists the $995 plan’s limits: 20,000 stored tokens, a 1 MB payload, 24 hours of logs, a PCI AOC, and a US-only environment."
+  - q: "How Does Basis Theory Count Tokens for Billing?"
+    a: "It bills on the tokens stored in your vault during the calendar month, including cards, network tokens, wallet tokens, and anything else you store. Tokens you delete in the same month still count. The $995 plan includes 20,000 tokens, and each extra token costs $0.05, so 100,000 stored tokens works out to about $4,995 a month by our arithmetic."
+  - q: "Do Basis Theory and Skyflow Offer Free Trials?"
+    a: "Both offer a free non-production environment. Basis Theory’s free test tenant is not PCI compliant and takes synthetic data only. Skyflow’s Try Account is request-gated, limited to test data, and carries no support or SLA. Neither is a free production plan."
+  - q: "Which Is Better for PII and PHI, Basis Theory or Skyflow?"
+    a: "Skyflow is built for it, with policy-based access, encrypted queries, and customer-managed keys. Basis Theory stores generic tokens for any data but caps payloads at 1 MB on its $995 plan and offers PII and PHI compliance options on Enterprise. Neither page we read mentions signing a BAA, so ask each vendor for one before you send PHI."
+  - q: "Which Is Better for AI and Agent Data?"
+    a: "They address different problems. Skyflow’s Detect de-identifies text, files, audio, and images across 60 entity types and more than 40 languages. Basis Theory’s agentic features are about agent payments: an Agentic Payments API, which its docs label Enterprise, and PCI Agent Runtimes. Basis Theory does not mask LLM prompts."
+  - q: "What Is a Lower-Cost Alternative to Basis Theory and Skyflow?"
+    a: "Enigma Vault has separate vaults for cards, records, files, and customer intake, plus NoPII for LLM prompts, with free tiers and published plans from $49 a month per product. It does not have Basis Theory’s Reactors and payments extras or Skyflow’s governance depth."
+---
+<p>Basis Theory and Skyflow are both developer-first vault platforms that keep sensitive values out of your own systems and give your engineers an API to store and use them.</p>
+<p>Basis Theory is best for engineering teams building payments on a vault with a published price, while Skyflow is best for enterprises that need to govern sensitive data and AI workflows across a company.</p>
+<p>This guide compares Basis Theory and Skyflow on architecture, features, pricing, compliance, and reviews, with Enigma Vault alongside as a third option for teams that want published prices and a simpler start.</p>
+
+<h2>Basis Theory vs Skyflow at a Glance</h2>
+<div class="bl-tablewrap bl-tablewrap--tri"><table class="bl-table bl-table--tri"><thead><tr><th>Vendor</th><th>Basis Theory</th><th>Skyflow</th><th class="bl-tri__ev"><span class="bl-tri__tag">Also consider</span>Enigma Vault</th></tr></thead><tbody>
+<tr><td>Best for</td><td>Engineering-led teams building payments on an API</td><td>Enterprises controlling sensitive data across datastores, models, and agents</td><td class="bl-tri__ev">Teams protecting cards, records, files, and prompts at published prices</td></tr>
+<tr><td>Entry price</td><td>$995/mo, 20,000 stored tokens</td><td>Quote only</td><td class="bl-tri__ev">Free, then $49/mo</td></tr>
+<tr><td>Free option</td><td>Free test tenant, synthetic data only</td><td>Free Try Account on request, test data only</td><td class="bl-tri__ev">Free Lite sandboxes, with hard limits</td></tr>
+<tr><td>Architecture</td><td>API vault with Elements, Proxy, and Reactors</td><td>API-first vault with SDKs, Detect, and Connections</td><td class="bl-tri__ev">Separate vaults called by API</td></tr>
+<tr><td>G2</td><td><a class="bl-link" href="https://www.g2.com/products/basis-theory/reviews" rel="nofollow noopener" target="_blank">No reviews yet</a></td><td><a class="bl-link" href="https://www.g2.com/sellers/skyflow-inc" rel="nofollow noopener" target="_blank">5.0/5 (2, across product listings)</a></td><td class="bl-tri__ev"><a class="bl-link" href="https://www.g2.com/products/enigma-vault/reviews" rel="nofollow noopener" target="_blank">4.4/5 (6)</a></td></tr>
+<tr><td>Capterra</td><td><a class="bl-link" href="https://www.capterra.com/p/10002181/Basis-Theory/" rel="nofollow noopener" target="_blank">Listed, 0 reviews</a></td><td>No listing found</td><td class="bl-tri__ev"><a class="bl-link" href="https://www.capterra.com/p/241650/Enigma-Vault/" rel="nofollow noopener" target="_blank">4.8/5 (4)</a></td></tr>
+<tr class="bl-tri__cta"><td>Next step</td><td colspan="2" class="bl-tri__note">Free Lite tier, no card needed. Published plans from $49 a month.</td><td class="bl-tri__ev"><div class="bl-tri__acts"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-basis-theory-vs-skyflow--table-glance" href="/request-demo/?interest=basis-theory-vs-skyflow"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-tri__more cta-blog cta-basis-theory-vs-skyflow--table-glance-explore" href="/platform/overview/">Explore the platform &rarr;</a></div></td></tr>
+</tbody></table></div>
+<p>Figures are as of 8 November 2026, taken from each vendor’s own site, docs, and terms and from G2 and Capterra. For more options, see our guides to <a class="bl-link" href="/blog/basis-theory-alternatives/">Basis Theory alternatives</a> and <a class="bl-link" href="/blog/skyflow-alternatives/">Skyflow alternatives</a>.</p>
+
+<h2>Basis Theory vs Skyflow: Quick Verdict</h2>
+<p><strong>Basis Theory:</strong> A payments-first token vault with Elements for web and mobile, a proxy, and Reactors that run Node.js against tokens. It publishes one plan at $995 a month for 20,000 stored tokens, and its docs label network tokens, account updater, and 3D Secure as Enterprise features. It has no reviews yet on G2 or Capterra.</p>
+<p><strong>Skyflow:</strong> An API-first data privacy vault with policy-based access control, encrypted queries, Detect for de-identifying text, files, and audio, and deployment as multi-tenant SaaS, a dedicated VPC, or in your own cloud account. It publishes no prices and offers a free Try Account for test data.</p>
+<div class="bl-evcall" role="note"><span class="bl-evcall__tag">Also consider</span><p><strong>Enigma Vault:</strong> Separate vaults for cards, records, files, and customer intake, plus NoPII for LLM prompts, with free tiers and published plans from $49 to $499 a month per product.</p><div class="bl-evcall__cta"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-basis-theory-vs-skyflow--callout-verdict" href="/request-demo/?interest=basis-theory-vs-skyflow"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-evcall__more cta-blog cta-basis-theory-vs-skyflow--callout-verdict-explore" href="/platform/overview/">Explore the platform &rarr;</a></div></div>
+<p>Go with <strong>Basis Theory</strong> if:</p>
+<ul>
+<li>Payments are your product and your engineers want to build with Elements, a proxy, and Reactors.</li>
+<li>You want a published starting price and ISO 27001, and you accept that network tokens and account updater mean an Enterprise conversation.</li>
+<li>Your data is mostly cards and bank details, and your volume fits a stored-token price.</li>
+</ul>
+<p>Go with <strong>Skyflow</strong> if:</p>
+<ul>
+<li>You need one governed place for PII, PHI, and payment data, with different views for different teams or roles.</li>
+<li>You are building AI features or agents and want de-identification and policy-based re-identification in the same platform.</li>
+<li>You need customer-managed keys, a dedicated VPC, or your own cloud account, and you have an enterprise buying process.</li>
+</ul>
+<p>Go with <strong>Enigma Vault</strong> if:</p>
+<ul>
+<li>You want published prices and a free tier for cards, records, files, and prompts before any sales process.</li>
+<li>Cards arrive by phone, or you want a no-code intake app for staff and customers.</li>
+<li>You do not need Reactors, network tokens, or field-level policies across many teams.</li>
+</ul>
+<p><strong>The short version:</strong> Basis Theory hands payments engineers a programmable vault with a visible entry price, Skyflow governs sensitive data across a company, and Enigma Vault covers the common vaulting jobs at published prices for teams that need neither depth.</p>
+
+<h2>How Basis Theory and Skyflow Differ at the Core</h2>
+<p>Basis Theory is a token vault your application sends data to, with the payments tooling built around it, whereas Skyflow keeps a governed record whose fields different roles see in different forms. That difference shapes who can use the data, how, and at what price.</p>
+<p>To make it concrete, follow one subscriber signing up. They give a name, email, date of birth, a card for billing, and a scan of their ID.</p>
+<div class="bl-tablewrap bl-tablewrap--tri"><table class="bl-table bl-table--tri"><thead><tr><th>Piece of data</th><th>Basis Theory</th><th>Skyflow</th><th class="bl-tri__ev"><span class="bl-tri__tag">Also consider</span>Enigma Vault</th></tr></thead><tbody>
+<tr><td>Card for billing</td><td>A card token, captured with Elements and charged through the Proxy</td><td>The same vault, charged through a Connection to your processor</td><td class="bl-tri__ev">Card Vault, charged through the gateway proxy</td></tr>
+<tr><td>Name, email, date of birth</td><td>Generic tokens, under a 1 MB payload cap on the $995 plan</td><td>The same vault, with a policy per field</td><td class="bl-tri__ev">Data Vault, with exact-match lookup</td></tr>
+<tr><td>ID scan</td><td>Not a document store; PII and PHI options are Enterprise</td><td>Stored through the Upload File API, or de-identified by Detect</td><td class="bl-tri__ev">File Vault, from 5 GB free</td></tr>
+<tr><td>How the subscriber submits it</td><td>Elements in your page or app</td><td>Skyflow Elements in your page or app</td><td class="bl-tri__ev">A hosted form, or a Customer Vault intake link</td></tr>
+<tr><td>Who sees what</td><td>Per application, permission, and access rule</td><td>Per field and role</td><td class="bl-tri__ev">Per client and action</td></tr>
+<tr class="bl-tri__cta"><td>Next step</td><td colspan="2" class="bl-tri__note">Basis Theory’s test tenant, Skyflow’s Try Account, and Enigma Vault’s Lite tiers are all free test environments. Enigma Vault’s first paid plan is $49 a month.</td><td class="bl-tri__ev"><div class="bl-tri__acts"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-basis-theory-vs-skyflow--table-core" href="/request-demo/?interest=basis-theory-vs-skyflow"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-tri__more cta-blog cta-basis-theory-vs-skyflow--table-core-explore" href="/platform/overview/">Explore the platform &rarr;</a></div></td></tr>
+</tbody></table></div>
+<p><strong>Basis Theory’s Model:</strong> Applications get permissions and access rules over tokens, and the payments tools (proxy, Reactors, network tokens) work on those tokens. It is built for engineers who want to compose payment flows.</p>
+<p><strong>Skyflow’s Model:</strong> One schema, one record, many governed views. The front desk might see a masked date of birth while analytics sees only joinable tokens.</p>
+<div class="bl-evcall" role="note"><span class="bl-evcall__tag">Enigma Vault</span><p><strong>Enigma Vault’s Model:</strong> Each piece of data goes to the vault built for it, and you adopt only what you need, each with its own free tier and published price.</p><div class="bl-evcall__cta"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-basis-theory-vs-skyflow--callout-model" href="/request-demo/?interest=basis-theory-vs-skyflow"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-evcall__more cta-blog cta-basis-theory-vs-skyflow--callout-model-explore" href="/platform/overview/">Explore the platform &rarr;</a></div></div>
+<p>If you are building payment flows, Basis Theory’s model fits. If your problem is deciding who sees what across a large estate, Skyflow’s fits. If it is getting cards, records, and documents out of email, phone calls, and databases, Enigma Vault’s fits.</p>
+
+<h2>Basis Theory vs Skyflow Features Compared</h2>
+<p>Compare Basis Theory and Skyflow on data scope, payments, governance, AI, and deployment. Basis Theory goes deep on payments tooling but gates much of it behind Enterprise, whereas Skyflow goes wide on governance and keeps most details behind a sales conversation.</p>
+<div class="bl-tablewrap bl-tablewrap--tri"><table class="bl-table bl-table--tri"><thead><tr><th>Feature</th><th>Basis Theory</th><th>Skyflow</th><th class="bl-tri__ev"><span class="bl-tri__tag">Also consider</span>Enigma Vault</th></tr></thead><tbody>
+<tr><td>Core model</td><td>API token vault with Elements, Proxy, and Reactors</td><td>API-first vault with SDKs, Connections, Functions, and Pipelines</td><td class="bl-tri__ev">Separate vaults called by API</td></tr>
+<tr><td>Data types</td><td>Cards, bank accounts, and generic tokens for other data</td><td>Structured and unstructured: PII, PCI, PHI, files, text, audio, images</td><td class="bl-tri__ev">Cards, records, files, intake, and prompts</td></tr>
+<tr><td>Hosted capture</td><td>Elements for web, iOS, Android, React Native</td><td>Skyflow Elements; iOS, Android, React Native SDKs</td><td class="bl-tri__ev">Hosted card form and Customer Vault</td></tr>
+<tr><td>Phone (IVR) capture</td><td><span class="bl-tri__no">Not offered</span></td><td>Not found in docs</td><td class="bl-tri__ev">Twilio Pay (Growth and above)</td></tr>
+<tr><td>Apple Pay and Google Pay</td><td>Decrypts and vaults wallet tokens</td><td>Not found in docs</td><td class="bl-tri__ev">Through your gateway</td></tr>
+<tr><td>Proxy to third parties</td><td>Proxy, ephemeral or pre-configured</td><td>Connections, with mTLS and message signing</td><td class="bl-tri__ev">Gateway proxy, domain allowlisted</td></tr>
+<tr><td>Run your own code</td><td>Reactors in Node.js (asynchronous Reactors are Enterprise)</td><td>Functions in Node.js, through Connections</td><td class="bl-tri__ev"><span class="bl-tri__no">Not offered</span></td></tr>
+<tr><td>Access control</td><td>Applications with permissions and access rules; SSO/SAML on Enterprise</td><td>Roles, row-level rules, and context-aware authorization</td><td class="bl-tri__ev">Access by client and action</td></tr>
+<tr><td>Search on protected data</td><td>Token search</td><td>Encrypted queries and aggregation</td><td class="bl-tri__ev">Exact-match lookup on encrypted values</td></tr>
+<tr><td>Network tokens</td><td>Enterprise (Visa, Mastercard, Discover; Amex with conditions)</td><td>Listed in docs; availability not stated</td><td class="bl-tri__ev"><span class="bl-tri__no">Not offered</span></td></tr>
+<tr><td>Account updater</td><td>Enterprise</td><td>Listed in docs</td><td class="bl-tri__ev"><span class="bl-tri__no">Not offered</span></td></tr>
+<tr><td>3D Secure</td><td>Universal 3DS (Enterprise)</td><td>Listed in docs</td><td class="bl-tri__ev">Through your gateway</td></tr>
+<tr><td>BIN data</td><td>BIN and card-detail enrichments (Enterprise)</td><td>BIN lookup listed in docs</td><td class="bl-tri__ev"><span class="bl-tri__no">Not offered</span></td></tr>
+<tr><td>Agentic payments</td><td>Agentic Payments API (Enterprise)</td><td>Marketing page; docs not found</td><td class="bl-tri__ev"><span class="bl-tri__no">Not offered</span></td></tr>
+<tr><td>Files</td><td>1 MB payload limit on the $995 plan</td><td>Upload File API; no size limit published</td><td class="bl-tri__ev">File Vault, 5 GB free up to 5,000 GB</td></tr>
+<tr><td>LLM prompt protection</td><td><span class="bl-tri__no">Not offered</span></td><td>Detect: 60 entity types, 40+ languages</td><td class="bl-tri__ev">NoPII, 1M protected tokens a month free</td></tr>
+<tr><td>Deployment</td><td>Multi-tenant SaaS; no self-hosted option found</td><td>SaaS, dedicated VPC, or BYOC on AWS or GCP</td><td class="bl-tri__ev">Managed SaaS; NoPII self-hosted edition on Enterprise</td></tr>
+<tr><td>Customer-managed keys</td><td>Not found for the vault</td><td>BYOK and BYOKMS</td><td class="bl-tri__ev">Per-customer AES-256 keys</td></tr>
+<tr><td>Regions</td><td>US on the $995 plan; EU and India on Enterprise</td><td>Region-specific vaults; no published list</td><td class="bl-tri__ev">US and EU; EU residency is an add-on from Growth</td></tr>
+<tr><td>No-code customer intake</td><td><span class="bl-tri__no">Not offered</span></td><td><span class="bl-tri__no">Not offered</span></td><td class="bl-tri__ev">Customer Vault</td></tr>
+<tr class="bl-tri__cta"><td>Next step</td><td colspan="2" class="bl-tri__note">Check which features each vendor ships on the plan you would use.</td><td class="bl-tri__ev"><div class="bl-tri__acts"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-basis-theory-vs-skyflow--table-features" href="/request-demo/?interest=basis-theory-vs-skyflow"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-tri__more cta-blog cta-basis-theory-vs-skyflow--table-features-explore" href="/vault/data-vault/">Explore Data Vault &rarr;</a></div></td></tr>
+</tbody></table></div>
+<p>Here is how the biggest differences play out in practice.</p>
+
+<h2>Where Basis Theory and Skyflow Differ in Practice</h2>
+
+<h3>Developer Experience and Time to First Token</h3>
+<p>Basis Theory has a free, self-serve test tenant, a large public docs site, server SDKs for .NET, Java, Go, Node, and Python, a Terraform provider, a CLI, and a production checklist. The test tenant is not PCI compliant and takes synthetic data only.</p>
+<p>Skyflow’s homepage call to action is a demo. Its free Try Account is request-gated, so a team member contacts you to set it up, and it allows test data only. Skyflow’s SDKs cover Java, Node.js, Python, and Go on the server and JavaScript, React, React Native, iOS, and Android on the client. If you want to run a card through a vault today without talking to anyone, Basis Theory’s test tenant gets you closer than Skyflow does.</p>
+
+<h3>Payments Depth and What Sits Behind Enterprise</h3>
+<p>Basis Theory’s payments tooling is its strength: network tokens, account updater, Universal 3D Secure, BIN and card-detail enrichments, and an agentic payments API. Its docs label all of these Enterprise features, and its pricing page gives no prices for them. Its payments-routing guide is marked under construction, although its site markets smart and backup routing. Elements, the proxy, and synchronous Reactors carry no plan label in its docs, so confirm what the $995 plan includes.</p>
+<p>Skyflow’s documentation lists network tokenization, account updater, 3D Secure, and BIN lookup, and it connects to processors such as Stripe, Adyen, Braintree, Cybersource, and Checkout. It does not describe card issuing as a capability, and we found no Apple Pay or Google Pay support in its docs. If payments optimization is the point, ask each vendor to demonstrate the specific features you will use, on the plan you will buy.</p>
+
+<h3>Data Types, Files, and PII</h3>
+<p>Basis Theory has card and bank-account token types and a generic token type that stores any value, but payloads are capped at 1 MB on the $995 plan, and PII and PHI compliance options are Enterprise. Skyflow’s documentation covers structured and unstructured data, an Upload File API that stores files in a file column, and Detect, which de-identifies CSV, Word, PowerPoint, PDF (redaction only), audio, and images. Neither publishes a file size limit beyond Basis Theory’s payload cap.</p>
+<div class="bl-evcall" role="note"><span class="bl-evcall__tag">Enigma Vault</span><p>Enigma Vault splits these jobs across <a class="bl-link" href="/vault/data-vault/">Data Vault</a> for records, <a class="bl-link" href="/vault/file-vault/">File Vault</a> for documents, and <a class="bl-link" href="/vault/customer-vault/">Customer Vault</a> for no-code intake.</p><div class="bl-evcall__cta"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-basis-theory-vs-skyflow--callout-data" href="/request-demo/?interest=basis-theory-vs-skyflow"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-evcall__more cta-blog cta-basis-theory-vs-skyflow--callout-data-explore" href="/vault/data-vault/">Explore Data Vault &rarr;</a></div></div>
+
+<h3>Governance, Logs, and Keys</h3>
+<p>Basis Theory controls access through applications, permissions, and access rules, and it audits all activity through a logs API. On the $995 plan, logs are kept for 24 hours, and custom log access is Enterprise. SSO and SAML are Enterprise, and we found no customer-managed keys for the vault.</p>
+<p>Skyflow combines roles, row-level rules, and context-aware authorization, returns values masked, redacted, or in plain text depending on who asks, and supports BYOK and BYOKMS on every deployment model. It offers an audit events API, but we found no published retention period.</p>
+
+<h3>AI and Agents</h3>
+<p>The two companies mean different things by agents. Basis Theory’s agent features are about agent payments: an Agentic Payments API (Enterprise) built on rails such as Visa Intelligent Commerce and Mastercard Agent Pay, and PCI Agent Runtimes, which run an agent inside a Reactor. It does not mask LLM prompts.</p>
+<p>Skyflow’s are about agent data. Detect de-identifies and re-identifies text, files, audio, and images, covers 60 entity types and more than 40 languages, and adds guardrails such as toxicity checks. It announced MCP data protection in August 2025 and launched Skyflow for Glean on 25 August 2026, while its pages on agent memory and agentic commerce have no documentation behind them that we could find.</p>
+<div class="bl-evcall" role="note"><span class="bl-evcall__tag">Enigma Vault</span><p>Enigma Vault’s <a class="bl-link" href="/nopii/">NoPII</a> tokenizes PII in your application’s LLM API calls across nine or more model providers, with a free tier of one million protected tokens a month. It does not cover agent traffic.</p><div class="bl-evcall__cta"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-basis-theory-vs-skyflow--callout-ai" href="/request-demo/?interest=basis-theory-vs-skyflow"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-evcall__more cta-blog cta-basis-theory-vs-skyflow--callout-ai-explore" href="/nopii/">Explore NoPII &rarr;</a></div></div>
+
+<h3>Deployment and Data Residency</h3>
+<p>Basis Theory is hosted multi-tenant SaaS with separate test and production tenants, and we found no on-premises, self-hosted, or VPC option. Its $995 plan is US only, and EU and India regions are Enterprise.</p>
+<p>Skyflow runs as multi-tenant SaaS, as a dedicated VPC, or as BYOC in your own cloud account on AWS or GCP. It describes region-specific vaults but publishes no region list, and its own pages cite different counts, from 100-plus regions to 150-plus countries. Enigma Vault is managed in US and EU regions, with EU residency an add-on from the Growth tier.</p>
+
+<h2>What Basis Theory’s Comparison Page Says About Skyflow</h2>
+<p>Basis Theory publishes its own page comparing itself with Skyflow. It makes several claims worth checking.</p>
+<ul>
+<li><strong>Skyflow holds PCI, SOC 2, and HIPAA.</strong> This is incomplete. Skyflow also lists ISO 27001:2022 and GDPR, and it describes its HIPAA status as “assessed and eligible.”</li>
+<li><strong>Skyflow support is a community.</strong> This looks out of date. Skyflow’s site presents Partially Redacted as a podcast, and its terms describe standard support with premium levels set in the order form.</li>
+<li><strong>Basis Theory pricing is a free trial, a per-token Starter, and a custom Professional tier.</strong> This is out of date for Basis Theory itself. Its pricing page now shows one $995 plan with a $0.05 overage and a custom Enterprise tier.</li>
+<li><strong>Skyflow has migration guides onto Skyflow but not off it.</strong> We could not verify this either way.</li>
+</ul>
+<p>Skyflow has no page naming Basis Theory. Treat both as marketing, and let only the claims you can test in a proof of concept count.</p>
+
+<h2>Basis Theory vs Skyflow Pricing</h2>
+
+<h3>What Basis Theory Charges</h3>
+<p>Basis Theory publishes one self-serve plan and a custom Enterprise tier. There is no free production plan, only a free test tenant. It bills on the tokens stored in your vault during the calendar month, including cards, network tokens, and wallet tokens, and tokens deleted in the same month still count.</p>
+<div class="bl-tablewrap"><table class="bl-table"><thead><tr><th>Basis Theory plan</th><th>What you get</th></tr></thead><tbody>
+<tr><td>$995/mo</td><td>20,000 tokens stored per calendar month, then $0.05 for each extra token; production PCI environment, 1 MB payload limit, 24 hours of logs, PCI AOC, US-only environment</td></tr>
+<tr><td>Enterprise (custom)</td><td>PII and PHI options, responses for 95% of PCI SAQ D, unlimited monthly interactions per token, custom log access and payload sizes, uptime guarantees, enterprise support, SSO/SAML, white-label CNAME, dedicated IP</td></tr>
+<tr class="bl-tri__solo"><td colspan="2"><div class="bl-tri__solo-in"><span class="bl-tri__solo-note">Compare: Enigma Vault publishes every tier, with a free Lite sandbox and plans from $49 to $499 a month per product.</span><div class="bl-tri__acts"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-basis-theory-vs-skyflow--table-plans" href="/request-demo/?interest=basis-theory-vs-skyflow"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-tri__more cta-blog cta-basis-theory-vs-skyflow--table-plans-explore" href="/pricing/#vault">See published pricing &rarr;</a></div></div></td></tr>
+</tbody></table></div>
+<p>At the published overage rate, 100,000 stored tokens works out to about $4,995 a month and 250,000 to about $12,495. That is our arithmetic from the published figures, not a Basis Theory quote, and Enterprise terms may differ.</p>
+
+<h3>What Skyflow Charges</h3>
+<p>Skyflow publishes no plans or prices, and its pricing URL simply shows the homepage. Quotes come through a demo or an AWS Marketplace private offer. Its Terms of Service, updated 15 July 2026, base fees on a count of “Unique Identifiers,” such as a person, entity, or account number, invoiced annually in advance, with a 5% increase at renewal and true-up charges for excess use. Buyer data is too thin to quote: Vendr has a single Skyflow purchase on record.</p>
+
+<h3>What Enigma Vault Charges</h3>
+<div class="bl-evcall" role="note"><span class="bl-evcall__tag">Enigma Vault</span><p>Each vault is priced separately, and every tier is published. Card Vault runs $0, $49, $249, and $499 a month for 1,000, 20,000, 250,000, and 1,000,000 requests, and Data Vault runs the same four prices for 1,500, 30,000, 400,000, and 2,000,000. Each tier also caps stored tokens at 100, 10,000, 100,000, and 1,000,000. File Vault includes 5 GB free, then 150 GB, 1,000 GB, and 5,000 GB. Yearly prices are $550, $2,700, and $5,500.</p><div class="bl-evcall__cta"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-basis-theory-vs-skyflow--callout-charges" href="/request-demo/?interest=basis-theory-vs-skyflow"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-evcall__more cta-blog cta-basis-theory-vs-skyflow--callout-charges-explore" href="/pricing/#vault">See published pricing &rarr;</a></div></div>
+
+<h3>Basis Theory vs Skyflow Cost at Three Business Sizes</h3>
+<div class="bl-tablewrap bl-tablewrap--tri"><table class="bl-table bl-table--tri"><thead><tr><th>Business size</th><th>Basis Theory</th><th>Skyflow</th><th class="bl-tri__ev"><span class="bl-tri__tag">Also consider</span>Enigma Vault</th></tr></thead><tbody>
+<tr><td>Small team (up to 100 stored records)</td><td>$995/mo, or a free test tenant with synthetic data</td><td>Quote; free Try Account for test data only</td><td class="bl-tri__ev">$49/mo per vault on Starter (the free Lite sandbox is for testing)</td></tr>
+<tr><td>Growing company (about 10,000 stored records)</td><td>$995/mo (20,000 tokens included)</td><td>Quote</td><td class="bl-tri__ev">$49/mo per vault (Starter: up to 10,000 stored tokens)</td></tr>
+<tr><td>Established platform (about 100,000 stored records)</td><td>About $4,995/mo at the published overage rate, or Enterprise by quote</td><td>Quote, invoiced annually in advance</td><td class="bl-tri__ev">$249/mo per vault (Growth: up to 100,000 stored tokens)</td></tr>
+<tr class="bl-tri__cta"><td>Next step</td><td colspan="2" class="bl-tri__note">Basis Theory’s large-platform figure is our arithmetic from its published rate, and Skyflow publishes no prices. Ask both for a written quote.</td><td class="bl-tri__ev"><div class="bl-tri__acts"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-basis-theory-vs-skyflow--table-pricing" href="/request-demo/?interest=basis-theory-vs-skyflow"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-tri__more cta-blog cta-basis-theory-vs-skyflow--table-pricing-explore" href="/pricing/#vault">See published pricing &rarr;</a></div></td></tr>
+</tbody></table></div>
+<p><strong>How to Read This Table:</strong> Basis Theory counts every token stored in one pool, Skyflow counts unique identifiers, and Enigma Vault prices each vault separately on requests with a stored-token ceiling. If you store cards and profiles in separate vaults, Enigma Vault’s prices add up per vault, and Basis Theory’s token count adds up across both.</p>
+<p><strong>The Practical Takeaway:</strong> Ask each vendor for a written quote at your volume, including overage, renewal, and plan labels for every feature you need, and compare it with the published Enigma Vault price. See our list of the <a class="bl-link" href="/blog/best-data-tokenization-software/">best data tokenization software</a> for more price points.</p>
+
+<h2>Basis Theory vs Skyflow Security and Compliance</h2>
+<p>Basis Theory, Skyflow, and Enigma Vault all hold PCI DSS Level 1 and SOC 2 Type II. Basis Theory and Skyflow also hold ISO 27001, which Enigma Vault is still working toward.</p>
+<div class="bl-tablewrap bl-tablewrap--tri"><table class="bl-table bl-table--tri"><thead><tr><th>Control</th><th>Basis Theory</th><th>Skyflow</th><th class="bl-tri__ev"><span class="bl-tri__tag">Also consider</span>Enigma Vault</th></tr></thead><tbody>
+<tr><td>PCI DSS</td><td>Level 1, merchant and service provider; PCI AOC in the $995 plan</td><td>Level 1 certified; version not shown</td><td class="bl-tri__ev">Level 1 Service Provider (Card, Data, File Vault in scope)</td></tr>
+<tr><td>SOC 2</td><td>Type II; auditor and period not stated</td><td>Type II</td><td class="bl-tri__ev">Type II</td></tr>
+<tr><td>ISO 27001</td><td>Certified</td><td>ISO 27001:2022</td><td class="bl-tri__ev">In progress</td></tr>
+<tr><td>HIPAA</td><td>“HIPAA compliant” environment; PHI options on Enterprise; BAA not mentioned</td><td>“Assessed and eligible”; BAA not found</td><td class="bl-tri__ev">BAA available</td></tr>
+<tr><td>GDPR and privacy</td><td>EU region described as GDPR compliant (Enterprise); DPA not found</td><td>GDPR “assessed and compliant”; DPA for paying customers</td><td class="bl-tri__ev">EU region for GDPR workloads; DPA from Starter</td></tr>
+<tr><td>Key management</td><td>Customer-managed vault keys not found</td><td>BYOK and BYOKMS</td><td class="bl-tri__ev">Per-customer AES-256 keys</td></tr>
+<tr><td>Trust documents</td><td>Security page and status page; no trust center</td><td>Security page and sub-processor list; no dedicated trust center</td><td class="bl-tri__ev">AOC, responsibility matrix, and SOC 2 report from Starter</td></tr>
+<tr class="bl-tri__cta"><td>Next step</td><td colspan="2" class="bl-tri__note">Ask every vendor for current audit reports and a signed BAA before you send PHI.</td><td class="bl-tri__ev"><div class="bl-tri__acts"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-basis-theory-vs-skyflow--table-security" href="/request-demo/?interest=basis-theory-vs-skyflow"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-tri__more cta-blog cta-basis-theory-vs-skyflow--table-security-explore" href="/platform/data-security/">Explore security controls &rarr;</a></div></td></tr>
+</tbody></table></div>
+<p>On reliability, Basis Theory’s status page lists no incidents from January to October 2026, and it published a postmortem for the 18 November 2025 Cloudflare outage, which affected it for about six hours. Skyflow publishes no uptime figure or incident history. With any of the three, the vault can significantly reduce the systems in your PCI scope, but your acquirer or QSA confirms your final scope.</p>
+
+<h2>Basis Theory vs Skyflow Reviews</h2>
+<p>Basis Theory has no reviews yet on G2 or Capterra. Skyflow has two on G2, spread across its product listings, and no Capterra listing that we could find. Enigma Vault has 6 on G2 and 4 on Capterra.</p>
+<div class="bl-tablewrap bl-tablewrap--tri"><table class="bl-table bl-table--tri"><thead><tr><th>Source</th><th>Basis Theory</th><th>Skyflow</th><th class="bl-tri__ev"><span class="bl-tri__tag">Also consider</span>Enigma Vault</th></tr></thead><tbody>
+<tr><td>G2</td><td><a class="bl-link" href="https://www.g2.com/products/basis-theory/reviews" rel="nofollow noopener" target="_blank">Listed, no reviews</a></td><td><a class="bl-link" href="https://www.g2.com/sellers/skyflow-inc" rel="nofollow noopener" target="_blank">5.0/5 from 2 reviews</a></td><td class="bl-tri__ev"><a class="bl-link" href="https://www.g2.com/products/enigma-vault/reviews" rel="nofollow noopener" target="_blank">4.4/5 from 6 reviews</a></td></tr>
+<tr><td>Capterra</td><td><a class="bl-link" href="https://www.capterra.com/p/10002181/Basis-Theory/" rel="nofollow noopener" target="_blank">Listed, no reviews</a></td><td>No listing found</td><td class="bl-tri__ev"><a class="bl-link" href="https://www.capterra.com/p/241650/Enigma-Vault/" rel="nofollow noopener" target="_blank">4.8/5 from 4 reviews</a></td></tr>
+<tr><td>Other public proof</td><td>Customer stories; one editorial score of 8.7/10 whose publisher says vendors can pay for placement</td><td>Customer stories chosen by Skyflow</td><td class="bl-tri__ev">Reviewer quotes on support speed and cost</td></tr>
+<tr class="bl-tri__cta"><td>Next step</td><td colspan="2" class="bl-tri__note">Six reviews is a thin base. Ask every vendor for a reference in your industry.</td><td class="bl-tri__ev"><div class="bl-tri__acts"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-basis-theory-vs-skyflow--table-reviews" href="/request-demo/?interest=basis-theory-vs-skyflow"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-tri__more cta-blog cta-basis-theory-vs-skyflow--table-reviews-explore" href="/platform/overview/">Explore the platform &rarr;</a></div></td></tr>
+</tbody></table></div>
+<h3>What Basis Theory’s Public Proof Shows</h3>
+<p>With no third-party reviews yet, Basis Theory’s proof comes from its own customer stories and testimonials, such as Cubby going from proof of concept to live in about a week. Treat those as marketing and ask for references in your industry.</p>
+<h3>What Skyflow Reviewers Say</h3>
+<p>Skyflow’s G2 reviews are split across product listings, and the two it has are positive. One reviewer on the Payments Data Privacy Vault says it keeps client payment details confidential, and one on the Healthcare Data Privacy Vault values its HIPAA alignment but has noticed occasional slowness. Two reviews is not a meaningful sample.</p>
+<h3>What Enigma Vault Reviewers Say</h3>
+<div class="bl-evcall" role="note"><span class="bl-evcall__tag">Enigma Vault</span><p>Reviewers on G2 praise a simple API, clear PCI scope, lower cost than other vendors, and quick support, and ask for more documentation and deeper reporting dashboards. Six reviews is a thin base, so ask each vendor for a reference in your industry.</p><div class="bl-evcall__cta"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-basis-theory-vs-skyflow--callout-reviews" href="/request-demo/?interest=basis-theory-vs-skyflow"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-evcall__more cta-blog cta-basis-theory-vs-skyflow--callout-reviews-explore" href="/platform/overview/">Explore the platform &rarr;</a></div></div>
+
+<h2>Who Should Choose Basis Theory, Skyflow, or Enigma Vault</h2>
+
+<h3>A Payments Platform With an Engineering Team</h3>
+<p>Basis Theory fits best if you want to compose payment flows from Elements, a proxy, and Reactors, and you will talk to sales for network tokens, account updater, and 3D Secure. Check which of its features the $995 plan includes before you commit.</p>
+
+<h3>A Company Governing PII, PHI, and Payment Data Across Many Teams</h3>
+<p>Skyflow fits best. Field-level policies, encrypted queries, customer-managed keys, and a dedicated VPC or your own cloud account suit an estate where many teams touch the same records. Expect a demo, a quote, and an annual contract.</p>
+
+<h3>A Healthcare or Regulated Team</h3>
+<p>Ask every vendor for a signed BAA before you send PHI. Basis Theory describes a HIPAA compliant environment, with PHI options on Enterprise, and does not mention a BAA. Skyflow says it is HIPAA assessed and eligible, and we could not find a BAA statement. Enigma Vault offers a BAA for healthcare workloads.</p>
+
+<h3>A Team That Wants Published Prices and a Free Start</h3>
+<p>Basis Theory publishes one price but has no free production plan, and Skyflow publishes none. Enigma Vault’s free Lite tiers on Card Vault, Data Vault, and File Vault are also sandboxes for development and testing, but it publishes every paid tier, from $49 a month, so you can price your own volume before talking to anyone.</p>
+
+<h2>Questions to Ask Basis Theory and Skyflow Before You Sign</h2>
+<p>Bring these to both vendors. The answers shown are what each publishes today, so you can see where a sales call is needed.</p>
+<div class="bl-tablewrap bl-tablewrap--tri"><table class="bl-table bl-table--tri"><thead><tr><th>Question</th><th>Basis Theory</th><th>Skyflow</th><th class="bl-tri__ev"><span class="bl-tri__tag">Also consider</span>Enigma Vault</th></tr></thead><tbody>
+<tr><td>What will year one cost?</td><td>$995/mo for 20,000 stored tokens, then $0.05 each; ask when Enterprise starts</td><td>Quote after a demo; ask how Unique Identifiers are counted</td><td class="bl-tri__ev">Published: $0, $49, $249, or $499 a month per product</td></tr>
+<tr><td>Which features are on which plan?</td><td>Ask what the $995 plan includes; network tokens, account updater, and 3DS are Enterprise</td><td>Ask which agent and MCP features are generally available</td><td class="bl-tri__ev">Published per tier</td></tr>
+<tr><td>Can we try it before signing?</td><td>A free test tenant, synthetic data only</td><td>A free Try Account on request, test data only, no support or SLA</td><td class="bl-tri__ev">Yes, on the free Lite sandboxes, which have hard limits</td></tr>
+<tr><td>Which regions can hold our data?</td><td>The $995 plan is US only; EU and India are Enterprise</td><td>Region-specific vaults; ask for the region list</td><td class="bl-tri__ev">US and EU; EU residency is an add-on from Growth</td></tr>
+<tr><td>Can you sign a BAA?</td><td>Ask; PHI options are Enterprise</td><td>“Assessed and eligible”; ask for a signed BAA</td><td class="bl-tri__ev">Yes</td></tr>
+<tr><td>What are the overage and renewal terms?</td><td>$0.05 per token above 20,000; tokens deleted in the month still count</td><td>Terms allow usage limits, true-up for excess use, and a 5% annual renewal increase</td><td class="bl-tri__ev">Published overage rates; Lite has a hard limit</td></tr>
+<tr><td>How do we leave?</td><td>Exporting cards on file goes through a support request, and the destination needs a PCI AOC and SSH and PGP keys</td><td>Skyflow’s Pipelines docs say export requires contacting support</td><td class="bl-tri__ev">Ask for the export process in writing</td></tr>
+<tr class="bl-tri__cta"><td>Next step</td><td colspan="2" class="bl-tri__note">Put the same questions to Enigma Vault.</td><td class="bl-tri__ev"><div class="bl-tri__acts"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-basis-theory-vs-skyflow--table-questions" href="/request-demo/?interest=basis-theory-vs-skyflow"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-tri__more cta-blog cta-basis-theory-vs-skyflow--table-questions-explore" href="/docs/">Explore the docs &rarr;</a></div></td></tr>
+</tbody></table></div>
+<p>The last row matters for all three. Tokens never transfer between vaults on their own, so agree the exit process before you sign, whereas most buyers only ask when they are already leaving.</p>
+
+<h2>Moving From Basis Theory or Skyflow to Enigma Vault</h2>
+<p>If the price or the contract terms no longer fit, the move is a data migration between two vendors, so plan it before you cancel anything.</p>
+<ul>
+<li><strong>Map What You Store:</strong> List every token type, field, and file, and which service or team reads each one.</li>
+<li><strong>Check What You Rely On:</strong> If you use Reactors, Functions, network tokens, account updater, or field-level policies, confirm that you can replace them or live without them.</li>
+<li><strong>Agree the Export:</strong> Basis Theory exports cards on file to another PCI-compliant provider through a support request, and Skyflow’s export goes through support as well.</li>
+<li><strong>Re-Tokenize and Run Both for a Few Weeks:</strong> Then cut over.</li>
+</ul>
+<p>Our guide to <a class="bl-link" href="/blog/how-to-migrate-from-vaultless-tokenization-to-vault/">migrating tokenization providers</a> has a checklist for running two vaults side by side. If you want help mapping what you store, <a class="bl-link cta-blog cta-basis-theory-vs-skyflow--migration" href="/request-demo/?interest=basis-theory-vs-skyflow">book a migration call</a>.</p>
+
+<h2>Final Verdict: Basis Theory, Skyflow, or Enigma Vault?</h2>
+<p>Basis Theory and Skyflow are built for different jobs. Basis Theory is the stronger choice when you are building payment flows and want a vault with a visible entry price, with the caveat that its advanced payments features sit behind Enterprise. Skyflow is the stronger choice when the problem is governing sensitive data and AI workflows across a company. I’d decide on the job first and the price second, and I’d get a written quote with plan labels and overage terms from either one before you commit.</p>
+<p>If you want published prices, a free start, and vaults for cards, records, files, and prompts, Enigma Vault covers those. It has no Reactors, network tokens, or field-level governance, so if your project depends on those, it is not the right choice.</p>
+<div class="bl-inlinecta"><div><p class="bl-inlinecta__t">Price your own volume.</p><p class="bl-inlinecta__s">Book a demo and we will model the cost against Basis Theory and Skyflow, or <a class="cta-blog cta-basis-theory-vs-skyflow--final-explore" href="/platform/overview/">explore the platform</a> first.</p></div><a class="np-btn np-btn--on-dark np-btn--primary cta-blog cta-basis-theory-vs-skyflow--final" href="/request-demo/?interest=basis-theory-vs-skyflow"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a></div>
+<p>More comparisons: <a class="bl-link" href="/blog/enigma-vault-vs-basis-theory/">Enigma Vault vs Basis Theory</a>, <a class="bl-link" href="/blog/enigma-vault-vs-skyflow/">Enigma Vault vs Skyflow</a>, <a class="bl-link" href="/blog/very-good-security-vs-basis-theory/">VGS vs Basis Theory</a>, and <a class="bl-link" href="/blog/skyflow-vs-very-good-security/">Skyflow vs VGS</a>.</p>
+
+<h2>How We Researched This Comparison</h2>
+<p>We checked every fact on 8 November 2026. Basis Theory facts come from basistheory.com, including its pricing and billing pages, security page, developer docs, and status page. Skyflow facts come from skyflow.com, its documentation, its Terms of Service (updated 15 July 2026), its security page, and its press releases. Reviews and listings come from G2 and Capterra, and Enigma Vault facts come from our own pricing and product pages.</p>
+<p>Where a vendor makes a claim about itself or a rival, we label it as a vendor claim. If something here is out of date, tell us through our <a class="bl-link" href="/contact/">contact page</a> and we will check it.</p>

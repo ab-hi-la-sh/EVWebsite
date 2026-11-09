@@ -1,0 +1,273 @@
+---
+title: "Very Good Security (VGS) vs Basis Theory: Which Tokenization Platform Fits in 2026?"
+slug: "very-good-security-vs-basis-theory"
+layout: "pii-style"
+metaTitle: "VGS vs Basis Theory (2026): Features, Pricing, and Fit"
+description: "VGS vs Basis Theory compared on architecture, card capture, network tokens, pricing, compliance, and reviews, with Enigma Vault as a lower-cost third option."
+subtitle: "Choose VGS to retrofit existing traffic through a proxy, choose Basis Theory if your engineers want programmable building blocks, and look at Enigma Vault if a $1,000-a-month floor is more than you need."
+date: 2026-11-08
+category: "Card Vault"
+allOnly: true
+author: "abhilash-kumar"
+readTime: 16
+heroImage: "/assets/blog/img-10.png"
+heroAlt: "Very Good Security (VGS) vs Basis Theory comparison"
+excerpt: "A proxy-first tokenization platform against a programmable payments vault, compared feature by feature, with Enigma Vault as a third column."
+tags: ["tokenization", "comparison", "card-vault"]
+ogType: article
+styles: ["blog.css", "pages/blog-pii-hero.css", "tr-pages.css", "pages/vs-tri-table.css"]
+scripts: ["blog-article.js", "pages/vs-tri-table.js"]
+faqSchema: true
+faqs:
+  - q: "Is VGS or Basis Theory Cheaper?"
+    a: "They are close at the entry level. VGS Starter plans start at $1,000 a month, and Basis Theory’s published plan is $995 a month for 20,000 tokens. Above that, VGS moves to a custom quote, while Basis Theory charges $0.05 for each token stored above 20,000 until you negotiate Enterprise terms, so the real difference depends on your volume and which features you need. Enigma Vault’s Card Vault starts free and costs $49, $249, or $499 a month at published volumes."
+  - q: "What Is the Main Difference Between VGS and Basis Theory?"
+    a: "VGS is proxy-first: it sits in your request path, swaps sensitive data for aliases, and restores it on the way to your processor. Basis Theory is an API vault: your application calls it, keeps a token, and can run its own code on vaulted data with Reactors."
+  - q: "Which Is Better for a Startup, VGS or Basis Theory?"
+    a: "Neither has a free production plan, and their entry prices are almost identical. Very Good Security offers a free sandbox that is not for real data, and Basis Theory publishes a self-serve plan. A startup with modest card volume should also price Enigma Vault, whose Lite sandbox is free for testing and whose paid tiers start at $49 a month."
+  - q: "Which Has Better Reviews, VGS or Basis Theory?"
+    a: "VGS has more public reviews: 4.7/5 from 47 on G2, as of 8 November 2026. Basis Theory has G2 and Capterra listings with no reviews yet, so its proof comes from its own customer stories. With so little third-party data on Basis Theory, ask both vendors for references in your industry."
+  - q: "Do VGS and Basis Theory Both Support Network Tokens and Account Updater?"
+    a: "Yes, but both sell them at the quote-only tier. Basis Theory’s docs label network tokens and account updater as Enterprise features, and VGS lists them on its Growth package. Check which regions each feature runs in, because Very Good Security’s status page lists them only in its US environment."
+  - q: "How Long Does Implementation Take With VGS or Basis Theory?"
+    a: "It depends on the scope. VGS says account activation can take up to two business days, and G2 shows an average implementation time of about four months. Basis Theory says a migration from VGS can take hours, which is a vendor claim, and its customer stories describe going live in about a week. Plan for your own testing either way."
+  - q: "Can VGS or Basis Theory Protect PII and Files as Well as Cards?"
+    a: "Yes, with limits. Very Good Security’s vault covers social security numbers, passport numbers, and other sensitive data, and Managed File Tokenization handles several file formats. Basis Theory offers bank data on all plans and PII and PHI options on Enterprise, with a 1 MB payload limit on its $995 plan. Enigma Vault has separate vaults for records and files, with free tiers."
+  - q: "What Is a Lower-Cost Alternative to VGS and Basis Theory?"
+    a: "Enigma Vault’s Card Vault is a PCI DSS Level 1 tokenization service with a free tier and published plans of $49, $249, and $499 a month. It adds phone card capture and covers records, files, and AI prompts, but it does not offer network tokens, account updater, routing, or custom code."
+---
+<p>Very Good Security (VGS) and Basis Theory are both developer-first vault platforms that keep card data out of your own systems by replacing it with aliases or tokens held in a PCI-scoped vault.</p>
+<p>VGS is best for teams that want to protect existing endpoints through a proxy without changing code, while Basis Theory is best for engineering teams that want to build payments on an API with programmable parts.</p>
+
+<h2>VGS vs Basis Theory at a Glance</h2>
+<div class="bl-tablewrap bl-tablewrap--tri"><table class="bl-table bl-table--tri"><thead><tr><th>Vendor</th><th>VGS</th><th>Basis Theory</th><th class="bl-tri__ev"><span class="bl-tri__tag">Also consider</span>Enigma Vault</th></tr></thead><tbody>
+<tr><td>Best for</td><td>Payments teams retrofitting existing endpoints through a proxy</td><td>Engineering-led teams building payments on an API</td><td class="bl-tri__ev">Teams protecting cards, records, files, and prompts without a four-figure floor</td></tr>
+<tr><td>Entry price</td><td>From $1,000/mo (Starter)</td><td>$995/mo, 20,000 tokens</td><td class="bl-tri__ev">Free, then $49/mo</td></tr>
+<tr><td>Free option</td><td>Free sandbox, not for real data, no SLA</td><td>Free test tenant (synthetic data only); no free production plan</td><td class="bl-tri__ev">Free Lite sandbox: 1,000 requests a month</td></tr>
+<tr><td>Architecture</td><td>Proxy-first, with APIs</td><td>API vault, with a proxy</td><td class="bl-tri__ev">API vault, with a gateway proxy at charge time</td></tr>
+<tr><td>G2</td><td><a class="bl-link" href="https://www.g2.com/products/very-good-security-vgs-platform/reviews" rel="nofollow noopener" target="_blank">4.7/5 (47)</a></td><td><a class="bl-link" href="https://www.g2.com/products/basis-theory/reviews" rel="nofollow noopener" target="_blank">No reviews yet</a></td><td class="bl-tri__ev"><a class="bl-link" href="https://www.g2.com/products/enigma-vault/reviews" rel="nofollow noopener" target="_blank">4.4/5 (6)</a></td></tr>
+<tr><td>Capterra</td><td><a class="bl-link" href="https://www.capterra.com/p/195135/VGS-Platform/" rel="nofollow noopener" target="_blank">Listed, 0 reviews</a></td><td><a class="bl-link" href="https://www.capterra.com/p/10002181/Basis-Theory/" rel="nofollow noopener" target="_blank">Listed, 0 reviews</a></td><td class="bl-tri__ev"><a class="bl-link" href="https://www.capterra.com/p/241650/Enigma-Vault/" rel="nofollow noopener" target="_blank">4.8/5 (4)</a></td></tr>
+<tr class="bl-tri__cta"><td>Next step</td><td colspan="2" class="bl-tri__note">Free Lite tier, no card needed. Published plans from $49 a month.</td><td class="bl-tri__ev"><div class="bl-tri__acts"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-very-good-security-vs-basis-theory--table-glance" href="/request-demo/?interest=vgs-vs-basis-theory"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-tri__more cta-blog cta-very-good-security-vs-basis-theory--table-glance-explore" href="/vault/card-vault/">Explore Card Vault &rarr;</a></div></td></tr>
+</tbody></table></div>
+<p>Figures are as of 8 November 2026, from each vendor’s own pages and from G2 and Capterra, except the VGS Capterra listing, last read on 30 October 2026. For a wider shortlist, see our guides to <a class="bl-link" href="/blog/very-good-security-alternatives/">Very Good Security alternatives</a> and <a class="bl-link" href="/blog/basis-theory-alternatives/">Basis Theory alternatives</a>.</p>
+<p>This guide compares Very Good Security and Basis Theory on architecture, features, cost at three business sizes, compliance, and reviews, with Enigma Vault alongside as a third option for teams that do not need either price floor.</p>
+
+<h2>VGS vs Basis Theory: Quick Verdict</h2>
+<p><strong>VGS:</strong> A proxy-first tokenization platform with inbound and outbound routes, Collect and Show components, VGS Compute, and a payments line that includes network tokens, account updater, and card issuing. Starter plans start at $1,000 a month, and Growth is by quote.</p>
+<p><strong>Basis Theory:</strong> A programmable payments vault with Elements, a general-purpose proxy, and Reactors that run your code. It publishes one plan at $995 a month for 20,000 tokens, and its docs label network tokens, account updater, 3D Secure, and agentic payments as Enterprise features. It has no reviews yet on G2 or Capterra.</p>
+<div class="bl-evcall" role="note"><span class="bl-evcall__tag">Also consider</span><p><strong>Enigma Vault:</strong> A PCI DSS Level 1 vault for cards, records, files, and AI prompts, with a free tier and published plans from $49 to $499 a month per product.</p><div class="bl-evcall__cta"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-very-good-security-vs-basis-theory--callout-verdict" href="/request-demo/?interest=vgs-vs-basis-theory"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-evcall__more cta-blog cta-very-good-security-vs-basis-theory--callout-verdict-explore" href="/vault/card-vault/">Explore Card Vault &rarr;</a></div></div>
+<p><strong>VGS</strong> fits you if:</p>
+<ul>
+<li>You have many existing endpoints and want to protect them with route configuration instead of code changes.</li>
+<li>You want audit help from the vendor, since its Growth package lists a PCI compliance subscription and a provided auditor.</li>
+<li>You need card issuing and network tokens from one vendor, and ISO 27001 and large named customers matter in your vendor review.</li>
+</ul>
+<p><strong>Basis Theory</strong> fits you if:</p>
+<ul>
+<li>Your engineers want to build against an API, with Elements, a proxy, and Reactors that run your own code.</li>
+<li>You want a published self-serve price and ISO 27001, and you are prepared to go to a quote for network tokens, account updater, and 3D Secure.</li>
+<li>You are comfortable that it has no third-party reviews yet and will ask for references.</li>
+</ul>
+<p><strong>Enigma Vault</strong> fits you if:</p>
+<ul>
+<li>A $1,000-a-month floor is more than your card volume justifies, and you want to start at $0.</li>
+<li>Cards still arrive by phone, or you also need to protect records, documents, and AI prompts.</li>
+<li>You can live without network tokens, account updater, routing, and custom code.</li>
+</ul>
+<p><strong>Bottom Line:</strong> Very Good Security bends your existing traffic around a proxy, Basis Theory hands your engineers programmable parts, and Enigma Vault gives teams without a four-figure monthly budget a PCI-scoped vault they can start building on for free.</p>
+
+<h2>VGS vs Basis Theory Pricing</h2>
+
+<h3>What VGS Charges</h3>
+<p>VGS publishes two packages. Starter plans start at $1,000 a month, and the page lists no included features, units, or overage. Growth has no price, and its card lists network tokens, account updater, a PCI compliance subscription, a VGS-provided auditor, large file transfers, VGS Compute, and card attributes. The page does not say whether each item is in the base price. A sandbox is free for building and testing, but it is not for real data and has no SLA.</p>
+<p>Beyond the floor, buyer data is the best guide. <a class="bl-link" href="https://www.vendr.com/marketplace/very-good-security" rel="nofollow noopener" target="_blank">Vendr</a>, which tracks software purchases, shows a median of $56,700 a year for VGS, with a range of $21,600 to $132,000. It publishes no purchase count or data date. One G2 reviewer reports $40 for each extra custom domain.</p>
+
+<h3>What Basis Theory Charges</h3>
+<p>Basis Theory publishes one self-serve plan and a custom Enterprise tier. There is no free production plan, only a free test tenant that is not PCI compliant and takes synthetic data only. It bills on the tokens stored in your vault during the calendar month, including cards, network tokens, and wallet tokens, and tokens deleted in the same month still count.</p>
+<div class="bl-tablewrap"><table class="bl-table"><thead><tr><th>Basis Theory plan</th><th>What you get</th></tr></thead><tbody>
+<tr><td>$995/mo</td><td>20,000 tokens stored per calendar month, then $0.05 for each extra token; production PCI environment, 1 MB payload limit, 24 hours of logs, PCI AOC, US-only environment</td></tr>
+<tr><td>Enterprise (custom)</td><td>PII and PHI options, responses for 95% of PCI SAQ D, unlimited monthly interactions per token, custom log access and payload sizes, uptime guarantees, enterprise support, SSO/SAML, white-label CNAME, dedicated IP</td></tr>
+<tr class="bl-tri__solo"><td colspan="2"><div class="bl-tri__solo-in"><span class="bl-tri__solo-note">Compare: Enigma Vault’s Card Vault has a free Lite sandbox and published plans of $49, $249, and $499 a month.</span><div class="bl-tri__acts"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-very-good-security-vs-basis-theory--table-plans" href="/request-demo/?interest=vgs-vs-basis-theory"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-tri__more cta-blog cta-very-good-security-vs-basis-theory--table-plans-explore" href="/pricing/#vault">See Card Vault pricing &rarr;</a></div></div></td></tr>
+</tbody></table></div>
+
+<p>At the published overage rate, 100,000 stored tokens works out to about $4,995 a month and 250,000 to about $12,495. That is our arithmetic from the published figures, not a Basis Theory quote, and Enterprise terms may differ.</p>
+
+<h3>What Enigma Vault Charges</h3>
+<div class="bl-evcall" role="note"><span class="bl-evcall__tag">Enigma Vault</span><p>Every Card Vault tier is published. Lite is a free sandbox with 1,000 requests a month, Starter is $49 for 20,000, Growth is $249 for 250,000, and Business is $499 for 1,000,000, with yearly prices of $550, $2,700, and $5,500. Overage is published at $0.02, $0.01, and $0.007 per request on the paid tiers, and Lite has a hard limit. Billing runs through the developer portal or AWS Marketplace.</p><div class="bl-evcall__cta"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-very-good-security-vs-basis-theory--callout-charges" href="/request-demo/?interest=vgs-vs-basis-theory"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-evcall__more cta-blog cta-very-good-security-vs-basis-theory--callout-charges-explore" href="/pricing/#vault">See Card Vault pricing &rarr;</a></div></div>
+
+<h3>VGS vs Basis Theory Cost at Three Business Sizes</h3>
+<div class="bl-tablewrap bl-tablewrap--tri"><table class="bl-table bl-table--tri"><thead><tr><th>Business size</th><th>VGS</th><th>Basis Theory</th><th class="bl-tri__ev"><span class="bl-tri__tag">Also consider</span>Enigma Vault</th></tr></thead><tbody>
+<tr><td>Small agency or practice (up to 100 stored cards)</td><td>From $1,000/mo, or the free sandbox while you build</td><td>$995/mo, or a free test tenant with synthetic data</td><td class="bl-tri__ev">$49/mo on Starter (the free Lite sandbox is for testing)</td></tr>
+<tr><td>Growing SaaS or retailer (about 10,000 stored cards)</td><td>From $1,000/mo</td><td>$995/mo (20,000 tokens included)</td><td class="bl-tri__ev">$49/mo (Starter: up to 10,000 stored card tokens)</td></tr>
+<tr><td>Established platform (about 100,000 stored cards)</td><td>Growth, by quote; Vendr’s median is $56,700 a year</td><td>About $4,995/mo at the published overage rate, or Enterprise by quote</td><td class="bl-tri__ev">$249/mo (Growth: up to 100,000 stored card tokens), or $2,700 a year</td></tr>
+<tr class="bl-tri__cta"><td>Next step</td><td colspan="2" class="bl-tri__note">Basis Theory’s large-platform figure is our arithmetic from its published rate. Model your own card counts.</td><td class="bl-tri__ev"><div class="bl-tri__acts"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-very-good-security-vs-basis-theory--table-pricing" href="/request-demo/?interest=vgs-vs-basis-theory"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-tri__more cta-blog cta-very-good-security-vs-basis-theory--table-pricing-explore" href="/pricing/#vault">See Card Vault pricing &rarr;</a></div></td></tr>
+</tbody></table></div>
+<p><strong>How to Read This Table:</strong> The rows are sized by stored cards. Very Good Security does not publish its billing unit, Basis Theory bills on tokens stored in the month, and Enigma Vault bills on requests with a stored-token ceiling on each tier, so the units are not identical. Enigma Vault’s tiers also limit requests, so check your traffic against the allowance.</p>
+<p><strong>The Practical Takeaway:</strong> A full year of Card Vault Growth costs $2,700. A year at VGS’s $1,000 Starter floor costs $12,000 and a year of Basis Theory’s plan costs $11,940. Enigma Vault is under a quarter of either, before you account for the features it does not have. See our list of the <a class="bl-link" href="/blog/best-credit-card-tokenization-software/">best credit card tokenization software</a> for more price points.</p>
+
+<h2>How VGS and Basis Theory Differ at the Core</h2>
+<p>VGS sits in your traffic and swaps data for aliases on the way in and out, whereas Basis Theory is called by your application, which keeps a token and decides what happens next. That one choice shapes how much code you change, who sits in your request path, and what you maintain.</p>
+<div class="bl-tablewrap bl-tablewrap--tri"><table class="bl-table bl-table--tri"><thead><tr><th>Question</th><th>VGS (proxy-first)</th><th>Basis Theory (API vault)</th><th class="bl-tri__ev"><span class="bl-tri__tag">Also consider</span>Enigma Vault (API vault)</th></tr></thead><tbody>
+<tr><td>How data is protected on the way in</td><td>An inbound route strips sensitive values, so your servers store aliases</td><td>Your app or Elements sends the card to the vault and stores the token</td><td class="bl-tri__ev">Your app or the hosted form sends the card to the vault and stores the token</td></tr>
+<tr><td>How data reaches a third party</td><td>An outbound route restores the real value in transit</td><td>The proxy or a Reactor sends it to the provider</td><td class="bl-tri__ev">The gateway proxy injects the card into an allowlisted gateway request</td></tr>
+<tr><td>Who sits in your request path</td><td>VGS, on every proxied route</td><td>Basis Theory, on the calls you send through it</td><td class="bl-tri__ev">Enigma Vault, at charge time only</td></tr>
+<tr><td>Code changes</td><td>Mostly route configuration</td><td>API calls and Elements in your code</td><td class="bl-tri__ev">A handful of explicit API calls</td></tr>
+<tr><td>Ongoing upkeep</td><td>Routes, matching rules, and promotion from sandbox to live</td><td>Tokens, expressions, and Reactor code</td><td class="bl-tri__ev">An allowlist and credentials</td></tr>
+<tr class="bl-tri__cta"><td>Next step</td><td colspan="2" class="bl-tri__note">Each vendor offers a free test environment. Enigma Vault’s first paid plan is $49 a month.</td><td class="bl-tri__ev"><div class="bl-tri__acts"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-very-good-security-vs-basis-theory--table-core" href="/request-demo/?interest=vgs-vs-basis-theory"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-tri__more cta-blog cta-very-good-security-vs-basis-theory--table-core-explore" href="/platform/overview/">Explore the platform &rarr;</a></div></td></tr>
+</tbody></table></div>
+<p><strong>Where the Proxy Model Helps:</strong> You can protect existing endpoints with little application code, and G2 reviewers repeatedly say they understood the proxy quickly.</p>
+<p><strong>Where It Costs You:</strong> G2 reviewers mention reloading routes before changes take effect, needing support for complex matching, and promoting routes between vaults by hand in YAML.</p>
+<p><strong>Where the API Model Helps:</strong> Only the calls you choose go through the vendor, and your engineers control exactly where tokens are created and used. The price is more explicit code in your own application.</p>
+<p>If you have dozens of existing endpoints and little appetite for code changes, the proxy model saves time. If you would rather build the integration once and keep third parties out of the rest of your traffic, the API model is cleaner.</p>
+
+<h2>Card-on-File Workflow: VGS vs Basis Theory vs Enigma Vault</h2>
+<p>To make the comparison concrete, here is the same job on each platform: take a customer’s card, store it, and charge it later through your payment processor.</p>
+<div class="bl-tablewrap bl-tablewrap--tri"><table class="bl-table bl-table--tri"><thead><tr><th>Step</th><th>VGS</th><th>Basis Theory</th><th class="bl-tri__ev"><span class="bl-tri__tag">Also consider</span>Enigma Vault</th></tr></thead><tbody>
+<tr><td>1. Capture the card</td><td>Collect hosted fields on web, iOS, Android, or React Native, or an inbound route</td><td>Universal Form Elements on web and mobile</td><td class="bl-tri__ev">Hosted form, API, or Twilio Pay on a phone call (Growth and above)</td></tr>
+<tr><td>2. Store it</td><td>The vault returns an alias, with several formats including Luhn-valid ones</td><td>The vault returns a token you can shape with expressions</td><td class="bl-tri__ev">Card Vault returns a random token, optionally Luhn-passable; CVV is deleted within 30 minutes</td></tr>
+<tr><td>3. Save the reference</td><td>Your database keeps the alias</td><td>Your database keeps the token</td><td class="bl-tri__ev">Your database keeps the token</td></tr>
+<tr><td>4. Charge later</td><td>An outbound route restores the card in the processor request</td><td>The proxy forwards to any provider</td><td class="bl-tri__ev">The gateway proxy injects the card into an allowlisted gateway request</td></tr>
+<tr><td>5. Keep the card working</td><td>Network tokens and account updater (listed on the Growth package)</td><td>Network tokens and account updater (Enterprise)</td><td class="bl-tri__ev">The customer re-enters an expired card</td></tr>
+<tr class="bl-tri__cta"><td>Next step</td><td colspan="2" class="bl-tri__note">Run the same five steps on Enigma Vault’s free Lite sandbox.</td><td class="bl-tri__ev"><div class="bl-tri__acts"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-very-good-security-vs-basis-theory--table-workflow" href="/request-demo/?interest=vgs-vs-basis-theory"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-tri__more cta-blog cta-very-good-security-vs-basis-theory--table-workflow-explore" href="/vault/card-vault/">Explore Card Vault &rarr;</a></div></td></tr>
+</tbody></table></div>
+<p>All three get the card number out of your servers. The differences show up at step 1 and step 5.</p>
+<ul>
+<li><strong>Step 1:</strong> Very Good Security and Basis Theory both offer mature hosted fields for web and mobile. Enigma Vault adds the phone channel that neither packages.</li>
+<li><strong>Step 5:</strong> VGS and Basis Theory both sell network tokens and account updater, at their quote-only tiers (Growth at VGS, Enterprise at Basis Theory). They matter most to subscription and marketplace revenue, and Enigma Vault does not offer them.</li>
+</ul>
+
+<h2>VGS vs Basis Theory Features Compared</h2>
+<p>Compare Very Good Security and Basis Theory on capture, proxies, payments tools, data types, and AI. Both go deep on payments, so the useful differences are in how each is built and what each leaves out.</p>
+<div class="bl-tablewrap bl-tablewrap--tri"><table class="bl-table bl-table--tri"><thead><tr><th>Feature</th><th>VGS</th><th>Basis Theory</th><th class="bl-tri__ev"><span class="bl-tri__tag">Also consider</span>Enigma Vault</th></tr></thead><tbody>
+<tr><td>Web card fields</td><td>Collect</td><td>Universal Form Elements</td><td class="bl-tri__ev">Hosted forms</td></tr>
+<tr><td>Mobile capture</td><td>Collect for iOS, Android, React Native</td><td>iOS, Android, React Native SDKs</td><td class="bl-tri__ev">API</td></tr>
+<tr><td>Phone (IVR) capture</td><td>None found on VGS’s site</td><td><span class="bl-tri__no">Not offered</span></td><td class="bl-tri__ev">Twilio Pay (Growth and above)</td></tr>
+<tr><td>Apple Pay and Google Pay</td><td>Wallet payments and decryption guides</td><td>Decrypts and vaults wallet tokens</td><td class="bl-tri__ev">Through your gateway</td></tr>
+<tr><td>Token formats</td><td>Many alias formats, including Luhn-valid format-preserving ones</td><td>Expressions</td><td class="bl-tri__ev">Random or Luhn-passable</td></tr>
+<tr><td>Proxy to payment gateways</td><td>Outbound routes</td><td>Proxy to any provider</td><td class="bl-tri__ev">Gateway proxy, domain allowlisted</td></tr>
+<tr><td>Proxy to any third-party API</td><td>Outbound routes to any HTTPS destination</td><td>Proxy, ephemeral or pre-configured</td><td class="bl-tri__ev"><span class="bl-tri__no">Not offered</span></td></tr>
+<tr><td>Run your own code on data</td><td>VGS Compute (listed on Growth)</td><td>Reactors (asynchronous Reactors are Enterprise)</td><td class="bl-tri__ev"><span class="bl-tri__no">Not offered</span></td></tr>
+<tr><td>Network tokens</td><td>Listed on Growth</td><td>Enterprise</td><td class="bl-tri__ev"><span class="bl-tri__no">Not offered</span></td></tr>
+<tr><td>Account updater</td><td>Listed on Growth</td><td>Enterprise</td><td class="bl-tri__ev"><span class="bl-tri__no">Not offered</span></td></tr>
+<tr><td>3D Secure</td><td>Single-API 3DS</td><td>Universal 3DS (Enterprise)</td><td class="bl-tri__ev">Through your gateway</td></tr>
+<tr><td>BIN and card data</td><td>Card Attributes (listed on Growth)</td><td>BIN and card-detail enrichments (Enterprise)</td><td class="bl-tri__ev"><span class="bl-tri__no">Not offered</span></td></tr>
+<tr><td>Smart PSP routing</td><td>“Payment orchestration” use case</td><td>Marketed as smart and backup routing; docs guide marked under construction</td><td class="bl-tri__ev"><span class="bl-tri__no">Not offered</span></td></tr>
+<tr><td>Card issuing</td><td>Card management platform</td><td>Guides for tokenizing issuer-API data; not an issuer</td><td class="bl-tri__ev"><span class="bl-tri__no">Not offered</span></td></tr>
+<tr><td>Agentic payments</td><td>Agentic Commerce Hub (US environment)</td><td>Agentic Payments API (Enterprise)</td><td class="bl-tri__ev"><span class="bl-tri__no">Not offered</span></td></tr>
+<tr><td>PII beyond cards</td><td>SSNs, passport numbers, and other sensitive data</td><td>Bank data; PII and PHI options on Enterprise</td><td class="bl-tri__ev">Data Vault on every tier</td></tr>
+<tr><td>Files</td><td>Managed File Tokenization; no size limit published</td><td>1 MB payload limit on the $995 plan</td><td class="bl-tri__ev">File Vault, 5 GB free up to 5,000 GB</td></tr>
+<tr><td>LLM prompt protection</td><td>AI Data Firewall (page only; no pricing or docs)</td><td><span class="bl-tri__no">Not offered</span></td><td class="bl-tri__ev">NoPII, 1M protected tokens a month free</td></tr>
+<tr><td>No-code customer intake</td><td><span class="bl-tri__no">Not offered</span></td><td><span class="bl-tri__no">Not offered</span></td><td class="bl-tri__ev">Customer Vault</td></tr>
+<tr><td>Regions</td><td>US, EU, and Asia-Pacific environments</td><td>US only on the $995 plan; EU and India on Enterprise</td><td class="bl-tri__ev">US and EU; EU residency is an add-on from Growth</td></tr>
+<tr class="bl-tri__cta"><td>Next step</td><td colspan="2" class="bl-tri__note">Check which of these features sit on each vendor’s entry plan, not only its top tier.</td><td class="bl-tri__ev"><div class="bl-tri__acts"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-very-good-security-vs-basis-theory--table-features" href="/request-demo/?interest=vgs-vs-basis-theory"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-tri__more cta-blog cta-very-good-security-vs-basis-theory--table-features-explore" href="/vault/card-vault/">Explore Card Vault &rarr;</a></div></td></tr>
+</tbody></table></div>
+<p>Here is how the biggest differences play out in practice.</p>
+
+<h2>Where VGS and Basis Theory Differ in Practice</h2>
+
+<h3>Card Capture on the Web and in Apps</h3>
+<p>VGS Collect provides hosted form fields for JavaScript, iOS, Android, and React Native, and VGS Show reveals stored values in a VGS-hosted component. Basis Theory’s Universal Form Elements cover web and mobile, with Apple Pay and Google Pay built in. For most checkouts either one works.</p>
+<p>If a styled, embedded checkout is your main requirement, both offer more ready-made pieces than Enigma Vault’s hosted forms and API.</p>
+
+<h3>Network Tokens, Account Updater, and Routing</h3>
+<p>This is the heart of both products, and at both it sits behind a quote. Network tokens and account updater keep stored cards working after a reissue or expiry, which protects recurring revenue. Basis Theory’s docs label network tokens, account updater, Universal 3D Secure, and BIN and card-detail enrichments as Enterprise features, and its pricing page gives no prices for them. Its payments-routing guide is marked under construction, although its site markets smart and backup routing. VGS lists network tokens, account updater, and card attributes on its Growth package, runs a card management platform, and offers 3D Secure through a single API.</p>
+<p>One thing to check with VGS: its status page lists network tokens, account updater, card attributes, 3D Secure, and file tokenization only in the US environment, while the EU and Asia-Pacific environments list a shorter set of components, mainly the proxy, dashboard, Collect, and Show. That is a monitoring list, not a published availability statement, so confirm regional availability with Very Good Security if you process outside the US.</p>
+
+<h3>Custom Code: VGS Compute and Basis Theory Reactors</h3>
+<p>Both let you run your own logic on sensitive data without it touching your servers. VGS Compute runs customer-written code, in a Python-like language, inside the VGS proxies on data in transit, for custom cryptographic operations, payload transformation, and policy enforcement. Basis Theory’s Reactors run your code against vaulted data inside its secure environment, for example to transform a value or send it to a partner.</p>
+<div class="bl-evcall" role="note"><span class="bl-evcall__tag">Enigma Vault</span><p>Enigma Vault has no equivalent. It returns data only to authorized callers or injects it into gateway requests through its proxy.</p><div class="bl-evcall__cta"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-very-good-security-vs-basis-theory--callout-code" href="/request-demo/?interest=vgs-vs-basis-theory"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-evcall__more cta-blog cta-very-good-security-vs-basis-theory--callout-code-explore" href="/vault/card-vault/">Explore Card Vault &rarr;</a></div></div>
+
+<h3>Beyond Cards: PII, Files, and AI Prompts</h3>
+<p>VGS’s vault holds more than cards. Its documentation names social security numbers, passport numbers, and any other data you deem sensitive, and Managed File Tokenization handles CSV, JSON, XML, Parquet, ISO 8583, and EBCDIC files. Very Good Security also markets an AI Data Firewall, a proxy that tokenizes sensitive values in prompts, but its page lists no pricing, documentation, or entity counts. VGS’s trust center does not list HIPAA.</p>
+<p>Basis Theory has a bank-account token type and a generic token type that stores any primitive or unstructured data, with PII and PHI compliance options on Enterprise. On the $995 plan, payloads are capped at 1 MB and logs are kept for 24 hours, so it is not a document store.</p>
+<div class="bl-evcall" role="note"><span class="bl-evcall__tag">Enigma Vault</span><p>Enigma Vault covers these jobs with separate vaults: <a class="bl-link" href="/vault/data-vault/">Data Vault</a> for structured records from the free tier up, <a class="bl-link" href="/vault/file-vault/">File Vault</a> for documents, <a class="bl-link" href="/vault/customer-vault/">Customer Vault</a> for no-code intake, and <a class="bl-link" href="/nopii/">NoPII</a> for LLM prompts, with a BAA for healthcare workloads.</p><div class="bl-evcall__cta"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-very-good-security-vs-basis-theory--callout-beyond" href="/request-demo/?interest=vgs-vs-basis-theory"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-evcall__more cta-blog cta-very-good-security-vs-basis-theory--callout-beyond-explore" href="/vault/data-vault/">Explore Data Vault &rarr;</a></div></div>
+
+<h3>Implementation Time and Support</h3>
+<p>VGS says activating an account can take up to two business days, after which you create a live vault, promote your sandbox routes, and ask support to enable live data. G2 shows an average implementation time of about four months, although G2 reviewers also praise quick setup, so the real figure depends heavily on how many routes you protect. Reviewers often praise Very Good Security support, especially chat.</p>
+<p>Basis Theory’s migration page promises a move from VGS “in hours,” which is a vendor claim, and its docs say network tokens, account updater, and agentic payments need onboarding before production. One editorial comparison estimates six to twelve engineering weeks for the same migration without citing a source, so treat anything between hours and weeks as unproven until you test your own routes. Basis Theory’s customer stories show a more modest timeline, such as Cubby going from proof of concept to live in about a week.</p>
+
+<h2>VGS vs Basis Theory Security and Compliance</h2>
+<p>VGS, Basis Theory, and Enigma Vault all hold PCI DSS Level 1 and SOC 2 Type II. Very Good Security and Basis Theory also hold ISO 27001, which Enigma Vault is still working toward.</p>
+<div class="bl-tablewrap bl-tablewrap--tri"><table class="bl-table bl-table--tri"><thead><tr><th>Control</th><th>VGS</th><th>Basis Theory</th><th class="bl-tri__ev"><span class="bl-tri__tag">Also consider</span>Enigma Vault</th></tr></thead><tbody>
+<tr><td>PCI DSS</td><td>Level 1 live environments; PCI DSS v4.0.1 on its trust center</td><td>Level 1, merchant and service provider; PCI AOC included in the $995 plan</td><td class="bl-tri__ev">Level 1 Service Provider (Card, Data, File Vault in scope)</td></tr>
+<tr><td>SOC 2</td><td>Type II</td><td>Type II</td><td class="bl-tri__ev">Type II</td></tr>
+<tr><td>ISO 27001</td><td>ISO/IEC 27001:2022 listed</td><td>Certified</td><td class="bl-tri__ev">In progress</td></tr>
+<tr><td>HIPAA</td><td>Not listed on its trust center</td><td>“HIPAA compliant” environment; PHI options on Enterprise; BAA not mentioned</td><td class="bl-tri__ev">BAA available</td></tr>
+<tr><td>Audit support</td><td>PCI compliance subscription and provided auditor listed on Growth</td><td>PCI AOC; Enterprise includes responses for 95% of SAQ D</td><td class="bl-tri__ev">AOC, responsibility matrix, and SOC 2 report from Starter; bring your own QSA</td></tr>
+<tr><td>Data residency</td><td>US, EU, and Asia-Pacific environments; features vary by region</td><td>US only on the $995 plan; EU and India on Enterprise</td><td class="bl-tri__ev">US and EU; EU residency is an add-on from Growth</td></tr>
+<tr class="bl-tri__cta"><td>Next step</td><td colspan="2" class="bl-tri__note">Ask every vendor for its current audit reports and, if you handle PHI, a signed BAA.</td><td class="bl-tri__ev"><div class="bl-tri__acts"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-very-good-security-vs-basis-theory--table-security" href="/request-demo/?interest=vgs-vs-basis-theory"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-tri__more cta-blog cta-very-good-security-vs-basis-theory--table-security-explore" href="/platform/data-security/">Explore security controls &rarr;</a></div></td></tr>
+</tbody></table></div>
+<p>With any of them, the vault can significantly reduce the systems in your PCI scope, but your acquirer or QSA confirms your final scope. Our guide to the <a class="bl-link" href="/blog/best-pci-dss-compliant-tokenization-software/">best PCI DSS compliant tokenization software</a> compares more certified vaults.</p>
+
+<h2>VGS vs Basis Theory Reviews</h2>
+<p>VGS has 47 reviews on G2 at 4.7/5, while Basis Theory has no reviews yet on G2 or Capterra. Enigma Vault has 6 on G2 and 4 on Capterra.</p>
+<div class="bl-tablewrap bl-tablewrap--tri"><table class="bl-table bl-table--tri"><thead><tr><th>Source</th><th>VGS</th><th>Basis Theory</th><th class="bl-tri__ev"><span class="bl-tri__tag">Also consider</span>Enigma Vault</th></tr></thead><tbody>
+<tr><td>G2</td><td><a class="bl-link" href="https://www.g2.com/products/very-good-security-vgs-platform/reviews" rel="nofollow noopener" target="_blank">4.7/5 from 47 reviews</a></td><td><a class="bl-link" href="https://www.g2.com/products/basis-theory/reviews" rel="nofollow noopener" target="_blank">Listed, no reviews</a></td><td class="bl-tri__ev"><a class="bl-link" href="https://www.g2.com/products/enigma-vault/reviews" rel="nofollow noopener" target="_blank">4.4/5 from 6 reviews</a></td></tr>
+<tr><td>Capterra</td><td><a class="bl-link" href="https://www.capterra.com/p/195135/VGS-Platform/" rel="nofollow noopener" target="_blank">Listed, no reviews</a></td><td><a class="bl-link" href="https://www.capterra.com/p/10002181/Basis-Theory/" rel="nofollow noopener" target="_blank">Listed, no reviews</a></td><td class="bl-tri__ev"><a class="bl-link" href="https://www.capterra.com/p/241650/Enigma-Vault/" rel="nofollow noopener" target="_blank">4.8/5 from 4 reviews</a></td></tr>
+<tr><td>Other public proof</td><td>Named customers and testimonials</td><td>Customer stories</td><td class="bl-tri__ev">Reviewer quotes on support speed and cost</td></tr>
+<tr class="bl-tri__cta"><td>Next step</td><td colspan="2" class="bl-tri__note">Six reviews is a thin base. Ask every vendor for a reference in your industry.</td><td class="bl-tri__ev"><div class="bl-tri__acts"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-very-good-security-vs-basis-theory--table-reviews" href="/request-demo/?interest=vgs-vs-basis-theory"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-tri__more cta-blog cta-very-good-security-vs-basis-theory--table-reviews-explore" href="/platform/overview/">Explore the platform &rarr;</a></div></td></tr>
+</tbody></table></div>
+<h3>What VGS Reviewers Say</h3>
+<p>Reviewers on G2 often praise support, especially chat, and say the proxy was quick to understand. The critical notes cluster around price and polish. One reviewer calls it not very startup-friendly and another reports $40 for each extra custom domain. Others say documentation is out of date in places, mobile SDKs need more examples, the admin page is slow, and log filtering is weak.</p>
+<p>VGS’s own homepage features a SumUp testimonial crediting it with saving nearly $1M and six months of development time. That is a vendor-chosen quote, so weigh it as marketing.</p>
+<h3>What Basis Theory’s Public Proof Shows</h3>
+<p>With no third-party reviews yet on G2 or Capterra, Basis Theory’s proof comes from its own customer stories. Treat those as marketing too, and ask for references in your industry.</p>
+<h3>What Enigma Vault Reviewers Say</h3>
+<div class="bl-evcall" role="note"><span class="bl-evcall__tag">Enigma Vault</span><p>Reviewers on G2 praise a simple API, clear PCI scope, lower cost than other vendors, and quick support, and ask for more documentation and deeper reporting dashboards. Six reviews is a thin base, so ask for a reference in your industry here as well.</p><div class="bl-evcall__cta"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-very-good-security-vs-basis-theory--callout-reviews" href="/request-demo/?interest=vgs-vs-basis-theory"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-evcall__more cta-blog cta-very-good-security-vs-basis-theory--callout-reviews-explore" href="/platform/overview/">Explore the platform &rarr;</a></div></div>
+
+<h2>What Basis Theory’s Comparison Page Says About VGS</h2>
+<p>Basis Theory publishes its own page comparing itself with Very Good Security, and it is one of the few pages that rank for this search. It makes several claims worth checking.</p>
+<ul>
+<li><strong>VGS pricing is custom, and you must contact sales.</strong> This is out of date. VGS publishes Starter plans from $1,000 a month and sells only Growth by quote.</li>
+<li><strong>Very Good Security lists no ISO 27001.</strong> Also out of date. VGS’s trust center lists ISO/IEC 27001:2022.</li>
+<li><strong>Migration takes a few hours with no downtime.</strong> The page links to a migration guide on GitHub, and we found no VGS customer who describes that timeline. Treat it as a vendor claim.</li>
+<li><strong>Very Good Security charges an annual migration fee.</strong> We found no VGS source for this, so we have not repeated it.</li>
+</ul>
+<p>The page also describes Basis Theory’s features without plan labels. Its own docs mark network tokens, account updater, Universal 3D Secure, and BIN enrichments as Enterprise, so check what the $995 plan includes before you compare it with VGS. Very Good Security has no page naming Basis Theory.</p>
+
+<h2>Who Should Choose VGS, Basis Theory, or Enigma Vault</h2>
+
+<h3>A Payments Fintech or Marketplace With an Engineering Team</h3>
+<p>Both VGS and Basis Theory fit. Pick VGS if you are retrofitting traffic across many services or want audit help bundled with the vendor. Pick Basis Theory if your team would rather build against an API and use Reactors and routing. If your card volume is modest, price both against Enigma Vault first.</p>
+
+<h3>A Subscription or Ecommerce Business With Cards on File</h3>
+<p>Network tokens and account updater protect recurring revenue, and both Very Good Security and Basis Theory sell them, at their quote-only tiers: Growth at VGS and Enterprise at Basis Theory. If most of your revenue is recurring, that is worth paying for. If customers can re-enter an expired card, Enigma Vault covers storage and gateway charging at a fraction of the price.</p>
+
+<h3>An Agency, Travel Business, Clinic, or Support Team Taking Cards by Phone</h3>
+<p>A proxy protects data arriving over HTTP. It does nothing for a card number read aloud on a call and typed into a ticket. We found no phone channel on VGS’s site, and Basis Theory does not package one. Enigma Vault’s <a class="bl-link" href="/vault/card-vault/">Card Vault</a> includes Twilio Pay IVR from the Growth tier, so callers enter their card on the keypad and agents never hear it.</p>
+
+<h3>A Team That Wants to Try Before Buying</h3>
+<p>Very Good Security offers a free sandbox that is not for real data. Basis Theory has a free test tenant for synthetic data only, and no free production plan. Enigma Vault’s Lite tier is also a free sandbox for development and testing, with hard limits and no card to enter, so you can build against the API before you pay anything. Paid plans start at $49 a month.</p>
+
+<h2>Questions to Ask VGS and Basis Theory Before You Sign</h2>
+<p>Bring these to both vendors. The answers shown are what each publishes today, so you can see where a sales call is needed.</p>
+<div class="bl-tablewrap bl-tablewrap--tri"><table class="bl-table bl-table--tri"><thead><tr><th>Question</th><th>VGS</th><th>Basis Theory</th><th class="bl-tri__ev"><span class="bl-tri__tag">Also consider</span>Enigma Vault</th></tr></thead><tbody>
+<tr><td>What will year one cost?</td><td>Starter from $1,000/mo; ask what is in the base price and what the billing unit is</td><td>$995/mo for 20,000 tokens; ask how tokens are counted and when Enterprise starts</td><td class="bl-tri__ev">Published: $0, $49, $249, or $499 a month per product</td></tr>
+<tr><td>Can we test before signing?</td><td>Free sandbox, not for real data</td><td>A free test tenant with synthetic data only; ask about production</td><td class="bl-tri__ev">Yes, on the free Lite sandbox</td></tr>
+<tr><td>Which features run outside the US?</td><td>Ask which features run in the EU and Asia-Pacific environments</td><td>The $995 plan is US only; EU and India are part of Enterprise</td><td class="bl-tri__ev">US and EU; EU residency is an add-on from Growth</td></tr>
+<tr><td>Can you sign a BAA?</td><td>Ask; HIPAA is not listed on its trust center</td><td>PHI options are part of Enterprise</td><td class="bl-tri__ev">Yes</td></tr>
+<tr><td>Who does the audit work?</td><td>Growth lists a PCI subscription and auditor</td><td>PCI AOC; Enterprise includes SAQ D responses</td><td class="bl-tri__ev">AOC and SOC 2 report from Starter; bring your own QSA</td></tr>
+<tr><td>How do we leave?</td><td>Ask for the export process in writing</td><td>Ask for the export process in writing</td><td class="bl-tri__ev">Ask for the export process in writing</td></tr>
+<tr class="bl-tri__cta"><td>Next step</td><td colspan="2" class="bl-tri__note">Put the same questions to Enigma Vault.</td><td class="bl-tri__ev"><div class="bl-tri__acts"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-very-good-security-vs-basis-theory--table-questions" href="/request-demo/?interest=vgs-vs-basis-theory"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-tri__more cta-blog cta-very-good-security-vs-basis-theory--table-questions-explore" href="/docs/">Explore the docs &rarr;</a></div></td></tr>
+</tbody></table></div>
+<p>The last row matters for all three. Tokens never transfer between vaults on their own, so agree the exit process before you sign, whereas most buyers only ask when they are already leaving.</p>
+
+<h2>Moving From VGS or Basis Theory to Enigma Vault</h2>
+<p>If the price or the feature set no longer fits, the move is a card migration between two PCI-compliant providers, which both vendors and your acquirer need to agree.</p>
+<ul>
+<li><strong>Map Your Routes or Tokens First:</strong> List every VGS route or Basis Theory token flow, and every downstream system that depends on the alias or token format.</li>
+<li><strong>Check What You Rely On:</strong> If you use network tokens, account updater, routing, VGS Compute, or Reactors, confirm your gateway covers them or that you can live without them.</li>
+<li><strong>Choose a Token Format:</strong> Enigma Vault issues random tokens, with a Luhn-passable option if a legacy system checks card formats.</li>
+<li><strong>Re-Tokenize and Run Both for a Few Weeks:</strong> Then cut over.</li>
+</ul>
+<p>Our guide to <a class="bl-link" href="/blog/how-to-migrate-from-vaultless-tokenization-to-vault/">migrating tokenization providers</a> has a checklist for running two vaults side by side. If you want help mapping your routes or tokens, <a class="bl-link cta-blog cta-very-good-security-vs-basis-theory--migration" href="/request-demo/?interest=vgs-vs-basis-theory">book a migration call</a>.</p>
+
+<h2>Final Verdict: VGS, Basis Theory, or Enigma Vault?</h2>
+<p>Both VGS and Basis Theory are serious platforms. Very Good Security is the stronger fit if you want to protect existing traffic with little code and have the vendor help with compliance. Basis Theory is the stronger fit if your engineers want to build against an API with a proxy and custom code. I’d choose between them on architecture first and price second, because their entry prices are within $5 a month of each other.</p>
+<p>If neither floor makes sense for your volume, or you also need to protect phone payments, records, documents, or AI prompts, Enigma Vault covers those at published prices, with a free sandbox to build on. It does not have network tokens, account updater, routing, or custom code, so if your revenue depends on those, it is not the right choice.</p>
+<div class="bl-inlinecta"><div><p class="bl-inlinecta__t">Price Card Vault at your volume.</p><p class="bl-inlinecta__s">Book a demo and we will model the cost against VGS and Basis Theory, or <a class="cta-blog cta-very-good-security-vs-basis-theory--final-explore" href="/vault/card-vault/">explore Card Vault</a> first.</p></div><a class="np-btn np-btn--on-dark np-btn--primary cta-blog cta-very-good-security-vs-basis-theory--final" href="/request-demo/?interest=vgs-vs-basis-theory"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a></div>
+<p>More comparisons: <a class="bl-link" href="/blog/enigma-vault-vs-very-good-security/">Enigma Vault vs VGS</a>, <a class="bl-link" href="/blog/enigma-vault-vs-basis-theory/">Enigma Vault vs Basis Theory</a>, <a class="bl-link" href="/blog/skyflow-vs-very-good-security/">Skyflow vs VGS</a>, and <a class="bl-link" href="/blog/basis-theory-vs-skyflow/">Basis Theory vs Skyflow</a>.</p>
+
+<h2>How We Researched This Comparison</h2>
+<p>We checked every fact on 8 November 2026, except the VGS Capterra listing, last read on 30 October 2026. VGS facts come from verygoodsecurity.com, including its pricing page, documentation, trust center, status page, and press releases. Basis Theory facts come from basistheory.com, including its pricing and billing pages, security page, developer docs, and status page. Third-party figures come from Vendr, G2, and Capterra, and Enigma Vault facts come from our own pricing and product pages.</p>
+<p>Where a vendor makes a claim about itself or a rival, such as migration times, we label it as a vendor claim. If something here is out of date, tell us through our <a class="bl-link" href="/contact/">contact page</a> and we will check it.</p>

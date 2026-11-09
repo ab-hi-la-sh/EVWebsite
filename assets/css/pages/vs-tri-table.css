@@ -1,0 +1,72 @@
+/* Three-brand comparison tables for the "A vs B" pages: label | Brand A | Brand B | Enigma Vault.
+   The fourth column is Enigma Vault: tinted, with a header tag and an optional CTA row.
+   Scoped to .bl-table--tri, so no existing table changes. */
+.bl-tablewrap--tri{border-radius:12px;}
+.bl-table--tri{min-width:780px;table-layout:fixed;}
+.bl-table--tri th:nth-child(1){width:21%;}
+.bl-table--tri th:nth-child(2),.bl-table--tri th:nth-child(3){width:26%;}
+.bl-table--tri th:nth-child(4){width:27%;}
+.bl-table--tri td{font-size:14.5px;overflow-wrap:anywhere;}
+.bl-table--tri td.bl-tri__ev,.bl-table--tri th.bl-tri__ev{border-left:1px solid #C9DAE6;}
+.bl-table--tri td.bl-tri__ev{background:#EEF4F8;color:var(--ev-ink);}
+.bl-table--tri thead th.bl-tri__ev{background:var(--ev-mineral-blue);color:#fff;border-bottom-color:var(--ev-mineral-blue);border-left-color:var(--ev-mineral-blue);}
+.bl-tri__tag{display:block;font-size:10.5px;font-weight:600;letter-spacing:0.09em;text-transform:uppercase;opacity:0.8;margin-bottom:3px;}
+.bl-tri__no{color:var(--ev-slate);}
+.bl-table--tri tr.bl-tri__cta td{background:var(--ev-warm-cloud);border-top:1px solid var(--border-hairline);vertical-align:middle;padding-top:16px;padding-bottom:16px;}
+.bl-table--tri tr.bl-tri__cta td.bl-tri__ev{background:#E1ECF3;}
+.bl-table--tri tr.bl-tri__cta td.bl-tri__note{font-size:13.5px;line-height:1.5;color:var(--ev-slate);}
+.bl-table--tri .np-btn{color:#fff;text-decoration:none;text-align:center;white-space:normal;}
+.bl-table--tri .np-btn:hover{color:#fff;}
+.bl-inlinecta__s a{color:#fff;text-decoration:underline;text-underline-offset:2px;}
+
+/* Small screens: horizontal scroll with a sticky label column by default. */
+@media (max-width:760px){
+  .bl-table--tri th:first-child,.bl-table--tri td:first-child{position:sticky;left:0;z-index:2;background:#fff;box-shadow:1px 0 0 var(--border-hairline);}
+  .bl-table--tri th:first-child{background:var(--ev-warm-cloud);}
+  .bl-table--tri tr.bl-tri__cta td:first-child{background:var(--ev-warm-cloud);}
+}
+
+/* Small screens with the script loaded (vs-tri-table.js adds .bl-tri--stack): one block per row,
+   each brand labelled, and the Enigma Vault block highlighted so it is never off-screen. */
+@media (max-width:760px){
+  .bl-table--tri.bl-tri--stack{min-width:0;table-layout:auto;}
+  .bl-table--tri.bl-tri--stack thead{display:none;}
+  .bl-table--tri.bl-tri--stack,.bl-table--tri.bl-tri--stack tbody,.bl-table--tri.bl-tri--stack tr,.bl-table--tri.bl-tri--stack td{display:block;width:auto;}
+  .bl-table--tri.bl-tri--stack tr{padding:4px 0 12px;border-bottom:1px solid var(--border-hairline);}
+  .bl-table--tri.bl-tri--stack tr:last-child{border-bottom:0;}
+  .bl-table--tri.bl-tri--stack td{border:0;padding:4px 16px;}
+  .bl-table--tri.bl-tri--stack td:first-child{position:static;box-shadow:none;background:transparent;font-weight:600;color:var(--ev-ink);padding-top:12px;}
+  .bl-table--tri.bl-tri--stack td[data-label]:not(:first-child)::before{content:attr(data-label);display:block;font-size:10.5px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--ev-slate);margin-bottom:1px;}
+  .bl-table--tri.bl-tri--stack td.bl-tri__ev{background:#EEF4F8;border-left:3px solid var(--ev-mineral-blue);margin:6px 0 0;padding:8px 16px;}
+  .bl-table--tri.bl-tri--stack td.bl-tri__ev[data-label]::before{color:var(--ev-mineral-blue);}
+  .bl-table--tri.bl-tri--stack tr.bl-tri__cta td{background:transparent;border:0;}
+  .bl-table--tri.bl-tri--stack tr.bl-tri__cta td::before{display:none;}
+  .bl-table--tri.bl-tri--stack tr.bl-tri__cta td.bl-tri__note{padding-bottom:0;}
+  .bl-table--tri.bl-tri--stack tr.bl-tri__cta td.bl-tri__ev{background:#E1ECF3;}
+}
+
+/* Enigma Vault calls to action: a "Book a demo" button plus an "Explore" link, used in the table CTA rows,
+   the plan-table rows and the callouts below. */
+.bl-tri__acts{display:flex;flex-direction:column;align-items:flex-start;gap:9px;}
+.bl-tri__more,.bl-evcall__more{font-size:13.5px;font-weight:600;line-height:1.35;color:var(--ev-mineral-blue);text-decoration:none;}
+.bl-tri__more:hover,.bl-evcall__more:hover{text-decoration:underline;text-underline-offset:3px;}
+
+/* Plan tables for a single vendor (no Enigma Vault column): one tinted row at the bottom carries the CTA. */
+.bl-table tr.bl-tri__solo td{background:#EEF4F8;border-top:1px solid #C9DAE6;padding:16px 20px;}
+.bl-tri__solo-in{display:flex;align-items:center;justify-content:space-between;gap:12px 24px;flex-wrap:wrap;}
+.bl-tri__solo-note{flex:1 1 260px;font-size:14px;line-height:1.5;color:var(--ev-ink);}
+.bl-tri__solo .bl-tri__acts{flex-direction:row;align-items:center;flex-wrap:wrap;gap:8px 18px;}
+.bl-tri__solo .np-btn{color:#fff;text-decoration:none;text-align:center;white-space:normal;}
+.bl-tri__solo .np-btn:hover{color:#fff;}
+
+/* Callout for a paragraph about the third brand: tinted like the table column, with its own CTA. */
+.bl-content .bl-evcall{margin:24px 0 0;padding:18px 22px 20px;background:#EEF4F8;border:1px solid #C9DAE6;border-left:4px solid var(--ev-mineral-blue);border-radius:12px;}
+.bl-content h2 + .bl-evcall,.bl-content h3 + .bl-evcall{margin-top:14px;}
+.bl-evcall__tag{display:block;font-size:10.5px;font-weight:600;letter-spacing:0.09em;text-transform:uppercase;color:var(--ev-mineral-blue);margin:0 0 6px;}
+.bl-content .bl-evcall p{margin:0;color:var(--ev-ink);}
+.bl-evcall__cta{display:flex;flex-wrap:wrap;align-items:center;gap:10px 20px;margin-top:14px;}
+.bl-evcall .np-btn{color:#fff;text-decoration:none;text-align:center;white-space:normal;}
+.bl-evcall .np-btn:hover{color:#fff;}
+@media (max-width:760px){
+  .bl-content .bl-evcall{padding:16px 16px 18px;}
+}

@@ -22,11 +22,11 @@ faqs:
   - q: "Is Enigma Vault or Basis Theory Cheaper?"
     a: "Enigma Vault, by a wide margin at small and mid volumes. Card Vault is free for 1,000 requests a month, $49 for 20,000, $249 for 250,000, and $499 for 1,000,000. Basis Theory’s published plan is $995 a month with 20,000 tokens, and higher volumes move to custom Enterprise pricing. Basis Theory counts tokens and Enigma Vault counts requests, so model your own traffic."
   - q: "What Is the Main Difference Between Enigma Vault and Basis Theory?"
-    a: "Basis Theory is a programmable payments platform: Elements, a general-purpose proxy, Reactors that run your code on card data, network tokens, account updater, 3DS, and PSP routing. Enigma Vault covers more kinds of sensitive data (cards, records, files, customer intake, and LLM prompts) at a much lower entry price, with fewer payments optimization features."
+    a: "Basis Theory is a programmable payments platform: Elements, a general-purpose proxy, Reactors that run your code on card data, and, on Enterprise, network tokens, account updater, and 3D Secure. Enigma Vault covers more kinds of sensitive data (cards, records, files, customer intake, and LLM prompts) at a much lower entry price, with fewer payments optimization features."
   - q: "Does Basis Theory Offer EU Data Residency?"
     a: "Its $995 plan is listed as US environment only, so EU hosting is part of the custom Enterprise tier. Enigma Vault offers US and EU regions on every plan, including free."
   - q: "Which Is Better for Subscription Businesses?"
-    a: "Basis Theory. Network tokens and account updater keep stored cards working after reissue, which protects recurring revenue. Enigma Vault does not offer either today."
+    a: "Basis Theory. Network tokens and account updater keep stored cards working after reissue, which protects recurring revenue, and its docs label both Enterprise features. Enigma Vault does not offer either today."
   - q: "What Are Basis Theory Reactors?"
     a: "Reactors let you run your own code against vaulted data inside Basis Theory’s secure environment, so you can transform or send sensitive data to a partner without it reaching your servers. Enigma Vault has no equivalent; it returns data only to authorized callers or injects it into gateway requests through its proxy."
   - q: "Does Basis Theory Have Reviews on G2 or Capterra?"
@@ -37,12 +37,12 @@ faqs:
     a: "Neither does on its own. Both can significantly reduce PCI scope, and Basis Theory’s Enterprise tier includes responses for 95% of SAQ D, but your acquirer or QSA confirms final scope."
 ---
 <p>If you are weighing Enigma Vault against Basis Theory, you already know you want card data out of your systems. The real question is what you need to do with that data once it is vaulted.</p>
-<p>Basis Theory is a programmable payments vault for engineering teams, with network tokens, account updater, smart routing, custom code on vaulted data, and agentic payments, while Enigma Vault is a PCI DSS Level 1 tokenization platform that protects payment cards, customer records, documents up to 5 GB, customer intake, and LLM prompts, including sensitive data that never touches a checkout.</p>
+<p>Basis Theory is a programmable payments vault for engineering teams, with a proxy, Reactors that run custom code on vaulted data and, on its Enterprise plan, network tokens, account updater, 3D Secure, and agentic payments, while Enigma Vault is a PCI DSS Level 1 tokenization platform that protects payment cards, customer records, documents up to 5 GB, customer intake, and LLM prompts, including sensitive data that never touches a checkout.</p>
 <p>This guide compares the two on features, cost at three business sizes, compliance, <a class="bl-link" href="https://www.g2.com/products/enigma-vault/reviews" rel="nofollow noopener" target="_blank">G2</a> and <a class="bl-link" href="https://www.capterra.com/p/241650/Enigma-Vault/" rel="nofollow noopener" target="_blank">Capterra</a> reviews, and fit by industry.</p>
 
 <h2>Enigma Vault vs Basis Theory: Quick Verdict</h2>
 <p><strong>Enigma Vault:</strong> Focused vaults for cards, records, and files, plus Customer Vault for intake and NoPII for LLM prompts. It starts free, tops out at $499 a month per product before Enterprise, and offers US and EU hosting on every plan.</p>
-<p><strong>Basis Theory:</strong> A programmable payments vault with network tokens, account updater, 3DS, smart routing, Reactors, and agentic payments. It starts at $995 a month, its entry plan is US-only, and it has no reviews yet on <a class="bl-link" href="https://www.g2.com/products/basis-theory/reviews" rel="nofollow noopener" target="_blank">G2</a> or <a class="bl-link" href="https://www.capterra.com/p/10002181/Basis-Theory/" rel="nofollow noopener" target="_blank">Capterra</a>.</p>
+<p><strong>Basis Theory:</strong> A programmable payments vault with Elements, a proxy, and Reactors. It starts at $995 a month, its entry plan is US-only, its docs label network tokens, account updater, 3D Secure, and agentic payments as Enterprise features, and it has no reviews yet on <a class="bl-link" href="https://www.g2.com/products/basis-theory/reviews" rel="nofollow noopener" target="_blank">G2</a> or <a class="bl-link" href="https://www.capterra.com/p/10002181/Basis-Theory/" rel="nofollow noopener" target="_blank">Capterra</a>.</p>
 <p>I’d point you to <strong>Enigma Vault</strong> first if your sensitive data goes beyond online checkout:</p>
 <ul>
 <li>You can stay well under $1,000 a month, and start at $0 on the free tier.</li>
@@ -53,7 +53,7 @@ faqs:
 <p>Basis Theory’s real strength is payments depth. It matters most if you’re a subscription business, marketplace, or fintech where authorization rates and stored-card lifecycle directly move your revenue, and your engineers want to write custom logic against card data.</p>
 <ul>
 <li><strong>Choose Enigma Vault if:</strong> You want PCI scope reduction at a published price, you protect more than cards, or your team has little engineering time.</li>
-<li><strong>Choose Basis Theory if:</strong> Payments are your product and network tokens, routing, card issuing, or agent payments are on your roadmap.</li>
+<li><strong>Choose Basis Theory if:</strong> Payments are your product and network tokens, account updater, or agent payments, which are Enterprise features, are on your roadmap.</li>
 </ul>
 <p><strong>Bottom Line:</strong> Basis Theory helps you earn more from each card; Enigma Vault helps you stop holding sensitive data you should not have, for a fraction of the entry price.</p>
 
@@ -70,7 +70,7 @@ faqs:
 <tr><td>1. Capture the card</td><td>Hosted form, API, or Twilio Pay on a phone call</td><td>Universal Form Elements in web or mobile checkout</td></tr>
 <tr><td>2. Store it</td><td>Card Vault returns a random 128-bit token; CVV deleted within 30 minutes</td><td>Vault returns a token you can shape with expressions</td></tr>
 <tr><td>3. Save the token</td><td>Your database keeps the token, never the card</td><td>Your database keeps the token, never the card</td></tr>
-<tr><td>4. Charge later</td><td>Gateway proxy injects the card into an allowlisted gateway request</td><td>Proxy forwards to any provider, with optional smart routing</td></tr>
+<tr><td>4. Charge later</td><td>Gateway proxy injects the card into an allowlisted gateway request</td><td>Proxy forwards to any provider</td></tr>
 <tr><td>5. Keep the card working</td><td>Customer re-enters an expired card</td><td>Account updater and network tokens refresh it</td></tr>
 </tbody></table></div>
 <p>Both platforms get the card number out of your systems. The difference shows up at step 1 and step 5.</p>
@@ -94,13 +94,13 @@ faqs:
 <tr><td>Proxy to payment gateways</td><td>Domain allowlisted</td><td>Included</td></tr>
 <tr><td>Proxy to any third-party API</td><td>Not offered</td><td>Proxy and Browser Proxy</td></tr>
 <tr><td>Run your own code on vaulted data</td><td>Not offered</td><td>Reactors</td></tr>
-<tr><td>Network tokens</td><td>Not offered</td><td>Included</td></tr>
-<tr><td>Account updater</td><td>Not offered</td><td>Included</td></tr>
-<tr><td>3D Secure</td><td>Through your gateway</td><td>Included</td></tr>
-<tr><td>Enhanced BIN data</td><td>Not offered</td><td>Included</td></tr>
-<tr><td>Smart and backup PSP routing</td><td>Not offered</td><td>Included</td></tr>
-<tr><td>Card issuing flows</td><td>Not offered</td><td>Included</td></tr>
-<tr><td>Agentic payments</td><td>Not offered</td><td>Included</td></tr>
+<tr><td>Network tokens</td><td>Not offered</td><td>Enterprise plan</td></tr>
+<tr><td>Account updater</td><td>Not offered</td><td>Enterprise plan</td></tr>
+<tr><td>3D Secure</td><td>Through your gateway</td><td>Enterprise plan (Universal 3DS)</td></tr>
+<tr><td>Enhanced BIN data</td><td>Not offered</td><td>Enterprise plan</td></tr>
+<tr><td>Smart and backup PSP routing</td><td>Not offered</td><td>Marketed; its docs guide is marked under construction</td></tr>
+<tr><td>Card issuing flows</td><td>Not offered</td><td>Guides for tokenizing issuer-API data; not an issuer</td></tr>
+<tr><td>Agentic payments</td><td>Not offered</td><td>Enterprise plan (Agentic Payments API)</td></tr>
 <tr><td>No-code customer intake app</td><td>Customer Vault</td><td>Not offered</td></tr>
 <tr><td>LLM prompt tokenization</td><td>NoPII</td><td>Not offered</td></tr>
 <tr><td>EU hosting on entry plan</td><td>Included</td><td>Enterprise only</td></tr>
@@ -115,7 +115,7 @@ faqs:
 <p>Enigma Vault covers checkout with hosted forms and the API. They do the job, but if a pixel-perfect embedded checkout is your top priority, Basis Theory’s Elements are more mature.</p>
 
 <h3>Card Capture Over the Phone</h3>
-<p>Here the comparison flips. Enigma Vault’s <a class="bl-link" href="/vault/card-vault/">Card Vault</a> includes Twilio Pay IVR, so callers enter their card on the phone keypad and agents never hear, type, or record it.</p>
+<p>Here the comparison flips. Enigma Vault’s <a class="bl-link" href="/vault/card-vault/">Card Vault</a> includes Twilio Pay IVR from the Growth tier, so callers enter their card on the phone keypad and agents never hear, type, or record it.</p>
 <p>Basis Theory does not package a phone channel. For travel agencies, hotels, clinics, contact centers, and high-value retail, the phone is where card numbers leak most, through call recordings and handwritten notes.</p>
 
 <h3>Vault Storage and Token Formats</h3>
@@ -151,7 +151,7 @@ faqs:
 
 <h3>Reactors and Custom Code on Vaulted Data</h3>
 <p>Reactors are one of Basis Theory’s most distinctive features. They run your own code against vaulted data inside Basis Theory’s secure environment, so you can transform, validate, or send card data to an unusual partner without it reaching your infrastructure.</p>
-<p>They power card issuing, custom partner integrations, and data migrations. Enigma Vault does not run customer code, so if your product depends on that programmability, Basis Theory is the clear choice.</p>
+<p>They power issuer-API data flows, custom partner integrations, and data migrations. Enigma Vault does not run customer code, so if your product depends on that programmability, Basis Theory is the clear choice.</p>
 
 <h3>Network Tokens, Account Updater, and PSP Routing</h3>
 <p>Basis Theory includes a full payment optimization stack:</p>
@@ -164,7 +164,7 @@ faqs:
 <p>Together they lift authorization rates, which can be worth real money for subscription and marketplace businesses. Enigma Vault charges through the REST gateway you already use (Stripe, Braintree, PayPal, Authorize.net, and others), and switching processors later is a configuration change. It offers none of the optimization tools above; your gateway handles 3DS.</p>
 
 <h3>Agentic Payments</h3>
-<p>Basis Theory offers agentic commerce tools to issue virtual cards and create agentic credentials, and in September 2025 it formed an Agentic Commerce Consortium with partners such as Lithic, Skyfire, and Crossmint. Its $33M Series B in October 2025 was raised partly to build this out.</p>
+<p>Basis Theory offers an Agentic Payments API, an Enterprise feature, for agentic credentials, and in September 2025 it formed an Agentic Commerce Consortium with partners such as Lithic, Skyfire, and Crossmint. Its $33M Series B in October 2025 was raised partly to build this out.</p>
 <p>Enigma Vault approaches AI from the privacy side, not payments, and does not issue payment credentials to agents.</p>
 
 <h3>Customer Intake Without Developers</h3>
@@ -226,7 +226,7 @@ faqs:
 <h3>Fintech, Payments, and Lending</h3>
 <p>Fintech apps handle cards, bank accounts, ID documents, and underwriting files, and the right vault depends on which of those is your biggest exposure.</p>
 <ul>
-<li><strong>If Payments Are the Roadmap:</strong> Card issuing, authorization rates, and multi-PSP routing point to Basis Theory.</li>
+<li><strong>If Payments Are the Roadmap:</strong> Network tokens, account updater, and authorization rates point to Basis Theory, on its Enterprise plan.</li>
 <li><strong>If Documents Are the Risk:</strong> ID scans and underwriting files sitting in your main database are covered by Data Vault and File Vault for far less.</li>
 </ul>
 <p>Our guide to the <a class="bl-link" href="/blog/best-tokenization-software-for-fintech/">best tokenization software for fintech</a> compares more options.</p>
@@ -239,7 +239,7 @@ faqs:
 
 <h3>Subscription and Ecommerce Businesses</h3>
 <p>Recurring revenue depends on stored cards that keep working after they expire or are reissued. Every failed renewal is churn you did not choose.</p>
-<p>Basis Theory’s network tokens and account updater are built for exactly that, and Enigma Vault has no equivalent. If your gateway already offers account updater, the gap narrows, so check before you decide.</p>
+<p>Basis Theory’s network tokens and account updater, both Enterprise features, are built for exactly that, and Enigma Vault has no equivalent. If your gateway already offers account updater, the gap narrows, so check before you decide.</p>
 <p><strong>Best fit:</strong> Basis Theory.</p>
 
 <h3>Vertical SaaS and Marketplaces</h3>
@@ -286,7 +286,7 @@ faqs:
 
 <h2>Why Teams Choose Basis Theory Over Enigma Vault</h2>
 <ul>
-<li><strong>Payments Optimization:</strong> Network tokens, account updater, 3DS, BIN data, and PSP routing.</li>
+<li><strong>Payments Optimization:</strong> Network tokens, account updater, 3DS, and BIN data on Enterprise, plus PSP routing that its docs still mark as under construction.</li>
 <li><strong>Programmability:</strong> Reactors and a proxy that reaches any third-party API.</li>
 <li><strong>Checkout Components:</strong> Polished Elements for web, mobile, and wallets.</li>
 <li><strong>Certifications:</strong> ISO 27001, plus SAQ D support on Enterprise.</li>
@@ -306,9 +306,9 @@ faqs:
 <tr><td>Take a card over the phone</td><td>Configure Twilio Pay IVR</td><td>Build or buy a phone channel</td></tr>
 <tr><td>Collect IDs and documents from customers</td><td>Send a Customer Vault intake link</td><td>Build forms, storage, and a staff view</td></tr>
 <tr><td>Store a 2 GB scanned file</td><td>Upload to File Vault</td><td>Use a separate store; 1 MB payload limit on $995 plan</td></tr>
-<tr><td>Keep stored cards working after reissue</td><td>Rely on your gateway’s tools</td><td>Turn on account updater and network tokens</td></tr>
+<tr><td>Keep stored cards working after reissue</td><td>Rely on your gateway’s tools</td><td>Ask sales to enable account updater and network tokens (Enterprise)</td></tr>
 <tr><td>Send card data to an unusual partner API</td><td>Not supported</td><td>Write a Reactor or use the Proxy</td></tr>
-<tr><td>Route charges across several PSPs</td><td>Not supported</td><td>Configure smart and backup routing</td></tr>
+<tr><td>Route charges across several PSPs</td><td>Not supported</td><td>Marketed as smart and backup routing; its docs guide is marked under construction</td></tr>
 </tbody></table></div>
 <p>If your team wants to build payments features, Basis Theory saves engineering time on the bottom three rows, while Enigma Vault saves it on the top three. Count which rows describe your roadmap.</p>
 
@@ -334,9 +334,9 @@ faqs:
 <p>Our guide to <a class="bl-link" href="/blog/how-to-migrate-from-vaultless-tokenization-to-vault/">migrating tokenization providers</a> has a checklist for running two vaults side by side.</p>
 
 <h2>Final Recommendation: Enigma Vault or Basis Theory?</h2>
-<p>Basis Theory is a well-built payments platform. If payments are your product and your roadmap includes network tokens, routing, card issuing, or agentic payments, it is the stronger choice, and I would point you to it.</p>
+<p>Basis Theory is a well-built payments platform. If payments are your product and your roadmap includes network tokens, account updater, or agentic payments, which are Enterprise features, it is the stronger choice, and I would point you to it.</p>
 <p>If your sensitive data is broader than card authorization, or you need EU hosting and a free tier, Enigma Vault covers cards, records, files, intake, and AI prompts for a fraction of the entry price.</p>
-<p><a class="bl-link" href="/pricing/">Start free</a> and tokenize your first card or record today, see how <a class="bl-link" href="/vault/card-vault/">Card Vault</a> charges through your gateway, or <a class="bl-link" href="/request-demo/">request a demo</a> with your volumes and we will model the cost with you.</p>
+<p><a class="bl-link" href="/pricing/">Start free</a> in the Lite sandbox and build against the API today, see how <a class="bl-link" href="/vault/card-vault/">Card Vault</a> charges through your gateway, or <a class="bl-link" href="/request-demo/">request a demo</a> with your volumes and we will model the cost with you.</p>
 
 <h2>How We Researched This Comparison</h2>
 <p>Enigma Vault publishes this page, so read it as a vendor-written comparison. Basis Theory facts come from basistheory.com, its pricing and security pages, its developer docs, its funding announcements, and its G2 and Capterra listings, checked on 30 October 2026. Basis Theory is the stronger product for several jobs, and we name them.</p>

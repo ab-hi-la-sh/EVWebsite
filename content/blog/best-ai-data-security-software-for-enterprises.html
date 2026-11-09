@@ -86,8 +86,8 @@ faqs:
 <thead><tr><th>Platform</th><th>Best for</th><th>Starting price</th><th>Free trial or tier</th><th>Where it sits</th><th>Protection method</th><th>G2 rating</th></tr></thead>
 <tbody>
 <tr><td><a class="bl-link" href="#enigma-vault">Enigma Vault (NoPII)</a></td><td>Tokenizing PII in your own LLM API calls without losing multi-turn context</td><td>$0, then $49 a month</td><td>Lite: 1M tokens a month</td><td>Application-level proxy</td><td>Deterministic, reversible tokens</td><td><a class="bl-link" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener">4.4/5 (6 reviews)</a></td></tr>
-<tr><td><a class="bl-link" href="#protecto">Protecto</a></td><td>Reversible masking inside your own VPC or data center</td><td>Custom quote</td><td>Free trial</td><td>API layer and data pipelines</td><td>Consistent, reversible masking</td><td><a class="bl-link" href="https://www.g2.com/products/protecto/reviews" target="_blank" rel="noopener">No reviews yet</a></td></tr>
-<tr><td><a class="bl-link" href="#skyflow">Skyflow</a></td><td>An LLM privacy vault inside a wider privacy program</td><td>Custom quote</td><td>Demo</td><td>Data privacy vault plus API</td><td>Tokenization, redaction, re-identification</td><td><a class="bl-link" href="https://www.g2.com/products/payments-data-privacy-vault/reviews" target="_blank" rel="noopener">5.0/5 (1 review, Payments vault)</a></td></tr>
+<tr><td><a class="bl-link" href="#protecto">Protecto</a></td><td>Reversible masking inside your own VPC or data center</td><td>$250 to $750 a month by API-call volume; Enterprise by quote</td><td>Free trial</td><td>API layer and data pipelines</td><td>Consistent, reversible masking</td><td><a class="bl-link" href="https://www.g2.com/products/protecto/reviews" target="_blank" rel="noopener">No reviews yet</a></td></tr>
+<tr><td><a class="bl-link" href="#skyflow">Skyflow</a></td><td>An LLM privacy vault inside a wider privacy program</td><td>Custom quote</td><td>Demo; free Try Account on request (test data only)</td><td>Data privacy vault plus API</td><td>Tokenization, redaction, re-identification</td><td><a class="bl-link" href="https://www.g2.com/products/payments-data-privacy-vault/reviews" target="_blank" rel="noopener">5.0/5 (1 review, Payments vault)</a></td></tr>
 <tr><td><a class="bl-link" href="#limina">Limina (formerly Private AI)</a></td><td>Self-hosted PII detection across many languages</td><td>Custom quote</td><td>Free trial</td><td>Container in your pipeline</td><td>Redaction, pseudonymization, synthetic data</td><td><a class="bl-link" href="https://www.g2.com/products/limina/reviews" target="_blank" rel="noopener">4.6/5 (22 reviews)</a></td></tr>
 <tr><td><a class="bl-link" href="#nightfall-ai">Nightfall AI</a></td><td>Employee AI use across browser, endpoint, and SaaS</td><td>Custom quote, per user</td><td>Free trial or proof of value</td><td>Browser, endpoint, SaaS</td><td>Detect and block</td><td><a class="bl-link" href="https://www.g2.com/products/nightfall-ai/reviews" target="_blank" rel="noopener">4.6/5 (101 reviews)</a></td></tr>
 <tr><td><a class="bl-link" href="#prompt-security">Prompt Security (SentinelOne)</a></td><td>Workforce and homegrown GenAI in a SentinelOne estate</td><td>Custom quote</td><td>Demo</td><td>Browser, endpoint, app layer</td><td>Detect, redact, block</td><td><a class="bl-link" href="https://www.g2.com/products/prompt-security/reviews" target="_blank" rel="noopener">5.0/5 (2 reviews)</a></td></tr>
@@ -166,7 +166,7 @@ faqs:
 <tbody>
 <tr><td>Where it sits</td><td>Application-level reverse proxy for LLM API calls</td></tr>
 <tr><td>Protection method</td><td>Deterministic tokenization with round-trip detokenization; fail-safe blocking</td></tr>
-<tr><td>Deployment</td><td>Hosted proxy (api.nopii.co); base-URL change</td></tr>
+<tr><td>Deployment</td><td>Hosted proxy (api.nopii.co) with a base-URL change; self-hosted edition on Enterprise</td></tr>
 <tr><td>Governance</td><td>Per-request audit log; workspaces and roles on Growth; SSO on Business; SLA and BAA on Enterprise</td></tr>
 <tr><td>Compliance evidence</td><td>Built on Enigma Vault: PCI DSS Level 1, SOC 2 Type II; ISO 27001 in progress</td></tr>
 </tbody></table></div>
@@ -296,7 +296,7 @@ faqs:
 <div class="bl-tablewrap"><table class="bl-table">
 <thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
 <tbody>
-<tr><td>Skyflow vault</td><td>Custom quote</td><td>Priced by data subjects protected; annual contracts</td></tr>
+<tr><td>Skyflow vault</td><td>Custom quote</td><td>Billed on Unique Identifiers, invoiced annually in advance (Terms of Service)</td></tr>
 <tr><td>AWS Marketplace</td><td>Private offer</td><td>Same platform billed through your AWS commitment</td></tr>
 </tbody></table></div>
 <p><strong>Pros</strong></p>
@@ -556,7 +556,7 @@ faqs:
 <div class="bl-tablewrap"><table class="bl-table bl-table--wide">
 <thead><tr><th>Platform</th><th>Where it sits</th><th>Protection method</th><th>Context across turns</th><th>Deployment</th><th>Coverage</th><th>Governance</th></tr></thead>
 <tbody>
-<tr><td>Enigma Vault (NoPII)</td><td>Reverse proxy, app to LLM API</td><td>Reversible tokens; blocks if detection fails</td><td>Yes, same token per session</td><td>Hosted proxy, base-URL change</td><td>9 LLM providers via API</td><td>Roles on Growth; SSO on Business; SLA, BAA on Enterprise</td></tr>
+<tr><td>Enigma Vault (NoPII)</td><td>Reverse proxy, app to LLM API</td><td>Reversible tokens; blocks if detection fails</td><td>Yes, same token per session</td><td>Hosted proxy, base-URL change; self-hosted on Enterprise</td><td>9 LLM providers via API</td><td>Roles on Growth; SSO on Business; SLA, BAA on Enterprise</td></tr>
 <tr><td>Protecto</td><td>API layer before LLMs, agents, MCP</td><td>Consistent, reversible masking</td><td>Yes, within a namespace</td><td>SaaS, VPC, on-prem, air-gapped</td><td>AI apps, RAG, agents, pipelines</td><td>Context-based unmasking by role and task</td></tr>
 <tr><td>Skyflow</td><td>Vault plus detect-and-protect API</td><td>Tokenization, redaction, re-identification</td><td>Yes, through vault tokens</td><td>Cloud vault, regional residency</td><td>Training, RAG, inference, agents</td><td>Per-field access policies</td></tr>
 <tr><td>Limina</td><td>Container in your pipeline</td><td>Redaction, pseudonymization, synthetic</td><td>Only if you build the token store</td><td>Your VPC or on-prem (CPU or GPU)</td><td>Text in 52 languages</td><td>Your own access controls</td></tr>

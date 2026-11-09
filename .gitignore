@@ -8,3 +8,9 @@ resources/
 
 # Legacy static-site export, kept locally as a reference only — not part of the Hugo project
 site-export
+
+# Google API creds/tokens/venv
+scripts/api/.venv/
+scripts/api/client_secret.json
+scripts/api/token.json
+scripts/api/out/

@@ -1,0 +1,398 @@
+---
+title: "Types of Data Tokenization: Methods, Examples and How to Choose the Right One"
+slug: "types-of-data-tokenization"
+layout: "pii-style"
+metaTitle: "Types of Data Tokenization: Methods and How to Choose the Right One"
+description: "Learn the types of data tokenization, from vault-based and vaultless to deterministic and format-preserving tokens, with real use cases and a guide to choosing."
+subtitle: "Data tokenization comes in several types, from vault-based and vaultless to random, deterministic and format-preserving tokens. Each one changes whether you can restore values, match records or keep legacy systems running."
+date: 2026-11-10
+category: "Data Vault"
+author: "abhilash-kumar"
+readTime: 17
+heroImage: "/assets/blog/img-05.png"
+heroAlt: "Types of Data Tokenization: Methods, Examples and How to Choose the Right One"
+excerpt: "Learn the types of data tokenization, from vault-based and vaultless to deterministic and format-preserving tokens, with real use cases and a guide to choosing."
+tags: ["tokenization", "token-types", "vault"]
+styles: ["blog.css", "pages/blog-pii-hero.css", "tr-pages.css"]
+scripts: ["blog-article.js"]
+faqSchema: true
+faqs:
+  - q: "Which Type of Data Tokenization Is the Most Secure?"
+    a: "Vault-based tokenization with random tokens is generally the most secure, because tokens have no mathematical link to the original. Even if attackers learn how tokens are made, they can’t reverse them without vault access."
+  - q: "Can You Use More Than One Type of Tokenization in the Same System?"
+    a: "Yes. Most teams combine types, such as vault-based, format-preserving, multi-use tokens for card on file alongside deterministic tokens for analytics. Each field gets the token behavior its workflow actually needs."
+  - q: "Are Format-Preserving Tokens Allowed Under PCI DSS?"
+    a: "Yes, when they are generated and managed securely. PCI SSC guidelines say tokens should be distinguishable from real card numbers, so many providers issue them from a dedicated BIN range. Your QSA confirms the effect on scope."
+  - q: "Is Hashing a Type of Tokenization?"
+    a: "Yes, in a narrow sense. The PCI SSC treats tokens from one-way functions as irreversible authenticatable tokens. A hash can confirm that a value matches, yet it can never restore the original, so it suits verification only."
+  - q: "What Type of Tokenization Makes GDPR Erasure Easiest?"
+    a: "Vault-based tokenization makes erasure easiest. Deleting one vault record makes every copy of that token meaningless, whereas vaultless tokens have no record to delete and may require re-tokenizing whole datasets."
+---
+
+<p><strong>Data tokenization comes in several types, from vault-based and vaultless to random, deterministic and format-preserving tokens. Each one changes whether you can restore values, match records or keep legacy systems running.</strong></p>
+
+<p>The main types of data tokenization are:</p>
+
+<ol>
+  <li><strong>Vault-based tokenization:</strong> Stores the encrypted original in a secure vault and gives your systems a token that maps back to it.</li>
+  <li><strong>Vaultless tokenization:</strong> Computes the token from the value with a secret key, so no vault or lookup table exists.</li>
+  <li><strong>Random tokenization:</strong> Creates a new, unrelated token every time, even for the same value.</li>
+  <li><strong>Deterministic tokenization:</strong> Returns the same token whenever the same value appears, so records still match.</li>
+  <li><strong>Format-preserving tokenization:</strong> Keeps the length and character pattern of the original, so legacy systems accept the token.</li>
+  <li><strong>Reversible and irreversible tokenization:</strong> Decides whether the original can come back through a vault or key, or never at all.</li>
+  <li><strong>Single-use, multi-use and expiring tokens:</strong> Control how many times a token works and how long it lives.</li>
+</ol>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Token type</th><th>Choose it when</th></tr></thead>
+    <tbody>
+      <tr><td>Vault-based</td><td>Your teams must restore values, log every access and delete one person’s data on request</td></tr>
+      <tr><td>Vaultless</td><td>Very high volumes run through your pipeline, restores are rare and your keys are tightly managed</td></tr>
+      <tr><td>Random</td><td>Records must never be linked, such as files from separate legal matters</td></tr>
+      <tr><td>Deterministic</td><td>Analysts need joins, search or deduplication on tokenized data</td></tr>
+      <tr><td>Format-preserving</td><td>Legacy systems reject anything that doesn’t look like a real card number or SSN</td></tr>
+      <tr><td>Irreversible</td><td>Verifying a value is enough, and nobody will ever need it back</td></tr>
+      <tr><td>Single-use or expiring</td><td>Access should end after one action or on a set date</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h2>What Is Data Tokenization and Why Does the Type You Choose Matter?</h2>
+
+<p><strong>Data tokenization replaces sensitive values with non-sensitive tokens. The type you choose decides whether those tokens can be restored, matched across systems, accepted by legacy software or retired after a set time.</strong></p>
+
+<p>Picture two organizations that both tokenize SSNs. One is a payroll provider that must restore each SSN for tax filings and link employee records across HR and benefits systems. The other is a research sponsor that wants participant identities kept away from analysts for good. Both are tokenizing, yet they need very different tokens.</p>
+
+<p>Every token type answers one of four design questions:</p>
+
+<ol>
+  <li><strong>Storage:</strong> Where does the original value live, in a vault or nowhere at all?</li>
+  <li><strong>Matching:</strong> Should the same value always produce the same token?</li>
+  <li><strong>Format:</strong> Does the token need to keep the shape of the original?</li>
+  <li><strong>Reversibility and lifespan:</strong> Can the original ever come back, and for how long should the token work?</li>
+</ol>
+
+<p>Most real deployments combine answers from all four, which is why it helps to understand each type before you choose.</p>
+
+<h2>Types of Data Tokenization at a Glance: How Each Method Compares</h2>
+
+<p><strong>The main types of data tokenization differ in how tokens are generated, stored, matched and retired. Vault-based, random and format-preserving tokens suit payments, while deterministic tokens suit analytics and record matching.</strong></p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table bl-table--wide">
+    <thead><tr><th>Type</th><th>How it works</th><th>Can you restore the value?</th><th>Can you match records?</th><th>Keeps the original format?</th><th>Best fit and example</th></tr></thead>
+    <tbody>
+      <tr><td>Vault-based</td><td>Stores the encrypted original in a vault and maps a token to it</td><td>Yes, through an approved vault request</td><td>Only with deterministic tokens</td><td>Optional</td><td>PII and card data that must be restored or deleted per record, such as a clinic’s insurance member IDs</td></tr>
+      <tr><td>Vaultless</td><td>Derives the token from the value with a secret key, usually through format-preserving encryption</td><td>Yes, by anyone holding the key</td><td>Yes, because the same key gives the same token</td><td>Usually</td><td>High-volume event streams where a lookup on every request adds latency</td></tr>
+      <tr><td>Random</td><td>Generates a fresh token each time, with no link to the value</td><td>Yes, through the vault</td><td>No</td><td>Optional</td><td>Records that should never be linkable, such as a law firm’s claimant files</td></tr>
+      <tr><td>Deterministic</td><td>Returns the same token every time the same value appears</td><td>Yes, through the vault</td><td>Yes</td><td>Optional</td><td>Joins and deduplication, such as a payer’s claims analytics</td></tr>
+      <tr><td>Format-preserving</td><td>Keeps the length and character pattern of the original</td><td>Yes</td><td>Depends on how tokens are generated</td><td>Yes</td><td>Legacy systems that validate fields, such as a hotel’s property management system</td></tr>
+      <tr><td>Reversible cryptographic</td><td>Creates the token from the value with strong cryptography and stores only the key</td><td>Yes, with the key</td><td>Yes</td><td>Often</td><td>Systems that can’t call a vault at runtime</td></tr>
+      <tr><td>Irreversible</td><td>Produces the token with a one-way function, such as a keyed hash</td><td>No</td><td>Only if the token is authenticatable</td><td>No</td><td>Verification and reporting datasets where the value never returns</td></tr>
+      <tr><td>Single-use</td><td>Works for one transaction or one action, then stops</td><td>Once</td><td>No</td><td>Optional</td><td>A one-time share with a partner or vendor</td></tr>
+      <tr><td>Multi-use</td><td>Stays valid for the same record across many transactions</td><td>Yes</td><td>Yes, for the same record</td><td>Optional</td><td>Card on file and recurring billing at a travel agency</td></tr>
+      <tr><td>Expiring</td><td>Deleted automatically after a set period</td><td>Until it expires</td><td>Until it expires</td><td>Optional</td><td>Temporary workflows with strict retention limits</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h2>Vault vs Vaultless Tokenization: Comparing the Two Core Token Architectures</h2>
+
+<p><strong>Vault-based tokenization stores the encrypted original in a secure vault and maps each token to it, while vaultless tokenization computes tokens from the value with a secret key, so no lookup store exists at all.</strong></p>
+
+<p>This is the first decision most teams make, because it shapes everything that follows: how tokens are generated, how quickly they return, how you delete data and what an attacker would need to reverse them.</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Factor</th><th>Vault-based tokenization</th><th>Vaultless tokenization</th></tr></thead>
+    <tbody>
+      <tr><td>Where the original lives</td><td>Encrypted inside a dedicated vault</td><td>Nowhere; the token itself carries the value in encrypted form</td></tr>
+      <tr><td>How tokens are made</td><td>Random or deterministic generation, with no mathematical link to the value</td><td>Format-preserving encryption, such as NIST FF1, applied with a secret key</td></tr>
+      <tr><td>What it takes to reverse a token</td><td>An authorized request to the vault</td><td>The key and the algorithm</td></tr>
+      <tr><td>Main exposure point</td><td>The vault and its access controls</td><td>The key, which can reverse every token it ever produced</td></tr>
+      <tr><td>Speed</td><td>One lookup per tokenize or restore call</td><td>No lookup, so tokens return faster at very high volume</td></tr>
+      <tr><td>Deleting one person’s data</td><td>Delete the vault record, and every copy of the token stops working</td><td>No record to delete, so erasure usually means re-tokenizing or rotating keys</td></tr>
+      <tr><td>Access control and audit</td><td>Enforced and logged at one point for every restore</td><td>Spread across every system that holds the key</td></tr>
+      <tr><td>Typical users</td><td>Payments, healthcare, legal and HR teams with per-record retention rules</td><td>Data platforms tokenizing large event streams at ingestion</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h3>How Vault-Based Tokenization Works</h3>
+
+<ol>
+  <li>A form, API call or phone keypad captures the sensitive value.</li>
+  <li>The vault encrypts the value and stores it.</li>
+  <li>Your application receives a token and saves it in place of the original.</li>
+  <li>An approved process sends the token back when it needs the real value, and the vault returns it or forwards it to a trusted endpoint such as a payment gateway.</li>
+  <li>Deleting the vault record retires the value everywhere at once.</li>
+</ol>
+
+<h3>How Vaultless Tokenization Works</h3>
+
+<p>Vaultless systems skip the lookup store entirely. A secret key and a format-preserving encryption algorithm, such as the FF1 mode described in <a class="bl-link" href="https://csrc.nist.gov/pubs/sp/800/38/g/final">NIST SP 800-38G</a>, turn each value into a token of the same length and character set. Reversing the token means running the same algorithm backward with the same key. Because nothing is stored, the system scales easily, yet the key becomes the single thing protecting every token.</p>
+
+<p><strong>Choose vault-based tokenization when:</strong></p>
+
+<ul>
+  <li>You must restore values for specific people or processes and log every restore.</li>
+  <li>Your retention or erasure rules require deleting one person’s data on request.</li>
+  <li>Card numbers, SSNs or member IDs need random tokens that reveal nothing even if someone learns how the system works.</li>
+  <li>Different teams need different restore rights over the same data.</li>
+</ul>
+
+<p><strong>Choose vaultless tokenization when:</strong></p>
+
+<ul>
+  <li>Your pipeline handles very high volumes where a lookup per record adds noticeable latency.</li>
+  <li>Data rarely needs restoring, and per-record deletion isn’t a requirement.</li>
+  <li>Strong key management, including rotation and tight access to the key, is something your team can run.</li>
+</ul>
+
+<p>Some organizations run both: a vault for regulated identifiers people act on, and vaultless tokens for analytics streams that never return to plaintext. For a deeper look at latency, key risk and erasure trade-offs, read our full comparison of <a class="bl-link" href="/blog/vault-vs-vaultless-tokenization/">vault vs vaultless tokenization</a>.</p>
+
+<h2>Random vs Deterministic Tokenization: Choosing Between Privacy and Matching</h2>
+
+<p><strong>Random tokenization gives the same value a different token every time, which keeps records unlinkable, whereas deterministic tokenization always returns the same token, so you can join, search and deduplicate safely.</strong></p>
+
+<p>Here is what each approach does when the same SSN arrives twice:</p>
+
+<div class="bl-code bl-code--light">
+  <pre style="white-space:pre;overflow-x:auto"><code style="white-space:pre;">Random tokenization
+  Request 1:  SSN 523-41-8890   →  tkn_Qz81PmW0aLr2
+  Request 2:  SSN 523-41-8890   →  tkn_7HvNc3KsYe5d</code></pre>
+</div>
+
+<div class="bl-code bl-code--light">
+  <pre style="white-space:pre;overflow-x:auto"><code style="white-space:pre;">Deterministic tokenization
+  Request 1:  SSN 523-41-8890   →  tkn_Lm4XbR9wTq07
+  Request 2:  SSN 523-41-8890   →  tkn_Lm4XbR9wTq07</code></pre>
+</div>
+
+<p>Random tokens suit a law firm representing the same client in two separate matters. Nobody comparing the case files can tell they belong to one person, which keeps the matters cleanly apart.</p>
+
+<p>Deterministic tokens suit a health insurer whose member IDs are copied across claims, eligibility and member service systems. With one consistent token per member, analysts can follow claims history, catch duplicate submissions and run exact-match searches without anyone seeing the real ID.</p>
+
+<p>Deterministic tokens carry one risk worth planning for. On fields with few possible values, such as gender or state, identical tokens repeat often enough to reveal the underlying values through frequency analysis. Reserve deterministic tokens for high-variety identifiers, and scope them by tenant or purpose so a single token doesn’t become a universal identifier across your business.</p>
+
+<h2>Format-Preserving Tokenization: Keeping Legacy Systems Working With Tokens</h2>
+
+<p><strong>Format-preserving tokenization creates tokens that keep the length and character pattern of the original value. Legacy systems that validate card numbers, SSNs or phone numbers accept the token without any code changes.</strong></p>
+
+<p>Many older systems check every field before saving it. A property management system might reject anything that isn’t a 16-digit card number, and a payroll tool might expect exactly nine digits in the SSN field. Random tokens fail those checks. Format-preserving tokens pass them.</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Original value</th><th>Format-preserving token</th><th>What stays the same</th></tr></thead>
+    <tbody>
+      <tr><td>4111 1111 1111 1111</td><td>4111 1187 3920 1111</td><td>Length, first six and last four digits</td></tr>
+      <tr><td>523-41-8890</td><td>731-62-8890</td><td>Nine digits and the last four</td></tr>
+      <tr><td>(212) 555-0147</td><td>(212) 555-8836</td><td>Area code and phone pattern</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>Hotels feel this most at check-in, where the property management system validates card numbers before saving a reservation. Format-preserving tokens let front desk staff see the card brand and last four digits while the system stores only tokens, which is why format support ranks high on most shortlists of <a class="bl-link" href="/blog/best-data-tokenization-software-for-hotel-industry/">data tokenization software for the hotel industry</a>.</p>
+
+<p>There’s one rule to respect with payment data. The <a class="bl-link" href="https://listings.pcisecuritystandards.org/documents/Tokenization_Product_Security_Guidelines.pdf">PCI SSC Tokenization Product Security Guidelines</a> state that a tokenization product should include a way to distinguish tokens from real card numbers, for example by issuing tokens from a specific BIN range or labeling them. A token that looks exactly like a live card, with nothing to tell them apart, creates confusion during audits.</p>
+
+<h2>Reversible vs Irreversible Tokens and How the PCI SSC Classifies Them</h2>
+
+<p><strong>The PCI SSC splits tokens into reversible and irreversible types. Reversible tokens can become the original value again through a vault or key, while irreversible tokens can never be converted back to the original.</strong></p>
+
+<p>The same PCI SSC guidelines give the payment industry’s most formal way to classify tokens. Although they focus on card numbers, the four categories apply to any sensitive field.</p>
+
+<h3>Reversible Cryptographic Tokens</h3>
+
+<p>These tokens are generated from the original value using strong cryptography. The original isn’t stored anywhere; only the key is. Vaultless tokenization built on format-preserving encryption falls into this category, so the key deserves the same protection as the data itself.</p>
+
+<h3>Reversible Non-Cryptographic Tokens</h3>
+
+<ul>
+  <li><strong>Relationship to the value:</strong> None. The token has no mathematical link to the original.</li>
+  <li><strong>Recovery path:</strong> A lookup in a secure vault, available only to approved requests.</li>
+  <li><strong>Typical platforms:</strong> Most vault-based tokenization services, including card vaults and PII vaults.</li>
+</ul>
+
+<h3>Irreversible Authenticatable Tokens</h3>
+
+<p>A one-way function, such as a keyed hash, produces these tokens. You can’t recover the original, yet you can confirm whether a given value matches. A contact center verifying callers might use one like this:</p>
+
+<ol>
+  <li>Callers provide their card number to verify an account.</li>
+  <li>Your system runs the number through the same one-way function.</li>
+  <li>Matching results confirm the caller’s identity.</li>
+  <li>Nothing about the full card number is stored for this check.</li>
+</ol>
+
+<h3>Irreversible Non-Authenticatable Tokens</h3>
+
+<p>These tokens can’t be traced to a specific value at all, although they may still be linked to an account or customer. The PCI SSC describes them as carrying little to no risk of exposing the original, which makes them useful for reporting datasets where nobody will ever need the value again.</p>
+
+<p>Reversible tokens, in any form, remain pseudonymised data under <a class="bl-link" href="https://eur-lex.europa.eu/eli/reg/2016/679/oj">Article 4(5) of the GDPR</a>, so they are still PII for anyone who can restore them.</p>
+
+<h2>Single-Use, Multi-Use and Expiring Tokens: How Token Lifespan Changes Risk</h2>
+
+<p><strong>Single-use tokens work for one transaction, multi-use tokens stay valid across many, and expiring tokens delete themselves after a set time. The shorter a token lives, the less damage it can do if it ever leaks.</strong></p>
+
+<p>A single-use token works once and then stops, a multi-use token stays tied to the same record for repeat transactions, and an expiring token disappears from the vault on a set date. Most businesses need all three, often within the same customer relationship.</p>
+
+<p>Follow one private aviation charter from booking to wheels-up:</p>
+
+<ol>
+  <li><strong>Booking:</strong> The client’s card is tokenized at capture and kept as a multi-use token, because the operator charges a deposit now and the balance after the flight.</li>
+  <li><strong>Manifest:</strong> The passport number is stored as a token, and dispatch restores it once to file the international manifest.</li>
+  <li><strong>Ground transport:</strong> The concierge team shares the client’s name and phone number with a car service through a one-time key that self-destructs after the driver opens it.</li>
+  <li><strong>After the trip:</strong> The passport record expires on the date the operator’s retention policy sets, while the card token stays active for the client’s next charter.</li>
+</ol>
+
+<p>Each step uses the shortest lifespan the task allows. That habit limits what a leaked token can unlock, and it keeps the vault from holding data longer than your business needs.</p>
+
+<h2>Batch vs Real-Time Tokenization: Why the Moment You Tokenize Matters</h2>
+
+<p><strong>Real-time tokenization replaces sensitive values the moment they are captured, before any system stores them, while batch tokenization converts large volumes of existing records in bulk during migrations or cleanups.</strong></p>
+
+<h3>Real-Time Tokenization at Capture</h3>
+
+<p>Tokenizing at capture means the sensitive value travels straight from the form, API call or phone keypad into the vault, and your systems receive a token from the first moment.</p>
+
+<p>Collections agencies show why timing matters. When collectors take card or bank details on recorded calls, plaintext lands in the audio, on the agent’s screen and in CRM notes. Routing payment entry through a secure IVR flow tokenizes the card before any of those systems see it, and the resulting token supports the consumer’s payment plan next month.</p>
+
+<h3>Batch Tokenization for Existing Data</h3>
+
+<p>Real-time capture protects new data, yet most organizations also carry years of plaintext in older systems. A staffing firm whose recruiters have copied workers’ tax IDs and bank details into onboarding spreadsheets might clean up like this:</p>
+
+<ol>
+  <li>Export the spreadsheets and implementation trackers that hold SSNs and bank accounts.</li>
+  <li>Send the values to the tokenization service in large batches.</li>
+  <li>Write the returned tokens back into each tracker.</li>
+  <li>Confirm record counts match, then delete the plaintext exports.</li>
+</ol>
+
+<p>From that point, real-time capture handles every new hire, and the trackers keep their status columns with tokens in place of the sensitive values.</p>
+
+<h2>Data Tokenization Types by the Kind of Sensitive Data You Protect</h2>
+
+<p><strong>Different kinds of sensitive data call for different token types. Payment cards often use network or format-preserving tokens, PII and PHI fields use vault tokens, and AI prompts rely on deterministic tokens.</strong></p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Kind of data</th><th>Token types that usually fit</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td>Payment cards</td><td>Vault-based, format-preserving, multi-use; network tokens for card-on-file payments</td><td>Charges repeat, legacy checkouts validate card format, and networks issue their own tokens</td></tr>
+      <tr><td>SSNs, tax IDs and bank accounts</td><td>Vault-based, random or deterministic</td><td>Filings and payroll need the real value, and some teams need matching</td></tr>
+      <tr><td>Health identifiers and PHI fields</td><td>Vault-based, random, expiring</td><td>Restores are rare and retention rules are strict</td></tr>
+      <tr><td>Credentials and API keys</td><td>Vault-based, random, expiring or single-use</td><td>A leaked token should stop working quickly</td></tr>
+      <tr><td>PII inside AI prompts</td><td>Deterministic</td><td>The model needs each person kept distinct, and the app restores values in the reply</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>Payment cards deserve a closer look because two token systems often run side by side. Merchant tokens from a card vault replace stored card numbers for card on file and recurring billing. Network tokens come from the card networks under the EMVCo framework, keep the card’s format and add a one-time cryptogram to every transaction. Tokens that can start a payment on their own are often called high-value tokens, and systems that hold them may stay in PCI scope. Buyers evaluating <a class="bl-link" href="/blog/best-payment-tokenization-software/">payment tokenization software</a> should check which of these a vendor supports.</p>
+
+<p>AI prompts are the newest category. Deterministic tokens keep each person and account distinct for the model, so a reply can address the right customer once the application restores real values, the approach behind <a class="bl-link" href="/blog/pii-tokenization-for-ai/">PII tokenization for AI</a>.</p>
+
+<h2>Data Tokenization Use Cases: Which Token Types Fit Each Industry Workflow</h2>
+
+<p><strong>Travel agencies, hotels, clinical research teams, health insurers and managed service providers all tokenize sensitive data, yet each one leans on a different mix of token types to match how its teams use that data.</strong></p>
+
+<p>These scenarios come from the workflows where sensitive data most often leaks: inboxes, supplier portals, spreadsheets, tickets and shared drives.</p>
+
+<h3>Travel Agencies Paying Airline, Hotel and Cruise Suppliers</h3>
+
+<p>Cards reach agents by phone, email and chat, then get re-entered into airline, hotel, cruise and tour portals that the agency can’t replace. A vault keeps that workflow intact. The traveler enters the card once through a secure intake link, the booking record stores a multi-use token, and the agent either reveals the card in an approved, logged session or the vault injects it into an authorized supplier payment through a proxy. Repeat travelers never have to resend a card, and the CRM never holds one. Agencies weighing vendors for this can review our picks for <a class="bl-link" href="/blog/best-data-tokenization-software-for-travel-agencies/">data tokenization software for travel agencies</a>.</p>
+
+<h3>Hotels Handling Third-Party Card Authorizations and Group Deposits</h3>
+
+<ul>
+  <li><strong>Exposure today:</strong> Corporate travel teams, assistants and event planners send card authorization PDFs and card images by email.</li>
+  <li><strong>Token approach:</strong> A branded intake link tokenizes the card as it’s entered, captures the cardholder’s signature and expires after a set time.</li>
+  <li><strong>Group sales:</strong> Event deposits link the sales record to card tokens, so charges run through an approved gateway path and sales tools stay out of card handling.</li>
+  <li><strong>Result:</strong> Every authorization becomes a traceable record in place of an attachment sitting in a shared inbox.</li>
+</ul>
+
+<h3>Clinical Research Teams Separating Identity From Study Data</h3>
+
+<p>Research workflows need identity and study data kept apart, with re-identification limited to a few authorized people:</p>
+
+<ol>
+  <li>Direct identifiers are tokenized during participant pre-screening, before broader review.</li>
+  <li>The identity key stays in the vault, controlled by a small group.</li>
+  <li>Each study works with its own study-specific tokens, so data from different studies can’t be linked by token alone.</li>
+  <li>Analysts work on coded data, while re-identification authority stays separate from routine analysis.</li>
+</ol>
+
+<h3>Health Insurers and TPAs Tracking Members Across Systems</h3>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Where member IDs travel</th><th>Token type</th><th>What it enables</th></tr></thead>
+    <tbody>
+      <tr><td>Member service intake and call notes</td><td>Vault-based, random</td><td>Case notes stop collecting real identifiers</td></tr>
+      <tr><td>Claims, eligibility and pharmacy systems</td><td>Vault-based, deterministic</td><td>Analysts link each member’s history without seeing the ID</td></tr>
+      <tr><td>Provider onboarding records</td><td>Vault-based, random</td><td>Tax, banking and license data stays out of general tools</td></tr>
+      <tr><td>Disputed claim callbacks</td><td>Restore on approved request</td><td>Adjusters see the real ID only for the call that needs it</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h3>Managed Service Providers Storing Client Credentials</h3>
+
+<p>Managed service providers and outsourcing firms handle client passwords and API keys every day, and those secrets tend to land in tickets and team chat. Storing the secret in the vault and the token in the ticket changes the picture:</p>
+
+<div class="bl-code bl-code--light">
+  <pre style="white-space:pre;overflow-x:auto"><code style="white-space:pre;">Ticket #48213  |  Reset SFTP access for client Northwind
+Credential:    tkn_V8rJ2nQxL5aW   (restore requires on-call engineer role)</code></pre>
+</div>
+
+<p>Staff see a reference and finish the task, only the approved role retrieves the credential, and each retrieval is logged with who asked and when. Pairing random tokens with short expiry means a token copied into the wrong channel stops working quickly.</p>
+
+<h2>How to Choose the Right Type of Data Tokenization for Each Workflow</h2>
+
+<p><strong>Choose a token type by working backward from the workflow. Ask whether you need the value back, whether records must match, whether legacy systems check formats and how long the token should live, then combine the answers.</strong></p>
+
+<p>Run each data flow through these questions and combine the answers:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Question to ask</th><th>If the answer is yes</th><th>If the answer is no</th></tr></thead>
+    <tbody>
+      <tr><td>Will anyone need the original value back?</td><td>Reversible tokens, vault-based or cryptographic</td><td>Irreversible tokens</td></tr>
+      <tr><td>Must records match across systems?</td><td>Deterministic tokens</td><td>Random tokens</td></tr>
+      <tr><td>Do legacy systems validate field formats?</td><td>Format-preserving tokens</td><td>Random tokens in any format</td></tr>
+      <tr><td>Will the same token be used more than once?</td><td>Multi-use tokens</td><td>Single-use tokens</td></tr>
+      <tr><td>Should access end on a set date?</td><td>Expiring tokens</td><td>Tokens kept until deletion is requested</td></tr>
+      <tr><td>Must you delete one person’s data on request?</td><td>Vault-based tokenization</td><td>Vaultless can work</td></tr>
+      <tr><td>Does new data arrive continuously?</td><td>Real-time tokenization at capture</td><td>Batch tokenization</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>A travel agency’s card on file, for instance, answers yes to the first, third and fourth questions, which points to vault-based, format-preserving, multi-use tokens. Once you know the combinations you need, our guide to the <a class="bl-link" href="/blog/best-data-tokenization-tools/">best data tokenization tools</a> helps you match them to vendors.</p>
+
+<h2>Common Mistakes Teams Make When Mixing Different Tokenization Types</h2>
+
+<p><strong>Most tokenization problems come from using the wrong type for the job. Deterministic tokens on low-variety fields, format-preserving tokens that look like real cards and irreversible tokens where values must return cause the most trouble.</strong></p>
+
+<ol>
+  <li><strong>Deterministic tokens on low-variety fields:</strong> Tokenizing a gender or state column deterministically leaves only a handful of distinct tokens, and their frequencies give the values away.</li>
+  <li><strong>Format-preserving tokens that pass as real cards:</strong> If nothing distinguishes a token from a live card number, auditors and downstream teams can’t tell them apart, which complicates PCI scope reviews.</li>
+  <li><strong>Vaultless tokens for data subject to erasure:</strong> Without a vault record to delete, honoring one person’s erasure request can mean re-tokenizing entire datasets.</li>
+  <li><strong>Irreversible tokens where values must return:</strong> Hashing SSNs in a payroll system looks safe until tax season, when nobody can recover the originals.</li>
+  <li><strong>Multi-use tokens with no expiry:</strong> Card tokens kept for years after a customer leaves expand your exposure with no business reason behind them.</li>
+</ol>
+
+<h2>How Enigma Vault Helps You Use the Right Token Type for Your Data</h2>
+
+<p>At Enigma Vault, every product is vault-based, so you get per-record deletion and one place to control who can restore a value. Within that vault, you choose the token behavior each workflow needs:</p>
+
+<ul>
+  <li><strong>Random tokens:</strong> Data Vault generates 128-bit tokens from a cryptographically secure random generator, with nothing reversible embedded in them.</li>
+  <li><strong>Deterministic tokens:</strong> Available in Data Vault and Card Vault for joins, lookups and deduplication, and used by NoPII to keep each person consistent in AI prompts.</li>
+  <li><strong>Format-preserving tokens:</strong> Card Vault offers optional tokens that keep the first six and last four digits, and it can issue them from your own BIN range.</li>
+  <li><strong>Expiring and single-use access:</strong> Records in Data Vault can expire anywhere from 60 seconds to 7 years, and one-time keys let you share a secret once before it self-destructs.</li>
+  <li><strong>Batch tokenization:</strong> Up to 5,000 values per request for migrations and enrollment surges.</li>
+</ul>
+
+<p>Everything runs on PCI DSS Level 1 and SOC 2 Type II certified infrastructure. <a class="bl-link" href="/request-demo/">Request a demo</a> to match token types to your data flows.</p>

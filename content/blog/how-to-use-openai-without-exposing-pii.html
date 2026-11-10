@@ -1,0 +1,410 @@
+---
+title: "How to Use OpenAI Without Exposing PII: A Practical Guide"
+slug: "how-to-use-openai-without-exposing-pii"
+layout: "pii-style"
+metaTitle: "How to Use OpenAI Without Exposing PII: A Practical Guide"
+description: "Using OpenAI with customer data? See where PII leaks in GPT prompts, tool calls and logs, and how tokenization keeps real details from ever reaching OpenAI."
+subtitle: "To use OpenAI without exposing PII, set up a workflow that keeps raw PII from ever reaching OpenAI’s servers: send only the data each task needs, tokenize identifiers before every request and restore real values when GPT replies."
+date: 2026-11-10
+category: "NoPII"
+author: "abhilash-kumar"
+readTime: 18
+heroImage: "/assets/blog/img-05.png"
+heroAlt: "How to Use OpenAI Without Exposing PII: A Practical Guide"
+excerpt: "Using OpenAI with customer data? See where PII leaks in GPT prompts, tool calls and logs, and how tokenization keeps real details from ever reaching OpenAI."
+tags: ["openai", "nopii", "pii", "llm", "tokenization"]
+styles: ["blog.css", "pages/blog-pii-hero.css", "tr-pages.css"]
+scripts: ["blog-article.js"]
+faqSchema: true
+faqs:
+  - q: "Does OpenAI Train on Data Sent Through the API?"
+    a: "No. OpenAI says data sent to its API isn’t used to train or improve its models unless you opt in. Abuse-monitoring logs can still keep content for up to 30 days, so PII in a prompt still leaves your systems."
+  - q: "Is Zero Data Retention Enough to Protect Customer PII?"
+    a: "No. Zero Data Retention limits what OpenAI stores, yet your prompts still carry real PII to OpenAI, and endpoints such as Files and Assistants aren’t eligible. Tokenizing before the request keeps PII in your environment."
+  - q: "Can You Send PHI to OpenAI?"
+    a: "Only under a BAA that expressly covers OpenAI’s API services, with Modified Retention active on each project. Tokenizing PHI before each request also reduces how much protected data reaches OpenAI at all."
+  - q: "Does Tokenizing PII Reduce the Quality of GPT Responses?"
+    a: "Rarely. Consistent tokens keep each person and account distinct, so GPT can summarize, classify and draft as usual. Quality drops only when a task depends on the literal value, such as fuzzy name matching."
+  - q: "Does PII Tokenization Work with Streaming Responses from OpenAI?"
+    a: "Yes. A proxy such as NoPII holds back the end of each streamed chunk, so a token split across chunks is still caught, then restores real values as the response streams back to your application in real time."
+---
+
+<p><strong>To use OpenAI without exposing PII, set up a workflow that keeps raw PII from ever reaching OpenAI’s servers: send only the data each task needs, tokenize identifiers before every request and restore real values when GPT replies.</strong></p>
+
+<p>Support teams paste customer records into AI tools to get replies out faster. Product teams hold back useful GPT features because the privacy review can’t approve sending names, account numbers and call transcripts to an outside model. Both problems come from the same place: real PII travels inside every prompt.</p>
+
+<p>Tokenization fixes this at the source. Each name, email and account number is swapped for a token before the request leaves your systems, GPT works on the tokens, and the real values come back only when the reply returns. Your teams get the AI feature, and OpenAI never receives the customer data your privacy team was worried about.</p>
+
+<h2>What Does It Mean to Use OpenAI Without Exposing PII?</h2>
+
+<p><strong>Using OpenAI without exposing PII means GPT receives prompts that contain no real names, account numbers or other identifiers, while your team still gets complete, accurate results with the real details restored.</strong></p>
+
+<p>It doesn’t mean avoiding OpenAI or stripping useful context out of every prompt. It means deciding where real customer details live. In a setup that doesn’t expose PII, three things hold true:</p>
+
+<ol>
+  <li>Real customer details stay inside your own systems, in a secure vault your team controls.</li>
+  <li>Every request to OpenAI carries stand-ins in place of PII, so OpenAI’s servers, logs and stored responses hold nothing that identifies a person.</li>
+  <li>The people and processes that need real values get them back automatically once GPT replies.</li>
+</ol>
+
+<p>PII in an OpenAI prompt is broader than SSNs and card numbers. In most business workflows, it looks like this:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Type of PII</th><th>Examples that end up in prompts</th><th>Where it usually comes from</th></tr></thead>
+    <tbody>
+      <tr><td>Contact details</td><td>Names, emails, phone numbers, home addresses</td><td>Support tickets and customer emails</td></tr>
+      <tr><td>Account information</td><td>Account numbers, invoice numbers, member and loyalty IDs</td><td>CRM records and billing systems</td></tr>
+      <tr><td>Government IDs</td><td>SSNs, passport numbers, driver’s license numbers</td><td>Onboarding forms and booking records</td></tr>
+      <tr><td>Financial details</td><td>Card numbers, bank accounts, balances</td><td>Payment disputes and collections notes</td></tr>
+      <tr><td>Health information</td><td>Diagnoses, medications, insurance member IDs</td><td>Patient messages and intake forms</td></tr>
+      <tr><td>Indirect identifiers</td><td>Birth dates, job titles, ZIP codes, unique events</td><td>Free-text notes and case summaries</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>Indirect identifiers matter because they combine. “The regional manager in our Denver office who filed a complaint last Tuesday” names nobody, yet anyone inside the company could tell who it is.</p>
+
+<h2>How PII Leaks When You Use OpenAI: The Most Common Exposure Points</h2>
+
+<p><strong>PII leaks when you use OpenAI through oversharing in prompts, retrieval that pulls whole records, tool calls, logs, model outputs and employees using personal ChatGPT accounts. Most leaks happen quietly, long before anyone notices them.</strong></p>
+
+<p>Leaks rarely come from one dramatic mistake. They come from ordinary features doing slightly more than they need to:</p>
+
+<ol>
+  <li><strong>Oversharing in prompts:</strong> A support agent pastes a full customer record when GPT only needed the order status.</li>
+  <li><strong>Retrieval that pulls too much:</strong> A feature loads an entire customer profile into context to answer a question about one invoice.</li>
+  <li><strong>Tool calls that carry identifiers:</strong> GPT passes an email address or account number into a connected tool or third-party service.</li>
+  <li><strong>Logs and traces:</strong> Prompt and response bodies end up in error logs, tracing platforms and analytics tools.</li>
+  <li><strong>Model outputs:</strong> GPT repeats PII from the prompt into summaries, tickets and emails that are stored downstream.</li>
+  <li><strong>Inference from combined details:</strong> Several harmless-looking facts, such as a job title, a city and a date, add up to one identifiable person.</li>
+  <li><strong>Personal ChatGPT accounts:</strong> Employees paste customer data into consumer tools that sit outside any protected route.</li>
+</ol>
+
+<p>Each of these sends real customer data somewhere it doesn’t need to go. The next two sections look at what happens once a request reaches OpenAI, and at the specific integration points where PII slips into the request.</p>
+
+<h2>What Happens to Your PII When You Send a Prompt to the OpenAI API?</h2>
+
+<p><strong>When you send a prompt to the OpenAI API, any PII inside it passes through your own logs and tools, reaches OpenAI’s abuse-monitoring logs for up to 30 days and can stay longer with stored responses and uploaded files.</strong></p>
+
+<p>A prompt that drafts a reply to a disputed charge carries the customer’s name, email and invoice number. Before it reaches OpenAI, that prompt is often copied into app logs, a gateway and a tracing tool. At OpenAI, abuse-monitoring logs keep it for up to 30 days by default, stored responses stay for at least 30 days unless storage is off, and uploaded files stay until you delete them. Every one of those copies holds real PII unless it was tokenized first.</p>
+
+<h2>Where PII Leaks in an OpenAI Integration Before the Model Even Sees It</h2>
+
+<p><strong>PII leaks from an OpenAI integration through system prompts, chat history, tool-call arguments, retrieved records, uploaded files and logs, often in places your team never reviews before a request goes out.</strong></p>
+
+<p>A GPT feature isn’t one data flow. It’s a chain of parts, from the user interface and prompt builder to retrieval, tools, tracing and the model itself, and PII can enter at any step and get copied into several others.</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Leak point</th><th>What it usually carries</th><th>Who can see it</th></tr></thead>
+    <tbody>
+      <tr><td>System prompts</td><td>Account details added to personalize answers</td><td>Anyone with access to prompt templates and logs</td></tr>
+      <tr><td>Chat history</td><td>Everything the customer typed in earlier turns</td><td>Every request that resends the conversation</td></tr>
+      <tr><td>Tool and function-call arguments</td><td>Customer IDs, emails and order numbers</td><td>The model, plus your tool logs</td></tr>
+      <tr><td>Retrieved records</td><td>CRM notes, tickets and claims text pulled into context</td><td>The model and your retrieval logs</td></tr>
+      <tr><td>Uploaded files</td><td>Contracts, statements and intake forms</td><td>OpenAI storage until deleted</td></tr>
+      <tr><td>Observability and tracing</td><td>Full prompts and responses</td><td>Engineers and third-party monitoring vendors</td></tr>
+      <tr><td>Application and gateway logs</td><td>Raw request bodies</td><td>Anyone with log access</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>Each of these could need its own fix, yet one step covers most of them at once. When PII is tokenized before it enters the prompt, every copy made afterward, from your traces to OpenAI’s logs, holds tokens in place of real values.</p>
+
+<h2>How to Use OpenAI Without Exposing PII in Your App: Step-by-Step Guide</h2>
+
+<p><strong>Using OpenAI without exposing PII comes down to mapping where PII enters your prompts, sending only what the task needs, tokenizing identifiers before each request, limiting storage and testing with real-looking data.</strong></p>
+
+<h3>Map the PII in Every Prompt and Data Source</h3>
+
+<p>Start with an inventory of every input that can reach a prompt. For each one, ask a single question: does GPT need the real value to do this job?</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Prompt input</th><th>PII it can contain</th><th>Does GPT need the real value?</th></tr></thead>
+    <tbody>
+      <tr><td>Customer message</td><td>Names, emails, phone numbers</td><td>No</td></tr>
+      <tr><td>Account lookup</td><td>Account numbers, balances</td><td>No, for drafting and summarizing</td></tr>
+      <tr><td>Retrieved ticket history</td><td>Addresses, order IDs</td><td>No</td></tr>
+      <tr><td>Payment details</td><td>Card numbers</td><td>Never</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>In most features, the answer is no for almost every field. GPT needs to know there’s a customer, an account and a disputed charge. It doesn’t need to know who the customer is.</p>
+
+<h3>Send Only the Data the Task Needs</h3>
+
+<p>Many prompts carry fields out of habit, because the app passes a whole CRM record when the task needed two fields. A reply about a late fee doesn’t need the customer’s date of birth or home address.</p>
+
+<p><strong>Before:</strong> “Draft a reply to Maria Lopez, DOB 1984-03-12, 14 Elm St, Austin, account 88231907, about her late fee.”</p>
+
+<p><strong>After:</strong> “Draft a reply to Maria Lopez, account 88231907, about her late fee.”</p>
+
+<p>Trimming first leaves less PII for every later step to handle, and it often makes GPT’s answers more focused.</p>
+
+<h3>Tokenize PII Before the Request Leaves Your Systems</h3>
+
+<p>Tokenization replaces each remaining identifier with a consistent token before the prompt goes out, then swaps the real value back when the response returns. GPT receives “Draft a reply to [NAME: Ry0Ixd1], account [ACCOUNT: k8Lm2n], about her late fee,” writes a natural reply, and your app shows the agent that reply with Maria’s real name in place.</p>
+
+<p>With a tokenization proxy, the change in your code is usually a single setting:</p>
+
+<div class="bl-code bl-code--light">
+  <pre style="white-space:pre;overflow-x:auto"><code style="white-space:pre;">client = OpenAI(api_key="sk-...", base_url="https://api.nopii.co")</code></pre>
+</div>
+
+<p>Because each value always maps to the same token, GPT can still tell two customers apart and refer back to the right person later in the conversation. Our guide to <a class="bl-link" href="/blog/pii-tokenization-for-ai/">PII tokenization for AI</a> explains why that consistency keeps answers accurate.</p>
+
+<h3>Keep Multi-Turn Conversations Consistent</h3>
+
+<p>In a chat, the same customer appears across many requests. Passing a session ID with each call keeps one token per person for the whole conversation, so a follow-up such as “remind her about the due date” still points to the right customer.</p>
+
+<h3>Turn Off Storage Where You Can</h3>
+
+<p>Your developers can set store to false on Responses and Chat Completions calls unless the feature needs OpenAI to keep the response. It also helps to avoid sending customer data to endpoints that aren’t eligible for Zero Data Retention, such as Files, Assistants, vector stores and Batches, when a simpler endpoint does the job. If you do upload files, setting an expiry means documents don’t sit on OpenAI’s servers indefinitely.</p>
+
+<h3>Lock Down Logs, Traces and Prompt Histories</h3>
+
+<ol>
+  <li>Tokenize or scrub prompts before they reach your logging and tracing tools.</li>
+  <li>Restrict who can open full prompt histories, and keep that group small.</li>
+  <li>Set retention limits on logs so old prompts don’t pile up.</li>
+  <li>Review which third-party monitoring vendors receive prompt data, and what they keep.</li>
+</ol>
+
+<h3>Test With Representative Data Before Going Live</h3>
+
+<p>Detection catches common formats such as emails, phone numbers and SSNs reliably, while internal account formats, unusual names and free-text notes are harder. Before launch, run test prompts built from your own data patterns and check what was tokenized and what got through. After launch, review the audit log regularly, because new kinds of data tend to appear as a feature grows.</p>
+
+<h2>Why Tokenization Protects PII in OpenAI Prompts Better Than Redaction</h2>
+
+<p><strong>Tokenization protects PII in OpenAI prompts better than redaction because each person keeps a distinct, consistent token GPT can reason about, and your app restores the real values once GPT sends its reply.</strong></p>
+
+<h3>How Tokenization Works in an OpenAI Request</h3>
+
+<p>Tokenization sits at the point where requests leave your systems, so it protects every prompt your app sends, whoever wrote it:</p>
+
+<ol>
+  <li>Your app builds the prompt with real customer data, exactly as it does today.</li>
+  <li>Before the request leaves your systems, a detection step finds PII such as names, emails, account numbers and government IDs.</li>
+  <li>Each value is replaced with a token, and the real value is stored in a secure vault. The same value receives the same token across your account.</li>
+  <li>Labels that would give a value away are neutralized, so “SSN 123-45-6789” reaches GPT as “ID number [GOV_ID: k8Lm2n].”</li>
+  <li>GPT reads the tokenized prompt and writes its reply using the same tokens.</li>
+  <li>On the way back, tokens are swapped for real values, so your app receives a complete, normal response.</li>
+  <li>If tokenization fails for any reason, the request is blocked, so raw PII is never sent as a fallback.</li>
+</ol>
+
+<p>Here’s what that looks like for one support request:</p>
+
+<div class="bl-code bl-code--light">
+  <pre style="white-space:pre;overflow-x:auto"><code style="white-space:pre;">Your app sends:   Maria Lopez (maria.lopez@mail.com) was charged twice for order 5521.
+GPT receives:     [NAME: Ry0Ixd1] ([EMAIL: bN3dF5h]) was charged twice for order 5521.
+GPT replies:      Hi [NAME: Ry0Ixd1], we're sorry about the double charge on order 5521...
+Your app gets:    Hi Maria Lopez, we're sorry about the double charge on order 5521...</code></pre>
+</div>
+
+<h3>Tokenization Compared With Redaction and Masking</h3>
+
+<p>There are several ways to hide PII from a model, and they lead to very different results once GPT starts writing.</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table bl-table--wide">
+    <thead><tr><th>Method</th><th>What GPT receives</th><th>Can real values come back?</th><th>Effect on responses</th><th>Best fit</th></tr></thead>
+    <tbody>
+      <tr><td>Redaction</td><td>”Refund ____ for order 5521”</td><td>No</td><td>Loses who the reply is about</td><td>Documents shared outside your business</td></tr>
+      <tr><td>Masking</td><td>”Refund [PERSON] for order 5521”</td><td>No</td><td>Mixes people up when several appear</td><td>One-off analysis with no customer-facing output</td></tr>
+      <tr><td>OpenAI Privacy Filter</td><td>Masked spans across eight PII and secret categories, detected locally</td><td>No</td><td>Same limits as masking</td><td>Local pre-filtering of text and secrets</td></tr>
+      <tr><td>Tokenization</td><td>”Refund [NAME: Ry0Ixd1] for order 5521”</td><td>Yes, inside your app</td><td>Keeps each person distinct, with real values restored in the reply</td><td>Customer-facing replies, copilots and agents</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>OpenAI released Privacy Filter in April 2026 as an open-weight model that detects and masks PII before text leaves your environment. It’s a useful local filter, but like any masking approach it removes values for good, so a support reply drafted from masked text can’t address the customer by name. That trade-off is why <a class="bl-link" href="/blog/pii-masking-for-llm/">PII masking for LLMs</a> suits one-way workflows, while tokenization suits anything that goes back to a customer.</p>
+
+<h3>When Tokenization Isn’t the Right Fit</h3>
+
+<p>Tokenization works for most language tasks, but a few are better kept in your own systems:</p>
+
+<ul>
+  <li><strong>Fuzzy name matching:</strong> Tokens don’t preserve how similar two names look, so “Jon Smith” and “John Smith” become unrelated tokens.</li>
+  <li><strong>Working on the value itself:</strong> Sorting SSNs numerically or checking a spelling needs the literal data.</li>
+  <li><strong>Tasks with no PII:</strong> Code generation and questions about public information gain nothing from an extra step.</li>
+  <li><strong>PII inside images or audio:</strong> Text-based tokenization won’t catch identifiers in a scanned ID or a voice recording.</li>
+</ul>
+
+<h2>How to Keep PII Out of OpenAI Tool Calls, Retrieved Records and Agents</h2>
+
+<p><strong>Tool calls, retrieved records and agents carry PII between steps where it’s easy to miss. Tokenizing every value before it enters the prompt keeps each step clean, and real values are restored only inside your own tools.</strong></p>
+
+<h3>Tool and Function Calls</h3>
+
+<p>When GPT decides to call a function such as lookup_order, it fills in the arguments from the conversation. If the prompt held a tokenized email, the argument holds the same token. Your tool restores the real email inside your own system, runs the lookup and returns the result, which is tokenized again before it goes back into the conversation. GPT never handles the raw value at any point, and structured outputs such as JSON mode keep working as before.</p>
+
+<h3>Retrieved Records in Prompts</h3>
+
+<p>Retrieval features pull CRM notes, tickets or case files into the prompt, and those records are often the richest source of PII in the whole request:</p>
+
+<ol>
+  <li>Retrieve only the records and fields the task actually uses.</li>
+  <li>Pass the assembled prompt through tokenization before it goes to OpenAI.</li>
+  <li>Let GPT answer from the tokenized context.</li>
+  <li>Restore real values in the answer for the user who asked.</li>
+</ol>
+
+<h3>Multi-Step Agents</h3>
+
+<p>Agents chain several model calls and tools together. With consistent tokens, every step refers to the same customer without revealing who they are:</p>
+
+<div class="bl-code bl-code--light">
+  <pre style="white-space:pre;overflow-x:auto"><code style="white-space:pre;">Step 1  Classify ticket from [NAME: Ry0Ixd1] ([EMAIL: bN3dF5h])   →  "billing dispute"
+Step 2  Call get_invoices(customer=[EMAIL: bN3dF5h])              →  2 invoices found
+Step 3  Draft reply to [NAME: Ry0Ixd1] confirming a refund        →  restored as "Maria Lopez"</code></pre>
+</div>
+
+<h2>Using OpenAI With PHI, Card Numbers and Other Regulated PII Safely</h2>
+
+<p><strong>PHI, card numbers and other regulated PII need stricter handling with OpenAI. PHI requires a BAA covering the API, card numbers should never enter a prompt and tokenized data still counts as PII under GDPR.</strong></p>
+
+<p><strong>PHI:</strong> OpenAI’s HIPAA guide, dated July 9, 2026, says PHI may go to the API only when your BAA expressly lists OpenAI’s API services, and only through organizations and projects with Modified Retention switched on. Tokenizing patient names, member IDs and dates of birth before each request adds a second layer of protection, because far less PHI reaches OpenAI at all.</p>
+
+<p><strong>Card numbers:</strong> A prompt has no reason to contain a full card number. Tokenize cards at the point of capture, so your app only ever holds a token, and give GPT the last four digits when a reply needs to mention the card. Our walkthrough of <a class="bl-link" href="/blog/card-vault-tokenization/">card vault tokenization</a> shows how that capture flow works.</p>
+
+<p><strong>GDPR:</strong> Tokenized data counts as pseudonymised data under Article 4(5) of the GDPR, so it remains PII for anyone who can restore it. Tokenization reduces what reaches OpenAI, while your lawful basis, contracts and retention rules still apply.</p>
+
+<h2>How Different Industries Use OpenAI Without Exposing Customer PII</h2>
+
+<p><strong>Every industry that builds on OpenAI leaks PII in its own places, from support tickets to call transcripts and claims notes. Tokenizing those details before each request lets GPT do the work while customer data stays private.</strong></p>
+
+<p>The PII at risk, and the place it slips into a prompt, changes from one industry to the next:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Industry</th><th>Where PII leaks into OpenAI requests</th><th>What kind of PII leaks</th></tr></thead>
+    <tbody>
+      <tr><td>SaaS and support platforms</td><td>Ticket summaries, reply drafts, retrieved CRM context</td><td>Names, emails, phone numbers, account IDs, addresses</td></tr>
+      <tr><td>Contact centers</td><td>Live transcripts, agent notes, identity checks</td><td>Account numbers, verification answers, addresses, payment details</td></tr>
+      <tr><td>Collections agencies</td><td>Call summaries, payment reminders, hardship notes</td><td>Account numbers, balances, bank details, SSNs, income details</td></tr>
+      <tr><td>Clinics and behavioral health</td><td>Patient messages, intake summaries, visit notes</td><td>Names, dates of birth, insurance member IDs, diagnoses, medications</td></tr>
+      <tr><td>Health insurers and TPAs</td><td>Member service chats, claims notes, provider records</td><td>Member IDs, claims details, bank accounts, government IDs</td></tr>
+      <tr><td>Law firms</td><td>Drafting tools, document review, client intake</td><td>Client names, case details, financial accounts, medical records</td></tr>
+      <tr><td>HR and recruiting</td><td>CV screening, candidate emails, onboarding</td><td>Contact details, government IDs, tax IDs, compensation, background checks</td></tr>
+      <tr><td>Travel and hospitality</td><td>Booking emails, itinerary changes, guest requests</td><td>Traveler names, passport numbers, loyalty IDs, cards, assistance needs</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h3>SaaS and Support Platforms</h3>
+
+<p>AI support features are among the most common places PII reaches OpenAI. Ticket summaries send the full ticket text, and reply drafting adds retrieved CRM context such as order history and contact details. The fix starts with retrieving only the fields a reply needs, then tokenizing names, emails and account IDs before each request. GPT drafts the reply on tokens, and restoration happens only inside your application, so the agent sees a normal reply with real names. Teams comparing tools for this can start with our list of <a class="bl-link" href="/blog/best-pii-tokenization-software-for-saas/">PII tokenization software for SaaS</a>.</p>
+
+<h3>Contact Centers</h3>
+
+<p>Agent-assist tools send live transcripts to GPT for suggested answers, and those transcripts carry account numbers, verification answers and sometimes payment details. Recognized PII is tokenized in the application stream as the transcript is sent, so suggestions still arrive in real time. Payment capture belongs in a separate secure flow, such as keypad entry, which keeps card numbers out of the transcript entirely. For identity checks, agent tools can show only the verification result, which keeps security answers out of notes and prompts alike.</p>
+
+<h3>Collections Agencies</h3>
+
+<p>Collections teams use GPT to summarize calls, score conversations and draft payment reminders. Each of those touches account numbers, balances and bank details, and hardship notes can add income or medical information that has no place in a prompt at all. Tokenizing account data lets the reminder still read naturally:</p>
+
+<div class="bl-code bl-code--light">
+  <pre style="white-space:pre;overflow-x:auto"><code style="white-space:pre;">Your app sends:   Draft a reminder for Daniel Reyes, account 88231907, balance $412.
+GPT receives:     Draft a reminder for [NAME: Pq7Lk2], account [ACCOUNT: k8Lm2n], balance $412.
+Your app gets:    Hi Daniel Reyes, this is a reminder that account 88231907 has a balance of $412...</code></pre>
+</div>
+
+<h3>Clinics and Behavioral Health</h3>
+
+<p>Clinics use GPT to summarize intake forms and draft replies to patient messages, and behavioral health practices handle some of the most sensitive notes in healthcare. A protected intake summary works like this:</p>
+
+<ol>
+  <li>The patient submits intake answers, insurance details and a reason for the visit.</li>
+  <li>Names, dates of birth and insurance member IDs are tokenized before the summary request.</li>
+  <li>Only the clinical details the summary needs are included in the prompt.</li>
+  <li>GPT writes the summary from the tokenized text.</li>
+  <li>Staff read the summary with real patient details restored in the practice’s own system.</li>
+</ol>
+
+<p>Tokenizing identifiers doesn’t make the remaining health details harmless, so the prompt should still carry only what the task needs, and PHI sent to OpenAI requires the BAA terms covered earlier.</p>
+
+<h3>Health Insurers and TPAs</h3>
+
+<p>Member service and claims teams copy member identifiers across many systems, and AI tools add one more destination.</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Workflow</th><th>PII involved</th><th>What GPT receives</th></tr></thead>
+    <tbody>
+      <tr><td>Member service chat</td><td>Member IDs, contact details, coverage questions</td><td>Tokens for identifiers, with the coverage question intact</td></tr>
+      <tr><td>Claims note summaries</td><td>Claim numbers, diagnoses, provider names</td><td>Tokens for identifiers, with only the details the summary needs</td></tr>
+      <tr><td>Provider onboarding</td><td>Tax IDs, bank accounts, license numbers</td><td>Tokens in place of every structured value</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h3>Law Firms</h3>
+
+<p>Legal drafting and document review tools often receive client names, case details, financial accounts and medical records in a single document. Tokenizing direct identifiers reduces what reaches OpenAI, yet confidential case facts can remain in the text, and tokenization alone doesn’t protect privilege. Firms get the most from it by routing only approved applications through tokenization and assessing confidential content separately.</p>
+
+<h3>HR and Recruiting</h3>
+
+<ul>
+  <li><strong>Where it leaks:</strong> Screening tools and candidate communication apps send whole CVs and applications to GPT.</li>
+  <li><strong>What leaks:</strong> Contact details, government and tax IDs, compensation history and sometimes background check results.</li>
+  <li><strong>How tokenization helps:</strong> Names, contact details and IDs become tokens, while skills and experience stay readable, so GPT can still compare candidates.</li>
+</ul>
+
+<h3>Travel and Hospitality</h3>
+
+<p>Booking assistants and email tools draft confirmations, itinerary changes and replies to guest requests. Each one can carry traveler names, passport numbers, loyalty IDs and special assistance details.</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Detail in the email</th><th>What GPT receives</th><th>What the traveler sees</th></tr></thead>
+    <tbody>
+      <tr><td>Traveler names</td><td>Tokens</td><td>Real names</td></tr>
+      <tr><td>Passport numbers</td><td>Tokens</td><td>Real numbers, only where the email needs them</td></tr>
+      <tr><td>Loyalty IDs</td><td>Tokens</td><td>Real IDs</td></tr>
+      <tr><td>Payment card</td><td>Last four digits only</td><td>Last four digits only</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>Agencies that add AI to their booking tools usually protect cards on file at the same time, and our review of <a class="bl-link" href="/blog/best-data-tokenization-software-for-travel-agencies/">data tokenization software for travel agencies</a> looks at platforms that handle both.</p>
+
+<h2>PII Risks to Avoid When Building OpenAI Features on Customer Data</h2>
+
+<p><strong>Most PII exposure in OpenAI features comes from trusting retention settings alone, logging full prompts, uploading raw files, letting tools return raw values and leaving some routes without any protection.</strong></p>
+
+<ol>
+  <li><strong>Relying on Zero Data Retention alone:</strong> ZDR limits what OpenAI keeps, yet every prompt still carries real PII to OpenAI.</li>
+  <li><strong>Logging full prompts:</strong> Debug and tracing tools quietly build a second copy of every customer conversation.</li>
+  <li><strong>Uploading raw files to Assistants or vector stores:</strong> These endpoints aren’t eligible for ZDR, and objects you never delete stay indefinitely.</li>
+  <li><strong>Letting tools return raw PII to the model:</strong> A lookup that sends back a plaintext address undoes the tokenization upstream.</li>
+  <li><strong>Protecting one provider and not the others:</strong> An app that calls OpenAI through tokenization but sends fallback traffic straight to another model leaks on that second route.</li>
+  <li><strong>Skipping tests for unrecognized PII:</strong> Internal ID formats and free-text notes are where detection misses most often.</li>
+  <li><strong>Keeping token mappings forever:</strong> Expiry and purge rules make sure restored values aren’t available longer than the workflow needs.</li>
+</ol>
+
+<h3>What About Employees Using ChatGPT Directly?</h3>
+
+<p>API-level tokenization protects the traffic your applications send to OpenAI. It doesn’t cover an employee who pastes a customer list into a personal ChatGPT account. The practical answer is an approved internal assistant, built on the API and routed through tokenization, along with a clear policy on public AI tools. Our roundup of <a class="bl-link" href="/blog/best-ai-data-security-software-for-enterprises/">AI data security software for enterprises</a> covers tools that help govern that wider use.</p>
+
+<h2>How Enigma NoPII Keeps PII Out of Your OpenAI Requests Automatically</h2>
+
+<p>At Enigma Vault, we built NoPII as a reverse proxy that sits between your app and OpenAI. You keep your own OpenAI key and change one setting:</p>
+
+<div class="bl-code bl-code--light">
+  <pre style="white-space:pre;overflow-x:auto"><code style="white-space:pre;">client = OpenAI(api_key="sk-...", base_url="https://api.nopii.co")</code></pre>
+</div>
+
+<p>From there, NoPII finds PII in each prompt, replaces it with tokens stored in our vault and restores the real values in GPT’s reply before your app receives it.</p>
+
+<ul>
+  <li><strong>Detection:</strong> It recognizes 30+ PII entity types plus common secret patterns, and neutralizes revealing labels, so “SSN” becomes “ID number.”</li>
+  <li><strong>Consistent tokens:</strong> The same value gets the same token across your account, and a session ID keeps conversations consistent across turns.</li>
+  <li><strong>Fail-safe behavior:</strong> If tokenization fails, the request is blocked; if restoring fails, tokens stay in the response.</li>
+  <li><strong>Built for real apps:</strong> It supports streaming, plus tool calls and JSON mode where the provider supports them, and works with the OpenAI SDK, LangChain, LlamaIndex, LiteLLM and Vercel AI SDK.</li>
+  <li><strong>Controls:</strong> An audit log records detected entity types, with token expiry and purge.</li>
+</ul>
+
+<p>NoPII protects text sent through its endpoint. It doesn’t scan images or audio, and it can’t see traffic that bypasses it. You can <a class="bl-link" href="https://nopii.co/">start free with NoPII</a> or <a class="bl-link" href="/request-demo/">request a demo</a> to test it on your own prompts.</p>

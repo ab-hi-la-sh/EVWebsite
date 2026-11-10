@@ -1,0 +1,369 @@
+---
+title: "Pseudonymization vs Anonymization: Key Differences, Examples and When to Use Each"
+slug: "pseudonymization-vs-anonymization"
+layout: "pii-style"
+metaTitle: "Pseudonymization vs Anonymization: Key Differences, Examples and When to Use Each"
+description: "Pseudonymization replaces identifiers with reversible tokens, while anonymization removes the link to a person for good. Compare GDPR status, risk, examples and when to use each."
+subtitle: "Pseudonymization replaces identifiers like names and account numbers with tokens that can be reversed using a separately held key, while anonymization removes or generalizes identifiers so the data can never be linked back to a person."
+date: 2026-11-10
+category: "PII"
+author: "abhilash-kumar"
+readTime: 15
+heroImage: "/assets/blog/img-05.png"
+heroAlt: "Pseudonymization vs Anonymization: Key Differences, Examples and When to Use Each"
+excerpt: "Pseudonymization replaces identifiers with reversible tokens, while anonymization removes the link to a person for good. Compare GDPR status, risk, examples and when to use each."
+tags: ["pseudonymization", "anonymization", "gdpr", "tokenization"]
+styles: ["blog.css", "pages/blog-pii-hero.css", "tr-pages.css"]
+scripts: ["blog-article.js"]
+faqSchema: true
+faqs:
+  - q: "Is Tokenized Data Considered Anonymous Under GDPR?"
+    a: "No. Tokenized data is pseudonymized, because the token vault can map each token back to its original value. It remains personal data for the organization holding the vault, though it sharply reduces exposure in daily use."
+  - q: "Is Hashing Pseudonymization or Anonymization?"
+    a: "Hashing is pseudonymization in most cases. Unsalted hashes of emails or names can be reversed by hashing common values and comparing results, so sensitive data calls for keyed hashing or vault-based tokenization."
+  - q: "Can We Share Pseudonymized Data with Vendors?"
+    a: "Yes, with contracts and safeguards in place. The 2025 EDPS v SRB ruling suggests the data may not be personal for a vendor that can’t re-identify it, but it stays personal for you, so your GDPR obligations remain."
+  - q: "Does Deleting the Token Mapping Anonymize the Data?"
+    a: "Not automatically. Deleting the mapping removes the route back through that token, but dates, locations or free text left in the record may still identify someone. Test the full record before treating it as anonymous."
+  - q: "Can We Use Pseudonymized Data with LLMs?"
+    a: "Yes, and it often works better than anonymized data. Tokenizing names and contact details before a prompt reaches the model keeps identities consistent across a conversation, while the model provider never receives real values."
+---
+
+<p><strong>Pseudonymization replaces identifiers like names and account numbers with tokens that can be reversed using a separately held key, while anonymization removes or generalizes identifiers so the data can never be linked back to a person.</strong></p>
+
+<ul>
+  <li><strong>Choose pseudonymization when:</strong> You still need to link records to a real person, follow them over time or restore the original value, as in customer support, fraud review, AI workflows and ongoing research.</li>
+  <li><strong>Choose anonymization when:</strong> You’ll never need to identify anyone again and the data is headed for publication, benchmarking or wide sharing.</li>
+</ul>
+
+<h2>Pseudonymization vs Anonymization: What Is the Core Difference?</h2>
+
+<p><strong>The core difference between pseudonymization and anonymization lies in reversibility. Pseudonymization keeps a separate, secure key that lets the data be re-identified, whereas anonymization alters data permanently so no key or path back exists.</strong></p>
+
+<ul>
+  <li><strong>Pseudonymization:</strong> Substitutes direct identifiers, like names or account numbers, with tokens and keeps a separate key to reverse them, so pseudonymized data is still personal data under laws like the GDPR.</li>
+  <li><strong>Anonymization:</strong> Permanently alters or deletes identifying information, leaving no key or method to re-identify anyone, so truly anonymized data falls outside the scope of data protection laws.</li>
+</ul>
+
+<h2>Pseudonymization and Anonymization: Key Differences at a Glance</h2>
+
+<p><strong>Pseudonymization and anonymization differ in what they do to identifiers, whether they can be reversed, how privacy laws treat the result, how much breach risk remains, how useful the data stays and which tasks each suits.</strong></p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Feature</th><th>Pseudonymization</th><th>Anonymization</th></tr></thead>
+    <tbody>
+      <tr><td>What it does</td><td>Replaces direct identifiers with tokens, codes or aliases</td><td>Removes, generalizes or aggregates identifiers permanently</td></tr>
+      <tr><td>Reversibility</td><td>Yes. Reversible using a separate key, lookup table or token vault</td><td>No. Permanently removes or generalizes the data</td></tr>
+      <tr><td>GDPR status</td><td>Still personal data. All GDPR rules and data subject rights apply</td><td>Non-personal data. Falls outside GDPR when done properly</td></tr>
+      <tr><td>Re-identification risk</td><td>Low while the key is protected, high if both data and key are exposed</td><td>Negligible when the data passes singling out, linkability and inference tests</td></tr>
+      <tr><td>Data utility</td><td>High. Keeps granularity and links records over time</td><td>Low to moderate. Detail is lost to grouping, noise or deletion</td></tr>
+      <tr><td>Breach impact</td><td>Reduced harm, though still a reportable personal data breach</td><td>Usually not a personal data breach</td></tr>
+      <tr><td>Erasure and access requests</td><td>Must still be honored</td><td>Don’t apply</td></tr>
+      <tr><td>Retention limits</td><td>Apply in full</td><td>Don’t apply to truly anonymous data</td></tr>
+      <tr><td>Common methods</td><td>Tokenization, encryption, keyed hashing</td><td>Generalization, aggregation, suppression, noise addition, differential privacy</td></tr>
+      <tr><td>Best used for</td><td>Software testing, longitudinal research, fraud prevention, customer support, AI workflows</td><td>Public datasets, statistical analysis, industry benchmarks, sharing with outside parties</td></tr>
+      <tr><td>Example</td><td><em>Jane Doe</em> becomes <em>User_99214</em>, with the key held elsewhere</td><td><em>Jane Doe, 34, Santa Clara</em> becomes <em>“patient, age 30 to 39, California”</em></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h2>Pseudonymization vs Anonymization: A Detailed Comparison</h2>
+
+<p><strong>A detailed comparison of pseudonymization and anonymization covers who controls re-identification, how privacy laws classify each, how regulators test re-identification risk and how utility, breaches and data subject rights differ.</strong></p>
+
+<h3>Reversibility and Who Controls Re-Identification</h3>
+
+<p>With pseudonymization, re-identification is a decision your organization controls. Whoever holds the key or has access to the token vault can turn <em>User_99214</em> back into <em>Jane Doe</em>. That’s useful when a verified borrower calls a lender’s support desk or a fraud analyst needs to confirm an account holder.</p>
+
+<p>It also makes the key your most sensitive asset. GDPR requires the additional information to be kept separately and protected by technical and organizational measures. In practice, that means:</p>
+
+<ol>
+  <li>Storing the key or vault on separate infrastructure from the pseudonymized data</li>
+  <li>Encrypting it at rest and in transit</li>
+  <li>Limiting access to a small number of authorized roles</li>
+  <li>Logging every re-identification request</li>
+</ol>
+
+<p>Anonymization takes that decision off the table. There’s no key to steal, and no way to recover the original record, even when you have a legitimate reason to.</p>
+
+<h3>Legal Status Under GDPR, HIPAA and CCPA</h3>
+
+<p>Each privacy law draws its own line between the two methods.</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Law</th><th>Pseudonymized data</th><th>Anonymized or de-identified data</th></tr></thead>
+    <tbody>
+      <tr><td><a class="bl-link" href="https://eur-lex.europa.eu/eli/reg/2016/679/oj">GDPR</a></td><td>Personal data under Article 4(5), while Articles 25 and 32 name pseudonymization as a recommended safeguard</td><td>Outside the regulation under Recital 26</td></tr>
+      <tr><td>HIPAA</td><td>Still protected health information if the covered entity can re-identify it</td><td>De-identified when it meets <a class="bl-link" href="https://www.hhs.gov/hipaa/for-professionals/special-topics/de-identification/index.html">Safe Harbor or Expert Determination</a></td></tr>
+      <tr><td>CCPA</td><td>Still personal information</td><td>”Deidentified” only with reasonable safeguards, a public commitment not to re-identify and contracts binding recipients</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>Under GDPR, pseudonymization is actively encouraged as a security practice, but it doesn’t remove your obligations. If a customer exercises their right to erasure under Article 17, you must still find and delete their pseudonymized records. Anonymization, on the other hand, works like an exit from GDPR: purpose limitation, storage limits and consent requirements no longer apply to that dataset.</p>
+
+<p>Two recent developments add nuance. The <a class="bl-link" href="https://edpb.europa.eu/news/news/2025/edpb-adopts-pseudonymisation-guidelines-and-paves-way-improve-cooperation_en">EDPB’s pseudonymisation guidelines</a>, adopted in January 2025, confirm that pseudonymized data stays personal data while recognizing it can support legitimate interests and compatible further processing. In September 2025, the EU Court of Justice ruled in EDPS v SRB that pseudonymized data may not count as personal data for a recipient with no reasonable means to re-identify it. For the organization holding the key, it remains personal data.</p>
+
+<h3>How Regulators Test Re-Identification Risk</h3>
+
+<p>European regulators have long judged anonymization against three risks. If a dataset fails any one of them, it’s treated as pseudonymized:</p>
+
+<ol>
+  <li><strong>Singling out:</strong> Can you still isolate one individual’s record within the dataset?</li>
+  <li><strong>Linkability:</strong> Can you connect records about the same person, either within the dataset or by combining it with another source?</li>
+  <li><strong>Inference:</strong> Can you deduce something about a person with high confidence, such as concluding that everyone in a small ZIP code group shares the same diagnosis?</li>
+</ol>
+
+<p>Pseudonymized data fails the first two by design, since each person keeps a consistent token. That’s exactly what makes it useful, and exactly why it stays personal data.</p>
+
+<h3>Data Utility and Analytical Value</h3>
+
+<p>Pseudonymization keeps the granularity and relationships in your data intact. Engineers can join tables, analysts can follow one customer across years of transactions and data scientists can train fraud or churn models on realistic records.</p>
+
+<p>Anonymization trades that precision for safety. Exact ages become ranges, cities become regions and individual rows often become totals. The data still answers questions about groups, such as how many customers churned in a quarter, but it can’t tell you anything about one person.</p>
+
+<h3>Breach Impact and Data Subject Rights</h3>
+
+<p>The breach picture differs sharply:</p>
+
+<ul>
+  <li><strong>Pseudonymized data:</strong> If attackers steal the dataset alone, they see tokens instead of names and account numbers. If they also reach the key or vault, it becomes a full breach. Either way, it’s a personal data breach you must assess and may need to report.</li>
+  <li><strong>Anonymized data:</strong> A stolen anonymous dataset can’t be traced back to individuals, so it rarely triggers breach notification duties.</li>
+</ul>
+
+<p>Data subject rights follow the same logic. Access, correction, portability and erasure requests apply to pseudonymized records, while anonymized data sits outside them, since no request can be tied to a specific row.</p>
+
+<h2>What Is Pseudonymization and How Does It Protect Personal Data?</h2>
+
+<p><strong>Pseudonymization is a data protection technique that replaces direct identifiers with tokens, codes or aliases and keeps the information needed to reverse them separate, so records stay useful while revealing nothing about who they describe.</strong></p>
+
+<p>GDPR Article 4(5) defines pseudonymization as processing personal data in a way that it can no longer be attributed to a specific person without additional information, provided that information is kept separately and protected.</p>
+
+<p>Here’s how it works on a traveler profile at a travel agency:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Field</th><th>Original</th><th>Pseudonymized</th></tr></thead>
+    <tbody>
+      <tr><td>Traveler name</td><td>Priya Sharma</td><td>TRV_4f8K2</td></tr>
+      <tr><td>Email</td><td>priya.sharma@mail.com</td><td>EML_9pQ7d</td></tr>
+      <tr><td>Passport number</td><td>P8251634</td><td>DOC_7Q2X9</td></tr>
+      <tr><td>Destination</td><td>Lisbon</td><td>Lisbon</td></tr>
+      <tr><td>Booking value</td><td>$3,450</td><td>$3,450</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>The identifiers change, while the destination and booking value stay exactly as they were. Agents, analysts and test environments can keep working with this profile, but a stolen copy reveals nothing about Priya.</p>
+
+<p>Pseudonymization protects personal data by shrinking the number of people and systems that ever see plaintext identifiers. Your databases, data warehouses, logs and third-party tools hold tokens. The vault or key that maps tokens back to real values becomes the one place you need to defend, and every re-identification request can be controlled and audited there.</p>
+
+<p>It’s also the method privacy law actively rewards. GDPR names pseudonymization in its rules on data protection by design (Article 25), security of processing (Article 32) and research safeguards (Article 89).</p>
+
+<h2>What Is Anonymization and When Does Data Become Truly Anonymous?</h2>
+
+<p><strong>Anonymization is the process of permanently removing or generalizing identifiers so no one can identify a person using reasonably available means, and data becomes truly anonymous only when it holds up against outside data sources too.</strong></p>
+
+<p>GDPR Recital 26 sets the bar. Data is anonymous when identification isn’t possible “by means reasonably likely to be used,” taking into account cost, time and available technology. Because technology keeps improving, data that’s anonymous today may not be anonymous in five years.</p>
+
+<p>Regulators such as the UK’s Information Commissioner’s Office apply a motivated intruder test. Picture a determined person with no special access, but with public sources like voter rolls, social media and news archives. If they could pick out an individual from your dataset, it isn’t anonymous.</p>
+
+<h3>Why Removing Names Isn’t Anonymization</h3>
+
+<p>This is the most common trap. Deleting names and Social Security numbers from a spreadsheet removes direct identifiers, but quasi-identifiers usually remain, and in combination they can point straight to one person.</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Quasi-identifier</th><th>Why it’s risky</th></tr></thead>
+    <tbody>
+      <tr><td>Birth date</td><td>Narrows a population quickly, especially combined with location</td></tr>
+      <tr><td>ZIP code</td><td>Places someone in a small geographic group</td></tr>
+      <tr><td>Job title</td><td>Senior or niche roles may belong to one person in a company</td></tr>
+      <tr><td>Rare details</td><td>An uncommon diagnosis or purchase can identify someone on its own</td></tr>
+      <tr><td>Free text</td><td>Notes and comments often repeat names, relatives and addresses</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>Consider a law firm’s case export showing a 41-year-old female claimant in a small town with a rare injury. There’s no name, yet anyone familiar with the local case could probably recognize her. Data like this is pseudonymized, or just de-identified, and it still counts as personal data.</p>
+
+<p>That’s why true anonymization changes the data itself. Values are generalized, rare records are removed and individual rows are often replaced with totals until no single person stands out.</p>
+
+<h2>Pseudonymization vs Anonymization Examples</h2>
+
+<p><strong>Pseudonymization vs anonymization examples show the same record handled two ways, with pseudonymization keeping it detailed and traceable for internal teams and anonymization blurring it so outside readers can never trace it back.</strong></p>
+
+<p>Let’s start with a health insurance claims administrator and follow one member record through both methods.</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Field</th><th>Original record</th><th>Pseudonymized for claims teams</th><th>Anonymized for a public report</th></tr></thead>
+    <tbody>
+      <tr><td>Member name</td><td>Maria Lopez</td><td>MBR_7Q2X9</td><td>Removed</td></tr>
+      <tr><td>Date of birth</td><td>03/14/1981</td><td>03/14/1981</td><td>Age band 40 to 49</td></tr>
+      <tr><td>ZIP code</td><td>94110</td><td>94110</td><td>Northern California</td></tr>
+      <tr><td>Diagnosis</td><td>Asthma</td><td>Asthma</td><td>Respiratory conditions</td></tr>
+      <tr><td>Claim amount</td><td>$1,240</td><td>$1,240</td><td>Part of a regional average</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>Claims processors and fraud analysts work with the middle column. They can flag duplicate claims and request Maria’s real name through an approved process. The right-hand column feeds an annual cost report and answers group-level questions only.</p>
+
+<p>Here are two more examples from everyday operations.</p>
+
+<p><strong>Support ticket sent to an AI assistant:</strong> Before the ticket reaches the language model, “Refund Jane Doe at jane@mail.com” becomes “Refund [NAME: Ry0Ixd1] at [EMAIL: bN3dF5h].” The model drafts a reply, and the real name is restored before the agent sees it. That’s pseudonymization working in real time.</p>
+
+<p><strong>Clinical trial:</strong> During the study, analysts see only study-specific participant tokens, while the identity key stays with the trial site. When results are published, the paper reports outcomes by group, with no participant-level rows. The trial relies on pseudonymization while it runs and anonymization when it publishes.</p>
+
+<h2>When to Use Pseudonymization vs Anonymization for Your Sensitive Data</h2>
+
+<p><strong>Use pseudonymization when your teams still need to connect data to real people or restore original values, and use anonymization when you’re releasing data to audiences who should never be able to identify anyone in it.</strong></p>
+
+<h3>When to Choose Pseudonymization</h3>
+
+<ul>
+  <li>You need to contact, bill, verify or support the same customer later.</li>
+  <li>Your engineers want production-like data to troubleshoot bugs without seeing real names.</li>
+  <li>Fraud, CRM or AI systems in your stack depend on one person keeping one identifier.</li>
+  <li>Longitudinal research or churn modeling requires following the same people for months or years.</li>
+  <li>Restoring the original value quickly matters, such as for a verified support or legal request.</li>
+</ul>
+
+<h3>When to Choose Anonymization</h3>
+
+<ul>
+  <li>You’re publishing benchmarks, research findings or open datasets.</li>
+  <li>Your analysis only needs trends and totals, never individuals.</li>
+  <li>Historical reporting must continue after customers close accounts and retention periods end.</li>
+  <li>Partners outside your organization need insight without any personal data changing hands.</li>
+</ul>
+
+<h3>When to Use Both</h3>
+
+<p>Most mature privacy programs use the two in sequence. Data is pseudonymized at the point of capture, stays pseudonymized through operations and internal analytics, and is anonymized only when it leaves the organization for good. A SaaS platform, for example, might pseudonymize customer records inside its app and warehouse, then anonymize usage data before sharing industry benchmarks with customers.</p>
+
+<h2>How to Choose Between Pseudonymization and Anonymization: 5 Questions</h2>
+
+<p><strong>Choosing between pseudonymization and anonymization comes down to five questions about whether you’ll need to re-identify people, where the data is going, which laws apply, whether AI will process it and how long you’ll keep it.</strong></p>
+
+<p>Work through these in order. The first answer usually settles it.</p>
+
+<p><strong>1. Will you ever need to link a record back to a specific person?</strong> If yes, pseudonymize. Anonymization can’t be undone, so you’d lose the ability to support, bill or protect that customer.</p>
+
+<p><strong>2. Is the data staying inside your organization or leaving it?</strong> Internal teams and contracted vendors can usually work with pseudonymized data. A public audience, or a partner with no need for identities, calls for anonymized data.</p>
+
+<p><strong>3. Which privacy laws apply to this data?</strong> GDPR, HIPAA and CCPA each set their own standard for when data stops being personal. Check yours before labeling anything anonymous.</p>
+
+<p><strong>4. Will an AI model or LLM process it?</strong> AI workflows stay accurate when each person keeps a consistent identity across prompts, which points to pseudonymization with real values restored afterward.</p>
+
+<p><strong>5. How long do you plan to keep it?</strong> Pseudonymization doesn’t extend how long you may hold personal data. Once the retention period ends, delete the data or anonymize it properly.</p>
+
+<h2>Key Benefits of Pseudonymization and Anonymization</h2>
+
+<p><strong>Pseudonymization balances data utility with risk reduction by keeping a secure link to identity, whereas anonymization maximizes legal freedom and minimizes liability by removing that link permanently.</strong></p>
+
+<h3>Key Benefits of Pseudonymization</h3>
+
+<p>Because pseudonymization keeps a controlled link to the original identity, its benefits come from protecting data without making it less useful.</p>
+
+<ul>
+  <li><strong>High data utility:</strong> Records stay distinct and linked, so engineering and analytics teams can join tables, run longitudinal studies and track behavior over time.</li>
+  <li><strong>Lower breach impact:</strong> Stolen databases, logs or test copies show tokens instead of names and Social Security numbers, as long as the vault stays secure.</li>
+  <li><strong>Reversibility for operations:</strong> Authorized staff can restore a real value when a verified customer needs help or a legal request arrives.</li>
+  <li><strong>Recognized compliance measure:</strong> GDPR names pseudonymization as a safeguard under Article 32, showing regulators you practice privacy by design.</li>
+  <li><strong>Safer testing and AI:</strong> Development teams can test software and build AI features on realistic data without exposing PII to developers or model providers.</li>
+</ul>
+
+<h3>Key Benefits of Anonymization</h3>
+
+<p>Because anonymization removes the link to identity entirely, its benefits come from freedom.</p>
+
+<ol>
+  <li><strong>Exemption from privacy laws:</strong> Truly anonymous data isn’t personal data, so GDPR and similar frameworks no longer apply.</li>
+  <li><strong>No retention deadlines:</strong> Data can be kept indefinitely for historical trend analysis after personal data would have to be deleted.</li>
+  <li><strong>Freer data sharing:</strong> Research partners, industry groups and the public can receive anonymized datasets without consent or residency concerns.</li>
+  <li><strong>Zero rights requests:</strong> Access and erasure requests can’t apply to records nobody can trace.</li>
+  <li><strong>Lower breach stakes:</strong> A stolen anonymous dataset holds no keys or links an attacker could use to harm individuals.</li>
+</ol>
+
+<h2>Pseudonymization and Anonymization Methods and Techniques Explained</h2>
+
+<p><strong>Pseudonymization methods such as tokenization, encryption and keyed hashing keep a controlled way back to the original value, whereas anonymization methods such as generalization, aggregation and differential privacy remove that way back entirely.</strong></p>
+
+<h3>Pseudonymization Methods</h3>
+
+<ol>
+  <li><strong>Tokenization</strong> swaps a sensitive value, such as a card or account number, for a random token generated by a secure token vault. The token has no mathematical link to the original, so it can’t be decrypted.</li>
+  <li><strong>Encryption</strong> scrambles identifiers with a strong cipher such as AES-256. The data stays pseudonymized only as long as the decryption key is restricted to a few authorized systems and stored separately.</li>
+  <li><strong>Keyed hashing</strong> turns an identifier into a fixed-length code using a secret key. Unsalted hashes are risky, since attackers can hash common names or emails and match the results.</li>
+</ol>
+
+<h3>Anonymization Methods</h3>
+
+<p>Generalization makes values less precise, turning an exact age of 34 into a range of 30 to 39 or GPS coordinates into a city. Suppression deletes high-risk rows or columns outright, such as an outlier salary or a rare medical condition that makes one person stand out.</p>
+
+<p>Aggregation replaces individual rows with totals or averages. It’s ideal for reporting, provided each group is large enough that no single person can be singled out.</p>
+
+<p>Three more advanced techniques offer stronger guarantees:</p>
+
+<ul>
+  <li><strong>K-anonymity:</strong> Each record matches at least <em>k</em> other records on its quasi-identifiers, so nobody can be isolated.</li>
+  <li><strong>Differential privacy:</strong> Calibrated random noise is added to query results, letting you share accurate patterns while mathematically limiting what can be learned about any one person.</li>
+  <li><strong>Synthetic data:</strong> A model generates artificial records with the same statistical patterns as the real ones, useful for testing and research when the model doesn’t copy real records.</li>
+</ul>
+
+<h2>Where Tokenization Fits Between Pseudonymization and Anonymization</h2>
+
+<p><strong>Tokenization is a form of pseudonymization, because every token can be mapped back to its original value through a secure token vault, which means tokenized data remains personal data under GDPR while greatly reducing exposure.</strong></p>
+
+<p>Tokenized data isn’t anonymous, and that’s by design.</p>
+
+<p>Tokenization is valuable precisely because it’s reversible under control. A support agent can reveal a customer’s phone number when it’s needed, and a fraud team can follow one customer across thousands of transactions using deterministic tokens, where the same value always produces the same token.</p>
+
+<p>What sets tokenization apart from other pseudonymization methods is separation. Plaintext lives only in the vault, so databases, warehouses, logs and backups inherit tokens instead of copies of sensitive data.</p>
+
+<p>Erasure is where it meets anonymization. When a vault record is purged or reaches its expiry date, every copy of that token stops pointing to anything. That doesn’t automatically make the surrounding record anonymous, because dates, locations and free text left behind may still identify someone. It does remove the most direct route back to the person.</p>
+
+<p>The same pattern now protects AI workflows. When applications tokenize names and account numbers before a prompt reaches an LLM, the model provider receives only tokens, and the real values are restored inside your own systems.</p>
+
+<h2>Common Pseudonymization and Anonymization Mistakes and How to Avoid Them</h2>
+
+<p><strong>Common pseudonymization and anonymization mistakes include unsalted hashing, storing keys beside the data, reusing one token everywhere, calling masked data anonymous and forgetting the copies sitting in logs and free text.</strong></p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Mistake</th><th>What goes wrong</th><th>How to avoid it</th></tr></thead>
+    <tbody>
+      <tr><td>Hashing emails or names without a secret key</td><td>Attackers hash common values and match them back</td><td>Use keyed hashing or vault-based tokenization</td></tr>
+      <tr><td>Keeping the key beside the pseudonymized data</td><td>One breach exposes both halves</td><td>Store keys or vault mappings in a separate, access-controlled system</td></tr>
+      <tr><td>Reusing a single token across every system</td><td>Tokens turn into universal IDs that link unrelated datasets</td><td>Scope tokens to an application or purpose</td></tr>
+      <tr><td>Labeling masked or hashed data “anonymous”</td><td>Data gets shared without the legal basis it still needs</td><td>Test against singling out, linkability and inference before any release</td></tr>
+      <tr><td>Ignoring notes, tickets and attachments</td><td>Names and account numbers hide in unstructured text</td><td>Scan free-text fields and files before sharing</td></tr>
+      <tr><td>Leaving plaintext in logs, backups and exports</td><td>Raw values survive outside the protected dataset</td><td>Tokenize at capture so every downstream copy holds tokens</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h2>How Enigma Vault Helps You Pseudonymize Sensitive Data</h2>
+
+<p>At Enigma Vault, we built <a class="bl-link" href="/vault/data-vault/">Data Vault</a> so strong pseudonymization becomes the default for the structured sensitive data your systems handle every day, from Social Security numbers and account numbers to credentials and health fields. Here’s how it lines up with what good pseudonymization requires:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>What pseudonymization needs</th><th>How Data Vault delivers it</th></tr></thead>
+    <tbody>
+      <tr><td>Original values kept separately</td><td>Plaintext lives in an isolated vault, while your applications store only tokens</td></tr>
+      <tr><td>Strong protection for that separate store</td><td>AES-256 field-level encryption with per-customer keys on PCI DSS Level 1 and SOC 2 Type II infrastructure</td></tr>
+      <tr><td>Data that stays useful</td><td>Deterministic tokens keep lookups, joins and deduplication working</td></tr>
+      <tr><td>Controlled sharing</td><td>One-time, time-limited keys let a partner read a specific record once</td></tr>
+      <tr><td>Retention and erasure</td><td>Expiry from 60 seconds to 7 years, with deletion resolved at the vault instead of across every backup</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>For AI workloads, <a class="bl-link" href="/nopii/">NoPII</a> applies the same approach to LLM traffic, tokenizing PII before prompts reach the model provider and restoring real values in the response.</p>
+
+<p>You can start with 1,500 free Data Vault requests a month, or <a class="bl-link" href="/request-demo/">request a demo</a> to walk through your own data flows with our team.</p>

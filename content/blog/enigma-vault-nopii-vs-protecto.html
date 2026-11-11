@@ -1,0 +1,296 @@
+---
+title: "Enigma Vault NoPII vs Protecto: 2026 Comparison of LLM PII Protection"
+slug: "enigma-vault-nopii-vs-protecto"
+layout: "pii-style"
+metaTitle: "Enigma Vault NoPII vs Protecto: LLM PII Protection Compared (2026)"
+description: "Enigma Vault NoPII vs Protecto compared on LLM PII protection, proxy vs masking API, accuracy claims, deployment, pricing, compliance, and reviews."
+subtitle: "Choose Enigma Vault NoPII if you want PII tokenized in your LLM calls with a base-URL change and a free tier, while you should choose Protecto if you want a masking API you can place anywhere in your AI pipeline and run on-premises or air-gapped."
+date: 2026-11-10
+category: "NoPII"
+allOnly: true
+author: "abhilash-kumar"
+readTime: 15
+heroImage: "/assets/blog/img-10.png"
+heroAlt: "Enigma Vault NoPII vs Protecto comparison"
+excerpt: "An LLM privacy proxy against an AI data masking platform, compared on integration, what is generally available, where each runs, and what each costs."
+tags: ["comparison", "llm-privacy", "nopii"]
+ogType: article
+styles: ["blog.css", "pages/blog-pii-hero.css", "tr-pages.css", "pages/vs-tri-table.css"]
+scripts: ["blog-article.js", "pages/vs-tri-table.js"]
+faqSchema: true
+faqs:
+  - q: "What Is the Main Difference Between Enigma Vault NoPII and Protecto?"
+    a: "Enigma Vault NoPII is a proxy in the path of your LLM API calls: you change the base URL, and it tokenizes PII before it reaches the model provider and restores it in the response. Protecto is an AI data protection platform built around mask and unmask API calls that your code makes at each data boundary, with a gateway for chat tools and an on-premises option."
+  - q: "Is Enigma Vault NoPII or Protecto Cheaper?"
+    a: "Enigma Vault NoPII is free for one million protected tokens a month, then $49, $249, or $499 a month. Protecto’s plans are $250 a month for 5,000 API calls, $500 for 12,000, and $750 for 16,000, with Enterprise by quote. A year of Enigma Vault NoPII Starter costs $550, against $3,000 for Protecto Starter. The billing units differ, so compare with your own traffic."
+  - q: "Can Protecto Run On-Premises or Air-Gapped?"
+    a: "Yes. Protecto’s docs describe an on-premises or private-cloud deployment that you operate, and its marketing lists air-gapped environments. You own scaling, backups, upgrades, and availability in that model. Enigma Vault NoPII’s self-hosted edition runs the proxy and vault in your environment on an Enterprise license."
+  - q: "Which Protecto Features Are Still Coming Soon?"
+    a: "Protecto’s docs label context-based access control and GPTGuard MCP as coming soon, and list dynamic runtime authorization on its roadmap, while its product pages present context-based access control as available. Ask which features are generally available before you sign."
+  - q: "Is Protecto More Accurate Than Enigma Vault NoPII?"
+    a: "There is no independent head-to-head. Protecto reports 99% recall and 96% precision from a Bank Muscat proof of concept, and precision figures against AWS Comprehend and Microsoft Presidio from a benchmark it hosts. Enigma Vault NoPII publishes the results of 109 automated tests on its engine. Test both on your own data."
+  - q: "Does Protecto Have a Free Trial?"
+    a: "Its pricing page lists a 14-day free trial with 1,000 API calls, while its docs say trial and proof-of-concept access comes through its sales team. Enigma Vault NoPII’s Lite tier is free indefinitely at one million protected tokens a month, with no card."
+  - q: "Which Covers Files and Images?"
+    a: "Protecto’s gateway handles text, PDFs, and images for chat tools, and its API masks values of up to 600 characters each. Enigma Vault NoPII scans text only: messages, system prompts, tool-call arguments, tool results, and embeddings input."
+  - q: "What Are the Reviews for Enigma Vault NoPII and Protecto?"
+    a: "Enigma Vault NoPII is rated 5/5 from 1 review on G2. Protecto has no reviews on G2 or Capterra. Its public proof is vendor-published testimonials and case studies from customers such as Automation Anywhere, Inovalon, and Bank Muscat."
+---
+<p>Enigma Vault NoPII and Protecto both tokenize PII so an LLM keeps its context, and both can put real values back. Protecto here is the company at protecto.ai, not Protegrity.</p>
+<p>Protecto is best for teams that want PII masking for LLMs they place at each pipeline step or run on-premises, while Enigma Vault NoPII is best for teams that want every LLM call protected with a base-URL change and a free tier.</p>
+<p>This guide compares the two for LLM traffic only. For Protecto more broadly, see our <a class="bl-link" href="/blog/protecto-alternatives/">Protecto alternatives</a> and <a class="bl-link" href="/blog/protecto-vs-skyflow/">Protecto vs Skyflow</a>.</p>
+
+<h2>Enigma Vault NoPII vs Protecto at a Glance</h2>
+<div class="bl-tablewrap bl-tablewrap--tri"><table class="bl-table bl-table--tri"><thead><tr><th>Vendor</th><th class="bl-tri__ev"><span class="bl-tri__tag">Enigma Vault</span>NoPII</th><th>Protecto</th></tr></thead><tbody>
+<tr><td>Best for</td><td class="bl-tri__ev">Teams protecting their app’s LLM calls with no per-call code</td><td>AI teams that want masking they control at each step, including on-premises</td></tr>
+<tr><td>How it works</td><td class="bl-tri__ev">Inline proxy: change the model base URL</td><td>Mask and unmask API calls, a chat gateway, and a LiteLLM adapter</td></tr>
+<tr><td>Entry price</td><td class="bl-tri__ev">Free, then $49/mo</td><td>$250/mo for 5,000 API calls</td></tr>
+<tr><td>Free option</td><td class="bl-tri__ev">Lite: 1M protected tokens a month, no expiry</td><td>14-day trial, 1,000 API calls</td></tr>
+<tr><td>Deployment</td><td class="bl-tri__ev">Managed; self-hosted on Enterprise</td><td>SaaS, or on-premises and private cloud, including air-gapped</td></tr>
+<tr><td>G2</td><td class="bl-tri__ev"><a class="bl-link" href="https://www.g2.com/products/nopii/reviews" rel="nofollow noopener" target="_blank">5/5 (1)</a></td><td><a class="bl-link" href="https://www.g2.com/products/protecto/reviews" rel="nofollow noopener" target="_blank">No reviews yet</a></td></tr>
+<tr class="bl-tri__cta"><td>Next step</td><td class="bl-tri__ev"><div class="bl-tri__acts"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-enigma-vault-nopii-vs-protecto--table-glance" href="/request-demo/?interest=enigma-vault-nopii-vs-protecto"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-tri__more cta-blog cta-enigma-vault-nopii-vs-protecto--table-glance-explore" href="/nopii/">Explore Enigma Vault NoPII &rarr;</a></div></td><td class="bl-tri__note">Protecto’s trial is SaaS only.</td></tr>
+</tbody></table></div>
+<p>Figures are as of 10 November 2026, from each vendor’s own site and docs, and from G2 and Capterra. For more options, see our guide to <a class="bl-link" href="/blog/protecto-alternatives/">Protecto alternatives</a> and our comparison of <a class="bl-link" href="/blog/protecto-vs-skyflow/">Protecto vs Skyflow</a>.</p>
+
+<h2>Enigma Vault NoPII vs Protecto: Quick Verdict</h2>
+<p><strong>Enigma Vault NoPII:</strong> A hosted LLM privacy proxy built for PII tokenization for LLMs. It detects PII, secrets, and API keys in prompts, system prompts, tool calls, and embeddings input, swaps them for consistent tokens before they reach the model provider, and restores real values in the response. It is free for one million protected tokens a month.</p>
+<p><strong>Protecto:</strong> A platform for data masking for AI, with a headless REST API for masking and unmasking, typed tokens that keep context, a privacy gateway for chat tools, and deployment as SaaS or on-premises, including air-gapped. Plans run $250 to $750 a month by API calls, with Enterprise by quote.</p>
+<p>I’d point you to <strong>Enigma Vault NoPII</strong> first if you’re protecting an application that calls LLM APIs:</p>
+<ul>
+<li>You want every model call covered without adding mask and unmask calls around each one.</li>
+<li>You want real values back in streamed responses with no extra code.</li>
+<li>You want to start free and pay $49 a month, not $250, for your first production feature.</li>
+</ul>
+<p>Protecto’s real strength is control over placement and location: you decide exactly where in a pipeline masking happens, and you can run it in your own data center. It matters most if you’re a regulated team whose data cannot leave your network, or whose AI pipeline has many steps beyond one LLM call.</p>
+<div class="bl-evcall" role="note"><span class="bl-evcall__tag">Enigma Vault NoPII</span><p>Enigma Vault NoPII sits in the request path, so there is nothing to call at each boundary, and if tokenization ever fails, the request is blocked rather than sent raw.</p><div class="bl-evcall__cta"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-enigma-vault-nopii-vs-protecto--callout-verdict" href="/nopii/demo/"><span>Try the live demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-evcall__more cta-blog cta-enigma-vault-nopii-vs-protecto--callout-verdict-explore" href="/nopii/">Explore Enigma Vault NoPII &rarr;</a></div></div>
+<ul>
+<li><strong>Choose Enigma Vault NoPII if:</strong> Your scope is LLM API traffic, and you want the shortest path, a published price below $250, and a free tier.</li>
+<li><strong>Choose Protecto if:</strong> You need masking inside your own network or air-gapped, or you want to mask data at many pipeline steps, such as ingestion and storage, not only at the model call.</li>
+</ul>
+
+<h2>Masking API vs Privacy Proxy: Where Your Code Changes</h2>
+<p>Both products tokenize and restore. The difference is who makes the calls, and that decides how much engineering each one takes.</p>
+<div class="bl-tablewrap bl-tablewrap--tri"><table class="bl-table bl-table--tri"><thead><tr><th>Step</th><th class="bl-tri__ev"><span class="bl-tri__tag">Enigma Vault</span>NoPII</th><th>Protecto</th></tr></thead><tbody>
+<tr><td>1. Get access</td><td class="bl-tri__ev">Sign up and register your provider key</td><td>Start a trial, or get credentials from its team for a proof of concept</td></tr>
+<tr><td>2. Before the model call</td><td class="bl-tri__ev">Nothing: the request goes to the Enigma Vault NoPII base URL</td><td>Your code sends values to the mask endpoint and receives tokens</td></tr>
+<tr><td>3. The model receives</td><td class="bl-tri__ev">Consistent tokens, so the same customer maps to the same token</td><td>Typed tokens that keep context, with format-preserving options</td></tr>
+<tr><td>4. After the model call</td><td class="bl-tri__ev">Nothing: real values are restored in the response</td><td>Your code calls the unmask endpoint where a workflow may see real values</td></tr>
+<tr><td>5. Limits to know</td><td class="bl-tri__ev">Text only; requests per minute set by plan</td><td>Masked values of up to 600 characters each; rate limits by tier</td></tr>
+<tr class="bl-tri__cta"><td>Next step</td><td class="bl-tri__ev"><div class="bl-tri__acts"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-enigma-vault-nopii-vs-protecto--table-code" href="/nopii/demo/"><span>Try the live demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-tri__more cta-blog cta-enigma-vault-nopii-vs-protecto--table-code-explore" href="/nopii/">Explore Enigma Vault NoPII &rarr;</a></div></td><td class="bl-tri__note">Protecto’s gateway removes the per-call code for chat tools; it supports LibreChat today.</td></tr>
+</tbody></table></div>
+<p><strong>Protecto’s Approach:</strong> A headless vault you call where you choose. That is useful when the same data must be masked in a warehouse, a stream, and a prompt, and it costs you code at each step.</p>
+<p><strong>Enigma Vault NoPII’s Approach:</strong> The proxy does the swap for every request it sees, including tool calls and embeddings, so one change covers the whole LLM path. It only sees traffic you route through it.</p>
+
+<h2>Enigma Vault NoPII vs Protecto Features Compared</h2>
+<p>Compare Enigma Vault NoPII and Protecto on approach, detection, coverage, governance, and deployment. Protecto offers more placement and deployment control, whereas Enigma Vault NoPII offers more coverage of the LLM path with less work.</p>
+<div class="bl-tablewrap bl-tablewrap--tri"><table class="bl-table bl-table--tri"><thead><tr><th>Feature</th><th class="bl-tri__ev"><span class="bl-tri__tag">Enigma Vault</span>NoPII</th><th>Protecto</th></tr></thead><tbody>
+<tr><td>Core approach</td><td class="bl-tri__ev">Reversible tokenization in a proxy</td><td>Masking and unmasking through an API</td></tr>
+<tr><td>Integration</td><td class="bl-tri__ev">Base URL; LangChain, LangGraph, LlamaIndex, LiteLLM, Vercel AI SDK</td><td>REST API, a LibreChat gateway, and a LiteLLM adapter described on its site</td></tr>
+<tr><td>Entity coverage</td><td class="bl-tri__ev">11 on by default, 25+ opt-in, 14 credential families</td><td>50+ marketed; its docs list 53, all on by default</td></tr>
+<tr><td>Languages</td><td class="bl-tri__ev">Pattern-based types in most languages</td><td>Six in its docs; seven in its marketing</td></tr>
+<tr><td>Restore values</td><td class="bl-tri__ev">Automatic in the response, including streaming</td><td>Unmask call, permissioned by user</td></tr>
+<tr><td>Streaming</td><td class="bl-tri__ev">Tokens replaced as chunks arrive</td><td>Claimed for the LiteLLM adapter</td></tr>
+<tr><td>Agents and tool calls</td><td class="bl-tri__ev">Tool-call arguments and results tokenized</td><td>Gateway resolves values at the tool boundary; MCP features coming soon</td></tr>
+<tr><td>Files and images</td><td class="bl-tri__ev"><span class="bl-tri__no">Not covered</span> (text only)</td><td>Text, PDFs, and images through the gateway</td></tr>
+<tr><td>Data discovery</td><td class="bl-tri__ev"><span class="bl-tri__no">Not offered</span></td><td>Data Scanning API on paid plans</td></tr>
+<tr><td>Access policy</td><td class="bl-tri__ev">Reveal to the creating user, a time-boxed grant, or an opt-in server key</td><td>User-level unmasking; context-based control coming soon</td></tr>
+<tr><td>Failure behavior</td><td class="bl-tri__ev">Fail-closed block, always</td><td>Error codes returned to your code</td></tr>
+<tr><td>Deployment</td><td class="bl-tri__ev">Managed; self-hosted on Enterprise</td><td>SaaS; on-premises, private cloud, or air-gapped</td></tr>
+<tr><td>Audit log</td><td class="bl-tri__ev">Token, masked value, entity, confidence, provider, and model; never plaintext</td><td>Audit logs on Enterprise</td></tr>
+<tr class="bl-tri__cta"><td>Next step</td><td class="bl-tri__ev"><div class="bl-tri__acts"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-enigma-vault-nopii-vs-protecto--table-features" href="/request-demo/?interest=enigma-vault-nopii-vs-protecto"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-tri__more cta-blog cta-enigma-vault-nopii-vs-protecto--table-features-explore" href="/nopii/">Explore Enigma Vault NoPII &rarr;</a></div></td><td class="bl-tri__note">Several Protecto features are marketed as live but labelled coming soon in its docs.</td></tr>
+</tbody></table></div>
+<p>Here is how the biggest differences play out in practice.</p>
+
+<h2>Where Protecto’s Masking API and Enigma Vault NoPII Part Ways</h2>
+
+<h3>Placement Control vs Path Coverage</h3>
+<p>Protecto lets you mask at any step, including bulk jobs in Snowflake, Databricks, or Kafka according to its product pages, and its async API on Enterprise handles larger volumes. If your goal is a masked copy of data at rest as well as in prompts, that flexibility matters.</p>
+<p>Enigma Vault NoPII protects the path to the model provider only. In exchange, it covers everything on that path, including system prompts, tool calls, and the embeddings endpoint, with no code at each step.</p>
+
+<h3>Running Inside Your Own Network</h3>
+<p>Protecto’s on-premises docs describe a single-tenant deployment in your infrastructure or private cloud, with the same API paths as SaaS. You own scaling, monitoring, backups, upgrades, and availability, and its on-premises support terms promise a response to critical issues within an hour.</p>
+<div class="bl-evcall" role="note"><span class="bl-evcall__tag">Enigma Vault NoPII</span><p>Enigma Vault NoPII’s self-hosted edition runs the proxy and vault inside your environment under an annual Enterprise license with no token meter, for teams whose residency, network, or procurement rules keep LLM traffic on their own infrastructure.</p><div class="bl-evcall__cta"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-enigma-vault-nopii-vs-protecto--callout-deploy" href="/request-demo/?interest=enigma-vault-nopii-vs-protecto"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-evcall__more cta-blog cta-enigma-vault-nopii-vs-protecto--callout-deploy-explore" href="/nopii/">Explore Enigma Vault NoPII &rarr;</a></div></div>
+
+<h3>Tokens That Keep Context</h3>
+<p>Both products avoid plain placeholders. Protecto uses typed, context-preserving tokens with format-preserving and entropy-based options, and reports that 85% of semantic accuracy was retained after masking in a bank’s proof of concept.</p>
+<p>Enigma Vault NoPII keeps the same token for the same value across a conversation and also neutralizes phrases that can trigger model safety refusals, so prompts about patients or lawsuits are less likely to be refused once identifiers are tokenized.</p>
+
+<h3>Who Can See Real Values</h3>
+<p>Protecto unmasks through permissioned calls, and its gateway maps Active Directory or Okta groups to a per-user key. Its finer, context-based access control is on its roadmap. Enigma Vault NoPII reveals a value only to the end user who created it, under a time-boxed reveal grant, or to an opt-in server key, and logs every attempt.</p>
+
+<h3>Files, Images, and Discovery</h3>
+<p>Protecto’s chat gateway handles PDFs and images, and its Data Scanning API finds sensitive data in stores on paid plans. Enigma Vault NoPII scans text only and does not offer discovery, so if documents and data stores are in scope, Protecto covers more.</p>
+
+<h2>What Protecto’s Docs Say Is Still Coming Soon</h2>
+<p>Protecto’s marketing and its documentation do not always agree. Here is what we found when we compared them, so you know what to ask in a demo.</p>
+<div class="bl-tablewrap"><table class="bl-table"><thead><tr><th>Topic</th><th>Marketing pages</th><th>Documentation</th></tr></thead><tbody>
+<tr><td>Context-based access control</td><td>Presented as available</td><td>Labelled coming soon</td></tr>
+<tr><td>GPTGuard MCP</td><td>MCP tools described as supported</td><td>Labelled coming soon</td></tr>
+<tr><td>Dynamic runtime authorization</td><td>Not featured</td><td>On the roadmap</td></tr>
+<tr><td>Languages</td><td>Seven, including Japanese</td><td>Six, without Japanese</td></tr>
+<tr><td>Entity types</td><td>50+</td><td>53 listed</td></tr>
+<tr><td>LiteLLM adapter</td><td>Described with streaming and MCP support</td><td>No page in the docs</td></tr>
+</tbody></table></div>
+<p>None of this means the features will not ship. It does mean you should ask which ones are generally available on your plan today, and get it in writing.</p>
+
+<h2>Protecto’s Accuracy Claims, Checked</h2>
+<p>Protecto leads with accuracy, so it is worth looking at where its figures come from.</p>
+<ul>
+<li><strong>Bank Muscat Case Study:</strong> 99% recall, including Arabic, 96% precision, and 85% semantic accuracy retained, from a four-week proof of concept that ran in the bank’s Oracle Cloud environment. These are figures Protecto publishes about its own pilot.</li>
+<li><strong>Benchmark:</strong> Its benchmark page credits UT Dallas and DataXpert, is hosted on Protecto’s site, and puts the report behind a form. Its product page shows precision against AWS Comprehend and Microsoft Presidio, not against Enigma Vault NoPII or Skyflow.</li>
+<li><strong>Test Scope:</strong> The benchmark page says ten entity types were tested, while the product page says eight PII categories.</li>
+</ul>
+<div class="bl-evcall" role="note"><span class="bl-evcall__tag">Enigma Vault NoPII</span><p>Enigma Vault NoPII publishes the results of 109 automated tests on its engine and makes no independent accuracy claim either. The fair test is the same prompts through both products, and Enigma Vault NoPII’s free tier lets you run it on real traffic.</p><div class="bl-evcall__cta"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-enigma-vault-nopii-vs-protecto--callout-accuracy" href="/nopii/demo/"><span>Try the live demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-evcall__more cta-blog cta-enigma-vault-nopii-vs-protecto--callout-accuracy-explore" href="/nopii/">Explore Enigma Vault NoPII &rarr;</a></div></div>
+
+<h2>Identifier Coverage: Enigma Vault NoPII vs Protecto</h2>
+<div class="bl-tablewrap bl-tablewrap--tri"><table class="bl-table bl-table--tri"><thead><tr><th>Coverage</th><th class="bl-tri__ev"><span class="bl-tri__tag">Enigma Vault</span>NoPII</th><th>Protecto</th></tr></thead><tbody>
+<tr><td>Entity types</td><td class="bl-tri__ev">30+ configurable: 11 on by default, 25+ opt-in</td><td>53 in its docs (50+ marketed), all on by default</td></tr>
+<tr><td>Credentials and secrets</td><td class="bl-tri__ev">14 pattern families, on by default</td><td>Not called out in its entity docs; ask</td></tr>
+<tr><td>Regional identifiers</td><td class="bl-tri__ev">US, India, UK, Europe, Australia, and Singapore, switched on per workspace</td><td>Gulf and Indian data laws covered by its compliance pages</td></tr>
+<tr><td>Languages for names</td><td class="bl-tri__ev">English, and Hindi in Devanagari (beta)</td><td>Six in its docs, including Arabic</td></tr>
+<tr><td>Checksum validation</td><td class="bl-tri__ev">Where the format allows, such as Aadhaar</td><td>Not described</td></tr>
+<tr><td>Custom entities</td><td class="bl-tri__ev">25 to 500 custom terms by plan</td><td>Custom identifiers on Enterprise</td></tr>
+<tr class="bl-tri__cta"><td>Next step</td><td class="bl-tri__ev"><div class="bl-tri__acts"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-enigma-vault-nopii-vs-protecto--table-coverage" href="/nopii/demo/"><span>Try the live demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-tri__more cta-blog cta-enigma-vault-nopii-vs-protecto--table-coverage-explore" href="/nopii/">Explore Enigma Vault NoPII &rarr;</a></div></td><td class="bl-tri__note">Run the same multilingual prompts through both before you decide.</td></tr>
+</tbody></table></div>
+<p>Here is Enigma Vault NoPII’s coverage by market in detail.</p>
+<p>Protecto’s docs list 53 entity types across PII, PHI, and financial data, all on by default, in six languages including Arabic. Enigma Vault NoPII takes a per-market approach: global types are on by default, and regional types are switched on per workspace.</p>
+<div class="bl-tablewrap"><table class="bl-table"><thead><tr><th>Enigma Vault NoPII coverage</th><th>Types</th><th>Examples</th></tr></thead><tbody>
+<tr><td>Everywhere</td><td>11</td><td>Names, emails, phones, addresses, cards, IBAN, IP addresses, secrets, crypto wallets, URLs, dates</td></tr>
+<tr><td>United States</td><td>6</td><td>SSN, passport, driver’s license, bank account, Medicare Beneficiary Identifier, tax IDs</td></tr>
+<tr><td>India</td><td>7</td><td>Aadhaar (checksum-validated), PAN, passport, voter ID, vehicle registration, addresses</td></tr>
+<tr><td>United Kingdom</td><td>3</td><td>National Insurance, NHS numbers, UK addresses</td></tr>
+<tr><td>Europe</td><td>8</td><td>Spanish NIF, DNI, and NIE, Italian fiscal code and IDs, Polish PESEL, Finnish identity code</td></tr>
+<tr><td>Australia and Singapore</td><td>6</td><td>TFN, ABN, ACN, Medicare, NRIC, FIN</td></tr>
+</tbody></table></div>
+<p>Several regional types are in beta, and some are detected only when a label such as “TFN” or “NRIC” precedes the number. Names and places are detected in English and in Hindi written in Devanagari, which is in beta, and names in Chinese, Japanese, Korean, or Thai script are not yet reliably detected.</p>
+<p>If Arabic text is central to your use case, Protecto lists Arabic support and published a bank case study with Arabic recall figures, so test that first. If you operate across India, the UK, and Europe, compare Enigma Vault NoPII’s regional types against Protecto’s list on your own data.</p>
+
+<h2>Enigma Vault NoPII by Workflow: Legal, Pharmacovigilance, and Insurance</h2>
+<p>These are workflows where both vendors are evaluated, and where Enigma Vault NoPII’s consistent tokens do specific work.</p>
+<div class="bl-tablewrap bl-tablewrap--tri"><table class="bl-table bl-table--tri"><thead><tr><th>Workflow</th><th class="bl-tri__ev"><span class="bl-tri__tag">Enigma Vault</span>NoPII</th><th>Protecto</th></tr></thead><tbody>
+<tr><td>Legal chronologies and demand drafting</td><td class="bl-tri__ev">The same claimant is the same token on page one and page nine hundred, so a long chronology stays coherent</td><td>Masking calls at each step of your drafting pipeline</td></tr>
+<tr><td>Adverse event narratives</td><td class="bl-tri__ev">Each case narrative stays internally consistent for causality assessment, with a per-transaction audit trail</td><td>Masking API, or on-premises for sponsors that keep data inside</td></tr>
+<tr><td>Insurance claims summaries</td><td class="bl-tri__ev">Medical, financial, identity, and payment data tokenized in one pass, with text extracted from the claim PDF first</td><td>Gateway handles PDFs for chat tools</td></tr>
+<tr class="bl-tri__cta"><td>Next step</td><td class="bl-tri__ev"><div class="bl-tri__acts"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-enigma-vault-nopii-vs-protecto--table-workflows" href="/request-demo/?interest=enigma-vault-nopii-vs-protecto"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-tri__more cta-blog cta-enigma-vault-nopii-vs-protecto--table-workflows-explore" href="/nopii/">Explore Enigma Vault NoPII &rarr;</a></div></td><td class="bl-tri__note">Bring one real workflow to a demo and compare the outputs.</td></tr>
+</tbody></table></div>
+<div class="bl-evcall" role="note"><span class="bl-evcall__tag">Enigma Vault NoPII</span><p>Enigma Vault NoPII also rewrites category labels around a value, so “social security number” becomes “ID number” and “date of birth” becomes “date”. That keeps models from refusing prompts about patients, claimants, or policyholders once their identifiers are tokenized.</p><div class="bl-evcall__cta"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-enigma-vault-nopii-vs-protecto--callout-neutralize" href="/nopii/demo/"><span>Try the live demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-evcall__more cta-blog cta-enigma-vault-nopii-vs-protecto--callout-neutralize-explore" href="/nopii/">Explore Enigma Vault NoPII &rarr;</a></div></div>
+
+<h2>Enigma Vault NoPII vs Protecto Pricing</h2>
+
+<h3>Enigma Vault NoPII Plans and Prices</h3>
+<div class="bl-tablewrap"><table class="bl-table"><thead><tr><th>Enigma Vault NoPII plan</th><th>What you get</th></tr></thead><tbody>
+<tr><td>Lite, free</td><td>1M protected tokens a month, hard cap, no card</td></tr>
+<tr><td>Starter, $49/mo ($550/yr)</td><td>50M tokens, then $1.00 per million</td></tr>
+<tr><td>Growth, $249/mo ($2,700/yr)</td><td>500M tokens, then $0.80 per million; workspaces and Langfuse</td></tr>
+<tr><td>Business, $499/mo ($5,500/yr)</td><td>2B tokens, then $0.60 per million; SSO and reveal grants</td></tr>
+<tr><td>Enterprise, custom</td><td>SLA, BAA, custom retention, and the self-hosted edition</td></tr>
+<tr class="bl-tri__solo"><td colspan="2"><div class="bl-tri__solo-in"><span class="bl-tri__solo-note">Protected tokens count everything that flows through the proxy, in both directions.</span><div class="bl-tri__acts"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-enigma-vault-nopii-vs-protecto--table-plans" href="/request-demo/?interest=enigma-vault-nopii-vs-protecto"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-tri__more cta-blog cta-enigma-vault-nopii-vs-protecto--table-plans-explore" href="/pricing/#nopii">See Enigma Vault NoPII pricing &rarr;</a></div></div></td></tr>
+</tbody></table></div>
+
+<h3>How Protecto Prices Its Plans</h3>
+<p>Protecto’s <a class="bl-link" href="https://www.protecto.ai/saas/" rel="nofollow noopener" target="_blank">pricing page</a> publishes SaaS plans billed by API calls a month, under the headline “$250/month, not $50K.”</p>
+<ul>
+<li><strong>Free Trial:</strong> $0 for 14 days, with 1,000 API calls.</li>
+<li><strong>Starter:</strong> $250 a month for 5,000 calls.</li>
+<li><strong>Growth:</strong> $500 a month for 12,000 calls.</li>
+<li><strong>Scale:</strong> $750 a month for 16,000 calls.</li>
+<li><strong>Enterprise:</strong> Custom, with dedicated VPC or on-premises, an async API, custom identifiers, region-specific deployment, and 24/7 support.</li>
+</ul>
+<p>The page does not define what counts as a call or publish overage rates, and the docs say trial access comes through its sales team. <a class="bl-link" href="https://www.capterra.com/p/10006145/Protecto/" rel="nofollow noopener" target="_blank">Capterra</a> lists Protecto as contact the vendor for pricing, with a free trial.</p>
+
+<h3>Enigma Vault NoPII vs Protecto Cost at Four Stages</h3>
+<div class="bl-tablewrap bl-tablewrap--tri"><table class="bl-table bl-table--tri"><thead><tr><th>Stage</th><th class="bl-tri__ev"><span class="bl-tri__tag">Enigma Vault</span>NoPII</th><th>Protecto</th></tr></thead><tbody>
+<tr><td>Trying it out</td><td class="bl-tri__ev">Lite: 1M protected tokens a month, no expiry</td><td>14-day trial, 1,000 API calls</td></tr>
+<tr><td>First production feature</td><td class="bl-tri__ev">$49/mo (Starter)</td><td>$250/mo (Starter, 5,000 calls)</td></tr>
+<tr><td>Growing workload</td><td class="bl-tri__ev">$249/mo (Growth)</td><td>$500 to $750/mo (Growth or Scale)</td></tr>
+<tr><td>Large or regulated deployment</td><td class="bl-tri__ev">$499/mo (Business), or Enterprise with self-hosting</td><td>Enterprise quote, with on-premises</td></tr>
+<tr class="bl-tri__cta"><td>Next step</td><td class="bl-tri__ev"><div class="bl-tri__acts"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-enigma-vault-nopii-vs-protecto--table-pricing" href="/request-demo/?interest=enigma-vault-nopii-vs-protecto"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-tri__more cta-blog cta-enigma-vault-nopii-vs-protecto--table-pricing-explore" href="/pricing/#nopii">See Enigma Vault NoPII pricing &rarr;</a></div></td><td class="bl-tri__note">A Protecto call can carry many values, so compare with your own traffic.</td></tr>
+</tbody></table></div>
+<p><strong>The Practical Takeaway:</strong> A year of Enigma Vault NoPII Starter is $550 and Growth is $2,700, while a year of Protecto Starter is $3,000 and Growth is $6,000. If on-premises deployment below Enterprise is a hard requirement, price Protecto first, since Enigma Vault NoPII self-hosting is Enterprise only.</p>
+
+<h2>Enigma Vault NoPII vs Protecto Security and Compliance</h2>
+<p>Enigma Vault NoPII runs on Enigma Vault’s platform, which is PCI DSS Level 1 and SOC 2 Type II, with a BAA on Enterprise. Protecto states SOC 2 Type II, ISO 27001, HIPAA with a BAA, and GDPR readiness across its pages, but we found no report, certificate, or trust center to confirm them.</p>
+<div class="bl-tablewrap bl-tablewrap--tri"><table class="bl-table bl-table--tri"><thead><tr><th>Control</th><th class="bl-tri__ev"><span class="bl-tri__tag">Enigma Vault</span>NoPII</th><th>Protecto</th></tr></thead><tbody>
+<tr><td>SOC 2</td><td class="bl-tri__ev">Type II (Enigma Vault platform)</td><td>Type II, stated; no report found</td></tr>
+<tr><td>ISO 27001</td><td class="bl-tri__ev">In progress</td><td>Stated; no certificate found</td></tr>
+<tr><td>PCI DSS</td><td class="bl-tri__ev">Level 1 Service Provider (Card, Data, File Vault in scope)</td><td>Not listed</td></tr>
+<tr><td>HIPAA</td><td class="bl-tri__ev">BAA on Enterprise</td><td>BAA when Protecto hosts or can access your instance</td></tr>
+<tr><td>Regional rules</td><td class="bl-tri__ev">GDPR erasure by token purge</td><td>GDPR, DPDP, CCPA, and Gulf data laws such as Saudi PDPL</td></tr>
+<tr><td>Support targets</td><td class="bl-tri__ev">SLA on Enterprise</td><td>Critical issues answered within one hour on its on-premises SLA</td></tr>
+<tr class="bl-tri__cta"><td>Next step</td><td class="bl-tri__ev"><div class="bl-tri__acts"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-enigma-vault-nopii-vs-protecto--table-security" href="/request-demo/?interest=enigma-vault-nopii-vs-protecto"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-tri__more cta-blog cta-enigma-vault-nopii-vs-protecto--table-security-explore" href="/platform/data-security/">Explore security controls &rarr;</a></div></td><td class="bl-tri__note">Ask both vendors for audit reports under NDA.</td></tr>
+</tbody></table></div>
+<p>Protecto’s docs note that when it runs in your environment with no access, it does not receive PHI and is not a business associate. That is a real advantage for some healthcare and Gulf-region buyers, so weigh it if data location is your main constraint.</p>
+
+<h2>Enigma Vault NoPII vs Protecto Reviews</h2>
+<p>Independent reviews are thin on both sides. Enigma Vault NoPII has one on G2, and Protecto has none on G2 or Capterra.</p>
+<div class="bl-tablewrap bl-tablewrap--tri"><table class="bl-table bl-table--tri"><thead><tr><th>Source</th><th class="bl-tri__ev"><span class="bl-tri__tag">Enigma Vault</span>NoPII</th><th>Protecto</th></tr></thead><tbody>
+<tr><td>G2</td><td class="bl-tri__ev"><a class="bl-link" href="https://www.g2.com/products/nopii/reviews" rel="nofollow noopener" target="_blank">5/5 from 1 review</a></td><td><a class="bl-link" href="https://www.g2.com/products/protecto/reviews" rel="nofollow noopener" target="_blank">Listed, no reviews</a></td></tr>
+<tr><td>Capterra</td><td class="bl-tri__ev">No listing</td><td><a class="bl-link" href="https://www.capterra.com/p/10006145/Protecto/" rel="nofollow noopener" target="_blank">Listed, no reviews</a></td></tr>
+<tr><td>Other public proof</td><td class="bl-tri__ev">109 published engine tests and a free tier</td><td>Testimonials and case studies chosen by Protecto</td></tr>
+<tr class="bl-tri__cta"><td>Next step</td><td class="bl-tri__ev"><div class="bl-tri__acts"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-enigma-vault-nopii-vs-protecto--table-reviews" href="/nopii/demo/"><span>Try the live demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-tri__more cta-blog cta-enigma-vault-nopii-vs-protecto--table-reviews-explore" href="/nopii/">Explore Enigma Vault NoPII &rarr;</a></div></td><td class="bl-tri__note">Ask each vendor for a reference customer in your industry.</td></tr>
+</tbody></table></div>
+<h3>Protecto’s Published Proof</h3>
+<p>Protecto’s proof is vendor-published: logos including Inovalon, Automation Anywhere, Citrix, Bank Muscat, and Dell, testimonials from Automation Anywhere and Inovalon, and anonymous quotes on its pricing page, such as a fintech saying it cost 1/200th of an enterprise quote.</p>
+<h3>Feedback on Enigma Vault NoPII</h3>
+<p>The one <a class="bl-link" href="https://www.g2.com/products/nopii/reviews" rel="nofollow noopener" target="_blank">G2 reviewer</a> values that tokenization keeps the context redaction loses and that setup took two lines of code, and finds the interface clunky.</p>
+
+<h2>Does Protecto Compare Itself to Enigma Vault NoPII?</h2>
+<p>No. Protecto’s comparison pages cover AWS Comprehend, Azure de-identification, Limina, Microsoft Presidio, OpenAI’s privacy filter, Protegrity, and Skyflow, and none names Enigma Vault NoPII or Enigma Vault. Its <a class="bl-link" href="https://protecto.ai/skyflow-alternative" rel="nofollow noopener" target="_blank">Skyflow page</a> shows how it positions itself: more affordable, on-premises and air-gapped, and more accurate by its own benchmark. Hold any vendor’s claims, ours included, to a test on your own data.</p>
+
+<h2>How to Decide Between Enigma Vault NoPII and Protecto</h2>
+<p>Work through these questions in order. The first one that clearly applies to you usually decides it.</p>
+<ol>
+<li><strong>Must processing stay inside your own network, below an enterprise contract?</strong> Protecto offers a customer-operated on-premises and air-gapped model; Enigma Vault NoPII self-hosts only on Enterprise. If yes, start with Protecto.</li>
+<li><strong>Do you need masked data at rest, in warehouses or streams, as well as in prompts?</strong> Protecto’s API and Data Scanning cover more of that pipeline. If yes, Protecto is the better fit.</li>
+<li><strong>Is your scope the LLM calls your applications make, including tools and embeddings?</strong> Enigma Vault NoPII covers that path with one client change. If yes, start with Enigma Vault NoPII.</li>
+<li><strong>Is your first-year budget under $3,000?</strong> Enigma Vault NoPII Starter is $550 a year and Lite is free, while Protecto Starter is $3,000 a year.</li>
+<li><strong>Do your agents pass customer data through tool calls today?</strong> Enigma Vault NoPII tokenizes tool-call arguments and results now, while Protecto’s MCP features are labelled coming soon in its docs.</li>
+</ol>
+<div class="bl-evcall" role="note"><span class="bl-evcall__tag">Enigma Vault NoPII</span><p>Still unsure after five questions? Send the same prompts through Enigma Vault NoPII’s free tier and Protecto’s trial, and compare what each sends to the model.</p><div class="bl-evcall__cta"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-enigma-vault-nopii-vs-protecto--callout-decide" href="/nopii/demo/"><span>Try the live demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-evcall__more cta-blog cta-enigma-vault-nopii-vs-protecto--callout-decide-explore" href="/nopii/">Explore Enigma Vault NoPII &rarr;</a></div></div>
+
+<h3>By Company Size</h3>
+<div class="bl-tablewrap"><table class="bl-table"><thead><tr><th>Company</th><th>Usually the better fit</th><th>Why</th></tr></thead><tbody>
+<tr><td>Startup or small SaaS team</td><td>Enigma Vault NoPII</td><td>Free tier and a $49 entry, against a $250 floor</td></tr>
+<tr><td>Mid-market company with one regulated AI workflow</td><td>Depends on deployment</td><td>Enigma Vault NoPII if cloud is acceptable; Protecto if data cannot leave</td></tr>
+<tr><td>Bank, insurer, or government-linked enterprise in the Gulf or India</td><td>Protecto</td><td>On-premises model, Arabic support, and regional data laws such as Saudi PDPL and DPDP</td></tr>
+<tr><td>Enterprise with many AI products in the cloud</td><td>Enigma Vault NoPII</td><td>Workspaces, SSO, reveal grants, and published Business pricing</td></tr>
+</tbody></table></div>
+
+<h3>By Industry</h3>
+<ul>
+<li><strong>Legal and Insurance:</strong> Enigma Vault NoPII is best for long chronologies and claim summaries where one person must stay one token across hundreds of pages.</li>
+<li><strong>Banking in the Gulf:</strong> Protecto’s best-documented example is its Bank Muscat proof of concept with Arabic recall figures, run inside the bank’s own cloud.</li>
+<li><strong>Healthcare Software:</strong> Both offer BAAs under conditions; Enigma Vault NoPII’s is on Enterprise, and Protecto signs one when it hosts or can access your instance.</li>
+</ul>
+
+<h2>Questions to Ask Before You Choose Enigma Vault NoPII or Protecto</h2>
+<div class="bl-tablewrap bl-tablewrap--tri"><table class="bl-table bl-table--tri"><thead><tr><th>Question</th><th class="bl-tri__ev"><span class="bl-tri__tag">Enigma Vault</span>NoPII</th><th>Protecto</th></tr></thead><tbody>
+<tr><td>What counts toward the bill?</td><td class="bl-tri__ev">Protected tokens, input and output</td><td>API calls; ask what one call can carry and what overage costs</td></tr>
+<tr><td>Which features are live today?</td><td class="bl-tri__ev">Listed on the product page</td><td>Ask about context-based access control, MCP, and the LiteLLM adapter</td></tr>
+<tr><td>How much code changes?</td><td class="bl-tri__ev">The model client’s base URL</td><td>Mask and unmask calls, or the gateway for chat tools</td></tr>
+<tr><td>Where does processing run?</td><td class="bl-tri__ev">Managed cloud; self-hosted on Enterprise</td><td>SaaS, or on-premises that you operate</td></tr>
+<tr><td>Can we see audit reports?</td><td class="bl-tri__ev">SOC 2 report and AOC on request</td><td>Ask for the SOC 2 report and ISO certificate</td></tr>
+<tr><td>How do we leave?</td><td class="bl-tri__ev">Ask for the export process in writing</td><td>Ask for the export process in writing</td></tr>
+<tr class="bl-tri__cta"><td>Next step</td><td class="bl-tri__ev"><div class="bl-tri__acts"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-enigma-vault-nopii-vs-protecto--table-questions" href="/request-demo/?interest=enigma-vault-nopii-vs-protecto"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-tri__more cta-blog cta-enigma-vault-nopii-vs-protecto--table-questions-explore" href="/nopii/">Explore Enigma Vault NoPII &rarr;</a></div></td><td class="bl-tri__note">Put the same questions to both vendors.</td></tr>
+</tbody></table></div>
+
+<h2>Moving From Protecto to Enigma Vault NoPII</h2>
+<ul>
+<li><strong>List Your Mask and Unmask Calls:</strong> Find every place your code calls Protecto before and after a model call, and every system that stores a Protecto token.</li>
+<li><strong>Keep What Enigma Vault NoPII Does Not Cover:</strong> Warehouse masking, data scanning, and file handling stay where they are or move to a different tool.</li>
+<li><strong>Route One Provider First:</strong> Point one model client at the Enigma Vault NoPII base URL, remove the mask calls on that path, and compare what reaches the provider in the audit log.</li>
+<li><strong>Run Both for a Few Weeks:</strong> Then cut over.</li>
+</ul>
+<p>If you want help mapping your AI data path, <a class="bl-link cta-blog cta-enigma-vault-nopii-vs-protecto--migration" href="/request-demo/?interest=enigma-vault-nopii-vs-protecto">book a migration call</a>, or read our <a class="bl-link" href="/blog/llm-privacy-proxy/">guide to LLM privacy proxies</a>.</p>
+
+<h2>Final Verdict: Enigma Vault NoPII or Protecto?</h2>
+<p>Protecto is a serious option when masking must run inside your own network or at many points in a data pipeline, and its published plans make it easier to budget than most enterprise vendors. If that is your requirement, it belongs on your shortlist, and I would say so.</p>
+<p>If what you need is to keep PII out of your application’s LLM calls, Enigma Vault NoPII does it with a base-URL change, real values back in every response, and a free tier that does not expire, at a fifth of Protecto’s entry price. It covers text only and self-hosts only on Enterprise, so if those are your constraints, weigh Protecto carefully.</p>
+<p>See it on your own data: <a class="bl-link cta-blog cta-enigma-vault-nopii-vs-protecto--verdict-demo" href="/nopii/demo/">try the Enigma Vault NoPII live demo</a> or <a class="bl-link cta-blog cta-enigma-vault-nopii-vs-protecto--verdict-pricing" href="/pricing/#nopii">compare plans and start free</a>.</p>
+<div class="bl-inlinecta"><div><p class="bl-inlinecta__t">See what reaches your model provider.</p><p class="bl-inlinecta__s">Book a demo to map your AI data path, or <a class="cta-blog cta-enigma-vault-nopii-vs-protecto--final-explore" href="/nopii/">explore Enigma Vault NoPII</a> first. The free tier covers one million protected tokens a month.</p></div><a class="np-btn np-btn--on-dark np-btn--primary cta-blog cta-enigma-vault-nopii-vs-protecto--final" href="/request-demo/?interest=enigma-vault-nopii-vs-protecto"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a></div>
+<p>More comparisons: <a class="bl-link" href="/blog/enigma-vault-nopii-vs-skyflow/">Enigma Vault NoPII vs Skyflow</a>, <a class="bl-link" href="/blog/enigma-vault-nopii-vs-portkey/">Enigma Vault NoPII vs Portkey</a>, <a class="bl-link" href="/blog/enigma-vault-nopii-vs-nightfall/">Enigma Vault NoPII vs Nightfall</a>, and <a class="bl-link" href="/blog/protecto-vs-skyflow/">Protecto vs Skyflow</a>.</p>
+
+<h2>How We Researched This Comparison</h2>
+<p>We checked every fact on 10 November 2026. Protecto facts come from protecto.ai, its pricing page, its documentation and roadmap pages, its support SLA, its case studies, and its comparison pages. Review data comes from G2 and Capterra, read live, and Enigma Vault NoPII facts come from our own product and pricing pages.</p>
+<p>Enigma Vault publishes this page, so read it as a vendor-written comparison. Where Protecto is the stronger product, we say so. If something here is out of date, tell us through our <a class="bl-link" href="/contact/">contact page</a> and we will check it.</p>
+

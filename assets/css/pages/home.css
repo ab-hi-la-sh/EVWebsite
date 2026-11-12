@@ -415,7 +415,7 @@
   .hp-layer__prod,.hp-layer__proof,.hp-stack__cap,
   .hp-legend__lead,.hp-legend__k,.hp-tier__name,.hp-tier__weight,.hp-ind__count,.hp-chip,
   .hp-tag,.hp-respost__tag,.hp-respost__meta,.hp-resfeat__meta,
-  .hp-footer__col h4,.hp-footer__col a,.hp-footer__bottom{
+  .hp-footer__col h3,.hp-footer__col a,.hp-footer__bottom{
     font-family:var(--ev-font-sans);
   }
   .hp-trust__lead,.hp-trust__item{font-weight:500;letter-spacing:0.01em;}

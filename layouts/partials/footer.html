@@ -1,6 +1,9 @@
 {{- /* Site footer. Ported from site-footer.js; content lives in data/footer.yml.
        External links open in a new tab, as they did before. */ -}}
 {{- $f := hugo.Data.footer -}}
+{{- /* Footer column titles are H4 by default. A page can set `footerHeading: "h3"` in its
+       front matter when its content ends on an H2 and an H4 would skip a level. */ -}}
+{{- $hl := .Params.footerHeading | default "h4" -}}
 <footer class="hp-footer">
   <div class="hp-footer__inner">
     <div class="hp-footer__grid">
@@ -23,7 +26,7 @@
       </div>
       {{- range $f.columns }}
       <div class="hp-footer__col">
-        <h3>{{ .title }}</h3>
+        {{ if eq $hl "h3" }}<h3>{{ .title }}</h3>{{ else }}<h4>{{ .title }}</h4>{{ end }}
         <ul>
           {{- range .links }}
           {{- $href := index . 1 }}

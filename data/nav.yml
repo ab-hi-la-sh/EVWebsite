@@ -42,7 +42,7 @@ items:
     panel:
       - [Overview, /nopii/]
       - [How it works, /nopii/#how-it-works]
-      - [Use cases, /nopii/#use-cases]
+      - [Use cases, /nopii/use-cases/]
       - [FAQs, /nopii/#faqs]
     # Second column of the dropdown: a promo card instead of a link list.
     promo:

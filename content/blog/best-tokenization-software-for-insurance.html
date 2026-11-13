@@ -1,0 +1,561 @@
+---
+title: "Best Tokenization Software for Insurance in 2026: 9 Leading Platforms Compared"
+titleEmphasis: "9 Leading Platforms Compared"
+slug: "best-tokenization-software-for-insurance"
+layout: "pii-style"
+metaTitle: "Best Tokenization Software for Insurance (2026)"
+description: "Compare 9 tokenization platforms for carriers, MGAs, agencies, and TPAs: picks by role, quote-to-renewal coverage, claims AI, insurance rules, and pricing."
+subtitle: "How to choose tokenization software that protects SSNs, claims files, premium payments, and AI on adjuster notes for carriers, MGAs, agencies, and TPAs."
+date: 2026-11-10T00:30:00
+category: "Vault"
+author: "tony-alex"
+readTime: 14
+heroImage: "/assets/blog/img-02.png"
+heroAlt: "Policyholder SSNs, claim documents, and premium card numbers replaced by tokens on their way into insurance systems"
+excerpt: "Nine data tokenization platforms compared for insurance: policyholder PII, claims PHI, premium card and bank payments, agent portals, actuarial warehouses, claims AI, and what each plan includes for insurers."
+tags: ["tokenization", "insurance", "claims", "pii", "data-vault", "nopii"]
+ogImage: "/assets/og/vault-data.jpg"
+ogImageAlt: "Best Tokenization Software for Insurance in 2026 | Enigma Vault"
+ogType: article
+styles: ["blog.css", "pages/blog-pii-hero.css", "tr-pages.css", "pages/vs-tri-table.css"]
+scripts: ["blog-article.js", "pages/vs-tri-table.js"]
+faqSchema: true
+faqs:
+  - q: "What Is the Best Tokenization Software for Insurance in 2026?"
+    a: "Enigma Vault ranks first because one vault covers policyholder fields, agency intake, claims documents, premium cards taken online or by phone, and AI prompts, with published prices. Protegrity suits carrier analytics in Snowflake and AWS, Bluefin ShieldConex suits premium, claims-file, and call-center protection with vaultless tokens, Thales suits carriers that run their own key infrastructure, Protecto suits AI on claims text, VGS suits insurance marketplaces and agent platforms routing cards and PII through a proxy, Basis Theory suits insurtech apps that tokenize premium cards and policyholder PII through an API, IXOPAY (TokenEx) suits high-volume premium card collection, and Fortanix suits teams that want vaultless tokens alongside HSM-backed keys."
+  - q: "How Can Insurers Process Claims Without Exposing Customer Data?"
+    a: "Tokenize identifiers at intake so claims systems, adjusters, and vendors work with tokens. Enigma Vault stores claim files in File Vault behind expiring, logged links and keeps SSNs and bank details as Data Vault tokens. For claims AI, Enigma Vault NoPII and Protecto tokenize names, SSNs, dates, and account numbers before text reaches a model provider and restore them in the response. Loss narratives and rare medical details can still point to a person, so keep prompts to the minimum necessary."
+  - q: "Which Insurance Analytics Platforms Keep Policyholder Data Tokenized?"
+    a: "Protegrity offers vaultless tokens for analytics in AWS, Snowflake, Redshift, and Databricks, and a G2 reviewer notes deterministic tokens make matching easier. Bluefin ShieldConex offers vaultless, format-preserving tokens for policyholder PII and PHI. Fortanix offers vaultless format-preserving tokens with keys in FIPS 140-2 Level 3 HSMs, and Thales offers format-preserving or random tokens with masking by role. Enigma Vault Data Vault supports exact-match lookup on tokenized fields."
+  - q: "Does the NAIC Insurance Data Security Model Law Require Tokenization?"
+    a: "No. Model Law #668 requires an information security program, risk assessment, third-party service provider oversight, and notice to the commissioner within 72 hours of determining a cybersecurity event has occurred. Tokenization is one way to meet those goals and to shrink the data an incident can expose. As of the NAIC’s November 3, 2026 map, 28 jurisdictions have adopted it."
+  - q: "Does HIPAA Apply to Insurance Claims Data?"
+    a: "It depends on the line. HIPAA covers health plans, including health insurance issuers and HMOs, but federal rules exclude excepted benefits such as accident and disability income coverage, liability insurance, workers’ compensation, and automobile medical payment insurance. Health details in those claims are still protected under state insurance law, the NAIC model where adopted, and GLBA."
+  - q: "Does NYDFS Part 500 Apply to Insurance Agencies and Brokers?"
+    a: "It applies to entities licensed or required to be licensed under New York’s Banking, Insurance, or Financial Services Law, which can include carriers, agencies, and brokers. Covered entities file an annual compliance notification by April 15 and notify DFS within 72 hours of determining a cybersecurity incident has occurred. Smaller licensees may qualify for limited exemptions."
+  - q: "How Does Tokenization Help With Premium Payments and PCI DSS?"
+    a: "A hosted payment form, phone capture, or payment proxy keeps card numbers out of the policy admin system, agent screens, and call recordings, which narrows PCI DSS scope. Enigma Vault Card Vault does this through an iframe, Twilio Pay IVR capture, and a gateway proxy; IXOPAY (TokenEx) offers an iFrame, mobile, and Contact Center API; Bluefin pairs ShieldConex with PCI-validated P2PE for call centers and agent devices; VGS collects cards through its own forms and proxy; Basis Theory tokenizes cards entered in insurtech apps and routes them to the carrier."
+  - q: "How Much Does Tokenization Software for Insurance Cost?"
+    a: "Enigma Vault publishes its prices: a free sandbox for testing, then Growth at $249 or Business at $499 a month per product ($5,500 a year for Business), with Enterprise and Customer Vault quoted. Twilio Pay phone capture for premiums needs Growth or Business. VGS plans start at $1,000 a month with a free start, and Basis Theory lists $995 a month with 20,000 tokens. Protegrity, Thales, Protecto, IXOPAY, and Bluefin quote privately; Fortanix lists hourly AWS Marketplace rates from $1.95 plus AWS infrastructure."
+---
+<style>
+/* Wide tables: tighter cell padding so they fit the article column. */
+.bl-content .bl-table--wide td, .bl-content .bl-table--wide th { padding-left: 8px; padding-right: 8px; }
+.bl-content figure.bl-shot{margin:20px 0 24px;padding:10px;border:1px solid var(--ev-cool-stone);border-radius:10px;background:var(--ev-warm-cloud)}.bl-content figure.bl-shot img{display:block;width:100%;height:auto;border-radius:6px}.bl-content figure.bl-shot figcaption{margin-top:8px;text-align:center;font-size:13px;color:var(--ev-slate)}
+/* Vendor header card: rank, name, best-for pill, review scores, key facts. */
+.bl-content .vc { margin: 40px 0 20px; }
+.bl-content .vc__head { display: grid; grid-template-columns: auto 1fr auto; gap: 18px; align-items: center; margin-bottom: 14px; }
+.bl-content .vc__num { font-size: 34px; font-weight: 600; line-height: 1; color: var(--ev-mineral-blue); font-variant-numeric: tabular-nums; }
+.bl-content h3.vc__name { margin: 0; padding: 0; font-size: 26px; line-height: 1.25; font-weight: 600; color: var(--ev-ink); }
+.bl-content .vc__sep { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.bl-content .vc__pill { display: table; margin-top: 10px; padding: 6px 12px; border-radius: 6px; background: var(--ev-mineral-blue); color: #fff; line-height: 1.4; font-weight: 600; text-transform: none; letter-spacing: 0; font-size: 13px; }
+.bl-content .vc__rates { display: flex; flex-direction: column; gap: 8px; align-items: stretch; }
+.bl-content .vc__rate { display: flex; flex-direction: column; align-items: flex-end; padding: 8px 14px; border: 1px solid var(--ev-cool-stone); border-radius: 10px; background: #fff; text-decoration: none !important; min-width: 128px; }
+.bl-content a.vc__rate:hover { border-color: var(--ev-mineral-blue); }
+.bl-content .vc__score { font-size: 20px; font-weight: 700; color: var(--ev-ink); line-height: 1.2; }
+.bl-content .vc__score small { font-size: 13px; font-weight: 500; color: var(--ev-slate); }
+.bl-content .vc__src { font-size: 12px; color: var(--ev-slate); line-height: 1.3; }
+.bl-content .vc__rate--new .vc__score { font-size: 15px; }
+.bl-content .vc__facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px 24px; margin: 0; padding: 18px 22px; border-radius: 12px; background: var(--ev-warm-cloud); }
+.bl-content .vc__facts div { margin: 0; }
+.bl-content .vc__facts .vc__best { grid-column: 1 / -1; padding-top: 14px; border-top: 1px solid var(--ev-cool-stone); }
+.bl-content .vc__facts dt { margin: 0 0 4px; font-size: 11.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ev-slate); }
+.bl-content .vc__facts dd { margin: 0; font-size: 15px; line-height: 1.5; color: var(--ev-ink); }
+@media (max-width: 700px) {
+  .bl-content .vc__head { grid-template-columns: auto 1fr; }
+  .bl-content .vc__rates { grid-column: 1 / -1; flex-direction: row; flex-wrap: wrap; }
+  .bl-content .vc__rate { align-items: flex-start; }
+  .bl-content .vc__num { font-size: 26px; }
+  .bl-content h3.vc__name { font-size: 22px; }
+  .bl-content .vc__facts { grid-template-columns: 1fr; }
+}
+.bl-content .tldr { margin: 8px 0 32px; padding: 22px 26px; border-radius: 12px; background: var(--ev-warm-cloud); border-left: 3px solid var(--ev-mineral-blue); }
+.bl-content .tldr .tldr__label { margin: 0 0 12px; padding: 0; border: 0; font-size: 13px; line-height: 1.4; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--ev-mineral-blue); }
+.bl-content .tldr .tldr__list { margin: 0; padding-left: 20px; }
+.bl-content .tldr .tldr__list li { margin: 0 0 10px; font-size: 16px; line-height: 1.6; color: var(--ev-ink); }
+.bl-content .tldr .tldr__list li::marker { color: var(--ev-mineral-blue); }
+.bl-content .tldr .tldr__list li:last-child { margin-bottom: 0; }
+.bl-content .tldr strong a { font-weight: 600; }
+</style>
+<p>Comparing the best tokenization software for insurance of 2026: 1. Enigma Vault, 2. Protegrity, 3. Bluefin ShieldConex, 4. Thales CipherTrust Tokenization, 5. Protecto, 6. VGS, 7. Basis Theory, 8. IXOPAY (TokenEx), 9. Fortanix.</p>
+<p><strong>Why trust Enigma Vault:</strong> we run a PCI DSS Level 1 and SOC 2 Type II vault ourselves, so we know which details matter once policyholder data is in production.</p>
+<p>An insurance file collects sensitive data long before a policy exists. A quote form asks for a date of birth and driver’s license, an application adds an SSN and bank account, a premium arrives by card over the phone, and a claim brings medical bills, photos, and an adjuster’s notes.</p>
+<p>Enigma Vault takes the top spot because it follows that file from quote to claim: Customer Vault for agency intake, Data Vault for SSNs and bank details, File Vault for claims evidence, Card Vault for premiums taken online or through an IVR, and NoPII for AI on claims notes. It is PCI DSS Level 1 and SOC 2 Type II, rated <a class="bl-link" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener">4.4/5 on G2</a> and <a class="bl-link" href="https://www.capterra.com/p/241650/Enigma-Vault/reviews/" target="_blank" rel="noopener">4.8/5 on Capterra</a>, with a free sandbox for testing and Growth plans from $249 a month per product.</p>
+<p>Other platforms worth comparing:</p>
+<ul>
+  <li>Protegrity: Known for vaultless tokens in carrier analytics on Snowflake and AWS (<a class="bl-link" href="https://www.g2.com/products/protegrity/reviews" target="_blank" rel="noopener">G2 rating 4.5 from 14 reviews</a>).</li>
+  <li>Bluefin ShieldConex: Known for vaultless tokens across premiums, claims files, and call centers (<a class="bl-link" href="https://www.g2.com/products/shieldconex/reviews" target="_blank" rel="noopener">no G2 reviews yet</a>).</li>
+  <li>Thales CipherTrust Tokenization: Built for carriers that run their own key management and map controls to the NAIC model law (<a class="bl-link" href="https://www.g2.com/products/thales-ciphertrust-tokenization/reviews" target="_blank" rel="noopener">G2 rating 4.0 from 6 reviews</a>).</li>
+  <li>Protecto: Best suited for AI assistants that read claims and member notes (<a class="bl-link" href="https://www.g2.com/products/protecto/reviews" target="_blank" rel="noopener">no G2 or Capterra reviews yet</a>).</li>
+  <li>VGS: Built for insurance marketplaces and agent platforms passing cards and PII to carriers (<a class="bl-link" href="https://www.g2.com/products/very-good-security-vgs-platform/reviews" target="_blank" rel="noopener">G2 rating 4.7 from 47 reviews</a>).</li>
+  <li>Basis Theory: Built for insurtech apps that tokenize premium cards and policyholder PII (<a class="bl-link" href="https://www.g2.com/products/basis-theory/reviews" target="_blank" rel="noopener">no G2 reviews yet</a>).</li>
+  <li>IXOPAY (TokenEx): Offers card capture across web, mobile, and contact-center channels for premium billing (<a class="bl-link" href="https://www.g2.com/products/tokenex/reviews" target="_blank" rel="noopener">G2 rating 4.6 from 17 reviews</a>).</li>
+  <li>Fortanix: Best for vaultless format-preserving tokens alongside HSM-backed keys (<a class="bl-link" href="https://www.g2.com/products/fortanix/reviews" target="_blank" rel="noopener">G2 rating 4.5 from 2 reviews</a>).</li>
+</ul>
+<p><em>Disclosure: Enigma Vault publishes this guide and appears first in it. Every platform here is judged on the same criteria, and the review ratings come from G2 and Capterra.</em></p>
+<p><strong>About the author:</strong> I’m <a class="bl-link" href="https://www.linkedin.com/in/tony-alex-enigma-vault/" target="_blank" rel="noopener">Dr. Tony Alex</a>, Chief Executive Officer of Enigma Vault, where I lead our work in encryption, tokenization, and sensitive-data protection. I have more than two decades of experience building enterprise software businesses.</p>
+<p>In 1999 I founded US eDirect to develop software for parks, campgrounds, and recreation agencies, bringing reservations and payments into one cloud system, and led it through its acquisition by Tyler Technologies in 2022.</p>
+<div class="tldr" id="tldr">
+  <h2 class="tldr__label">TL;DR</h2>
+  <ul class="tldr__list">
+    <li><strong><a class="bl-link" href="#enigma-vault">Enigma Vault</a>:</strong> best for the whole policy life cycle, from quote to claim.</li>
+    <li><strong><a class="bl-link" href="#protegrity">Protegrity</a>:</strong> best for carrier analytics in Snowflake and AWS.</li>
+    <li><strong><a class="bl-link" href="#bluefin-shieldconex">Bluefin ShieldConex</a>:</strong> best for premiums, claims files, and call centers.</li>
+    <li><strong><a class="bl-link" href="#thales-ciphertrust-tokenization">Thales CipherTrust Tokenization</a>:</strong> best for carriers running their own key infrastructure.</li>
+    <li><strong><a class="bl-link" href="#protecto">Protecto</a>:</strong> best for AI assistants on claims and member notes.</li>
+    <li><strong><a class="bl-link" href="#vgs">VGS</a>:</strong> best for insurance marketplaces and agent platforms.</li>
+    <li><strong><a class="bl-link" href="#basis-theory">Basis Theory</a>:</strong> best for insurtech apps taking premium cards and PII.</li>
+    <li><strong><a class="bl-link" href="#ixopay-tokenex">IXOPAY (TokenEx)</a>:</strong> best for premium card collection across channels.</li>
+    <li><strong><a class="bl-link" href="#fortanix">Fortanix</a>:</strong> best for vaultless tokens next to HSM-backed keys.</li>
+  </ul>
+</div>
+<h2 id="best-tokenization-software-for-insurance-at-a-glance">Best Tokenization Software for Insurance at a Glance</h2>
+<p>Here’s how the nine platforms compare for a carrier, MGA, agency, or TPA that holds policyholder SSNs, claim files, and premium payments, and now runs AI over adjuster notes. Prices, ratings, and features were checked on November 11, 2026, and for VGS, Bluefin, and Basis Theory on November 13, 2026.</p>
+<div class="bl-tablewrap"><table class="bl-table bl-table--wide">
+<thead><tr><th>Platform</th><th>Best for</th><th>Starting price</th><th>Free tier or trial</th><th>Claims files</th><th>AI on adjuster notes</th><th>G2 rating</th></tr></thead>
+<tbody>
+<tr><td><a class="bl-link" href="#enigma-vault">Enigma Vault</a></td><td>Quote to claim under one vault</td><td>$249/mo per product (Growth)</td><td>Free sandbox</td><td>File Vault, expiring logged links</td><td>NoPII tokenizes prompts, restores replies</td><td><a class="bl-link" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener">4.4/5 (6 reviews)</a></td></tr>
+<tr><td><a class="bl-link" href="#protegrity">Protegrity</a></td><td>Carrier analytics in Snowflake and AWS</td><td>Not published</td><td>Free AI Developer Edition</td><td>Not published</td><td>Guardrails for prompts and outputs</td><td><a class="bl-link" href="https://www.g2.com/products/protegrity/reviews" target="_blank" rel="noopener">4.5/5 (14 reviews)</a></td></tr>
+<tr><td><a class="bl-link" href="#bluefin-shieldconex">Bluefin ShieldConex</a></td><td>Premiums, claims files, and call centers</td><td>Not published</td><td>Sandbox on request</td><td>Batch files with TPAs and providers</td><td>Not documented</td><td><a class="bl-link" href="https://www.g2.com/products/shieldconex/reviews" target="_blank" rel="noopener">No reviews yet</a></td></tr>
+<tr><td><a class="bl-link" href="#thales-ciphertrust-tokenization">Thales CipherTrust Tokenization</a></td><td>Carriers running their own token servers</td><td>Not published</td><td>Not published</td><td>Not published</td><td>Not documented</td><td><a class="bl-link" href="https://www.g2.com/products/thales-ciphertrust-tokenization/reviews" target="_blank" rel="noopener">4.0/5 (6 reviews)</a></td></tr>
+<tr><td><a class="bl-link" href="#protecto">Protecto</a></td><td>AI assistants on claims notes</td><td>Not published</td><td>Free 4-week pilot</td><td>Claims text for AI only</td><td>Yes, tokenized before the model</td><td><a class="bl-link" href="https://www.g2.com/products/protecto/reviews" target="_blank" rel="noopener">No reviews yet</a></td></tr>
+<tr><td><a class="bl-link" href="#vgs">VGS</a></td><td>Insurance marketplaces and agent platforms</td><td>$1,000/mo (Starter)</td><td>Free to start</td><td>Not published</td><td>AI Data Firewall tokenizes prompts</td><td><a class="bl-link" href="https://www.g2.com/products/very-good-security-vgs-platform/reviews" target="_blank" rel="noopener">4.7/5 (47 reviews)</a></td></tr>
+<tr><td><a class="bl-link" href="#basis-theory">Basis Theory</a></td><td>Insurtech apps taking premium cards and PII</td><td>$995/mo with 20,000 tokens</td><td>Free to start</td><td>Tokens can hold file contents</td><td>Not documented</td><td><a class="bl-link" href="https://www.g2.com/products/basis-theory/reviews" target="_blank" rel="noopener">No reviews yet</a></td></tr>
+<tr><td><a class="bl-link" href="#ixopay-tokenex">IXOPAY (TokenEx)</a></td><td>Premium cards across web and phone</td><td>Not published</td><td>Not published</td><td>Not published</td><td>Not documented</td><td><a class="bl-link" href="https://www.g2.com/products/tokenex/reviews" target="_blank" rel="noopener">4.6/5 (17 reviews)</a></td></tr>
+<tr><td><a class="bl-link" href="#fortanix">Fortanix</a></td><td>Vaultless tokens with HSM-backed keys</td><td>$1.95/hour on AWS Marketplace</td><td>30-day free trial</td><td>Not published</td><td>Not documented</td><td><a class="bl-link" href="https://www.g2.com/products/fortanix/reviews" target="_blank" rel="noopener">4.5/5 (2 reviews)</a></td></tr>
+</tbody></table></div>
+
+<div class="bl-inlinecta">
+  <div>
+    <p class="bl-inlinecta__t">Protect policyholder data from quote to claim</p>
+    <p class="bl-inlinecta__s">Bring one renewal or claim packet, and we will show which fields to tokenize first.</p>
+  </div>
+  <a class="np-btn np-btn--on-dark np-btn--primary cta-blog cta-best-tokenization-software-for-insurance--glance" href="/request-demo/"><span>Request a demo</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
+</div>
+<h2 id="how-we-ranked">How We Ranked Insurance Tokenization Platforms</h2>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Criterion</th><th>Weight</th><th>What we looked for</th></tr></thead>
+<tbody>
+<tr><td>Policyholder and claimant PII</td><td>20%</td><td>SSNs, licenses, bank accounts tokenized, lookup intact</td></tr>
+<tr><td>Claims documents and PHI</td><td>20%</td><td>FNOL uploads and medical bills with logged access</td></tr>
+<tr><td>Premium payments</td><td>15%</td><td>Online and phone card capture outside PCI scope</td></tr>
+<tr><td>Intake and distribution</td><td>15%</td><td>Agency and MGA intake without email attachments</td></tr>
+<tr><td>Analytics and AI</td><td>15%</td><td>Warehouse-ready tokens and prompt tokenization</td></tr>
+<tr><td>Price and time to start</td><td>10%</td><td>Published plans, free sandboxes, managed operation</td></tr>
+<tr><td>Reviews</td><td>5%</td><td>G2 and Capterra ratings and comments</td></tr>
+</tbody></table></div>
+<p>Vendor facts come from each vendor’s own pages, checked on November 11, 2026. Where a page says nothing on a point, we write “Not published.”</p>
+<h2 id="the-9-best-tokenization-software-for-insurance">The 9 Best Tokenization Software for Insurance in 2026</h2>
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">01</span>
+    <div class="vc__id">
+      <h3 id="enigma-vault" class="vc__name"><span class="vc__sep">1. </span>Enigma Vault<span class="vc__sep">: </span><span class="vc__pill">Best for the Whole Policy Life Cycle, From Quote to Claim</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener"><span class="vc__score">4.4<small>/5</small></span><span class="vc__src">G2 · 6 reviews</span></a><a class="vc__rate" href="https://www.capterra.com/p/241650/Enigma-Vault/reviews/" target="_blank" rel="noopener"><span class="vc__score">4.8<small>/5</small></span><span class="vc__src">Capterra · 4 reviews</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Data covered</dt><dd>Fields, files, cards, intake, and AI prompts</dd></div>
+    <div><dt>Starting price</dt><dd>Free sandbox; Growth $249 a month per product</dd></div>
+    <div><dt>Deployment</dt><dd>Managed cloud; NoPII self-hosted on Enterprise</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Agencies, brokers, MGAs, TPAs, and carriers that want policyholder PII, claims evidence, premium payments, and claims AI traffic under one vendor and one audit trail.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/enigma-vault.jpg" alt="Enigma Vault homepage" >}}
+  <figcaption>Enigma Vault homepage. Source: enigmavault.io</figcaption>
+</figure>
+<p>Enigma Vault is a vaulted tokenization platform delivered as APIs, a payment proxy, and a no-code intake app. Policy, billing, and claims systems keep tokens; the real values stay in the vault under AES-256 encryption.</p>
+<p><a class="bl-link" href="/vault/data-vault/">Data Vault</a> holds SSNs and account numbers with exact-match lookup, and <a class="bl-link" href="/vault/customer-vault/">Customer Vault</a> gives agencies branded intake links for applications, signed disclosures, IDs, and claims correspondence.</p>
+<p><strong>Policy Lifecycle Coverage:</strong> Quote and bind run through Customer Vault intake links with presets for SSN, driver’s license, passport, date of birth, and tax ID, plus electronic signatures; Data Vault holds the policyholder fields with exact-match lookup. Premiums run through Card Vault on the gateway you already use (Twilio Pay covers phone payments, and the CVV is deleted within 30 minutes), and claims files sit in File Vault behind expiring, trackable links, with <a class="bl-link" href="/nopii/">NoPII</a> tokenizing SSNs and bank accounts before claims AI calls reach the model provider.</p>
+<p><strong>Strengths:</strong></p>
+<ul>
+  <li><strong>One vendor, one log:</strong> Agency intake, policyholder fields, claim files, and premiums share one vault and one log format.</li>
+  <li><strong>Works with existing carriers and gateways:</strong> Tokens live in your policy and billing systems, and cards still run through your processor.</li>
+  <li><strong>Batch-friendly:</strong> Data Vault batches up to 5,000 secrets per request on Growth and Business.</li>
+</ul>
+<p><strong>Limitations:</strong></p>
+<ul>
+  <li><strong>ISO 27001 still in progress:</strong> PCI DSS Level 1 and SOC 2 Type II are in place; some carrier vendor questionnaires ask for ISO 27001 today.</li>
+  <li><strong>Carrier portals may not proxy:</strong> Where a carrier requires its own upload portal, files still leave the vault at that step.</li>
+  <li><strong>Detection has limits:</strong> NoPII tokenizes recognized identifiers, so loss narratives and claim-specific IDs need review.</li>
+</ul>
+<p><strong>Pricing:</strong> After a free sandbox for testing, Growth is $249 a month per product (Twilio Pay phone capture needs Growth or Business) and Business is $499 a month per product ($5,500 a year); Enterprise is quoted with uptime commitments and a BAA on Vault and NoPII for health, disability, and long-term care lines.</p>
+<p><strong>Reviewer Read:</strong> <a class="bl-link" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener">4.4/5 from 6 reviews on G2</a> and <a class="bl-link" href="https://www.capterra.com/p/241650/Enigma-Vault/reviews/" target="_blank" rel="noopener">4.8/5 from 4 on Capterra</a>: one G2 reviewer values card data, personal information, and large files in one vault, and the same reviewer wants more flexible reporting dashboards.</p>
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">02</span>
+    <div class="vc__id">
+      <h3 id="protegrity" class="vc__name"><span class="vc__sep">2. </span>Protegrity<span class="vc__sep">: </span><span class="vc__pill">Best for Carrier Analytics in Snowflake and AWS</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/protegrity/reviews" target="_blank" rel="noopener"><span class="vc__score">4.5<small>/5</small></span><span class="vc__src">G2 · 14 reviews</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Data covered</dt><dd>Structured fields in apps and data platforms</dd></div>
+    <div><dt>Starting price</dt><dd>Free Developer Edition; paid editions quoted</dd></div>
+    <div><dt>Deployment</dt><dd>AWS cloud, on-premises, or hybrid</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Large carriers and health insurers moving policy and claims data into Snowflake, Redshift, or Databricks for actuarial and AI work.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/protegrity.jpg" alt="Protegrity homepage" >}}
+  <figcaption>Protegrity homepage. Source: protegrity.com</figcaption>
+</figure>
+<p>Protegrity is a data protection platform with a dedicated insurance and payer page. Its G2 profile says it protects data for 2 of the 5 largest US health insurers, and its insurance page says it has worked with insurance organizations for more than two decades.</p>
+<p><strong>Policy Lifecycle Coverage:</strong> Strongest after bind, when policy and claims data moves into Snowflake or AWS for actuarial and claims analytics; its insurance page features Aflac’s partnership with Protegrity and Snowflake on AWS. Quote intake, claims document storage, and premium card capture are Not published on the pages we checked.</p>
+<p><strong>Strengths:</strong></p>
+<ul>
+  <li><strong>Vaultless, format-preserving tokens:</strong> Policy numbers and dates keep their shape in legacy schemas, with no token vault to sync.</li>
+  <li><strong>Analytics keep working:</strong> One G2 reviewer notes deterministic tokens make matching for analytics easier.</li>
+  <li><strong>Insurer references:</strong> Its G2 profile says it protects data for 2 of the 5 largest US health insurers.</li>
+</ul>
+<p><strong>Limitations:</strong></p>
+<ul>
+  <li><strong>Field-focused:</strong> No intake, claims files, or premium payment tooling.</li>
+  <li><strong>Key custody is yours:</strong> Any system holding the key can reverse tokens.</li>
+  <li><strong>Price questioned:</strong> One reviewer cites a single-year license above $15,000.</li>
+</ul>
+<p><strong>Pricing:</strong> Protegrity publishes editions, not prices: a free AI Developer Edition for testing, then Team and Enterprise Editions by quote.</p>
+<p><strong>Reviewer Read:</strong> <a class="bl-link" href="https://www.g2.com/products/protegrity/reviews" target="_blank" rel="noopener">4.5/5 from 14 reviews on G2</a>, with praise for “world class support” and one request for integrations beyond AWS.</p>
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">03</span>
+    <div class="vc__id">
+      <h3 id="bluefin-shieldconex" class="vc__name"><span class="vc__sep">3. </span>Bluefin ShieldConex<span class="vc__sep">: </span><span class="vc__pill">Best for Premiums, Claims Files, and Call Centers</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate vc__rate--new" href="https://www.g2.com/products/shieldconex/reviews" target="_blank" rel="noopener"><span class="vc__score">No reviews</span><span class="vc__src">G2</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Data covered</dt><dd>Cards, ACH, policyholder PII, PHI, and batch files</dd></div>
+    <div><dt>Starting price</dt><dd>Custom quote; sandbox on request</dd></div>
+    <div><dt>Deployment</dt><dd>Cloud tokenization as a service, vaultless</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Carriers and brokers collecting card and ACH premiums across web, phone, and agent devices, and exchanging claims files with TPAs and providers.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/bluefin.jpg" alt="Bluefin ShieldConex page" >}}
+  <figcaption>Bluefin ShieldConex page. Source: bluefin.com</figcaption>
+</figure>
+<p>Bluefin ShieldConex is a cloud-based, vaultless tokenization service for payments, PII, and PHI, with tokens generated in hardware security modules. Bluefin has a dedicated insurance page that names premiums, claims, and policyholder PII and PHI, and pairs ShieldConex with its PCI-validated point-to-point encryption (P2PE).</p>
+<p><strong>Policy Lifecycle Coverage:</strong> Strongest at premium payment and claim: its insurance page covers recurring card and ACH premiums across channels, card encryption at call centers, agent devices, and kiosks, IVR protection that keeps the card number from agents, and documents and batch files exchanged with TPAs and providers. FileGuard tokenizes NACHA, CSV, and fixed-width files over SFTP. Agency intake and AI prompt tokenization are Not published on the pages we checked.</p>
+<p><strong>Strengths:</strong></p>
+<ul>
+  <li><strong>Insurance-specific page:</strong> Premiums, claims, and policyholder PII and PHI named together.</li>
+  <li><strong>Call-center coverage:</strong> P2PE and IVR keep card numbers away from agents.</li>
+  <li><strong>Consistent tokens:</strong> The same input always yields the same token, so records still match.</li>
+</ul>
+<p><strong>Limitations:</strong></p>
+<ul>
+  <li><strong>No public price:</strong> Sold by quote through sales.</li>
+  <li><strong>No review base:</strong> No G2 reviews yet and no Capterra listing.</li>
+  <li><strong>No AI coverage:</strong> Prompt tokenization is not described.</li>
+</ul>
+<p><strong>Pricing:</strong> Bluefin publishes no prices; ShieldConex is quoted, with a sandbox available on request.</p>
+<p><strong>Reviewer Read:</strong> No reviews yet on <a class="bl-link" href="https://www.g2.com/products/shieldconex/reviews" target="_blank" rel="noopener">G2</a> and no Capterra listing, so ask for insurer references.</p>
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">04</span>
+    <div class="vc__id">
+      <h3 id="thales-ciphertrust-tokenization" class="vc__name"><span class="vc__sep">4. </span>Thales CipherTrust Tokenization<span class="vc__sep">: </span><span class="vc__pill">Best for Carriers Running Their Own Key Infrastructure</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/thales-ciphertrust-tokenization/reviews" target="_blank" rel="noopener"><span class="vc__score">4.0<small>/5</small></span><span class="vc__src">G2 · 6 reviews</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Data covered</dt><dd>Database and application fields</dd></div>
+    <div><dt>Starting price</dt><dd>Custom quote</dd></div>
+    <div><dt>Deployment</dt><dd>Customer-operated token servers</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Large carriers with a security engineering team that wants to run its own token servers and keys, with tokenization mapped to insurance regulations.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v3/thales.jpg" alt="Thales homepage" >}}
+  <figcaption>Thales homepage. Source: cpl.thalesgroup.com</figcaption>
+</figure>
+<p>Thales sells CipherTrust Tokenization with dynamic masking as part of its CipherTrust Data Security Platform. Its insurance page lists GLBA, PCI DSS, HIPAA/HITECH, and state breach laws, and links to NAIC Insurance Data Security Model Law compliance material.</p>
+<p><strong>Policy Lifecycle Coverage:</strong> Covers database and application fields through tokenization or partial masking, with format-preserving tokens so schemas keep working; a Thales case study describes a property and casualty insurer in North America and Europe using CipherTrust Tokenization to protect personal and financial customer data. Intake, claims files, and AI prompts sit outside the tokenization product.</p>
+<p><strong>Strengths:</strong></p>
+<ul>
+  <li><strong>Insurance regulation mapping:</strong> Published NAIC compliance material and an insurance page naming GLBA and PCI DSS.</li>
+  <li><strong>Full custody:</strong> No third party holds your token vault or keys.</li>
+  <li><strong>Role-based masking:</strong> Staff see formatted, partly masked fields where their job allows.</li>
+</ul>
+<p><strong>Limitations:</strong></p>
+<ul>
+  <li><strong>Operational load:</strong> Your team runs token servers and keys; one reviewer lists implementation complexity.</li>
+  <li><strong>Heavy for agencies and MGAs:</strong> One G2 reviewer calls it expensive for small businesses.</li>
+  <li><strong>Fields only:</strong> No claims document, intake, or prompt coverage.</li>
+</ul>
+<p><strong>Pricing:</strong> Thales does not publish prices; a carrier licenses vaulted or vaultless tokenization plus the token servers it runs.</p>
+<p><strong>Reviewer Read:</strong> <a class="bl-link" href="https://www.g2.com/products/thales-ciphertrust-tokenization/reviews" target="_blank" rel="noopener">4.0/5 from 6 reviews on G2</a>, with one reviewer valuing on-premises and cloud consoles and one noting extra processing time per request.</p>
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">05</span>
+    <div class="vc__id">
+      <h3 id="protecto" class="vc__name"><span class="vc__sep">5. </span>Protecto<span class="vc__sep">: </span><span class="vc__pill">Best for AI Assistants on Claims and Member Notes</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate vc__rate--new" href="https://www.g2.com/products/protecto/reviews" target="_blank" rel="noopener"><span class="vc__score">No reviews</span><span class="vc__src">G2</span></a><a class="vc__rate vc__rate--new" href="https://www.capterra.com/p/10006145/Protecto/reviews/" target="_blank" rel="noopener"><span class="vc__score">No reviews</span><span class="vc__src">Capterra</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Data covered</dt><dd>Structured columns and free text for AI</dd></div>
+    <div><dt>Starting price</dt><dd>Custom quote; free trial with a 4-week pilot</dd></div>
+    <div><dt>Deployment</dt><dd>SaaS, private cloud, on-premises, or air-gapped</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Health insurers and claims organizations building assistants, search, and summaries over claims files and support notes.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/protecto.jpg" alt="Protecto homepage" >}}
+  <figcaption>Protecto homepage. Source: protecto.ai</figcaption>
+</figure>
+<p>Protecto is a privacy vault for AI. Its vault page cites more than 50 million records protected at a healthcare insurer and uses a claims team’s assistant over support notes as a worked example.</p>
+<p><strong>Policy Lifecycle Coverage:</strong> Focused on the claim stage: its healthcare page describes claims search and prior authorization review running on tokens, and its vault page uses a claims team’s assistant over support notes as a worked example. Premium payments, agency intake, and claims file storage sit outside its focus.</p>
+<p><strong>Strengths:</strong></p>
+<ul>
+  <li><strong>Built for unstructured claims text:</strong> 50+ PII, PHI, and PCI entity types detected in notes, letters, and messages.</li>
+  <li><strong>Consistent tokens:</strong> A claimant still matches across documents.</li>
+  <li><strong>Health-line paperwork:</strong> SOC 2 Type II, ISO 27001, and a HIPAA BAA, with an air-gapped option.</li>
+</ul>
+<p><strong>Limitations:</strong></p>
+<ul>
+  <li><strong>AI scope only:</strong> Premiums, intake, and documents need other vendors.</li>
+  <li><strong>No public price:</strong> Budgeting waits for the pilot and a quote.</li>
+</ul>
+<p><strong>Pricing:</strong> Protecto quotes privately after a free 4-week pilot on your own data, and also sells through Google Cloud Marketplace.</p>
+<p><strong>Reviewer Read:</strong> No reviews yet on <a class="bl-link" href="https://www.g2.com/products/protecto/reviews" target="_blank" rel="noopener">G2</a> or <a class="bl-link" href="https://www.capterra.com/p/10006145/Protecto/reviews/" target="_blank" rel="noopener">Capterra</a>, so ask for insurer references.</p>
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">06</span>
+    <div class="vc__id">
+      <h3 id="vgs" class="vc__name"><span class="vc__sep">6. </span>VGS<span class="vc__sep">: </span><span class="vc__pill">Best for Insurance Marketplaces and Agent Platforms</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/very-good-security-vgs-platform/reviews" target="_blank" rel="noopener"><span class="vc__score">4.7<small>/5</small></span><span class="vc__src">G2 · 47 reviews</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Data covered</dt><dd>Cards, bank accounts, PII, and AI prompts</dd></div>
+    <div><dt>Starting price</dt><dd>Free to start; plans from $1,000 a month</dd></div>
+    <div><dt>Deployment</dt><dd>Managed cloud vault behind a proxy</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Insurance marketplaces and agent platforms that collect policyholder cards and PII and pass them to several carriers and payment providers.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/vgs.jpg" alt="VGS homepage" >}}
+  <figcaption>VGS homepage. Source: verygoodsecurity.com</figcaption>
+</figure>
+<p>VGS (Very Good Security) is a vaulted tokenization platform that sits in front of your systems as a proxy, swapping sensitive fields for aliases on the way in and restoring them on the way out. Its “OTA and Insurers” page targets insurance platforms that sell as an agent between the policyholder and the carrier.</p>
+<p><strong>Policy Lifecycle Coverage:</strong> Covers quote, bind, and premium payment for platforms that pass cards on to carriers; its insurers page describes the “double-loop” payment where each premium moves from customer to platform and then to the carrier. Its PII page stores aliased data under AES-256-GCM, and its AI Data Firewall tokenizes SSNs, bank accounts, and health data before inference. Claims document storage is Not published on the pages we checked.</p>
+<p><strong>Strengths:</strong></p>
+<ul>
+  <li><strong>Built for agent setups:</strong> Shares card data with carriers without manual handling.</li>
+  <li><strong>Claims AI coverage:</strong> The AI Data Firewall tokenizes or blocks fields, then reconstructs replies.</li>
+  <li><strong>Deep review base:</strong> 47 G2 reviews, the most of any vendor here.</li>
+</ul>
+<p><strong>Limitations:</strong></p>
+<ul>
+  <li><strong>High entry price:</strong> Plans start at $1,000 a month, heavy for small agencies.</li>
+  <li><strong>Payments-centered:</strong> No claims file vault or agency intake links described.</li>
+  <li><strong>Documentation gaps:</strong> One G2 reviewer says some documentation is out of date.</li>
+</ul>
+<p><strong>Pricing:</strong> VGS lets you start free, then Starter plans begin at $1,000 a month; a Growth package adds network tokens, account updater, a PCI compliance subscription, and large file transfers by quote.</p>
+<p><strong>Reviewer Read:</strong> <a class="bl-link" href="https://www.g2.com/products/very-good-security-vgs-platform/reviews" target="_blank" rel="noopener">4.7/5 from 47 reviews on G2</a>, with praise for responsive chat support; one reviewer calls the $40 fee per custom CNAME too expensive. Its Capterra listing has no reviews.</p>
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">07</span>
+    <div class="vc__id">
+      <h3 id="basis-theory" class="vc__name"><span class="vc__sep">7. </span>Basis Theory<span class="vc__sep">: </span><span class="vc__pill">Best for Insurtech Apps Taking Premium Cards and PII</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate vc__rate--new" href="https://www.g2.com/products/basis-theory/reviews" target="_blank" rel="noopener"><span class="vc__score">No reviews</span><span class="vc__src">G2</span></a><a class="vc__rate vc__rate--new" href="https://www.capterra.com/p/10002181/Basis-Theory/" target="_blank" rel="noopener"><span class="vc__score">No reviews</span><span class="vc__src">Capterra</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Data covered</dt><dd>Cards, bank accounts, SSNs, and any PII</dd></div>
+    <div><dt>Starting price</dt><dd>Free to start; $995 a month with 20,000 tokens</dd></div>
+    <div><dt>Deployment</dt><dd>Managed cloud vault through an API</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Insurtech marketplaces, agencies, and brokerages that build their own apps and want premium cards and policyholder PII out of their systems.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v6/basistheory.jpg" alt="Basis Theory homepage" >}}
+  <figcaption>Basis Theory homepage. Source: basistheory.com</figcaption>
+</figure>
+<p>Basis Theory is a vaulted, API-first tokenization platform: your app sends sensitive data to its vault and stores only the returned token. Its case studies tagged Insurance include Marble, Matic, and the brokerage Modern Life.</p>
+<p><strong>Policy Lifecycle Coverage:</strong> Covers quote, bind, and premium payment for insurtech apps. In the Marble case study, Basis Theory takes the card after entry, tokenizes it, routes it to the carrier, and vaults it; Modern Life tokenizes client PII. Its tokens can hold an SSN, a user record, or file contents, but claims workflows and agency intake are Not published.</p>
+<p><strong>Strengths:</strong></p>
+<ul>
+  <li><strong>Insurer case studies:</strong> Marble went live in under 30 days; Matic integrated in one week.</li>
+  <li><strong>Format-preserving aliases:</strong> A token can keep an SSN’s shape for existing schemas.</li>
+  <li><strong>Compliance coverage:</strong> PCI Level 1, SOC 2 Type II, ISO 27001, and HIPAA listed.</li>
+</ul>
+<p><strong>Limitations:</strong></p>
+<ul>
+  <li><strong>Developer build required:</strong> Collection runs through its Elements and API inside your app.</li>
+  <li><strong>Payments-centered:</strong> No claims file vault or prompt tokenization described.</li>
+  <li><strong>US-only entry plan:</strong> The $995 plan runs in a US environment only.</li>
+</ul>
+<p><strong>Pricing:</strong> Basis Theory lets you start free; the $995 monthly plan includes 20,000 tokens and a PCI AOC, and PII and PHI compliance options, uptime guarantees, and SSO come with a quoted plan.</p>
+<p><strong>Reviewer Read:</strong> No reviews yet on <a class="bl-link" href="https://www.g2.com/products/basis-theory/reviews" target="_blank" rel="noopener">G2</a> or <a class="bl-link" href="https://www.capterra.com/p/10002181/Basis-Theory/" target="_blank" rel="noopener">Capterra</a>, so ask for insurer references.</p>
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">08</span>
+    <div class="vc__id">
+      <h3 id="ixopay-tokenex" class="vc__name"><span class="vc__sep">8. </span>IXOPAY (TokenEx)<span class="vc__sep">: </span><span class="vc__pill">Best for Premium Card Collection Across Channels</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/tokenex/reviews" target="_blank" rel="noopener"><span class="vc__score">4.6<small>/5</small></span><span class="vc__src">G2 · 17 reviews</span></a><a class="vc__rate vc__rate--new" href="https://www.capterra.com/p/181731/Cloud-Based-Tokenization/reviews/" target="_blank" rel="noopener"><span class="vc__score">No reviews</span><span class="vc__src">Capterra</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Data covered</dt><dd>Cards first; SSNs and health data as examples</dd></div>
+    <div><dt>Starting price</dt><dd>Custom quote</dd></div>
+    <div><dt>Deployment</dt><dd>Cloud tokenization, vaulted or vaultless</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Carriers and billing teams collecting premiums by web, app, and phone across several processors.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/ixopay.jpg" alt="IXOPAY homepage" >}}
+  <figcaption>IXOPAY homepage. Source: ixopay.com</figcaption>
+</figure>
+<p>TokenEx is IXOPAY’s cloud tokenization platform, sold alongside its payment orchestration. Its documentation lists credit card numbers, SSNs, and health information as examples of data it tokenizes.</p>
+<p><strong>Policy Lifecycle Coverage:</strong> Covers the payment stage: recurring card premiums through a hosted iFrame, mobile API, batch files, or P2PE devices, and phone premiums through its Contact Center API with IVR/DTMF and PIN pad capture. We found no insurance page or insurer case study, and ACH tokenization, claims files, and agency intake are Not published on the pages we checked.</p>
+<p><strong>Strengths:</strong></p>
+<ul>
+  <li><strong>Call-center capture:</strong> Phone and IVR routes for premium lines.</li>
+  <li><strong>Processor flexibility:</strong> Universal tokens work across processors, with network tokens and account updater.</li>
+  <li><strong>Established review base:</strong> 17 G2 reviews, more than most vendors here.</li>
+</ul>
+<p><strong>Limitations:</strong></p>
+<ul>
+  <li><strong>Payments-centered:</strong> Policyholder files and claims documents need another product.</li>
+  <li><strong>No public price:</strong> Quote-only.</li>
+</ul>
+<p><strong>Pricing:</strong> IXOPAY publishes no prices; tokenization is sold alone or inside its IXO One platform with orchestration.</p>
+<p><strong>Reviewer Read:</strong> <a class="bl-link" href="https://www.g2.com/products/tokenex/reviews" target="_blank" rel="noopener">4.6/5 from 17 reviews on G2</a>. One G2 reviewer says its secure iframe keeps card data off their systems to reduce PCI scope; the <a class="bl-link" href="https://www.capterra.com/p/181731/Cloud-Based-Tokenization/reviews/" target="_blank" rel="noopener">Capterra listing</a> has no reviews.</p>
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">09</span>
+    <div class="vc__id">
+      <h3 id="fortanix" class="vc__name"><span class="vc__sep">9. </span>Fortanix<span class="vc__sep">: </span><span class="vc__pill">Best for Vaultless Tokens Next to HSM-Backed Keys</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/fortanix/reviews" target="_blank" rel="noopener"><span class="vc__score">4.5<small>/5</small></span><span class="vc__src">G2 · 2 reviews</span></a><a class="vc__rate" href="https://www.capterra.com/p/191860/Self-Defending-Key-Management-Service/reviews/" target="_blank" rel="noopener"><span class="vc__score">5.0<small>/5</small></span><span class="vc__src">Capterra · 1 review</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Data covered</dt><dd>Structured fields via vaultless FPE</dd></div>
+    <div><dt>Starting price</dt><dd>Free trial; paid plans quoted</dd></div>
+    <div><dt>Deployment</dt><dd>On-premises or SaaS</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Carrier security teams consolidating key management, HSMs, and tokenization on one platform.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/fortanix.jpg" alt="Fortanix homepage" >}}
+  <figcaption>Fortanix homepage. Source: fortanix.com</figcaption>
+</figure>
+<p>Fortanix offers tokenization inside its Data Security Manager, using vaultless format-preserving encryption backed by FIPS 140-2 Level 3 HSMs. Its tokenization page cites PCI DSS and electronically protected health information (ePHI).</p>
+<p><strong>Policy Lifecycle Coverage:</strong> Covers policy databases after bind: SSNs and other structured fields tokenized with vaultless format-preserving encryption, and its tokenization page names nonpublic personal information (NPPI), the GLBA term insurers use. Intake, claims files, card capture, and prompt tokenization are Not published on the pages we checked.</p>
+<p><strong>Strengths:</strong></p>
+<ul>
+  <li><strong>HSM-backed keys:</strong> Keys live in FIPS 140-2 Level 3 hardware.</li>
+  <li><strong>One security platform:</strong> Keys, HSM, encryption, and tokenization together, on-premises or SaaS.</li>
+  <li><strong>Snowflake material:</strong> Fortanix publishes guidance on tokenizing data in Snowflake.</li>
+</ul>
+<p><strong>Limitations:</strong></p>
+<ul>
+  <li><strong>Thin review base:</strong> Two G2 reviews and one on Capterra.</li>
+  <li><strong>Limited visibility:</strong> One reviewer wants more granular visibility into key usage.</li>
+</ul>
+<p><strong>Pricing:</strong> A 30-day free trial, then an Enterprise Tier by quote or AWS Marketplace at $1.95 to $4.11 an hour plus AWS infrastructure.</p>
+<p><strong>Reviewer Read:</strong> <a class="bl-link" href="https://www.g2.com/products/fortanix/reviews" target="_blank" rel="noopener">4.5/5 from 2 reviews on G2</a> and <a class="bl-link" href="https://www.capterra.com/p/191860/Self-Defending-Key-Management-Service/reviews/" target="_blank" rel="noopener">5.0/5 from 1 on Capterra</a>, with praise for its data-centric approach.</p>
+<h2 id="picks-by-role">Which Tokenization Software Fits Your Insurance Business</h2>
+<p>With the nine platforms covered, start with where your data piles up. A carrier, an MGA, an agency, and a claims TPA each hold different files, so the best fit differs.</p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Your role</th><th>Best pick</th><th>Why</th></tr></thead>
+<tbody>
+<tr><td>Carrier: analytics and actuarial</td><td>Protegrity</td><td>Vaultless tokens in Snowflake and AWS</td></tr>
+<tr><td>Carrier: in-house key management</td><td>Thales CipherTrust or Fortanix</td><td>Self-run token servers or HSM-backed keys</td></tr>
+<tr><td>Insurance marketplace or agent platform</td><td>VGS</td><td>Proxy passes cards and PII to carriers</td></tr>
+<tr><td>Insurtech app built in-house</td><td>Basis Theory</td><td>API vault routes premium cards to carriers</td></tr>
+<tr><td>MGA with its own platform</td><td>Enigma Vault</td><td>Data Vault and Card Vault through the API</td></tr>
+<tr><td>Agency or broker</td><td>Enigma Vault</td><td>Customer Vault intake, Card Vault premiums</td></tr>
+<tr><td>Claims TPA</td><td>Enigma Vault</td><td>File Vault claim files, NoPII for claims AI</td></tr>
+<tr><td>Health insurer AI team</td><td>Protecto or Enigma Vault NoPII</td><td>Prompt tokenization with a BAA</td></tr>
+<tr><td>Premium billing, many processors</td><td>IXOPAY (TokenEx) or Bluefin ShieldConex</td><td>Contact-center capture; Bluefin adds ACH and P2PE</td></tr>
+</tbody></table></div>
+<p>Health insurers should also read our guide to <a class="bl-link" href="/blog/best-tokenization-software-for-healthcare/">tokenization software for healthcare</a>.</p>
+<h2 id="policy-lifecycle">Tokenized Data Across the Policy Lifecycle</h2>
+<p>Each stage of a policy adds sensitive data and new hands. The last column lists platforms that document coverage on their own pages.</p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Stage</th><th>Data exposed</th><th>Platforms that cover it</th></tr></thead>
+<tbody>
+<tr><td>Quote</td><td>DOB, driver’s license, prior claims</td><td>Enigma Vault (Customer Vault, Data Vault), VGS</td></tr>
+<tr><td>Bind</td><td>SSN, bank account, signed disclosures</td><td>Enigma Vault (Data Vault, Customer Vault)</td></tr>
+<tr><td>Premium payment</td><td>Cards online and by phone</td><td>Enigma Vault (Card Vault), IXOPAY, Bluefin, VGS, Basis Theory</td></tr>
+<tr><td>Claim</td><td>Photos, medical bills, IDs, adjuster notes</td><td>Enigma Vault (File Vault), Bluefin files, Protecto AI</td></tr>
+<tr><td>Renewal</td><td>Revised driver lists, payroll, IDs</td><td>Enigma Vault (Customer Vault)</td></tr>
+<tr><td>Analytics</td><td>Policy, loss, and member data</td><td>Protegrity, Fortanix, Thales, Bluefin</td></tr>
+</tbody></table></div>
+<div class="bl-evcall" role="note"><span class="bl-evcall__tag">Enigma Vault</span><p><strong>The application packet is where policyholder data sprawls first:</strong> Customer Vault sends a branded intake link for the application, IDs, and signed disclosures, tokenizes SSNs and licenses through Data Vault, and lets you share a limited packet with a carrier by expiring link, with every access logged.</p><div class="bl-evcall__cta"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-best-tokenization-software-for-insurance--callout-intake" href="/request-demo/?interest=best-tokenization-software-for-insurance"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-evcall__more cta-blog cta-best-tokenization-software-for-insurance--callout-intake-explore" href="/vault/customer-vault/">Explore Customer Vault &rarr;</a></div></div>
+<h2 id="claims-analytics-and-ai">Claims Analytics and AI Without Exposing Policyholders</h2>
+<p>Actuarial and claims analytics need joins and counts, not raw SSNs. Vaultless, format-preserving tokens from Protegrity, Bluefin, Fortanix, and Thales keep schemas and matching intact in the warehouse.</p>
+<p>AI is the newer leak. Adjusters drop whole claim files into summarization apps, so the prompt itself needs tokenizing.</p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Platform</th><th>Tokenizes prompts</th><th>Restores values in replies</th><th>Self-hosted option</th></tr></thead>
+<tbody>
+<tr><td>Enigma Vault (NoPII)</td><td>Yes, proxy for 9 model providers</td><td>Yes</td><td>Enterprise</td></tr>
+<tr><td>Protecto</td><td>Yes, before models or agents</td><td>Yes, by policy</td><td>On-premises or air-gapped</td></tr>
+<tr><td>Protegrity</td><td>Guardrails for prompts and outputs</td><td>Not published</td><td>On-premises or hybrid</td></tr>
+<tr><td>VGS (AI Data Firewall)</td><td>Yes, tokenize, mask, or block</td><td>Yes, reconstructs responses</td><td>Not published</td></tr>
+<tr><td>Thales, IXOPAY, Bluefin, Basis Theory, Fortanix</td><td>Not documented</td><td>Not applicable</td><td>Not applicable</td></tr>
+</tbody></table></div>
+<div class="bl-evcall" role="note"><span class="bl-evcall__tag">Enigma Vault NoPII</span><p><strong>Claims AI without handing the model an SSN:</strong> Point the claims app’s base URL at NoPII and names, SSNs, account numbers, and dates are tokenized before the prompt leaves, then restored in the reply. Every detection is logged for the market-conduct exam, and a failed tokenization blocks the request.</p><div class="bl-evcall__cta"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-best-tokenization-software-for-insurance--callout-ai" href="/request-demo/?interest=best-tokenization-software-for-insurance"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-evcall__more cta-blog cta-best-tokenization-software-for-insurance--callout-ai-explore" href="/nopii/">Explore NoPII &rarr;</a></div></div>
+<h2 id="insurance-regulations-and-tokenization">Which Insurance Rules Apply</h2>
+<p>No insurance rule names tokenization. Each asks you to protect nonpublic information, and tokens shrink what an incident exposes.</p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Rule</th><th>Who it reaches</th><th>What it asks</th></tr></thead>
+<tbody>
+<tr><td><a class="bl-link" href="https://content.naic.org/sites/default/files/model-law-668.pdf" target="_blank" rel="noopener">NAIC Model Law #668</a></td><td>Licensees in <a class="bl-link" href="https://content.naic.org/sites/default/files/legal-adoption-map-668-idsm.pdf" target="_blank" rel="noopener">28 jurisdictions</a> (Nov 3, 2026)</td><td>Security program, vendor oversight, 72-hour notice</td></tr>
+<tr><td><a class="bl-link" href="https://www.dfs.ny.gov/cybersecurity/requirements" target="_blank" rel="noopener">NYDFS Part 500</a></td><td>New York insurance licensees</td><td>Encryption, MFA, 72-hour notice, April 15 filing</td></tr>
+<tr><td><a class="bl-link" href="https://www.ftc.gov/business-guidance/privacy-security/gramm-leach-bliley-act" target="_blank" rel="noopener">GLBA Safeguards</a></td><td>Insurers, <a class="bl-link" href="https://www.law.cornell.edu/uscode/text/15/6805" target="_blank" rel="noopener">enforced by state regulators</a></td><td>Safeguards for customer information</td></tr>
+<tr><td><a class="bl-link" href="https://www.law.cornell.edu/cfr/text/45/160.103" target="_blank" rel="noopener">HIPAA</a></td><td>Health plans and HMOs</td><td>Safeguards and a BAA with vendors</td></tr>
+<tr><td><a class="bl-link" href="https://www.pcisecuritystandards.org/standards/" target="_blank" rel="noopener">PCI DSS</a></td><td>Anyone handling premium cards</td><td>Protect cardholder data in scope</td></tr>
+</tbody></table></div>
+<p>HIPAA <a class="bl-link" href="https://www.law.cornell.edu/uscode/text/42/300gg-91" target="_blank" rel="noopener">excludes excepted benefits</a> such as disability income, liability, and workers’ compensation. Medical records in those claims still fall under state insurance law and GLBA.</p>
+<h2 id="evidence-checklist">Vendor Checklist for Insurance Security Reviews</h2>
+<p>Carrier vendor-management teams ask every tokenization provider similar questions. The right column shows what Enigma Vault states on its own pages.</p>
+<div class="bl-tablewrap bl-tablewrap--tri"><table class="bl-table bl-table--tri"><thead><tr><th>Question</th><th>Why insurers ask</th><th>What to request from any vendor</th><th class="bl-tri__ev"><span class="bl-tri__tag">Our answer</span>Enigma Vault</th></tr></thead><tbody>
+<tr><td>Premium card scope</td><td>PCI DSS for billing and call centers</td><td>PCI level, AOC, and responsibility matrix</td><td class="bl-tri__ev">PCI DSS Level 1 with an AOC</td></tr>
+<tr><td>Control evidence</td><td>NAIC and NYDFS vendor oversight</td><td>SOC 2 Type II report and date</td><td class="bl-tri__ev">SOC 2 Type II report</td></tr>
+<tr><td>Access records</td><td>72-hour incident determination</td><td>A sample log of one reveal</td><td class="bl-tri__ev">Every access, tokenization, and retrieval logged</td></tr>
+<tr><td>Health lines</td><td>HIPAA for health plans</td><td>BAA scope by product</td><td class="bl-tri__ev">BAA on the Vault and NoPII Enterprise</td></tr>
+<tr><td>AI failure mode</td><td>Claims text leaking to a model</td><td>Block or pass through when detection fails</td><td class="bl-tri__ev">NoPII blocks the request</td></tr>
+<tr><td>ISO 27001</td><td>Common in carrier questionnaires</td><td>Certificate or timeline</td><td class="bl-tri__ev">In progress</td></tr>
+<tr class="bl-tri__cta"><td>Next step</td><td colspan="2" class="bl-tri__note">Bring your vendor questionnaire and one claims or billing workflow.</td><td class="bl-tri__ev"><div class="bl-tri__acts"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-best-tokenization-software-for-insurance--table-evidence" href="/request-demo/?interest=best-tokenization-software-for-insurance"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-tri__more cta-blog cta-best-tokenization-software-for-insurance--table-evidence-explore" href="/platform/data-security/">Explore data security &rarr;</a></div></td></tr>
+</tbody></table></div>
+<h2 id="pricing-compared">Insurance Pricing Compared</h2>
+<p>Only four vendors here put a number on the page.</p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Platform</th><th>Published price?</th><th>How it’s sold</th><th>Notes</th></tr></thead>
+<tbody>
+<tr><td>Enigma Vault</td><td>Yes: Growth $249, Business $499 a month</td><td>Self-serve; Enterprise by quote</td><td>Customer Vault by engagement</td></tr>
+<tr><td>Protegrity</td><td>Free Developer Edition only</td><td>Team or Enterprise quote</td><td>Ask for SOC 2 and HIPAA evidence</td></tr>
+<tr><td>Thales CipherTrust</td><td>No</td><td>License quote</td><td>You run the token servers</td></tr>
+<tr><td>Protecto</td><td>No</td><td>Quote after 4-week pilot</td><td>SOC 2 Type II, ISO 27001, BAA</td></tr>
+<tr><td>IXOPAY (TokenEx)</td><td>No</td><td>Contact sales</td><td>Ask for the AOC</td></tr>
+<tr><td>Bluefin ShieldConex</td><td>No</td><td>Quote; sandbox on request</td><td>Ask about SOC 2 evidence</td></tr>
+<tr><td>VGS</td><td>Yes: from $1,000 a month</td><td>Free start; Growth by quote</td><td>$40 per custom CNAME, per reviewer</td></tr>
+<tr><td>Basis Theory</td><td>Yes: $995 a month, 20,000 tokens</td><td>Free start; larger plans by quote</td><td>$995 plan is US environment only</td></tr>
+<tr><td>Fortanix</td><td>AWS from $1.95 an hour</td><td>Trial, Enterprise Tier, or AWS</td><td>AWS infrastructure billed separately</td></tr>
+</tbody></table></div>
+<p>Where a cell says No or Not published, put the question in the carrier’s vendor questionnaire.</p>
+<h2 id="what-we-ask-insurance-teams">What We Ask Insurance Teams First</h2>
+<p>We prove one line of business and one packet, never the whole operation. These are the questions we open with:</p>
+<ul>
+  <li><strong>Where do applications arrive today?</strong> Email attachments and repeat requests at renewal are the usual start.</li>
+  <li><strong>Who gets the full packet?</strong> Often every market, when each carrier needs only part of it.</li>
+  <li><strong>Where does settlement data land?</strong> Bank details and tax documents often sit in general claims notes.</li>
+  <li><strong>Does a carrier require its own portal?</strong> If so, files leave the vault at that step, and we say so early.</li>
+  <li><strong>Are premiums taken by phone?</strong> Twilio Pay capture needs Growth or Business.</li>
+  <li><strong>Any litigation holds?</strong> They can limit deletion, so the vault sits beside the claim system of record.</li>
+</ul>
+<p>We are also clear on limits: tokenization does not check an application is true, no product makes an agency PCI compliant alone, and NoPII covers only application routes sent through it, not staff pasting claims into a consumer chatbot.</p>
+<div class="bl-evcall" role="note"><span class="bl-evcall__tag">Enigma Vault</span><p><strong>Start with one renewal packet:</strong> The free sandbox covers a test set at no cost, with no card, so producers and claims staff can see tokenized fields, stored files, and the access log before anyone signs a contract.</p><div class="bl-evcall__cta"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-best-tokenization-software-for-insurance--callout-pilot" href="/request-demo/?interest=best-tokenization-software-for-insurance"><span>Plan a pilot</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-evcall__more cta-blog cta-best-tokenization-software-for-insurance--callout-pilot-explore" href="/pricing/">See plans &rarr;</a></div></div>
+<h2 id="enigma-vault-for-insurance">Protect Policyholder Data With Enigma Vault</h2>
+<p>Renewal season at a regional agency: clients email revised driver lists with license numbers, a commercial account sends payroll by attachment, three premiums come in by phone, and a claim arrives with photos and a hospital bill.</p>
+<p>With Enigma Vault, the renewal packet comes through a Customer Vault link, licenses and SSNs become Data Vault tokens, phone premiums go through Card Vault’s IVR capture, and the claim file sits in File Vault behind an expiring link the carrier can open.</p>
+<p>The carrier’s security review has what it needs: PCI DSS Level 1, SOC 2 Type II, a BAA for health lines, and a log of every access. To map it to one line of business, <a class="bl-link" href="/request-demo/">book a demo</a> or start in the Lite sandbox after checking <a class="bl-link" href="/pricing/">pricing</a>.</p>
+
+
+

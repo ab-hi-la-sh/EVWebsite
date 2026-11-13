@@ -1,0 +1,826 @@
+---
+title: "10 Best Tokenization Software for Healthcare in 2026"
+titleEmphasis: "10 Best Tokenization Software for Healthcare in 2026"
+slug: "best-tokenization-software-for-healthcare"
+layout: "pii-style"
+metaTitle: "Best Tokenization Software for Healthcare (2026)"
+description: "Compare 10 tokenization platforms for healthcare by organization type: PHI and payment coverage, HIPAA de-identification limits, clinical AI prompts, pricing, and BAAs."
+subtitle: "How to choose tokenization software that protects PHI across patient intake, payments, and AI on clinical notes, and which platforms sign a BAA."
+date: 2026-11-10T00:10:00
+category: "Vault"
+author: "tony-alex"
+readTime: 15
+heroImage: "/assets/blog/img-02.png"
+heroAlt: "Patient identifiers from intake forms, EHR fields, and clinical notes replaced by tokens, with originals held in a vault"
+excerpt: "Ten tokenization platforms compared for healthcare: PHI in EHR fields and documents, BAA availability, patient payments under PCI, clinical-note AI, and price."
+tags: ["tokenization", "phi", "hipaa", "healthcare", "data-vault", "nopii"]
+ogImage: "/assets/og/vault-data.jpg"
+ogImageAlt: "Best Tokenization Software for Healthcare in 2026 | Enigma Vault"
+ogType: article
+styles: ["blog.css", "pages/blog-pii-hero.css", "tr-pages.css", "pages/vs-tri-table.css"]
+scripts: ["blog-article.js", "pages/vs-tri-table.js"]
+faqSchema: true
+faqs:
+  - q: "What Is Tokenization Software for Healthcare?"
+    a: "It replaces protected health information such as patient names, medical record numbers, member IDs, diagnoses, and card numbers with tokens that mean nothing on their own. The originals sit in a protected vault or behind a key, and only authorized users or systems can reveal them, with each reveal logged for the HIPAA audit trail."
+  - q: "What Is the Best Tokenization Software for Healthcare in 2026?"
+    a: "Enigma Vault ranks first for covering PHI fields, patient documents, intake, patient card payments, and clinical-note AI prompts in one vault, with a BAA available on the Vault and NoPII Enterprise and published prices. Skyflow suits health apps that want a HIPAA-mapped vault; Bluefin ShieldConex suits patient payments and PHI on vaultless tokens; Protecto suits payer and provider AI on unstructured notes; Protegrity suits payer analytics in Snowflake or AWS; VGS suits health apps that take card payments and send PHI to AI; Thales suits hospital data centers that run their own keys; K2view suits a single patient view across many systems; IXOPAY suits patient identifiers and payment credentials in one vault; Basis Theory suits digital-health platforms storing cards and PHI."
+  - q: "Is Tokenized PHI Still PHI Under HIPAA?"
+    a: "Usually yes. When a token can be reversed through a vault or key that your organization or vendor controls, the data is pseudonymized and stays PHI for HIPAA purposes. De-identification needs either the Safe Harbor method, which removes 18 identifier types, or a documented Expert Determination. Tokenization reduces who can see identifiers and where they are stored; it does not by itself de-identify a data set."
+  - q: "Do Healthcare Tokenization Vendors Sign a BAA?"
+    a: "Several do, with different scopes. Enigma Vault offers a BAA on the Vault and NoPII Enterprise, and Protecto lists a HIPAA BAA. Skyflow describes itself as HIPAA assessed and eligible. Bluefin ShieldConex, Protegrity, VGS, Thales, K2view, IXOPAY, and Basis Theory do not state BAA terms on the pages we checked, so ask before signing."
+  - q: "What Is the Difference Between PHI Tokenization and Patient Record Linkage?"
+    a: "PHI tokenization protects identifiers inside your own systems and lets authorized staff reveal them. Patient record linkage, offered by companies such as Datavant, IQVIA, and LexisNexis Gravitas, creates one-way tokens so de-identified records from different sources can be matched for research and real-world data without revealing who the patient is. They answer different problems."
+  - q: "Does Tokenizing Prompts Make Clinical AI HIPAA Compliant?"
+    a: "No. Enigma Vault NoPII and Protecto tokenize recognized identifiers such as names, dates, and record numbers before text reaches a model provider and restore them in the response. HIPAA still depends on covered-entity and business-associate roles, BAAs, minimum necessary use, and the full data flow, and a rare diagnosis in free text can still identify someone."
+  - q: "Which Tokenization Platforms Support Payments, PII, and PHI?"
+    a: "Enigma Vault covers all three in one vendor: Card Vault for patient card payments under PCI DSS Level 1, Data Vault for PII and PHI fields, and File Vault and Customer Vault for records and intake. Skyflow offers a payments vault and a healthcare vault. Bluefin ShieldConex tokenizes payments, PII, and PHI, and VGS vaults cards and lists PHI under HIPAA. IXOPAY tokenizes patient identifiers and payment credentials, and Basis Theory stores cards, PHI, and PII in one vault. Protecto, Protegrity, Thales, and K2view focus on PII and PHI data and do not publish healthcare card-payment coverage."
+  - q: "If an Employee Removes the Name, DOB, and MRN Before Pasting a Note Into AI, Is It Still PHI?"
+    a: "Usually yes. Name, date of birth, and medical record number are three of the 18 identifier types HIPAA Safe Harbor requires removing. Dates of service, ZIP codes, phone numbers, and other details left in the note can keep it PHI, so tokenizing every recognized identifier before the prompt leaves, plus governance review, is safer than manual deletion."
+---
+<style>
+/* Wide tables: tighter cell padding so they fit the article column. */
+.bl-content .bl-table--wide td, .bl-content .bl-table--wide th { padding-left: 8px; padding-right: 8px; }
+.bl-content figure.bl-shot{margin:20px 0 24px;padding:10px;border:1px solid var(--ev-cool-stone);border-radius:10px;background:var(--ev-warm-cloud)}.bl-content figure.bl-shot img{display:block;width:100%;height:auto;border-radius:6px}.bl-content figure.bl-shot figcaption{margin-top:8px;text-align:center;font-size:13px;color:var(--ev-slate)}
+/* Vendor header card: rank, name, best-for pill, review scores, key facts. */
+.bl-content .vc { margin: 40px 0 20px; }
+.bl-content .vc__head { display: grid; grid-template-columns: auto 1fr auto; gap: 18px; align-items: center; margin-bottom: 14px; }
+.bl-content .vc__num { font-size: 34px; font-weight: 600; line-height: 1; color: var(--ev-mineral-blue); font-variant-numeric: tabular-nums; }
+.bl-content h3.vc__name { margin: 0; padding: 0; font-size: 26px; line-height: 1.25; font-weight: 600; color: var(--ev-ink); }
+.bl-content .vc__sep { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.bl-content .vc__pill { display: table; margin-top: 10px; padding: 6px 12px; border-radius: 6px; background: var(--ev-mineral-blue); color: #fff; line-height: 1.4; font-weight: 600; text-transform: none; letter-spacing: 0; font-size: 13px; }
+.bl-content .vc__rates { display: flex; flex-direction: column; gap: 8px; align-items: stretch; }
+.bl-content .vc__rate { display: flex; flex-direction: column; align-items: flex-end; padding: 8px 14px; border: 1px solid var(--ev-cool-stone); border-radius: 10px; background: #fff; text-decoration: none !important; min-width: 128px; }
+.bl-content a.vc__rate:hover { border-color: var(--ev-mineral-blue); }
+.bl-content .vc__score { font-size: 20px; font-weight: 700; color: var(--ev-ink); line-height: 1.2; }
+.bl-content .vc__score small { font-size: 13px; font-weight: 500; color: var(--ev-slate); }
+.bl-content .vc__src { font-size: 12px; color: var(--ev-slate); line-height: 1.3; }
+.bl-content .vc__rate--new .vc__score { font-size: 15px; }
+.bl-content .vc__facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px 24px; margin: 0; padding: 18px 22px; border-radius: 12px; background: var(--ev-warm-cloud); }
+.bl-content .vc__facts div { margin: 0; }
+.bl-content .vc__facts .vc__best { grid-column: 1 / -1; padding-top: 14px; border-top: 1px solid var(--ev-cool-stone); }
+.bl-content .vc__facts dt { margin: 0 0 4px; font-size: 11.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ev-slate); }
+.bl-content .vc__facts dd { margin: 0; font-size: 15px; line-height: 1.5; color: var(--ev-ink); }
+@media (max-width: 700px) {
+  .bl-content .vc__head { grid-template-columns: auto 1fr; }
+  .bl-content .vc__rates { grid-column: 1 / -1; flex-direction: row; flex-wrap: wrap; }
+  .bl-content .vc__rate { align-items: flex-start; }
+  .bl-content .vc__num { font-size: 26px; }
+  .bl-content h3.vc__name { font-size: 22px; }
+  .bl-content .vc__facts { grid-template-columns: 1fr; }
+}
+.bl-content .tldr { margin: 8px 0 32px; padding: 22px 26px; border-radius: 12px; background: var(--ev-warm-cloud); border-left: 3px solid var(--ev-mineral-blue); }
+.bl-content .tldr .tldr__label { margin: 0 0 12px; padding: 0; border: 0; font-size: 13px; line-height: 1.4; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--ev-mineral-blue); }
+.bl-content .tldr .tldr__list { margin: 0; padding-left: 20px; }
+.bl-content .tldr .tldr__list li { margin: 0 0 10px; font-size: 16px; line-height: 1.6; color: var(--ev-ink); }
+.bl-content .tldr .tldr__list li::marker { color: var(--ev-mineral-blue); }
+.bl-content .tldr .tldr__list li:last-child { margin-bottom: 0; }
+.bl-content .tldr strong a { font-weight: 600; }
+</style>
+<p>Comparing the best tokenization software for healthcare of 2026: 1. Enigma Vault, 2. Skyflow, 3. Bluefin ShieldConex, 4. Protecto, 5. Protegrity, 6. VGS, 7. Thales CipherTrust Tokenization, 8. K2view, 9. IXOPAY, and 10. Basis Theory.</p>
+<p>Patient data rarely stays in the EHR. It arrives as a photographed insurance card, travels in a referral fax or an HL7 feed, gets read aloud on a copay call, and now lands in prompts for ambient documentation and prior authorization apps.</p>
+<p>Reviewers of healthcare-relevant platforms keep naming the same costs: a <a class="bl-link" href="https://www.g2.com/products/thales-ciphertrust-tokenization/reviews" target="_blank" rel="noopener">Thales reviewer on G2</a> says it can be expensive for small organizations, <a class="bl-link" href="https://www.g2.com/products/k2view/reviews" target="_blank" rel="noopener">K2view reviewers</a> describe a steep learning curve, and two <a class="bl-link" href="https://www.g2.com/products/protegrity/reviews" target="_blank" rel="noopener">Protegrity reviewers</a> call the price high.</p>
+<p>Enigma Vault is our top pick because one vault covers every place PHI enters a practice, health plan, or digital-health app: EHR-adjacent fields, referrals and records, intake forms, copay cards, and AI prompts, with a BAA available on the Vault and NoPII Enterprise. It is PCI DSS Level 1 and SOC 2 Type II, holds <a class="bl-link" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener">4.4/5 on G2</a> and <a class="bl-link" href="https://www.capterra.com/p/241650/Enigma-Vault/reviews/" target="_blank" rel="noopener">4.8/5 on Capterra</a>, and lets a health IT team test in a free sandbox before production plans from $249 a month per product.</p>
+<p>Also worth a look:</p>
+<ul>
+  <li>Skyflow: Built for health apps that want a data privacy vault mapped rule by rule to HIPAA (<a class="bl-link" href="https://www.g2.com/products/payments-data-privacy-vault/reviews" target="_blank" rel="noopener">G2 rating 5.0 from 1 review</a>, Payments vault).</li>
+  <li>Bluefin ShieldConex: Built for patient payments, PII, and PHI on vaultless tokens (<a class="bl-link" href="https://www.g2.com/products/shieldconex/reviews" target="_blank" rel="noopener">no G2 reviews yet</a>)</li>
+  <li>Protecto: Best suited for payer and provider AI that reads claims, charts, and clinical notes (<a class="bl-link" href="https://www.g2.com/products/protecto/reviews" target="_blank" rel="noopener">no G2 or Capterra reviews yet</a>).</li>
+  <li>Protegrity: Known for vaultless tokens that health insurers use for analytics in Snowflake and AWS (<a class="bl-link" href="https://www.g2.com/products/protegrity/reviews" target="_blank" rel="noopener">G2 rating 4.5 from 14 reviews</a>).</li>
+  <li>VGS: Known for a payments vault that also covers PHI and AI prompts (<a class="bl-link" href="https://www.g2.com/products/very-good-security-vgs-platform/reviews" target="_blank" rel="noopener">G2 rating 4.7 from 47 reviews</a>)</li>
+  <li>Thales CipherTrust Tokenization: Offers self-run tokenization and masking for hospital data centers on Thales keys (<a class="bl-link" href="https://www.g2.com/products/thales-ciphertrust-tokenization/reviews" target="_blank" rel="noopener">G2 rating 4.0 from 6 reviews</a>).</li>
+  <li>K2view: Best for keeping one patient’s tokens consistent across many source systems (<a class="bl-link" href="https://www.g2.com/products/k2view/reviews" target="_blank" rel="noopener">G2 rating 4.6 from 55 reviews</a>, for its overall data platform).</li>
+  <li>IXOPAY: Built for tokenizing patient identifiers and payment credentials in one vault (<a class="bl-link" href="https://www.g2.com/products/tokenex-ixopay/reviews" target="_blank" rel="noopener">G2 rating 4.6 from 17 reviews</a>, as TokenEx).</li>
+  <li>Basis Theory: Built for digital-health platforms that store cards, PHI, and PII together (<a class="bl-link" href="https://www.g2.com/products/basis-theory/reviews" target="_blank" rel="noopener">no G2 reviews yet</a>).</li>
+</ul>
+<p><strong>About the author:</strong> I’m <a class="bl-link" href="https://www.linkedin.com/in/tony-alex-enigma-vault/" target="_blank" rel="noopener">Dr. Tony Alex</a>, Chief Executive Officer of Enigma Vault, where I lead our work in encryption, tokenization, and sensitive-data protection. I have more than two decades of experience building enterprise software businesses.</p>
+<p>In 1999 I founded US eDirect to develop software for parks, campgrounds, and recreation agencies, bringing reservations and payments into one cloud system, and led it through its acquisition by Tyler Technologies in 2022.</p>
+<p><em>Disclosure: Enigma Vault publishes this guide and appears first in it. Every platform here is judged on the same criteria, and the review ratings come from G2 and Capterra.</em></p>
+<div class="tldr" id="tldr">
+  <h2 class="tldr__label">TL;DR</h2>
+  <ul class="tldr__list">
+    <li><strong><a class="bl-link" href="#enigma-vault">Enigma Vault</a>:</strong> best for PHI across EHR fields, intake, payments, and AI prompts.</li>
+    <li><strong><a class="bl-link" href="#skyflow">Skyflow</a>:</strong> best for health apps mapping controls to HIPAA rules.</li>
+    <li><strong><a class="bl-link" href="#bluefin-shieldconex">Bluefin ShieldConex</a>:</strong> best for patient payments and PHI on vaultless tokens.</li>
+    <li><strong><a class="bl-link" href="#protecto">Protecto</a>:</strong> best for clinical notes and claims headed to AI models.</li>
+    <li><strong><a class="bl-link" href="#protegrity">Protegrity</a>:</strong> best for payer analytics in cloud data platforms.</li>
+    <li><strong><a class="bl-link" href="#vgs">VGS</a>:</strong> best for health apps taking card payments and using AI.</li>
+    <li><strong><a class="bl-link" href="#thales-ciphertrust-tokenization">Thales CipherTrust Tokenization</a>:</strong> best for hospital data centers that hold their own keys.</li>
+    <li><strong><a class="bl-link" href="#k2view">K2view</a>:</strong> best for one patient record assembled from many systems.</li>
+    <li><strong><a class="bl-link" href="#ixopay">IXOPAY</a>:</strong> best for patient identifiers and payment credentials in one vault.</li>
+    <li><strong><a class="bl-link" href="#basis-theory">Basis Theory</a>:</strong> best for digital-health platforms storing cards and PHI.</li>
+  </ul>
+</div>
+<h2 id="at-a-glance">Best Tokenization Software for Healthcare at a Glance</h2>
+<p>Here is how the ten platforms compare on the points a privacy officer checks first: who each one suits, what it costs to start, whether a BAA is offered, and whether it can keep PHI out of AI prompts.</p>
+<div class="bl-tablewrap"><table class="bl-table bl-table--wide">
+<thead><tr><th>Platform</th><th>Best for</th><th>Starting price</th><th>Free tier or trial</th><th>BAA available</th><th>PHI in AI prompts</th><th>G2 rating</th></tr></thead>
+<tbody>
+<tr><td>Enigma Vault</td><td>PHI, intake, payments, and AI in one</td><td>$249/mo per product (Growth)</td><td>Free Lite sandbox</td><td>Vault and NoPII Enterprise</td><td>Yes, NoPII tokenizes prompts</td><td><a class="bl-link" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener">4.4/5 (6 reviews)</a></td></tr>
+<tr><td>Skyflow</td><td>Health apps mapping controls to HIPAA</td><td>Not published</td><td>Not published</td><td>Not published</td><td>Yes, per its LLM pages</td><td><a class="bl-link" href="https://www.g2.com/products/payments-data-privacy-vault/reviews" target="_blank" rel="noopener">5.0/5 (1 review)</a></td></tr>
+<tr><td>Bluefin ShieldConex</td><td>Patient payments and PHI, vaultless</td><td>Not published</td><td>Not published</td><td>Not published</td><td>Not documented</td><td><a class="bl-link" href="https://www.g2.com/products/shieldconex/reviews" target="_blank" rel="noopener">No reviews yet</a></td></tr>
+<tr><td>Protecto</td><td>Clinical notes and claims headed to AI</td><td>Not published</td><td>Free trial, 4-week pilot</td><td>Yes, HIPAA BAA listed</td><td>Yes, before models or agents</td><td><a class="bl-link" href="https://www.g2.com/products/protecto/reviews" target="_blank" rel="noopener">No reviews yet</a></td></tr>
+<tr><td>Protegrity</td><td>Payer analytics in cloud data platforms</td><td>Not published</td><td>Free Developer Edition</td><td>Not published</td><td>Developer Edition guardrails</td><td><a class="bl-link" href="https://www.g2.com/products/protegrity/reviews" target="_blank" rel="noopener">4.5/5 (14 reviews)</a></td></tr>
+<tr><td>VGS</td><td>Health apps taking cards and using AI</td><td>$1,000/mo</td><td>Free to start</td><td>Not published</td><td>Yes, AI Data Firewall</td><td><a class="bl-link" href="https://www.g2.com/products/very-good-security-vgs-platform/reviews" target="_blank" rel="noopener">4.7/5 (47 reviews)</a></td></tr>
+<tr><td>Thales CipherTrust Tokenization</td><td>Hospitals holding their own keys</td><td>Not published</td><td>Not published</td><td>Not published</td><td>Not documented</td><td><a class="bl-link" href="https://www.g2.com/products/thales-ciphertrust-tokenization/reviews" target="_blank" rel="noopener">4.0/5 (6 reviews)</a></td></tr>
+<tr><td>K2view</td><td>One patient view across systems</td><td>Not published</td><td>Product tour</td><td>Not published</td><td>Not documented</td><td><a class="bl-link" href="https://www.g2.com/products/k2view/reviews" target="_blank" rel="noopener">4.6/5 (55 reviews)</a></td></tr>
+<tr><td>IXOPAY</td><td>Patient identifiers and payments in one vault</td><td>Not published</td><td>Sandbox access</td><td>Not published</td><td>Not documented</td><td><a class="bl-link" href="https://www.g2.com/products/tokenex-ixopay/reviews" target="_blank" rel="noopener">4.6/5 (17 reviews)</a></td></tr>
+<tr><td>Basis Theory</td><td>Digital-health platforms storing cards and PHI</td><td>$995/mo (Starter)</td><td>Free to start</td><td>Not published</td><td>Not documented</td><td><a class="bl-link" href="https://www.g2.com/products/basis-theory/reviews" target="_blank" rel="noopener">No reviews yet</a></td></tr>
+</tbody></table></div>
+
+<div class="bl-inlinecta">
+  <div>
+    <p class="bl-inlinecta__t">Keep PHI out of exports, inboxes, and AI prompts</p>
+    <p class="bl-inlinecta__s">Show us one intake or billing workflow, and we will walk through it tokenized, with a BAA available on the Vault and on NoPII Enterprise.</p>
+  </div>
+  <a class="np-btn np-btn--on-dark np-btn--primary cta-blog cta-best-tokenization-software-for-healthcare--glance" href="/request-demo/"><span>Request a demo</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
+</div>
+<h2 id="how-we-scored">How We Scored Healthcare Tokenization Platforms</h2>
+<p>We weighted each criterion by how often it decides a healthcare deal.</p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Criterion</th><th>Weight</th><th>What we checked</th></tr></thead>
+<tbody>
+<tr><td>PHI coverage</td><td>25%</td><td>Fields, records, intake, and clinical notes</td></tr>
+<tr><td>BAA and HIPAA evidence</td><td>20%</td><td>BAA scope, logged reveals, certifications</td></tr>
+<tr><td>Clinical AI protection</td><td>20%</td><td>Prompt tokenization and restored responses</td></tr>
+<tr><td>Patient payments</td><td>10%</td><td>Copay cards kept out of PCI scope</td></tr>
+<tr><td>Lean IT fit</td><td>10%</td><td>Managed operation and time to first workflow</td></tr>
+<tr><td>Price transparency</td><td>10%</td><td>Published plans, sandboxes, BAA tier</td></tr>
+<tr><td>Reviews</td><td>5%</td><td>G2 and Capterra ratings</td></tr>
+</tbody></table></div>
+<p>Vendor facts come from each vendor’s own pages, checked on November 11, 2026, and for VGS, Bluefin ShieldConex, IXOPAY, and Basis Theory on November 13, 2026. Where a page is silent, we write “Not published.”</p>
+<h2 id="the-10-best-tokenization-software-for-healthcare">The 10 Best Tokenization Software for Healthcare in 2026</h2>
+<p>Each entry covers key capabilities, how the platform handles PHI and the BAA, its clinical workflow fit, pricing, pros, cons, and what users say on G2 and Capterra.</p>
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">01</span>
+    <div class="vc__id">
+      <h3 id="enigma-vault" class="vc__name"><span class="vc__sep">1. </span>Enigma Vault<span class="vc__sep">: </span><span class="vc__pill">Best for PHI Across EHR Fields, Intake, Payments, and AI Prompts</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener"><span class="vc__score">4.4<small>/5</small></span><span class="vc__src">G2 · 6 reviews</span></a><a class="vc__rate" href="https://www.capterra.com/p/241650/Enigma-Vault/reviews/" target="_blank" rel="noopener"><span class="vc__score">4.8<small>/5</small></span><span class="vc__src">Capterra · 4 reviews</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>BAA</dt><dd>Available on the Vault and NoPII Enterprise</dd></div>
+    <div><dt>Production price</dt><dd>Growth from $249 a month per product; Enterprise custom</dd></div>
+    <div><dt>Deployment</dt><dd>Managed cloud or AWS Marketplace; NoPII self-hosted on Enterprise</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Health systems, clinics, and digital-health vendors that want PHI out of EHR-adjacent apps, referral inboxes, card payments, and clinical AI traffic under one vendor and one audit trail.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/enigma-vault.jpg" alt="Enigma Vault homepage" >}}
+  <figcaption>Enigma Vault homepage. Source: enigmavault.io</figcaption>
+</figure>
+<p>Enigma Vault is a vaulted tokenization platform delivered as APIs, a proxy, and a no-code intake app. Your EHR-adjacent systems hold tokens, while the real values stay in the vault under per-customer AES-256 keys.</p>
+<p><strong>Key Capabilities</strong></p>
+<ul>
+  <li><strong><a class="bl-link" href="/vault/data-vault/">Data Vault</a>:</strong> Encrypts diagnoses, prescriptions, and lab results at the API level, with exact-match search on encrypted fields.</li>
+  <li><strong>File Vault:</strong> Stores referrals, records, and imaging behind one-time, time-limited keys.</li>
+  <li><strong>Customer Vault:</strong> Collects insurance cards, consents, and medical history without fax or email.</li>
+  <li><strong>Card Vault:</strong> Tokenizes copay cards under PCI DSS Level 1.</li>
+  <li><strong><a class="bl-link" href="/nopii/">NoPII</a>:</strong> Tokenizes PHI in LLM traffic before it reaches the model provider, across 9+ model providers.</li>
+</ul>
+<p><strong>How It Handles PHI</strong></p>
+<ul>
+  <li><strong>BAA:</strong> Available for healthcare workloads on the Vault and on NoPII Enterprise.</li>
+  <li><strong>Audit trail:</strong> Every access, tokenization, and retrieval is logged, which supports the HIPAA audit controls requirement.</li>
+  <li><strong>AI prompts:</strong> If tokenization fails, NoPII blocks the request.</li>
+  <li><strong>Certifications:</strong> PCI DSS Level 1 and SOC 2 Type II.</li>
+</ul>
+<p><strong>Clinical Workflow Fit</strong></p>
+<p>Clinics and medical groups that want intake, records, and copays under one BAA, plus digital-health vendors and health systems moving clinical AI traffic into the same audit trail.</p>
+<p><strong>Pricing</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>Lite</td><td>Free sandbox for testing</td><td>Data Vault 1,500 requests; File Vault 5 GB</td></tr>
+<tr><td>Growth</td><td>$249 a month per product</td><td>Production use; Twilio Pay phone copays</td></tr>
+<tr><td>Business</td><td>$499 a month, $5,500 a year</td><td>Higher volume; Twilio Pay phone copays</td></tr>
+<tr><td>Enterprise</td><td>Custom</td><td>NoPII BAA</td></tr>
+</tbody></table></div>
+<p><strong>Pros</strong></p>
+<ul>
+  <li><strong>Every PHI entry point in one vault:</strong> Fields, files, intake, cards, and prompts share keys and one audit format.</li>
+  <li><strong>HIPAA and PCI from one vendor:</strong> A BAA for PHI and PCI DSS Level 1 for copay cards, with the CVV from phone copays deleted within 30 minutes.</li>
+  <li><strong>Published prices:</strong> A small IT team can budget and prove one front-desk workflow before a contract.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li><strong>NoPII BAA is on Enterprise:</strong> On NoPII, the BAA is offered on Enterprise, which is custom priced.</li>
+  <li><strong>Detection has limits:</strong> NoPII tokenizes identifiers it recognizes, so rare clinical details in free text still need governance review.</li>
+  <li><strong>ISO 27001 still in progress:</strong> Some hospital questionnaires ask for it today; FHIR and HL7 connectors are not published, so integration runs through the REST API.</li>
+</ul>
+<p><strong>What Users Say:</strong> Very positive, from a small sample: <a class="bl-link" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener">4.4/5 from 6 reviews on G2</a> and <a class="bl-link" href="https://www.capterra.com/p/241650/Enigma-Vault/reviews/" target="_blank" rel="noopener">4.8/5 from 4 on Capterra</a>.</p>
+<p><strong>Likes:</strong> One G2 reviewer calls the API “simplistic and easy to understand,” and one values a single vendor for card data, personal information, and large files.</p>
+<p><strong>Dislikes:</strong> One wants more flexible reporting dashboards, and one finds pricing a bit high.</p>
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">02</span>
+    <div class="vc__id">
+      <h3 id="skyflow" class="vc__name"><span class="vc__sep">2. </span>Skyflow<span class="vc__sep">: </span><span class="vc__pill">Best for Health Apps Mapping Controls to HIPAA Rules</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/payments-data-privacy-vault/reviews" target="_blank" rel="noopener"><span class="vc__score">5.0<small>/5</small></span><span class="vc__src">G2 · 1 review</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>BAA</dt><dd>Not stated; listed as HIPAA assessed and eligible</dd></div>
+    <div><dt>Starting price</dt><dd>Custom quote</dd></div>
+    <div><dt>Deployment</dt><dd>SaaS, dedicated VPC, or your AWS or GCP account</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Digital-health and telehealth product teams that want a vault service with column-level access policies and a published HIPAA rule map.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/skyflow.jpg" alt="Skyflow homepage" >}}
+  <figcaption>Skyflow homepage. Source: skyflow.com</figcaption>
+</figure>
+<p>Skyflow is a data privacy vault with a dedicated healthcare product and a separate payments vault.</p>
+<p><strong>Key Capabilities</strong></p>
+<ul>
+  <li><strong>Healthcare vault:</strong> Protects and de-identifies health data with polymorphic encryption and tokenization.</li>
+  <li><strong>Usable protected data:</strong> Data stays usable for analytics, operations, and third-party sharing.</li>
+  <li><strong>Model training:</strong> Its healthcare page says models can be trained without ever decrypting sensitive health data.</li>
+  <li><strong>Payments vault:</strong> A separate Payments Data Privacy Vault for card data.</li>
+</ul>
+<p><strong>How It Handles PHI</strong></p>
+<ul>
+  <li><strong>HIPAA rule map:</strong> Its HIPAA page pairs the Privacy, Security, Audit Log, and Breach Notification rules with vault controls.</li>
+  <li><strong>Certifications:</strong> ISO 27001:2022, SOC 2 Type II, PCI DSS Level 1, and “HIPAA Assessed and Eligible.”</li>
+  <li><strong>BAA:</strong> Terms are not published on the pages we checked.</li>
+</ul>
+<p><strong>Clinical Workflow Fit</strong></p>
+<p>Digital-health and telehealth product teams that want column-level access policies, with the example of doctors seeing records and billing seeing insurance.</p>
+<p><strong>Pricing</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>All plans</td><td>Custom quote</td><td>SaaS, dedicated VPC, or your AWS or GCP account</td></tr>
+</tbody></table></div>
+<p><strong>Pros</strong></p>
+<ul>
+  <li><strong>Logged PHI actions:</strong> Skyflow says every PHI action is logged and can feed your monitoring system.</li>
+  <li><strong>Right-of-access by API:</strong> Patient access requests can be served with an API call.</li>
+  <li><strong>Data sharing controls:</strong> Column-level and row-level grants for patients, care providers, and public health officials.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li><strong>No public price:</strong> Clinics cannot budget without a sales cycle.</li>
+  <li><strong>BAA scope unstated:</strong> Confirm BAA terms, and FHIR or HL7 support, in writing before PHI moves.</li>
+</ul>
+<p><strong>What Users Say:</strong> Too few to judge. The Payments Data Privacy Vault holds <a class="bl-link" href="https://www.g2.com/products/payments-data-privacy-vault/reviews" target="_blank" rel="noopener">5.0/5 from one G2 review</a>; the PII Data Privacy Vault has no G2 reviews, and we found no Capterra listing, so ask for health-system references.</p>
+<p><strong>Likes:</strong> The reviewer says the vault kept one client’s payment data apart from another’s and removed manual checks.</p>
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">03</span>
+    <div class="vc__id">
+      <h3 id="bluefin-shieldconex" class="vc__name"><span class="vc__sep">3. </span>Bluefin ShieldConex<span class="vc__sep">: </span><span class="vc__pill">Best for Patient Payments and PHI on Vaultless Tokens</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate vc__rate--new" href="https://www.g2.com/products/shieldconex/reviews" target="_blank" rel="noopener"><span class="vc__score">No reviews</span><span class="vc__src">G2</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>BAA</dt><dd>Not published</dd></div>
+    <div><dt>Starting price</dt><dd>Custom quote</dd></div>
+    <div><dt>Deployment</dt><dd>Cloud service via iFrame, API, or FileGuard batch files</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Hospitals, clinics, and healthcare platforms that want patient payments, PHI, and PII in portals and EHR-connected apps tokenized without storing originals.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/bluefin.jpg" alt="Bluefin ShieldConex page" >}}
+  <figcaption>Bluefin ShieldConex page. Source: bluefin.com</figcaption>
+</figure>
+<p>Bluefin ShieldConex is a cloud tokenization service from Bluefin, a payment security company with a dedicated healthcare practice.</p>
+<p><strong>Key Capabilities</strong></p>
+<ul>
+  <li><strong>Vaultless tokens:</strong> Tokens are generated with HSMs, and the original data is never stored in a vault or database.</li>
+  <li><strong>Payments, PII, and PHI:</strong> One service tokenizes card numbers, personal data, and health data.</li>
+  <li><strong>Three routes in:</strong> An iFrame keeps raw data off your systems, an API suits system-to-system data, and FileGuard handles ACH and CSV files.</li>
+  <li><strong>Point-of-care encryption:</strong> Bluefin also offers PCI-validated point-to-point encryption for patient payment devices.</li>
+</ul>
+<p><strong>How It Handles PHI</strong></p>
+<ul>
+  <li><strong>Healthcare channels:</strong> Its healthcare page covers PHI, PII, and billing data in patient portals, EHR platforms, and web apps.</li>
+  <li><strong>Certifications:</strong> The ShieldConex page shows ISO/IEC 27001:2022 and a SOC report badge; its healthcare page says it is aligned with HIPAA and HITECH.</li>
+  <li><strong>BAA:</strong> Terms are not published on the pages we checked.</li>
+</ul>
+<p><strong>Clinical Workflow Fit</strong></p>
+<p>Billing offices, patient portals, and front desks that take card payments and collect patient data, especially where card readers already need P2PE.</p>
+<p><strong>Pricing</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>All plans</td><td>Custom quote</td><td>Tokenization service; FileGuard as an add-on</td></tr>
+</tbody></table></div>
+<p><strong>Pros</strong></p>
+<ul>
+  <li><strong>Nothing to breach at rest:</strong> Vaultless design means no stored originals.</li>
+  <li><strong>Payments and PHI together:</strong> Card numbers and health data share one tokenization service.</li>
+  <li><strong>Point-of-care coverage:</strong> P2PE for card readers sits alongside tokenization.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li><strong>No public price or reviews:</strong> Budgeting and references depend on a sales call.</li>
+  <li><strong>AI prompts and documents unstated:</strong> Clinical-note AI and referral storage are not documented on its pages.</li>
+</ul>
+<p><strong>What Users Say:</strong> No reviews yet on <a class="bl-link" href="https://www.g2.com/products/shieldconex/reviews" target="_blank" rel="noopener">G2</a>, and we found no Capterra listing, so ask for references from a provider of your size.</p>
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">04</span>
+    <div class="vc__id">
+      <h3 id="protecto" class="vc__name"><span class="vc__sep">4. </span>Protecto<span class="vc__sep">: </span><span class="vc__pill">Best for Clinical Notes and Claims Headed to AI Models</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate vc__rate--new" href="https://www.g2.com/products/protecto/reviews" target="_blank" rel="noopener"><span class="vc__score">No reviews</span><span class="vc__src">G2</span></a><a class="vc__rate vc__rate--new" href="https://www.capterra.com/p/10006145/Protecto/reviews/" target="_blank" rel="noopener"><span class="vc__score">No reviews</span><span class="vc__src">Capterra</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>BAA</dt><dd>HIPAA BAA available</dd></div>
+    <div><dt>Starting price</dt><dd>Custom quote; free trial with a 4-week pilot</dd></div>
+    <div><dt>Deployment</dt><dd>SaaS, private cloud, on-premises, or air-gapped</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Payers, providers, and health-tech vendors running prior authorization, chart summaries, and member assistants on unstructured text.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/protecto.jpg" alt="Protecto homepage" >}}
+  <figcaption>Protecto homepage. Source: protecto.ai</figcaption>
+</figure>
+<p>Protecto is an AI-focused privacy vault with a healthcare solution for unstructured text.</p>
+<p><strong>Key Capabilities</strong></p>
+<ul>
+  <li><strong>Built for clinical text:</strong> Detection targets names, member IDs, and dates written into claims, records, notes, and messages.</li>
+  <li><strong>Consistent tokens:</strong> The same member gets the same token, so a prior authorization request still matches past claims.</li>
+  <li><strong>Scale:</strong> A case study cites about 750 million claims documents prepared for AI.</li>
+  <li><strong>Deployment choice:</strong> SaaS, private cloud, on-premises, or air-gapped.</li>
+</ul>
+<p><strong>How It Handles PHI</strong></p>
+<ul>
+  <li><strong>Before the model:</strong> PHI is replaced with tokens before any model or agent sees it.</li>
+  <li><strong>BAA and audits:</strong> Its page lists SOC 2 Type II, ISO 27001, and a HIPAA BAA, and notes that each AI recipient touching PHI often needs its own BAA.</li>
+  <li><strong>Reveal and logs:</strong> Real values return only to authorized people or systems, and every mask, reveal, and access is logged.</li>
+</ul>
+<p><strong>Clinical Workflow Fit</strong></p>
+<p>Payers running claims and prior authorization, providers summarizing charts and portal messages, and business associates shipping AI into hospitals.</p>
+<p><strong>Pricing</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>Free trial</td><td>$0</td><td>4-week pilot on your sample text</td></tr>
+<tr><td>Production</td><td>Custom quote</td><td>Deployment of your choice</td></tr>
+</tbody></table></div>
+<p><strong>Pros</strong></p>
+<ul>
+  <li><strong>Clinical-text detection:</strong> Built for identifiers written into notes and messages.</li>
+  <li><strong>BAA and audits listed:</strong> SOC 2 Type II, ISO 27001, and a HIPAA BAA on its pages.</li>
+  <li><strong>Air-gapped option:</strong> For hospitals that keep PHI on their own network.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li><strong>AI scope only:</strong> Intake forms, copay cards, and document storage need other vendors.</li>
+  <li><strong>No public price or reviews:</strong> Budgeting depends on the pilot, and references must come from the vendor.</li>
+</ul>
+<p><strong>What Users Say:</strong> No reviews yet on <a class="bl-link" href="https://www.g2.com/products/protecto/reviews" target="_blank" rel="noopener">G2</a> or <a class="bl-link" href="https://www.capterra.com/p/10006145/Protecto/reviews/" target="_blank" rel="noopener">Capterra</a>, so test detection on synthetic clinical notes during the pilot and ask for references from a health plan or provider.</p>
+<p>For the full AI angle, our guide to <a class="bl-link" href="/blog/pii-protection-for-llm-in-healthcare/">PII protection for LLMs in healthcare</a> walks through ambient documentation, coding, and prior authorization.</p>
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">05</span>
+    <div class="vc__id">
+      <h3 id="protegrity" class="vc__name"><span class="vc__sep">5. </span>Protegrity<span class="vc__sep">: </span><span class="vc__pill">Best for Payer Analytics in Cloud Data Platforms</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/protegrity/reviews" target="_blank" rel="noopener"><span class="vc__score">4.5<small>/5</small></span><span class="vc__src">G2 · 14 reviews</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>BAA</dt><dd>Not published</dd></div>
+    <div><dt>Starting price</dt><dd>Free Developer Edition; paid editions quoted</dd></div>
+    <div><dt>Deployment</dt><dd>On-premises, hybrid cloud, or multi-cloud</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Health insurers and pharmacy benefit teams protecting member and claims columns in Snowflake, Redshift, or Databricks while analysts keep working.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/protegrity.jpg" alt="Protegrity homepage" >}}
+  <figcaption>Protegrity homepage. Source: protegrity.com</figcaption>
+</figure>
+<p>Protegrity is a data protection platform built around vaultless tokenization for analytics and back-office data.</p>
+<p><strong>Key Capabilities</strong></p>
+<ul>
+  <li><strong>Vaultless, format-preserving tokens:</strong> Member IDs and dates keep their shape, so claims schemas stay unchanged.</li>
+  <li><strong>Central policy:</strong> Protectors run inside applications and data stores under one policy.</li>
+  <li><strong>Cloud data routes:</strong> Documented AWS, Snowflake, and Redshift integrations.</li>
+</ul>
+<p><strong>How It Handles PHI</strong></p>
+<ul>
+  <li><strong>Member and claims columns:</strong> Protected in data platforms while analysts keep working.</li>
+  <li><strong>HIPAA example:</strong> Its healthcare page cites a discount prescription company that met HIPAA, SOX, and CCPA through its Redshift integration.</li>
+  <li><strong>BAA:</strong> Terms are not published on the pages we checked.</li>
+</ul>
+<p><strong>Clinical Workflow Fit</strong></p>
+<p>Health plans and pharmacy benefit teams; its G2 profile says it protects data for 2 of the 5 largest US health insurers.</p>
+<p><strong>Pricing</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>AI Developer Edition</td><td>Free</td><td>Build and test</td></tr>
+<tr><td>Team and Enterprise</td><td>Custom quote</td><td>Production editions</td></tr>
+</tbody></table></div>
+<p><strong>Pros</strong></p>
+<ul>
+  <li><strong>Payer track record:</strong> Health insurer customers and healthcare case studies on its pages.</li>
+  <li><strong>Analytics on protected data:</strong> Format-preserving tokens let claims analysts keep working.</li>
+  <li><strong>Praised support:</strong> One reviewer describes “world class support.”</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li><strong>Clinic workflows uncovered:</strong> No intake, document, or copay tooling.</li>
+  <li><strong>Price questioned:</strong> Two reviewers call it high, one citing a single-year license above $15,000.</li>
+  <li><strong>BAA terms unstated:</strong> Ask for them before member data moves into a new pipeline.</li>
+</ul>
+<p><strong>What Users Say:</strong> Positive, with <a class="bl-link" href="https://www.g2.com/products/protegrity/reviews" target="_blank" rel="noopener">4.5/5 from 14 reviews on G2</a> and no Capterra listing found.</p>
+<p><strong>Likes:</strong> Reviewers praise data protection, ease of use, and scalable vaultless tokenization.</p>
+<p><strong>Dislikes:</strong> G2’s summary says integration options could be broader, and one reviewer says customer support “wasn’t the best.”</p>
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">06</span>
+    <div class="vc__id">
+      <h3 id="vgs" class="vc__name"><span class="vc__sep">6. </span>VGS<span class="vc__sep">: </span><span class="vc__pill">Best for Health Apps Taking Card Payments and Using AI</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/very-good-security-vgs-platform/reviews" target="_blank" rel="noopener"><span class="vc__score">4.7<small>/5</small></span><span class="vc__src">G2 · 47 reviews</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>BAA</dt><dd>Not published</dd></div>
+    <div><dt>Starting price</dt><dd>Plans from $1,000 a month; free to start</dd></div>
+    <div><dt>Deployment</dt><dd>Managed vault and proxy run by VGS</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Digital-health and health-fintech product teams that already vault card data and want PHI and AI traffic under the same proxy.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/vgs.jpg" alt="VGS homepage" >}}
+  <figcaption>VGS homepage. Source: verygoodsecurity.com</figcaption>
+</figure>
+<p>VGS (Very Good Security) is a payments-first token vault that also stores personal and health data.</p>
+<p><strong>Key Capabilities</strong></p>
+<ul>
+  <li><strong>Data types:</strong> Its Vault page lists cards, PII, bank data, and health data (PHI under HIPAA).</li>
+  <li><strong>Structured and unstructured:</strong> Data can arrive through APIs, files, and forms.</li>
+  <li><strong>AI Data Firewall:</strong> Tokenizes or masks health data, SSNs, and cards before inference.</li>
+</ul>
+<p><strong>How It Handles PHI</strong></p>
+<ul>
+  <li><strong>Out of your systems:</strong> The Vault page says no sensitive data is stored in your environment, which reduces HIPAA scope.</li>
+  <li><strong>Certifications:</strong> PCI DSS Level 1, per its Vault page.</li>
+  <li><strong>BAA:</strong> Terms are not published on the pages we checked.</li>
+</ul>
+<p><strong>Clinical Workflow Fit</strong></p>
+<p>Developer-led health apps that take patient card payments and are adding AI features, where one proxy can cover both.</p>
+<p><strong>Pricing</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>Free start</td><td>$0</td><td>Try the platform before a plan</td></tr>
+<tr><td>Starter Package</td><td>From $1,000 a month</td><td>Packages scoped with sales</td></tr>
+</tbody></table></div>
+<p><strong>Pros</strong></p>
+<ul>
+  <li><strong>Deep review base:</strong> 47 G2 reviews, mostly praising integration.</li>
+  <li><strong>Cards and PHI in one vault:</strong> Copay cards and health data share one provider.</li>
+  <li><strong>Published starting price:</strong> Plans start at $1,000 a month.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li><strong>Payments first:</strong> No healthcare page, intake app, or HIPAA rule map on its site.</li>
+  <li><strong>Higher entry price:</strong> $1,000 a month is steep for a single clinic.</li>
+  <li><strong>BAA terms unstated:</strong> Ask before PHI moves through the proxy.</li>
+</ul>
+<p><strong>What Users Say:</strong> Very positive, with <a class="bl-link" href="https://www.g2.com/products/very-good-security-vgs-platform/reviews" target="_blank" rel="noopener">4.7/5 from 47 reviews on G2</a>; its Capterra listing has no reviews.</p>
+<p><strong>Likes:</strong> G2’s summary highlights easy integration and responsive support.</p>
+<p><strong>Dislikes:</strong> Some reviewers find documentation hard to navigate or out of date.</p>
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">07</span>
+    <div class="vc__id">
+      <h3 id="thales-ciphertrust-tokenization" class="vc__name"><span class="vc__sep">7. </span>Thales CipherTrust Tokenization<span class="vc__sep">: </span><span class="vc__pill">Best for Hospital Data Centers That Hold Their Own Keys</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/thales-ciphertrust-tokenization/reviews" target="_blank" rel="noopener"><span class="vc__score">4.0<small>/5</small></span><span class="vc__src">G2 · 6 reviews</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>BAA</dt><dd>Not published</dd></div>
+    <div><dt>Starting price</dt><dd>Custom quote</dd></div>
+    <div><dt>Deployment</dt><dd>Self-run, as native column-level protection, an application SDK, or a RESTful service</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Hospital and health-system IT teams that run their own data centers and want to hold token vaults and keys themselves.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v3/thales.jpg" alt="Thales homepage" >}}
+  <figcaption>Thales homepage. Source: cpl.thalesgroup.com</figcaption>
+</figure>
+<p>Thales CipherTrust Tokenization is self-run tokenization and masking from the CipherTrust data security family.</p>
+<p><strong>Key Capabilities</strong></p>
+<ul>
+  <li><strong>Vaulted or vaultless:</strong> Tokenization alone or with masking or redaction.</li>
+  <li><strong>Three integration routes:</strong> Native column-level protection, an application SDK, or a RESTful service.</li>
+  <li><strong>Key protection:</strong> Its HIPAA page cites cryptographic keys protected in a FIPS 140-2 Level 4 environment.</li>
+</ul>
+<p><strong>How It Handles PHI</strong></p>
+<ul>
+  <li><strong>Pseudonymize and mask:</strong> Its HIPAA page says it can protect PHI for production or test use while keeping aggregate analysis possible.</li>
+  <li><strong>Security Rule map:</strong> The same page ties products to specific Security Rule safeguards.</li>
+  <li><strong>BAA:</strong> Terms are not published on the pages we checked.</li>
+</ul>
+<p><strong>Clinical Workflow Fit</strong></p>
+<p>Health systems that run their own data centers; Thales states cloud providers never have access to token vaults or keys, so custody stays with the hospital’s team.</p>
+<p><strong>Pricing</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>All deployments</td><td>Custom quote</td><td>Your team runs components and keys</td></tr>
+</tbody></table></div>
+<p><strong>Pros</strong></p>
+<ul>
+  <li><strong>Full custody:</strong> Token vaults and keys stay with the hospital.</li>
+  <li><strong>Flexible integration:</strong> Column, SDK, or REST, depending on the application.</li>
+  <li><strong>Test data from production:</strong> Masking supports realistic test environments without exposing PHI.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li><strong>Expensive for smaller providers:</strong> One G2 reviewer calls it expensive for small businesses.</li>
+  <li><strong>Fields only:</strong> Scanned referrals, intake, copay capture, and prompt traffic are outside it.</li>
+  <li><strong>Your team runs it:</strong> A reviewer lists implementation complexity and dependency on Thales.</li>
+</ul>
+<p><strong>What Users Say:</strong> Mixed to positive, with <a class="bl-link" href="https://www.g2.com/products/thales-ciphertrust-tokenization/reviews" target="_blank" rel="noopener">4.0/5 from 6 reviews on G2</a>; Capterra has no tokenization listing.</p>
+<p><strong>Likes:</strong> Reviewers like its data protection, ease of use, and having both on-premises and cloud consoles.</p>
+<p><strong>Dislikes:</strong> One notes extra processing time per request.</p>
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">08</span>
+    <div class="vc__id">
+      <h3 id="k2view" class="vc__name"><span class="vc__sep">8. </span>K2view<span class="vc__sep">: </span><span class="vc__pill">Best for One Patient Record Assembled From Many Systems</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/k2view/reviews" target="_blank" rel="noopener"><span class="vc__score">4.6<small>/5</small></span><span class="vc__src">G2 · 55 reviews</span></a><a class="vc__rate" href="https://www.capterra.com/p/212568/K2View-Fabric/reviews/" target="_blank" rel="noopener"><span class="vc__score">4.9<small>/5</small></span><span class="vc__src">Capterra · 8 reviews</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>BAA</dt><dd>Not published</dd></div>
+    <div><dt>Starting price</dt><dd>Custom quote</dd></div>
+    <div><dt>Deployment</dt><dd>On-premises, cloud, or hybrid</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Provider and payer data teams building a single patient view, test data, or analytics copies from many source systems with tokens that stay consistent.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v5/k2view.jpg" alt="K2view homepage" >}}
+  <figcaption>K2view homepage. Source: k2view.com</figcaption>
+</figure>
+<p>K2view is a data management platform with tokenization built into its entity-based design.</p>
+<p><strong>Key Capabilities</strong></p>
+<ul>
+  <li><strong>Per-patient Micro-Database:</strong> Its tokenization page describes an individually encrypted “micro” token vault, so no single store holds every original record.</li>
+  <li><strong>Encryption:</strong> AES-256 at rest or in flight, with bring-your-own-key support.</li>
+  <li><strong>Dynamic masking:</strong> Protects data that does not need restoring to its original value.</li>
+</ul>
+<p><strong>How It Handles PHI</strong></p>
+<ul>
+  <li><strong>HIPAA use case:</strong> Its tokenization page names healthcare insurance and pharma, replacing PHI and identifiers with tokens in compliance with HIPAA.</li>
+  <li><strong>Detokenization rights:</strong> RBAC and LDAP decide who can detokenize.</li>
+  <li><strong>Certifications and BAA:</strong> Its security page lists SOC 2 Type 2 and ISO 27001:2022; BAA terms are not published on the pages we checked.</li>
+</ul>
+<p><strong>Clinical Workflow Fit</strong></p>
+<p>Provider and payer data teams building a single patient view, test data, or analytics copies from many source systems with referentially intact tokens.</p>
+<p><strong>Pricing</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>Product tour</td><td>Free</td><td>Interactive tokenization flow</td></tr>
+<tr><td>Production</td><td>Custom quote</td><td>On-premises, cloud, or hybrid</td></tr>
+</tbody></table></div>
+<p><strong>Pros</strong></p>
+<ul>
+  <li><strong>Small blast radius:</strong> One patient per micro-vault limits what one breach exposes.</li>
+  <li><strong>Consistent across systems:</strong> Tokens stay intact across test and analytics copies.</li>
+  <li><strong>Largest review base here:</strong> 55 G2 reviews describe operating the platform.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li><strong>A larger platform commitment:</strong> Tokenization sits inside a data integration product.</li>
+  <li><strong>Clinic workflows unstated:</strong> Intake and payment handling are not published.</li>
+</ul>
+<p><strong>What Users Say:</strong> Positive, with <a class="bl-link" href="https://www.g2.com/products/k2view/reviews" target="_blank" rel="noopener">4.6/5 from 55 reviews on G2</a> and <a class="bl-link" href="https://www.capterra.com/p/212568/K2View-Fabric/reviews/" target="_blank" rel="noopener">4.9/5 from 8 on Capterra</a>, covering the overall data platform.</p>
+<p><strong>Likes:</strong> Reviewers praise the entity-based design and the support.</p>
+<p><strong>Dislikes:</strong> G2’s summary lists learning curve, complex setup, and high technical requirements.</p>
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">09</span>
+    <div class="vc__id">
+      <h3 id="ixopay" class="vc__name"><span class="vc__sep">9. </span>IXOPAY<span class="vc__sep">: </span><span class="vc__pill">Best for Patient Identifiers and Payment Credentials in One Vault</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/tokenex-ixopay/reviews" target="_blank" rel="noopener"><span class="vc__score">4.6<small>/5</small></span><span class="vc__src">G2 · 17 reviews</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>BAA</dt><dd>Not published</dd></div>
+    <div><dt>Starting price</dt><dd>Custom quote; sandbox access available</dd></div>
+    <div><dt>Deployment</dt><dd>Hosted fields, mobile integrations, APIs, or batch tokenization</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Healthcare organizations that hold Social Security numbers, birthdates, and payment credentials across registration, billing, and administrative systems.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/ixopay.jpg" alt="IXOPAY homepage" >}}
+  <figcaption>IXOPAY homepage. Source: ixopay.com</figcaption>
+</figure>
+<p>IXOPAY, formerly TokenEx, is a tokenization and payment orchestration platform with a dedicated healthcare solution page.</p>
+<p><strong>Key Capabilities</strong></p>
+<ul>
+  <li><strong>Patient identifiers:</strong> Replaces Social Security numbers, dates of birth, and health ID numbers with tokens.</li>
+  <li><strong>Format options:</strong> Tokens can keep the length or structure your applications expect.</li>
+  <li><strong>Payment credentials:</strong> Universal Tokens protect stored cards and reduce PCI scope, with PCI-validated P2PE for in-person payments.</li>
+  <li><strong>Two routes in:</strong> APIs and batch tokenization for existing records.</li>
+</ul>
+<p><strong>How It Handles PHI</strong></p>
+<ul>
+  <li><strong>Separate vault:</strong> Original values sit in a secure vault apart from internal applications, revealed only for authorized workflows.</li>
+  <li><strong>Certifications:</strong> ISO/IEC 27001:2022, SOC 2 and SOC 3 reports, and PCI DSS Level 1 service provider.</li>
+  <li><strong>BAA:</strong> Terms are not published on the pages we checked.</li>
+</ul>
+<p><strong>Clinical Workflow Fit</strong></p>
+<p>Registration, billing, and administrative teams; its healthcare page cites Secure Medical, which used tokenization to reduce PCI compliance work.</p>
+<p><strong>Pricing</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>Sandbox</td><td>Request access</td><td>Test tokenization before production</td></tr>
+<tr><td>Production</td><td>Custom quote</td><td>Tokenization, security, and payments modules</td></tr>
+</tbody></table></div>
+<p><strong>Pros</strong></p>
+<ul>
+  <li><strong>Healthcare page with a customer story:</strong> Secure Medical is named on it.</li>
+  <li><strong>Identifiers and cards together:</strong> SSNs, birthdates, and copay cards share one token platform.</li>
+  <li><strong>Audit evidence listed:</strong> ISO/IEC 27001:2022, SOC 2, and PCI DSS Level 1.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li><strong>Payments first:</strong> Much of the platform is payment orchestration a clinic may not need.</li>
+  <li><strong>Structured fields only:</strong> Clinical-note AI and document storage are not documented.</li>
+  <li><strong>BAA and price unstated:</strong> Both depend on a sales conversation.</li>
+</ul>
+<p><strong>What Users Say:</strong> Positive, with <a class="bl-link" href="https://www.g2.com/products/tokenex-ixopay/reviews" target="_blank" rel="noopener">4.6/5 from 17 reviews on G2</a>, listed as TokenEx; its Capterra listing has no reviews.</p>
+<p><strong>Likes:</strong> One reviewer values the secure payment iframe that keeps card data off their systems and tokens usable across gateways.</p>
+<p><strong>Dislikes:</strong> That reviewer reports nothing significant to dislike, so ask for a healthcare reference.</p>
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">10</span>
+    <div class="vc__id">
+      <h3 id="basis-theory" class="vc__name"><span class="vc__sep">10. </span>Basis Theory<span class="vc__sep">: </span><span class="vc__pill">Best for Digital-Health Platforms Storing Cards and PHI</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate vc__rate--new" href="https://www.g2.com/products/basis-theory/reviews" target="_blank" rel="noopener"><span class="vc__score">No reviews</span><span class="vc__src">G2</span></a><a class="vc__rate vc__rate--new" href="https://www.capterra.com/p/10002181/Basis-Theory/" target="_blank" rel="noopener"><span class="vc__score">No reviews</span><span class="vc__src">Capterra</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>BAA</dt><dd>Not published</dd></div>
+    <div><dt>Starting price</dt><dd>Starter $995 a month with 20,000 tokens; free to start</dd></div>
+    <div><dt>Deployment</dt><dd>Managed vault; Starter runs in a US environment only</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Digital-health companies that store patient card details, PHI, and other PII and share them with insurers or providers.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/basis-theory.jpg" alt="Basis Theory homepage" >}}
+  <figcaption>Basis Theory homepage. Source: basistheory.com</figcaption>
+</figure>
+<p>Basis Theory is a programmable token vault with a Digital Health use case page.</p>
+<p><strong>Key Capabilities</strong></p>
+<ul>
+  <li><strong>Patient data vault:</strong> Stores, tokenizes, and retrieves card data, PHI, and other PII.</li>
+  <li><strong>Collect:</strong> Web and mobile forms and APIs capture card and patient information.</li>
+  <li><strong>Share:</strong> Formats data for insurers, healthcare providers, and other third parties.</li>
+  <li><strong>Payment routing:</strong> Retries failed transactions through a backup processor.</li>
+</ul>
+<p><strong>How It Handles PHI</strong></p>
+<ul>
+  <li><strong>HIPAA environment:</strong> Its security page says PHI is protected and shared in an independently certified compliant environment.</li>
+  <li><strong>Certifications:</strong> PCI Level 1, SOC 2 Type II, and ISO 27001.</li>
+  <li><strong>BAA:</strong> Terms are not published on the pages we checked.</li>
+</ul>
+<p><strong>Clinical Workflow Fit</strong></p>
+<p>Developer-led digital-health platforms where payment ends the patient experience and stored card and patient data are reused.</p>
+<p><strong>Pricing</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>Starter</td><td>$995 a month</td><td>20,000 tokens; PCI environment; US only</td></tr>
+<tr><td>Enterprise</td><td>Custom quote</td><td>Additional compliance options for PII and PHI</td></tr>
+</tbody></table></div>
+<p><strong>Pros</strong></p>
+<ul>
+  <li><strong>Published starting price:</strong> Starter is $995 a month.</li>
+  <li><strong>Cards and PHI in one vault:</strong> Patient payments and health data share one provider.</li>
+  <li><strong>Audit evidence listed:</strong> PCI Level 1, SOC 2 Type II, and ISO 27001.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+  <li><strong>PHI options on Enterprise:</strong> Its pricing page lists PII and PHI compliance options there.</li>
+  <li><strong>Payments focus:</strong> Clinical-note AI and document storage are not documented.</li>
+  <li><strong>No reviews yet:</strong> References must come from the vendor.</li>
+</ul>
+<p><strong>What Users Say:</strong> No reviews yet on <a class="bl-link" href="https://www.g2.com/products/basis-theory/reviews" target="_blank" rel="noopener">G2</a> or <a class="bl-link" href="https://www.capterra.com/p/10002181/Basis-Theory/" target="_blank" rel="noopener">Capterra</a>, so ask for references from a digital-health customer.</p>
+<h2 id="best-by-organization-type">Which Tokenization Software Fits Your Healthcare Organization</h2>
+<p>With all ten platforms reviewed, the shortlist usually comes down to who you are. Find the row that matches your organization and start your evaluation there.</p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Organization</th><th>Best pick</th><th>Why</th></tr></thead>
+<tbody>
+<tr><td>Clinic, dental, or behavioral health</td><td>Enigma Vault</td><td>Intake, records, and copays under one BAA</td></tr>
+<tr><td>Digital health or telehealth app</td><td>Enigma Vault, Skyflow, or VGS</td><td>Managed vault; Enigma and VGS publish prices</td></tr>
+<tr><td>Practice taking cards at point of care</td><td>Bluefin ShieldConex</td><td>Vaultless tokens plus P2PE card readers</td></tr>
+<tr><td>Health system with its own data centers</td><td>Thales CipherTrust Tokenization</td><td>Hospital holds token vaults and keys</td></tr>
+<tr><td>Health plan or payer analytics</td><td>Protegrity</td><td>Format-preserving tokens for claims columns</td></tr>
+<tr><td>Payer or provider AI on notes</td><td>Protecto or Enigma Vault NoPII</td><td>PHI tokenized before the model</td></tr>
+<tr><td>Single patient view across systems</td><td>K2view</td><td>Consistent tokens in per-patient micro-vaults</td></tr>
+<tr><td>Life sciences research linkage</td><td>A record linkage vendor</td><td>One-way tokens; covered in the next section</td></tr>
+</tbody></table></div>
+<h2 id="two-meanings-of-healthcare-tokenization">Protecting PHI While Keeping Patient Records Linked</h2>
+<p>One word covers two product categories. The ten platforms above do PHI security, while research teams that link records across sources need a different kind of vendor.</p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th></th><th>PHI security tokenization</th><th>Patient record linkage</th></tr></thead>
+<tbody>
+<tr><td>Goal</td><td>Keep identifiers out of apps and prompts</td><td>Match de-identified records across sources</td></tr>
+<tr><td>Reversible?</td><td>Yes, for authorized users, logged</td><td>No, designed to be one-way</td></tr>
+<tr><td>Typical buyer</td><td>Provider IT, digital health, security teams</td><td>Life sciences and research teams</td></tr>
+<tr><td>Example vendors</td><td>The ten platforms above</td><td>Datavant, IQVIA, LexisNexis Gravitas</td></tr>
+</tbody></table></div>
+<h2 id="payments-pii-and-phi">Payments, PII, and PHI: Which Platform Covers All Three</h2>
+<p>A medical group often needs one vendor for copay cards, patient profiles, and clinical records. Here is what each platform documents on its own pages.</p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Platform</th><th>Patient card payments</th><th>PII and PHI fields</th><th>Records and intake</th></tr></thead>
+<tbody>
+<tr><td>Enigma Vault</td><td>Yes, Card Vault; PCI DSS Level 1</td><td>Yes, Data Vault</td><td>Yes, File Vault and Customer Vault</td></tr>
+<tr><td>Skyflow</td><td>Yes, Payments Data Privacy Vault</td><td>Yes, healthcare vault</td><td>Not published</td></tr>
+<tr><td>Bluefin ShieldConex</td><td>Yes, plus P2PE card readers</td><td>Yes, vaultless PII and PHI</td><td>Not published</td></tr>
+<tr><td>Protecto</td><td>Not its focus</td><td>Yes, clinical text and claims</td><td>Not published</td></tr>
+<tr><td>Protegrity</td><td>Not published</td><td>Yes, payer analytics columns</td><td>Not published</td></tr>
+<tr><td>VGS</td><td>Yes, PCI DSS Level 1 vault</td><td>Yes, PHI listed on Vault page</td><td>Not published</td></tr>
+<tr><td>Thales CipherTrust</td><td>Not published for healthcare</td><td>Yes, database and app fields</td><td>Not published</td></tr>
+<tr><td>K2view</td><td>Not published</td><td>Yes, per-patient micro-vaults</td><td>Not published</td></tr>
+<tr><td>IXOPAY</td><td>Yes, Universal Tokens plus P2PE</td><td>Yes, SSNs, birthdates, health IDs</td><td>Not published</td></tr>
+<tr><td>Basis Theory</td><td>Yes, PCI Level 1 vault</td><td>Yes, PHI and PII in vault</td><td>Web and mobile collection forms</td></tr>
+</tbody></table></div>
+<div class="bl-evcall" role="note"><span class="bl-evcall__tag">Enigma Vault</span><p><strong>The front desk is where PHI leaks first:</strong> Customer Vault replaces fax and email for intake, File Vault holds referrals behind expiring links, and Card Vault takes copays without card numbers touching the practice. All three log every access in one audit trail, and a BAA is available on the Vault.</p><div class="bl-evcall__cta"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-best-tokenization-software-for-healthcare--callout-intake" href="/request-demo/?interest=best-tokenization-software-for-healthcare"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-evcall__more cta-blog cta-best-tokenization-software-for-healthcare--callout-intake-explore" href="/vault/customer-vault/">Explore Customer Vault &rarr;</a></div></div>
+<h2 id="hipaa-de-identification-and-tokenization">HIPAA De-Identification: What Tokenization Does and Does Not Do</h2>
+<p><a class="bl-link" href="https://www.law.cornell.edu/cfr/text/45/164.514" target="_blank" rel="noopener">The Privacy Rule at 45 CFR 164.514(b)</a> offers two routes to de-identified data: Safe Harbor, which removes 18 identifier types, and Expert Determination by a qualified expert.</p>
+<p><strong>If a staff member removes the name, date of birth, and MRN before pasting a note into AI, is it still PHI?</strong> Usually yes. Those are three of the 18 Safe Harbor identifiers, so dates of service, ZIP codes, phone numbers, and other details left in the note can keep it PHI.</p>
+<p>Reversible tokens are pseudonymization. While a vault or key can restore the name, the data generally stays PHI; tokenization narrows access without de-identifying a data set on its own.</p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Goal</th><th>What tokenization adds</th><th>What you still need</th></tr></thead>
+<tbody>
+<tr><td>Security Rule safeguards</td><td>Identifiers out of apps; logged reveals</td><td>Risk analysis and access reviews</td></tr>
+<tr><td>Safe Harbor</td><td>Consistent removal of structured identifiers</td><td>All 18 types, including free-text dates</td></tr>
+<tr><td>Expert Determination</td><td>Linkable, consistent tokens</td><td>An expert’s documented analysis</td></tr>
+</tbody></table></div>
+<p>For intake, claims, and research examples, see our explainer on <a class="bl-link" href="/blog/patient-data-tokenization-healthcare/">patient data tokenization in healthcare</a>.</p>
+<h2 id="clinical-ai-on-patient-notes">Keeping PHI Out of Clinical AI Prompts</h2>
+<p>Ambient documentation, coding, and prior authorization turn patient notes into prompts. Tokenizing first means the model provider never holds the identifiers.</p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Platform</th><th>Prompt tokenization</th><th>Restores the response</th><th>BAA for the AI path</th></tr></thead>
+<tbody>
+<tr><td>Enigma Vault NoPII</td><td>Yes, proxy for 9+ providers</td><td>Yes</td><td>NoPII Enterprise</td></tr>
+<tr><td>Protecto</td><td>Yes, before models or agents</td><td>Yes, by policy</td><td>Listed</td></tr>
+<tr><td>Skyflow</td><td>Yes, per its LLM pages</td><td>Yes, per its LLM pages</td><td>Not published</td></tr>
+<tr><td>VGS</td><td>Yes, AI Data Firewall</td><td>Not published</td><td>Not published</td></tr>
+<tr><td>Protegrity</td><td>Developer Edition guardrails</td><td>Not published</td><td>Not published</td></tr>
+<tr><td>Bluefin, Thales, K2view, IXOPAY, and Basis Theory</td><td>Not documented</td><td>Not applicable</td><td>Not published</td></tr>
+</tbody></table></div>
+<div class="bl-evcall" role="note"><span class="bl-evcall__tag">Enigma Vault NoPII</span><p><strong>The model provider never holds an identifier:</strong> Point your clinical AI app’s base URL at NoPII and names, dates, and record numbers are tokenized before the prompt leaves, then restored in the response. If tokenization fails, the request is blocked.</p><div class="bl-evcall__cta"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-best-tokenization-software-for-healthcare--callout-ai" href="/request-demo/?interest=best-tokenization-software-for-healthcare"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-evcall__more cta-blog cta-best-tokenization-software-for-healthcare--callout-ai-explore" href="/nopii/">Explore NoPII &rarr;</a></div></div>
+<h2 id="pricing-compared">Healthcare Pricing and BAA Availability</h2>
+<p>For healthcare buyers, the deciding line is which plan carries the BAA, then the price.</p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Platform</th><th>Starting price</th><th>BAA</th><th>Deployment</th></tr></thead>
+<tbody>
+<tr><td>Enigma Vault</td><td>Growth from $249 a month per product</td><td>Vault and NoPII Enterprise</td><td>Managed cloud; self-hosted NoPII</td></tr>
+<tr><td>Skyflow</td><td>Custom quote</td><td>Not published; HIPAA assessed and eligible</td><td>SaaS, VPC, or your cloud</td></tr>
+<tr><td>Bluefin ShieldConex</td><td>Custom quote</td><td>Not published</td><td>Cloud; iFrame, API, or batch</td></tr>
+<tr><td>Protecto</td><td>Free trial, then quote</td><td>HIPAA BAA listed</td><td>SaaS to air-gapped</td></tr>
+<tr><td>Protegrity</td><td>Free Developer Edition, then quote</td><td>Not published</td><td>On-premises to multi-cloud</td></tr>
+<tr><td>VGS</td><td>From $1,000 a month; free to start</td><td>Not published</td><td>Managed vault and proxy</td></tr>
+<tr><td>Thales CipherTrust</td><td>Custom quote</td><td>Not published</td><td>Self-run</td></tr>
+<tr><td>K2view</td><td>Product tour, then quote</td><td>Not published</td><td>On-premises, cloud, or hybrid</td></tr>
+<tr><td>IXOPAY</td><td>Sandbox access, then quote</td><td>Not published</td><td>Hosted fields, APIs, or batch</td></tr>
+<tr><td>Basis Theory</td><td>Starter $995 a month; free to start</td><td>Not published</td><td>Managed vault; Starter US only</td></tr>
+</tbody></table></div>
+<h2 id="baa-and-security-documents">BAA and Security Documents by Platform</h2>
+<p>Hospital security questionnaires ask for the same documents from every vendor. This is what each platform states on its own pages; anything marked “Not published” is worth raising early in vendor review.</p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Platform</th><th>BAA</th><th>SOC 2 Type II</th><th>ISO 27001</th><th>PCI DSS</th></tr></thead>
+<tbody>
+<tr><td>Enigma Vault</td><td>Vault and NoPII Enterprise</td><td>Yes</td><td>In progress</td><td>Level 1</td></tr>
+<tr><td>Skyflow</td><td>Not published; HIPAA assessed and eligible</td><td>Yes</td><td>ISO 27001:2022</td><td>Level 1</td></tr>
+<tr><td>Bluefin ShieldConex</td><td>Not published</td><td>SOC report badge; type unstated</td><td>ISO/IEC 27001:2022</td><td>PCI-validated P2PE</td></tr>
+<tr><td>Protecto</td><td>HIPAA BAA listed</td><td>Yes</td><td>Yes</td><td>Not published</td></tr>
+<tr><td>Protegrity</td><td>Not published</td><td>Not published</td><td>Not published</td><td>Not published</td></tr>
+<tr><td>VGS</td><td>Not published</td><td>Not published</td><td>Not published</td><td>Level 1</td></tr>
+<tr><td>Thales CipherTrust</td><td>Not published</td><td>Not published</td><td>Not published</td><td>Not published</td></tr>
+<tr><td>K2view</td><td>Not published</td><td>Yes</td><td>ISO 27001:2022</td><td>Not published</td></tr>
+<tr><td>IXOPAY</td><td>Not published</td><td>SOC 2 and SOC 3 reports</td><td>ISO/IEC 27001:2022</td><td>Level 1 service provider</td></tr>
+<tr><td>Basis Theory</td><td>Not published</td><td>Yes</td><td>Yes</td><td>Level 1</td></tr>
+</tbody></table></div>
+<p>Whatever you pick, also ask for a sample reveal log showing one detokenization, plus the date and scope of the latest SOC 2 Type II report.</p>
+<h2 id="questions-healthcare-teams-ask-us">Questions Healthcare Teams Ask Us</h2>
+<p>Our healthcare conversations usually start at the front desk, so we plan around one administrative workflow, such as intake, referrals, or billing, and keep clinical decision support out of the first project.</p>
+<ul>
+  <li><strong>Does NoPII make our clinical AI HIPAA compliant?</strong> No. It reduces what a model provider receives; HIPAA still depends on roles, BAAs, and the whole data flow.</li>
+  <li><strong>Will it catch every identifier in a note?</strong> It tokenizes recognized entities, so test coverage on your own note formats first.</li>
+  <li><strong>Which plans carry a BAA?</strong> The Vault and NoPII Enterprise; confirm the exact products before PHI moves.</li>
+  <li><strong>Can a dental practice keep cards on file?</strong> Yes, as a card token, with patient authorization and processor support for recurring charges.</li>
+  <li><strong>How do we start?</strong> Run one workflow on synthetic patients in the Lite sandbox, then review the SOC 2 report, PCI AOC, DPA, and BAA.</li>
+</ul>
+<div class="bl-evcall" role="note"><span class="bl-evcall__tag">Enigma Vault</span><p><strong>Prove one front-desk workflow first:</strong> Data Vault Lite includes 1,500 requests and 100 tokens, File Vault Lite 5 GB, and NoPII Lite 1M protected tokens a month, all free with no card. Use synthetic patients until the BAA and plan are in place.</p><div class="bl-evcall__cta"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-best-tokenization-software-for-healthcare--callout-pilot" href="/request-demo/?interest=best-tokenization-software-for-healthcare"><span>Plan a pilot</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-evcall__more cta-blog cta-best-tokenization-software-for-healthcare--callout-pilot-explore" href="/pricing/">Compare plans &rarr;</a></div></div>
+<h2 id="enigma-vault-for-healthcare">Protect Patient PHI With Enigma Vault</h2>
+<p>A Monday at a growing medical group: new patients email photos of insurance cards, a referral arrives as a 40-page PDF, the billing line takes a copay by phone, and the AI scribe pilot is waiting on the privacy officer’s sign-off.</p>
+<p>With Enigma Vault, each step lands in one vault. Intake runs through Customer Vault, the referral sits in File Vault behind an expiring link, Card Vault tokenizes the copay, and NoPII tokenizes the scribe’s prompts before the model provider sees them.</p>
+<p>The evidence is ready for the review: a BAA on the Vault and NoPII Enterprise, PCI DSS Level 1, SOC 2 Type II, and a log entry for every access. To map it to your workflows, <a class="bl-link" href="/request-demo/">book a demo</a> or start in the Lite sandbox after reviewing <a class="bl-link" href="/pricing/">pricing</a>.</p>
+<p>For BAA scope or Enterprise terms, <a class="bl-link" href="/contact/">contact our team</a>.</p>
+
+

@@ -1,0 +1,584 @@
+---
+title: "Best Tokenization Software for Banking & Financial Services (2026): 7 Platforms Compared"
+titleEmphasis: "7 Platforms Compared"
+slug: "best-tokenization-software-for-banking-and-financial-services"
+layout: "pii-style"
+metaTitle: "Best Tokenization Software for Banking & Financial Services (2026)"
+description: "Compare 7 tokenization platforms for banks, credit unions, and lenders: a shortlist by institution size, partner data sharing, examiner due diligence, and what each costs."
+subtitle: "How to choose tokenization software that protects SSNs, account numbers, cards, loan files, and AI on customer data at banks, credit unions, and lenders."
+date: 2026-11-10T00:20:00
+category: "Vault"
+author: "tony-alex"
+readTime: 15
+heroImage: "/assets/blog/img-02.png"
+heroAlt: "Account numbers, SSNs, and card numbers from bank systems replaced by tokens, with originals held in a vault"
+excerpt: "Seven data tokenization platforms compared for banking and financial services: core and KYC data, cards and ACH, loan files, call centers, analytics, AI, and price."
+tags: ["tokenization", "banking", "financial-services", "pci-dss", "glba", "data-vault", "nopii"]
+ogImage: "/assets/og/vault-data.jpg"
+ogImageAlt: "Best Tokenization Software for Banking & Financial Services in 2026 | Enigma Vault"
+ogType: article
+styles: ["blog.css", "pages/blog-pii-hero.css", "tr-pages.css", "pages/vs-tri-table.css"]
+scripts: ["blog-article.js", "pages/vs-tri-table.js"]
+faqSchema: true
+faqs:
+  - q: "What Is Data Tokenization Software for Banking?"
+    a: "It replaces sensitive values such as Social Security numbers, account and routing numbers, card numbers, and ID document details with tokens that mean nothing on their own. The originals stay in a protected vault or behind a key, and only approved users or systems can reveal them, with each reveal logged. It is a data security control and is unrelated to tokenizing deposits, securities, or other real-world assets."
+  - q: "What Is the Best Tokenization Software for Banks and Financial Services in 2026?"
+    a: "Enigma Vault ranks first for covering account fields, cards, phone payments, KYC and loan documents, and AI prompts in one managed vault with published prices. VGS suits banks that share account numbers with fintech partners as tokens; Protegrity suits analytics on tokenized data at large scale; Thales suits banks standardizing on the CipherTrust Data Security Platform; Bluefin ShieldConex suits vaultless tokens on ACH and NACHA batch files; IXOPAY suits card tokenization tied to payment orchestration; Fortanix suits banks moving mainframe keys and HSMs to one platform."
+  - q: "What Are the Top Protegrity Alternatives for Banking Tokenization?"
+    a: "It depends on why you are leaving or comparing. Enigma Vault adds a managed vault with published prices plus card capture, document storage, and AI prompt protection. VGS adds tokenized account numbers and card issuing features. Thales CipherTrust Tokenization suits banks that want to run tokenization on their own keys, Bluefin ShieldConex tokenizes NACHA batch files without a vault, IXOPAY covers card programs, and Fortanix adds vaultless tokens with FIPS 140-2 Level 3 HSMs."
+  - q: "Is Tokenization Expensive for a Mid-Sized Bank?"
+    a: "Most enterprise vendors quote privately. Enigma Vault publishes per-product prices: a free Lite sandbox, then $49, $249, or $499 a month per product, so three vaults on Growth come to $747 a month before any add-ons. VGS and IXOPAY plans start at $1,000 a month. Protegrity paid editions, Thales, Bluefin ShieldConex, and Fortanix pricing are not published; Fortanix offers a 30-day free trial."
+  - q: "Does Tokenization Help With GLBA and the FTC Safeguards Rule?"
+    a: "It supports them. The FTC Safeguards Rule (16 CFR 314.4(c)(3)) requires covered non-bank financial institutions to protect customer information by encryption in transit and at rest, or by approved compensating controls. The Interagency Guidelines for banks list encryption of electronic customer information as a measure to consider. Tokenization narrows where readable customer data lives, but it does not replace the written security program either rule requires."
+  - q: "How Does Tokenization Reduce PCI DSS 4.0 Scope for a Bank?"
+    a: "When card numbers are captured by a hosted form, phone IVR, or vault, and your systems store only tokens, those systems no longer store cardholder data. That can shrink the set of systems your assessor reviews. PCI DSS v4.0.1 is the current version; v4.0 was retired on December 31, 2024. Confirm scope decisions with your QSA."
+  - q: "Can Banks Use AI on Customer Data Without Sending Account Numbers to a Model Provider?"
+    a: "Yes, for identifiers the platform detects. Enigma Vault NoPII tokenizes names, SSNs, bank account numbers, IBANs, and card numbers before a prompt reaches the model provider, keeps the same token for the same account across a conversation, and restores values in the response. If tokenization fails, the request is blocked. Transaction context can still be sensitive, so keep model-risk review in place."
+  - q: "Is a Vaulted or Vaultless Platform Better for a Bank?"
+    a: "Vaulted platforms keep originals in a separate store and give a clear reveal log, which suits customer service, payments, and loan files. Vaultless platforms derive tokens from keys, which suits very high-volume analytics where a vault lookup would add latency. Many banks use both: a vault for operational data and vaultless tokens in the warehouse."
+---
+<style>
+/* Wide tables: tighter cell padding so they fit the article column. */
+.bl-content .bl-table--wide td, .bl-content .bl-table--wide th { padding-left: 8px; padding-right: 8px; }
+.bl-content figure.bl-shot{margin:20px 0 24px;padding:10px;border:1px solid var(--ev-cool-stone);border-radius:10px;background:var(--ev-warm-cloud)}.bl-content figure.bl-shot img{display:block;width:100%;height:auto;border-radius:6px}.bl-content figure.bl-shot figcaption{margin-top:8px;text-align:center;font-size:13px;color:var(--ev-slate)}
+/* Vendor header card: rank, name, best-for pill, review scores, key facts. */
+.bl-content .vc { margin: 40px 0 20px; }
+.bl-content .vc__head { display: grid; grid-template-columns: auto 1fr auto; gap: 18px; align-items: center; margin-bottom: 14px; }
+.bl-content .vc__num { font-size: 34px; font-weight: 600; line-height: 1; color: var(--ev-mineral-blue); font-variant-numeric: tabular-nums; }
+.bl-content h3.vc__name { margin: 0; padding: 0; font-size: 26px; line-height: 1.25; font-weight: 600; color: var(--ev-ink); }
+.bl-content .vc__sep { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.bl-content .vc__pill { display: table; margin-top: 10px; padding: 6px 12px; border-radius: 6px; background: var(--ev-mineral-blue); color: #fff; line-height: 1.4; font-weight: 600; text-transform: none; letter-spacing: 0; font-size: 13px; }
+.bl-content .vc__rates { display: flex; flex-direction: column; gap: 8px; align-items: stretch; }
+.bl-content .vc__rate { display: flex; flex-direction: column; align-items: flex-end; padding: 8px 14px; border: 1px solid var(--ev-cool-stone); border-radius: 10px; background: #fff; text-decoration: none !important; min-width: 128px; }
+.bl-content a.vc__rate:hover { border-color: var(--ev-mineral-blue); }
+.bl-content .vc__score { font-size: 20px; font-weight: 700; color: var(--ev-ink); line-height: 1.2; }
+.bl-content .vc__score small { font-size: 13px; font-weight: 500; color: var(--ev-slate); }
+.bl-content .vc__src { font-size: 12px; color: var(--ev-slate); line-height: 1.3; }
+.bl-content .vc__rate--new .vc__score { font-size: 15px; }
+.bl-content .vc__facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px 24px; margin: 0; padding: 18px 22px; border-radius: 12px; background: var(--ev-warm-cloud); }
+.bl-content .vc__facts div { margin: 0; }
+.bl-content .vc__facts .vc__best { grid-column: 1 / -1; padding-top: 14px; border-top: 1px solid var(--ev-cool-stone); }
+.bl-content .vc__facts dt { margin: 0 0 4px; font-size: 11.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ev-slate); }
+.bl-content .vc__facts dd { margin: 0; font-size: 15px; line-height: 1.5; color: var(--ev-ink); }
+@media (max-width: 700px) {
+  .bl-content .vc__head { grid-template-columns: auto 1fr; }
+  .bl-content .vc__rates { grid-column: 1 / -1; flex-direction: row; flex-wrap: wrap; }
+  .bl-content .vc__rate { align-items: flex-start; }
+  .bl-content .vc__num { font-size: 26px; }
+  .bl-content h3.vc__name { font-size: 22px; }
+  .bl-content .vc__facts { grid-template-columns: 1fr; }
+}
+.bl-content .tldr { margin: 8px 0 32px; padding: 22px 26px; border-radius: 12px; background: var(--ev-warm-cloud); border-left: 3px solid var(--ev-mineral-blue); }
+.bl-content .tldr .tldr__label { margin: 0 0 12px; padding: 0; border: 0; font-size: 13px; line-height: 1.4; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--ev-mineral-blue); }
+.bl-content .tldr .tldr__list { margin: 0; padding-left: 20px; }
+.bl-content .tldr .tldr__list li { margin: 0 0 10px; font-size: 16px; line-height: 1.6; color: var(--ev-ink); }
+.bl-content .tldr .tldr__list li::marker { color: var(--ev-mineral-blue); }
+.bl-content .tldr .tldr__list li:last-child { margin-bottom: 0; }
+.bl-content .tldr strong a { font-weight: 600; }
+</style>
+
+<p>Comparing the best tokenization software for banking &amp; financial services of 2026: 1. Enigma Vault, 2. VGS, 3. Protegrity, 4. Thales CipherTrust Tokenization, 5. Bluefin ShieldConex, 6. IXOPAY, and 7. Fortanix Data Security Manager.</p>
+<p><strong>About the author:</strong> I’m <a class="bl-link" href="https://www.linkedin.com/in/tony-alex-enigma-vault/" target="_blank" rel="noopener">Dr. Tony Alex</a>, Chief Executive Officer of Enigma Vault, where I lead our work in encryption, tokenization, and sensitive-data protection. I have more than two decades of experience building enterprise software businesses.</p>
+<p>In 1999 I founded US eDirect to develop software for parks, campgrounds, and recreation agencies, bringing reservations and payments into one cloud system, and led it through its acquisition by Tyler Technologies in 2022.</p>
+<p><em>Disclosure: Enigma Vault publishes this guide and appears first in it. Every platform here is judged on the same criteria, and the review ratings come from G2 and Capterra.</em></p>
+<p>This guide covers tokenizing customer data inside a bank’s own systems; tokenized deposits and securities are a separate topic. Building an app on a sponsor bank? Our guide to <a class="bl-link" href="/blog/best-tokenization-software-for-fintech/">tokenization software for fintech</a> compares developer-first vaults.</p>
+<div class="tldr" id="tldr">
+  <h2 class="tldr__label">TL;DR</h2>
+  <ul class="tldr__list">
+    <li><strong><a class="bl-link" href="#enigma-vault">Enigma Vault</a>:</strong> best for account data, cards, loan files, and AI prompts in one vault.</li>
+    <li><strong><a class="bl-link" href="#vgs">VGS</a>:</strong> best for bank account tokens shared with fintech partners.</li>
+    <li><strong><a class="bl-link" href="#protegrity">Protegrity</a>:</strong> best for fraud and risk analytics on tokenized data.</li>
+    <li><strong><a class="bl-link" href="#thales-ciphertrust-tokenization">Thales CipherTrust Tokenization</a>:</strong> best for banks standardizing on the CipherTrust platform.</li>
+    <li><strong><a class="bl-link" href="#bluefin-shieldconex">Bluefin ShieldConex</a>:</strong> best for vaultless tokens on ACH and NACHA batch files.</li>
+    <li><strong><a class="bl-link" href="#ixopay">IXOPAY (formerly TokenEx)</a>:</strong> best for card programs routing across acquirers.</li>
+    <li><strong><a class="bl-link" href="#fortanix-data-security-manager">Fortanix Data Security Manager</a>:</strong> best for banks modernizing mainframe keys and HSMs.</li>
+  </ul>
+</div>
+<h2 id="best-tokenization-software-for-banks-at-a-glance">Best Tokenization Software for Banks at a Glance</h2>
+<p>Only Enigma Vault, VGS, and IXOPAY publish a starting price. Enigma Vault offers a free Lite sandbox, VGS says teams can get started for free, Bluefin offers a sandbox on request, Protegrity offers a free Developer Edition, and Fortanix offers a 30-day free trial. Every fact was checked between November 11 and 13, 2026.</p>
+<div class="bl-tablewrap"><table class="bl-table bl-table--wide">
+<thead><tr><th>Platform</th><th>Best for</th><th>Starting price</th><th>Deployment</th><th>Card and ACH data</th><th>G2 rating</th></tr></thead>
+<tbody>
+<tr><td><a class="bl-link" href="#enigma-vault">Enigma Vault</a></td><td>Account data, cards, loan files, and AI prompts</td><td>$249/mo per product (Growth)</td><td>Managed cloud; NoPII also self-hosted</td><td>Cards, IVR payments, ACH account numbers</td><td><a class="bl-link" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener">4.4/5 (6 reviews)</a></td></tr>
+<tr><td><a class="bl-link" href="#vgs">VGS</a></td><td>Account tokens shared with fintech partners</td><td>$1,000/mo (Starter)</td><td>Managed vault behind a proxy</td><td>Cards, tokenized bank account numbers</td><td><a class="bl-link" href="https://www.g2.com/products/very-good-security-vgs-platform/reviews" target="_blank" rel="noopener">4.7/5 (47 reviews)</a></td></tr>
+<tr><td><a class="bl-link" href="#protegrity">Protegrity</a></td><td>Fraud and risk analytics at scale</td><td>Not published</td><td>Your cloud, hybrid, or on-premises</td><td>Cards as fields; Nacha cited</td><td><a class="bl-link" href="https://www.g2.com/products/protegrity/reviews" target="_blank" rel="noopener">4.5/5 (14 reviews)</a></td></tr>
+<tr><td><a class="bl-link" href="#thales-ciphertrust-tokenization">Thales CipherTrust Tokenization</a></td><td>Banks on the CipherTrust platform</td><td>Not published</td><td>Bank-run token servers</td><td>Cards and accounts as fields</td><td><a class="bl-link" href="https://www.g2.com/products/thales-ciphertrust-tokenization/reviews" target="_blank" rel="noopener">4.0/5 (6 reviews)</a></td></tr>
+<tr><td><a class="bl-link" href="#bluefin-shieldconex">Bluefin ShieldConex</a></td><td>Vaultless tokens on ACH and NACHA files</td><td>Not published</td><td>Cloud service; API, iFrame, or SFTP</td><td>Cards; ACH and NACHA files</td><td><a class="bl-link" href="https://www.g2.com/products/shieldconex/reviews" target="_blank" rel="noopener">No reviews yet</a></td></tr>
+<tr><td><a class="bl-link" href="#ixopay">IXOPAY</a></td><td>Card programs routing across acquirers</td><td>$1,000/mo</td><td>Managed payment platform</td><td>Cards, account and routing numbers</td><td><a class="bl-link" href="https://www.g2.com/products/tokenex/reviews" target="_blank" rel="noopener">4.6/5 (17 reviews)</a></td></tr>
+<tr><td><a class="bl-link" href="#fortanix-data-security-manager">Fortanix DSM</a></td><td>Mainframe keys and HSMs in one platform</td><td>Not published; 30-day free trial</td><td>SaaS or on-premises</td><td>Payment data and PII as fields</td><td><a class="bl-link" href="https://www.g2.com/products/fortanix/reviews" target="_blank" rel="noopener">4.5/5 (2 reviews)</a></td></tr>
+</tbody></table></div>
+
+<div class="bl-inlinecta">
+  <div>
+    <p class="bl-inlinecta__t">Take SSNs and account numbers out of loan files</p>
+    <p class="bl-inlinecta__s">Walk us through one loan or KYC file, and we will show how each field becomes a token your systems can still use.</p>
+  </div>
+  <a class="np-btn np-btn--on-dark np-btn--primary cta-blog cta-best-tokenization-software-for-banking-and-financial-services--glance" href="/request-demo/"><span>Request a demo</span><span class="np-btn__arrow" aria-hidden="true">&#8594;</span></a>
+</div>
+
+<h2 id="how-we-weighted">How We Ranked Tokenization Software for Banks</h2>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Criterion</th><th>Weight</th><th>What we checked</th></tr></thead>
+<tbody>
+<tr><td>Coverage of bank data</td><td>25%</td><td>Core, KYC, card, ACH, loan, and document data</td></tr>
+<tr><td>Fit with core banking</td><td>20%</td><td>Legacy cores, mainframes, warehouses, deployment options</td></tr>
+<tr><td>Evidence for examiners</td><td>20%</td><td>PCI, SOC 2, ISO 27001, reveal logs, key custody</td></tr>
+<tr><td>AI on customer data</td><td>15%</td><td>Identifiers tokenized before prompts reach a model</td></tr>
+<tr><td>Price transparency</td><td>10%</td><td>Published plans, sandboxes, or trials</td></tr>
+<tr><td>Reviews</td><td>10%</td><td>G2 and Capterra ratings and comments</td></tr>
+</tbody></table></div>
+<p>Vendor facts come from each vendor’s own pages, checked between November 11 and 13, 2026, or on October 29, 2026 where noted in our sources. Where a page is silent, we write “Not published.”</p>
+<h2 id="the-7-best-tokenization-software-for-banking">The 7 Best Tokenization Software for Banking and Financial Services in 2026</h2>
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">01</span>
+    <div class="vc__id">
+      <h3 id="enigma-vault" class="vc__name"><span class="vc__sep">1. </span>Enigma Vault<span class="vc__sep">: </span><span class="vc__pill">Best for Account Data, Cards, Loan Files, and AI Prompts in One Vault</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener"><span class="vc__score">4.4<small>/5</small></span><span class="vc__src">G2 · 6 reviews</span></a><a class="vc__rate" href="https://www.capterra.com/p/241650/Enigma-Vault/reviews/" target="_blank" rel="noopener"><span class="vc__score">4.8<small>/5</small></span><span class="vc__src">Capterra · 4 reviews</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Token model</dt><dd>Vaulted, per-customer AES-256 keys</dd></div>
+    <div><dt>Starting price</dt><dd>Free Lite sandbox, then $49 a month per product</dd></div>
+    <div><dt>Evidence</dt><dd>PCI DSS Level 1, SOC 2 Type II</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Community and regional banks, credit unions, lenders, and wealth managers that want cards, account fields, documents, and AI traffic protected by one vendor without running token servers.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/enigma-vault.jpg" alt="Enigma Vault homepage" >}}
+  <figcaption>Enigma Vault homepage. Source: enigmavault.io</figcaption>
+</figure>
+<p>Enigma Vault is a vaulted tokenization platform delivered as APIs, hosted forms, a payment proxy, and a no-code intake app. Bank systems keep tokens, while the real values stay in the vault in EU or US regions.</p>
+<p>For financial services, the site describes cards tokenized and charged through any gateway, and ACH data, account numbers, and loan documents vaulted under per-customer keys. <a class="bl-link" href="/nopii/">NoPII</a> tokenizes identifiers in AI traffic before it reaches the model provider.</p>
+<p>Data Vault stores SSNs and account numbers as tokens with exact-match lookup and batches of up to 5,000 values on Growth and Business, and Twilio Pay IVR sends call center cards into Card Vault.</p>
+<p>Core banking connectors are Not published; integration runs through the REST API at your middleware. Payment actions go through the vault’s proxy to Authorize.net, Stripe, Braintree, PayPal, or any REST processor.</p>
+<p><strong>What’s Great</strong></p>
+<ul>
+  <li><strong>Every entry point in one vault:</strong> Fields, cards, phone payments, KYC documents, and prompts share keys and one audit format.</li>
+  <li><strong>Fail-closed AI proxy:</strong> NoPII tokenizes SSNs, bank account numbers, IBANs, and cards and blocks any request it cannot tokenize.</li>
+  <li><strong>Prove one workflow first:</strong> Published prices and a free sandbox let a small bank IT team test before a contract.</li>
+</ul>
+<p><strong>Watch-Outs</strong></p>
+<ul>
+  <li><strong>No packaged core connectors:</strong> Linking a core or loan origination system takes API work.</li>
+  <li><strong>Managed cloud for the Vault:</strong> Only NoPII has a self-hosted edition.</li>
+</ul>
+<p><strong>Our Take:</strong> Pick Enigma Vault if you are a community bank, credit union, or lender that wants account data, cards, loan files, and AI prompts under one audit trail. It is the wrong pick for banks that require on-premises token servers for every vault.</p>
+<p><strong>Pricing</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>Lite</td><td>$0</td><td>Free sandbox for testing</td></tr>
+<tr><td>Growth</td><td>$249 a month per product</td><td>Production use, Twilio Pay IVR</td></tr>
+<tr><td>Business</td><td>$499 a month per product</td><td>Higher volumes, raw usage export</td></tr>
+<tr><td>Enterprise</td><td>Quoted per product</td><td>Annual contract, custom terms, and an SLA</td></tr>
+</tbody></table></div>
+<p><strong>Security and Compliance</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Control</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>PCI DSS</td><td>Level 1</td></tr>
+<tr><td>SOC 2</td><td>Type II</td></tr>
+<tr><td>ISO 27001</td><td>In progress</td></tr>
+<tr><td>AOC, responsibility matrix, SOC 2 report</td><td>Included on paid plans</td></tr>
+<tr><td>Audit logs</td><td>Every access, tokenization, and retrieval</td></tr>
+</tbody></table></div>
+<p><strong>What Reviewers Say:</strong> <a class="bl-link" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener">4.4/5 from 6 reviews on G2</a>; one reviewer calls the API “simplistic and easy to understand,” and one wants more flexible reporting dashboards.</p>
+<div class="bl-evcall" role="note"><span class="bl-evcall__tag">Enigma Vault</span><p><strong>The loan file is where account data spreads:</strong> Borrowers email pay stubs and statements, and SSNs get copied into spreadsheets. Customer Vault collects the package, Data Vault tokenizes SSNs and account numbers, and File Vault limits who can open each document, with every access logged.</p><div class="bl-evcall__cta"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-best-tokenization-software-for-banking-and-financial-services--callout-loan" href="/request-demo/?interest=best-tokenization-software-for-banking-and-financial-services"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-evcall__more cta-blog cta-best-tokenization-software-for-banking-and-financial-services--callout-loan-explore" href="/vault/data-vault/">Explore Data Vault &rarr;</a></div></div>
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">02</span>
+    <div class="vc__id">
+      <h3 id="vgs" class="vc__name"><span class="vc__sep">2. </span>VGS<span class="vc__sep">: </span><span class="vc__pill">Best for Bank Account Tokens Shared With Fintech Partners</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/very-good-security-vgs-platform/reviews" target="_blank" rel="noopener"><span class="vc__score">4.7<small>/5</small></span><span class="vc__src">G2 · 47 reviews</span></a><a class="vc__rate vc__rate--new" href="https://www.capterra.com/p/195135/VGS-Platform/reviews/" target="_blank" rel="noopener"><span class="vc__score">No reviews</span><span class="vc__src">Capterra</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Token model</dt><dd>Vaulted, non-relational tokens</dd></div>
+    <div><dt>Starting price</dt><dd>Starter from $1,000 a month; free to start</dd></div>
+    <div><dt>Evidence</dt><dd>ISO 27001 badge on homepage</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Card-issuing banks and institutions that share account data with fintechs, processors, and Pay by Bank partners and want tokens in place of raw account numbers.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/vgs.jpg" alt="VGS homepage" >}}
+  <figcaption>VGS homepage. Source: verygoodsecurity.com</figcaption>
+</figure>
+<p>VGS (Very Good Security) is a tokenization vault that sits behind a proxy and swaps tokens for real values on the way to a processor. Its financial institutions page is written for banks, card issuers, and the fintechs they partner with.</p>
+<p>Tokenized Account Numbers (TANs) turn a deposit account number into a merchant-specific token for third parties, which VGS links to the CFPB data-sharing rules. Routing numbers, account numbers, and SSNs can sit in the same vault, and every tokenization and detokenization is logged.</p>
+<p>For issuing banks, the page covers card reveal, push provisioning, settlement files, and screen redaction for service staff. Its AI Data Firewall tokenizes cards, SSNs, and bank accounts before inference. Loan document storage is Not published.</p>
+<p><strong>What’s Great</strong></p>
+<ul>
+  <li><strong>Built for account data sharing:</strong> TANs give each partner its own token.</li>
+  <li><strong>Deep card issuing features:</strong> Card reveal, push provisioning, and settlement file protection.</li>
+</ul>
+<p><strong>Watch-Outs</strong></p>
+<ul>
+  <li><strong>Proxy in the data path:</strong> Real values are substituted on outbound calls, so VGS uptime becomes part of yours.</li>
+  <li><strong>Documentation:</strong> G2’s review summary notes some users find it hard to navigate.</li>
+</ul>
+<p><strong>Our Take:</strong> VGS fits card-issuing banks and institutions that share account data with fintech partners. It is the wrong pick for teams whose main exposure is loan documents and member files.</p>
+<p><strong>Pricing</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>Starter</td><td>From $1,000 a month</td><td>Get started for free</td></tr>
+<tr><td>Growth</td><td>Custom quote</td><td>Network tokens, account updater, PCI compliance subscription</td></tr>
+</tbody></table></div>
+<p><strong>Security and Compliance</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Control</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>ISO 27001</td><td>Schellman badge on homepage</td></tr>
+<tr><td>Audit logs</td><td>Every tokenization and detokenization</td></tr>
+<tr><td>Audit scope</td><td>Says TANs remove bank data from NACHA, SOC 2, PCI scope</td></tr>
+</tbody></table></div>
+<p><strong>What Reviewers Say:</strong> <a class="bl-link" href="https://www.g2.com/products/very-good-security-vgs-platform/reviews" target="_blank" rel="noopener">4.7/5 from 47 reviews on G2</a>; reviewers praise easy integration and responsive support, while two object to the $40 fee per extra CNAME.</p>
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">03</span>
+    <div class="vc__id">
+      <h3 id="protegrity" class="vc__name"><span class="vc__sep">3. </span>Protegrity<span class="vc__sep">: </span><span class="vc__pill">Best for Fraud and Risk Analytics on Tokenized Data</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/protegrity/reviews" target="_blank" rel="noopener"><span class="vc__score">4.5<small>/5</small></span><span class="vc__src">G2 · 14 reviews</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Token model</dt><dd>Vaultless, format- and type-preserving</dd></div>
+    <div><dt>Starting price</dt><dd>Free Developer Edition; paid editions quoted</dd></div>
+    <div><dt>Evidence</dt><dd>Not published on the pages checked</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Large banks, card issuers, and credit bureaus that tokenize customer columns across warehouses and clouds and need analysts to keep joining and counting.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/protegrity.jpg" alt="Protegrity homepage" >}}
+  <figcaption>Protegrity homepage. Source: protegrity.com</figcaption>
+</figure>
+<p>Protegrity is a data protection platform whose protectors apply tokenization inside applications and data stores under one central policy. Its financial services page is written for banks, insurance providers, and other financial services companies.</p>
+<p>Vaultless, format-preserving tokens keep account numbers in shape across warehouses, with featured AWS and Databricks integrations.</p>
+<p>It cites 300 million tokens generated per minute in a credit reporting agency’s database, and a credit reporting agency protecting data on more than 400 million credit card holders. Card capture, phone payments, and loan documents are Not published.</p>
+<p><strong>What’s Great</strong></p>
+<ul>
+  <li><strong>Proven at bureau scale:</strong> Case studies cover hundreds of millions of card holder records.</li>
+  <li><strong>Analytics keep working:</strong> Joins and counts run on tokens, so fraud models avoid raw identifiers.</li>
+</ul>
+<p><strong>Watch-Outs</strong></p>
+<ul>
+  <li><strong>Key custody is yours:</strong> Any system holding the key can reverse tokens.</li>
+  <li><strong>Price questioned:</strong> Two reviewers call it high, one citing a single-year license above $15,000.</li>
+</ul>
+<p><strong>Our Take:</strong> Protegrity fits large banks, card issuers, and credit bureaus running fraud and risk analytics on tokenized data. It is the wrong pick for branch and call center teams that need card capture, IVR, or document intake.</p>
+<p><strong>Pricing</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>AI Developer Edition</td><td>Free</td><td>Testing</td></tr>
+<tr><td>Team and Enterprise editions</td><td>Quoted</td><td>Team runs in your AWS; Enterprise adds hybrid, on-premises, and HSM keys</td></tr>
+</tbody></table></div>
+<p><strong>Security and Compliance</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Control</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>Certifications</td><td>Not published on the pages checked</td></tr>
+<tr><td>Frameworks named</td><td>Nacha, PCI DSS, and GDPR</td></tr>
+</tbody></table></div>
+<p><strong>What Reviewers Say:</strong> <a class="bl-link" href="https://www.g2.com/products/protegrity/reviews" target="_blank" rel="noopener">4.5/5 from 14 reviews on G2</a>; one reviewer praises scalable vaultless tokenization, while one criticizes support.</p>
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">04</span>
+    <div class="vc__id">
+      <h3 id="thales-ciphertrust-tokenization" class="vc__name"><span class="vc__sep">4. </span>Thales CipherTrust Tokenization<span class="vc__sep">: </span><span class="vc__pill">Best for Banks Standardizing on the CipherTrust Platform</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/thales-ciphertrust-tokenization/reviews" target="_blank" rel="noopener"><span class="vc__score">4.0<small>/5</small></span><span class="vc__src">G2 · 6 reviews</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Token model</dt><dd>Vaulted and vaultless</dd></div>
+    <div><dt>Starting price</dt><dd>Custom quote</dd></div>
+    <div><dt>Evidence</dt><dd>Not listed on the product page</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Bank security teams that run their own data centers, already use Thales key management, and can staff token servers and vault databases.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v3/thales.jpg" alt="Thales homepage" >}}
+  <figcaption>Thales homepage. Source: cpl.thalesgroup.com</figcaption>
+</figure>
+<p>Thales CipherTrust Tokenization offers vaulted and vaultless tokenization with optional data masking. It is part of the Thales CipherTrust Data Security Platform, with centralized management.</p>
+<p>Tokens reach data through native column protection, an application SDK, or a RESTful service, with format-preserving output so schemas stay unchanged. Loan and KYC documents, IVR capture, and prompt traffic are outside the product page.</p>
+<p><strong>What’s Great</strong></p>
+<ul>
+  <li><strong>Full custody:</strong> The bank runs every component, which some risk committees prefer.</li>
+  <li><strong>Choice of token model:</strong> Vaulted for operations and vaultless for batch volume.</li>
+</ul>
+<p><strong>Watch-Outs</strong></p>
+<ul>
+  <li><strong>You operate the vault database:</strong> Vaulted mode depends on databases your team runs and patches.</li>
+  <li><strong>Fields only:</strong> No files, intake, phone capture, or AI prompt protection.</li>
+</ul>
+<p><strong>Our Take:</strong> Thales fits bank security teams that want tokenization inside the CipherTrust Data Security Platform with centralized management. Smaller institutions should look elsewhere; one G2 reviewer calls it expensive for small businesses.</p>
+<p><strong>Pricing</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>Tokenization</td><td>Not published</td><td>Demo or sales quote</td></tr>
+</tbody></table></div>
+<p><strong>Security and Compliance</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Control</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>Certifications</td><td>Not listed on the product page</td></tr>
+<tr><td>Framework named</td><td>PCI DSS</td></tr>
+<tr><td>Key access</td><td>Cloud providers never access vaults or keys</td></tr>
+</tbody></table></div>
+<p><strong>What Reviewers Say:</strong> <a class="bl-link" href="https://www.g2.com/products/thales-ciphertrust-tokenization/reviews" target="_blank" rel="noopener">4.0/5 from 6 reviews on G2</a>; one reviewer likes the on-premises and cloud consoles, and one cites implementation complexity.</p>
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">05</span>
+    <div class="vc__id">
+      <h3 id="bluefin-shieldconex" class="vc__name"><span class="vc__sep">5. </span>Bluefin ShieldConex<span class="vc__sep">: </span><span class="vc__pill">Best for Vaultless Tokens on ACH and NACHA Batch Files</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate vc__rate--new" href="https://www.g2.com/products/shieldconex/reviews" target="_blank" rel="noopener"><span class="vc__score">No reviews</span><span class="vc__src">G2</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Token model</dt><dd>Vaultless, HSM-generated, same input gives same token</dd></div>
+    <div><dt>Starting price</dt><dd>Custom quote; sandbox on request</dd></div>
+    <div><dt>Evidence</dt><dd>ISO/IEC 27001:2022 and SOC badges listed</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Bank payments and operations teams that still exchange NACHA, CSV, or fixed-width files and want card numbers and PII tokenized without a stored vault.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/bluefin.jpg" alt="Bluefin ShieldConex product page" >}}
+  <figcaption>Bluefin ShieldConex page. Source: bluefin.com/shieldconex/</figcaption>
+</figure>
+<p>Bluefin ShieldConex is a tokenization service for payment data, PII, and PHI. Tokens are generated by hardware security modules, and the sensitive values are not stored in a vault or database.</p>
+<p>Its FileGuard option tokenizes NACHA, CSV, and fixed-width files over SFTP, with payroll and vendor payments as examples. The same input always returns the same token, so records stay linked across channels.</p>
+<p>Bluefin’s site lists it as a registered ISO of KeyBank, N.A. and Citizens Bank, N.A. Loan documents, call center capture, and AI prompts are Not published.</p>
+<p><strong>What’s Great</strong></p>
+<ul>
+  <li><strong>Batch files covered:</strong> NACHA files are tokenized without rebuilding the file exchange.</li>
+  <li><strong>Nothing stored to breach:</strong> Vaultless tokens leave no central store of originals.</li>
+</ul>
+<p><strong>Watch-Outs</strong></p>
+<ul>
+  <li><strong>Bank account fields unnamed:</strong> The page covers NACHA files but does not name account number fields.</li>
+  <li><strong>No public reviews or price:</strong> References and pricing come only through sales.</li>
+</ul>
+<p><strong>Our Take:</strong> ShieldConex fits bank payments and operations teams that run payroll or vendor payments on NACHA files. It is the wrong pick for teams that need document storage or AI prompt protection.</p>
+<p><strong>Pricing</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>Sandbox</td><td>On request</td><td>Testing</td></tr>
+<tr><td>ShieldConex</td><td>Not published</td><td>API, iFrame, and FileGuard SFTP</td></tr>
+</tbody></table></div>
+<p><strong>Security and Compliance</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Control</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>ISO/IEC 27001</td><td>2022 certification badge on site</td></tr>
+<tr><td>SOC</td><td>SOC for Service Organizations badge</td></tr>
+<tr><td>PCI DSS</td><td>iFrame capture reduces scope, per Bluefin</td></tr>
+</tbody></table></div>
+<p><strong>What Reviewers Say:</strong> The <a class="bl-link" href="https://www.g2.com/products/shieldconex/reviews" target="_blank" rel="noopener">ShieldConex listing on G2</a> has no reviews yet and there is no Capterra listing, so ask for references from a bank of your size.</p>
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">06</span>
+    <div class="vc__id">
+      <h3 id="ixopay" class="vc__name"><span class="vc__sep">6. </span>IXOPAY (Formerly TokenEx)<span class="vc__sep">: </span><span class="vc__pill">Best for Card Programs Routing Across Acquirers</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/tokenex/reviews" target="_blank" rel="noopener"><span class="vc__score">4.6<small>/5</small></span><span class="vc__src">G2 · 17 reviews</span></a><a class="vc__rate vc__rate--new" href="https://www.capterra.com/p/181731/Cloud-Based-Tokenization/reviews/" target="_blank" rel="noopener"><span class="vc__score">No reviews</span><span class="vc__src">Capterra</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Token model</dt><dd>Vaulted card and payment data tokens</dd></div>
+    <div><dt>Starting price</dt><dd>Plans from $1,000 a month; free sandbox on request</dd></div>
+    <div><dt>Evidence</dt><dd>PCI DSS Level 1, SOC 2, ISO 27001:2022</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Banks and payment businesses running card acceptance across many acquirers and payment methods that want tokens independent of any one processor.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/ixopay.jpg" alt="IXOPAY homepage" >}}
+  <figcaption>IXOPAY homepage. Source: ixopay.com</figcaption>
+</figure>
+<p>IXOPAY is a payment orchestration platform that absorbed TokenEx’s tokenization. Its financial services page pairs card tokenization with intelligent routing and real-time fraud prevention.</p>
+<p>An adapter catalog keeps tokens usable across gateways and processors, and TokenEx guidance covers bank account and routing numbers as payment data.</p>
+<p>Its financial services page quotes Bankart as a client; core customer fields, KYC documents, and AI prompts are outside its focus.</p>
+<p><strong>What’s Great</strong></p>
+<ul>
+  <li><strong>Strong payments evidence:</strong> Public trust page with AOCs, SOC reports, and ISO 27001:2022.</li>
+  <li><strong>Processor portability:</strong> Tokens stay usable when the bank changes acquirers.</li>
+</ul>
+<p><strong>Watch-Outs</strong></p>
+<ul>
+  <li><strong>Payments scope:</strong> Customer records, documents, and analytics data need another vendor.</li>
+  <li><strong>Orchestration-first:</strong> Banks that need only a vault may pay for routing they do not use.</li>
+</ul>
+<p><strong>Our Take:</strong> IXOPAY fits card programs routing across many acquirers and payment methods. It is the wrong pick for banks whose exposure is loan files and customer records rather than card flows.</p>
+<p><strong>Pricing</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>Sandbox</td><td>Free on request</td><td>Testing</td></tr>
+<tr><td>Plans</td><td>From $1,000 a month</td><td>Plan contents Not published</td></tr>
+</tbody></table></div>
+<p><strong>Security and Compliance</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Control</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>PCI DSS</td><td>Level 1 service provider</td></tr>
+<tr><td>AOCs</td><td>Separate for tokenization and orchestration</td></tr>
+<tr><td>SOC reports</td><td>SOC 2 and SOC 3</td></tr>
+<tr><td>ISO 27001</td><td>ISO 27001:2022</td></tr>
+<tr><td>Cloud</td><td>CSA STAR</td></tr>
+</tbody></table></div>
+<p><strong>What Reviewers Say:</strong> <a class="bl-link" href="https://www.g2.com/products/tokenex/reviews" target="_blank" rel="noopener">4.6/5 from 17 reviews on G2</a>. One G2 reviewer says its iframe and transparent gateway keep card data off their systems to reduce PCI scope, and that tokens work across gateways.</p>
+<div class="vc">
+  <div class="vc__head">
+    <span class="vc__num">07</span>
+    <div class="vc__id">
+      <h3 id="fortanix-data-security-manager" class="vc__name"><span class="vc__sep">7. </span>Fortanix Data Security Manager<span class="vc__sep">: </span><span class="vc__pill">Best for Banks Modernizing Mainframe Keys and HSMs</span></h3>
+    </div>
+    <div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/fortanix/reviews" target="_blank" rel="noopener"><span class="vc__score">4.5<small>/5</small></span><span class="vc__src">G2 · 2 reviews</span></a><a class="vc__rate" href="https://www.capterra.com/p/191860/Self-Defending-Key-Management-Service/" target="_blank" rel="noopener"><span class="vc__score">5.0<small>/5</small></span><span class="vc__src">Capterra · 1 review</span></a></div>
+  </div>
+  <dl class="vc__facts">
+    <div><dt>Token model</dt><dd>Vaultless, format-preserving encryption</dd></div>
+    <div><dt>Starting price</dt><dd>Custom quote; 30-day free trial, no credit card</dd></div>
+    <div><dt>Evidence</dt><dd>FIPS 140-2 Level 3, PCI DSS, ISO 27001, SOC 2 Type 2</dd></div>
+    <div class="vc__best"><dt>Who it suits</dt><dd>Bank security teams that run mainframes and legacy HSMs and want tokenization, encryption, and keys managed in one platform, on premises or as SaaS.</dd></div>
+  </dl>
+</div>
+<figure class="bl-shot">
+  {{< img src="/assets/blog/listicles-2026/v4/fortanix.jpg" alt="Fortanix homepage" >}}
+  <figcaption>Fortanix homepage. Source: fortanix.com</figcaption>
+</figure>
+<p>Fortanix Data Security Manager offers data tokenization as format-preserving encryption, with no central token database. Keys sit in FIPS 140-2 Level 3 HSMs, on premises or as SaaS.</p>
+<p>Its banking and financial services page is written for financial institutions, names PCI DSS and GLBA, and features a Goldman Sachs case study. For mainframes, it imports and exports X9.24 and TR-31 keys and upgrades legacy 3DES keys to AES.</p>
+<p>Access runs on granular RBAC with quorum approvals, and fields can be fully or partly masked by permission. Card capture, loan documents, and AI prompt protection are Not published.</p>
+<p><strong>What’s Great</strong></p>
+<ul>
+  <li><strong>Mainframe key path:</strong> X9.24 and TR-31 key import, plus 3DES to AES upgrades.</li>
+  <li><strong>Deidentified sharing:</strong> Tokenized data sets can go to third parties for analytics or support.</li>
+</ul>
+<p><strong>Watch-Outs</strong></p>
+<ul>
+  <li><strong>Few public reviews:</strong> Two G2 reviews; one finds managing many devices strenuous.</li>
+  <li><strong>Fields only:</strong> No document intake, phone capture, or prompt tokenization published.</li>
+</ul>
+<p><strong>Our Take:</strong> Fortanix fits bank security teams consolidating HSMs and mainframe keys alongside tokenization. It is the wrong pick for teams whose exposure is loan files, call center cards, or AI prompts.</p>
+<p><strong>Pricing</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
+<tbody>
+<tr><td>DSM SaaS trial</td><td>Free for 30 days</td><td>Full feature set; no credit card</td></tr>
+<tr><td>Enterprise</td><td>Not published</td><td>Demo or sales quote</td></tr>
+</tbody></table></div>
+<p><strong>Security and Compliance</strong></p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Control</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>FIPS 140-2</td><td>Level 3 HSMs</td></tr>
+<tr><td>Certifications listed</td><td>PCI DSS, ISO 27001, SOC 2 Type 2</td></tr>
+<tr><td>Frameworks named</td><td>PCI DSS, GLBA, GDPR on banking page</td></tr>
+</tbody></table></div>
+<p><strong>What Reviewers Say:</strong> <a class="bl-link" href="https://www.g2.com/products/fortanix/reviews" target="_blank" rel="noopener">4.5/5 from 2 reviews on G2</a>; one reviewer values key portability, and one wants more visibility into how keys are used.</p>
+<h2 id="shortlist-by-institution-size">Which Tokenization Software Fits Your Bank or Credit Union</h2>
+<p>Size and the systems you already run narrow the list quickly. Start with the row that matches your institution.</p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Institution</th><th>Pick</th><th>Why</th></tr></thead>
+<tbody>
+<tr><td>Community bank or credit union</td><td>Enigma Vault</td><td>Cards, accounts, and member files; no token servers</td></tr>
+<tr><td>Regional bank</td><td>Enigma Vault or VGS</td><td>Managed vault, or account tokens for fintech partners</td></tr>
+<tr><td>Global bank or card processor</td><td>Protegrity or Thales</td><td>Warehouse analytics or self-run custody</td></tr>
+<tr><td>Lender or fintech partner</td><td>Enigma Vault</td><td>Borrower files, SSNs, and bank details, one audit trail</td></tr>
+<tr><td>Payments team exchanging NACHA files</td><td>Bluefin ShieldConex</td><td>Batch files tokenized over SFTP</td></tr>
+<tr><td>Card program across acquirers</td><td>IXOPAY</td><td>Tokens stay usable when acquirers change</td></tr>
+<tr><td>Bank with mainframes and legacy HSMs</td><td>Fortanix DSM</td><td>Mainframe key import; HSMs on premises or SaaS</td></tr>
+</tbody></table></div>
+<h2 id="where-bank-data-flows">Where Bank Customer Data Flows and Which Platform Covers It</h2>
+<p>All seven platforms tokenize payment data, and most cover account fields. They split on the places customer data lands next: loan folders, the call center, the warehouse, and AI apps.</p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Platform</th><th>Loan and ID documents</th><th>Call center cards</th><th>Analytics warehouse</th><th>AI on customer data</th></tr></thead>
+<tbody>
+<tr><td>Enigma Vault</td><td>Yes, File Vault and intake</td><td>Yes, Twilio Pay IVR</td><td>Deterministic tokens; no connector published</td><td>Yes, NoPII proxy</td></tr>
+<tr><td>Protegrity</td><td>Not published</td><td>Not published</td><td>Yes, AWS and Databricks</td><td>AI editions</td></tr>
+<tr><td>VGS</td><td>Not published</td><td>Screens redacted for service staff</td><td>Not published</td><td>Yes, AI Data Firewall</td></tr>
+<tr><td>Thales CipherTrust</td><td>Not published</td><td>Not published</td><td>Column-level protection</td><td>“Ready data for AI,” per product page</td></tr>
+<tr><td>Bluefin ShieldConex</td><td>NACHA, CSV, and fixed-width files only</td><td>Not published</td><td>Same input, same token</td><td>Not published</td></tr>
+<tr><td>IXOPAY</td><td>Not published</td><td>Not published</td><td>Not published</td><td>Agentic commerce only</td></tr>
+<tr><td>Fortanix DSM</td><td>Not published</td><td>Not published</td><td>Deidentified data sets shared for analytics</td><td>Not published for tokenization</td></tr>
+</tbody></table></div>
+<h2 id="sharing-with-partners">Sharing Tokenized Customer Data With Fintech Partners and Third Parties</h2>
+<p>Banks hand customer data to bureaus, servicers, integrators, processors, and now model providers. The question is what each partner actually needs to see, and who can turn a token back into a value.</p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Partner need</th><th>What helps</th><th>Documented by</th></tr></thead>
+<tbody>
+<tr><td>Analytics or bureau data sets</td><td>Deterministic or format-preserving tokens</td><td>Protegrity, Bluefin ShieldConex, Fortanix</td></tr>
+<tr><td>Servicer needing a few real values</td><td>Role-limited, logged or partial reveal</td><td>Enigma Vault, VGS</td></tr>
+<tr><td>Payment processors</td><td>Processor-independent card tokens</td><td>IXOPAY, VGS, Enigma Vault proxy</td></tr>
+<tr><td>AI model providers</td><td>Prompts tokenized, responses restored</td><td>Enigma Vault NoPII</td></tr>
+</tbody></table></div>
+<p>Agree token scope before any feed goes out. A token reused across family, trustee, and advisor records can link people who should stay separate, so give each partner only the fields and reveal rights it needs.</p>
+<p>Choose a vaultless platform if analysts must join and count on tokens across warehouses, and a vault if your exposure sits in call centers, loan files, and staff AI apps.</p>
+<div class="bl-evcall" role="note"><span class="bl-evcall__tag">Enigma Vault NoPII</span><p><strong>Account numbers never reach the model provider:</strong> Point your copilot’s base URL at NoPII and SSNs, bank account numbers, IBANs, and cards are tokenized before the prompt leaves, then restored in the response. A failed tokenization blocks the request.</p><div class="bl-evcall__cta"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-best-tokenization-software-for-banking-and-financial-services--callout-ai" href="/request-demo/?interest=best-tokenization-software-for-banking-and-financial-services"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-evcall__more cta-blog cta-best-tokenization-software-for-banking-and-financial-services--callout-ai-explore" href="/nopii/">Explore NoPII &rarr;</a></div></div>
+<h2 id="token-models-and-evidence">Token Models and Examiner Evidence by Platform</h2>
+<p>Examiners ask two things of any tokenization vendor: who can reverse a token, and what independent evidence backs the controls. Here is what each platform states on its own pages.</p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Platform</th><th>Token model</th><th>Published evidence</th></tr></thead>
+<tbody>
+<tr><td>Enigma Vault</td><td>Vaulted, per-customer keys</td><td>PCI DSS Level 1, SOC 2 Type II</td></tr>
+<tr><td>VGS</td><td>Vaulted, non-relational tokens</td><td>ISO 27001 badge on homepage</td></tr>
+<tr><td>Protegrity</td><td>Vaultless, format-preserving</td><td>Not published on the pages checked</td></tr>
+
+<tr><td>Thales CipherTrust</td><td>Vaulted and vaultless</td><td>Not listed on the product page</td></tr>
+<tr><td>Bluefin ShieldConex</td><td>Vaultless, HSM-generated tokens</td><td>ISO/IEC 27001:2022 and SOC badges</td></tr>
+<tr><td>IXOPAY</td><td>Vaulted card tokens</td><td>PCI DSS Level 1, SOC 2, ISO 27001:2022</td></tr>
+<tr><td>Fortanix DSM</td><td>Vaultless, format-preserving</td><td>FIPS 140-2 L3, PCI DSS, ISO 27001, SOC 2</td></tr>
+</tbody></table></div>
+<h2 id="rules-and-due-diligence">Banking Rules and the Vendor Due Diligence Examiners Expect</h2>
+<p>No platform makes an institution compliant. These rules reward having fewer systems that hold readable customer data.</p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Rule</th><th>Who it covers</th><th>Where tokenization helps</th></tr></thead>
+<tbody>
+<tr><td>PCI DSS v4.0.1</td><td>Anyone handling card data</td><td>Token-only systems can leave cardholder data scope</td></tr>
+<tr><td>GLBA Safeguards Rule</td><td>Non-bank lenders under the FTC</td><td>Encryption or approved compensating controls</td></tr>
+<tr><td>GLBA Interagency Guidelines</td><td>Federally supervised banks</td><td>Encryption listed among measures to consider</td></tr>
+<tr><td>NYDFS Part 500.15</td><td>New York–regulated entities</td><td>Written encryption policy in transit and at rest</td></tr>
+<tr><td>SOX Section 404</td><td>Listed banks</td><td>Reveal logs show who saw what</td></tr>
+<tr><td>DORA</td><td>EU financial entities, since January 17, 2025</td><td>Vendor exit, incident, and contract questions</td></tr>
+</tbody></table></div>
+<p>Your third-party risk team will ask any tokenization vendor the same questions. The right column shows what Enigma Vault states on its own pages.</p>
+<div class="bl-tablewrap bl-tablewrap--tri"><table class="bl-table bl-table--tri"><thead><tr><th>Question</th><th>Why it matters</th><th>What to confirm</th><th class="bl-tri__ev"><span class="bl-tri__tag">Our answer</span>Enigma Vault</th></tr></thead><tbody>
+<tr><td>PCI evidence</td><td>Card data scope</td><td>PCI level, AOC, responsibility matrix</td><td class="bl-tri__ev">PCI DSS Level 1; AOC and matrix on paid plans</td></tr>
+<tr><td>Audit report</td><td>Independent proof of controls</td><td>SOC 2 Type II date and scope</td><td class="bl-tri__ev">SOC 2 Type II report on paid plans</td></tr>
+<tr><td>ISO 27001</td><td>Common in questionnaires</td><td>Certificate or stated timeline</td><td class="bl-tri__ev">In progress, per our security policy</td></tr>
+<tr><td>Key custody</td><td>Who can reverse tokens</td><td>Key separation and rotation</td><td class="bl-tri__ev">Per-customer AES-256 keys, rolled over on schedule</td></tr>
+<tr><td>Reveal logging</td><td>Examiner and SOX evidence</td><td>A sample detokenization record</td><td class="bl-tri__ev">Every access, tokenization, and retrieval logged</td></tr>
+<tr><td>Data location</td><td>Residency and DORA exit</td><td>Regions and export path</td><td class="bl-tri__ev">EU and US regions; usage export on Business</td></tr>
+<tr class="bl-tri__cta"><td>Next step</td><td colspan="2" class="bl-tri__note">Bring your vendor questionnaire and one data flow.</td><td class="bl-tri__ev"><div class="bl-tri__acts"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-best-tokenization-software-for-banking-and-financial-services--table-risk" href="/request-demo/?interest=best-tokenization-software-for-banking-and-financial-services"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-tri__more cta-blog cta-best-tokenization-software-for-banking-and-financial-services--table-risk-explore" href="/platform/data-security/">Explore data security &rarr;</a></div></td></tr>
+</tbody></table></div>
+<h2 id="cost-for-a-mid-sized-bank">What Tokenization Costs a Mid-Sized Bank</h2>
+<p>Only Enigma Vault, VGS, and IXOPAY publish a price for tokenization. A mid-sized bank running Data Vault, Card Vault, and File Vault on Growth would pay $747 a month before add-ons.</p>
+<div class="bl-tablewrap"><table class="bl-table">
+<thead><tr><th>Platform</th><th>Published price</th><th>How it’s sold</th></tr></thead>
+<tbody>
+<tr><td>Enigma Vault</td><td>Growth $249, Business $499 a month per product; free sandbox</td><td>Self-serve, AWS Marketplace, or Enterprise contract</td></tr>
+<tr><td>VGS</td><td>Starter from $1,000 a month</td><td>Free start, then contact sales</td></tr>
+<tr><td>Protegrity</td><td>Free Developer Edition; paid Not published</td><td>Demo, then quote</td></tr>
+<tr><td>Thales CipherTrust</td><td>Not published</td><td>Demo or sales quote</td></tr>
+<tr><td>Bluefin ShieldConex</td><td>Not published</td><td>Quote; sandbox on request</td></tr>
+<tr><td>IXOPAY</td><td>From $1,000 a month</td><td>Demo; free sandbox on request</td></tr>
+<tr><td>Fortanix DSM</td><td>Not published</td><td>30-day free trial, then quote</td></tr>
+</tbody></table></div>
+<div class="bl-evcall" role="note"><span class="bl-evcall__tag">Enigma Vault</span><p><strong>Start with a synthetic loan file:</strong> Data Vault Lite includes 1,500 requests a month and 100 stored tokens, and File Vault Lite includes 5 GB, with no card and no contract. The same integration then moves to a paid plan.</p><div class="bl-evcall__cta"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-best-tokenization-software-for-banking-and-financial-services--callout-pilot" href="/request-demo/?interest=best-tokenization-software-for-banking-and-financial-services"><span>Plan a bank pilot</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-evcall__more cta-blog cta-best-tokenization-software-for-banking-and-financial-services--callout-pilot-explore" href="/pricing/">Explore plans &rarr;</a></div></div>
+<h2 id="what-we-hear">What We Hear From Lenders and Credit Unions</h2>
+<p>The first conversation usually starts with a workflow owner, such as loan production, payments operations, or a product lead whose AI feature is stuck in review. Compliance and security test the design next.</p>
+<ul>
+  <li><strong>Account numbers sit in more places than expected:</strong> We ask which systems hold full account numbers or tax IDs, including spreadsheets and notes.</li>
+  <li><strong>Borrowers go around the portal:</strong> Income documents still arrive by email, so we ask who can download a full loan package.</li>
+  <li><strong>Wire instructions draw the hardest questions:</strong> A vault logs who retrieves instructions; callback verification and dual control stay with operations.</li>
+  <li><strong>“Do you connect to our core?”</strong> We publish no core connectors; integration runs through our REST API at your middleware.</li>
+  <li><strong>“Tokenization makes us compliant”:</strong> It can reduce PCI DSS scope; KYC, AML, fraud, and fair-lending duties stay put.</li>
+</ul>
+<h2 id="enigma-vault-for-banking">Protect Bank and Lender Customer Data With Enigma Vault</h2>
+<p>A Tuesday at a regional lender: a borrower emails a bank statement and a driver’s license photo, a member calls to pay a card balance, and the service team wants its new copilot approved.</p>
+<p>With Enigma Vault, each step lands in one vault. Customer Vault collects the documents, Data Vault tokenizes SSNs and account numbers, Twilio Pay sends the card into Card Vault, and NoPII tokenizes the copilot’s prompts.</p>
+<p>The evidence is ready for your vendor review: PCI DSS Level 1 and the AOC and SOC 2 Type II report on paid plans. To map it to your flows, <a class="bl-link" href="/request-demo/">book a demo</a> or start in the Lite sandbox after reviewing <a class="bl-link" href="/pricing/">pricing</a>.</p>
+

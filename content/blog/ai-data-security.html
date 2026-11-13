@@ -1,0 +1,670 @@
+---
+title: "What Is AI Data Security? Risks, Mitigation Strategies and How to Protect Data"
+slug: "ai-data-security"
+layout: "pii-style"
+metaTitle: "What Is AI Data Security? Risks and Mitigation Strategies"
+description: "Learn what AI data security is, the top risks to data in AI systems, the mitigation strategies that reduce them and how to protect data at every AI stage."
+subtitle: "AI data security is the practice of protecting the data AI systems use, from training records to prompts and answers. It keeps sensitive values safe inside retrieval and logs, so a business can use AI without losing control of its data."
+date: 2026-11-13T12:03:00
+category: "AI Security"
+author: "abhilash-kumar"
+readTime: 20
+heroImage: "/assets/blog/img-06.png"
+heroAlt: "What Is AI Data Security? Risks, Mitigation Strategies and How to Protect Data"
+excerpt: "Learn what AI data security is, the top risks to data in AI systems, the mitigation strategies that reduce them and how to protect data at every AI stage."
+tags: ["ai-data-security", "ai", "llm"]
+styles: ["blog.css", "pages/blog-pii-hero.css", "tr-pages.css"]
+scripts: ["blog-article.js"]
+faqSchema: true
+faqs:
+  - q: "What is the difference between AI security and AI data security?"
+    a: "AI security protects the whole AI system, including the models and the infrastructure they run on. AI data security focuses on the data itself, keeping sensitive values safe in prompts and training data as well as AI logs."
+  - q: "What are the biggest risks to data in AI systems?"
+    a: "The biggest risks are data leakage to model providers and prompt injection. Data poisoning and over-permissioned agents follow. Shadow AI and plaintext in logs add exposure, and AI can also give confident wrong answers."
+  - q: "How do you secure data used in RAG and vector databases?"
+    a: "Tokenize sensitive values before text becomes embeddings, and retrieve only the fields a question needs. Deterministic tokens keep search accurate, so you can find every record about a person without exposing them."
+  - q: "Does encryption protect data sent to an LLM?"
+    a: "Not on its own. Encryption protects stored data, but your app decrypts it before building a prompt. To keep real values away from the model provider, tokenize them before the request ever leaves your systems."
+  - q: "Which framework should guide AI data security?"
+    a: "Most teams start with the NIST AI Risk Management Framework and its Generative AI Profile. They add the OWASP Top 10 for LLM Applications for app risks, then map their controls to laws like HIPAA or GDPR."
+---
+
+<p><strong>AI data security is the practice of protecting the data AI systems use, from training records to prompts and answers. It keeps sensitive values safe inside retrieval and logs, so a business can use AI without losing control of its data.</strong></p>
+
+<p>An adjuster drops a claims file into a summarization tool. That one file can hold medical records and bank details, along with identity documents and payment data.</p>
+
+<p>Seconds later, all of it sits with a model provider.</p>
+
+<p>AI systems move data faster and further than older software. Data can leak to providers or sit in logs. It can also come back in a confident wrong answer. AI data security closes those gaps. Real values stay in a vault while the model works with tokens, and every answer gets checked against approved evidence before anyone acts on it.</p>
+
+<h2>What Is AI Data Security and How Does It Protect AI Systems?</h2>
+
+<p><strong>AI data security protects data at every point an AI system touches it, from the records it retrieves to the answers it writes. It pairs access control with tokenization and output checks, so data stays protected inside AI features.</strong></p>
+
+<h3>What AI Data Security Covers</h3>
+
+<p>Traditional software reads a record and shows it on a screen. An AI feature passes that same record through several systems before an answer comes back:</p>
+
+<div class="bl-code bl-code--light">
+  <pre style="white-space:pre;overflow-x:auto"><code style="white-space:pre;">Source record  -&gt;  Prompt builder  -&gt;  Search index  -&gt;  Model provider  -&gt;  Answer  -&gt;  Logs</code></pre>
+</div>
+
+<p>Each stop can copy the data. The prompt builder adds customer context, the search index stores embeddings and the model provider receives the full prompt. Answers get saved into tickets and emails, and logs keep a record of all of it.</p>
+
+<p>AI data security treats that whole chain as one system to protect. A control that covers the database but misses the prompt leaves the most exposed step open.</p>
+
+<h3>Why AI Changes Data Security</h3>
+
+<p>Three shifts make AI harder to secure than classic software:</p>
+
+<ol>
+
+  <li><strong>Data turns into free text.</strong> An SSN inside a sentence doesn't sit in a labeled database field, so field-level controls can't find it.</li>
+
+  <li><strong>Software starts acting on its own.</strong> AI agents read records and call tools with no person approving each step.</li>
+
+  <li><strong>Copies multiply.</strong> Support AI re-sends the full ticket thread at every step, and each request creates another copy outside your systems.</li>
+
+</ol>
+
+<h3>The Three Exposures in Every AI Feature</h3>
+
+<p>Enigma Vault describes the same three exposures across every regulated industry. Each one needs its own control:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+
+    <thead><tr><th>Exposure</th><th>What goes wrong</th><th>Control that protects it</th></tr></thead>
+
+    <tbody>
+
+      <tr><td>Stored data</td><td>Plaintext SSNs and card numbers sit in systems AI can read</td><td>Keep real values in a vault and store tokens</td></tr>
+
+      <tr><td>Leaked identifiers</td><td>Real customer details reach the model provider in a prompt</td><td>Tokenize sensitive values before the request</td></tr>
+
+      <tr><td>Wrong answers</td><td>AI states something your evidence doesn't support</td><td>Check answers against approved evidence</td></tr>
+
+    </tbody>
+  </table>
+</div>
+
+<p>Good data security for AI depends on how you build those tokens, and the <a class="bl-link" href="/blog/types-of-data-tokenization/">types of data tokenization</a> shape how well they work inside AI.</p>
+
+<h2>AI Data Security vs Traditional Data Security: Key Differences</h2>
+
+<p><strong>Traditional data security protects data where it's stored and while it moves, whereas AI data security also protects data after an AI feature reads it, inside prompts and retrieved context as well as outputs and AI logs.</strong></p>
+
+<p>People often mix up AI security vs data security. AI security protects models and the infrastructure around them, while AI data security protects the data moving through those systems. Traditional data security still matters. It stops at the point where AI begins.</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+
+    <thead><tr><th>Factor</th><th>Traditional data security</th><th>AI data security</th></tr></thead>
+
+    <tbody>
+
+      <tr><td>Data format</td><td>Structured fields in databases</td><td>Free text, prompts and embeddings</td></tr>
+
+      <tr><td>Who accesses data</td><td>People with assigned roles</td><td>People plus AI agents and service accounts</td></tr>
+
+      <tr><td>Where data goes</td><td>Known apps and storage</td><td>Model providers, search indexes and tool calls</td></tr>
+
+      <tr><td>Main control</td><td>Encryption at rest and in transit</td><td>Tokenization before data reaches the model</td></tr>
+
+      <tr><td>How it fails</td><td>A stolen database or weak password</td><td>A prompt that carries real identifiers</td></tr>
+
+    </tbody>
+  </table>
+</div>
+
+<h3>Why Encryption Alone Falls Short</h3>
+
+<p>Each traditional control solves one problem and leaves another open:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+
+    <thead><tr><th>Control</th><th>What it does</th><th>What it doesn't do alone</th></tr></thead>
+
+    <tbody>
+
+      <tr><td>Encryption at rest</td><td>Makes stored data unreadable without keys</td><td>Stop an authorized app from reading plaintext</td></tr>
+
+      <tr><td>TLS in transit</td><td>Protects data crossing a network</td><td>Reduce who receives the plaintext</td></tr>
+
+      <tr><td>Tokenization</td><td>Removes the real value from everyday systems</td><td>Remove every compliance duty</td></tr>
+
+      <tr><td>Audit logging</td><td>Records who did what</td><td>Prevent an event by itself</td></tr>
+
+    </tbody>
+  </table>
+</div>
+
+<p>Disk encryption has a second weakness. Once the database is running, fields stay readable to anyone with access, and full-field encryption usually breaks search. Teams then add plaintext columns back so lookups keep working.</p>
+
+<h3>Why Custody Is the Control That Matters for AI</h3>
+
+<p>Your app decrypts data before it builds a prompt. So encryption can't stop an SSN from reaching a model provider, however strong the keys are.</p>
+
+<p>Custody works differently. If your database holds tokens and the real values live in a vault, a breach of that database yields tokens that reference nothing. An AI feature reading the same database finds tokens too. The <a class="bl-link" href="/blog/data-masking-vs-tokenization/">differences between data masking and tokenization</a> decide which stand-in fits each use.</p>
+
+<h2>Top AI Data Security Risks and How They Expose Business Data</h2>
+
+<p><strong>The top AI data security risks start with data leakage to model providers and prompt injection. Data poisoning and over-permissioned agents follow, and shadow AI adds exposure that older security tools weren't built to catch.</strong></p>
+
+<p>Most of these risks start with a visibility problem. The <a class="bl-link" href="https://www.businesswire.com/news/home/20260225599723/en/AI-The-New-Insider-Threat-Facing-Organizations">Thales 2026 Data Threat Report</a> found that only 34% of organizations know where all their data resides, and 39% can fully classify it. Data you can't find is data you can't protect once AI starts reading it.</p>
+
+<h3>1. Data Leakage to Model Providers</h3>
+
+<p>Every prompt is a data transfer. In financial services, a support agent opens a copilot and pastes the whole case:</p>
+
+<div class="bl-code bl-code--light">
+  <pre style="white-space:pre;overflow-x:auto"><code style="white-space:pre;">Customer: [name]  |  Account: [full account number]  |  Recent transactions: [list]</code></pre>
+</div>
+
+<p>All of it goes to the model provider. The provider may keep it under its retention terms, and your own logs may keep another copy. The agent only needed help drafting a reply, yet the full record left the business.</p>
+
+<p>This risk matters most because it happens in normal use. Nobody has to make a mistake for data to leak. The AI feature works as designed.</p>
+
+<h3>2. Prompt Injection</h3>
+
+<p>Prompt injection hides instructions inside content an AI reads. It usually works in three steps:</p>
+
+<ol>
+
+  <li>An attacker places instructions inside a document or web page.</li>
+
+  <li>Your AI feature reads that content as part of a normal task.</li>
+
+  <li>The model follows the hidden instructions and reveals data from its context, or calls a tool it shouldn't.</li>
+
+</ol>
+
+<p>The risk grows with tool access. A model that can only write text can leak what's in its prompt, while an agent that can call your CRM can do far more. OWASP ranks prompt injection first (LLM01) in its Top 10 for LLM Applications.</p>
+
+<h3>3. Data Poisoning</h3>
+
+<p>Data poisoning means someone tampers with the data a model learns from or retrieves. It can enter through:</p>
+
+<ul>
+
+  <li>Training or fine-tuning datasets pulled from sources you don't control</li>
+
+  <li>Documents added to a retrieval index without review</li>
+
+  <li>Shared datasets that pass through several teams before use</li>
+
+</ul>
+
+<p>The model then gives skewed or harmful results, and the cause is hard to trace because nothing looks broken. OWASP lists it as LLM04, Data and Model Poisoning.</p>
+
+<h3>4. Training Data Memorization</h3>
+
+<p>A model trained or fine-tuned on personal data can repeat parts of it later. If you fine-tune on raw support tickets, customer names and account details can surface in answers to unrelated questions.</p>
+
+<p>NIST's Generative AI Profile (NIST AI 600-1) names memorization among its privacy risks, making it a core concern in generative AI data security. The hard part is reversal. A trained model can't reliably forget one record, so protection has to happen before training starts.</p>
+
+<h3>5. Over-Permissioned AI Agents</h3>
+
+<p>An agent that reads a support ticket can call your CRM tool with customer data in the function arguments. If that agent runs on a broad service account, one task can reach:</p>
+
+<ul>
+
+  <li>Every customer record in the CRM</li>
+
+  <li>Connected billing or ticketing systems</li>
+
+  <li>Third-party tools and connectors that receive the data next</li>
+
+</ul>
+
+<p>Access built for people rarely fits software that reads thousands of records in seconds. OWASP calls this Excessive Agency (LLM06).</p>
+
+<h3>6. RAG Over-Retrieval and Embedding Exposure</h3>
+
+<p>Retrieval-augmented generation (RAG) pulls documents into a prompt so the model can answer from your data. Two problems show up here.</p>
+
+<p>First, search often retrieves an entire customer profile when a question needed a few fields, and every extra field reaches the model. Second, embeddings in a vector database still represent the original text, so raw tickets stored as vectors remain sensitive. OWASP tracks this as Vector and Embedding Weaknesses (LLM08).</p>
+
+<h3>7. Plaintext in Logs and Traces</h3>
+
+<p>Copies often outlive the request that created them:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+
+    <thead><tr><th>Where copies sit</th><th>Who can see them</th><th>How long they last</th></tr></thead>
+
+    <tbody>
+
+      <tr><td>Tracing and observability tools</td><td>Engineers and monitoring vendors</td><td>Often months</td></tr>
+
+      <tr><td>Error logs</td><td>Anyone with log access</td><td>Until someone cleans them up</td></tr>
+
+      <tr><td>Model provider logs</td><td>The provider</td><td>Under its retention terms</td></tr>
+
+    </tbody>
+  </table>
+</div>
+
+<p>Each copy is another place a breach can find real values. Logs are also hard to erase, which makes deletion requests under GDPR and CCPA harder to honor.</p>
+
+<h3>8. Shadow AI</h3>
+
+<p>An employee opens a consumer chatbot website and pastes a customer list. That traffic never passes through any company control, so no protection layer can tokenize it.</p>
+
+<p>Shadow AI grows when approved options are missing or slow. Technology alone can't close this gap. Approved company AI accounts and a clear policy have to carry most of the load.</p>
+
+<h3>9. Confident Wrong Answers</h3>
+
+<p>Models produce fluent text, and fluency isn't knowledge. A model sounds equally sure when it's wrong as when it's right, especially on recent changes or rare details.</p>
+
+<p>The cost is real. In 2024, a Canadian tribunal held Air Canada responsible after its website chatbot gave a customer incorrect bereavement fare information. In financial services, a misquoted rate becomes a compliance exposure the moment a customer acts on it. OWASP lists this risk as Misinformation (LLM09).</p>
+
+<h2>AI Data Security Mitigation Strategies That Reduce Each Major Risk</h2>
+
+<p><strong>AI data security mitigation strategies match a control to each risk. Tokenization stops leakage to model providers, and scoped access limits what agents can reach. Grounding catches wrong answers before anyone acts on them.</strong></p>
+
+<p>No single control covers every risk. This table shows which mitigation fits which threat, and where each one stops:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+
+    <thead><tr><th>Risk</th><th>Mitigation</th><th>What it stops</th><th>What it doesn't stop</th></tr></thead>
+
+    <tbody>
+
+      <tr><td>Data leakage</td><td>Tokenize before the request</td><td>Real identifiers reaching the provider</td><td>Sensitive meaning in free text</td></tr>
+
+      <tr><td>Prompt injection</td><td>Input checks and limited tool access</td><td>Hidden instructions reaching sensitive tools</td><td>Every new attack pattern</td></tr>
+
+      <tr><td>Data poisoning</td><td>Trusted, reviewed data sources</td><td>Tampered data entering training or retrieval</td><td>Flaws in the original source</td></tr>
+
+      <tr><td>Memorization</td><td>De-identify data before training</td><td>Personal data inside model weights</td><td>Re-identification from rare details</td></tr>
+
+      <tr><td>Over-permissioned agents</td><td>Least-privilege access per tool</td><td>Agents reading unneeded records</td><td>Misuse within allowed access</td></tr>
+
+      <tr><td>RAG over-retrieval</td><td>Retrieve minimum fields; tokenize before embedding</td><td>Full profiles reaching the model</td><td>Poorly scoped search queries</td></tr>
+
+      <tr><td>Plaintext in logs</td><td>Log metadata only</td><td>Raw values in tracing tools</td><td>Copies made before the fix</td></tr>
+
+      <tr><td>Shadow AI</td><td>Approved company AI accounts and policy</td><td>Unmanaged consumer chatbot use</td><td>Every determined workaround</td></tr>
+
+      <tr><td>Wrong answers</td><td>Ground answers in approved evidence</td><td>Unsupported claims reaching customers</td><td>Errors inside the evidence itself</td></tr>
+
+    </tbody>
+  </table>
+</div>
+
+<h3>Tokenize Before Data Leaves Your Systems</h3>
+
+<p>A protection layer sits between your app and the model provider. It swaps sensitive values for tokens on the way out and restores them on the way back, the approach behind <a class="bl-link" href="/blog/pii-tokenization-for-ai/">PII tokenization for AI</a>. For most teams, it's the base of LLM data security.</p>
+
+<p>Deterministic tokens give the same value the same token every time. That keeps a long conversation coherent, because the model can follow one customer across many turns without seeing who they are.</p>
+
+<h3>Keep Real Values in a Vault</h3>
+
+<p>Tokenizing prompts protects data in motion. A vault protects data at rest, so AI never finds plaintext to begin with.</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+
+    <thead><tr><th>Where</th><th>What should live there</th></tr></thead>
+
+    <tbody>
+
+      <tr><td>Your application or CRM</td><td>Customer reference, token, card brand and last four digits</td></tr>
+
+      <tr><td>The vault</td><td>The encrypted real value, isolated per customer</td></tr>
+
+      <tr><td>Logs and analytics</td><td>Tokens and request IDs, never the card number or CVV</td></tr>
+
+    </tbody>
+  </table>
+</div>
+
+<h3>Scope Every Agent and Tool</h3>
+
+<p>Least privilege applies to software as much as to people:</p>
+
+<ul>
+
+  <li><strong>One identity per agent:</strong> Each agent gets its own credentials, so access can be reviewed and revoked separately.</li>
+
+  <li><strong>Tools limited to the task:</strong> A scheduling agent has no reason to call a billing tool.</li>
+
+  <li><strong>Allowlisted destinations:</strong> Restrict which domains an agent or proxy can send data to.</li>
+
+  <li><strong>Reviews on change:</strong> Recheck permissions whenever a new tool or connector is added.</li>
+
+</ul>
+
+<h3>Block When Protection Fails</h3>
+
+<p>If tokenization can't run, the request should stop. A request that waits for protection is better than raw data reaching a provider by accident.</p>
+
+<p>The same idea applies to restoring values. If a token can't be restored safely, the token stays visible in the reply. Failure should always land on the safe side.</p>
+
+<h3>Ground Answers in Approved Evidence</h3>
+
+<p>A model can't police its own output, and a prompt is only a request the model may ignore. Grounding moves the check outside the model:</p>
+
+<ol>
+
+  <li><strong>Route:</strong> Send each question to the most reliable method first, such as a direct lookup in verified data.</li>
+
+  <li><strong>Constrain:</strong> Let the model generate only from verified facts, and stop where the evidence ends.</li>
+
+  <li><strong>Refuse and record:</strong> When the evidence can't support an answer, decline and log the gap so it can be fixed.</li>
+
+</ol>
+
+<h3>Log Every Access Without Logging the Data</h3>
+
+<p>Audit logs prove who did what. They shouldn't become a second copy of the data. A safe AI log records details like these:</p>
+
+<ul>
+
+  <li>Entity type found, such as "SSN" or "email"</li>
+
+  <li>The model provider and model used, plus the session ID</li>
+
+  <li>Timestamp and outcome</li>
+
+  <li>A token or masked form, never the plaintext</li>
+
+</ul>
+
+<h2>How to Protect Data in AI Systems at Each Stage of the AI Lifecycle</h2>
+
+<p><strong>To protect data in AI systems, apply a different control at each stage of the AI lifecycle. Collect data through secure intake and de-identify it before training. Then tokenize it before prompts and check every output.</strong></p>
+
+<p>Data changes form as it moves through an AI system, so securing AI data means changing the control at each stage. This table gives the short version, and the sections below explain each stage:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+
+    <thead><tr><th>Stage</th><th>Main risk</th><th>Main control</th></tr></thead>
+
+    <tbody>
+
+      <tr><td>Collection and intake</td><td>Sensitive files copied through email</td><td>Secure intake straight into a vault</td></tr>
+
+      <tr><td>Training and fine-tuning</td><td>Memorization</td><td>De-identify before training</td></tr>
+
+      <tr><td>Retrieval and embeddings</td><td>Over-retrieval, sensitive vectors</td><td>Minimum fields; tokenize before embedding</td></tr>
+
+      <tr><td>Prompts and inference</td><td>Leakage to the provider</td><td>Tokenize at the model boundary</td></tr>
+
+      <tr><td>Outputs and storage</td><td>Repeated details, wrong answers</td><td>Output checks and grounding</td></tr>
+
+      <tr><td>Retention and deletion</td><td>Copies that never expire</td><td>Expiry rules and purge</td></tr>
+
+    </tbody>
+  </table>
+</div>
+
+<h3>Data Collection and Intake</h3>
+
+<p>Much sensitive data still arrives by email and shared drives. Those channels aren't encrypted end to end, attachments can be forwarded to anyone and inbox archives are hard to audit. Once a passport scan sits in an inbox, any AI feature connected to that inbox can read it.</p>
+
+<p>Secure intake fixes this at the source. A travel agency can send a client a secure link to enter a card once, so the booking app receives only a token and masked card details. Teams that handle cards this way often start with <a class="bl-link" href="/blog/card-vault-tokenization/">card vault tokenization</a>.</p>
+
+<h3>Training and Fine-Tuning</h3>
+
+<p>A trained model can't reliably forget a record, so this stage needs the strictest cleanup. Before any training job:</p>
+
+<ol>
+
+  <li>Remove or tokenize direct identifiers such as names and SSNs.</li>
+
+  <li>Check free-text fields, since notes often hide account numbers.</li>
+
+  <li>Use reviewed data sources to lower the risk of poisoning.</li>
+
+  <li>Store the training set in a controlled location with clear access rules.</li>
+
+</ol>
+
+<h3>Retrieval and Embeddings</h3>
+
+<p>Tokenize text before it becomes embeddings in a vector database. Deterministic tokens keep search accurate, because the same person maps to the same token in every document.</p>
+
+<p>Retrieval also needs limits. Return the fields a question needs, and check that the person asking is allowed to see the documents search returns.</p>
+
+<h3>Prompts and Inference</h3>
+
+<p>This is where most leakage happens. Tokenize sensitive values in the prompt so the model works with stand-ins:</p>
+
+<div class="bl-code bl-code--light">
+  <pre style="white-space:pre;overflow-x:auto"><code style="white-space:pre;">Original:         John Smith (SSN: 123-45-6789)
+Model receives:   [NAME: Ry0Ixd1] (ID number: [GOV_ID: k8Lm2n])</code></pre>
+</div>
+
+<p>The label change matters too. "SSN" becomes "ID number," which helps keep the model from refusing the task. For live chat, protection has to work on streamed replies, restoring real values as each piece of the answer arrives.</p>
+
+<h3>Outputs and Downstream Storage</h3>
+
+<p>Models repeat what they read. A summary can copy an account number into a ticket or a downstream database, creating a fresh copy in a system that was never meant to hold it.</p>
+
+<p>Check outputs before they're saved. For answers that customers or staff will act on, ground them in approved evidence. A grounded system can mark each answer as supported or conflicted, or refuse when the evidence runs out.</p>
+
+<h3>Retention and Deletion</h3>
+
+<p>Every stage leaves data behind, so the lifecycle needs an end. Set expiry rules for tokens, and set them separately for logs. Then give stored values a retention period that matches your legal duties.</p>
+
+<p>When a customer asks for erasure, deleting their values in the vault cuts the link behind every token. That includes tokens left in old prompts and provider logs, which is far simpler than chasing every copy.</p>
+
+<h2>AI Data Security Best Practices for Teams That Build and Run AI</h2>
+
+<p><strong>AI data security best practices work best when each team owns a clear part. Security maps AI routes while engineering builds tokenization into every feature. Compliance owns provider terms and the audit evidence regulators ask for.</strong></p>
+
+<p>Shared ownership fails when nobody owns the details. Here's how the work splits across teams.</p>
+
+<h3>Security Teams</h3>
+
+<ul>
+
+  <li><strong>Map every AI route:</strong> List each model provider and framework, including fallback paths. One unprotected route is still an exposure.</li>
+
+  <li><strong>Block bypass routes:</strong> Make the protection layer the only path to model providers.</li>
+
+  <li><strong>Turn on secret detection:</strong> Engineers paste connection strings and API keys into internal copilots, so scan for credentials in every prompt.</li>
+
+  <li><strong>Use per-customer keys:</strong> One customer's data should never share an encryption key with another's.</li>
+
+</ul>
+
+<h3>Engineering Teams</h3>
+
+<ol>
+
+  <li>Retrieve only the fields a task needs.</li>
+
+  <li>Tokenize text before it's embedded.</li>
+
+  <li>Keep raw prompt and response bodies out of observability tools.</li>
+
+  <li>Test detection on your own data formats, including internal IDs a general detector may miss.</li>
+
+  <li>Confirm protection works on streamed replies and tool calls before launch.</li>
+
+</ol>
+
+<h3>Compliance and Privacy Teams</h3>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+
+    <thead><tr><th>Task</th><th>Why it matters</th></tr></thead>
+
+    <tbody>
+
+      <tr><td>Review provider retention and data location</td><td>Decides how long copies live and where</td></tr>
+
+      <tr><td>Sign BAAs where PHI is involved</td><td>HIPAA requires them for vendors handling PHI</td></tr>
+
+      <tr><td>Set erasure and retention rules</td><td>GDPR and CCPA deletion requests must reach AI copies</td></tr>
+
+      <tr><td>Keep audit evidence ready</td><td>Regulators and enterprise customers ask what reached which system</td></tr>
+
+    </tbody>
+  </table>
+</div>
+
+<h3>AI and Product Leads</h3>
+
+<p>AI and product leads decide where accuracy matters most. They choose which answers need grounding and define when the AI should refuse.</p>
+
+<p>They also own scope. Every new agent tool or data source changes what the AI can reach, so permissions get reviewed with each release.</p>
+
+<p>When teams are ready to compare vendors, our list of <a class="bl-link" href="/blog/best-ai-data-security-software-for-enterprises/">AI data security software for enterprises</a> covers the main options.</p>
+
+<h2>AI Data Security Frameworks and Regulations Organizations Should Know</h2>
+
+<p><strong>AI data security frameworks such as the NIST AI RMF and OWASP Top 10 for LLM Applications guide how to manage AI risk. Laws like HIPAA and GDPR apply to data inside AI systems the same way they apply to any other system.</strong></p>
+
+<p>Frameworks shape how you approach AI data governance. Regulations tell you what you must do.</p>
+
+<h3>NIST AI Risk Management Framework</h3>
+
+<p>The NIST AI RMF organizes AI risk work into four functions: Govern, Map, Measure and Manage. Its Generative AI Profile (NIST AI 600-1) applies the framework to generative AI and lists risks such as data privacy, including leakage and memorization. Both are voluntary, and many enterprise buyers expect AI programs to follow them.</p>
+
+<h3>OWASP Top 10 for LLM Applications</h3>
+
+<p>OWASP's list names the most common security risks in LLM applications. Several map directly to data security:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+
+    <thead><tr><th>OWASP entry</th><th>What it covers</th><th>Main mitigation</th></tr></thead>
+
+    <tbody>
+
+      <tr><td>LLM01: Prompt Injection</td><td>Hidden instructions in content the model reads</td><td>Input checks, limited tool access</td></tr>
+
+      <tr><td>LLM02: Sensitive Information Disclosure</td><td>Private data revealed through prompts or outputs</td><td>Tokenization before the request</td></tr>
+
+      <tr><td>LLM04: Data and Model Poisoning</td><td>Tampered training or retrieval data</td><td>Reviewed data sources</td></tr>
+
+      <tr><td>LLM06: Excessive Agency</td><td>Agents with more access than needed</td><td>Least privilege per tool</td></tr>
+
+      <tr><td>LLM08: Vector and Embedding Weaknesses</td><td>Sensitive data in vector stores</td><td>Tokenize before embedding</td></tr>
+
+      <tr><td>LLM09: Misinformation</td><td>Confident but false outputs</td><td>Grounding in approved evidence</td></tr>
+
+    </tbody>
+  </table>
+</div>
+
+<h3>ISO/IEC 42001</h3>
+
+<p>ISO/IEC 42001 is a management system standard for AI. It sets requirements for running AI systems responsibly, including risk assessment and controls. Organizations can certify against it, much like ISO/IEC 27001 for information security.</p>
+
+<h3>Laws That Apply to Data in AI Systems</h3>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+
+    <thead><tr><th>Law</th><th>What it means for AI data security</th></tr></thead>
+
+    <tbody>
+
+      <tr><td>HIPAA</td><td>Requires minimum necessary use of PHI and BAAs with vendors that handle it</td></tr>
+
+      <tr><td>PCI DSS</td><td>Applies wherever card data is stored, processed or sent, including AI transcripts</td></tr>
+
+      <tr><td>GLBA Safeguards Rule</td><td>Requires a security program for customer financial data, including oversight of service providers</td></tr>
+
+      <tr><td>GDPR and CCPA/CPRA</td><td>Require data minimization and honoring deletion requests, which AI logs make harder</td></tr>
+
+      <tr><td>EU AI Act</td><td>Sets risk-based rules, including data governance for high-risk AI systems</td></tr>
+
+    </tbody>
+  </table>
+</div>
+
+<p>No product makes an AI system compliant by itself. A BAA assigns responsibility for PHI, but it doesn't stop the data from moving. GDPR also treats tokenized data as pseudonymized, so it's still personal data, and the <a class="bl-link" href="/blog/pseudonymization-vs-anonymization/">difference between pseudonymization and anonymization</a> explains why that matters.</p>
+
+<h2>AI Data Security Use Cases: How Regulated Industries Protect AI Data</h2>
+
+<p><strong>AI data security use cases are strongest in regulated industries, where one AI action can touch PHI or card data. Healthcare and financial services lead, and legal and insurance teams send some of the densest files to models.</strong></p>
+
+<p>Leaked identifiers and wrong answers show up in every regulated industry, along with exposed stored data. Each one meets them differently.</p>
+
+<h3>Healthcare</h3>
+
+<p>Clinical AI is already in daily use. Ambient scribes and coding tools send patient records to model providers as part of normal work, and a transcript can carry a patient's name and medical record number along with a date of birth.</p>
+
+<p>A BAA doesn't close this gap, since it assigns liability after the data moves. Healthcare teams protect AI data in three places:</p>
+
+<ul>
+
+  <li><strong>Before the request:</strong> Tokenize patient identifiers so the model provider never sees them.</li>
+
+  <li><strong>In storage:</strong> Keep diagnoses and insurance IDs in encrypted fields, outside everyday systems.</li>
+
+  <li><strong>In the answer:</strong> Ground clinical answers in approved evidence, because a fabricated clinical answer is a safety event.</li>
+
+</ul>
+
+<h3>Financial Services</h3>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+
+    <thead><tr><th>Exposure</th><th>What happens</th><th>Protection</th></tr></thead>
+
+    <tbody>
+
+      <tr><td>Leaked identifiers</td><td>Agents paste full cases into copilots</td><td>Tokenize account numbers and SSNs on the way in</td></tr>
+
+      <tr><td>Secrets</td><td>Engineers paste connection strings and API keys</td><td>Turn on secret detection</td></tr>
+
+      <tr><td>Wrong answers</td><td>A copilot quotes an outdated rate or fee</td><td>Ground product answers in current terms</td></tr>
+
+      <tr><td>Stored data</td><td>Card tables sit in application databases</td><td>Keep cards in a vault and store tokens</td></tr>
+
+    </tbody>
+  </table>
+</div>
+
+<p>Rules like PCI DSS and GLBA apply to every one of these paths, so financial teams treat AI as part of their regulated environment from day one.</p>
+
+<h3>Legal</h3>
+
+<p>Privilege doesn't survive a provider log. Drafting tools and deposition summaries send client files to models, often with names and SSNs inside, along with medical histories and employment records.</p>
+
+<p>Firms protect AI data in two ways. They tokenize client and matter data before any prompt leaves the firm, and they move intake files out of email into controlled storage. Legal research then gets checked against approved sources, because invented authority fails in front of a judge.</p>
+
+<h3>Insurance</h3>
+
+<p>One claims file can hold four regulated categories of data at once, from medical records to payment data. Insurers handle this in a set order:</p>
+
+<ol>
+
+  <li>Collect claims documents through secure intake, so they don't scatter across email.</li>
+
+  <li>Tokenize claimant data before claims or underwriting AI reads it.</li>
+
+  <li>Log every detection, since market-conduct exams ask what reached which system.</li>
+
+  <li>Ground rate and coverage answers in versioned evidence, because AI working from a superseded filing gives a wrong answer even when no data leaks.</li>
+
+</ol>
+
+<h3>Customer Support and SaaS</h3>
+
+<ul>
+
+  <li><strong>Volume:</strong> Support AI re-sends the full ticket thread at each step, so one customer's details reach the provider again and again.</li>
+
+  <li><strong>Streaming:</strong> Protection has to work in real time, restoring values as each part of the reply arrives.</li>
+
+  <li><strong>Erasure:</strong> Once customer data spreads across provider logs, deletion requests under GDPR and CCPA get hard to keep. Purging tokens at the vault resolves them in one place.</li>
+
+</ul>
+
+<h2>How Enigma Vault Secures Your Data Before and After It Reaches AI</h2>
+
+<p>At Enigma Vault, we protect all three exposures from one foundation. Our Vault stores real card numbers and SSNs, along with sensitive files, under per-customer AES-256 keys while your systems hold tokens. NoPII tokenizes PII and secrets before each prompt reaches the LLM provider, restores them in the reply and blocks any request it can't protect. Triplets checks AI answers against your approved evidence and refuses when support is missing. All three share one audit trail and run on PCI DSS Level 1 and SOC 2 Type II infrastructure. <a class="bl-link" href="/platform/data-security/">See how our data security works</a>.</p>

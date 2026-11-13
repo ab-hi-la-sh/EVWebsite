@@ -1,0 +1,616 @@
+---
+title: "What Is Data Redaction for AI? Types, Use Cases and How It Works"
+slug: "data-redaction-for-ai"
+layout: "pii-style"
+metaTitle: "What Is Data Redaction for AI? Types, Use Cases and How It Works"
+description: "Learn what data redaction for AI is, the types of redaction and data to redact, how it works and how it compares with masking and tokenization for AI."
+subtitle: "Data redaction for AI is the process of finding sensitive values in text, such as SSNs and card numbers, and removing or replacing them before an AI model reads it. The model still gets the task, while real identities stay out of its prompts and logs."
+date: 2026-11-13T12:02:00
+category: "NoPII"
+author: "abhilash-kumar"
+readTime: 24
+heroImage: "/assets/blog/img-08.png"
+heroAlt: "What Is Data Redaction for AI? Types, Use Cases and How It Works"
+excerpt: "Learn what data redaction for AI is, the types of redaction and data to redact, how it works and how it compares with masking and tokenization for AI."
+tags: ["redaction", "ai", "pii"]
+styles: ["blog.css", "pages/blog-pii-hero.css", "tr-pages.css"]
+scripts: ["blog-article.js"]
+faqSchema: true
+faqs:
+  - q: "What is the difference between data redaction and data masking?"
+    a: "Data redaction removes a sensitive value or replaces it with a label, whereas data masking hides part of the value, such as all but the last four digits of a card. Neither one can usually be reversed later."
+  - q: "Can redacted data be restored?"
+    a: "No. Redaction is one-way, so once a value is removed, your system can't bring it back. If an AI feature needs real values in its reply, use tokenization, which keeps each original value in a secure vault."
+  - q: "Does data redaction affect AI accuracy?"
+    a: "It can. Redaction removes context, so a model may mix up people who share one label or guess at missing details. Numbered labels help a little, and tokenization keeps the most context for live AI features."
+  - q: "Is redacted data still personal data under GDPR?"
+    a: "Often, yes. If the remaining details can still identify someone, the data counts as pseudonymized and stays personal data. Only fully anonymized data, where no one can be identified, falls outside GDPR."
+  - q: "Should you redact or tokenize data before sending it to an LLM?"
+    a: "Redact when nobody needs the real values again, such as for training data or archived files. Tokenize for live AI features, so the model can tell people apart and your app can restore real values in the reply."
+---
+
+<p><strong>Data redaction for AI is the process of finding sensitive values in text, such as SSNs and card numbers, and removing or replacing them before an AI model reads it. The model still gets the task, while real identities stay out of its prompts and logs.</strong></p>
+
+<p>A support agent needs one order status. She pastes the full customer record into a copilot anyway, with the date of birth and home address inside. That one paste sends personal data to a model provider.</p>
+
+<p>Redaction catches those values before the prompt leaves your systems. The provider receives a version of the record that names no one.</p>
+
+<p>It suits training data and files shared outside the business. Live AI features usually need a reversible method, because redacted values can't come back.</p>
+
+<h2>What Is Data Redaction for AI and Why Do AI Teams Rely on It?</h2>
+
+<p><strong>Data redaction for AI removes sensitive values from text before an AI model reads it. AI teams rely on it because every prompt sends data to a model provider, and redaction keeps names and SSNs out of that transfer.</strong></p>
+
+<p>Here's a refund request before and after redaction:</p>
+
+<div class="bl-code bl-code--light">
+  <pre style="white-space:pre;overflow-x:auto"><code style="white-space:pre;">Before:  Refund request from Priya Shah, SSN 482-19-7734, card ending 4417.
+After:   Refund request from [NAME], SSN [SSN], card ending [CARD].</code></pre>
+</div>
+
+<p>The model can still tell this is a refund request and draft a reply. It never learns who asked or which card was charged, and the original record stays untouched in your CRM.</p>
+
+<p>AI teams rely on redaction because a prompt is a data transfer. Every request to an LLM API leaves your systems, and it can sit in provider logs or your own traces long after the reply comes back. A policy can't stop a paste, and a prompt instruction can't control what the model has already received. Redaction cleans the text before it's sent, which is how teams <a class="bl-link" href="/blog/how-to-use-openai-without-exposing-pii/">use OpenAI without exposing PII</a> on live prompts.</p>
+
+<h2>Common Use Cases of Data Redaction for AI in Regulated Industries</h2>
+
+<p><strong>Data redaction for AI is most common in regulated industries like healthcare and financial services. Legal and insurance teams also redact client and claimant files before AI summarizes them, since one file can hold several regulated data types.</strong></p>
+
+<h3>Healthcare and Behavioral Health</h3>
+
+<p>Clinics are adding AI to admin work first, and each feature meets protected health information (PHI) at a different point:</p>
+
+<ul>
+
+  <li><strong>Scheduling assistants:</strong> Patient names and phone numbers sit inside every request.</li>
+
+  <li><strong>Coding support:</strong> Encounter notes carry medical record numbers (MRNs) and dates of birth next to the clinical text.</li>
+
+  <li><strong>Patient message drafting:</strong> Replies pull in insurance member IDs and contact details from the chart.</li>
+
+</ul>
+
+<p>Redaction removes those direct identifiers before the text reaches the model provider. That supports HIPAA's minimum necessary standard, which expects a practice to share only the PHI a task needs.</p>
+
+<p>Behavioral health needs a second layer of care. Clinical context can stay sensitive after every obvious identifier is gone. A note about a recent divorce and a job loss in a small town can point to one person with no name attached. Teams in this field keep clinical data policies separate from identifier redaction, and they review what's left in the text before approving an AI feature.</p>
+
+<h3>Insurance and Claims</h3>
+
+<p>A claims file often passes through AI in four stages:</p>
+
+<ol>
+
+  <li><strong>Intake:</strong> The claimant sends ID documents and bank details, along with photos of the loss.</li>
+
+  <li><strong>Review:</strong> An adjuster drops the full claims file into a summarization feature to save reading time.</li>
+
+  <li><strong>Redaction:</strong> Names and home addresses get replaced, and bank account numbers come out of the settlement notes.</li>
+
+  <li><strong>Summary:</strong> The model returns a summary of the loss narrative with labels where identities used to be.</li>
+
+</ol>
+
+<p>A single claim PDF can carry four regulated categories of data at once, so the redaction step has a lot to catch. Claims also use internal formats, such as claim numbers and policy numbers, that a general detector won't recognize. Teams test redaction on their own files first. They also check the loss narrative itself, since a detailed account of a fire at a named business can identify the claimant on its own.</p>
+
+<h3>Financial Services and Collections</h3>
+
+<p>Money conversations put account data into AI features in ways that are easy to miss. Collections teams send call transcripts to models for summaries or quality scoring, and a card number read aloud on a recorded call lands in that transcript word for word. Keeping payment capture separate from the call keeps the card number out of the transcript before redaction even starts.</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+
+    <thead><tr><th>Situation</th><th>What needs redacting</th></tr></thead>
+
+    <tbody>
+
+      <tr><td>Support agent pastes a case into a copilot</td><td>Customer name, full account number, recent transactions</td></tr>
+
+      <tr><td>Collections calls go to AI for summaries or scoring</td><td>Debtor names, account numbers, card numbers read aloud</td></tr>
+
+      <tr><td>Hardship notes get summarized for review</td><td>Income details and bank account numbers</td></tr>
+
+      <tr><td>Engineer pastes a failing config into an AI assistant</td><td>Database connection strings and API keys</td></tr>
+
+    </tbody>
+  </table>
+</div>
+
+<h3>Legal</h3>
+
+<p>Law firms use AI for deposition summaries and document review. Privilege review sends the most protected files a firm holds, and client intake can happen before an engagement letter exists. Once privileged text sits in a provider's logs, the firm can't pull it back.</p>
+
+<p><strong>Redact before AI:</strong> client names and SSNs, plus opposing party names and any account numbers found in evidence.</p>
+
+<p><strong>Keep for the model:</strong> event dates and legal issues, along with contract clause language, since the analysis depends on them.</p>
+
+<p>Redaction lowers the exposure, though it doesn't settle every question. Free-text case facts can reveal a matter to anyone who already knows it, even with every name removed. Firms often add a manual check for sensitive matters, and they avoid promising clients that an outside model can't infer who a document is about.</p>
+
+<h3>Customer Support</h3>
+
+<p>Support AI runs at conversation speed. Each new turn re-sends the earlier messages so the model keeps context:</p>
+
+<div class="bl-code bl-code--light">
+  <pre style="white-space:pre;overflow-x:auto"><code style="white-space:pre;">Turn 1:  Hi, I'm Dana Cole, 14 Elm St. My order hasn't arrived.
+Turn 2:  [Turn 1 resent] + "Can you check order 88123?"
+Turn 3:  [Turns 1 and 2 resent] + "Please refund my card."</code></pre>
+</div>
+
+<p>Without redaction, Dana's name and address reach the provider three times in one short chat. Prompt redaction on each message keeps them out of every repeat. Ticket attachments need the same thought. IDs and bank statements attached to tickets shouldn't go to a model by default, so teams pass only the extracted text the task needs.</p>
+
+<h3>HR and Recruiting</h3>
+
+<p>A recruiter pastes a resume into an AI assistant to write a candidate summary. That resume carries far more than skills.</p>
+
+<ul>
+
+  <li>Full name and home address</li>
+
+  <li>Personal email and phone number</li>
+
+  <li>Visa status</li>
+
+  <li>Dates that reveal age</li>
+
+</ul>
+
+<p>Redaction removes the direct identifiers so the model can focus on experience. Resumes are hard to anonymize fully, though. A rare job title at a named employer can identify a candidate on its own, so HR teams treat a redacted resume as reduced risk and keep it under the same access rules.</p>
+
+<h2>Types of Data Redaction for AI and How Each Method Protects Data</h2>
+
+<p><strong>Types of data redaction for AI range from full redaction, which removes a value completely, to synthetic substitution, which swaps in realistic fake data. The right method depends on how much context the AI model needs.</strong></p>
+
+<p>Here's one sign-up record under each method, so the differences are easy to compare:</p>
+
+<div class="bl-code bl-code--light">
+  <pre style="white-space:pre;overflow-x:auto"><code style="white-space:pre;">Original:     Maria Lopez, 418 Oak St, Austin, TX 78704, age 34, booked a pottery class at the Riverside facility.
+
+Full:         ███████████, █████████████████████████, age ██, booked a pottery class at the Riverside facility.
+Partial:      M. L., Austin, TX, age 34, booked a pottery class at the Riverside facility.
+Placeholder:  [NAME], [ADDRESS], age [AGE], booked a pottery class at the Riverside facility.
+Synthetic:    Dana Reyes, 22 Pine Ave, Austin, TX 78701, age 36, booked a pottery class at the Riverside facility.
+Generalized:  A customer aged 30 to 39 in ZIP area 787 booked a pottery class at the Riverside facility.</code></pre>
+</div>
+
+<p>The class and the facility stay in every version. They describe the booking, and an AI feature needs them to send a schedule or answer a question about the class. Redacting them too would be over-redaction, unless the facility is small enough to point to one person.</p>
+
+<h3>Full Redaction</h3>
+
+<p>Full redaction removes the value and leaves a black bar or a generic marker like [REDACTED]:</p>
+
+<div class="bl-code bl-code--light">
+  <pre style="white-space:pre;overflow-x:auto"><code style="white-space:pre;">Before:  Client John Carter, SSN 512-44-9087, signed the settlement on May 2.
+After:   Client [REDACTED], SSN [REDACTED], signed the settlement on May 2.</code></pre>
+</div>
+
+<p>It offers the strongest privacy, which is why it's standard for court filings and public records releases. For AI, it's the weakest choice. Every redacted value looks the same, so the model can't tell a name from an SSN.</p>
+
+<p>One failure deserves a warning. Visual-only redaction draws a box over text in a PDF while the words stay underneath. A person sees a black bar, but an AI parser reading the file sees the original text. True redaction deletes the characters from the file before any model reads it.</p>
+
+<h3>Partial Redaction</h3>
+
+<p>Partial redaction hides most of a value and keeps a small piece:</p>
+
+<ul>
+
+  <li><strong>Card number:</strong> 4532 7781 2290 6614 becomes **** **** **** 6614</li>
+
+  <li><strong>Date of birth:</strong> 03/14/1991 becomes **/**/1991</li>
+
+  <li><strong>Phone number:</strong> (512) 555-0187 becomes (***) ***-0187</li>
+
+</ul>
+
+<p>Staff can still confirm they have the right record, and analysts can still group people by age. The visible piece has to stay small, though. A birth year paired with the last four digits of a phone number can narrow a city's population down to one person. The trade-offs between partial and full hiding are covered in <a class="bl-link" href="/blog/pii-masking-for-llm/">PII masking for LLMs</a>.</p>
+
+<h3>Placeholder Labels</h3>
+
+<p>Placeholder labels swap each value for its type, so the model still knows what kind of value sat in that spot:</p>
+
+<div class="bl-code bl-code--light">
+  <pre style="white-space:pre;overflow-x:auto"><code style="white-space:pre;">Before:    Maria Lopez called about Dana Reyes's refund.
+Plain:     [NAME] called about [NAME]'s refund.
+Numbered:  [NAME_1] called about [NAME_2]'s refund.</code></pre>
+</div>
+
+<p>This is the most common method of redaction for LLMs. The plain version shows its weakness: two people become one label, and the model can't tell who called. Numbered labels fix that within one document, but they break down across separate prompts, because the numbering starts over each time.</p>
+
+<h3>Synthetic Substitution</h3>
+
+<p>Synthetic substitution replaces real values with realistic fake ones:</p>
+
+<div class="bl-code bl-code--light">
+  <pre style="white-space:pre;overflow-x:auto"><code style="white-space:pre;">Before:  Patient James Wu, MRN 448210, reported chest pain on arrival.
+After:   Patient Alan Brooks, MRN 902213, reported chest pain on arrival.</code></pre>
+</div>
+
+<p>The text reads naturally, which helps when teams build test data or train models that need lifelike examples. A good generator keeps the format, so the fake MRN still has six digits and downstream parsing still works. It needs care, since a fake name can belong to a real person by chance. Teams mark synthetic datasets clearly and keep them out of anything patients or customers see.</p>
+
+<h3>Generalization</h3>
+
+<p>Generalization keeps a value but makes it less precise. HIPAA's Safe Harbor method uses it for dates and ZIP codes, along with ages over 89:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+
+    <thead><tr><th>Original value</th><th>Generalized</th><th>What the rule says</th></tr></thead>
+
+    <tbody>
+
+      <tr><td>Date of birth 03/14/1991</td><td>1991</td><td>Safe Harbor keeps the year and removes every other date element</td></tr>
+
+      <tr><td>ZIP code 78704</td><td>787</td><td>Allowed only when the three-digit ZIP area holds more than 20,000 people</td></tr>
+
+      <tr><td>Age 93</td><td>90 or older</td><td>Safe Harbor groups every age over 89 into one category</td></tr>
+
+      <tr><td>Age 34</td><td>30 to 39</td><td>Common in analytics, though Safe Harbor lets ages under 90 stay as they are</td></tr>
+
+    </tbody>
+  </table>
+</div>
+
+<p>It works well for analytics and training data, where trends matter more than individuals.</p>
+
+<h3>Static vs Dynamic Redaction</h3>
+
+<p><strong>Static example:</strong> A team cleans 12 months of support tickets once and saves the redacted set for fine-tuning.</p>
+
+<p><strong>Dynamic example:</strong> Each live chat message gets redacted in the moment, before the copilot sends it to the model provider.</p>
+
+<p>Static redaction suits training sets and archived files. Its catch is drift: when the source data changes, the redacted copy goes out of date until someone runs the job again. Dynamic redaction suits chat and support AI. It has to be fast, because users wait on it, and accurate, because there's no second pass before the text reaches the model.</p>
+
+<h2>What Types of Sensitive Data Need to Be Redacted Before AI Use?</h2>
+
+<p><strong>Sensitive data that needs redaction before AI use includes personal identifiers like SSNs and health data like medical record numbers. Card numbers and credentials such as API keys need removal too, since one leaked key can expose a system.</strong></p>
+
+<p>PII redaction usually starts with the obvious identifiers. A full list covers more ground:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+
+    <thead><tr><th>Data type</th><th>Examples</th><th>Rule that applies</th></tr></thead>
+
+    <tbody>
+
+      <tr><td>Personal identifiers (PII)</td><td>Names, SSNs, dates of birth, passport numbers, home addresses</td><td>State privacy laws, GDPR</td></tr>
+
+      <tr><td>Health data (PHI)</td><td>MRNs, diagnoses, insurance member IDs</td><td>HIPAA</td></tr>
+
+      <tr><td>Card data</td><td>Primary account number (PAN), expiry date, CVV</td><td>PCI DSS</td></tr>
+
+      <tr><td>Financial data</td><td>Bank account numbers, tax IDs, W-2s</td><td>GLBA, state laws</td></tr>
+
+      <tr><td>Credentials</td><td>API keys, passwords, database connection strings</td><td>Security policy</td></tr>
+
+      <tr><td>Confidential files</td><td>Contracts, case files, pricing documents</td><td>Contracts and NDAs</td></tr>
+
+    </tbody>
+  </table>
+</div>
+
+<h3>Card Data Needs Its Own Controls</h3>
+
+<p>PCI DSS applies to any system that stores or processes card data, and CVVs can't be stored after a payment is authorized. Redacting a card number from a prompt helps, but the better fix keeps the number out of the text from the start. Many teams capture cards in a separate payment flow with <a class="bl-link" href="/blog/card-vault-tokenization/">card vault tokenization</a>, so the transcript or ticket holds a token and no prompt ever carries a real PAN.</p>
+
+<h3>Indirect Identifiers Need Attention Too</h3>
+
+<p>Some details name no one on their own. A ZIP code looks harmless, and so does a birth date or a job title. Combined, they can point to one person. Research by Latanya Sweeney found that a five-digit ZIP code and gender, combined with a full date of birth, were enough to uniquely identify about 87% of people in the US.</p>
+
+<p>These details are called quasi-identifiers, and they're the values redaction misses most often. Most detectors look for known formats, and a quasi-identifier has no special format. Reducing precision through generalization handles them better than removal.</p>
+
+<h3>Credentials Are Easy to Overlook</h3>
+
+<p>Credentials don't identify a person, so teams often leave them off redaction lists. An engineer pasting a failing config into an AI assistant can still expose a production database:</p>
+
+<div class="bl-code bl-code--light">
+  <pre style="white-space:pre;overflow-x:auto"><code style="white-space:pre;">DATABASE_URL=postgres://admin:S3cr3t@prod-db.internal:5432/customers</code></pre>
+</div>
+
+<p>Redaction rules should catch connection strings and API keys alongside personal data. Redaction alone isn't enough once a secret has left, though. If a key reached a prompt or a log, rotate it.</p>
+
+<h3>Files and Attachments Hide Data Too</h3>
+
+<p>Sensitive data isn't always in the visible text. Scanned IDs and screenshots carry it inside images, and document metadata can hold author names and file paths. Ticket attachments often include bank statements or medical files. Redaction for AI needs to cover these sources, or teams need a rule that keeps attachments away from the model unless the task needs them.</p>
+
+<h2>How Does Data Redaction for AI Work? A Step-by-Step Process</h2>
+
+<p><strong>Data redaction for AI works by scanning text for sensitive values, deciding how to handle each one and replacing it before the prompt goes to the model. The final step checks the AI answer and logs, since models can repeat details they read.</strong></p>
+
+<p>AI data redaction follows the same five steps whether it runs on a chat message or a training file.</p>
+
+<h3>Step 1: Find the Sensitive Data</h3>
+
+<p>Automated data redaction usually combines two detection methods. Pattern matching catches values with a fixed shape, such as SSNs and card numbers. Named entity recognition (NER) uses a model to spot names and places, which have no fixed format. Together, they find far more than either one alone.</p>
+
+<p>Most teams also add custom entities. Internal claim numbers and member IDs follow formats unique to each business, and no general detector knows them. Detection also has a sensitivity setting. Set it too strict and the system misses values, while setting it too loose removes harmless words. Teams test it on samples of their own data before going live.</p>
+
+<h3>Step 2: Apply a Redaction Rule</h3>
+
+<p>Each data type gets its own rule:</p>
+
+<ul>
+
+  <li><strong>SSNs and passport numbers:</strong> Replace with a placeholder label.</li>
+
+  <li><strong>Card numbers:</strong> Remove fully, or keep only the last four digits.</li>
+
+  <li><strong>API keys and passwords:</strong> Block the request until the secret is removed.</li>
+
+  <li><strong>Names in a multi-person thread:</strong> Use numbered labels like [NAME_1] and [NAME_2] so the model can tell people apart.</li>
+
+  <li><strong>Dates of birth in analytics data:</strong> Generalize to the birth year.</li>
+
+</ul>
+
+<p>Write these rules down as a policy, with an owner for each data type. When a new AI feature launches, the team applies the existing rules and avoids inventing new ones under deadline pressure.</p>
+
+<h3>Step 3: Replace the Value</h3>
+
+<p>The redaction layer swaps each value according to its rule. Good redaction also rewords labels that could confuse the model. Leaving "Social Security number:" in front of a placeholder can make some models refuse the task, so many teams change it to a neutral phrase like "ID number."</p>
+
+<p>Consistency matters here as well. If the same customer appears five times in a thread, every mention should get the same label. Mixed labels make the model think it's reading about five different people.</p>
+
+<h3>Step 4: Send the Cleaned Prompt</h3>
+
+<p>Only the redacted text goes to the model provider. The AI does its job, such as summarizing a ticket or drafting a reply, with placeholders where the real values used to be.</p>
+
+<p>Redaction has to cover the full request. System prompts and retrieved documents can carry personal data, and so can the arguments an agent sends to a tool. If the redaction step fails or times out, the safer default is to block the request. Sending the raw prompt as a fallback defeats the point.</p>
+
+<h3>Step 5: Check the Answer and the Logs</h3>
+
+<p>Models repeat what they read, and sometimes they repeat details redaction missed. Scan the AI's answer before it's saved into a ticket or email. Then check your own logs and traces, since many systems record full prompts by default. A redacted prompt does little good if the original sits in a debugging tool.</p>
+
+<p>High-risk documents, such as legal filings or behavioral health notes, often get a human review before release. Keep an audit record of what was redacted, with the entity type and time, and leave the real values out of that record.</p>
+
+<h2>Benefits of Data Redaction for AI and Where It Helps the Most</h2>
+
+<p><strong>The benefits of data redaction for AI start with stronger privacy and support for compliance. Redaction also makes data safer to share outside the business, and it shrinks the damage when a breach or a leaked log exposes stored prompts.</strong></p>
+
+<ul>
+
+  <li><strong>Stronger privacy:</strong> Prompts reach the model provider with labels where names and account numbers used to be. A copilot can draft a reply to a customer without ever seeing the customer's account number.</li>
+
+  <li><strong>Compliance support:</strong> Most privacy rules ask teams to use only the data a task needs. HIPAA's minimum necessary standard and GDPR's data minimization principle both favor sending less, and redaction makes "less" the default for AI.</li>
+
+  <li><strong>Safer sharing:</strong> Files sent outside the business carry no personal data. A claims file shared with an outside reviewer or a vendor can travel without SSNs or bank details.</li>
+
+  <li><strong>Smaller breach impact:</strong> Stored prompts and traces hold labels in place of real values. If a log leaks, it shows [SSN] where the real number would have been.</li>
+
+  <li><strong>Lower memorization risk:</strong> Training data without personal details gives a model nothing personal to memorize. A model trained on redacted tickets can't repeat a customer's name later.</li>
+
+  <li><strong>Less insider exposure:</strong> Staff who review AI outputs or debug traces see redacted text. Fewer people handle raw personal data as part of daily work.</li>
+
+</ul>
+
+<h3>Where Redaction Delivers the Most Value</h3>
+
+<p>Training data gets the biggest lift. A trained model can't reliably forget a record, and personal data in a training set may come back out in answers months later. Redacting before training works at the source, and nobody needs the real values back, so redaction's one-way nature costs nothing.</p>
+
+<p>Files shared outside the business come second. Once a document reaches an outside party, you can't control where it goes next. Redaction is the right final step for these one-way transfers. Live AI features sit at the other end of the scale, which the limitations below explain.</p>
+
+<h2>Limitations of Data Redaction for AI and How They Affect Accuracy</h2>
+
+<p><strong>Data redaction for AI has limits. It can remove too much or miss indirect identifiers, and it breaks references when several people share one label. Redacted values also can't be restored, which makes redaction a poor fit for live AI features.</strong></p>
+
+<ul>
+
+  <li><strong>Over-redaction:</strong> Aggressive rules remove more than they should. A detector might treat a product name or a city as a person's name, and the prompt loses details the model needed.</li>
+
+  <li><strong>Missed values:</strong> Redaction catches what it recognizes. Internal claim numbers can slip through, and so can misspelled names or names typed in lowercase.</li>
+
+  <li><strong>Quasi-identifiers:</strong> A ZIP code and a job title can identify someone even after every name is gone. Most detectors aren't built to judge combinations.</li>
+
+  <li><strong>Broken references:</strong> Plain labels erase who's who. When two people both become [NAME], the model can't tell which one made a request.</li>
+
+  <li><strong>Guessing and hallucination:</strong> When key details disappear, a model may fill the gaps on its own. It can mix up people or invent details that sound right, which is worse than a blank.</li>
+
+  <li><strong>Refusals:</strong> Labels like "SSN:" or "diagnosis:" left next to a placeholder can signal sensitive content. Some models then refuse the task, even though the real value is gone.</li>
+
+  <li><strong>No restoration:</strong> Redaction is one-way. Once a name becomes [NAME], your system can't put it back into the AI's reply.</li>
+
+  <li><strong>Images and audio:</strong> Most detectors read text. Card numbers inside a screenshot or spoken aloud in a call recording need separate handling.</li>
+
+  <li><strong>Latency:</strong> Live redaction adds a step before every model call. Slow detection makes chat and support AI feel sluggish.</li>
+
+</ul>
+
+<h3>How These Limits Show Up in a Real Request</h3>
+
+<p>Here's a short account change request, redacted with plain labels:</p>
+
+<div class="bl-code bl-code--light">
+  <pre style="white-space:pre;overflow-x:auto"><code style="white-space:pre;">Original:   Ana Ruiz asked to move account 4471902 to her husband, Tom.
+Redacted:   [NAME] asked to move account [ACCOUNT] to her husband, [NAME].</code></pre>
+</div>
+
+<p>The model can't tell which [NAME] made the request, so it may address the reply to the wrong person. In a long conversation, the confusion grows with every message. When the reply comes back, it says "Dear [NAME]," and a support agent has to fill in the real details by hand. <a class="bl-link" href="/blog/what-is-tokenization/">Tokenization</a> solves this by keeping each original value in a vault, so it can return in the reply when needed.</p>
+
+<h2>Data Redaction vs Masking vs Tokenization for AI: Key Differences</h2>
+
+<p><strong>Data redaction removes sensitive values for good, and masking hides part of a value, whereas tokenization swaps each value for a token that authorized systems can reverse. Tokenization keeps the most context for AI, while redaction keeps the least.</strong></p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+
+    <thead><tr><th>Factor</th><th>Redaction</th><th>Masking</th><th>Tokenization</th></tr></thead>
+
+    <tbody>
+
+      <tr><td>What it does</td><td>Removes or labels the value</td><td>Hides part of the value</td><td>Replaces the value with a token kept in a vault</td></tr>
+
+      <tr><td>Can it be reversed?</td><td>No</td><td>Usually no</td><td>Yes, for authorized systems</td></tr>
+
+      <tr><td>Keeps people apart?</td><td>No, unless labels are numbered</td><td>Partly</td><td>Yes, the same value gets the same token</td></tr>
+
+      <tr><td>Context for the model</td><td>Low</td><td>Medium</td><td>High</td></tr>
+
+      <tr><td>Best for</td><td>Training data, files shared outside</td><td>Test data, screens, analytics</td><td>Live AI features and agents</td></tr>
+
+    </tbody>
+  </table>
+</div>
+
+<h3>Where Tokenization Pulls Ahead</h3>
+
+<p>Here's how tokenization handles a value:</p>
+
+<div class="bl-code bl-code--light">
+  <pre style="white-space:pre;overflow-x:auto"><code style="white-space:pre;">Original:         John Smith (SSN: 123-45-6789)
+Model receives:   [NAME: Ry0Ixd1] (ID number: [GOV_ID: k8Lm2n])</code></pre>
+</div>
+
+<p>The token stays the same every time John appears, so the model can follow him across a long thread and across separate prompts. Two different customers get two different tokens, so the model never confuses them. When the reply comes back, the real name returns in place of the token. Redaction can't do any of that, because nothing is kept to restore.</p>
+
+<h3>When Redaction Still Wins</h3>
+
+<p>Redaction is the right choice when nobody needs the real values again. Training data fits, and so do archived records and files shared with outside reviewers. It needs no vault and no key management, which keeps it simple to run.</p>
+
+<p>It's also the safer pick when keeping any link back to a person is itself a risk. A redacted dataset with good generalization can move closer to anonymous data, while tokenized data always stays linked to real people through the vault.</p>
+
+<h3>Why Masking Sits in the Middle</h3>
+
+<p>Masking shows a little and hides the rest, like a card ending in 4417. It helps a person confirm a record on a screen, and it keeps the shape of the data for testing. It doesn't help a model reason about who's who, since two masked names look the same. The full comparison is in <a class="bl-link" href="/blog/data-masking-vs-tokenization/">data masking vs tokenization</a>.</p>
+
+<h2>How to Choose Between Redaction and Tokenization for Each AI Use Case</h2>
+
+<p><strong>To choose between redaction and tokenization for AI, ask whether anyone needs the real values back. If not, redact. If an AI feature must keep people apart or put real names back into its reply, tokenize the data.</strong></p>
+
+<p>The redaction vs tokenization choice is easier when you look at each use case on its own:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+
+    <thead><tr><th>Use case</th><th>Best fit</th><th>Why</th></tr></thead>
+
+    <tbody>
+
+      <tr><td>Training data</td><td>Redact or generalize</td><td>Nobody needs the real values back, and the model shouldn't learn them</td></tr>
+
+      <tr><td>Live assistants and agents</td><td>Tokenize</td><td>Users need real names in replies, and agents must track the same customer</td></tr>
+
+      <tr><td>Analytics</td><td>Mask or generalize</td><td>Trends matter more than individuals</td></tr>
+
+      <tr><td>Files shared outside the business</td><td>Redact</td><td>Outside readers should never see the values</td></tr>
+
+      <tr><td>RAG</td><td>Tokenize before embedding</td><td>Search still matches the same person across documents</td></tr>
+
+    </tbody>
+  </table>
+</div>
+
+<h3>Choose Redaction If Your Data Never Needs to Come Back</h3>
+
+<p>Redaction fits when you're sending data one way and nobody will ask for the original again. Pick it if:</p>
+
+<ul>
+
+  <li>Nobody on your team will need the real names or account numbers later.</li>
+
+  <li>You're building training or fine-tuning data, and your model should learn patterns without learning people.</li>
+
+  <li>Files are leaving your business for an outside reviewer or vendor, where you lose control of what happens next.</li>
+
+  <li>Your analytics only need trends, so a birth year or a three-digit ZIP code is enough.</li>
+
+  <li>Running a vault or managing keys isn't worth it for this use case.</li>
+
+</ul>
+
+<p>In these cases, redaction's one-way nature works in your favor. Nothing is kept, so nothing can leak back.</p>
+
+<h3>Choose Tokenization If Your AI Feature Needs Real Values</h3>
+
+<p>Tokenization fits when your AI feature sits in a live conversation and the reply has to make sense to a real person. Pick it if:</p>
+
+<ul>
+
+  <li>Your users expect real names and account details in the AI's reply.</li>
+
+  <li>Agents in your app must track the same customer across steps and tool calls.</li>
+
+  <li>Conversations you handle involve more than one person, such as disputes or family accounts.</li>
+
+  <li>Search in your RAG setup has to match the same person across documents.</li>
+
+  <li>You want real values restored inside your own application and kept away from the model provider.</li>
+
+</ul>
+
+<p>With tokenization, your model sees consistent tokens, and your app swaps the real values back before anyone reads the reply.</p>
+
+<h3>Using Both Together</h3>
+
+<p>Many teams use both, and you probably will too. Redact your training sets once and store the clean copy, so your models learn patterns without learning people. Then tokenize your live prompts so your AI features can restore real values in replies.</p>
+
+<p>A simple rule keeps the split clear. If data moves one way, into a model's weights or out to a third party, redact it. If it has to come back to your users, tokenize it. The approach behind that second step is covered in <a class="bl-link" href="/blog/pii-tokenization-for-ai/">PII tokenization for AI</a>.</p>
+
+<h2>How Privacy Laws and Regulators Treat Redacted Data in AI Systems</h2>
+
+<p><strong>Privacy laws treat redacted data differently depending on whether it can still be linked to a person. HIPAA and the CCPA have rules for de-identified data, while GDPR separates anonymized data from pseudonymized data, which remains personal data.</strong></p>
+
+<h3>HIPAA</h3>
+
+<p>HIPAA offers two paths to de-identify health data:</p>
+
+<ul>
+
+  <li><strong>Safe Harbor:</strong> Remove 18 specific identifiers, including names and dates tied to a person, along with Social Security and medical record numbers. The covered entity also can't have actual knowledge that the remaining data could identify someone.</li>
+
+  <li><strong>Expert Determination:</strong> A qualified expert confirms that the risk of re-identification is very small.</li>
+
+</ul>
+
+<p>Data de-identified either way is no longer PHI. Redacting a few fields from a clinical note usually falls short of Safe Harbor, so most AI prompts with clinical text still count as PHI and need HIPAA safeguards.</p>
+
+<h3>GDPR</h3>
+
+<p>GDPR separates two outcomes, and redaction can land on either side:</p>
+
+<div class="bl-code bl-code--light">
+  <pre style="white-space:pre;overflow-x:auto"><code style="white-space:pre;">Pseudonymized:  [NAME], 42, a nurse at St. Mary's in Boise, filed claim 7731.
+Anonymized:     A healthcare worker in Idaho filed a claim in 2025.</code></pre>
+</div>
+
+<p>The first line still points to one person through age and workplace, so it remains personal data under GDPR. The second can't be tied to anyone by reasonable means, so it falls outside GDPR. Placeholder redaction of a few fields usually produces the first kind. GDPR's data minimization principle still rewards it, since less personal data reaches the model provider. The <a class="bl-link" href="/blog/pseudonymization-vs-anonymization/">difference between pseudonymization and anonymization</a> explains where that line sits.</p>
+
+<h3>PCI DSS</h3>
+
+<p>PCI DSS sets three rules that matter for AI text:</p>
+
+<ol>
+
+  <li><strong>Displayed PANs are masked.</strong> At most, the first six and last four digits can show.</li>
+
+  <li><strong>Stored PANs are unreadable.</strong> Tokenization or strong encryption must protect them wherever they're kept.</li>
+
+  <li><strong>CVVs are never stored after authorization.</strong> No log or transcript may hold one.</li>
+
+</ol>
+
+<p>A PAN sitting in a stored prompt or call transcript counts as stored card data. Keeping card numbers out of AI text entirely is far simpler than bringing prompt logs into PCI scope.</p>
+
+<h3>CCPA</h3>
+
+<p>The CCPA treats deidentified information as outside the definition of personal information when a business meets three conditions:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+
+    <thead><tr><th>CCPA condition</th><th>Can redaction help?</th></tr></thead>
+
+    <tbody>
+
+      <tr><td>Reasonable steps so the data can't be linked to a person</td><td>Yes, this is where redaction does its work</td></tr>
+
+      <tr><td>A public commitment not to re-identify the data</td><td>No, this is a business commitment</td></tr>
+
+      <tr><td>Contracts requiring recipients to follow the same rules</td><td>No, this lives in your agreements</td></tr>
+
+    </tbody>
+  </table>
+</div>
+
+<p>Redaction covers the technical condition. The other two are written commitments the business has to make and keep.</p>
+
+<h2>How Enigma Vault Protects Sensitive Data Beyond Redaction in AI</h2>
+
+<p>At Enigma Vault, we built NoPII for the moments when redaction isn't enough. NoPII sits between your app and the LLM provider. It tokenizes PII and secrets before each prompt leaves, rewords labels like "SSN" to "ID number" and restores the real values in the reply. If tokenization fails, the request is blocked. Our Vault keeps the real card numbers and SSNs, so your systems hold tokens. <a class="bl-link" href="/nopii/demo/">Try the NoPII live demo</a> to see what your app and the model provider each receive.</p>

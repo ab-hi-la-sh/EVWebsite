@@ -1,0 +1,580 @@
+---
+title: "Sensitive Data Protection From AI: Risks, Ways to Secure and Core Strategies"
+slug: "sensitive-data-protection-from-ai"
+layout: "pii-style"
+metaTitle: "How to Protect Sensitive Data From AI: Risks and Core Strategies"
+description: "Learn the risks of sharing sensitive data with AI, the ways to protect and secure it and the core strategies that keep customer data out of AI models."
+subtitle: "Sensitive data protection from AI is the practice of keeping values like SSNs and card numbers out of AI prompts and model provider logs, so your teams can use AI features without exposing the customers behind that data."
+date: 2026-11-13T12:00:00
+category: "AI Security"
+author: "abhilash-kumar"
+readTime: 17
+heroImage: "/assets/blog/img-10.png"
+heroAlt: "Sensitive Data Protection From AI: Risks, Ways to Secure and Core Strategies"
+excerpt: "Learn the risks of sharing sensitive data with AI, the ways to protect and secure it and the core strategies that keep customer data out of AI models."
+tags: ["sensitive-data", "ai", "llm"]
+styles: ["blog.css", "pages/blog-pii-hero.css", "tr-pages.css"]
+scripts: ["blog-article.js"]
+faqSchema: true
+faqs:
+  - q: "What sensitive data should never be shared with AI?"
+    a: "Never share card numbers, CVVs, passwords or API keys with an AI chatbot. SSNs and medical record numbers should reach a model only as tokens, sent through an approved app that has a protection layer in place."
+  - q: "Is it safe to use AI with confidential company data?"
+    a: "It can be, with controls in place. Use a company AI account with clear retention terms and send only what the task needs. For apps, route traffic through a layer that swaps sensitive values for tokens."
+  - q: "Can a system prompt stop AI from leaking sensitive data?"
+    a: "No. A system prompt is a request, and a model can't reliably police its own output. Real protection sits outside the model, where sensitive values are tokenized before the request and answers are checked after."
+  - q: "What should you do if an employee pastes customer data into ChatGPT?"
+    a: "Delete the chat and any shared links, then rotate exposed passwords or keys. Record what data left and check the account's retention settings. Review whether breach notice rules apply, and update training."
+  - q: "Does protecting PII make an AI system HIPAA compliant?"
+    a: "No. PII protection reduces what a model provider receives, which supports HIPAA's minimum necessary standard. Compliance still depends on signed BAAs where required and the security controls across your whole data flow."
+---
+
+<p><strong>Sensitive data protection from AI is the practice of keeping values like SSNs and card numbers out of AI prompts and model provider logs, so your teams can use AI features without exposing the customers behind that data.</strong></p>
+
+<p>Every prompt is a data transfer. When a support agent pastes a customer case into a copilot, the customer's name and full account number leave with it. When a clinic's AI scribe drafts a note, the patient's name and date of birth travel to the model provider too.</p>
+
+<p>Once that data leaves, you can't call it back. It can sit in provider logs or reappear in an AI answer.</p>
+
+<p>The fix is to share less and keep real values in a vault. Your AI then works with tokens, which are stand-in values that mean nothing outside your systems.</p>
+
+<h2>What Is Sensitive Data Protection From AI and Why Does It Matter?</h2>
+
+<p><strong>Sensitive data protection from AI means controlling what an AI model can see and keep. It keeps values like SSNs and medical record numbers out of prompts and AI answers, whether staff use a chatbot or your app calls an LLM.</strong></p>
+
+<p>Think of it as a checkpoint. Before data leaves your systems for an AI model, protection decides which values can pass and which ones stay behind.</p>
+
+<h3>Two Ways Data Reaches AI</h3>
+
+<ul>
+
+  <li><strong>Staff using chatbots:</strong> An employee opens a consumer chatbot website and pastes in a customer list. Your company has no record of what went in.</li>
+
+  <li><strong>Apps calling an LLM:</strong> Your software sends a prompt to a model provider to summarize a ticket or draft a letter. Every call can carry customer data.</li>
+
+</ul>
+
+<h3>Sensitive Data Types AI Systems Touch</h3>
+
+<p>Different data follows different rules. Each type needs a clear answer to one question: can it go into AI at all?</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+
+    <thead><tr><th>Data type</th><th>Common values</th><th>Governed by</th><th>Can it go into AI?</th></tr></thead>
+
+    <tbody>
+
+      <tr><td>Cardholder data</td><td>Card number (PAN), expiry date</td><td>PCI DSS</td><td>Keep it out entirely</td></tr>
+
+      <tr><td>Sensitive authentication data</td><td>CVV, PIN</td><td>PCI DSS</td><td>Never; it can't be stored after authorization</td></tr>
+
+      <tr><td>Personal identifiers</td><td>SSNs, dates of birth, passport numbers</td><td>State privacy laws, GDPR</td><td>Only as tokens</td></tr>
+
+      <tr><td>Financial data</td><td>Bank account numbers, tax IDs</td><td>GLBA, state laws</td><td>Only as tokens</td></tr>
+
+      <tr><td>PHI</td><td>Medical record numbers (MRNs), diagnoses, insurance IDs</td><td>HIPAA</td><td>Only with a BAA and minimum necessary use</td></tr>
+
+      <tr><td>Credentials</td><td>API keys, passwords, connection strings</td><td>Security policy</td><td>Block before any AI call</td></tr>
+
+      <tr><td>Sensitive files</td><td>Passports, tax returns, medical records, contracts</td><td>Several rules at once</td><td>Send only the text a task needs</td></tr>
+
+    </tbody>
+  </table>
+</div>
+
+<h3>Why Custody Matters More Than Encryption</h3>
+
+<p>Encryption protects a database at rest. It doesn't solve the AI problem, because your app decrypts data before it builds a prompt.</p>
+
+<p>The stronger goal is custody. If the real SSN never sits in your CRM, an AI feature connected to that CRM can't leak it. AI data protection works best when the real value never makes the trip, and the <a class="bl-link" href="/blog/data-masking-vs-tokenization/">differences between data masking and tokenization</a> decide how you replace it.</p>
+
+<h2>What Makes Sensitive Data Risky to Share With AI Models and Agents?</h2>
+
+<p><strong>Sensitive data is risky to share with AI because every request copies it outside your systems, often into logs you can't see or erase. Once a provider holds it, you can't pull it back, and a model can repeat it in answers or act on it through tools.</strong></p>
+
+<p>Older security controls were built for databases and files. AI data security has to handle four new conditions:</p>
+
+<ol>
+
+  <li><strong>Free text:</strong> An SSN inside a sentence doesn't sit in a labeled field, so field-level controls miss it.</li>
+
+  <li><strong>Copies on every request:</strong> Support AI re-sends the full ticket thread at each step, creating a new copy every time.</li>
+
+  <li><strong>Speed:</strong> AI moves data across systems in seconds, far faster than any human review.</li>
+
+  <li><strong>Many components:</strong> One AI feature passes data through a prompt builder and a search index, then on to the model API and tracing tools.</li>
+
+</ol>
+
+<p>Adoption makes this urgent. Verizon's <a class="bl-link" href="https://www.verizon.com/about/news/breach-industry-wide-dbir-finds">2026 Data Breach Investigations Report</a> found that frequent use of AI tools by employees jumped from 15% to 45% in a single year.</p>
+
+<p>That growth creates six kinds of sensitive data exposure in AI:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+
+    <thead><tr><th>Risk</th><th>What it means</th><th>Real-world pattern</th></tr></thead>
+
+    <tbody>
+
+      <tr><td>Provider exposure</td><td>The model API receives real identifiers</td><td>A support copilot receives a customer's full account number</td></tr>
+
+      <tr><td>Retention and training</td><td>Data sits in provider logs, and some consumer plans may use chats for training</td><td>An employee pastes a customer list into a consumer chatbot website</td></tr>
+
+      <tr><td>Erasure gaps</td><td>Copies spread across provider logs, so deletion requests can't reach them</td><td>A customer asks for deletion, and their details still sit in old prompts</td></tr>
+
+      <tr><td>Lost privilege</td><td>Privileged material leaves the firm the moment it enters a prompt</td><td>A firm runs privilege review through a public model</td></tr>
+
+      <tr><td>Wrong answers</td><td>AI quotes an outdated fact as current</td><td>A support copilot misquotes a rate, and the customer acts on it</td></tr>
+
+      <tr><td>Compliance scope</td><td>Regulated data lands in systems not built for it</td><td>A call recording captures a spoken card number and enters PCI DSS scope</td></tr>
+
+    </tbody>
+  </table>
+</div>
+
+<p>Card data needs the most care, because PCI DSS applies wherever card data is stored, processed or sent. That's why many teams use <a class="bl-link" href="/blog/card-vault-tokenization/">card vault tokenization</a> to keep card numbers out of the systems AI connects to.</p>
+
+<h2>Common Ways AI Exposes Sensitive Data During Everyday Business Use</h2>
+
+<p><strong>AI exposes sensitive data at a few points in everyday use. The most common are prompts that carry full records and data sources that return more than a task needs. Outputs and agents add more, along with logs and consumer chatbots.</strong></p>
+
+<p>Most AI data leakage isn't a bug. It's the AI feature working as designed, with more data than the task needed.</p>
+
+<h3>Prompts That Carry Full Records</h3>
+
+<p>A support agent needs one order status and pastes the full customer record anyway. In financial services, the same habit sends a customer's name and full account number into a copilot, along with recent transactions.</p>
+
+<h3>Data Sources That Return Too Much</h3>
+
+<p>AI that searches your systems often retrieves an entire profile when it needed a few fields. Insurance shows the problem clearly. An adjuster drops a claims file into a summarization tool, and one file can mix medical and financial records with identity documents and payment data.</p>
+
+<h3>AI Outputs That Repeat Details</h3>
+
+<p>Models repeat what they read. A summary can copy a customer's account number into a ticket, an email or a downstream database, creating a fresh copy in a system that was never meant to hold it.</p>
+
+<h3>Agents and Tool Calls</h3>
+
+<p>AI agents don't stop at the model. An agent that reads a support ticket can call your CRM tool with customer data in the function arguments, and a third-party connector can receive sensitive values the same way.</p>
+
+<h3>Code and Config Pastes</h3>
+
+<p>An engineer pastes a failing config into an AI assistant to debug it:</p>
+
+<div class="bl-code bl-code--light">
+  <pre style="white-space:pre;overflow-x:auto"><code style="white-space:pre;">DATABASE_URL=postgres://admin:S3cr3t@prod-db.internal:5432/customers</code></pre>
+</div>
+
+<p>That one line holds the password to a production database. Credentials don't identify a person, yet they can open every customer record at once.</p>
+
+<h3>Logs and Traces</h3>
+
+<p>Copies often outlive the request that created them.</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+
+    <thead><tr><th>Where copies sit</th><th>Who can see them</th></tr></thead>
+
+    <tbody>
+
+      <tr><td>Tracing and observability tools</td><td>Engineers and monitoring vendors</td></tr>
+
+      <tr><td>Error logs</td><td>Anyone with log access</td></tr>
+
+      <tr><td>Model provider logs</td><td>The provider, under its retention terms</td></tr>
+
+    </tbody>
+  </table>
+</div>
+
+<h3>Consumer Chatbot Websites</h3>
+
+<p>An employee opens a consumer chatbot website and pastes a customer list. That traffic never passes through your company's controls.</p>
+
+<p>This is shadow AI, and it's the hardest gap to close with technology alone. Policy and approved company accounts have to carry most of the load.</p>
+
+<h2>How to Protect Sensitive Data From AI: A Step-by-Step Process</h2>
+
+<p><strong>To protect sensitive data from AI, start by mapping every place AI touches your data and deciding what it may see. Then route AI requests through a protection layer and test it with realistic data before launch.</strong></p>
+
+<h3>Step 1: Find Where AI Touches Your Data</h3>
+
+<p>List every app and agent that sends prompts to a model provider. Include backup providers, since one unprotected route is still an exposure. Then review a sample of real prompts and note which values appear, such as SSNs or account numbers.</p>
+
+<h3>Step 2: Sort Data Into Three AI Tiers</h3>
+
+<p>A three-tier framework works for most businesses:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+
+    <thead><tr><th>Tier</th><th>Data</th><th>Rule</th></tr></thead>
+
+    <tbody>
+
+      <tr><td>Public</td><td>Published policies, product details</td><td>Safe for approved AI features</td></tr>
+
+      <tr><td>Personal</td><td>Names, emails, SSNs, account numbers, MRNs</td><td>Send only as tokens through an approved app</td></tr>
+
+      <tr><td>Restricted</td><td>Card numbers, CVVs, passwords, API keys</td><td>Never send; block before any AI call</td></tr>
+
+    </tbody>
+  </table>
+</div>
+
+<h3>Step 3: Write a Simple AI Data Policy</h3>
+
+<p>Keep it to one page your staff will read:</p>
+
+<ul>
+
+  <li>Approved AI features and company accounts</li>
+
+  <li>Values that never go into a prompt, named plainly</li>
+
+  <li>Extra rules for PHI and card data</li>
+
+  <li>Who to contact after a mistake</li>
+
+</ul>
+
+<h3>Step 4: Route AI Requests Through a Protection Layer</h3>
+
+<p>A protection layer sits between your app and the model provider. It swaps sensitive values for tokens on the way out and restores them on the way back, the approach behind <a class="bl-link" href="/blog/pii-tokenization-for-ai/">PII tokenization for AI</a>.</p>
+
+<p>For apps built on an LLM API, the change is often one setting:</p>
+
+<div class="bl-code bl-code--light">
+  <pre style="white-space:pre;overflow-x:auto"><code style="white-space:pre;"># Before: requests go straight to the model provider
+client = OpenAI(api_key="sk-...")
+
+# After: requests pass through a protection layer first
+client = OpenAI(
+  api_key="sk-...",
+  base_url="https://api.nopii.co"
+)</code></pre>
+</div>
+
+<p>Then block direct routes to the provider, so no app can skip the layer.</p>
+
+<h3>Step 5: Test With Realistic Data</h3>
+
+<p>Detection can miss values it doesn't recognize, so test before launch. Run synthetic records through the layer, including formats specific to your business such as internal policy numbers. Then confirm:</p>
+
+<ol>
+
+  <li>Every seeded value was caught.</li>
+
+  <li>Tokens stayed consistent across turns.</li>
+
+  <li>Replies came back with real values in the right places.</li>
+
+</ol>
+
+<h3>Step 6: Monitor and Respond</h3>
+
+<p>Track how often sensitive values appear in logs and how many AI routes run unprotected. Each new AI feature can add a route, so review these numbers on a schedule.</p>
+
+<p>When something slips through, contain it first. Delete the chat and rotate any exposed key. Then record what left and fix the gap.</p>
+
+<h2>Core Strategies for Sensitive Data Protection From AI Systems</h2>
+
+<p><strong>The core strategies for sensitive data protection from AI start with sharing less and keeping real values in a vault. Tokens at the model boundary and least-privilege access come next, and checks on AI answers complete the set.</strong></p>
+
+<p>Steps get you started. These eight strategies protect company data from AI as use grows, and each one closes a different gap.</p>
+
+<h3>1. Share Only What the Task Needs</h3>
+
+<p>Data minimization for AI comes first. An AI feature needs enough context to finish a task, and the model often doesn't need the customer's real name or SSN.</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+
+    <thead><tr><th>Business</th><th>What the work needs</th><th>What it doesn't need</th></tr></thead>
+
+    <tbody>
+
+      <tr><td>Travel agency</td><td>Customer record, booking reference, preferred hotel</td><td>The full card number</td></tr>
+
+      <tr><td>Law firm</td><td>Matter file, engagement details</td><td>Passports and bank statements in email</td></tr>
+
+      <tr><td>AI support feature</td><td>Ticket context, order status</td><td>Real name, email, SSN or account number</td></tr>
+
+    </tbody>
+  </table>
+</div>
+
+<p>A protection layer is no excuse to send a full record. Minimize first, then protect what's left.</p>
+
+<h3>2. Keep Real Values in a Vault</h3>
+
+<p>The safest data is data your everyday systems never hold in the clear. A vault stores the real card number, and your app stores a token that points to it.</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+
+    <thead><tr><th>Where</th><th>What should live there</th></tr></thead>
+
+    <tbody>
+
+      <tr><td>Your application or CRM</td><td>Customer reference, token, card brand and last four digits</td></tr>
+
+      <tr><td>The vault</td><td>The encrypted card number, isolated per customer</td></tr>
+
+      <tr><td>Logs and analytics</td><td>Tokens and request IDs, never the card number or CVV</td></tr>
+
+    </tbody>
+  </table>
+</div>
+
+<p>When an AI feature reads that CRM, it finds tokens. A travel agency's client can enter a card once, and authorized staff can still use it later through an approved path.</p>
+
+<h3>3. Tokenize Data at the Model Boundary</h3>
+
+<p>Some values have to travel with a prompt. Tokenize them where the request leaves your app, so the model works with stand-ins:</p>
+
+<div class="bl-code bl-code--light">
+  <pre style="white-space:pre;overflow-x:auto"><code style="white-space:pre;">Original:         John Smith (SSN: 123-45-6789)
+Model receives:   [NAME: Ry0Ixd1] (ID number: [GOV_ID: k8Lm2n])</code></pre>
+</div>
+
+<p>The same value gets the same token every time, so the model can follow one customer across a long conversation. Notice the label change too. "SSN" becomes "ID number," which helps keep the model from refusing the task.</p>
+
+<h3>4. Limit Who Can See Real Values</h3>
+
+<p>Every person and app that touches AI should get only the access its task requires.</p>
+
+<ul>
+
+  <li><strong>Restored values:</strong> Reveal a real value only to the user who created it or to someone with an approved grant.</li>
+
+  <li><strong>Apps:</strong> Give each app its own credentials, limited to the vault and actions it needs.</li>
+
+  <li><strong>Agents:</strong> Check which tools an agent can call, since tool calls can pass sensitive data to third parties.</li>
+
+</ul>
+
+<p>Log every reveal, including refused ones, so reviewers can see who saw what.</p>
+
+<h3>5. Check What AI Sends Back</h3>
+
+<p>A prompt is a request, and a model can't police its own output. Telling it "never reveal SSNs" isn't a control.</p>
+
+<p>Two checks work from outside the model. Output checks catch a summary that repeats an account number before it's saved. Grounding confirms an answer is supported by approved evidence, because a misquoted rate becomes a compliance problem the moment a customer acts on it.</p>
+
+<h3>6. Protect Every AI Route</h3>
+
+<p>If an app uses three model providers and only one is protected, the other two stay open.</p>
+
+<p>Route every app through the same protection layer. Set it to block a request when tokenization fails, so raw data is never sent by accident.</p>
+
+<h3>7. Govern Logs and Data Retention</h3>
+
+<p>Logs are where sensitive data quietly piles up. Record what kind of data was found, and keep the raw values out.</p>
+
+<p>Set retention rules for logs and tokens, then delete on schedule. When a customer asks for erasure under GDPR or CCPA, purging their tokens from the vault cuts the link to the real person, even in old provider logs.</p>
+
+<h3>8. Plan Your Response to AI Data Exposure</h3>
+
+<p>Mistakes will happen, so decide the response in advance:</p>
+
+<ol>
+
+  <li>Contain the exposure by deleting the chat and any shared links.</li>
+
+  <li>Rotate any password, API key or connection string that left.</li>
+
+  <li>Record which values went to which provider.</li>
+
+  <li>Check whether HIPAA or state breach notice rules apply.</li>
+
+  <li>Fix the route or habit that caused it.</li>
+
+</ol>
+
+<p>Teams building on one provider can see several of these strategies in <a class="bl-link" href="/blog/how-to-use-openai-without-exposing-pii/">how to use OpenAI without exposing PII</a>.</p>
+
+<h2>Techniques to Secure Sensitive Data From AI Before It Reaches the Model</h2>
+
+<p><strong>Techniques to secure sensitive data from AI start with tokenization, which swaps real values for stand-ins the model can still reason over. Encryption and secure intake protect stored data, and fail-safe blocking stops unprotected requests.</strong></p>
+
+<p>Each technique helps secure sensitive data in AI at a different point. None of them works alone.</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+
+    <thead><tr><th>Technique</th><th>What it does</th><th>Its limit</th></tr></thead>
+
+    <tbody>
+
+      <tr><td>Vault tokenization</td><td>Replaces an SSN or card number with a token and keeps the original in a vault</td><td>Authorized systems can restore the value, so access needs rules</td></tr>
+
+      <tr><td>Deterministic tokens</td><td>Gives the same value the same token every time</td><td>Names that look alike get unrelated tokens</td></tr>
+
+      <tr><td>Field-level encryption</td><td>Encrypts stored values with per-customer keys</td><td>A model can't read encrypted text, so it protects storage only</td></tr>
+
+      <tr><td>Secure intake</td><td>Collects cards, IDs and files straight into a vault</td><td>Staff must stop accepting email attachments</td></tr>
+
+      <tr><td>Secret detection</td><td>Finds API keys and connection strings in prompts</td><td>New credential formats need pattern updates</td></tr>
+
+      <tr><td>Fail-safe blocking</td><td>Stops a request when tokenization fails</td><td>The request waits until protection works again</td></tr>
+
+      <tr><td>Token expiry and purge</td><td>Deletes tokens after a set time or on request</td><td>Expired tokens can't be restored</td></tr>
+
+      <tr><td>Answer grounding</td><td>Checks AI answers against approved evidence</td><td>Support in your evidence isn't proof of truth</td></tr>
+
+    </tbody>
+  </table>
+</div>
+
+<p>The right technique depends on the data:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+
+    <thead><tr><th>Data</th><th>Best technique</th></tr></thead>
+
+    <tbody>
+
+      <tr><td>Card numbers and CVVs</td><td>Card vault with hosted capture; CVV never stored after authorization</td></tr>
+
+      <tr><td>SSNs and bank account numbers</td><td>Data vault tokenization</td></tr>
+
+      <tr><td>Passports, tax returns and medical records</td><td>Protected file storage with expiring access</td></tr>
+
+      <tr><td>Names, DOBs and MRNs in prompts</td><td>Deterministic tokens at the model boundary</td></tr>
+
+      <tr><td>API keys and connection strings</td><td>Secret detection and blocking</td></tr>
+
+      <tr><td>AI answers</td><td>Grounding against approved evidence</td></tr>
+
+    </tbody>
+  </table>
+</div>
+
+<p>Token design matters too, and the <a class="bl-link" href="/blog/types-of-data-tokenization/">types of data tokenization</a> affect how well tokens hold up inside AI prompts.</p>
+
+<h2>Regulations and Frameworks That Govern Sensitive Data Protection in AI</h2>
+
+<p><strong>No single US law covers sensitive data in AI. Laws such as HIPAA and PCI DSS apply to AI the same way they apply to any other system, and frameworks like the NIST AI Risk Management Framework guide how to manage the risk.</strong></p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+
+    <thead><tr><th>Rule</th><th>What it expects</th><th>What it means for AI</th></tr></thead>
+
+    <tbody>
+
+      <tr><td>HIPAA</td><td>Minimum necessary use; BAAs with vendors that handle PHI</td><td>A model provider receiving PHI may need a BAA, and prompts should carry only what the task needs</td></tr>
+
+      <tr><td>PCI DSS</td><td>Protected card data; no CVV storage after authorization</td><td>A card number in a prompt or call recording widens the systems in scope</td></tr>
+
+      <tr><td>GLBA Safeguards Rule</td><td>A security program for customer financial data, including oversight of service providers</td><td>Model providers count as service providers you must oversee</td></tr>
+
+      <tr><td>CCPA/CPRA</td><td>Reasonable security and consumer rights over personal information</td><td>Copies in AI logs make deletion requests harder</td></tr>
+
+      <tr><td>GDPR</td><td>Data minimization, processor contracts, erasure rights</td><td>Tokenized data is pseudonymized, so it's still personal data</td></tr>
+
+      <tr><td>EU AI Act</td><td>Risk-based rules, including data governance for high-risk AI systems</td><td>Applies when you offer AI systems in the EU</td></tr>
+
+    </tbody>
+  </table>
+</div>
+
+<p>Two frameworks turn these rules into daily practice. NIST's Generative AI Profile (NIST AI 600-1) lists privacy risks such as data leakage and memorization. The OWASP Top 10 for LLM Applications ranks sensitive information disclosure second.</p>
+
+<p>One caution applies to every rule above. A BAA assigns responsibility for data; it doesn't stop the data from moving. No product makes AI compliant by itself either, since compliance depends on your contracts and the full data flow.</p>
+
+<p>GDPR treats pseudonymized and anonymized data very differently, and <a class="bl-link" href="/blog/pseudonymization-vs-anonymization/">pseudonymization vs anonymization</a> explains where that line sits.</p>
+
+<h2>Best Practices to Protect Sensitive Data When Using AI Models</h2>
+
+<p><strong>Best practices to protect sensitive data when using AI models begin with approving company AI accounts and never pasting full records. Keeping card numbers out of call recordings and checking provider terms close the most common gaps.</strong></p>
+
+<p>Good habits differ for employees and IT teams, and each regulated industry adds its own.</p>
+
+<h3>Best Practices for Employees Using AI</h3>
+
+<ol>
+
+  <li><strong>Use the company account:</strong> Many business AI plans keep your chats out of model training. Personal accounts may not by default.</li>
+
+  <li><strong>Paste the question, never the record:</strong> "Draft a reply to a customer who was charged twice" works without the customer's file.</li>
+
+  <li><strong>Replace identifiers first:</strong> Swap names and account numbers for placeholders like [CUSTOMER] or [ACCOUNT].</li>
+
+  <li><strong>Keep restricted values out:</strong> SSNs and card numbers never belong in a chatbot. Passwords and CVVs stay out too.</li>
+
+  <li><strong>Report slips fast:</strong> A quick message to IT limits the damage.</li>
+
+</ol>
+
+<h3>Best Practices for Enterprises and IT Teams</h3>
+
+<ul>
+
+  <li><strong>Approve business AI plans:</strong> Choose plans with signed data processing terms and clear retention periods.</li>
+
+  <li><strong>Map every route:</strong> List every model provider and framework, including fallback paths and connected tools.</li>
+
+  <li><strong>Route production calls through one protection layer:</strong> Block or govern any route that skips it.</li>
+
+  <li><strong>Minimize before the proxy:</strong> A protection layer should never justify sending extra records.</li>
+
+  <li><strong>Keep prompts out of ordinary logs:</strong> Store metadata, and keep raw prompt bodies out of observability tools.</li>
+
+  <li><strong>Test detection on real formats:</strong> Confirm detection works on your own data, including streamed replies and tool calls.</li>
+
+</ul>
+
+<h3>Best Practices for Healthcare and Behavioral Health</h3>
+
+<p>Start with administrative work such as intake, referrals or billing, not diagnosis. Before any AI feature touches PHI, map every system that will receive it, confirm a BAA with each provider and send only the minimum necessary.</p>
+
+<p>Behavioral health needs extra care. Removing names doesn't always de-identify free text, because clinical context can still point to one person.</p>
+
+<h3>Best Practices for Financial Services and Collections</h3>
+
+<p>Map one call and payment path end to end, including recordings and screen capture. Use secure card capture so card numbers never reach the audio or the agent's desktop.</p>
+
+<p>Then tokenize customer identifiers before transcripts go to AI for summaries or quality scoring. For engineers, turn on secret detection, since connection strings and API keys get pasted into internal copilots every day.</p>
+
+<h3>Best Practices for Insurance and Claims</h3>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+
+    <thead><tr><th>Practice</th><th>Why it matters</th></tr></thead>
+
+    <tbody>
+
+      <tr><td>Tokenize claimant PII before summarization</td><td>One claims file can hold four regulated data types</td></tr>
+
+      <tr><td>Test claim-specific identifiers</td><td>General detectors may miss your internal claim formats</td></tr>
+
+      <tr><td>Review narratives and loss photos</td><td>They can identify people even after names are removed</td></tr>
+
+    </tbody>
+  </table>
+</div>
+
+<h3>Best Practices for Legal Teams</h3>
+
+<p>Tokenization reduces exposure, but it doesn't establish privilege or confidentiality on its own. Define your firm's privilege and client-consent rules for AI first, then route only approved applications through a protection layer.</p>
+
+<p>Remember that free-text facts can reveal a client even when names are gone, so sensitive matters may need review before any AI step.</p>
+
+<h3>Best Practices for HR and Travel Teams</h3>
+
+<ul>
+
+  <li><strong>HR and recruiting:</strong> Collect SSNs and bank details only when onboarding requires them, and test recruiting AI on your own resume formats.</li>
+
+  <li><strong>Travel agencies:</strong> Let clients enter a card once through a secure form, so your app receives only a token and masked card details.</li>
+
+</ul>
+
+<h2>How Enigma Vault Secures Sensitive Data Before It Reaches AI Models</h2>
+
+<p>At Enigma Vault, we keep real values out of your systems and out of your prompts. Our Vault stores card numbers and SSNs, along with sensitive files, while your apps hold tokens. NoPII sits between your app and the LLM provider. It tokenizes PII and secrets before each request, restores them in the reply and blocks any request it can't protect. Triplets checks AI answers against your approved evidence and refuses when support is missing. All three run on PCI DSS Level 1 and SOC 2 Type II infrastructure. <a class="bl-link" href="/nopii/demo/">Try the NoPII live demo</a> to see what your app and the model provider each receive.</p>

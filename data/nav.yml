@@ -25,6 +25,9 @@ items:
           icon: /assets/nav/plat-integrations.jpg
           desc: Wide ecosystem of partners and products
 
+  - label: AI Vault
+    topHref: /ai-vault/
+
   - label: Triplets
     topHref: /triplets/
     tag: Trust the output

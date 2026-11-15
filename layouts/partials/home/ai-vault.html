@@ -1,0 +1,51 @@
+{{- /* Enigma AI Vault intro: sits between the trust strip and the suite, on the
+       dark band because it is the lead offering. Right side is the agent's data
+       path: each technology sits on the stage it protects. */ -}}
+{{- $svg := `<svg class="hp-aiv__ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">%s</svg>` -}}
+{{- $ic := dict
+  "vault" `<ellipse cx="12" cy="6" rx="7.5" ry="2.8"/><path d="M4.5 6v12c0 1.5 3.4 2.8 7.5 2.8s7.5-1.3 7.5-2.8V6"/><path d="M4.5 12c0 1.5 3.4 2.8 7.5 2.8s7.5-1.3 7.5-2.8"/>`
+  "nopii" `<path d="M7 5.5A8 8 0 0 1 20 12v1.5"/><path d="M4 9.5A8 8 0 0 0 4 12c0 2.4.5 4.5 1.5 6.5"/><path d="M8 18.5c-.7-1.9-1-4-1-6.5a5 5 0 0 1 10 0c0 1.2 0 2.4-.2 3.5"/><path d="M12 12c0 3.2.6 6 1.8 8.3"/><path d="M16.5 18.5c-.3.9-.6 1.6-1 2.3"/>`
+  "triplets" `<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h4"/><path d="M14 3l5 5v3"/><path d="M14 3v5h5"/><path d="M8.5 11h6M8.5 14.5h3"/><circle cx="17" cy="17.5" r="3.5"/><path d="m15.6 17.5 1 1 1.9-2"/>`
+  "mark" `<path d="M12 3l9 5-9 5-9-5z"/><path d="m3 12.5 9 5 9-5"/><path d="m3 16.5 9 5 9-5"/>`
+-}}
+{{- $stages := slice
+  (dict "k" "vault" "step" "Agent retrieves data" "name" "The Vault" "line" "Protects records, cards and files at the source and releases only what the task permits.")
+  (dict "k" "nopii" "step" "Agent calls a model" "name" "NoPII" "line" "Tokenizes personal information before supported model calls.")
+  (dict "k" "triplets" "step" "Agent answers" "name" "Triplets" "line" "Checks agent answers against approved, versioned evidence.")
+-}}
+<section class="hp-section hp-bg-dark hp-aiv" id="ai-vault">
+  <div class="hp-container hp-aiv__grid">
+    <div class="hp-reveal hp-aiv__left">
+      <p class="hp-kicker">Enigma AI Vault</p>
+      <h2 class="hp-h2">For AI agents that work with <span class="hp-em">sensitive data.</span></h2>
+      <p class="hp-aiv__problem">An agent may retrieve a customer record, assemble context from several systems, invoke a payment service and update a case, all within one task. Sensitive values can travel far beyond the database in which they began.</p>
+      <p class="hp-aiv__outcome">Agents work with tokens instead of raw values, release decisions stay outside the model, and answers are checked against approved evidence.</p>
+      <div class="hp-aiv__cta">{{ partial "ds/button.html" (dict "label" "Explore AI Vault" "href" "/ai-vault/" "size" "lg" "arrow" true) }}</div>
+    </div>
+    <div class="hp-reveal hp-aiv__right">
+      <div class="hp-aiv__panel">
+        <div class="hp-aiv__phead">
+          <span class="hp-aiv__mark">{{ printf $svg (index $ic "mark") | safeHTML }}</span>
+          <div>
+            <p class="hp-aiv__pname">AI Vault</p>
+            <p class="hp-aiv__intro">AI Vault brings three established technologies into the agent's data path.</p>
+          </div>
+        </div>
+        <ol class="hp-aiv__path">
+          {{- range $i, $s := $stages }}
+          <li class="hp-aiv__stage hp-aiv__stage--{{ add $i 1 }}">
+            {{- if lt $i 2 }}<span class="hp-aiv__seg hp-aiv__seg--{{ add $i 1 }}" aria-hidden="true"><i></i></span>{{ end }}
+            <span class="hp-aiv__node">{{ printf $svg (index $ic $s.k) | safeHTML }}</span>
+            <div class="hp-aiv__txt">
+              <span class="hp-aiv__step">{{ printf "%02d" (add $i 1) }} · {{ $s.step }}</span>
+              <strong>{{ $s.name }}</strong>
+              <span class="hp-aiv__line">{{ $s.line }}</span>
+            </div>
+          </li>
+          {{- end }}
+        </ol>
+      </div>
+      <p class="hp-aiv__note">Each technology is also available on its own.</p>
+    </div>
+  </div>
+</section>

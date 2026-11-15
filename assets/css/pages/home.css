@@ -151,7 +151,7 @@
   .hp-mega--cols .hp-mega__col{flex:1;min-width:188px;padding:16px 16px 10px;border-radius:12px;background:var(--ev-porcelain);border:1px solid var(--border-hairline);margin-left:0;}
   .hp-mega--cols .hp-mega__col + .hp-mega__col{border-left:1px solid var(--border-hairline);padding-left:16px;}
   .hp-mega--cols .hp-mega__head{font-size:14px;margin-bottom:12px;padding-bottom:11px;border-bottom:1px solid var(--border-hairline);flex-direction:row;align-items:center;gap:11px;}
-  .hp-mega__ic{width:44px;height:44px;border-radius:10px;overflow:hidden;flex:none;display:block;background:var(--ev-warm-cloud);border:1px solid var(--border-hairline);transition:border-color .15s var(--ev-ease),box-shadow .15s var(--ev-ease);}
+  .hp-mega__ic{width:52px;height:52px;border-radius:12px;overflow:hidden;flex:none;display:block;background:var(--ev-warm-cloud);border:1px solid var(--border-hairline);transition:border-color .15s var(--ev-ease),box-shadow .15s var(--ev-ease);}
   .hp-mega__ic img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;mix-blend-mode:multiply;}
   .hp-mega__ht{display:flex;flex-direction:column;gap:3px;min-width:0;}
   .hp-mega--cols .hp-mega__col:hover .hp-mega__ic{border-color:var(--ev-mineral-blue);box-shadow:0 4px 12px rgba(15,61,86,0.12);}
@@ -518,3 +518,57 @@
 .hp-boot__sub{font-size:18px;line-height:1.6;color:var(--text-body);margin:24px 0 0;max-width:56ch;}
 .hp-boot__links{display:flex;flex-wrap:wrap;gap:20px;margin:32px 0 0;font-size:15px;}
 @media (max-width:767px){.hp-boot{padding:72px 24px 64px;}}
+
+/* ---- Hero copy widths for the longer H1 + subhead ---- */
+.hp-bhero__copy{max-width:680px;}
+.hp-bhero h1{max-width:620px;}
+.hp-bhero__sub{max-width:62ch;}
+
+/* ---- Enigma AI Vault intro: dark band, agent data path ---- */
+.hp-aiv{position:relative;overflow:hidden;}
+.hp-aiv::before{content:"";position:absolute;right:-10%;top:-40%;width:75%;height:180%;background:radial-gradient(closest-side,rgba(143,178,196,0.16),rgba(143,178,196,0));pointer-events:none;}
+/* Flowing contour lines (data in motion), strongest behind the diagram, fading toward the copy. */
+.hp-aiv::after{content:"";position:absolute;inset:0;pointer-events:none;background:url("/assets/aiv-flow-lines.svg") center/cover no-repeat;-webkit-mask-image:linear-gradient(90deg,rgba(0,0,0,0.25) 0%,rgba(0,0,0,0.55) 35%,#000 60%,#000 100%);mask-image:linear-gradient(90deg,rgba(0,0,0,0.25) 0%,rgba(0,0,0,0.55) 35%,#000 60%,#000 100%);}
+.hp-aiv > .hp-container{position:relative;z-index:1;}
+.hp-aiv__grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:72px;align-items:center;}
+.hp-aiv .hp-kicker{color:#8FB2C4;}
+.hp-aiv .hp-h2{font-size:46px;}
+.hp-aiv__problem{font-size:17px;line-height:1.65;color:rgba(244,246,248,0.78);margin:24px 0 0;max-width:50ch;}
+.hp-aiv__outcome{font-size:17px;line-height:1.6;font-weight:500;color:#fff;margin:20px 0 0;padding-left:16px;border-left:2px solid #8FB2C4;max-width:50ch;}
+.hp-aiv__cta{margin-top:36px;}
+
+.hp-aiv__panel{background:#164761;border:1px solid rgba(255,255,255,0.14);border-radius:16px;padding:30px 32px 14px;}
+.hp-aiv__phead{display:flex;gap:16px;align-items:center;padding-bottom:24px;border-bottom:1px solid rgba(255,255,255,0.12);}
+.hp-aiv__mark{display:inline-flex;width:48px;height:48px;border-radius:12px;align-items:center;justify-content:center;background:#fff;color:var(--ev-mineral-blue);flex:none;}
+.hp-aiv .hp-aiv__ic{width:24px;height:24px;display:block;}
+.hp-aiv__pname{font-size:24px;font-weight:600;letter-spacing:-0.015em;line-height:1.1;color:#fff;margin:0;}
+.hp-aiv__intro{font-size:14px;line-height:1.45;color:rgba(244,246,248,0.68);margin:6px 0 0;}
+
+/* Stages: a short connector runs from each node to the next. A soft light travels
+   node 1 -> 2 -> 3; each node glows as the light arrives, then the path rests. */
+.hp-aiv__path{--node:48px;--T:4.6s;list-style:none;margin:0;padding:10px 0 4px;}
+.hp-aiv__stage{position:relative;display:flex;gap:20px;align-items:flex-start;padding:18px 0;}
+.hp-aiv__seg{position:absolute;left:calc(var(--node)/2 - 0.5px);top:calc(18px + var(--node) + 6px);bottom:calc(-18px + 6px);width:1px;background:rgba(255,255,255,0.16);overflow:hidden;}
+.hp-aiv__seg i{position:absolute;left:0;top:0;width:1px;height:60%;background:linear-gradient(to bottom,rgba(159,196,214,0),rgba(207,224,232,0.95));transform:translateY(-100%);animation:hpAivComet var(--T) cubic-bezier(.45,0,.55,1) infinite;}
+.hp-aiv__seg--2 i{animation-delay:calc(var(--T) * -0.81);}
+@keyframes hpAivComet{0%{transform:translateY(-100%)}30%{transform:translateY(167%)}100%{transform:translateY(167%)}}
+.hp-aiv__node{position:relative;z-index:1;display:inline-flex;align-items:center;justify-content:center;width:var(--node);height:var(--node);border-radius:50%;background:#123F57;border:1px solid rgba(255,255,255,0.22);color:#CFE0E8;flex:none;animation:hpAivNode var(--T) ease-out infinite;}
+.hp-aiv__stage:nth-child(1) .hp-aiv__node{animation-delay:calc(var(--T) * -0.04);}
+.hp-aiv__stage:nth-child(2) .hp-aiv__node{animation-delay:calc(var(--T) * -0.85);}
+.hp-aiv__stage:nth-child(3) .hp-aiv__node{animation-delay:calc(var(--T) * -0.66);}
+@keyframes hpAivNode{0%,100%{border-color:rgba(255,255,255,0.22);color:#CFE0E8;box-shadow:0 0 0 0 rgba(159,196,214,0)}4%{border-color:rgba(255,255,255,0.9);color:#fff;box-shadow:0 0 0 6px rgba(159,196,214,0.14)}24%{border-color:rgba(255,255,255,0.22);color:#CFE0E8;box-shadow:0 0 0 10px rgba(159,196,214,0)}}
+.hp-aiv__txt{display:flex;flex-direction:column;gap:3px;padding-top:2px;}
+.hp-aiv__step{font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#8FB2C4;}
+.hp-aiv__txt strong{font-size:19px;font-weight:600;letter-spacing:-0.01em;color:#fff;margin-top:4px;}
+.hp-aiv__line{font-size:15px;line-height:1.55;color:rgba(244,246,248,0.75);max-width:44ch;}
+.hp-aiv__note{font-size:13px;color:rgba(244,246,248,0.6);margin:18px 0 0;text-align:center;}
+
+@media (prefers-reduced-motion:reduce){.hp-aiv__seg i{display:none;}.hp-aiv__node{animation:none;}}
+@media (max-width:1100px){.hp-aiv__grid{grid-template-columns:1fr;gap:48px;}.hp-aiv__right{max-width:680px;}}
+@media (max-width:640px){
+  .hp-aiv .hp-h2{font-size:30px;}
+  .hp-aiv__panel{padding:22px 18px 6px;}
+  .hp-aiv__path{--node:42px;}
+  .hp-aiv__stage{gap:14px;}
+  .hp-aiv__line{font-size:14px;}
+}

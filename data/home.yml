@@ -6,8 +6,7 @@
 hero:
   eyebrow: The trust layer between your data and AI.
   title: Protect your data. Ground your AI answers.
-  sub: Enigma Vault provides AI data security through PII tokenization, secure storage and answers grounded
-    in your evidence.
+  sub: Sensitive data now moves through your applications, prompts and AI agents. Give your users and AI agents the data they need, not the raw values behind it, with answers backed by your evidence.
   cta1: Request a demo
   cta2: Start free on AWS Marketplace
 trust:

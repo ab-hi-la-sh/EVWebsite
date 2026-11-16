@@ -176,7 +176,7 @@ faqs:
   <table class="bl-table">
     <thead><tr><th>Data residency factor</th><th>How it works</th></tr></thead>
     <tbody>
-      <tr><td>Published vault regions</td><td>EU and US</td></tr>
+      <tr><td>Published vault regions</td><td>EU and US; EU data residency is a $99-a-month add-on on Card Vault and Data Vault Growth and Business</td></tr>
       <tr><td>Residency model</td><td>Vault per region; tokens in your apps, partner feeds, and AI prompts</td></tr>
       <tr><td>Key control</td><td>Enigma-managed AES-256 per field; File Vault wraps a unique key per file with your account key</td></tr>
       <tr><td>Who can detokenize</td><td>Only API clients holding your OAuth2 credentials; every request logged</td></tr>
@@ -189,16 +189,16 @@ faqs:
   <table class="bl-table">
     <thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
     <tbody>
-      <tr><td>Lite</td><td>$0, free sandbox</td><td>Data Vault 1,500 requests a month; File Vault 5GB; Card Vault 1,000 requests</td></tr>
-      <tr><td>Starter</td><td>$49 a month</td><td>Data Vault 30,000 requests; File Vault 150GB; Card Vault 20,000 requests</td></tr>
-      <tr><td>Growth</td><td>$249 a month</td><td>Data Vault 400,000 requests; File Vault 1,000GB; Card Vault 250,000 requests</td></tr>
-      <tr><td>Business</td><td>$499 a month</td><td>Data Vault 2,000,000 requests; File Vault 5,000GB; Card Vault 1,000,000 requests</td></tr>
+      <tr><td>Lite</td><td>$0 per vault, free sandbox</td><td>Data Vault 1,500 requests a month; File Vault 5GB; Card Vault 1,000 requests</td></tr>
+      <tr><td>Starter</td><td>$49 a month per vault</td><td>Data Vault 30,000 requests; File Vault 150GB; Card Vault 20,000 requests</td></tr>
+      <tr><td>Growth</td><td>$249 a month per vault</td><td>Data Vault 400,000 requests; File Vault 1,000GB; Card Vault 250,000 requests</td></tr>
+      <tr><td>Business</td><td>$499 a month per vault</td><td>Data Vault 2,000,000 requests; File Vault 5,000GB; Card Vault 1,000,000 requests</td></tr>
     </tbody>
   </table>
 </div>
 <p><strong>Pros</strong></p>
 <ul>
-  <li>The free Lite tier runs in EU or US regions, so you can prove a token-only flow between countries before legal signs anything.</li>
+  <li>The free Lite sandbox lets you prove a token-only flow between countries before legal signs anything; EU data residency is a $99-a-month add-on on Card Vault and Data Vault Growth and Business.</li>
   <li>One vault covers structured records, files, cards, and AI prompts, so you write one transfer story for counsel instead of three.</li>
   <li>Every reveal is logged with the calling client, so you can show an EU exporter kept re-identification under its own control.</li>
 </ul>
@@ -534,12 +534,12 @@ faqs:
 <blockquote class="bl-quote-cta"><p>Sending prompts to a model provider in another country? <a class="bl-link" href="/request-demo/">Get in touch</a></p></blockquote>
 
 <h2 id="key-features-compared-side-by-side">Key Features Compared Side by Side</h2>
-<p>Only Enigma Vault and Protecto pair usable tokens with built-in AI prompt protection; Skyflow and InCountry sell that as a separate product, and VGS and CipherStash don’t offer it. Each cell comes from the vendor’s own pages, checked October 16, 2026.</p>
+<p>Protecto builds AI prompt protection into its vault; Enigma Vault (NoPII), Skyflow, and InCountry sell it as a separate product, and VGS and CipherStash don’t offer it. Each cell comes from the vendor’s own pages, checked October 16, 2026.</p>
 <div class="bl-tablewrap">
   <table class="bl-table bl-table--wide">
     <thead><tr><th>Platform</th><th>Data regions</th><th>Where readable data lives</th><th>Key control</th><th>Who can reveal data</th><th>Deployment</th><th>Data covered</th><th>AI prompt protection</th></tr></thead>
     <tbody>
-      <tr><td>Enigma Vault</td><td>EU and US</td><td>Regional vault; tokens go to apps, partners, and AI prompts</td><td>Enigma-managed AES-256 per field; per-file keys</td><td>API clients with your OAuth2 credentials, logged</td><td>Cloud, on AWS</td><td>Fields, cards, files, customer records</td><td>Included (NoPII)</td></tr>
+      <tr><td>Enigma Vault</td><td>EU and US</td><td>Regional vault; tokens go to apps, partners, and AI prompts</td><td>Enigma-managed AES-256 per field; per-file keys</td><td>API clients with your OAuth2 credentials, logged</td><td>Cloud, on AWS</td><td>Fields, cards, files, customer records</td><td>Separate product (NoPII, free Lite tier)</td></tr>
       <tr><td>Skyflow</td><td>US, EU, India, Japan, Australia, Indonesia, Middle East</td><td>Regional vaults; tokens in your app or ServiceNow</td><td>Skyflow-managed polymorphic encryption</td><td>Per-field access policies</td><td>Skyflow-hosted regions</td><td>PII and payment fields</td><td>Separate product (Skyflow for GenAI)</td></tr>
       <tr><td>VGS</td><td>US, EU, Asia-Pacific (Singapore)</td><td>One vault per region, own hostname each</td><td>VGS-managed</td><td>Approved endpoints via outbound proxy routes</td><td>VGS-hosted regions</td><td>Payment and PII fields</td><td>Not a focus</td></tr>
       <tr><td>InCountry</td><td>Per country; China quoted separately</td><td>In-country; global app sees a redacted copy</td><td>InCountry cloud or yours</td><td>Restored only inside the country</td><td>Your infrastructure, AWS Outposts, Alibaba Cloud</td><td>CRM and customer records</td><td>AgentCloak add-on</td></tr>
@@ -600,7 +600,7 @@ faqs:
 </ul>
 
 <h2 id="ready-to-try-enigma-vaults-data-vault">Ready to Try Enigma Vault’s Data Vault?</h2>
-<p>Start by moving one cross-border flow to tokens: the EU customer table your US support team reads, the passport scans your travel desk emails to suppliers, or the prompts your app sends to a model provider. <a class="bl-link" href="/vault/data-vault/">Data Vault</a> runs in EU or US regions, and the <a class="bl-link" href="/pricing/">free Lite tier</a> covers 1,500 requests a month with no contract, so you can show counsel the reveal log before anyone signs. Prefer to talk it through first? <a class="bl-link" href="/request-demo/">Book a demo</a>.</p>
+<p>Start by moving one cross-border flow to tokens: the EU customer table your US support team reads, the passport scans your travel desk emails to suppliers, or the prompts your app sends to a model provider. <a class="bl-link" href="/vault/data-vault/">Data Vault</a> runs in EU or US regions, and the <a class="bl-link" href="/pricing/">free Lite tier</a> covers 1,500 requests a month with no contract (EU data residency is a $99-a-month add-on on Growth and Business), so you can show counsel the reveal log before anyone signs. Prefer to talk it through first? <a class="bl-link" href="/request-demo/">Book a demo</a>.</p>
 <div class="bl-inlinecta">
   <div>
     <p class="bl-inlinecta__t">Personal data shouldn’t need a passport.</p>

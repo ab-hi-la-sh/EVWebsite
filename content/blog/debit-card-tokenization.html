@@ -247,7 +247,7 @@ faqs:
 
 <h3>How Card Vault Tokenizes Debit Cards</h3>
 <ol>
-  <li><strong>Capture:</strong> Cards arrive through a hosted or embedded form, a Twilio Pay phone IVR or a direct API call.</li>
+  <li><strong>Capture:</strong> Cards arrive through a hosted or embedded form, a Twilio Pay phone IVR (Growth and Business) or a direct API call.</li>
   <li><strong>Tokenize:</strong> Card Vault replaces the card number with a token in a single step.</li>
   <li><strong>Charge:</strong> The payment proxy sends each charge to the gateway, filling in card details inside the vault.</li>
 </ol>
@@ -255,7 +255,7 @@ faqs:
 <h3>Capture and Token Options</h3>
 <div class="bl-tablewrap"><table class="bl-table"><thead><tr><th>Option</th><th>What it does</th></tr></thead><tbody>
 <tr><td>Hosted and embedded forms</td><td>Iframe forms in 13 languages, including Magento and WooCommerce checkouts</td></tr>
-<tr><td>Twilio Pay IVR</td><td>Phone payments go straight to the vault, away from agents and servers</td></tr>
+<tr><td>Twilio Pay IVR</td><td>Phone payments go straight to the vault, away from agents and servers (Growth and Business)</td></tr>
 <tr><td>Direct API</td><td>One REST call returns a token, with OAuth2 authentication</td></tr>
 <tr><td>Random tokens</td><td>The default, with no structure to reverse</td></tr>
 <tr><td>Luhn-passable tokens</td><td>Keep the first six and last four digits, or use your own BIN range</td></tr>
@@ -284,8 +284,8 @@ faqs:
 <h3>Card Vault Pricing</h3>
 <div class="bl-tablewrap"><table class="bl-table"><thead><tr><th>Plan</th><th>Monthly price</th><th>Included requests</th><th>Overage per request</th><th>Includes</th></tr></thead><tbody>
 <tr><td>Lite</td><td>$0, free sandbox</td><td>1,000 per month</td><td>None, hard limit</td><td>Tokenization and gateway proxy for development and testing</td></tr>
-<tr><td>Starter</td><td>$49</td><td>20,000 (roughly 200 to 300 daily transactions)</td><td>$0.02</td><td>PCI AOC, SOC 2 Type II report and DPA</td></tr>
-<tr><td>Growth</td><td>$249</td><td>250,000 (roughly 2,000 daily transactions)</td><td>$0.01</td><td>Custom CSS on hosted forms, Twilio Pay and 2 client IDs</td></tr>
-<tr><td>Business</td><td>$499</td><td>1,000,000 (roughly 8,000 daily transactions)</td><td>$0.007</td><td>Raw card data access, raw usage export and unlimited client IDs</td></tr>
+<tr><td>Starter</td><td>$49</td><td>20,000</td><td>$0.02</td><td>PCI AOC, SOC 2 Type II report and DPA</td></tr>
+<tr><td>Growth</td><td>$249</td><td>250,000</td><td>$0.01</td><td>Custom CSS on hosted forms, Twilio Pay and 2 client IDs</td></tr>
+<tr><td>Business</td><td>$499</td><td>1,000,000</td><td>$0.007</td><td>Raw card data access, raw usage export and unlimited client IDs</td></tr>
 </tbody></table></div>
-<p>Every plan is billed through AWS Marketplace, and overage on paid plans is metered per request with no hard stop. Teams needing custom volume or dedicated infrastructure can request an enterprise plan. Full details are on the<a class="bl-link" href="https://www.enigmavault.io/pricing/#vault" target="_blank" rel="noopener"> pricing page</a>, and the<a class="bl-link" href="https://www.enigmavault.io/vault/card-vault-demo/" target="_blank" rel="noopener"> Card Vault live demo</a> tokenizes a test card in seconds.</p>
+<p>Plans are bought in the developer portal with a Stripe checkout, and Starter, Growth and Business can be paid yearly ($550, $2,700 and $5,500). Requests beyond the allowance on paid plans are billed per request at the end of each month, with no hard stop. EU data residency is a +$99/month add-on on Growth and Business. Teams with volume above Business, or who need custom terms and an SLA, can move to Enterprise on an annual contract. Full details are on the<a class="bl-link" href="https://www.enigmavault.io/pricing/#vault" target="_blank" rel="noopener"> pricing page</a>, and the<a class="bl-link" href="https://www.enigmavault.io/vault/card-vault-demo/" target="_blank" rel="noopener"> Card Vault live demo</a> tokenizes a test card in seconds.</p>

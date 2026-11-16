@@ -181,7 +181,7 @@ faqs:
 <p>Vaulted. Default tokens are random, 128-bit values with no structure to reverse, and the mapping lives only in the vault. Each stored value is encrypted with per-customer AES-256 keys that rotate on schedule.</p>
 <p><strong>Speed and Scale</strong></p>
 <ul>
-  <li><strong>Batching:</strong> Data Vault tokenizes up to 5,000 secrets per request.</li>
+  <li><strong>Batching:</strong> Data Vault tokenizes up to 5,000 secrets per request on Growth and Business (500 on Lite and Starter).</li>
   <li><strong>Availability:</strong> The platform page states a 99.99% uptime SLA; SLA guarantees are part of the Enterprise plan.</li>
   <li><strong>Streaming prompts:</strong> NoPII replaces tokens as response chunks arrive, which its page says keeps latency impact minimal.</li>
   <li><strong>Per-call latency:</strong> Not published.</li>
@@ -189,7 +189,7 @@ faqs:
 <p><strong>Analytics Support</strong></p>
 <p>Deterministic tokens are available on request, so the same value maps to the same token and joins and dedup still work. Data Vault also finds exact matches on encrypted values. Card tokens can be format-preserving and Luhn-passable, keeping first six and last four.</p>
 <p><strong>Deployment Options</strong></p>
-<p>A managed, per-tenant service hosted in EU and US regions, procured and billed directly or through AWS Marketplace on your existing AWS account; Enterprise adds dedicated infrastructure. Self-hosted or air-gapped: Not published.</p>
+<p>A managed, per-tenant service hosted in EU and US regions, bought self-serve in the developer portal with Stripe checkout, or through AWS Marketplace; Enterprise adds an annual contract, custom terms, and an SLA. Self-hosted or air-gapped: Not published.</p>
 <p>Apps integrate through a versioned REST API with OAuth2 credentials (no SDK required), cards come in through hosted or iframe forms and leave through a gateway proxy, and NoPII sits in front of LLM APIs as a proxy you reach by pointing your existing SDK at its base URL.</p>
 <p><strong>Detokenization Controls</strong></p>
 <p>Scoped OAuth2 credentials, role-based access, and opt-in IP allowlisting decide who can reveal. Every API request is logged with client ID, IP, and response status, and token expiry runs from 60 seconds to seven years.</p>
@@ -199,10 +199,10 @@ faqs:
 <tbody>
 <tr><td>Lite</td><td>$0 (free plan)</td><td>Data Vault 1,500 requests (hard limit); Card Vault 1,000 (hard limit); File Vault 5 GB</td></tr>
 <tr><td>Starter</td><td>$49 a month per product</td><td>Data Vault 30,000 requests ($0.013); Card Vault 20,000 ($0.02); File Vault 150 GB; PCI AOC, SOC 2 Type II report, and DPA</td></tr>
-<tr><td>Growth</td><td>$249 a month per product</td><td>Data Vault 400,000 requests ($0.0065); Card Vault 250,000 ($0.01); File Vault 1,000 GB; custom CSS on hosted forms, EU data residency add-on</td></tr>
+<tr><td>Growth</td><td>$249 a month per product</td><td>Data Vault 400,000 requests ($0.0065); Card Vault 250,000 ($0.01); File Vault 1,000 GB; custom CSS on hosted forms, EU data residency add-on (+$99 a month)</td></tr>
 <tr><td>Business</td><td>$499 a month per product</td><td>Data Vault 2,000,000 requests ($0.0045); Card Vault 1,000,000 ($0.007); File Vault 5,000 GB ($0.15 per GB-month); unlimited client IDs, raw usage export</td></tr>
 <tr><td>NoPII Lite to Business</td><td>$0, $49, $249, and $499 a month</td><td>1M protected tokens a month free; Starter includes 50M, then $1.00 per additional million; Growth 500M; Business 2B</td></tr>
-<tr><td>Enterprise</td><td>Custom quote</td><td>Custom volume, dedicated infrastructure, and a BAA for healthcare</td></tr>
+<tr><td>Enterprise</td><td>Custom quote</td><td>Volume above Business, annual contract, custom terms, and an SLA</td></tr>
 </tbody></table></div>
 <p><strong>Pros</strong></p>
 <ul>
@@ -484,7 +484,7 @@ faqs:
 <div class="bl-tablewrap"><table class="bl-table">
 <thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
 <tbody>
-<tr><td>API trial</td><td>Through sales</td><td>POC or trial access arranged with Protecto sales</td></tr>
+<tr><td>API trial</td><td>14-day free trial with 1,000 API calls (SaaS); POC through sales</td><td>POC or trial access arranged with Protecto sales</td></tr>
 <tr><td>Production</td><td>Custom quote</td><td>No prices published on the privacy vault page</td></tr>
 </tbody></table></div>
 <p><strong>Pros</strong></p>
@@ -569,7 +569,7 @@ faqs:
 <tr><td>Protecto</td><td>Vaulted; entropy, format-preserving, or context-preserving tokens</td><td>“Sub-sec” generation; 13M documents a day; bulk API for billions of rows</td><td>Same token within a namespace; fixed-length format-preserving fields; strings only</td><td>SaaS, on-premises, air-gapped</td></tr>
 <tr><td>K2view</td><td>Entity-based; one micro-vault per entity</td><td>Not published; low-latency claim without figures</td><td>Format-preserving; referential integrity across source systems</td><td>On-premises, cloud, hybrid; software-only</td></tr>
 </tbody></table></div>
-<p><strong>Takeaway:</strong> for published speed figures, Thales (over 1 million vaultless tokenizations a second per server), Enigma Vault (5,000 per batch, 99.99% SLA), and Protecto (“Sub-sec”) lead; for analytics joins at volume, Protegrity and K2view keep referential integrity by design. For on-premises or air-gapped, look at Thales, Fortanix, and Protecto; for a vault inside your own cloud account, Skyflow BYOC; for a per-request audit trail with no keys to run, Enigma Vault.</p>
+<p><strong>Takeaway:</strong> for published speed figures, Thales (over 1 million vaultless tokenizations a second per server), Enigma Vault (5,000 per batch on Growth and Business, 99.99% SLA), and Protecto (“Sub-sec”) lead; for analytics joins at volume, Protegrity and K2view keep referential integrity by design. For on-premises or air-gapped, look at Thales, Fortanix, and Protecto; for a vault inside your own cloud account, Skyflow BYOC; for a per-request audit trail with no keys to run, Enigma Vault.</p>
 <h2 id="how-vendors-describe-their-tokenization">How Each Vendor Describes Its Tokenization</h2>
 <p>Vendor pages use different words for similar designs. This table maps each one to the PCI SSC vocabulary, using only what the vendor states.</p>
 <div class="bl-tablewrap"><table class="bl-table bl-table--wide">
@@ -584,7 +584,7 @@ faqs:
 <tr><td>K2view</td><td>Per-entity encrypted micro token vaults</td><td>Reversible non-cryptographic, partitioned</td><td>Vendor site</td></tr>
 </tbody></table></div>
 <h2 id="pricing-compared">Data Tokenization Tool Pricing Compared</h2>
-<p>Only prices read on each vendor’s own pages or marketplace listings in October 2026 appear here. Enigma Vault publishes plan prices, Fortanix lists hourly AWS Marketplace rates, and the other five quote through sales.</p>
+<p>Only prices read on each vendor’s own pages or marketplace listings in October 2026 appear here. Enigma Vault and Protecto publish plan prices, Fortanix lists hourly AWS Marketplace rates, and the other four quote through sales.</p>
 <div class="bl-tablewrap"><table class="bl-table bl-table--wide">
 <thead><tr><th>Vendor and plan</th><th>Token model</th><th>Monthly price</th><th>What’s included</th><th>Free start</th></tr></thead>
 <tbody>
@@ -594,7 +594,7 @@ faqs:
 <tr><td>Enigma Vault NoPII Starter</td><td>Vaulted</td><td>$49</td><td>50M protected tokens, then $1.00 per additional million</td><td>NoPII Lite, 1M tokens a month</td></tr>
 <tr><td>Protegrity</td><td>Vaultless</td><td>Custom quote</td><td>AI Team and Enterprise editions</td><td>Developer Edition</td></tr>
 <tr><td>Fortanix DSM</td><td>Vaultless</td><td>Custom quote, or from $1.95 an hour on AWS Marketplace</td><td>Key management, HSM, tokenization, and secrets management</td><td>Free trial</td></tr>
-<tr><td>Protecto</td><td>Vaulted</td><td>$250 to $750 a month by API-call volume; Enterprise by quote</td><td>Not published</td><td>API trial</td></tr>
+<tr><td>Protecto</td><td>Vaulted</td><td>$250 to $750 a month by API-call volume; Enterprise by quote</td><td>5,000 to 16,000 API calls a month</td><td>14-day free trial</td></tr>
 <tr><td>K2view</td><td>Entity-based</td><td>Custom quote</td><td>Not published</td><td>Product tour</td></tr>
 <tr><td>Skyflow, Thales CipherTrust Tokenization</td><td>Vaulted; hybrid</td><td>Custom quote</td><td>Not published</td><td>Demo only</td></tr>
 </tbody></table></div>

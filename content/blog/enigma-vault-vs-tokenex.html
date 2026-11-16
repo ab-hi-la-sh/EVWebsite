@@ -22,7 +22,7 @@ faqs:
   - q: "Is TokenEx the Same Company as IXOPAY?"
     a: "Yes. TokenEx and IXOPAY merged in April 2024, and TokenEx now presents itself as part of IXOPAY. TokenEx tokenization is now sold in IXOPAY packages alongside payment orchestration and payments intelligence."
   - q: "Is Enigma Vault or TokenEx Cheaper?"
-    a: "Enigma Vault, for most small and mid-size businesses. Card Vault is free for 1,000 requests a month, then $49, $249, or $499 a month. IXOPAY’s sandbox page and Capterra both list plans from $1,000 a month, with exact pricing on a quote."
+    a: "Enigma Vault, for most small and mid-size businesses. Card Vault has a free Lite sandbox with 1,000 requests a month, then $49, $249, or $499 a month. IXOPAY’s sandbox page and Capterra both list plans from $1,000 a month, with exact pricing on a quote."
   - q: "Which Is Better for In-Store Payments?"
     a: "TokenEx. It offers point-to-point encryption (P2PE) for card-present terminals. Enigma Vault covers online, API, and phone capture through Twilio Pay, not in-store terminals."
   - q: "Does TokenEx Tokenize PII and PHI, or Only Cards?"
@@ -45,7 +45,7 @@ faqs:
 <p><strong>TokenEx:</strong> An enterprise payments tokenization platform with Universal Tokens, in-store P2PE, network tokens, and orchestration through IXOPAY. IXOPAY and <a class="bl-link" href="https://www.capterra.com/p/181731/Cloud-Based-Tokenization/" rel="nofollow noopener" target="_blank">Capterra</a> list plans from $1,000 a month, with exact pricing on a quote.</p>
 <p>I’d point you to <strong>Enigma Vault</strong> first if you’re a business whose cards and documents arrive through people, not terminals:</p>
 <ul>
-<li>You can price and test it on real data without a sales cycle.</li>
+<li>You can price it and test it in a free sandbox without a sales cycle.</li>
 <li>Cards reach you by phone or email, and Twilio Pay and Customer Vault cover both.</li>
 <li>You need to protect customer records, files, or LLM prompts as well as cards.</li>
 <li>Your team has little engineering time for a platform rollout.</li>
@@ -85,7 +85,7 @@ faqs:
 <tr><td>Token formats</td><td>Random or Luhn-passable</td><td>Multiple universal token schemes</td></tr>
 <tr><td>Structured PII and PHI</td><td>Data Vault with a BAA</td><td>PII and PHI tokenization</td></tr>
 <tr><td>Governed file storage</td><td>Up to 5 GB per file</td><td>Unstructured data tokenization</td></tr>
-<tr><td>Batch tokenization</td><td>Up to 5,000 secrets per batch</td><td>Included</td></tr>
+<tr><td>Batch tokenization</td><td>Up to 5,000 secrets per batch on Growth and Business (500 on Lite and Starter)</td><td>Included</td></tr>
 <tr><td>Proxy to payment gateways</td><td>Domain allowlisted gateway proxy</td><td>Transparent Gateway</td></tr>
 <tr><td>Orchestration and smart routing</td><td>Not offered</td><td>200+ PSPs</td></tr>
 <tr><td>Network tokens</td><td>Not offered</td><td>Included</td></tr>
@@ -96,8 +96,8 @@ faqs:
 <tr><td>No-code customer intake app</td><td>Customer Vault</td><td>Not offered</td></tr>
 <tr><td>LLM prompt tokenization</td><td>NoPII</td><td>Not offered</td></tr>
 <tr><td>Agentic payments</td><td>Not offered</td><td>Agentic Suite</td></tr>
-<tr><td>US and EU hosting</td><td>Both regions</td><td>Both regions</td></tr>
-<tr><td>Self-serve signup</td><td>AWS Marketplace, same day</td><td>Sandbox by request form</td></tr>
+<tr><td>US and EU hosting</td><td>Both regions (EU data residency is a +$99/mo add-on on Growth and Business)</td><td>Both regions</td></tr>
+<tr><td>Self-serve signup</td><td>Developer portal with Stripe checkout, same day</td><td>Sandbox by request form</td></tr>
 <tr><td>Published pricing</td><td>Every tier</td><td>Starting price only</td></tr>
 </tbody></table></div>
 
@@ -166,7 +166,7 @@ faqs:
 
 <h3>Developer Experience and Support</h3>
 <div class="bl-tablewrap"><table class="bl-table"><thead><tr><th></th><th>Enigma Vault</th><th>TokenEx</th></tr></thead><tbody>
-<tr><td>Getting access</td><td>Subscribe on AWS Marketplace</td><td>Request free sandbox access through a form</td></tr>
+<tr><td>Getting access</td><td>Subscribe in the developer portal</td><td>Request free sandbox access through a form</td></tr>
 <tr><td>Trying the API</td><td>Live Swagger UI at api.enigmavault.io</td><td>Sandbox once access is approved</td></tr>
 <tr><td>What reviewers praise</td><td>Simple API, quick support (<a class="bl-link" href="https://www.g2.com/products/enigma-vault/reviews" rel="nofollow noopener" target="_blank">G2</a>)</td><td>Easy API, tickets answered right away (<a class="bl-link" href="https://www.g2.com/products/tokenex-ixopay/reviews" rel="nofollow noopener" target="_blank">G2</a>)</td></tr>
 <tr><td>What reviewers dislike</td><td>Wants more documentation</td><td>2FA on the dev region, password resets, older iFrame CSS limits (<a class="bl-link" href="https://www.g2.com/products/tokenex-ixopay/reviews" rel="nofollow noopener" target="_blank">G2</a>)</td></tr>
@@ -188,11 +188,11 @@ faqs:
 <div class="bl-tablewrap"><table class="bl-table"><thead><tr><th>Product</th><th>Lite (free)</th><th>Starter</th><th>Growth / Business</th></tr></thead><tbody>
 <tr><td>Card Vault</td><td>1,000 requests/mo</td><td>$49/mo, 20,000 requests</td><td>$249/mo, 250,000 requests / $499/mo, 1,000,000 requests</td></tr>
 <tr><td>Data Vault</td><td>1,500 requests/mo</td><td>$49/mo, 30,000 requests</td><td>$249/mo, 400,000 requests / $499/mo, 2,000,000 requests</td></tr>
-<tr><td>File Vault</td><td>5 GB/mo</td><td>$49/mo, 150 GB</td><td>$249/mo, 1,000 GB / $499/mo, 5,000 GB</td></tr>
+<tr><td>File Vault</td><td>5 GB storage</td><td>$49/mo, 150 GB</td><td>$249/mo, 1,000 GB / $499/mo, 5,000 GB</td></tr>
 <tr><td>NoPII</td><td>1M tokens/mo</td><td>$49/mo, 50M tokens</td><td>$249/mo, 500M tokens / $499/mo, 2B tokens</td></tr>
 </tbody></table></div>
 <p>Overage is published ($0.02, $0.01, and $0.007 per Card Vault request on Starter, Growth, and Business), and security is the same on every tier. Customer Vault is priced by engagement.</p>
-<p><strong>The Practical Takeaway:</strong> A full year of Card Vault Growth costs about $3,000, roughly what three months of TokenEx’s listed entry price would cost. If your volume fits, you can be running on real cards before a TokenEx sandbox is issued. See our list of the <a class="bl-link" href="/blog/best-payment-tokenization-software/">best payment tokenization software</a> to compare more price points.</p>
+<p><strong>The Practical Takeaway:</strong> A full year of Card Vault Growth costs $2,700 on annual billing, less than what three months of TokenEx’s listed entry price would cost. If your volume fits, you can be running on real cards before a TokenEx sandbox is issued. See our list of the <a class="bl-link" href="/blog/best-payment-tokenization-software/">best payment tokenization software</a> to compare more price points.</p>
 
 <h2>Enigma Vault vs TokenEx Security and Compliance</h2>
 <div class="bl-tablewrap"><table class="bl-table"><thead><tr><th>Control</th><th>Enigma Vault</th><th>TokenEx (IXOPAY)</th></tr></thead><tbody>
@@ -201,7 +201,7 @@ faqs:
 <tr><td>ISO 27001</td><td>In progress</td><td>ISO/IEC 27001:2022 certified</td></tr>
 <tr><td>HIPAA</td><td>BAA available</td><td>PHI tokenization described</td></tr>
 <tr><td>Scope claim</td><td>Can significantly reduce scope</td><td>Up to 90% PCI scope reduction</td></tr>
-<tr><td>Reports</td><td>AOC and SOC 2 report on request</td><td>Through sales</td></tr>
+<tr><td>Reports</td><td>PCI AOC and SOC 2 Type II report included on Starter, Growth, and Business</td><td>Through sales</td></tr>
 </tbody></table></div>
 <p>IXOPAY’s Security and Trust page lists ISO/IEC 27001:2022, SOC 2 and SOC 3 reports, PCI DSS Level 1 Service Provider status, and HITRUST, so TokenEx holds the longer certification list today. Ask both vendors for the AOC and SOC 2 report during your evaluation.</p>
 <p>Treat any scope percentage, ours included, as the start of a conversation with your acquirer or QSA, who confirms your final scope.</p>
@@ -287,13 +287,13 @@ faqs:
 <tr><td>Data Vault and File Vault, each with a free tier</td><td>Network tokens, account updater, BIN lookup, and analytics</td></tr>
 <tr><td>NoPII for customer PII in LLM API calls</td><td>A decade of payments history and <a class="bl-link" href="https://www.g2.com/products/tokenex-ixopay/reviews" rel="nofollow noopener" target="_blank">17 G2 reviews at 4.6/5</a></td></tr>
 </tbody></table></div>
-<p><strong>Shared Ground:</strong> Both keep card data portable across gateways, which stay your partners, both run production in the US and EU, reviewers of both praise fast support, and reviewers of both want deeper reporting.</p>
+<p><strong>Shared Ground:</strong> Both keep card data portable across gateways, which stay your partners, both run production in the US and EU (EU is a paid add-on on Enigma Vault), reviewers of both praise fast support, and reviewers of both want deeper reporting.</p>
 
 <h2>Enigma Vault vs TokenEx Evaluation and Onboarding Timeline</h2>
 <p>How long it takes to evaluate a vendor is part of what you are buying. TokenEx runs a sales-led evaluation, whereas Enigma Vault lets you evaluate on your own before you speak to anyone.</p>
 <div class="bl-tablewrap"><table class="bl-table"><thead><tr><th>Stage</th><th>Enigma Vault</th><th>TokenEx</th></tr></thead><tbody>
 <tr><td>Price check</td><td>Read the pricing page</td><td>See the $1,000 a month floor, then request a quote</td></tr>
-<tr><td>Sandbox access</td><td>Subscribe on AWS Marketplace</td><td>Request free sandbox access through a form</td></tr>
+<tr><td>Sandbox access</td><td>Subscribe in the developer portal</td><td>Request free sandbox access through a form</td></tr>
 <tr><td>First test token</td><td>Same day, in the live Swagger UI</td><td>After sandbox access is issued</td></tr>
 <tr><td>Production rollout</td><td>Days for a single vault</td><td>About 1 month, per <a class="bl-link" href="https://www.g2.com/products/tokenex-ixopay/reviews" rel="nofollow noopener" target="_blank">G2 users</a></td></tr>
 <tr><td>Return on investment</td><td>Free tier costs nothing to try</td><td>About 17 months, per <a class="bl-link" href="https://www.g2.com/products/tokenex-ixopay/reviews" rel="nofollow noopener" target="_blank">G2 users</a></td></tr>
@@ -305,7 +305,7 @@ faqs:
 <tr><td>Retail with stores and ecommerce across countries</td><td>TokenEx</td><td>P2PE plus Universal Tokens and orchestration</td></tr>
 <tr><td>Enterprise merchant chasing higher authorization rates</td><td>TokenEx</td><td>Network tokens, account updater, routing, analytics</td></tr>
 <tr><td>Building agent-initiated payments</td><td>TokenEx</td><td>Payment Agent and MCP server</td></tr>
-<tr><td>Testing on real data before any sales call</td><td>Enigma Vault</td><td>Permanent free tier and published pricing</td></tr>
+<tr><td>Testing before any sales call</td><td>Enigma Vault</td><td>Free Lite sandbox and published pricing</td></tr>
 <tr><td>Travel agency, clinic, or firm collecting cards and documents remotely</td><td>Enigma Vault</td><td>Twilio Pay, Customer Vault, and File Vault</td></tr>
 <tr><td>SaaS product sending customer data to LLM APIs</td><td>Enigma Vault</td><td>NoPII</td></tr>
 </tbody></table></div>

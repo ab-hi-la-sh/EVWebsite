@@ -133,7 +133,7 @@ faqs:
   <li><strong>Re-tokenize in batches:</strong> Send recovered values to the vault in controlled batches and record each new token.</li>
   <li><strong>Store the mapping:</strong> Keep a legacy-to-vault token map until cutover is complete.</li>
 </ol>
-<p>With Enigma Vault, you can send up to 5,000 values in a single Data Vault request. For the lending platform's two million SSNs, that turns the migration into a weekend job instead of a quarter-long project.</p>
+<p>With Enigma Vault, you can send up to 5,000 values in a single Data Vault request on Growth and Business (500 on Lite and Starter). For the lending platform's two million SSNs, that turns the migration into a weekend job instead of a quarter-long project.</p>
 
 <h3>Phase 4: Update Downstream Systems</h3>
 <ul>
@@ -268,7 +268,7 @@ faqs:
 <p>In one private aviation deployment, existing cards were imported into the vault in bulk, staff signed in through enterprise single sign-on and every charge kept running through the operator's existing processor. The cards moved into certified custody, and the operation didn't change. For card-on-file operators, we package that pattern as Agent Vault, a fixed-scope, eight-week engagement that includes the migration.</p>
 
 <h3>Batch Migration With Data Vault</h3>
-<p><a class="bl-link" href="https://www.enigmavault.io/vault/data-vault/">Data Vault</a> accepts up to 5,000 values per request, so historical SSNs and account numbers move as batch calls. You can attach your own record IDs to each value so entries map onto your existing data model, and deterministic tokens keep joins and lookups working once the migration is done.</p>
+<p><a class="bl-link" href="https://www.enigmavault.io/vault/data-vault/">Data Vault</a> accepts up to 5,000 values per request on Growth and Business (500 on Lite and Starter), so historical SSNs and account numbers move as batch calls. You can attach your own record IDs to each value so entries map onto your existing data model, and deterministic tokens keep joins and lookups working once the migration is done.</p>
 
 <h3>Card-on-File Migration With Card Vault</h3>
 <ul>
@@ -288,10 +288,10 @@ faqs:
     <thead><tr><th>Plan</th><th>Card Vault</th><th>Data Vault</th><th>Includes</th></tr></thead>
     <tbody>
       <tr><td>Lite</td><td>$0 per month, free sandbox: 1,000 requests, hard limit</td><td>$0 per month, free sandbox: 1,500 requests, hard limit</td><td>Card tokenization and gateway proxy, or AES-256 field encryption, for development and testing</td></tr>
-      <tr><td>Starter</td><td>$49 per month: 20,000 requests (roughly 200 to 300 daily transactions), then $0.02 per request</td><td>$49 per month: 30,000 requests, then $0.013 per request</td><td>PCI AOC, SOC 2 Type II report and DPA</td></tr>
-      <tr><td>Growth</td><td>$249 per month: 250,000 requests (roughly 2,000 daily transactions), then $0.01 per request</td><td>$249 per month: 400,000 requests, then $0.0065 per request</td><td>Custom CSS on hosted forms, Twilio Pay, Data Vault batches of 5,000 and 2 client IDs</td></tr>
-      <tr><td>Business</td><td>$499 per month: 1,000,000 requests (roughly 8,000 daily transactions), then $0.007 per request</td><td>$499 per month: 2,000,000 requests, then $0.0045 per request</td><td>Raw card data access, raw usage export and unlimited client IDs</td></tr>
+      <tr><td>Starter</td><td>$49 per month: 20,000 requests, then $0.02 per request</td><td>$49 per month: 30,000 requests, then $0.013 per request</td><td>PCI AOC, SOC 2 Type II report and DPA</td></tr>
+      <tr><td>Growth</td><td>$249 per month: 250,000 requests, then $0.01 per request</td><td>$249 per month: 400,000 requests, then $0.0065 per request</td><td>Custom CSS on hosted forms, Twilio Pay, Data Vault batches of 5,000, 2 client IDs and an optional EU data residency add-on (+$99/month)</td></tr>
+      <tr><td>Business</td><td>$499 per month: 1,000,000 requests, then $0.007 per request</td><td>$499 per month: 2,000,000 requests, then $0.0045 per request</td><td>Raw card data access on Card Vault, raw usage export, unlimited client IDs and an optional EU data residency add-on (+$99/month)</td></tr>
     </tbody>
   </table>
 </div>
-<p>Every plan is billed through AWS Marketplace, and teams with custom volume or dedicated infrastructure needs can ask for an enterprise plan. See the full <a class="bl-link" href="https://www.enigmavault.io/pricing/#vault">pricing page</a>, <a class="bl-link" href="https://www.enigmavault.io/vault/card-vault-demo/">try the Card Vault demo</a> or <a class="bl-link" href="https://www.enigmavault.io/request-demo/">request a demo</a> to plan your migration with our team.</p>
+<p>You subscribe in the developer portal and pay at a Stripe checkout, monthly or yearly; you can also buy through AWS Marketplace. Teams with volume above Business, or that need custom terms and an SLA, can ask for an Enterprise plan on an annual contract. See the full <a class="bl-link" href="https://www.enigmavault.io/pricing/#vault">pricing page</a>, <a class="bl-link" href="https://www.enigmavault.io/vault/card-vault-demo/">try the Card Vault demo</a> or <a class="bl-link" href="https://www.enigmavault.io/request-demo/">request a demo</a> to plan your migration with our team.</p>

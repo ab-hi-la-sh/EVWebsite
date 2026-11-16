@@ -26,7 +26,7 @@ faqs:
   - q: "Can We Keep a Guest’s Card Between the Deposit and the Final Payment?"
     a: "Yes, as long as the guest has authorized it. Final payment often falls months before sailing (up to 120 days on Princess’s longest voyages), so the card sits on file for months. A vault stores the card number and returns a token you keep on the booking, and the final payment is charged from the token. The security code (CVV) can’t be kept after authorization; Enigma Vault holds it encrypted for at most 30 minutes, then deletes it."
   - q: "How Can a Cruise Agency Key a Card Into a Cruise Line’s Booking Portal Without Storing It?"
-    a: "Use a vault with a controlled, logged view for authorized staff, so your own booking app holds only the token and last four digits. Where the supplier takes an API call instead, a proxy can inject the card into the request so nobody sees it. Confirm which plan includes staff viewing before you design the workflow, and check that the cruise line accepts the way you use the guest’s card."
+    a: "Use a vault with a controlled, logged view for authorized staff, so your own booking app holds only the token and last four digits. Where the supplier takes an API call instead, a proxy can inject the card into the request so nobody sees it. On Enigma Card Vault, staff viewing of the full card needs the Business plan, so confirm how that access is set up before you design the workflow, and check that the cruise line accepts the way you use the guest’s card."
   - q: "Does Card Tokenization Take a Cruise Call Center Out of PCI Scope?"
     a: "No platform can promise that. Capturing cards on a hosted form or by IVR keypad entry and storing only tokens can significantly reduce PCI scope, but call recordings, notes, and screens that still see card numbers stay in scope. Your acquirer or QSA confirms the final scope and which self-assessment questionnaire applies."
   - q: "How Much Does Card Tokenization Cost for a Cruise Business?"
@@ -187,7 +187,7 @@ faqs:
 </ul>
 <p><strong>Cons</strong></p>
 <ul>
-  <li>Our public pages don’t say which plan unlocks full card viewing for staff, so confirm advisor access in writing first.</li>
+  <li>On Card Vault, raw card data access needs the Business plan, so confirm how advisor access is set up in writing first.</li>
   <li>There are no shipboard terminals or P2PE devices, so a cruise line still needs another provider for onboard point-of-sale cards.</li>
   <li>ISO 27001 certification is still in progress, so buyers requiring it today must accept PCI DSS Level 1 and SOC 2 evidence.</li>
 </ul>
@@ -201,11 +201,11 @@ faqs:
 <tr><td>Card Vault Business</td><td>$499 a month</td><td>1,000,000 requests; $0.007 per extra request; raw card data access, unlimited client IDs</td></tr>
 <tr><td>Agent Vault</td><td>Priced by engagement</td><td>Fixed-scope, eight-week card-on-file migration</td></tr>
 </tbody></table></div>
-<p>Card Vault plans are billed through AWS Marketplace.</p>
+<p>Card Vault plans are bought self-serve in the Enigma Vault developer portal, monthly or annually (Growth is $2,700 a year), through a Stripe checkout.</p>
 <div class="cr-flow"><p><strong>Booking-flow note:</strong> The deposit is taken by Twilio Pay or a hosted form, and the token is saved on the booking. At final payment, your system sends a tokenized request to the proxy, which injects the card and forwards it to your processor; your app gets the gateway response, never the number.</p>
 <p>Refunds go back through the same processor. For a cruise line portal that only accepts typed cards, the pattern we recommend is a controlled agent app under SSO and MFA with every access logged.</p></div>
-<p><strong>One honest limitation:</strong> Our public pages don’t yet say which plan unlocks staff viewing of the full card number, and that’s the first question cruise-focused advisors ask us.</p>
-<p>Confirm that access and the plan in writing during your demo before you design the advisor workflow around it.</p>
+<p><strong>One honest limitation:</strong> On Card Vault, staff viewing of the full card number needs the Business plan ($499 a month per product).</p>
+<p>Confirm how advisor and staff access is set up in writing during your demo before you design the advisor workflow around it.</p>
 <h4 class="cr-verdict">Final Verdict</h4>
 <p>For a cruise line, Agent Vault is the only offer on this list packaged as a fixed-scope card-on-file migration. For a small cruise agency, Card Vault’s free Lite plan is the cheapest way to stop keeping card numbers in a booking app.</p>
 <p>A vault doesn’t authenticate the cardholder or replace your fraud controls, and some suppliers set their own rules on third-party card use.</p>
@@ -321,7 +321,7 @@ faqs:
 <p><strong>One honest limitation:</strong> There’s no ready-made staff screen for phone orders or cruise line portals, so call-center capture and advisor card use are things your developers build.</p>
 <h4 class="cr-verdict">Final Verdict</h4>
 <p>A sensible pick for an operator juggling processors across brands. With no G2 or Capterra reviews to lean on, ask for travel references.</p>
-<p>Want to test on real cruise bookings with no trial clock? Enigma Vault’s Lite plan stays free. <a class="bl-link" href="/pricing/">See pricing</a></p>
+<p>Want to test your cruise booking flow before you pay? Enigma Vault’s Lite sandbox is free and never billed. <a class="bl-link" href="/pricing/">See pricing</a></p>
 
 <div class="vc">
   <div class="vc__head">

@@ -28,7 +28,7 @@ faqs:
   - q: "How Does Tokenization Help With Enterprise Security Questionnaires?"
     a: "It changes the answers. When your database, warehouse, logs, and support desk all hold tokens, the questions about where customer PII lives, who can see it, and how it is deleted point at one controlled boundary with an audit log. You still answer for your own controls, and you should be ready to share your vendor’s SOC 2 Type II report and data-flow diagrams."
   - q: "Can Tokenization Meet Customer Data Residency Requests?"
-    a: "Often, if the vault runs in the regions your customers ask for. The plaintext lives in the vault region while tokens can sit in your global application database. Enigma Vault runs in EU and US regions, Skyflow publishes regional vaults across many countries, and Basis Theory’s $995 plan is US only. Confirm the region list and any residency commitment in your contract."
+    a: "Often, if the vault runs in the regions your customers ask for. The plaintext lives in the vault region while tokens can sit in your global application database. Enigma Vault runs in US and EU regions (EU data residency is a +$99 a month add-on on Growth and Business), Skyflow publishes regional vaults across many countries, and Basis Theory’s $995 plan is US only. Confirm the region list and any residency commitment in your contract."
   - q: "Does Tokenization Work With Multi-Tenant SaaS Architecture?"
     a: "Yes, but check how the vendor isolates tenants. Enigma Vault isolates by client ID with per-customer AES-256 keys, NoPII Growth adds multiple workspaces and roles, Skyflow scopes access across accounts, workspaces, and vaults, and CipherStash binds decryption to identity-based policies. Ask whether each of your own customers can get its own key or vault, and how a single tenant’s data is deleted."
   - q: "Can We Tokenize PII Before It Reaches an LLM Provider?"
@@ -172,11 +172,11 @@ faqs:
 <p>File Vault takes user uploads up to 5 GB through presigned URLs, so files never pass through your app servers. NoPII sits in front of LLM APIs and tokenizes recognized PII before it reaches the model provider, then restores values in the response.</p>
 <p><strong>Integration pattern:</strong> API vault for stored fields and files; gateway proxy for card traffic; reverse proxy for LLM calls.</p>
 <p><strong>Time to first token:</strong> Data Vault documents two REST calls, an OAuth2 token request and a store call, with no SDK required. NoPII deploys by changing your model client’s base URL.</p>
-<p><strong>Tenant isolation and residency:</strong> Multi-tenancy isolation by client ID, per-customer AES-256 keys, and per-tenant IP allowlisting. The Vault API runs in EU and US regions. NoPII Growth adds multiple workspaces and roles.</p>
+<p><strong>Tenant isolation and residency:</strong> Multi-tenancy isolation by client ID, per-customer AES-256 keys, and per-tenant IP allowlisting. The Vault API runs in US and EU regions, with EU data residency as a +$99 a month add-on on Growth and Business. NoPII Growth adds multiple workspaces and roles.</p>
 <p><strong>Key Features</strong></p>
 <ul>
   <li>Data Vault: AES-256 field encryption with exact-match lookup and deterministic tokens, so login, dedup, and joins keep working.</li>
-  <li>Batch tokenization of up to 5,000 values per call for backfilling existing columns.</li>
+  <li>Batch tokenization for backfilling existing columns: up to 5,000 values per call on Growth and Business (500 on Lite and Starter).</li>
   <li>File Vault: direct uploads up to 5 GB through presigned URLs, with your app storing a file reference.</li>
   <li>NoPII: a reverse proxy that tokenizes recognized PII before supported LLM API calls and restores values in the response.</li>
   <li>Card Vault: hosted capture and gateway proxying to supported payment partners for SaaS products that take cards.</li>
@@ -202,10 +202,10 @@ faqs:
 <tbody>
 <tr><td>Lite</td><td>$0 (free plan)</td><td>Data Vault 1,500 requests (hard limit); Card Vault 1,000 (hard limit); File Vault 5 GB</td></tr>
 <tr><td>Starter</td><td>$49 a month per product</td><td>Data Vault 30,000 requests ($0.013); Card Vault 20,000 ($0.02); File Vault 150 GB; PCI AOC, SOC 2 Type II report, and DPA</td></tr>
-<tr><td>Growth</td><td>$249 a month per product</td><td>Data Vault 400,000 requests ($0.0065); Card Vault 250,000 ($0.01); File Vault 1,000 GB; custom CSS on hosted forms, EU data residency add-on</td></tr>
+<tr><td>Growth</td><td>$249 a month per product</td><td>Data Vault 400,000 requests ($0.0065); Card Vault 250,000 ($0.01); File Vault 1,000 GB; custom CSS on hosted forms, EU data residency add-on (+$99 a month)</td></tr>
 <tr><td>Business</td><td>$499 a month per product</td><td>Data Vault 2,000,000 requests ($0.0045); Card Vault 1,000,000 ($0.007); File Vault 5,000 GB ($0.15 per GB-month); unlimited client IDs, raw usage export</td></tr>
 <tr><td>NoPII Lite to Business</td><td>$0, $49, $249, or $499 a month</td><td>1M protected tokens free; Starter 50M, then $1.00 per additional million; Growth 500M, multiple workspaces and roles; Business 2B, unlimited users and SSO</td></tr>
-<tr><td>Enterprise</td><td>Custom quote</td><td>Volume pricing; NoPII Enterprise adds SSO, SLA, and a BAA for healthcare</td></tr>
+<tr><td>Enterprise</td><td>Custom quote</td><td>Volume pricing; NoPII Enterprise adds a custom commit, SLA guarantees, the self-hosted edition, and a BAA for healthcare</td></tr>
 </tbody></table></div>
 <p><strong>What Reviewers Say:</strong> Very positive. Enigma Vault holds <a class="bl-link" href="https://www.g2.com/products/enigma-vault/reviews" target="_blank" rel="noopener">4.4/5 from 6 reviews on G2</a> and <a class="bl-link" href="https://www.capterra.com/p/241650/Enigma-Vault/reviews/" target="_blank" rel="noopener">4.8/5 from 4 on Capterra</a>. Reviewers praise a simple API and one vendor for cards, personal data, and files, and one CEO says support added a domestic card type and languages in under 24 hours.</p>
 <p>On the critical side, one reviewer asks for more flexible reporting dashboards, one finds pricing a bit high, and one wants more documentation. The sample is small.</p>
@@ -549,8 +549,8 @@ faqs:
 <div class="bl-tablewrap"><table class="bl-table bl-table--wide">
 <thead><tr><th>Review question</th><th>Enigma Vault</th><th>Skyflow</th><th>Basis Theory</th><th>VGS</th><th>Evervault</th><th>CipherStash</th><th>Protegrity</th></tr></thead>
 <tbody>
-<tr><td>Where does customer PII physically live?</td><td>In the vault, EU or US region; your app keeps tokens</td><td>Regional vaults; app keeps tokens</td><td>In the vault, US on the entry plan</td><td>In the VGS vault behind the proxy</td><td>Ciphertext in your database; keys with Evervault</td><td>Ciphertext in your own database</td><td>Tokens in your stores; keys under your policy</td></tr>
-<tr><td>Can you meet in-region storage?</td><td>EU and US</td><td>Residency cited across 100+ countries</td><td>Enterprise only</td><td>US, EU, and APAC live regions</td><td>US or EU pinning, no SLA</td><td>Ciphertext stays where you host your database</td><td>Wherever you deploy it</td></tr>
+<tr><td>Where does customer PII physically live?</td><td>In the vault, US or EU region (EU is a paid add-on); your app keeps tokens</td><td>Regional vaults; app keeps tokens</td><td>In the vault, US on the entry plan</td><td>In the VGS vault behind the proxy</td><td>Ciphertext in your database; keys with Evervault</td><td>Ciphertext in your own database</td><td>Tokens in your stores; keys under your policy</td></tr>
+<tr><td>Can you meet in-region storage?</td><td>US and EU (EU data residency is a +$99 a month add-on on Growth and Business)</td><td>Residency cited across 100+ countries</td><td>Enterprise only</td><td>US, EU, and APAC live regions</td><td>US or EU pinning, no SLA</td><td>Ciphertext stays where you host your database</td><td>Wherever you deploy it</td></tr>
 <tr><td>How are tenants isolated?</td><td>Client ID isolation, per-customer keys</td><td>Accounts, workspaces, vaults, policies</td><td>Tenants with permission-scoped API keys</td><td>Each vault holds its own data</td><td>Teams and apps, each app with its own keys</td><td>Identity-bound key derivation</td><td>Policy-based</td></tr>
 <tr><td>Which audits back the vendor?</td><td>PCI DSS L1, SOC 2 Type II; ISO 27001 in progress</td><td>SOC 2 Type II, PCI DSS L1, ISO 27001:2022; HIPAA eligible</td><td>PCI DSS L1, SOC 2 Type II, ISO 27001, HIPAA</td><td>ISO 27001 badge; others via trust center</td><td>SOC 2 Type II, PCI DSS L1, HIPAA</td><td>SOC 2 Type II</td><td>ISO 27001:2013 (announced 2023)</td></tr>
 <tr><td>Who accessed which value, and when?</td><td>Every request logged with client ID, IP, path, status</td><td>Audit logging of sensitive events</td><td>24 hours of logs on entry plan</td><td>Ask sales</td><td>Ask sales</td><td>Every decryption in a cryptographic audit trail</td><td>Protect and unprotect operations in its Audit Store</td></tr>

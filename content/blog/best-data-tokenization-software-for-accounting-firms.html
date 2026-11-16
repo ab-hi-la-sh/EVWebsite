@@ -36,7 +36,7 @@ faqs:
   - q: "Do Small and Solo Tax Practices Need Data Tokenization Software?"
     a: "A solo practice may not need a developer platform, but it still collects SSNs and bank details by email every spring. A turnkey intake product that tokenizes those fields and stores documents encrypted can be a better fit than building anything. The FTC Safeguards Rule exempts firms with fewer than 5,000 consumers from certain provisions; the rest of the rule still applies."
   - q: "How Much Does Data Tokenization Software for Accounting Firms Cost?"
-    a: "Published prices on October 29, 2026 start at $0 (Enigma Vault Data Vault and File Vault Lite tiers, and NoPII Lite) and $49 a month per product (Enigma Vault Starter). VGS Starter starts at $1,000 a month. Skyflow, Protegrity, Thales CipherTrust Tokenization, Protecto, and Enigma Vault’s Customer Vault intake app are quoted by sales."
+    a: "Published prices on October 29, 2026 start at $0 (Enigma Vault Data Vault and File Vault Lite tiers, and NoPII Lite) and $49 a month per product (Enigma Vault Starter). VGS Starter starts at $1,000 a month, and Protecto publishes SaaS plans from $250 a month. Skyflow, Protegrity, Thales CipherTrust Tokenization, Protecto Enterprise, and Enigma Vault’s Customer Vault intake app are quoted by sales."
 ---
 <style>
 /* Wide tables: tighter cell padding so they fit the article column. */
@@ -515,9 +515,9 @@ faqs:
 <div class="bl-tablewrap"><table class="bl-table">
 <thead><tr><th>Firm size</th><th>What it needs</th><th>Best-fit platforms</th><th>Why</th></tr></thead>
 <tbody>
-<tr><td>Solo and small practices</td><td>Intake, sharing, and retention without developers</td><td>Enigma Vault (Customer Vault, File Vault)</td><td>Turnkey intake, no API integration; free Lite plans, then $49 a month per product</td></tr>
+<tr><td>Solo and small practices</td><td>Intake, sharing, and retention without developers</td><td>Enigma Vault (Customer Vault, File Vault)</td><td>Turnkey intake, no API integration (Customer Vault priced by engagement); File Vault starts on a free Lite plan, then $49 a month</td></tr>
 <tr><td>Mid-size and regional firms</td><td>Intake plus tokens in practice systems</td><td>Enigma Vault; VGS or Skyflow if you build your own client app</td><td>Enigma covers intake and the Data Vault API; VGS and Skyflow tokenize fields in your app</td></tr>
-<tr><td>Large and enterprise firms (engineers, data warehouses)</td><td>Custom volume, AI prompt protection, warehouse tokens</td><td>Enigma Vault Enterprise and NoPII; Protegrity or Thales for warehouses; Protecto for AI</td><td>Vault Enterprise adds custom volume and dedicated infrastructure; NoPII Enterprise adds SSO, SLA guarantees, and a dedicated account manager; Protegrity and Thales fit existing estates</td></tr>
+<tr><td>Large and enterprise firms (engineers, data warehouses)</td><td>Custom volume, AI prompt protection, warehouse tokens</td><td>Enigma Vault Enterprise and NoPII; Protegrity or Thales for warehouses; Protecto for AI</td><td>Vault Enterprise adds volume above Business on an annual contract with custom terms and an SLA; NoPII adds SSO from Business, and NoPII Enterprise adds SLA guarantees and a dedicated account manager; Protegrity and Thales fit existing estates</td></tr>
 </tbody></table></div>
 <p>Two cautions apply to every option. Encrypted storage alone does not stop overbroad access by authorized staff, so reveal permissions matter as much as encryption.</p>
 <p>And tax record-retention duties can require long-lived storage, so set download and deletion rules before peak season. Related reading: <a class="bl-link" href="/blog/secure-client-intake-form/">how to build a secure client intake form</a>.</p>
@@ -543,7 +543,7 @@ faqs:
   <li><strong>Solo and small practices:</strong> Pick a turnkey intake product that tokenizes fields and stores documents encrypted; Enigma Vault’s Customer Vault fits without developers.</li>
   <li><strong>Mid-size firms:</strong> Pair intake with an API vault so practice systems hold tokens; Enigma Vault covers both, and VGS fits if you run your own client app.</li>
   <li><strong>Large and regional firms with AI programs:</strong> Add prompt protection with Enigma Vault NoPII or Protecto, and test detection on real organizers first (see <a class="bl-link" href="/blog/pii-protection-for-llm/">PII protection for LLMs</a>).</li>
-  <li><strong>Enterprise firms with data warehouses or existing key management:</strong> Enigma Vault Enterprise adds custom volume and dedicated infrastructure, and NoPII Enterprise adds SSO and SLA guarantees; Protegrity and Thales CipherTrust Tokenization fit a security team’s current warehouse or key-management estate.</li>
+  <li><strong>Enterprise firms with data warehouses or existing key management:</strong> Enigma Vault Enterprise adds volume above Business on an annual contract with custom terms and an SLA, and NoPII adds SSO from Business and SLA guarantees on Enterprise; Protegrity and Thales CipherTrust Tokenization fit a security team’s current warehouse or key-management estate.</li>
   <li><strong>Firms serving clients across borders:</strong> Shortlist Skyflow for residency controls, and ask every vendor which regions it runs in.</li>
 </ul>
 

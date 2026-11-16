@@ -392,7 +392,7 @@ Credential:    tkn_V8rJ2nQxL5aW   (restore requires on-call engineer role)</code
   <li><strong>Deterministic tokens:</strong> Available in Data Vault and Card Vault for joins, lookups and deduplication, and used by NoPII to keep each person consistent in AI prompts.</li>
   <li><strong>Format-preserving tokens:</strong> Card Vault offers optional tokens that keep the first six and last four digits, and it can issue them from your own BIN range.</li>
   <li><strong>Expiring and single-use access:</strong> Records in Data Vault can expire anywhere from 60 seconds to 7 years, and one-time keys let you share a secret once before it self-destructs.</li>
-  <li><strong>Batch tokenization:</strong> Up to 5,000 values per request for migrations and enrollment surges.</li>
+  <li><strong>Batch tokenization:</strong> Data Vault batches take up to 500 values per request on Lite and Starter and up to 5,000 on Growth and Business, for migrations and enrollment surges.</li>
 </ul>
 
 <p>Everything runs on PCI DSS Level 1 and SOC 2 Type II certified infrastructure. <a class="bl-link" href="/request-demo/">Request a demo</a> to match token types to your data flows.</p>

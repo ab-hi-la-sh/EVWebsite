@@ -30,7 +30,7 @@ faqs:
   - q: "Should an Enterprise Choose Protegrity or Skyflow?"
     a: "Protegrity is vaultless: tokens are computed from a secret key wherever its protectors run, and its AI Team Edition deploys inside your own AWS environment. Skyflow is a vaulted service with regional vaults in ten named regions and a Bring Your Own Cloud option on AWS or GCP. Skyflow lists PCI DSS Level 1 on its security page; Protegrity’s tokenization page lists no certifications. Neither publishes prices."
   - q: "How Much Does Enterprise PII Tokenization Cost?"
-    a: "Most enterprise vendors quote privately. Of the ten here, Enigma Vault publishes prices (Business at $499 a month per product, or $5,500 a year, with Enterprise quoted), VGS starts plans at $1,000 a month, and Fortanix lists Data Security Manager on AWS Marketplace from $1.95 an hour plus AWS infrastructure. Skyflow, Thales, K2view, comforte, Bluefin ShieldConex, and Protecto quote, and one G2 reviewer cites a Protegrity single-year license above $15,000. Self-run options also carry your own server and staff costs."
+    a: "Most enterprise vendors quote privately. Of the ten here, Enigma Vault publishes prices (Business at $499 a month per product, or $5,500 a year, with Enterprise quoted), VGS starts plans at $1,000 a month, and Fortanix lists Data Security Manager on AWS Marketplace from $1.95 an hour plus AWS infrastructure. Skyflow, Thales, K2view, comforte, and Bluefin ShieldConex quote, Protecto publishes SaaS plans from $250 a month with Enterprise by quote, and one G2 reviewer cites a Protegrity single-year license above $15,000. Self-run options also carry your own server and staff costs."
   - q: "Vendor-Managed or Self-Hosted Tokenization: Which Should an Enterprise Choose?"
     a: "Vendor-managed services (Enigma Vault, Skyflow SaaS, VGS, Bluefin ShieldConex) remove key and server operations from your team but store originals in the vendor’s regions. Self-hosted options (Thales, K2view, Protegrity, comforte TAMUNIO, Fortanix appliances, Protecto air-gapped, NoPII’s self-hosted edition on Enterprise) keep everything in your network, and your team runs keys, servers, and upgrades."
   - q: "How Does PII Tokenization Help With Data Residency?"
@@ -95,7 +95,7 @@ faqs:
 <tr><td><a class="bl-link" href="#fortanix">Fortanix</a></td><td>HSM-backed keys with quorum approvals</td><td>Vaultless, HSM-keyed</td><td>AWS Marketplace from $1.95 an hour</td><td>30-day free trial</td><td><a class="bl-link" href="https://www.g2.com/products/fortanix/reviews" target="_blank" rel="noopener">4.5/5 (2 reviews)</a></td></tr>
 <tr><td><a class="bl-link" href="#comforte-tamunio">comforte TAMUNIO</a></td><td>Securing enterprise data across apps, files, and streams</td><td>Vaultless, self-run or cloud</td><td>Not published</td><td>Demo on request</td><td><a class="bl-link" href="https://www.g2.com/products/securdps-enterprise/reviews" target="_blank" rel="noopener">No reviews yet</a></td></tr>
 <tr><td><a class="bl-link" href="#bluefin-shieldconex">Bluefin ShieldConex</a></td><td>Vaultless PII, PHI, and file tokenization in the cloud</td><td>Vaultless, vendor-managed</td><td>Not published</td><td>Sandbox on request</td><td><a class="bl-link" href="https://www.g2.com/products/shieldconex/reviews" target="_blank" rel="noopener">No reviews yet</a></td></tr>
-<tr><td><a class="bl-link" href="#protecto">Protecto</a></td><td>AI pipelines kept on-premises or air-gapped</td><td>Vaulted</td><td>Not published</td><td>Free trial with 4-week pilot</td><td><a class="bl-link" href="https://www.g2.com/products/protecto/reviews" target="_blank" rel="noopener">No reviews yet</a></td></tr>
+<tr><td><a class="bl-link" href="#protecto">Protecto</a></td><td>AI pipelines kept on-premises or air-gapped</td><td>Vaulted</td><td>$250 to $750 a month by API-call volume; Enterprise by quote</td><td>14-day free trial; POC after a demo</td><td><a class="bl-link" href="https://www.g2.com/products/protecto/reviews" target="_blank" rel="noopener">No reviews yet</a></td></tr>
 </tbody></table></div>
 
 <div class="bl-inlinecta">
@@ -158,7 +158,7 @@ faqs:
 <ul>
   <li><strong>Vaulted tokens with managed keys:</strong> Originals sit under per-customer AES-256 keys in a managed secrets store that rotates them on schedule.</li>
   <li><strong>Joins that keep working:</strong> Deterministic tokens and exact-match search keep joins and deduplication intact.</li>
-  <li><strong>Regional, batch-ready service:</strong> Runs in EU and US regions on AWS across multiple availability zones (EU data residency is a $99 a month add-on on Card Vault and Data Vault Business), and Data Vault tokenizes up to 5,000 secrets per request for batch migrations.</li>
+  <li><strong>Regional, batch-ready service:</strong> Runs in EU and US regions on AWS across multiple availability zones (EU data residency is a $99 a month add-on on Card Vault and Data Vault Growth and Business), and Data Vault tokenizes up to 5,000 secrets per request on Growth and Business for batch migrations.</li>
   <li><strong>Logged access:</strong> Every API request uses OAuth2 machine-to-machine credentials and is logged with client ID, IP, resource path, and response status; roles and opt-in IP allowlisting govern reveals.</li>
   <li><strong>NoPII controls:</strong> Workspaces per team or product, SSO enforcement, reveal grants, a staff access log, exportable audit logs, and a self-hosted edition on Enterprise.</li>
 </ul>
@@ -572,7 +572,7 @@ faqs:
   </div>
   <dl class="vc__facts">
     <div><dt>Residency</dt><dd>Wherever you deploy it</dd></div>
-    <div><dt>Starting price</dt><dd>Custom quote; free trial with a 4-week pilot</dd></div>
+    <div><dt>Starting price</dt><dd>$250 to $750 a month (SaaS); Enterprise by quote; 14-day free trial</dd></div>
     <div><dt>Deployment</dt><dd>SaaS, private cloud, on-premises, or air-gapped</dd></div>
     <div class="vc__best"><dt>Who it suits</dt><dd>AI platform teams feeding agents and RAG systems with customer records, where policy keeps the vault inside their own network.</dd></div>
   </dl>
@@ -594,8 +594,9 @@ faqs:
 <div class="bl-tablewrap"><table class="bl-table">
 <thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
 <tbody>
-<tr><td>Free trial</td><td>$0</td><td>Includes a 4-week pilot</td></tr>
-<tr><td>Protecto platform</td><td>Custom quote</td><td>Direct or through Google Cloud Marketplace</td></tr>
+<tr><td>Free trial</td><td>$0</td><td>14 days, 1,000 API calls; Enterprise POC scoped after a demo</td></tr>
+<tr><td>Protecto SaaS (Starter, Growth, Scale)</td><td>$250, $500, or $750 a month</td><td>5,000, 12,000, or 16,000 API calls a month</td></tr>
+<tr><td>Protecto Enterprise</td><td>Custom quote</td><td>Direct or through Google Cloud Marketplace</td></tr>
 </tbody></table></div>
 <p>Protecto publishes no prices, and its pricing URL returns a 404.</p>
 <p><strong>Pros</strong></p>
@@ -661,7 +662,7 @@ faqs:
 <tr><td>Bluefin ShieldConex</td><td>SOC report badge</td><td>Yes (27001:2022)</td><td>HIPAA support cited</td></tr>
 <tr><td>Protecto</td><td>SOC 2 Type II</td><td>Yes</td><td>HIPAA BAA</td></tr>
 </tbody></table></div>
-<p>Enigma Vault includes its SOC 2 Type II report, PCI AOC, and DPA on Business and Enterprise.</p>
+<p>Enigma Vault includes its SOC 2 Type II report, PCI AOC, and DPA on every paid plan (Starter, Growth, Business) and on Enterprise.</p>
 <h2 id="what-enterprise-pii-tokenization-costs">What Enterprise PII Tokenization Costs</h2>
 <p>Most enterprise tiers are quoted privately, so the honest answer to “how much” is a published floor for three vendors and a quote for the rest. Self-run options also carry your own servers and staff.</p>
 <div class="bl-tablewrap"><table class="bl-table">
@@ -676,9 +677,9 @@ faqs:
 <tr><td>Fortanix</td><td>Yes, on AWS</td><td>Enterprise tier or AWS Marketplace</td><td>From $1.95 an hour plus AWS</td></tr>
 <tr><td>comforte TAMUNIO</td><td>No</td><td>Quote after a demo</td><td>Pricing URL returns a 404</td></tr>
 <tr><td>Bluefin ShieldConex</td><td>No</td><td>Custom quote</td><td>Sandbox on request</td></tr>
-<tr><td>Protecto</td><td>No</td><td>Quote or Google Cloud Marketplace</td><td>Free trial with a 4-week pilot</td></tr>
+<tr><td>Protecto</td><td>Yes, SaaS plans $250 to $750 a month</td><td>Enterprise quote or Google Cloud Marketplace</td><td>14-day free trial; POC after a demo</td></tr>
 </tbody></table></div>
-<p>For a PCI-compliant card vault, Enigma Vault’s Card Vault follows the same per-product prices, with the PCI AOC and responsibility matrix included.</p>
+<p>For a PCI-compliant card vault, Enigma Vault’s Card Vault follows the same per-product prices, with the PCI AOC and responsibility matrix included on Starter, Growth, and Business.</p>
 <h2 id="where-enterprise-pii-lives">Where Enterprise PII Lives and Which Platform Reaches It</h2>
 <p>An enterprise rarely has one PII problem: the same identifiers repeat across systems that different business units own.</p>
 <div class="bl-tablewrap"><table class="bl-table">

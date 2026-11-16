@@ -58,7 +58,7 @@ faqs:
   <table class="bl-table bl-table--wide">
     <thead><tr><th>Platform</th><th>Best for</th><th>Architecture</th><th>G2 rating</th><th>How you start</th><th>Pricing model</th></tr></thead>
     <tbody>
-      <tr><td><a class="bl-link" href="#enigma-vault">Enigma Vault</a></td><td>Teams that want a free start and a gateway-agnostic vault</td><td>Vaulted, with gateway proxy</td><td>4.4/5 (6 reviews)</td><td>Self-serve free tier (Lite, free sandbox) through AWS Marketplace</td><td>Per product: $0, $49, $249, or $499 a month, plus metered overage</td></tr>
+      <tr><td><a class="bl-link" href="#enigma-vault">Enigma Vault</a></td><td>Teams that want a free start and a gateway-agnostic vault</td><td>Vaulted, with gateway proxy</td><td>4.4/5 (6 reviews)</td><td>Self-serve free tier (Lite, free sandbox) in the developer portal</td><td>Per product: $0, $49, $249, or $499 a month, plus metered overage</td></tr>
       <tr><td><a class="bl-link" href="#spreedly">Spreedly</a></td><td>Multi-gateway merchants that want to own their vault</td><td>Independent vault plus orchestration</td><td>4.4/5 (35 reviews)</td><td>Sales conversation</td><td>Independent Vault from $750 a month; Performance Optimization by quote</td></tr>
       <tr><td><a class="bl-link" href="#ixopay">IXOPAY (formerly TokenEx)</a></td><td>Enterprises routing payments across many processors</td><td>Universal Tokens</td><td>4.6/5 (17 reviews)</td><td>Sandbox access or demo</td><td>Quote</td></tr>
       <tr><td><a class="bl-link" href="#vgs">VGS</a></td><td>Payments teams that want card management in one platform</td><td>Vault and proxy</td><td>4.7/5 (47 reviews)</td><td>"Try for free" on Starter</td><td>Starter from $1,000 a month; Growth by quote</td></tr>
@@ -116,7 +116,7 @@ faqs:
 
 <h3 id="enigma-vault">1. Enigma Vault: Best for Teams That Want a Free Start and a Gateway-Agnostic Card Vault</h3>
 <p><strong>Best for:</strong> engineering and product teams at software companies, fintechs, healthcare, legal, and service businesses that want to take card data off their own systems quickly, without replacing the gateway they already use.</p>
-<p>Enigma Vault is a tokenization API that holds your customers' most sensitive data, so a breach of your systems exposes nothing worth stealing. Card Vault tokenizes cards at capture through hosted forms, phone capture through Twilio Pay, or the API, then charges through the gateway you already use. The same platform also covers personal data (Data Vault), files (File Vault), and AI traffic (NoPII). It carries PCI DSS Level 1 and SOC 2 Type II and is billed through AWS Marketplace.</p>
+<p>Enigma Vault is a tokenization API that holds your customers' most sensitive data, so a breach of your systems exposes nothing worth stealing. Card Vault tokenizes cards at capture through hosted forms, phone capture through Twilio Pay, or the API, then charges through the gateway you already use. The same platform also covers personal data (Data Vault), files (File Vault), and AI traffic (NoPII). It carries PCI DSS Level 1 and SOC 2 Type II, and paid plans are bought self-serve in the developer portal through a Stripe checkout.</p>
 <div class="tk-carousel tk-single">
   <div class="tk-track">
     <figure class="tk-slide">
@@ -148,7 +148,7 @@ faqs:
     </tbody>
   </table>
 </div>
-<p>Lite is a permanent free tier, not a time-limited trial. Billing runs through AWS Marketplace on your existing AWS account, with no contract needed to start. See <a class="bl-link" href="/pricing/">current pricing</a>.</p>
+<p>Lite is a free sandbox for development and testing with hard limits, never billed, not a production plan. Paid plans are bought self-serve in the developer portal through a Stripe checkout, monthly or annually ($550, $2,700, or $5,500 a year), with no contract needed to start; you can also buy through AWS Marketplace. See <a class="bl-link" href="/pricing/">current pricing</a>.</p>
 <p><strong>Compliance and security</strong></p>
 <div class="bl-tablewrap">
   <table class="bl-table">
@@ -165,14 +165,14 @@ faqs:
 </div>
 <p><strong>Pros</strong></p>
 <ul>
-  <li>A permanent free tier and published per-vault pricing mean you can tokenize real cards without a sales call.</li>
+  <li>A free Lite sandbox and published per-vault pricing mean you can start tokenizing cards without a sales call.</li>
   <li>It works with the gateway you already use, so adopting it does not mean replacing Stripe, Braintree, or Authorize.net.</li>
   <li>One integration covers cards, personal data, files, and LLM traffic.</li>
 </ul>
 <p><strong>Cons</strong></p>
 <ul>
   <li>It is a tokenization and proxy layer, not a payment orchestration platform, so if you want smart routing or retries you pair it with your processor or an orchestrator.</li>
-  <li>It is a vaulted, cloud-delivered service procured through AWS Marketplace, so if you need vaultless tokens inside a fully on-premises estate, an enterprise suite serves you better.</li>
+  <li>It is a vaulted, cloud-delivered service bought self-serve through the developer portal, so if you need vaultless tokens inside a fully on-premises estate, an enterprise suite serves you better.</li>
   <li>Public reviews are few, with 6 on G2, so the sample is small.</li>
 </ul>
 <p><strong>What users say</strong></p>
@@ -717,4 +717,4 @@ faqs:
   </table>
 </div>
 <h2>The Bottom Line for 2026</h2>
-<p>The best payment tokenization software in 2026 does more than store cards: it keeps card data off your systems, keeps your tokens portable across processors, and lets you start without a long sales cycle. If you want to see how that works in your own stack, start with Enigma Vault's free tier, tokenize your first thousand cards without a contract, and compare it against anything on this list. Explore <a class="bl-link" href="https://www.enigmavault.io/vault/card-vault/">Card Vault</a> or try <a class="bl-link" href="/nopii/">NoPII</a> on your next LLM integration. For personal data and files, see my guide to the <a class="bl-link" href="/blog/best-data-tokenization-software/">best data tokenization software</a> and <a class="bl-link" href="/blog/pii-tokenization-for-ai/">PII tokenization for AI</a>.</p>
+<p>The best payment tokenization software in 2026 does more than store cards: it keeps card data off your systems, keeps your tokens portable across processors, and lets you start without a long sales cycle. If you want to see how that works in your own stack, start with Enigma Vault's free tier, tokenize your first cards (up to 100 stored, 1,000 requests a month) without a contract, and compare it against anything on this list. Explore <a class="bl-link" href="https://www.enigmavault.io/vault/card-vault/">Card Vault</a> or try <a class="bl-link" href="/nopii/">NoPII</a> on your next LLM integration. For personal data and files, see my guide to the <a class="bl-link" href="/blog/best-data-tokenization-software/">best data tokenization software</a> and <a class="bl-link" href="/blog/pii-tokenization-for-ai/">PII tokenization for AI</a>.</p>

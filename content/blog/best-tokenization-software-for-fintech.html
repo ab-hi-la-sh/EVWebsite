@@ -26,7 +26,7 @@ faqs:
   - q: "Do I Need Network Tokens if I Already Use a Vault?"
     a: "Usually both. A vault token keeps the card number out of your systems and lets you route to any processor you connect. A network token, issued by Visa or Mastercard, is what lifts authorization rates and survives card reissues. Enigma Vault does not issue network tokens; VGS, Basis Theory, Evervault, IXOPAY, Spreedly, and Bluefin sell them as add-ons or usage fees, and your processor may already offer them."
   - q: "Can Enigma Vault Tokenize Bank Account and Routing Numbers?"
-    a: "Yes. Data Vault stores structured secrets such as account numbers, routing numbers, SSNs, and tax IDs with field-level AES-256 encryption, deterministic tokens for exact-match lookups, and batch calls of up to 5,000 values. It is priced separately from Card Vault, starting with a free Lite tier."
+    a: "Yes. Data Vault stores structured secrets such as account numbers, routing numbers, SSNs, and tax IDs with field-level AES-256 encryption, deterministic tokens for exact-match lookups, and batch calls of up to 5,000 values on Growth and Business (500 on Lite and Starter). It is priced separately from Card Vault, starting with a free Lite tier."
   - q: "Which Tokenization Vendors Support Card Issuing Programs?"
     a: "VGS has the deepest issuing feature set in this list: card reveal, push provisioning, virtual card activation, and direct ISO 8583 connectivity to Visa and Mastercard. Evervault offers card reveal through an iframe and a Relay that encrypts PANs returned by an issuer. Skyflow publishes a card issuance solution. Enigma Vault’s proxy signs requests to Mastercard APIs with OAuth 1.0a, which fits push-to-card and issuer API calls, but it is not an issuer processor."
   - q: "What Audit Evidence Will Our Partner Bank Ask For?"
@@ -195,7 +195,7 @@ faqs:
 <tr><td>Starter</td><td>$49 a month per vault</td><td>Card Vault 20,000 requests ($0.02 overage); Data Vault 30,000 ($0.013); File Vault 150 GB; PCI AOC, SOC 2 report and DPA</td></tr>
 <tr><td>Growth</td><td>$249 a month per vault</td><td>Card Vault 250,000 requests ($0.01); Data Vault 400,000 ($0.0065); File Vault 1,000 GB; custom CSS, Twilio Pay, Data Vault batches of 5,000</td></tr>
 <tr><td>Business</td><td>$499 a month per vault</td><td>Card Vault 1,000,000 requests ($0.007); Data Vault 2,000,000 ($0.0045); File Vault 5,000 GB ($0.15 per GB-month after); raw card data access, raw usage export</td></tr>
-<tr><td>Enterprise</td><td>Custom quote</td><td>Volume, support, and deployment terms</td></tr>
+<tr><td>Enterprise</td><td>Custom quote</td><td>Volume above Business, annual contract, custom terms, and SLA</td></tr>
 </tbody></table></div>
 <p><strong>Security and Compliance</strong></p>
 <div class="bl-tablewrap"><table class="bl-table">
@@ -204,7 +204,7 @@ faqs:
 <tr><td>PCI DSS</td><td>Level 1 service provider</td></tr>
 <tr><td>SOC 2</td><td>Type II</td></tr>
 <tr><td>ISO 27001</td><td>In progress</td></tr>
-<tr><td>AOC on request</td><td>Ask sales</td></tr>
+<tr><td>AOC on request</td><td>Included on Starter, Growth, and Business</td></tr>
 <tr><td>SSO</td><td>OAuth2 machine-to-machine for APIs; enterprise SSO in hosted agent deployments</td></tr>
 <tr><td>Audit logs</td><td>Every plan: client ID, IP, path, status, tracing</td></tr>
 </tbody></table></div>
@@ -244,7 +244,7 @@ faqs:
   <li><strong>Add-on fees appear in reviews:</strong> G2 reviewers mention extra charges such as additional CNAMEs, so request a full price sheet first.</li>
 </ul>
 <p><strong>Our take:</strong> For a neobank launching debit or commercial cards, VGS is the most complete issuing toolkit in this list, ahead of Evervault’s card reveal and Skyflow’s issuance connectors.</p>
-<p>For a lender that mostly needs to store account numbers and SSNs, it is more platform than you need at ten to twenty times Enigma Vault’s Starter price. It is the wrong pick if you want a self-serve start under $1,000 a month or prefer not to route every request through a third-party proxy.</p>
+<p>For a lender that mostly needs to store account numbers and SSNs, it is more platform than you need at about twenty times Enigma Vault’s $49 Starter price. It is the wrong pick if you want a self-serve start under $1,000 a month or prefer not to route every request through a third-party proxy.</p>
 <p><strong>Pricing tiers</strong></p>
 <div class="bl-tablewrap"><table class="bl-table">
 <thead><tr><th>Plan</th><th>Price</th><th>Includes</th></tr></thead>
@@ -596,7 +596,7 @@ faqs:
 <tr><td>Audit logs</td><td>Ask sales</td></tr>
 </tbody></table></div>
 <p><strong>What Reviewers Say:</strong> Too few to judge. There are no reviews yet on <a class="bl-link" href="https://www.g2.com/products/shieldconex/reviews" target="_blank" rel="noopener">G2</a> and no Capterra listing.</p>
-<p>Moving from batch files to real-time APIs? <a class="bl-link" href="/vault/data-vault/">See Data Vault’s batch calls of up to 5,000 values</a>.</p>
+<p>Moving from batch files to real-time APIs? <a class="bl-link" href="/vault/data-vault/">See Data Vault’s batch calls of up to 5,000 values on Growth and Business</a>.</p>
 
 <div class="vc">
   <div class="vc__head">

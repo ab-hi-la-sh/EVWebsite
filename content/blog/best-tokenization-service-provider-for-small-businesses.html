@@ -34,7 +34,7 @@ faqs:
   - q: "Will Tokenization Reduce My PCI Questionnaire?"
     a: "It can significantly reduce PCI scope. When cards go straight into a provider’s hosted form or phone system and never touch your computers, many small merchants qualify for a shorter self-assessment questionnaire, but your acquirer or QSA confirms which one applies."
   - q: "Can I Take Card Payments Over the Phone Without Staff Hearing the Number?"
-    a: "Yes. Enigma Vault Card Vault uses Twilio Pay so callers enter digits on their keypad and the card goes straight to the vault as a token."
+    a: "Yes. Enigma Vault Card Vault, on Growth and Business plans, uses Twilio Pay so callers enter digits on their keypad and the card goes straight to the vault as a token."
   - q: "What Happens to My Stored Cards If I Switch Processors?"
     a: "With a gateway’s own tokens, you may need the old gateway to release the data or ask customers again. With a gateway-agnostic provider, the vault keeps the cards and you point charges at the new processor; ask any provider how a PCI-to-PCI export works before you sign."
   - q: "Do Small Hotels and Travel Agencies Need a Tokenization Service Provider?"
@@ -142,7 +142,7 @@ faqs:
   <dl class="vc__facts">
     <div><dt>Starting price</dt><dd>$0 (Lite), then $49 a month</dd></div>
     <div><dt>Free tier or trial</dt><dd>Lite, free sandbox</dd></div>
-    <div><dt>Setup without developers</dt><dd>Included: Customer Vault intake links</dd></div>
+    <div><dt>Setup without developers</dt><dd>Yes: Customer Vault intake links (priced by engagement)</dd></div>
     <div class="vc__best"><dt>Who it suits</dt><dd>Travel agencies, small hotels, clinics, law and accounting firms, and contact centers that take cards and documents by phone, email, and web, with nobody on staff who writes code.</dd></div>
   </dl>
 </div>
@@ -193,13 +193,13 @@ faqs:
 </div>
 <p><strong>Pros</strong></p>
 <ul>
-  <li>You can store real cards on a free plan with no sales call or contract, so you find out whether it fits before it costs you anything.</li>
+  <li>You can test card capture on a free sandbox with no sales call or contract, so you find out whether it fits before it costs you anything.</li>
   <li>Front-desk staff collect cards and ID documents through branded links, so you don’t need to hire or rent a developer to get started.</li>
   <li>Phone capture keeps card numbers out of agents’ ears, screens, and call recordings, so the channel small firms struggle with most is covered too.</li>
 </ul>
 <p><strong>Cons</strong></p>
 <ul>
-  <li>Paid plans bill through AWS Marketplace, so you need an AWS account set up before you can upgrade from the free tier.</li>
+  <li>Upgrading from Lite means subscribing to a paid plan in the developer portal and paying by card at a Stripe checkout; there is no free production tier.</li>
   <li>There are no network tokens or account updater on the published plans, so when a stored card expires you have to ask the customer for new details.</li>
   <li>Lite is a test sandbox with a hard limit of 1,000 requests, so live card volume needs at least the $49 Starter plan.</li>
 </ul>
@@ -335,7 +335,7 @@ faqs:
   <li>Every capture path (secure fields, mobile SDK, proxy) needs a developer, and there’s no ready-made staff screen for phone orders.</li>
 </ul>
 <p><strong>What small business owners say in reviews:</strong> PCI Proxy has no <a class="bl-link" href="https://www.g2.com/products/pci-proxy/reviews" target="_blank" rel="noopener">G2</a> or <a class="bl-link" href="https://www.capterra.com/p/10055014/PCI-Proxy/reviews/" target="_blank" rel="noopener">Capterra</a> reviews yet, so ask for customer references, ideally from a merchant of your size.</p>
-<blockquote class="bl-quote-cta"><p>Want to test with real cards and no trial clock? Enigma Vault’s Lite plan stays free. <a class="bl-link" href="/request-demo/">Get in touch</a></p></blockquote>
+<blockquote class="bl-quote-cta"><p>Want to test card capture before you pay? Enigma Vault’s Lite sandbox is free and never billed. <a class="bl-link" href="/request-demo/">Get in touch</a></p></blockquote>
 
 <div class="vc">
   <div class="vc__head">
@@ -531,7 +531,7 @@ faqs:
   <li>The entry plan runs in a US-only environment, which limits you if you serve customers in the EU.</li>
 </ul>
 <p><strong>What small business owners say in reviews:</strong> Basis Theory has no <a class="bl-link" href="https://www.g2.com/products/basis-theory/reviews" target="_blank" rel="noopener">G2</a> or <a class="bl-link" href="https://www.capterra.com/p/10002181/Basis-Theory/reviews/" target="_blank" rel="noopener">Capterra</a> reviews yet, so ask for customer references from a business at your stage.</p>
-<blockquote class="bl-quote-cta"><p>Not building a payments product? Store cards on Enigma Vault’s free tier and skip the build. <a class="bl-link" href="/request-demo/">Get in touch</a></p></blockquote>
+<blockquote class="bl-quote-cta"><p>Not building a payments product? Test on Enigma Vault’s free Lite sandbox and skip the build. <a class="bl-link" href="/request-demo/">Get in touch</a></p></blockquote>
 
 <div class="vc">
   <div class="vc__head">
@@ -726,12 +726,12 @@ faqs:
 <blockquote class="bl-quote-cta"><p>Take cards by phone more than at a counter? See how Card Vault phone capture works. <a class="bl-link" href="/request-demo/">Get in touch</a></p></blockquote>
 
 <h2 id="key-features-compared-side-by-side">Key Features Compared Side by Side</h2>
-<p>Only Enigma Vault pairs a free production plan with a no-code intake app your staff can use; every other provider here needs a developer for setup, and four of the nine publish entry prices of $750 a month or more. Each cell comes from the vendor’s own pages, checked October 16, 2026.</p>
+<p>Only Enigma Vault pairs a free sandbox and a $49 Starter plan with a no-code intake app your staff can use; every other provider here needs a developer for setup, and four of the nine publish entry prices of $750 a month or more. Each cell comes from the vendor’s own pages, checked October 16, 2026.</p>
 <div class="bl-tablewrap">
   <table class="bl-table bl-table--wide">
     <thead><tr><th>Platform</th><th>Setup without developers</th><th>Phone capture</th><th>Free start</th><th>Year-one cost at small volume</th><th>Gateways and processors</th><th>Card extras</th><th>Data beyond cards</th></tr></thead>
     <tbody>
-      <tr><td>Enigma Vault</td><td>Included (Customer Vault intake links, live the same day)</td><td>Included (Twilio Pay)</td><td>Lite, free sandbox (1,000 requests a month)</td><td>$0 on Lite; $588 on Starter</td><td>Authorize.net, Stripe, Braintree, PayPal, any REST gateway</td><td>CVV held 30 minutes at most, gateway proxy</td><td>Documents, IDs, signatures, customer records</td></tr>
+      <tr><td>Enigma Vault</td><td>Yes (Customer Vault intake links, priced by engagement)</td><td>Included (Twilio Pay, from Growth at $249 a month)</td><td>Lite, free sandbox (1,000 requests a month)</td><td>$0 on Lite; $588 on Starter</td><td>Authorize.net, Stripe, Braintree, PayPal, any REST gateway</td><td>CVV held 30 minutes at most, gateway proxy</td><td>Documents, IDs, signatures, customer records</td></tr>
       <tr><td>PCI Vault</td><td>Hosted capture form; API for the rest</td><td>Build your own</td><td>Self-serve signup</td><td>$1,524 base plus per-operation fees</td><td>Any processor through its PCI proxy (higher tiers)</td><td>Zero-knowledge storage</td><td>Cards only</td></tr>
       <tr><td>PCI Proxy (Planet)</td><td>Self onboarding; proxy needs integration</td><td>Build your own</td><td>Free trial</td><td>€4,200 base plus usage</td><td>Own gateway plus connected processors</td><td>3D Secure, network tokens, card intelligence</td><td>Cards only</td></tr>
       <tr><td>Spreedly</td><td>API integration required</td><td>Build your own</td><td>Demo only</td><td>$9,000 minimum</td><td>150+ gateways, 60+ payment methods</td><td>Routing and retries (Performance plan)</td><td>Cards and payment methods</td></tr>
@@ -767,7 +767,7 @@ faqs:
   <table class="bl-table">
     <thead><tr><th>Size</th><th>Start with</th><th>Why</th></tr></thead>
     <tbody>
-      <tr><td>Solo to 10 staff, under 1,000 vault requests a month</td><td>Enigma Vault Lite, then Starter</td><td>$0 to test, then $49 a month; no developer needed</td></tr>
+      <tr><td>Solo to 10 staff, under 1,000 vault requests a month</td><td>Enigma Vault Lite, then Starter</td><td>$0 to test, then $49 a month on Starter for live volume</td></tr>
       <tr><td>10 to 50 staff, a few thousand stored cards</td><td>Enigma Vault Starter, PCI Vault</td><td>Under $1,600 a year at published prices</td></tr>
       <tr><td>50+ staff with a developer and two gateways</td><td>Spreedly, PCI Proxy</td><td>Portability across processors is worth the higher floor</td></tr>
       <tr><td>Funded startup with an engineering team</td><td>Evervault, Basis Theory, VGS</td><td>Developer platforms with full PCI packages</td></tr>

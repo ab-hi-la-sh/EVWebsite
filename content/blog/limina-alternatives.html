@@ -1,0 +1,385 @@
+---
+title: "Top 10 Limina Alternatives and Competitors in 2026"
+slug: "limina-alternatives"
+layout: "pii-style"
+metaTitle: "Top 10 Limina (Private AI) Alternatives and Competitors in 2026"
+description: "We compared ten Limina (formerly Private AI) alternatives, from Tonic Textual and Presidio to Enigma Vault NoPII, on pricing, AI fit, detection breadth and deployment."
+subtitle: "The best Limina alternatives for 2026, ranked and scored on pricing transparency, AI application fit, and deployment options."
+date: 2026-11-22T06:00:00
+category: "NoPII"
+allOnly: true
+author: "abhilash-kumar"
+readTime: 19
+heroImage: "/assets/blog/img-06.png"
+heroAlt: "Top 10 Limina Alternatives and Competitors in 2026"
+excerpt: "The best Limina alternatives for 2026, ranked and scored on pricing transparency, AI application fit, and deployment options."
+tags: ["pii", "llm", "alternatives", "software-comparison"]
+ogType: article
+styles: ["blog.css", "pages/blog-pii-hero.css", "tr-pages.css", "pages/vs-tri-table.css"]
+scripts: ["blog-article.js", "pages/vs-tri-table.js"]
+faqSchema: true
+faqs:
+  - q: "What is Limina?"
+    a: "Limina, formerly Private AI, is a data de-identification platform. It detects PII, PHI and payment data across 50+ entity types in 52 languages, in text, PDFs, images, audio and structured data, and runs as a container in your VPC or on-premises."
+  - q: "Is Limina the same as Private AI?"
+    a: "Yes. The private-ai.com website now redirects to getlimina.ai, and G2 still describes the Limina listing with the Private AI name."
+  - q: "Who are Limina\u2019s main competitors?"
+    a: "Limina publishes its own comparison pages against Tonic.ai, AWS Comprehend, Microsoft Presidio, Azure Language Services and OpenAI Privacy Filter. Google\u2019s AI Overview for this search also names Protegrity, Google Cloud Sensitive Data Protection and Protecto."
+  - q: "What is the best Limina alternative?"
+    a: "For protecting live AI traffic, Enigma Vault NoPII scores highest at 4.0 out of 5 on our weighting. For documents and audio, Tonic Textual scores 3.9."
+  - q: "How much does Limina cost?"
+    a: "Limina\u2019s Starter plan is free for up to 75 API calls a day at 10 calls a minute. Batch is volume pricing by quote, and Enterprise is custom with committed volume pricing."
+  - q: "Does Limina support reversible tokenization?"
+    a: "Yes. Limina\u2019s de-identification product lets you redact, pseudonymize, tokenize reversibly or replace values with synthetic data, configured per entity type and workflow."
+  - q: "Is there a free Limina alternative?"
+    a: "Presidio is free and open source under the MIT license, and OpenAI Privacy Filter is free under Apache 2.0. Enigma Vault NoPII has a free tier with one million protected tokens a month, and Google Cloud, Azure and Amazon Comprehend each have free monthly allowances."
+  - q: "Which Limina alternative can run on-premises?"
+    a: "Presidio and OpenAI Privacy Filter run anywhere you deploy them, Tonic Textual can be self-hosted, Protecto supports on-premises and air-gapped deployment, Azure AI Language offers containers, and Enigma Vault NoPII offers a self-hosted edition on Enterprise."
+  - q: "Does Enigma Vault NoPII redact images or audio?"
+    a: "No. NoPII scans text: Messages, system prompts, tool-call arguments and tool results. Images, audio, files and documents are not scanned, so extract the text first if it needs protecting."
+  - q: "Which Limina alternative supports the most file types?"
+    a: "Among the alternatives here, Tonic Textual lists the widest range: Plain text, PDFs, scanned images, Word, Excel, PowerPoint, CSV, JSON, XML, HTML and audio."
+---
+<style>
+.bl-content .bl-table--wide td, .bl-content .bl-table--wide th { padding-left: 10px; padding-right: 10px; }
+.tk-carousel { margin: 20px 0 24px; }
+.tk-track { border: 1px solid var(--border-hairline); border-radius: 12px; background: var(--ev-warm-cloud); }
+.tk-slide { box-sizing: border-box; margin: 0; padding: 20px 20px 16px; }
+.tk-slide picture { display: flex; align-items: center; justify-content: center; height: clamp(220px, 50vw, 420px); }
+.tk-slide img { display: block; width: auto; height: auto; max-width: 100%; max-height: 100%; border-radius: 8px; object-fit: contain; }
+.tk-slide figcaption { margin-top: 14px; text-align: center; font-size: 13px; line-height: 1.5; color: var(--ev-slate); border: 0; padding: 0; }
+@media (max-width: 640px) { .tk-slide { padding: 14px 12px 12px; } }
+.bl-content .vc { margin: 40px 0 20px; }
+.bl-content .vc__head { display: grid; grid-template-columns: auto 1fr auto; gap: 18px; align-items: center; margin-bottom: 14px; }
+.bl-content .vc__num { font-size: 34px; font-weight: 600; line-height: 1; color: var(--ev-mineral-blue); font-variant-numeric: tabular-nums; }
+.bl-content h3.vc__name { margin: 0; padding: 0; font-size: 26px; line-height: 1.25; font-weight: 600; color: var(--ev-ink); }
+.bl-content .vc__sep { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.bl-content .vc__pill { display: table; margin-top: 10px; padding: 6px 12px; border-radius: 6px; background: var(--ev-mineral-blue); color: #fff; font-size: 13px; line-height: 1.4; font-weight: 600; letter-spacing: 0; text-transform: none; }
+.bl-content .vc__rates { display: flex; flex-direction: column; gap: 8px; align-items: stretch; }
+.bl-content .vc__rate { display: flex; flex-direction: column; align-items: flex-end; padding: 8px 14px; border: 1px solid var(--ev-cool-stone); border-radius: 10px; background: #fff; text-decoration: none !important; min-width: 128px; }
+.bl-content a.vc__rate:hover { border-color: var(--ev-mineral-blue); }
+.bl-content .vc__score { font-size: 20px; font-weight: 700; color: var(--ev-ink); line-height: 1.2; }
+.bl-content .vc__score small { font-size: 13px; font-weight: 500; color: var(--ev-slate); }
+.bl-content .vc__src { font-size: 12px; color: var(--ev-slate); line-height: 1.3; }
+.bl-content .vc__rate--new .vc__score { font-size: 15px; }
+.bl-content .vc__facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px 24px; margin: 0; padding: 18px 22px; border-radius: 12px; background: var(--ev-warm-cloud); }
+.bl-content .vc__facts div { margin: 0; }
+.bl-content .vc__facts .vc__best { grid-column: 1 / -1; padding-top: 14px; border-top: 1px solid var(--ev-cool-stone); }
+.bl-content .vc__facts dt { margin: 0 0 4px; font-size: 11.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ev-slate); }
+.bl-content .vc__facts dd { margin: 0; font-size: 15px; line-height: 1.5; color: var(--ev-ink); }
+@media (max-width: 700px) {
+  .bl-content .vc__head { grid-template-columns: auto 1fr; }
+  .bl-content .vc__rates { grid-column: 1 / -1; flex-direction: row; flex-wrap: wrap; }
+  .bl-content .vc__rate { align-items: flex-start; }
+  .bl-content .vc__num { font-size: 26px; }
+  .bl-content h3.vc__name { font-size: 22px; }
+  .bl-content .vc__facts { grid-template-columns: 1fr; }
+}
+.bl-content .bl-evcall p, .bl-content .bl-evcall p strong, .bl-content .bl-evcall__more { font-family: var(--ev-font-sans); font-size: 15px; line-height: 1.5; }
+.bl-content .bl-evcall p strong { font-weight: 500; color: var(--ev-ink); }
+.bl-content .bl-evcall__more { font-weight: 500; color: var(--ev-mineral-blue); }
+.bl-content .bl-evcall__tag { font-family: var(--ev-font-sans); }
+</style>
+<p>The best Limina alternatives for 2026: 1. Enigma Vault NoPII, 2. Tonic Textual, 3. Google Cloud Sensitive Data Protection, 4. Presidio, 5. Protecto, 6. Azure AI Language PII Detection, 7. Skyflow, 8. OpenAI Privacy Filter, 9. Protegrity, 10. Amazon Comprehend.</p>
+<p><a class="bl-link" href="https://www.getlimina.ai/" rel="nofollow noopener" target="_blank">Limina</a>, formerly Private AI, is a data de-identification platform. It detects PII, PHI and payment data across 50+ entity types in 52 languages, in text, PDFs, images, audio and structured data, and lets you redact, pseudonymize, tokenize reversibly or replace with synthetic data (<a class="bl-link" href="https://www.getlimina.ai/en/products/data-de-identification" rel="nofollow noopener" target="_blank">source</a>). It runs as a container in your VPC or on-premises. Limina itself publishes head-to-head pages against five of the products below (<a class="bl-link" href="https://www.getlimina.ai/en/competitive/tonic-ai" rel="nofollow noopener" target="_blank">source</a>).</p>
+<p>For protecting live AI traffic without running a container, the best alternative is <a class="bl-link" href="#enigma-vault-nopii">Enigma Vault NoPII</a>, which publishes every plan and starts free. For de-identifying documents, datasets and recordings, these are the strongest options:</p>
+<ul><li><a class="bl-link" href="#tonic-textual">Tonic Textual</a>: Best for consistent synthetic data across documents and audio (G2 rating 4.2 from 38 reviews, across Tonic products)</li><li><a class="bl-link" href="#google-cloud-sensitive-data-protection">Google Cloud Sensitive Data Protection</a>: Best for metered de-identification on Google Cloud (G2 rating 4.2 from 12 reviews)</li><li><a class="bl-link" href="#presidio">Presidio</a>: Best for engineering teams that want free, open-source detection</li><li><a class="bl-link" href="#protecto">Protecto</a>: Best for on-premises masking for AI agents</li></ul>
+<p>Every rating in this guide links to the product’s G2 or Capterra page, and every review quote links to the review itself.</p>
+<h2>Top 10 Alternatives to Limina at a Glance</h2>
+<div class="bl-tablewrap"><table class="bl-table"><thead><tr><th>Provider</th><th>Best for</th><th>How it protects data</th><th>Deployment</th><th>Starting price</th><th>G2 rating</th><th>Our score (/5)</th></tr></thead><tbody><tr><td><a class="bl-link" href="#enigma-vault-nopii">Enigma Vault NoPII</a></td><td>Protecting Live LLM Traffic Without Running a Container</td><td>Tokenizes LLM traffic, restores values</td><td>Hosted; self-hosted on Enterprise</td><td>Free, then $49/mo</td><td><a class="bl-link" href="https://www.g2.com/products/nopii/reviews" rel="nofollow noopener" target="_blank">5.0/5 (1)</a></td><td>4.0</td></tr><tr><td><a class="bl-link" href="#tonic-textual">Tonic Textual</a></td><td>Consistent Synthetic Data Across Documents and Audio</td><td>Redaction and consistent synthesis</td><td>Cloud or self-hosted</td><td>Pay-as-you-go per 1,000 words</td><td><a class="bl-link" href="https://www.g2.com/products/tonic-ai/reviews" rel="nofollow noopener" target="_blank">4.2/5 (38)</a></td><td>3.9</td></tr><tr><td><a class="bl-link" href="#google-cloud-sensitive-data-protection">Google Cloud Sensitive Data Protection</a></td><td>Metered De-Identification for Teams on Google Cloud</td><td>Inspection, redaction and tokenization API</td><td>Google Cloud</td><td>1 GiB free, then $3/GiB</td><td><a class="bl-link" href="https://www.g2.com/products/sensitive-data-protection/reviews" rel="nofollow noopener" target="_blank">4.2/5 (12)</a></td><td>3.7</td></tr><tr><td><a class="bl-link" href="#presidio">Presidio</a></td><td>Engineering Teams That Want Free, Open-Source Detection</td><td>Open-source detection and anonymization</td><td>Self-run</td><td>Free (MIT)</td><td>Not listed</td><td>3.6</td></tr><tr><td><a class="bl-link" href="#protecto">Protecto</a></td><td>On-Premises Masking for AI Agents</td><td>Format-preserving tokens for AI agents</td><td>SaaS, on-premises, air-gapped</td><td>Contact sales</td><td><a class="bl-link" href="https://www.g2.com/products/protecto/reviews" rel="nofollow noopener" target="_blank">No reviews yet</a></td><td>3.4</td></tr><tr><td><a class="bl-link" href="#azure-ai-language-pii">Azure AI Language PII Detection</a></td><td>Microsoft Shops Redacting Text, Transcripts and Documents</td><td>Detection and redaction API</td><td>Azure or containers</td><td>5,000 records free, then per record</td><td><a class="bl-link" href="https://www.g2.com/products/azure-ai-language/reviews" rel="nofollow noopener" target="_blank">4.3/5 (78)</a></td><td>3.2</td></tr><tr><td><a class="bl-link" href="#skyflow">Skyflow</a></td><td>De-Identification With Re-Identification for Authorized Use</td><td>Detection, tokenization and re-identification</td><td>Hosted vault on AWS</td><td>Contact sales</td><td><a class="bl-link" href="https://www.g2.com/products/skyflow-for-genai/reviews" rel="nofollow noopener" target="_blank">No reviews yet</a></td><td>3.1</td></tr><tr><td><a class="bl-link" href="#openai-privacy-filter">OpenAI Privacy Filter</a></td><td>A Free, Open-Weight Model You Run Locally</td><td>Open-weight detection model</td><td>Local</td><td>Free (Apache 2.0)</td><td>Not listed</td><td>3.1</td></tr><tr><td><a class="bl-link" href="#protegrity">Protegrity</a></td><td>Enterprise Data Platforms That Need Tokenization at Scale</td><td>Vaultless tokenization and masking</td><td>Enterprise platform</td><td>Contact sales</td><td><a class="bl-link" href="https://www.g2.com/products/protegrity/reviews" rel="nofollow noopener" target="_blank">4.5/5 (14)</a></td><td>3.0</td></tr><tr><td><a class="bl-link" href="#amazon-comprehend">Amazon Comprehend</a></td><td>English and Spanish PII Detection on AWS</td><td>PII detection and batch redaction</td><td>AWS</td><td>Per 100-character unit</td><td><a class="bl-link" href="https://www.g2.com/products/amazon-comprehend/reviews" rel="nofollow noopener" target="_blank">4.3/5 (86)</a></td><td>3.0</td></tr></tbody></table></div>
+<div class="bl-evcall" role="note"><p><strong>Protect PII in your AI features without running a container.</strong> Enigma Vault NoPII tokenizes sensitive values before they reach the model provider and restores them in the response. Your first million protected tokens each month are free.</p><div class="bl-evcall__cta"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-limina-alternatives--callout-glance" href="/request-demo/?interest=limina-alternatives"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-evcall__more cta-blog cta-limina-alternatives--callout-glance-explore" href="https://www.enigmavault.io/nopii/">Explore NoPII &rarr;</a></div></div>
+<h2>TL;DR</h2>
+<ul><li><strong>Enigma Vault NoPII (4.0/5):</strong> A hosted proxy for live LLM traffic, free for 1M tokens a month, then $49.</li><li><strong>Tonic Textual (3.9/5):</strong> Consistent synthetic replacement across text, PDFs, Office files and audio; cloud or self-hosted.</li><li><strong>Google Cloud Sensitive Data Protection (3.7/5):</strong> A metered API for redaction and tokenization with a free monthly allowance.</li><li><strong>Presidio (3.6/5):</strong> Free, open-source detection you deploy and maintain yourself.</li><li><strong>Protecto (3.4/5):</strong> Format-preserving tokens for AI agents, deployable on-premises and air-gapped.</li><li><strong>Azure AI Language PII Detection (3.2/5):</strong> Redaction for text, conversations and documents, in Azure or in containers.</li><li><strong>Skyflow (3.1/5):</strong> Detection and tokenization across text, audio and images, with re-identification for authorized use.</li><li><strong>OpenAI Privacy Filter (3.1/5):</strong> A free, open-weight model with eight PII categories that runs locally.</li><li><strong>Protegrity (3.0/5):</strong> Enterprise tokenization and masking for structured data platforms.</li><li><strong>Amazon Comprehend (3.0/5):</strong> PII detection for English and Spanish text, priced per 100 characters.</li></ul>
+<h2>Why Teams Look for Limina Alternatives</h2>
+<p>Limina is strong where it matters most for de-identification: 52 languages, 50+ entity types, audio and images, and a container that keeps data inside your infrastructure. The reasons buyers still evaluate alternatives are about cost visibility, the free tier and operating effort.</p>
+<ul><li><strong>Paid pricing needs a quote:</strong> Batch is volume pricing on request, and Enterprise is custom with committed volume (<a class="bl-link" href="https://www.getlimina.ai/pricing" rel="nofollow noopener" target="_blank">source</a>).</li><li><strong>The free tier is small:</strong> Starter allows up to 75 API calls a day at 10 a minute, with files capped at 250KB for txt, json, csv and xml, and 4MB for other types (<a class="bl-link" href="https://www.getlimina.ai/pricing" rel="nofollow noopener" target="_blank">source</a>).</li><li><strong>You run the container:</strong> Self-hosting is a strength for data sovereignty, and it is also infrastructure your team has to deploy, scale and upgrade.</li><li><strong>Reviewers mention cost:</strong> One G2 reviewer calls it quite pricey (<a class="bl-link" href="https://www.g2.com/products/limina/reviews/limina-review-8146323" rel="nofollow noopener" target="_blank">source</a>).</li></ul>
+<p>If those points match your evaluation, the alternatives below sort by the job you need done.</p>
+<h2>Redaction, Synthesis or Tokenization: Pick the Method First</h2>
+<p>Limina offers all three methods. Most alternatives offer one or two, so start from what happens to the data next.</p>
+<div class="bl-tablewrap"><table class="bl-table"><thead><tr><th>Method</th><th>What replaces the value</th><th>Can the original come back?</th><th>Best for</th><th>Alternatives that offer it</th></tr></thead><tbody><tr><td>Redaction</td><td>A placeholder or nothing</td><td>No</td><td>Sharing documents, breach reporting</td><td>Presidio, Amazon Comprehend, Azure, Google Cloud, OpenAI Privacy Filter</td></tr><tr><td>Synthetic replacement</td><td>A realistic fake value</td><td>No</td><td>Training data, analytics, test data</td><td>Tonic Textual</td></tr><tr><td>Reversible tokenization</td><td>A consistent token</td><td>Yes, for authorized users</td><td>Live AI features, RAG, agents</td><td>Enigma Vault NoPII, Protecto, Skyflow, Protegrity, Tonic Textual</td></tr></tbody></table></div>
+<div class="bl-evcall" role="note"><span class="bl-evcall__tag">Try it</span><p><strong>See tokenization on a real message.</strong> The NoPII live demo shows what your backend, the model provider and NoPII each receive when a message contains a name, email or SSN.</p><div class="bl-evcall__cta"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-limina-alternatives--callout-model" href="/request-demo/?interest=limina-alternatives"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-evcall__more cta-blog cta-limina-alternatives--callout-model-explore" href="/nopii/demo/">Try the live demo &rarr;</a></div></div>
+<h2>How We Scored These Limina Alternatives</h2>
+<p>We scored every provider on the same six criteria, weighted for a team replacing or avoiding Limina. Weights sum to 100%, and the score in the table is the weighted result.</p>
+<ul><li><strong>Pricing transparency and free start (25%):</strong> Published prices and a free way to test on real data.</li><li><strong>Fit for AI applications (20%):</strong> Prompts, responses, RAG and agents.</li><li><strong>Detection breadth (20%):</strong> Entity types, languages and file formats.</li><li><strong>Deployment options (15%):</strong> Hosted, self-hosted, on-premises and air-gapped.</li><li><strong>Reversibility and consistency (10%):</strong> Consistent replacement and the option to restore values.</li><li><strong>Review evidence (10%):</strong> Rating and number of verified reviews on G2 and Capterra.</li></ul>
+<p>Weight detection breadth higher and Tonic Textual and Skyflow climb; weight on-premises deployment higher and Protecto and Presidio climb.</p>
+<h2>The 10 Best Limina Competitors and De-Identification Alternatives</h2>
+<p>Each entry covers what the product is, which part of Limina it replaces, what it costs, where it falls short, and what verified reviewers say.</p>
+<div class="vc">
+<div class="vc__head"><span class="vc__num">01</span>
+<div class="vc__id">
+<h3 id="enigma-vault-nopii" class="vc__name"><span class="vc__sep">1. </span>Enigma Vault NoPII<span class="vc__sep">: </span><span class="vc__pill">Best for Protecting Live LLM Traffic Without Running a Container</span></h3></div>
+<div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/nopii/reviews" target="_blank" rel="nofollow noopener"><span class="vc__score">5.0<small>/5</small></span><span class="vc__src">G2 · 1 review</span></a></div></div><dl class="vc__facts">
+<div><dt>Starting price</dt><dd>Free, then $49 a month</dd></div>
+<div><dt>Free tier or trial</dt><dd>Lite: 1M protected tokens a month, no card</dd></div>
+<div><dt>Deployment</dt><dd>Hosted proxy; self-hosted edition on Enterprise</dd></div>
+<div class="vc__best"><dt>What it replaces from Limina</dt><dd>De-identifying prompts, tool calls and embeddings in real time, with values restored in the response</dd></div></dl></div>
+<div class="tk-carousel tk-single">
+<div class="tk-track"><figure class="tk-slide"><img src="/assets/blog/alternatives/nopii-page-nov2026.jpg" alt="The Enigma Vault NoPII page" width="1470" height="801" loading="lazy" decoding="async"><figcaption>The Enigma Vault NoPII page.</figcaption></figure></div></div>
+<p><a class="bl-link" href="https://www.enigmavault.io/nopii/">Enigma Vault NoPII</a> is an LLM privacy proxy. Your application points its model client at the NoPII base URL, and NoPII swaps sensitive values for deterministic tokens before the request reaches the model provider, then restores them in the response.</p>
+<p>For a Limina buyer, the difference is operational. Limina is a container you run in your VPC or data center and call from your pipelines; NoPII is a hosted proxy you switch on by changing one URL, with every price published. It covers one job, live LLM traffic, and does not do Limina’s batch, document, image or audio de-identification.</p>
+<p><strong>Key features</strong></p>
+<ul><li><strong>Base-URL integration:</strong> Works across OpenAI, Anthropic, Google Gemini and six more providers</li><li><strong>Deterministic tokens:</strong> The same customer is the same token across turns and documents, so the model keeps context</li><li><strong>Round trip:</strong> Real values are restored in the response before your user sees it</li><li><strong>Agent and RAG coverage:</strong> Tool-call arguments and results, system prompts and the embeddings endpoint</li><li><strong>Detection:</strong> 11 entity types on by default, 25+ to opt into, and 14 pattern families of credentials</li><li><strong>Fail-closed:</strong> If tokenization fails, the request is blocked</li></ul>
+<p><strong>Pricing</strong></p>
+<div class="bl-tablewrap"><table class="bl-table"><thead><tr><th>Plan</th><th>Price</th><th>Protected tokens a month</th><th>Beyond the allowance</th></tr></thead><tbody><tr><td>Lite</td><td>$0</td><td>1M (hard cap)</td><td>Upgrade prompt</td></tr><tr><td>Starter</td><td>$49/mo</td><td>50M</td><td>$1.00 per million</td></tr><tr><td>Growth</td><td>$249/mo</td><td>500M</td><td>$0.80 per million</td></tr><tr><td>Business</td><td>$499/mo</td><td>2B</td><td>$0.60 per million</td></tr><tr><td>Enterprise</td><td>Custom</td><td>Custom commit</td><td>Includes the self-hosted edition</td></tr></tbody></table></div>
+<p>Yearly billing saves on Starter, Growth and Business (<a class="bl-link" href="https://www.enigmavault.io/pricing/">pricing page</a>).</p>
+<p><strong>Pros</strong></p>
+<ul><li>Nothing to host: A base-URL change replaces a container, a pipeline and the code that calls it.</li><li>Its free tier is sized for a real pilot: One million protected tokens a month against Limina’s 75 API calls a day.</li><li>Every tier is published, so you can price a year of usage before a sales call.</li></ul>
+<p><strong>Cons</strong></p>
+<ul><li>It scans text only, so PDFs, images and call recordings are out of scope; Limina covers all of them.</li><li>Names and places are detected in English and Hindi, far short of Limina’s 52 languages.</li><li>Self-hosting is an Enterprise-only option, where Limina is self-hosted by default.</li></ul>
+<p><strong>What users say</strong></p>
+<ul><li><strong>Reviews: One G2 review so far:</strong> NoPII has a single 5/5 review on G2, written by a member of the Enigma Vault marketing team, so we do not quote it. The wider Enigma Vault listing has 6 reviews on <a class="bl-link" href="https://www.g2.com/products/enigma-vault/reviews" rel="nofollow noopener" target="_blank">G2</a>.</li></ul>
+<p>Rated <a class="bl-link" href="https://www.g2.com/products/nopii/reviews" rel="nofollow noopener" target="_blank">5.0/5 on G2 from 1 review</a>. No Capterra listing.</p>
+<p><strong>Watch for:</strong> If your Limina workload is batch de-identification of datasets or documents, NoPII is not a replacement; it is a separate layer for live AI traffic.</p>
+<p>See it on a real message in the <a class="bl-link" href="/nopii/demo/">NoPII live demo</a>.</p>
+<div class="bl-evcall" role="note"><p><strong>Keep the context, lose the identifiers.</strong> NoPII tokenizes names, emails and account numbers before the model sees them and restores them in the answer. Start free with one million protected tokens a month.</p><div class="bl-evcall__cta"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-limina-alternatives--callout-nopii" href="/request-demo/?interest=limina-alternatives"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-evcall__more cta-blog cta-limina-alternatives--callout-nopii-explore" href="/nopii/demo/">Try the live demo &rarr;</a></div></div>
+<div class="vc">
+<div class="vc__head"><span class="vc__num">02</span>
+<div class="vc__id">
+<h3 id="tonic-textual" class="vc__name"><span class="vc__sep">2. </span>Tonic Textual<span class="vc__sep">: </span><span class="vc__pill">Best for Consistent Synthetic Data Across Documents and Audio</span></h3></div>
+<div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/tonic-ai/reviews" target="_blank" rel="nofollow noopener"><span class="vc__score">4.2<small>/5</small></span><span class="vc__src">G2 (Tonic.ai) · 38 reviews</span></a></div></div><dl class="vc__facts">
+<div><dt>Starting price</dt><dd>Pay-as-you-go, flat rate per 1,000 words</dd></div>
+<div><dt>Free tier or trial</dt><dd>Not listed on the pricing page</dd></div>
+<div><dt>Deployment</dt><dd>Tonic Cloud, or self-hosted with Kubernetes or Docker</dd></div>
+<div class="vc__best"><dt>What it replaces from Limina</dt><dd>De-identification and synthetic replacement for text, documents and audio used in AI training and sharing</dd></div></dl></div>
+<div class="tk-carousel tk-single">
+<div class="tk-track"><figure class="tk-slide"><img src="/assets/blog/alternatives/tonic-textual-nov2026.jpg" alt="The Tonic Textual page" width="1470" height="801" loading="lazy" decoding="async"><figcaption>The Tonic Textual page.</figcaption></figure></div></div>
+<p><a class="bl-link" href="https://www.tonic.ai/products/textual" rel="nofollow noopener" target="_blank">Tonic Textual</a> de-identifies, redacts and synthesizes unstructured data, giving every person one synthetic identity that stays consistent across files and systems. Limina and Tonic each publish a head-to-head page against the other (<a class="bl-link" href="https://www.getlimina.ai/en/competitive/tonic-ai" rel="nofollow noopener" target="_blank">source</a>) (<a class="bl-link" href="https://www.tonic.ai/alternatives/limina" rel="nofollow noopener" target="_blank">source</a>), which makes it the most direct like-for-like swap on this list.</p>
+<p>For a Limina buyer, Textual is the pick when the output has to stay realistic, for example a training corpus where names must still read like names.</p>
+<p><strong>Key features</strong></p>
+<ul><li><strong>Detection with an LLM check:</strong> An LLM pass removes false positives after the first scan</li><li><strong>Custom entity types:</strong> Train detection on examples from your own data, such as project codenames</li><li><strong>Formats:</strong> Plain text, PDFs, scanned images, Word, Excel, PowerPoint, CSV, JSON, XML, HTML and audio</li><li><strong>Redaction, tokenization or synthesis:</strong> Automatic redaction, reversible tokenization, or consistent synthetic replacement</li><li><strong>RAG enrichment:</strong> Adds entity metadata tags to vector stores</li><li><strong>Deployment:</strong> Tonic Cloud or self-hosted with Kubernetes or Docker, plus Snowflake, AWS and Google Cloud marketplaces</li></ul>
+<p><strong>Pricing</strong></p>
+<div class="bl-tablewrap"><table class="bl-table"><thead><tr><th>Plan</th><th>Price</th><th>What it includes</th></tr></thead><tbody><tr><td>Pay-as-you-go</td><td>Flat rate per 1,000 words (rate not shown)</td><td>Unlimited words scanned, unlimited users and custom detection models, usage dashboard</td></tr><tr><td>Enterprise</td><td>Custom</td><td>Tonic Cloud or self-hosted, dedicated account manager, onboarding support, BAAs</td></tr></tbody></table></div>
+<p><strong>Pros</strong></p>
+<ul><li>The widest file-format list among the alternatives here, including Office files and audio.</li><li>Custom entity types let you catch internal identifiers such as project codenames.</li><li>Cloud or self-hosted, so you can keep Limina’s data-stays-inside model.</li></ul>
+<p><strong>Cons</strong></p>
+<ul><li>The per-word rate is not published, so you cannot model cost without talking to Tonic.</li><li>A reviewer says it can lean toward over-masking.</li><li>G2’s 38 reviews cover all Tonic products, not only Textual.</li></ul>
+<p><strong>What users say</strong></p>
+<ul><li><strong>Likes: Accurate identification and easy use:</strong> A reviewer singles out how effectively Textual identifies sensitive data (<a class="bl-link" href="https://www.g2.com/products/tonic-ai/reviews/tonic-ai-review-12025321" rel="nofollow noopener" target="_blank">source</a>), and another was impressed by how easy it was to use for anonymization (<a class="bl-link" href="https://www.g2.com/products/tonic-ai/reviews/tonic-ai-review-12198206" rel="nofollow noopener" target="_blank">source</a>).</li><li><strong>Dislikes: Over-masking and linking:</strong> One reviewer says it can over-mask (<a class="bl-link" href="https://www.g2.com/products/tonic-ai/reviews/tonic-ai-review-12025321" rel="nofollow noopener" target="_blank">source</a>), and another wants better linking of identical synthesized values (<a class="bl-link" href="https://www.g2.com/products/tonic-ai/reviews/tonic-ai-review-12198206" rel="nofollow noopener" target="_blank">source</a>).</li></ul>
+<p>Tonic.ai is rated <a class="bl-link" href="https://www.g2.com/products/tonic-ai/reviews" rel="nofollow noopener" target="_blank">4.2/5 on G2 from 38 reviews</a> across its products.</p>
+<p><strong>Watch for:</strong> Ask for the per-1,000-word rate in writing and model it against your monthly volume before you compare it with Limina’s committed-volume pricing.</p>
+<div class="vc">
+<div class="vc__head"><span class="vc__num">03</span>
+<div class="vc__id">
+<h3 id="google-cloud-sensitive-data-protection" class="vc__name"><span class="vc__sep">3. </span>Google Cloud Sensitive Data Protection<span class="vc__sep">: </span><span class="vc__pill">Best for Metered De-Identification for Teams on Google Cloud</span></h3></div>
+<div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/sensitive-data-protection/reviews" target="_blank" rel="nofollow noopener"><span class="vc__score">4.2<small>/5</small></span><span class="vc__src">G2 · 12 reviews</span></a></div></div><dl class="vc__facts">
+<div><dt>Starting price</dt><dd>1 GiB free a month, then $3.00 per GiB inspected</dd></div>
+<div><dt>Free tier or trial</dt><dd>1 GiB of inspection and 1 GiB of transformation a month</dd></div>
+<div><dt>Deployment</dt><dd>Google Cloud managed service with API access</dd></div>
+<div class="vc__best"><dt>What it replaces from Limina</dt><dd>Detecting, redacting and tokenizing sensitive data through an API, billed by volume</dd></div></dl></div>
+<div class="tk-carousel tk-single">
+<div class="tk-track"><figure class="tk-slide"><img src="/assets/blog/alternatives/google-sdp-homepage.jpg" alt="The Google Cloud Sensitive Data Protection page" width="1470" height="801" loading="lazy" decoding="async"><figcaption>The Google Cloud Sensitive Data Protection page.</figcaption></figure></div></div>
+<p><a class="bl-link" href="https://cloud.google.com/security/products/sensitive-data-protection" rel="nofollow noopener" target="_blank">Sensitive Data Protection</a> is Google Cloud’s managed service for discovering, classifying and de-identifying sensitive data, formerly Cloud DLP. Google’s own AI Overview for this search lists it as a Limina alternative, and both independent PII redaction roundups we checked include it (<a class="bl-link" href="https://elephas.app/resources/best-pii-redaction-tools" rel="nofollow noopener" target="_blank">source</a>) (<a class="bl-link" href="https://grepture.com/compare/best-pii-redaction-apis-for-llms" rel="nofollow noopener" target="_blank">source</a>).</p>
+<p>For a Limina buyer already on Google Cloud, it removes the container entirely: You call a managed API and pay per gibibyte.</p>
+<p><strong>Key features</strong></p>
+<ul><li><strong>Discovery and classification:</strong> Profiles sensitive data across a Google Cloud organization, including BigQuery</li><li><strong>De-identification:</strong> Redaction and tokenization through the same API</li><li><strong>Chat redaction:</strong> Listed by Google as a common use case</li><li><strong>AI and ML workloads:</strong> Listed by Google as a common use case</li><li><strong>Hybrid use:</strong> API support for data on or off Google Cloud</li></ul>
+<p><strong>Pricing</strong></p>
+<div class="bl-tablewrap"><table class="bl-table"><thead><tr><th>Content method</th><th>0 to 1 GiB</th><th>1 GiB to 1 TiB</th><th>Above 1 TiB</th></tr></thead><tbody><tr><td>Inspection</td><td>Free</td><td>$3.00 per GiB</td><td>$2.00 per GiB</td></tr><tr><td>Transformation</td><td>Free</td><td>$2.00 per GiB</td><td>$1.00 per GiB</td></tr></tbody></table></div>
+<p>Monthly, per account.</p>
+<p><strong>Pros</strong></p>
+<ul><li>Every rate is published, with a free monthly allowance for testing.</li><li>Redaction and tokenization from one API, with no infrastructure to run.</li><li>Reviewers find the API easy to set up and keep current.</li></ul>
+<p><strong>Cons</strong></p>
+<ul><li>Data has to be sent to Google Cloud for processing, the opposite of Limina’s stays-inside model.</li><li>Per-GiB costs need modelling for large backfills.</li><li>A reviewer finds the documentation heavy at first, and another notes that support is mostly paid.</li></ul>
+<p><strong>What users say</strong></p>
+<ul><li><strong>Likes: Easy setup and flexibility:</strong> One reviewer found the DLP API easy to set up (<a class="bl-link" href="https://www.g2.com/products/sensitive-data-protection/reviews/sensitive-data-protection-review-683679" rel="nofollow noopener" target="_blank">source</a>), and another values its scalability and cost savings (<a class="bl-link" href="https://www.g2.com/products/sensitive-data-protection/reviews/sensitive-data-protection-review-8623949" rel="nofollow noopener" target="_blank">source</a>).</li><li><strong>Dislikes: Learning curve and paid support:</strong> A reviewer calls it complex the first time (<a class="bl-link" href="https://www.g2.com/products/sensitive-data-protection/reviews/sensitive-data-protection-review-8623949" rel="nofollow noopener" target="_blank">source</a>), and another notes that support is mostly paid (<a class="bl-link" href="https://www.g2.com/products/sensitive-data-protection/reviews/sensitive-data-protection-review-683679" rel="nofollow noopener" target="_blank">source</a>).</li></ul>
+<p>Rated <a class="bl-link" href="https://www.g2.com/products/sensitive-data-protection/reviews" rel="nofollow noopener" target="_blank">4.2/5 on G2 from 12 reviews</a>. No Capterra listing.</p>
+<p><strong>Watch for:</strong> If you chose Limina because data cannot leave your environment, a managed cloud API changes that answer.</p>
+<div class="vc">
+<div class="vc__head"><span class="vc__num">04</span>
+<div class="vc__id">
+<h3 id="presidio" class="vc__name"><span class="vc__sep">4. </span>Presidio<span class="vc__sep">: </span><span class="vc__pill">Best for Engineering Teams That Want Free, Open-Source Detection</span></h3></div>
+<div class="vc__rates"><span class="vc__rate vc__rate--new"><span class="vc__score">No reviews</span><span class="vc__src">G2 and Capterra</span></span></div></div><dl class="vc__facts">
+<div><dt>Starting price</dt><dd>Free (MIT license)</dd></div>
+<div><dt>Free tier or trial</dt><dd>Open source</dd></div>
+<div><dt>Deployment</dt><dd>Self-run: Python, PySpark, Docker or Kubernetes</dd></div>
+<div class="vc__best"><dt>What it replaces from Limina</dt><dd>Self-hosted PII detection and anonymization for text, images and structured data</dd></div></dl></div>
+<div class="tk-carousel tk-single">
+<div class="tk-track"><figure class="tk-slide"><img src="/assets/blog/alternatives/presidio-github-nov2026.jpg" alt="The Presidio GitHub repository" width="1470" height="801" loading="lazy" decoding="async"><figcaption>The Presidio GitHub repository.</figcaption></figure></div></div>
+<p><a class="bl-link" href="https://github.com/data-privacy-stack/presidio" rel="nofollow noopener" target="_blank">Presidio</a> is an open-source framework for detecting, redacting, masking and anonymizing PII across text, images and structured data. It began at Microsoft and now lives in the data-privacy-stack GitHub organization. Limina publishes its own head-to-head page against it (<a class="bl-link" href="https://www.getlimina.ai/en/competitive/microsoft-presidio" rel="nofollow noopener" target="_blank">source</a>), and Google’s AI Overview for this search names it too.</p>
+<p>For a Limina buyer, Presidio is the build option: It runs in your environment like Limina does, but your team assembles, tunes and maintains it.</p>
+<p><strong>Key features</strong></p>
+<ul><li><strong>Detection:</strong> Recognizers that combine NLP, pattern matching and custom rules</li><li><strong>Image redaction:</strong> Removes PII from standard images and DICOM medical images</li><li><strong>Structured data:</strong> A module for tabular and structured data</li><li><strong>External models:</strong> Connects to other PII detection models</li><li><strong>Deployment:</strong> Runs from Python or PySpark through Docker to Kubernetes</li></ul>
+<p><strong>Pricing</strong></p>
+<div class="bl-tablewrap"><table class="bl-table"><thead><tr><th>Option</th><th>Price</th><th>Notes</th></tr></thead><tbody><tr><td>Open source</td><td>Free (MIT license)</td><td>You host and maintain it</td></tr></tbody></table></div>
+<p><strong>Pros</strong></p>
+<ul><li>No license cost, and it runs anywhere you can run a container.</li><li>Every recognizer is configurable, so you can add identifiers specific to your business.</li><li>Image and DICOM redaction are included.</li></ul>
+<p><strong>Cons</strong></p>
+<ul><li>Presidio’s own README warns there is no guarantee it will find all sensitive information (<a class="bl-link" href="https://github.com/data-privacy-stack/presidio" rel="nofollow noopener" target="_blank">source</a>).</li><li>There is no vendor support, SLA or compliance documentation.</li><li>A production system also needs storage, a proxy and audit logs, which you build yourself.</li></ul>
+<p><strong>What users say</strong></p>
+<ul><li><strong>Reviews: No review-site listing:</strong> Presidio has no G2 or Capterra listing; its GitHub issues and discussions are the main source of user feedback.</li></ul>
+<p>No G2 or Capterra listing.</p>
+<p><strong>Watch for:</strong> Budget the engineering time to tune recognizers on your own data; detection quality depends on that work.</p>
+<div class="vc">
+<div class="vc__head"><span class="vc__num">05</span>
+<div class="vc__id">
+<h3 id="protecto" class="vc__name"><span class="vc__sep">5. </span>Protecto<span class="vc__sep">: </span><span class="vc__pill">Best for On-Premises Masking for AI Agents</span></h3></div>
+<div class="vc__rates"><a class="vc__rate vc__rate--new" href="https://www.g2.com/products/protecto/reviews" target="_blank" rel="nofollow noopener"><span class="vc__score">No reviews</span><span class="vc__src">G2</span></a></div></div><dl class="vc__facts">
+<div><dt>Starting price</dt><dd>Contact sales</dd></div>
+<div><dt>Free tier or trial</dt><dd>Demo</dd></div>
+<div><dt>Deployment</dt><dd>SaaS, on-premises or private cloud, including air-gapped</dd></div>
+<div class="vc__best"><dt>What it replaces from Limina</dt><dd>Masking PII and PHI for AI agents, RAG and model calls inside your own environment, with values restored for authorized calls</dd></div></dl></div>
+<div class="tk-carousel tk-single">
+<div class="tk-track"><figure class="tk-slide"><img src="/assets/blog/alternatives/protecto-homepage.jpg" alt="The Protecto homepage" width="1470" height="801" loading="lazy" decoding="async"><figcaption>The Protecto homepage.</figcaption></figure></div></div>
+<p><a class="bl-link" href="https://www.protecto.ai/" rel="nofollow noopener" target="_blank">Protecto</a> calls itself the data security layer for agentic AI. It maps each real value to the same format-preserving token every time it appears, and its Gateway resolves real values for authorized tool calls. Google’s AI Overview for this search lists it as a Limina alternative, and Protecto publishes its own Limina comparison page (<a class="bl-link" href="https://www.protecto.ai/comparison/protecto-vs-limina-ai/" rel="nofollow noopener" target="_blank">source</a>).</p>
+<p>For a Limina buyer, Protecto keeps the on-premises model and adds controls built for agents and multi-step AI workflows.</p>
+<p><strong>Key features</strong></p>
+<ul><li><strong>Format-preserving tokens:</strong> The same value maps to the same token everywhere, in the original format</li><li><strong>Gateway:</strong> Resolves real values for authorized tool and MCP calls</li><li><strong>Vault APIs:</strong> Direct integration for applications</li><li><strong>Access control:</strong> Shows each user, agent and task only the data it may see</li><li><strong>Deployment:</strong> SaaS, or on-premises and private cloud, including air-gapped</li></ul>
+<p><strong>Pricing</strong></p>
+<div class="bl-tablewrap"><table class="bl-table"><thead><tr><th>Option</th><th>Price</th><th>Notes</th></tr></thead><tbody><tr><td>Protecto</td><td>Quote</td><td>The public pricing page currently returns a not-found page</td></tr></tbody></table></div>
+<p><strong>Pros</strong></p>
+<ul><li>Runs inside your own environment, including air-gapped setups, like Limina.</li><li>Consistent tokens keep context for the model across a conversation.</li><li>SOC 2 Type II, ISO 27001 and HIPAA are listed on its homepage.</li></ul>
+<p><strong>Cons</strong></p>
+<ul><li>The public pricing page has been removed.</li><li>There are no G2 reviews yet to check its claims against.</li><li>It is built around AI workloads more than batch dataset de-identification.</li></ul>
+<p><strong>What users say</strong></p>
+<ul><li><strong>Reviews: No reviews yet:</strong> Protecto has a <a class="bl-link" href="https://www.g2.com/products/protecto/reviews" rel="nofollow noopener" target="_blank">G2 listing</a> with no reviews, so ask for reference customers in your segment.</li></ul>
+<p>No G2 reviews yet. Capterra lists Protecto with no reviews.</p>
+<p><strong>Watch for:</strong> Ask for current pricing in writing, since the public pricing page is gone.</p>
+<p>For more options around this vendor, read our <a class="bl-link" href="/blog/protecto-alternatives/">Protecto alternatives</a>.</p>
+<div class="vc">
+<div class="vc__head"><span class="vc__num">06</span>
+<div class="vc__id">
+<h3 id="azure-ai-language-pii" class="vc__name"><span class="vc__sep">6. </span>Azure AI Language PII Detection<span class="vc__sep">: </span><span class="vc__pill">Best for Microsoft Shops Redacting Text, Transcripts and Documents</span></h3></div>
+<div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/azure-ai-language/reviews" target="_blank" rel="nofollow noopener"><span class="vc__score">4.3<small>/5</small></span><span class="vc__src">G2 (Azure AI Language) · 78 reviews</span></a></div></div><dl class="vc__facts">
+<div><dt>Starting price</dt><dd>Billed per text record</dd></div>
+<div><dt>Free tier or trial</dt><dd>5,000 text records free a month</dd></div>
+<div><dt>Deployment</dt><dd>Azure cloud, or connected and disconnected containers</dd></div>
+<div class="vc__best"><dt>What it replaces from Limina</dt><dd>Detecting and redacting PII in text, conversation transcripts and native documents</dd></div></dl></div>
+<div class="tk-carousel tk-single">
+<div class="tk-track"><figure class="tk-slide"><img src="/assets/blog/alternatives/azure-language-pii-homepage.jpg" alt="The Azure Language PII detection documentation" width="1470" height="801" loading="lazy" decoding="async"><figcaption>The Azure Language PII detection documentation.</figcaption></figure></div></div>
+<p><a class="bl-link" href="https://learn.microsoft.com/en-us/azure/ai-services/language-service/personally-identifiable-information/overview" rel="nofollow noopener" target="_blank">PII detection in Azure Language</a> identifies, classifies and redacts sensitive data across text, conversations and native documents, returning entity categories, confidence scores and redacted output. Limina publishes its own head-to-head page against Azure Language Services (<a class="bl-link" href="https://www.getlimina.ai/en/competitive/azure-language-services" rel="nofollow noopener" target="_blank">source</a>).</p>
+<p>For a Limina buyer in a Microsoft environment, Azure is notable because it can also run in containers, including disconnected ones.</p>
+<p><strong>Key features</strong></p>
+<ul><li><strong>Text PII:</strong> Detects and redacts PII in plain text</li><li><strong>Conversation PII:</strong> Handles multi-turn chats and call transcripts</li><li><strong>Document PII:</strong> Redacts native documents, including PDF, and returns JSON metadata</li><li><strong>Customization:</strong> Entity types, masking styles and exclusions</li><li><strong>Containers:</strong> PII detection and text PII redaction can run in connected or disconnected containers</li></ul>
+<p><strong>Pricing</strong></p>
+<div class="bl-tablewrap"><table class="bl-table"><thead><tr><th>Tier</th><th>Price</th><th>Notes</th></tr></thead><tbody><tr><td>Free</td><td>5,000 text records a month</td><td>Free web tier</td></tr><tr><td>Standard</td><td>Per text record, in tiers</td><td>Rates shown in Azure’s pricing calculator</td></tr><tr><td>Containers</td><td>Connected or disconnected</td><td>PII detection and text PII redaction available</td></tr></tbody></table></div>
+<p><strong>Pros</strong></p>
+<ul><li>Covers text, conversations and documents in one service.</li><li>A container option keeps processing inside your network, close to Limina’s model.</li><li>A free monthly allowance for testing.</li></ul>
+<p><strong>Cons</strong></p>
+<ul><li>Redaction only; the original values do not come back, where Limina offers reversible tokenization.</li><li>Language support differs by feature, with shorter lists for conversation and asynchronous workloads.</li><li>G2’s 78 reviews cover all Azure AI Language features, not only PII.</li></ul>
+<p><strong>What users say</strong></p>
+<ul><li><strong>Likes: Fast insight from large text volumes:</strong> A reviewer likes how quickly it extracts insights from large amounts of text (<a class="bl-link" href="https://www.g2.com/products/azure-ai-language/reviews/azure-ai-language-review-13017464" rel="nofollow noopener" target="_blank">source</a>).</li><li><strong>Dislikes: Learning curve and cost:</strong> One reviewer wants the advanced features to be easier to learn (<a class="bl-link" href="https://www.g2.com/products/azure-ai-language/reviews/azure-ai-language-review-13017464" rel="nofollow noopener" target="_blank">source</a>), and another flags pricing as a concern (<a class="bl-link" href="https://www.g2.com/products/azure-ai-language/reviews/azure-ai-language-review-8894517" rel="nofollow noopener" target="_blank">source</a>).</li></ul>
+<p>Azure AI Language is rated <a class="bl-link" href="https://www.g2.com/products/azure-ai-language/reviews" rel="nofollow noopener" target="_blank">4.3/5 on G2 from 78 reviews</a> across all its features.</p>
+<p><strong>Watch for:</strong> Check the language list for the exact feature you need; text, conversation and document PII each support different languages.</p>
+<div class="vc">
+<div class="vc__head"><span class="vc__num">07</span>
+<div class="vc__id">
+<h3 id="skyflow" class="vc__name"><span class="vc__sep">7. </span>Skyflow<span class="vc__sep">: </span><span class="vc__pill">Best for De-Identification With Re-Identification for Authorized Use</span></h3></div>
+<div class="vc__rates"><a class="vc__rate vc__rate--new" href="https://www.g2.com/products/skyflow-for-genai/reviews" target="_blank" rel="nofollow noopener"><span class="vc__score">No reviews</span><span class="vc__src">G2 (Skyflow for GenAI)</span></a></div></div><dl class="vc__facts">
+<div><dt>Starting price</dt><dd>Contact sales</dd></div>
+<div><dt>Free tier or trial</dt><dd>Demo through the Try Skyflow form</dd></div>
+<div><dt>Deployment</dt><dd>Hosted vault on AWS, with data residency support</dd></div>
+<div class="vc__best"><dt>What it replaces from Limina</dt><dd>Detecting and de-identifying sensitive data in text, audio and images, with re-identification for authorized use</dd></div></dl></div>
+<div class="tk-carousel tk-single">
+<div class="tk-track"><figure class="tk-slide"><img src="/assets/blog/alternatives/skyflow-homepage-nov2026.jpg" alt="The Skyflow homepage" width="1470" height="801" loading="lazy" decoding="async"><figcaption>The Skyflow homepage.</figcaption></figure></div></div>
+<p><a class="bl-link" href="https://www.skyflow.com/" rel="nofollow noopener" target="_blank">Skyflow</a> is a data privacy vault that detects and tokenizes sensitive values at runtime in databases, documents and analytics platforms. Its data security page covers audio, video and text, and sensitive data is only re-identified for authorized use (<a class="bl-link" href="https://www.skyflow.com/data-security-solution" rel="nofollow noopener" target="_blank">source</a>). G2 lists Skyflow for GenAI in the same Data De-Identification category as Limina.</p>
+<p>For a Limina buyer, Skyflow is the option where de-identified values sit in a vault and can be released to authorized users, instead of being removed for good.</p>
+<p><strong>Key features</strong></p>
+<ul><li><strong>Runtime detection:</strong> Detects and tokenizes sensitive values in databases, documents and analytics platforms</li><li><strong>AI lifecycle coverage:</strong> Detects and redacts during data collection, model training and fine-tuning</li><li><strong>Protection methods:</strong> Tokenization and polymorphic encryption</li><li><strong>Re-identification:</strong> Releases original values only for authorized use</li><li><strong>Data residency:</strong> Support for global data residency laws</li><li><strong>Integrations:</strong> AWS, Google Cloud, Snowflake, Databricks, Glean and ServiceNow</li></ul>
+<p><strong>Pricing</strong></p>
+<div class="bl-tablewrap"><table class="bl-table"><thead><tr><th>Option</th><th>Price</th><th>Notes</th></tr></thead><tbody><tr><td>Skyflow</td><td>Quote</td><td>The Try Skyflow page is a demo request form</td></tr></tbody></table></div>
+<p><strong>Pros</strong></p>
+<ul><li>Original values can be released to authorized users from the vault.</li><li>Covers audio and images as well as text, close to Limina’s format range.</li><li>ISO 27001:2022, SOC 2 Type II and PCI DSS Level 1 are listed as certified on its security page.</li></ul>
+<p><strong>Cons</strong></p>
+<ul><li>Its security page says services are deployed on AWS; there is no on-premises container like Limina’s.</li><li>No published pricing.</li><li>Skyflow for GenAI has no G2 reviews yet.</li></ul>
+<p><strong>What users say</strong></p>
+<ul><li><strong>Reviews: No reviews yet:</strong> <a class="bl-link" href="https://www.g2.com/products/skyflow-for-genai/reviews" rel="nofollow noopener" target="_blank">Skyflow for GenAI</a> has no G2 reviews yet, so ask for reference customers.</li></ul>
+<p>No G2 reviews for Skyflow for GenAI yet. No Capterra listing.</p>
+<p><strong>Watch for:</strong> If data must be processed on your own hardware, confirm Skyflow’s deployment options with its team before comparing it with Limina’s container.</p>
+<p>Read our <a class="bl-link" href="/blog/protecto-vs-skyflow/">Protecto vs Skyflow comparison</a> for more on Skyflow’s AI features.</p>
+<div class="vc">
+<div class="vc__head"><span class="vc__num">08</span>
+<div class="vc__id">
+<h3 id="openai-privacy-filter" class="vc__name"><span class="vc__sep">8. </span>OpenAI Privacy Filter<span class="vc__sep">: </span><span class="vc__pill">Best for A Free, Open-Weight Model You Run Locally</span></h3></div>
+<div class="vc__rates"><span class="vc__rate vc__rate--new"><span class="vc__score">No reviews</span><span class="vc__src">G2 and Capterra</span></span></div></div><dl class="vc__facts">
+<div><dt>Starting price</dt><dd>Free (Apache 2.0)</dd></div>
+<div><dt>Free tier or trial</dt><dd>Open weights</dd></div>
+<div><dt>Deployment</dt><dd>Runs locally, on a laptop or in a browser</dd></div>
+<div class="vc__best"><dt>What it replaces from Limina</dt><dd>Detecting and redacting PII in text with a model you host and fine-tune yourself</dd></div></dl></div>
+<div class="tk-carousel tk-single">
+<div class="tk-track"><figure class="tk-slide"><img src="/assets/blog/alternatives/openai-privacy-filter-homepage.jpg" alt="The OpenAI Privacy Filter GitHub repository" width="1470" height="801" loading="lazy" decoding="async"><figcaption>The OpenAI Privacy Filter GitHub repository.</figcaption></figure></div></div>
+<p><a class="bl-link" href="https://github.com/openai/privacy-filter" rel="nofollow noopener" target="_blank">OpenAI Privacy Filter</a> is an open-weight model for detecting and redacting PII in text, released under the Apache 2.0 license. Limina publishes its own comparison page against it (<a class="bl-link" href="https://www.getlimina.ai/en/competitive/openai-privacy-filter" rel="nofollow noopener" target="_blank">source</a>).</p>
+<p>For a Limina buyer, it is a free detector rather than a platform: You get a model to run and fine-tune, and you build the pipeline around it.</p>
+<p><strong>Key features</strong></p>
+<ul><li><strong>Small model:</strong> 1.5B parameters in total and 50M active, so it runs in a browser or on a laptop</li><li><strong>Long context:</strong> A 128,000-token window, with no chunking</li><li><strong>Eight categories:</strong> Account numbers, addresses, emails, names, phones, URLs, dates and secrets</li><li><strong>Fine-tuning:</strong> Adapt the model to your own labeled data</li><li><strong>Local tooling:</strong> A CLI for running, evaluating and fine-tuning</li></ul>
+<p><strong>Pricing</strong></p>
+<div class="bl-tablewrap"><table class="bl-table"><thead><tr><th>Option</th><th>Price</th><th>Notes</th></tr></thead><tbody><tr><td>Open weights</td><td>Free (Apache 2.0)</td><td>You host and maintain it</td></tr></tbody></table></div>
+<p><strong>Pros</strong></p>
+<ul><li>Free, with open weights you can inspect.</li><li>Small enough to run on ordinary hardware, fully inside your environment.</li><li>Fine-tunable for the data you actually handle.</li></ul>
+<p><strong>Cons</strong></p>
+<ul><li>Eight categories, against Limina’s 50+ entity types.</li><li>Changing what it detects means fine-tuning the model.</li><li>No vendor support, audit trail or reversible tokens.</li></ul>
+<p><strong>What users say</strong></p>
+<ul><li><strong>Reviews: No review-site listing:</strong> OpenAI Privacy Filter has no G2 or Capterra listing; its GitHub issues are the main source of user feedback.</li></ul>
+<p>No G2 or Capterra listing.</p>
+<p><strong>Watch for:</strong> It detects PII in text; entity consistency across turns, restoring values and audit logging are yours to build.</p>
+<p>Read our analysis of <a class="bl-link" href="/blog/openai-privacy-vs-nopii/">OpenAI Privacy Filter vs NoPII</a>.</p>
+<div class="vc">
+<div class="vc__head"><span class="vc__num">09</span>
+<div class="vc__id">
+<h3 id="protegrity" class="vc__name"><span class="vc__sep">9. </span>Protegrity<span class="vc__sep">: </span><span class="vc__pill">Best for Enterprise Data Platforms That Need Tokenization at Scale</span></h3></div>
+<div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/protegrity/reviews" target="_blank" rel="nofollow noopener"><span class="vc__score">4.5<small>/5</small></span><span class="vc__src">G2 · 14 reviews</span></a><span class="vc__rate"><span class="vc__score">5.0<small>/5</small></span><span class="vc__src">Capterra · 1 review</span></span></div></div><dl class="vc__facts">
+<div><dt>Starting price</dt><dd>Contact sales</dd></div>
+<div><dt>Free tier or trial</dt><dd>Free AI Developer Edition SDKs</dd></div>
+<div><dt>Deployment</dt><dd>Enterprise platform; current Enterprise deployment is AWS-specific</dd></div>
+<div class="vc__best"><dt>What it replaces from Limina</dt><dd>Tokenization, masking and encryption across databases, data warehouses and AI workflows</dd></div></dl></div>
+<div class="tk-carousel tk-single">
+<div class="tk-track"><figure class="tk-slide"><img src="/assets/blog/alternatives/protegrity-homepage.jpg" alt="The Protegrity homepage" width="1470" height="801" loading="lazy" decoding="async"><figcaption>The Protegrity homepage.</figcaption></figure></div></div>
+<p><a class="bl-link" href="https://www.protegrity.com/" rel="nofollow noopener" target="_blank">Protegrity</a> is an enterprise data protection platform that tokenizes, masks and encrypts sensitive data across databases, data warehouses and AI workflows. Google’s AI Overview for this search lists it first among Limina alternatives, as a strong match for masking, tokenization and privacy compliance.</p>
+<p>For a Limina buyer, Protegrity is the choice when the sensitive data sits in structured platforms such as Snowflake or Databricks rather than in free text.</p>
+<p><strong>Key features</strong></p>
+<ul><li><strong>Vaultless tokenization:</strong> High-speed tokenization that preserves format and performance</li><li><strong>Cloud protectors:</strong> Protect data inside Snowflake, BigQuery, Redshift and other managed services</li><li><strong>Policy management:</strong> One set of rules for redaction, masking, encryption, tokenization and AI guardrails</li><li><strong>AI controls:</strong> Semantic encryption, inference controls and AI guardrails</li><li><strong>Editions:</strong> AI Developer, AI Team and AI Enterprise</li></ul>
+<p><strong>Pricing</strong></p>
+<div class="bl-tablewrap"><table class="bl-table"><thead><tr><th>Edition</th><th>Price</th><th>Notes</th></tr></thead><tbody><tr><td>AI Developer Edition</td><td>Free</td><td>Downloadable SDKs on GitHub</td></tr><tr><td>AI Team Edition</td><td>Quote</td><td>Demo</td></tr><tr><td>AI Enterprise Edition</td><td>Quote</td><td>Current deployment is AWS-specific</td></tr></tbody></table></div>
+<p><strong>Pros</strong></p>
+<ul><li>Built for large structured data estates that Limina is not designed around.</li><li>Native protectors mean data stays usable inside each platform.</li><li>Rated 4.5 on G2 and 5.0 on Capterra.</li></ul>
+<p><strong>Cons</strong></p>
+<ul><li>Not built for de-identifying free text, audio or images the way Limina is.</li><li>The current Enterprise deployment is AWS-specific.</li><li>No published pricing.</li></ul>
+<p><strong>What users say</strong></p>
+<ul><li><strong>Likes: Scale and support:</strong> A reviewer highlights vaultless tokenization that scales to large data protection efforts, deployed on-premises and in public cloud with little effort (<a class="bl-link" href="https://www.g2.com/products/protegrity/reviews/protegrity-review-6909227" rel="nofollow noopener" target="_blank">source</a>), and another praises fast fixes from a support team that knows its product (<a class="bl-link" href="https://www.g2.com/products/protegrity/reviews/protegrity-review-7956211" rel="nofollow noopener" target="_blank">source</a>).</li><li><strong>Dislikes: Price and usability:</strong> One reviewer finds the price range a little high (<a class="bl-link" href="https://www.g2.com/products/protegrity/reviews/protegrity-review-6803062" rel="nofollow noopener" target="_blank">source</a>), and another says user friendliness could improve (<a class="bl-link" href="https://www.g2.com/products/protegrity/reviews/protegrity-review-6943427" rel="nofollow noopener" target="_blank">source</a>).</li></ul>
+<p>Rated <a class="bl-link" href="https://www.g2.com/products/protegrity/reviews" rel="nofollow noopener" target="_blank">4.5/5 on G2 from 14 reviews</a> and 5.0/5 on Capterra from 1 review.</p>
+<p><strong>Watch for:</strong> Map where your sensitive data actually lives; Protegrity fits structured platforms, Limina fits unstructured content.</p>
+<p>For more options around this vendor, read our <a class="bl-link" href="/blog/protegrity-alternatives/">Protegrity alternatives</a>.</p>
+<div class="vc">
+<div class="vc__head"><span class="vc__num">10</span>
+<div class="vc__id">
+<h3 id="amazon-comprehend" class="vc__name"><span class="vc__sep">10. </span>Amazon Comprehend<span class="vc__sep">: </span><span class="vc__pill">Best for English and Spanish PII Detection on AWS</span></h3></div>
+<div class="vc__rates"><a class="vc__rate" href="https://www.g2.com/products/amazon-comprehend/reviews" target="_blank" rel="nofollow noopener"><span class="vc__score">4.3<small>/5</small></span><span class="vc__src">G2 · 86 reviews</span></a></div></div><dl class="vc__facts">
+<div><dt>Starting price</dt><dd>Per 100-character unit, 3-unit minimum per request</dd></div>
+<div><dt>Free tier or trial</dt><dd>50K units a month for 12 months</dd></div>
+<div><dt>Deployment</dt><dd>AWS managed service</dd></div>
+<div class="vc__best"><dt>What it replaces from Limina</dt><dd>Detecting and redacting PII in English or Spanish text through an AWS API</dd></div></dl></div>
+<div class="tk-carousel tk-single">
+<div class="tk-track"><figure class="tk-slide"><img src="/assets/blog/alternatives/amazon-comprehend-homepage.jpg" alt="The Amazon Comprehend page" width="1470" height="801" loading="lazy" decoding="async"><figcaption>The Amazon Comprehend page.</figcaption></figure></div></div>
+<p><a class="bl-link" href="https://aws.amazon.com/comprehend/" rel="nofollow noopener" target="_blank">Amazon Comprehend</a> is AWS’s natural language processing service. Its Detect PII API locates PII entities in English or Spanish text, and its Contains PII API flags whether a document holds PII at all. Limina publishes its own head-to-head page against it (<a class="bl-link" href="https://www.getlimina.ai/en/competitive/aws-comprehend" rel="nofollow noopener" target="_blank">source</a>).</p>
+<p>For a Limina buyer, Comprehend is the simplest swap if your data is English or Spanish text and already lives in AWS.</p>
+<p><strong>Key features</strong></p>
+<ul><li><strong>Detect PII:</strong> Locates PII entities in English or Spanish text</li><li><strong>Contains PII:</strong> Flags whether a document holds chosen PII types, a cheap first pass</li><li><strong>Redaction:</strong> Produces redacted documents through asynchronous batch jobs</li><li><strong>Real-time analysis:</strong> Locates PII in real time through the API or console</li><li><strong>AWS integration:</strong> Reads documents from Amazon S3</li></ul>
+<p><strong>Pricing</strong></p>
+<div class="bl-tablewrap"><table class="bl-table"><thead><tr><th>Item</th><th>Price</th><th>Notes</th></tr></thead><tbody><tr><td>Free tier</td><td>50K units of text a month per API</td><td>For 12 months from your first request</td></tr><tr><td>Detect PII and Contains PII</td><td>Per 100-character unit</td><td>3-unit (300-character) minimum per request</td></tr><tr><td>Above 100M units a month</td><td>Contact AWS</td><td>Volume pricing</td></tr></tbody></table></div>
+<p><strong>Pros</strong></p>
+<ul><li>Pay per use with a free tier, and nothing to deploy if you run on AWS.</li><li>The largest G2 review base among the APIs here.</li><li>Contains PII is a cheap way to triage which documents need redaction at all.</li></ul>
+<p><strong>Cons</strong></p>
+<ul><li>PII detection covers English and Spanish text only (<a class="bl-link" href="https://docs.aws.amazon.com/comprehend/latest/dg/pii.html" rel="nofollow noopener" target="_blank">source</a>).</li><li>Redaction requires an asynchronous batch job.</li><li>No images, audio or on-premises container.</li></ul>
+<p><strong>What users say</strong></p>
+<ul><li><strong>Likes: Fast text processing:</strong> Reviewers value how quickly it processes large amounts of text (<a class="bl-link" href="https://www.g2.com/products/amazon-comprehend/reviews/amazon-comprehend-review-13484118" rel="nofollow noopener" target="_blank">source</a>) and how it analyzes text without building models (<a class="bl-link" href="https://www.g2.com/products/amazon-comprehend/reviews/amazon-comprehend-review-12928326" rel="nofollow noopener" target="_blank">source</a>).</li><li><strong>Dislikes: Accuracy on specialist content:</strong> One reviewer found accuracy inconsistent for domain-specific content (<a class="bl-link" href="https://www.g2.com/products/amazon-comprehend/reviews/amazon-comprehend-review-12928326" rel="nofollow noopener" target="_blank">source</a>), and another says setup takes technical effort (<a class="bl-link" href="https://www.g2.com/products/amazon-comprehend/reviews/amazon-comprehend-review-13484118" rel="nofollow noopener" target="_blank">source</a>).</li></ul>
+<p>Rated <a class="bl-link" href="https://www.g2.com/products/amazon-comprehend/reviews" rel="nofollow noopener" target="_blank">4.3/5 on G2 from 86 reviews</a> across all Comprehend uses. Capterra lists it with no reviews.</p>
+<p><strong>Watch for:</strong> Language coverage. If any of your data is outside English and Spanish, Comprehend cannot replace Limina for it.</p>
+<h2>Limina vs Enigma Vault NoPII</h2>
+<p>Both protect sensitive data headed for AI models, from opposite directions. Limina is a de-identification engine you run and call; NoPII is a proxy that sits in your model traffic.</p>
+<div class="bl-tablewrap bl-tablewrap--tri"><table class="bl-table bl-table--tri"><thead><tr><th></th><th>Limina</th><th class="bl-tri__ev"><span class="bl-tri__tag">Also consider</span>Enigma Vault NoPII</th></tr></thead><tbody><tr><td>How you run it</td><td>Container in your VPC or on-premises</td><td class="bl-tri__ev">Hosted proxy; self-hosted on Enterprise</td></tr><tr><td>How you integrate</td><td>Call the API from your pipeline</td><td class="bl-tri__ev">Change your model client’s base URL</td></tr><tr><td>Methods</td><td>Redact, pseudonymize, reversible tokens, synthetic</td><td class="bl-tri__ev">Deterministic tokens restored in the response</td></tr><tr><td>Data types</td><td>Text, PDFs, images, audio, structured data</td><td class="bl-tri__ev">Text: messages, prompts, tool calls, embeddings</td></tr><tr><td>Languages</td><td>52</td><td class="bl-tri__ev">Names and places in English and Hindi; patterns in most languages</td></tr><tr><td>Free tier</td><td>75 API calls a day</td><td class="bl-tri__ev">1M protected tokens a month</td></tr><tr><td>Paid pricing</td><td>Quote</td><td class="bl-tri__ev">$49, $249, $499 a month</td></tr><tr class="bl-tri__cta"><td>Next step</td><td colspan="1" class="bl-tri__note">One million protected tokens a month free. No card needed.</td><td class="bl-tri__ev"><div class="bl-tri__acts"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-limina-alternatives--table-core" href="/request-demo/?interest=limina-alternatives"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-tri__more cta-blog cta-limina-alternatives--table-core-explore" href="/nopii/demo/">Try the live demo &rarr;</a></div></td></tr></tbody></table></div>
+<p>Limina covers far more data types and languages. NoPII is the faster path for one job: Keeping identifiers out of the prompts your application sends to a model.</p>
+<h2>How to Choose a Limina Alternative</h2>
+<p><strong>Is the data live or at rest?</strong> Live prompts and agent calls point to NoPII, Protecto or Skyflow. Datasets, documents and recordings point to Tonic Textual, Presidio or a cloud API.</p>
+<p><strong>Can the data leave your environment?</strong> If not, your shortlist is Presidio, Tonic Textual self-hosted, Protecto, Azure containers or the OpenAI model. Google Cloud and Amazon Comprehend process data in their clouds.</p>
+<p><strong>Which languages and formats matter?</strong> Limina’s 52 languages and audio support are hard to match. Comprehend covers English and Spanish text only, and the OpenAI model covers eight categories.</p>
+<p><strong>Do you need the original values back?</strong> If yes, you need reversible tokenization: NoPII, Protecto, Skyflow, Protegrity or Tonic Textual.</p>
+<h2>Best Limina Alternative by Scenario</h2>
+<div class="bl-tablewrap"><table class="bl-table"><thead><tr><th>Scenario</th><th>Best pick</th><th>Why</th></tr></thead><tbody><tr><td>AI features that must show real values to users</td><td><a class="bl-link" href="#enigma-vault-nopii">Enigma Vault NoPII</a></td><td>Tokenizes in the request and restores in the response</td></tr><tr><td>Training data from documents and audio</td><td><a class="bl-link" href="#tonic-textual">Tonic Textual</a></td><td>Consistent synthesis across text, PDFs, Office files and audio</td></tr><tr><td>Already on Google Cloud</td><td><a class="bl-link" href="#google-cloud-sensitive-data-protection">Google Cloud Sensitive Data Protection</a></td><td>Metered API with a free monthly allowance</td></tr><tr><td>No budget, strong engineering team</td><td><a class="bl-link" href="#presidio">Presidio</a></td><td>Free and open source</td></tr><tr><td>Air-gapped AI agents</td><td><a class="bl-link" href="#protecto">Protecto</a></td><td>On-premises and air-gapped deployment</td></tr><tr><td>Microsoft shop with transcripts</td><td><a class="bl-link" href="#azure-ai-language-pii">Azure AI Language PII Detection</a></td><td>Text, conversation and document PII, with containers</td></tr><tr><td>Broad detection with re-identification</td><td><a class="bl-link" href="#skyflow">Skyflow</a></td><td>Text, audio and images, with re-identification for authorized use</td></tr><tr><td>Free local model for an offline pipeline</td><td><a class="bl-link" href="#openai-privacy-filter">OpenAI Privacy Filter</a></td><td>Open weights you can fine-tune</td></tr><tr><td>Structured data platforms</td><td><a class="bl-link" href="#protegrity">Protegrity</a></td><td>Protectors for Snowflake, BigQuery and Redshift, plus Databricks</td></tr><tr><td>English or Spanish text on AWS</td><td><a class="bl-link" href="#amazon-comprehend">Amazon Comprehend</a></td><td>Pay-per-use PII detection</td></tr></tbody></table></div>
+<h2>What Moving Off Limina Actually Involves</h2>
+<ul><li><strong>Inventory your entity types:</strong> List the Limina entities and languages you rely on, and check each against the replacement before you sign.</li><li><strong>Decide what happens to existing output:</strong> Data already de-identified by Limina stays that way. If you used reversible tokens, plan how you will re-identify historical records.</li><li><strong>Re-run your accuracy test:</strong> Every engine misses different things. Run the same labelled sample through Limina and the replacement before cutting over.</li><li><strong>Check where processing happens:</strong> Moving from a container in your VPC to a cloud API changes your data flow, and may need a fresh review from compliance.</li><li><strong>Run both in parallel:</strong> Send the same traffic through both for a few weeks and compare what each catches.</li></ul>
+<h2>Try Enigma Vault NoPII on Your Own Traffic</h2>
+<p>If the part of Limina you are replacing is protecting the prompts your application sends to a model, you can prove NoPII on your own traffic without deploying anything. The free plan is a permanent tier, not a trial, and switching is a base-URL change.</p>
+<div class="bl-tablewrap"><table class="bl-table"><thead><tr><th>What the free Lite plan includes</th><th>Detail</th></tr></thead><tbody><tr><td>Protected tokens</td><td>1M a month, hard cap, no credit card</td></tr><tr><td>Model providers</td><td>Every supported provider, including OpenAI, Anthropic and Google Gemini</td></tr><tr><td>Protection</td><td>PII detection and tokenization, with values restored in the response</td></tr><tr><td>Audit</td><td>Full audit trail with 7-day log history</td></tr><tr><td>Limits</td><td>1 workspace, 1 user, 25 custom terms, 60 requests a minute per key, 1-day token retention</td></tr><tr><td>Upgrade path</td><td>Starter at $49 a month for 50M tokens, with no re-integration</td></tr></tbody></table></div>
+<p><strong>How to run a fair test in a week</strong></p>
+<ol><li><strong>Pick the live workload:</strong> Choose an AI feature where Limina, or the pipeline around it, protects prompts before they reach a model.</li><li><strong>Point it at NoPII:</strong> Change the model client’s base URL to NoPII in a staging environment. There is no container to deploy.</li><li><strong>Use the same test set:</strong> Run the labelled sample you used to evaluate Limina, so detection results are comparable.</li><li><strong>Check what left your system:</strong> Use the audit trail to confirm each identifier reached the model provider as a token.</li><li><strong>Check the answers:</strong> Confirm real values come back in responses and that multi-turn conversations keep their context.</li><li><strong>Size the plan:</strong> Use the token count from the trial to choose a plan, and keep Limina for documents, audio and batch jobs if you need them.</li></ol>
+<p><strong>When NoPII is not the right fit:</strong> If your work is de-identifying documents, images, audio or whole datasets, or you need 52 languages, Limina or Tonic Textual covers that better. NoPII is built for one job, live LLM traffic, and many teams run it alongside a de-identification engine.</p>
+<div class="bl-inlinecta"><div><p class="bl-inlinecta__t">Keep PII out of your model calls.</p><p class="bl-inlinecta__s">Book a demo to map your AI data path, or <a class="cta-blog cta-limina-alternatives--final-explore" href="/nopii/demo/">try the live demo</a> first. If a de-identification engine on this list fits you better, we will say so.</p></div><a class="np-btn np-btn--on-dark np-btn--primary cta-blog cta-limina-alternatives--final" href="/request-demo/?interest=limina-alternatives"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a></div>
+<p>More comparisons: <a class="bl-link" href="/blog/protecto-alternatives/">Protecto alternatives</a>, <a class="bl-link" href="/blog/nightfall-alternatives/">Nightfall alternatives</a> and <a class="bl-link" href="/blog/enigma-vault-nopii-vs-protecto/">Enigma Vault NoPII vs Protecto</a>.</p>

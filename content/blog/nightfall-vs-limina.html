@@ -1,0 +1,265 @@
+---
+title: "Nightfall or Limina? A 2026 Comparison for Engineering Teams"
+slug: "nightfall-vs-limina"
+layout: "pii-style"
+metaTitle: "Nightfall or Limina? A 2026 Comparison for Engineering Teams"
+description: "Nightfall vs Limina compared on architecture, deployment, data types, languages, pricing, compliance, and reviews, with Enigma Vault NoPII as a third option."
+subtitle: "Choose Nightfall if your security team needs to watch what people send to AI tools and SaaS apps, choose Limina to de-identify text, files, and audio inside your own environment, and look at Enigma Vault NoPII if you want published prices for PII in your LLM calls."
+date: 2026-11-22
+category: "NoPII"
+allOnly: true
+author: "abhilash-kumar"
+readTime: 16
+heroImage: "/assets/blog/img-02.png"
+heroAlt: "Nightfall vs Limina comparison"
+excerpt: "A SaaS data loss prevention platform against a self-hostable redaction engine, compared feature by feature, with Enigma Vault NoPII as a third column."
+tags: ["comparison", "llm-privacy", "nopii"]
+ogType: article
+styles: ["blog.css", "pages/blog-pii-hero.css", "tr-pages.css", "pages/vs-tri-table.css"]
+scripts: ["blog-article.js", "pages/vs-tri-table.js"]
+faqSchema: true
+faqs:
+  - q: "Is Nightfall or Limina Cheaper?"
+    a: "Neither publishes production prices. Nightfall prices its Foundation and Premier editions per user per year by quote, and its Developer API is free for 3 GB of scanned data a month, then priced by volume. Limina’s Starter plan is free for 75 API calls a day, and its Batch and Enterprise plans are quoted by volume and deployment. Enigma Vault NoPII publishes every tier, starting free, with plans at $49, $249, and $499 a month."
+  - q: "What Is the Main Difference Between Nightfall and Limina?"
+    a: "Nightfall is a SaaS data loss prevention platform: it watches what employees paste into AI tools and share in SaaS apps, through browser plugins, an endpoint agent, and API connectors. Limina, formerly Private AI, is a PII detection and de-identification engine that your systems send data to, and it can run as a container in your own VPC or on-premises."
+  - q: "Can Nightfall Run Inside My Own VPC Like Limina?"
+    a: "We found no on-premises or VPC option in Nightfall’s documentation. Nightfall runs as SaaS, with browser plugins and an endpoint agent on your devices, and its security page names US hosting. Limina runs as a container in your VPC or on-premises, through the AWS, Snowflake, and Azure marketplaces, or as SaaS."
+  - q: "Is Limina the Same Company as Private AI?"
+    a: "Yes. Limina announced in March 2026 that Private AI had rebranded as Limina, and it said the API, features, and deployment did not change. The old Private AI domain redirects to getlimina.ai, and many of Limina’s G2 reviews still use the Private AI name."
+  - q: "Do Nightfall and Limina Offer Free Plans?"
+    a: "Both offer a free developer option. Limina’s Starter plan allows 75 API calls a day at 10 a minute, with files capped at 250 KB for text, JSON, CSV, and XML and 4 MB for other types. Nightfall’s Developer API is free for 3 GB of scanned data a month, and its business editions start with a free proof of value instead of a self-serve plan."
+  - q: "Which Is Better for Audio, Documents, and DICOM?"
+    a: "Limina is built for it. It says it handles audio through transcription, images and scanned documents through OCR, native PDFs, Office files, and DICOM. Nightfall scans text and file uploads across its channels and offers asynchronous file scanning in its Developer API, but we found no audio or DICOM support listed."
+  - q: "Which Is Better for Stopping Employees Pasting Data Into AI Tools?"
+    a: "Nightfall. Its browser plugins and endpoint agent watch prompts, copy and paste, and uploads into tools such as ChatGPT, Claude, Gemini, and Copilot, and can block, redact, or coach in the moment. Limina has no workforce monitoring; it only sees data your systems send to it."
+  - q: "What Is a Lower-Cost Alternative to Nightfall and Limina for LLM Calls?"
+    a: "Enigma Vault NoPII is a proxy in front of your LLM API calls. Data is tokenized before it reaches the model provider and real values are restored in the response, with a base-URL change, a free tier of one million protected tokens a month, and published plans from $49 a month. It covers text only and does not monitor employees."
+---
+<p>Nightfall and Limina, formerly Private AI, both find sensitive data such as names, card numbers, and health details, and both can redact it before it goes somewhere it should not.</p>
+<p>Nightfall is best for security teams that need to watch what people send to AI tools and SaaS apps, while Limina is best for engineering and data teams that need to de-identify text, documents, and audio inside their own environment.</p>
+<p>This guide compares Nightfall and Limina on architecture, features, pricing, compliance, and reviews, with Enigma Vault NoPII alongside as a third option for teams that want published prices for PII in their LLM calls.</p>
+
+<h2>Nightfall vs Limina at a Glance</h2>
+<div class="bl-tablewrap bl-tablewrap--tri"><table class="bl-table bl-table--tri"><thead><tr><th>Vendor</th><th>Nightfall</th><th>Limina</th><th class="bl-tri__ev"><span class="bl-tri__tag">Also consider</span>Enigma Vault NoPII</th></tr></thead><tbody>
+<tr><td>Best for</td><td>Security teams watching employees, AI tools, and SaaS apps</td><td>Teams de-identifying text, files, and audio in their own environment</td><td class="bl-tri__ev">Teams keeping PII out of their app’s LLM calls at published prices</td></tr>
+<tr><td>Entry price</td><td>Per user per year, by quote</td><td>Batch and Enterprise, by quote</td><td class="bl-tri__ev">Free, then $49/mo</td></tr>
+<tr><td>Free option</td><td>Developer API free to 3 GB a month; proof of value for editions</td><td>Starter: 75 API calls a day</td><td class="bl-tri__ev">Lite: 1M protected tokens a month</td></tr>
+<tr><td>Architecture</td><td>SaaS, with browser plugins, an endpoint agent, and API connectors</td><td>Container in your VPC or on-premises, marketplaces, or SaaS</td><td class="bl-tri__ev">Proxy for LLM API calls; self-hosted edition on Enterprise</td></tr>
+<tr><td>G2</td><td><a class="bl-link" href="https://www.g2.com/products/nightfall-ai/reviews" rel="nofollow noopener" target="_blank">4.6/5 (101)</a></td><td><a class="bl-link" href="https://www.g2.com/products/limina/reviews" rel="nofollow noopener" target="_blank">4.6/5 (22)</a></td><td class="bl-tri__ev"><a class="bl-link" href="https://www.g2.com/products/nopii/reviews" rel="nofollow noopener" target="_blank">5/5 (1)</a></td></tr>
+<tr><td>Capterra</td><td><a class="bl-link" href="https://www.capterra.com/p/211481/Nightfall-DLP/" rel="nofollow noopener" target="_blank">5.0/5 (2)</a></td><td>No listing found</td><td class="bl-tri__ev">No listing</td></tr>
+<tr class="bl-tri__cta"><td>Next step</td><td colspan="2" class="bl-tri__note">Free Lite tier, no card needed. Published plans from $49 a month.</td><td class="bl-tri__ev"><div class="bl-tri__acts"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-nightfall-vs-limina--table-glance" href="/request-demo/?interest=nightfall-vs-limina"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-tri__more cta-blog cta-nightfall-vs-limina--table-glance-explore" href="/nopii/">Explore Enigma Vault NoPII &rarr;</a></div></td></tr>
+</tbody></table></div>
+<p>Pricing and product facts were checked on 22 November 2026 on each vendor’s own site and docs, and G2 and Capterra figures are as of 22 November 2026. For more options, see our guides to <a class="bl-link" href="/blog/nightfall-alternatives/">Nightfall alternatives</a> and <a class="bl-link" href="/blog/limina-alternatives/">Limina alternatives</a>.</p>
+
+<h2>Nightfall vs Limina: Quick Verdict</h2>
+<p><strong>Nightfall:</strong> An AI-native data loss prevention (DLP) platform. It watches prompts, copy and paste, and uploads into AI tools through browser plugins and a macOS and Windows endpoint agent, scans SaaS apps such as Slack and Google Drive through APIs, and offers a Developer API that can mask, substitute, or encrypt findings. Its Foundation and Premier editions are priced per user per year by quote.</p>
+<p><strong>Limina (formerly Private AI):</strong> A de-identification engine that detects 50+ entity types and can redact, pseudonymize, tokenize, or replace them with synthetic values across text, documents, images, audio, and DICOM. It runs as a single container in your own environment or as SaaS. Private AI rebranded as Limina in March 2026, and Limina says the API, features, and deployment did not change.</p>
+<div class="bl-evcall" role="note"><span class="bl-evcall__tag">Also consider</span><p><strong>Enigma Vault NoPII:</strong> A proxy that tokenizes PII in your LLM API calls before it reaches the model provider and restores real values in the response, with a base-URL change. It is free for one million protected tokens a month, with published plans from $49 to $499 a month.</p><div class="bl-evcall__cta"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-nightfall-vs-limina--callout-verdict" href="/request-demo/?interest=nightfall-vs-limina"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-evcall__more cta-blog cta-nightfall-vs-limina--callout-verdict-explore" href="/nopii/">Explore Enigma Vault NoPII &rarr;</a></div></div>
+<p>Go with <strong>Nightfall</strong> if:</p>
+<ul>
+<li>Your risk is people: employees pasting customer data into ChatGPT, Claude, or Copilot, or sharing files in Slack and Drive.</li>
+<li>You want alerts, blocking, and in-the-moment coaching managed by a security team.</li>
+<li>You are comfortable with a SaaS vendor processing the data it scans.</li>
+</ul>
+<p>Go with <strong>Limina</strong> if:</p>
+<ul>
+<li>Your risk is datasets: transcripts, claims files, scanned forms, or medical images you need to clean before analytics or model training.</li>
+<li>Policy says sensitive data cannot leave your VPC or data center, even to a detection vendor.</li>
+<li>You work in languages other than English or with regional identifiers such as Canadian SINs or UK NHS numbers.</li>
+</ul>
+<p>Go with <strong>Enigma Vault NoPII</strong> if:</p>
+<ul>
+<li>Your own application sends customer text to OpenAI, Anthropic, Gemini, or another model provider.</li>
+<li>The reply has to come back with real values in it, and you would rather change a base URL than add redact and re-identify calls.</li>
+<li>You do not need workforce monitoring or document, audio, and DICOM de-identification.</li>
+</ul>
+<p><strong>The short version:</strong> Nightfall polices data in motion across a workforce, Limina prepares data for use inside your own infrastructure, and Enigma Vault NoPII keeps PII out of your app’s LLM calls at published prices for teams that need neither.</p>
+
+<h2>How Nightfall and Limina Differ at the Core</h2>
+<p>Nightfall watches the places your data goes (browsers, devices, and SaaS apps) and acts when a person moves something sensitive, whereas Limina waits for your systems to send it data and returns a cleaned version. That difference shapes who runs each product, where the data is processed, and how it is priced.</p>
+<p>To make it concrete, follow one customer record: a recorded support call with a name, a card number, and a date of birth.</p>
+<div class="bl-tablewrap bl-tablewrap--tri"><table class="bl-table bl-table--tri"><thead><tr><th>Step</th><th>Nightfall</th><th>Limina</th><th class="bl-tri__ev"><span class="bl-tri__tag">Also consider</span>Enigma Vault NoPII</th></tr></thead><tbody>
+<tr><td>An agent saves the call notes to Google Drive</td><td>Drive connector flags the card number and can alert or remediate</td><td>Not involved unless you send the file</td><td class="bl-tri__ev">Not involved</td></tr>
+<tr><td>An analyst pastes the notes into ChatGPT</td><td>Browser plugin or endpoint agent can block, redact, or coach</td><td>Not involved</td><td class="bl-tri__ev">Not involved</td></tr>
+<tr><td>The data team builds a training set from 10,000 call recordings</td><td>Possible through the Developer API for text; audio not listed</td><td>Transcribes and redacts audio and text in your container</td><td class="bl-tri__ev">Not covered</td></tr>
+<tr><td>Your product summarizes the call with an LLM</td><td>Scan API before the call; placeholders stay in the reply</td><td>Redact before the call, then a re-identify route on the reply</td><td class="bl-tri__ev">Tokenized in the proxy; real values restored in the reply</td></tr>
+<tr><td>Who runs it</td><td>A security team, with agents deployed to devices</td><td>An engineering or data team, operating the container</td><td class="bl-tri__ev">The engineers who own the LLM feature</td></tr>
+<tr class="bl-tri__cta"><td>Next step</td><td colspan="2" class="bl-tri__note">Nightfall’s Developer API, Limina’s Starter, and Enigma Vault NoPII’s Lite are all free to try. Enigma Vault NoPII’s first paid plan is $49 a month.</td><td class="bl-tri__ev"><div class="bl-tri__acts"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-nightfall-vs-limina--table-core" href="/request-demo/?interest=nightfall-vs-limina"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-tri__more cta-blog cta-nightfall-vs-limina--table-core-explore" href="/nopii/">Explore Enigma Vault NoPII &rarr;</a></div></td></tr>
+</tbody></table></div>
+<p><strong>Nightfall’s Model:</strong> Coverage of people and apps. Policies decide what counts as sensitive, and Nightfall alerts, blocks, redacts, or coaches wherever an employee moves data. It is built for a security team that wants visibility across a company.</p>
+<p><strong>Limina’s Model:</strong> A control point that data passes through before it is used. Your pipelines send text, files, or audio, and Limina returns a redacted, tokenized, or synthetic version, inside your network if you self-host.</p>
+<div class="bl-evcall" role="note"><span class="bl-evcall__tag">Enigma Vault NoPII</span><p><strong>Enigma Vault NoPII’s Model:</strong> A proxy in the request path of your LLM calls. It tokenizes PII on the way out, keeps the same token for the same value across a conversation, and restores real values in the response, including streams.</p><div class="bl-evcall__cta"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-nightfall-vs-limina--callout-model" href="/request-demo/?interest=nightfall-vs-limina"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-evcall__more cta-blog cta-nightfall-vs-limina--callout-model-explore" href="/nopii/">Explore Enigma Vault NoPII &rarr;</a></div></div>
+<p>If your checklist is mostly the first two rows, Nightfall’s model fits, because Limina does not try to watch people. If it is mostly the third, Limina’s fits, and Nightfall’s workforce coverage is cost you will not use. If it is the fourth, all three compete, and Enigma Vault NoPII’s fits with the least code.</p>
+
+<h2>Nightfall vs Limina Features Compared</h2>
+<p>Compare Nightfall and Limina on detection, redaction, data types, coverage, and deployment. Limina reads more kinds of data, whereas Nightfall watches more places.</p>
+<div class="bl-tablewrap bl-tablewrap--tri"><table class="bl-table bl-table--tri"><thead><tr><th>Feature</th><th>Nightfall</th><th>Limina</th><th class="bl-tri__ev"><span class="bl-tri__tag">Also consider</span>Enigma Vault NoPII</th></tr></thead><tbody>
+<tr><td>Core model</td><td>SaaS DLP with plugins, endpoint agent, and API connectors</td><td>De-identification engine called by API</td><td class="bl-tri__ev">Proxy for LLM API calls</td></tr>
+<tr><td>Entity coverage</td><td>Total not published; custom regex, word lists, and fingerprints</td><td>50+ types across PII, PHI, PCI, and confidential company information</td><td class="bl-tri__ev">11 on by default, 25+ opt-in, 14 credential families</td></tr>
+<tr><td>Languages</td><td>Not published; custom regex detectors</td><td>52 on its pricing page; 49+ in its docs</td><td class="bl-tri__ev">Pattern types in most languages; names in English and Hindi (beta)</td></tr>
+<tr><td>Redaction modes</td><td>Mask, substitute a phrase, substitute detector name, or encrypt</td><td>Redact, pseudonymize, tokenize, synthetic replacement</td><td class="bl-tri__ev">Consistent tokens</td></tr>
+<tr><td>Restoring values</td><td>Decrypt with your own RSA key</td><td>Re-identify route for LLM responses</td><td class="bl-tri__ev">Automatic in the response, including streams</td></tr>
+<tr><td>Documents and images</td><td>File uploads scanned; asynchronous file scanning in the API</td><td>Native and scanned PDF, Office files, and images through OCR</td><td class="bl-tri__ev"><span class="bl-tri__no">Not covered</span></td></tr>
+<tr><td>Audio</td><td><span class="bl-tri__no">Not listed</span></td><td>WAV, MP3, and M4A through transcription</td><td class="bl-tri__ev"><span class="bl-tri__no">Not covered</span></td></tr>
+<tr><td>DICOM</td><td><span class="bl-tri__no">Not listed</span></td><td>Supported</td><td class="bl-tri__ev"><span class="bl-tri__no">Not covered</span></td></tr>
+<tr><td>Employee AI tools</td><td>ChatGPT, Gemini, Copilot, Claude, and others through plugins and agent</td><td><span class="bl-tri__no">Not covered</span></td><td class="bl-tri__ev"><span class="bl-tri__no">Not covered</span></td></tr>
+<tr><td>SaaS apps</td><td>Supported apps through APIs, including Slack and Google Drive</td><td><span class="bl-tri__no">Not covered</span></td><td class="bl-tri__ev"><span class="bl-tri__no">Not covered</span></td></tr>
+<tr><td>Coding tools and MCP</td><td>Cursor, Claude Code, and VS Code hooks; MCP inventory (Premier)</td><td><span class="bl-tri__no">Not listed</span></td><td class="bl-tri__ev">Tool-call arguments and results tokenized</td></tr>
+<tr><td>SIEM export</td><td>Splunk, Panther, and Sumo (Premier)</td><td>Not listed</td><td class="bl-tri__ev">Audit trail on every plan</td></tr>
+<tr><td>Deployment</td><td>SaaS; no on-premises or VPC option found</td><td>Container in your VPC or on-premises, AWS, Snowflake, and Azure marketplaces, or SaaS</td><td class="bl-tri__ev">Managed; self-hosted edition on Enterprise</td></tr>
+<tr><td>Data location</td><td>Nightfall’s cloud, US hosting</td><td>Your environment when self-hosted; regional deployment on Enterprise</td><td class="bl-tri__ev">NoPII Cloud, or yours on Enterprise</td></tr>
+<tr class="bl-tri__cta"><td>Next step</td><td colspan="2" class="bl-tri__note">Check which features each vendor ships on the plan you would use. Limina’s language count differs across its pages, so ask for the list.</td><td class="bl-tri__ev"><div class="bl-tri__acts"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-nightfall-vs-limina--table-features" href="/request-demo/?interest=nightfall-vs-limina"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-tri__more cta-blog cta-nightfall-vs-limina--table-features-explore" href="/nopii/">Explore Enigma Vault NoPII &rarr;</a></div></td></tr>
+</tbody></table></div>
+<p>Here is how the biggest differences play out in practice.</p>
+
+<h2>Where Nightfall and Limina Differ in Practice</h2>
+
+<h3>Developer Experience and Time to First Call</h3>
+<p>Limina’s Starter plan is free for 75 calls a day at 10 a minute, which is enough to test accuracy on a sample of your documents, images, and audio clips, and its 4 MB file cap covers most PDFs and short recordings. It is not enough to benchmark throughput, and it runs on Limina’s hosted service, so it does not test the self-hosted container you would deploy.</p>
+<p>Nightfall’s Developer API is free for 3 GB of scanned data a month, with up to 500 KB per request, which is generous for text and the right place to test its detectors and redaction modes.</p>
+<p>It does not show you the browser plugins, endpoint agent, or SaaS connectors, which need a proof of value through sales. Nightfall’s API was formerly called Firewall for AI, so older tutorials use that name.</p>
+
+<h3>Deployment and Data Residency</h3>
+<p>Limina can run as a single container in your own environment, pulled from Docker Hub or delivered as an encrypted image export, with CPU and GPU builds and guides for ECS, EKS, and Kubernetes. Its pricing page says customer data is processed and discarded, not stored or logged.</p>
+<p>That control comes with work: your team sizes the hardware, patches, monitors, and scales the container, and synthetic replacement needs a GPU container with 24 GB or more of memory.</p>
+<p>Nightfall asks for none of this on the server side, but it does ask you to deploy browser plugins and an endpoint agent through tools such as Jamf or Intune, and every scan is processed in Nightfall’s cloud, which its security page names as US hosting. We found no on-premises or VPC option.</p>
+
+<h3>Data Types, Files, and Audio</h3>
+<p>Limina says it is built for messy data, including speech recognition errors, OCR mistakes, and handwritten forms. It transcribes WAV, MP3, and M4A audio before redacting, and it handles DICOM medical images, where identifiers can sit both in metadata and burned into the pixels. Its materials cite Providence Health reporting 99.5%+ accuracy on physician conversations, which is a customer claim in vendor marketing.</p>
+<p>Nightfall scans file uploads across its channels and offers asynchronous file scanning in its Developer API, but we found no audio transcription or DICOM support in its docs. If your sensitive data lives in call recordings or imaging archives, this is the deciding difference.</p>
+
+<h3>Workforce Monitoring and Shadow AI</h3>
+<p>Nightfall watches what employees paste into ChatGPT, Claude, Gemini, and Copilot, and what they share in Slack, Google Drive, GitHub, Jira, Confluence, Zendesk, and Salesforce. It can block, redact, or coach the user in the moment, and Premier adds hooks for Cursor, Claude Code, and VS Code, MCP discovery and inventory, and Claude Compliance API monitoring.</p>
+<p>Limina has no equivalent: it only sees data your systems choose to send it, so it cannot catch a leak nobody routed through it.</p>
+
+<h3>Redaction, Tokens, and Restoring Values</h3>
+<p>Nightfall’s mask and substitute modes are one-way. Its encryption mode is reversible with your own RSA private key, and Nightfall does not store your keys, so the restore logic is yours. Limina offers reversible tokenization and pseudonymization, and its docs describe a re-identify route that puts original values back into an LLM’s response. Limina can also generate synthetic replacements that keep a dataset useful for analytics and model training.</p>
+<div class="bl-evcall" role="note"><span class="bl-evcall__tag">Enigma Vault NoPII</span><p>Enigma Vault <a class="bl-link" href="/nopii/">NoPII</a> keeps the same token for the same value across a conversation and restores real values in the response without extra calls, so a summary or drafted reply comes back with the right customer’s name.</p><div class="bl-evcall__cta"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-nightfall-vs-limina--callout-tokens" href="/request-demo/?interest=nightfall-vs-limina"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-evcall__more cta-blog cta-nightfall-vs-limina--callout-tokens-explore" href="/nopii/">Explore Enigma Vault NoPII &rarr;</a></div></div>
+
+<h3>Languages and Detection Accuracy</h3>
+<p>Limina names identifiers such as the Canadian SIN, Japanese My Number, UK NHS number, and EU tax IDs, and laws including HIPAA, GDPR, CPRA, APPI, Quebec Law 25, and PCI DSS. Its pricing page says 52 languages and its docs have used 49+. Nightfall does not publish a language count; its help center describes custom regex detectors for local formats.</p>
+<p>Every accuracy figure is vendor-run or vendor-commissioned. Limina says general-purpose tools miss 13.8% to 46.5% of identifiers in a test of about 45,000 words, against 0.2% to 7% for Limina, and its April 2026 benchmark report puts its F1 at 0.938 against 0.777 for AWS Comprehend on a custom dataset, with recall of 0.939 against 0.698 on the same dataset.</p>
+<p>It also cites 99.5%+ validated by Armilla AI and 99.96% validated by Aetion and Datavant for expert determination. Nightfall advertises 95% detection precision, which its Lakera alternatives guide says was measured on customer data during limited proofs of value, and we found no published recall figure.</p>
+<p>Precision tells a security team how many alerts were real; recall tells a data team how many identifiers were caught. Run the same labeled sample through both and count misses by entity type.</p>
+
+<h2>Does Nightfall Compare Itself to Limina?</h2>
+<p>No. We found no comparison page naming the other on either nightfall.ai or getlimina.ai. The only third-party comparison of Limina we found is Protecto’s <a class="bl-link" href="https://www.protecto.ai/comparison/protecto-vs-limina-ai/" rel="nofollow noopener" target="_blank">Protecto vs Limina AI</a> page, which says its Limina claims were reviewed in November 2026. It makes several claims worth checking.</p>
+<ul>
+<li><strong>Limina uses a traditional NER-based approach:</strong> This is a framing dispute. Limina describes its own models as built for messy data and code-switching between languages, and only your own test data can settle it.</li>
+<li><strong>Limina offers selective unmasking through a re-identification API:</strong> This is consistent with the re-identify route in Limina’s docs.</li>
+<li><strong>Limina routes AI traffic through NVIDIA NeMo Guardrails or your own code and lacks session continuity:</strong> This fits what we found. Limina does not list its own gateway, and its docs focus on per-request processing.</li>
+<li><strong>Limina reviews and documents may still say Private AI:</strong> Protecto does not raise this, but buyers should: private-ai.com redirects to getlimina.ai, some tooling such as its status page still uses Private AI addresses, and contracts, DPAs, and audit reports signed before March 2026 may name the old entity.</li>
+</ul>
+<p>Protecto competes with both, so treat its page as one more vendor view, and let only the claims you can test in a proof of concept count.</p>
+
+<h2>Nightfall vs Limina Pricing</h2>
+
+<h3>What Nightfall Charges</h3>
+<p>Nightfall’s <a class="bl-link" href="https://nightfall.ai/pricing" rel="nofollow noopener" target="_blank">pricing page</a> shows the structure of its editions without any figures. There is no self-serve plan for its business editions, only a free seven-day proof of value in your own environment that ends with a security assessment report.</p>
+<div class="bl-tablewrap"><table class="bl-table"><thead><tr><th>Nightfall plan</th><th>What you get</th></tr></thead><tbody>
+<tr><td>Foundation Edition (per user per year)</td><td>All supported SaaS apps, including posture and access revocation; endpoint agent on two devices per user; shadow AI blocking on the endpoint; AI-based classification and lineage; 150 GB of data-at-rest discovery</td></tr>
+<tr><td>Premier Edition (per user per year)</td><td>Two tiers, up to 3 apps or all supported apps; hooks for Cursor, Claude Code, and VS Code; MCP discovery and inventory; Claude Compliance API monitoring; SIEM export to Splunk, Panther, and Sumo</td></tr>
+<tr><td>Data Discovery and Classification Add-On</td><td>150 GB included; extra annual packs of 1 TB, 3 TB, 5 TB, and 20 TB</td></tr>
+<tr><td>Developer API</td><td>Free for 3 GB of scanned data a month; custom Enterprise pricing based on the uncompressed volume you scan</td></tr>
+<tr class="bl-tri__solo"><td colspan="2"><div class="bl-tri__solo-in"><span class="bl-tri__solo-note">Compare: Enigma Vault NoPII publishes every tier, with a free Lite plan and paid plans from $49 to $499 a month.</span><div class="bl-tri__acts"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-nightfall-vs-limina--table-plans" href="/request-demo/?interest=nightfall-vs-limina"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-tri__more cta-blog cta-nightfall-vs-limina--table-plans-explore" href="/pricing/#nopii">See published pricing &rarr;</a></div></div></td></tr>
+</tbody></table></div>
+<p>A company buying Foundation or Premier pays for every user in scope, whether or not each one touches sensitive data, so ask how users are counted before you request a quote.</p>
+
+<h3>What Limina Charges</h3>
+<p>Limina’s <a class="bl-link" href="https://www.getlimina.ai/en/pricing" rel="nofollow noopener" target="_blank">pricing page</a> lists three plans, billed monthly in US dollars. Starter is free for up to 75 API calls a day at 10 a minute, with files up to 250 KB for TXT, JSON, CSV, and XML and 4 MB for other types.</p>
+<p>Batch is volume-priced for large one-time jobs such as data migration, breach reporting, or model training. Enterprise is custom, with committed volume and no consumption billing, hybrid or regional deployment, multi-cluster and multi-region, pinned model versions, a customer success manager, and a custom SLA.</p>
+<p>Expert determination reports for HIPAA de-identification come through independent partners and are priced separately, and the page says pricing depends on data volume and deployment model.</p>
+
+<h3>What Enigma Vault NoPII Charges</h3>
+<div class="bl-evcall" role="note"><span class="bl-evcall__tag">Enigma Vault NoPII</span><p>Enigma Vault NoPII bills on protected tokens flowing through the proxy, and every tier is published. Lite is free for one million a month. Starter is $49 a month for 50 million, Growth is $249 for 500 million, and Business is $499 for 2 billion, with overage at $1.00, $0.80, and $0.60 per additional million.</p>
+<p>Yearly prices are $550, $2,700, and $5,500, and Enterprise is custom with the self-hosted edition. Every plan includes every supported model provider, detection, tokenization, restore, and the audit trail.</p><div class="bl-evcall__cta"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-nightfall-vs-limina--callout-charges" href="/request-demo/?interest=nightfall-vs-limina"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-evcall__more cta-blog cta-nightfall-vs-limina--callout-charges-explore" href="/pricing/#nopii">See published pricing &rarr;</a></div></div>
+
+<h3>Nightfall vs Limina Cost at Three Business Sizes</h3>
+<div class="bl-tablewrap bl-tablewrap--tri"><table class="bl-table bl-table--tri"><thead><tr><th>Business size</th><th>Nightfall</th><th>Limina</th><th class="bl-tri__ev"><span class="bl-tri__tag">Also consider</span>Enigma Vault NoPII</th></tr></thead><tbody>
+<tr><td>Small team (a developer testing detection)</td><td>Developer API, free to 3 GB a month</td><td>Starter, free for 75 calls a day</td><td class="bl-tri__ev">Lite, free for 1M protected tokens a month</td></tr>
+<tr><td>Growing company (one production AI feature)</td><td>Developer API Enterprise, by volume</td><td>Enterprise or SaaS, by quote</td><td class="bl-tri__ev">$49/mo (Starter, 50M protected tokens)</td></tr>
+<tr><td>Established company (company-wide or self-hosted)</td><td>Foundation or Premier, per user per year; no self-hosted option</td><td>Container on any paid plan; Enterprise for hybrid and multi-region</td><td class="bl-tri__ev">$249 to $499/mo, or Enterprise for the self-hosted edition; no workforce monitoring</td></tr>
+<tr class="bl-tri__cta"><td>Next step</td><td colspan="2" class="bl-tri__note">Nightfall and Limina publish no production prices. Ask both for a written quote.</td><td class="bl-tri__ev"><div class="bl-tri__acts"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-nightfall-vs-limina--table-pricing" href="/request-demo/?interest=nightfall-vs-limina"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-tri__more cta-blog cta-nightfall-vs-limina--table-pricing-explore" href="/pricing/#nopii">See published pricing &rarr;</a></div></td></tr>
+</tbody></table></div>
+<p><strong>How to Read This Table:</strong> The units differ. Nightfall’s editions scale with headcount and apps, Limina’s plans scale with data volume and where you deploy, and Enigma Vault NoPII scales with the protected tokens in your LLM traffic. A 500-person company buying Nightfall pays for 500 users, and a 50-person data team cleaning ten years of call recordings with Limina pays for the volume regardless of headcount.</p>
+<p><strong>The Practical Takeaway:</strong> Ask each vendor for a written quote at your real shape, including overage, renewal, and plan labels for every feature you need, and compare it with the published Enigma Vault NoPII price. See our list of the <a class="bl-link" href="/blog/best-pii-tokenization-software-for-llms/">best PII tokenization software for LLMs</a> for more price points.</p>
+
+<h2>Nightfall vs Limina Security and Compliance</h2>
+<p>Nightfall’s pricing FAQ states SOC 2 Type II and ISO 27001 (its security page lists SOC 2 Type 2 only), and Limina states that it holds SOC 2 and ISO 27001. Enigma Vault holds SOC 2 Type II, and its ISO 27001 certification is in progress.</p>
+<div class="bl-tablewrap bl-tablewrap--tri"><table class="bl-table bl-table--tri"><thead><tr><th>Control</th><th>Nightfall</th><th>Limina</th><th class="bl-tri__ev"><span class="bl-tri__tag">Also consider</span>Enigma Vault NoPII</th></tr></thead><tbody>
+<tr><td>SOC 2</td><td>Type 2, on its security page</td><td>Vendor states SOC 2 certified; report type not stated</td><td class="bl-tri__ev">Type II (Enigma Vault platform)</td></tr>
+<tr><td>ISO 27001</td><td>Stated in its pricing FAQ; not on its security page</td><td>Vendor states certified; not listed on its pricing page</td><td class="bl-tri__ev">In progress</td></tr>
+<tr><td>HIPAA</td><td>“HIPAA-ready” per its pricing FAQ; BAA not found</td><td>Expert determination reports through partners; BAA not found</td><td class="bl-tri__ev">BAA on Enterprise</td></tr>
+<tr><td>Data retention</td><td>Ask how scanned data and findings are kept</td><td>Processed and discarded, not stored or logged (vendor statement)</td><td class="bl-tri__ev">Audit log stores tokens and masked values, never plaintext</td></tr>
+<tr><td>Data location</td><td>Nightfall’s cloud, US hosting</td><td>Your environment when self-hosted; Limina’s cloud for SaaS</td><td class="bl-tri__ev">NoPII Cloud, or yours on Enterprise</td></tr>
+<tr><td>Legal entity</td><td>Unchanged</td><td>Rebranded from Private AI in March 2026; check the entity on contracts and reports</td><td class="bl-tri__ev">Enigma Vault</td></tr>
+<tr class="bl-tri__cta"><td>Next step</td><td colspan="2" class="bl-tri__note">Ask both for current audit reports under NDA, issued to the current legal entity, and a signed BAA before you send PHI.</td><td class="bl-tri__ev"><div class="bl-tri__acts"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-nightfall-vs-limina--table-security" href="/request-demo/?interest=nightfall-vs-limina"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-tri__more cta-blog cta-nightfall-vs-limina--table-security-explore" href="/platform/data-security/">Explore security controls &rarr;</a></div></td></tr>
+</tbody></table></div>
+<p>Self-hosting changes the compliance question for Limina. If the container runs in your VPC, sensitive data never reaches Limina, so your own controls carry most of the weight and Limina’s certifications matter mainly for its software supply chain. With Nightfall, its SOC 2 report and hosting are in scope for every scan, so its report deserves a close read.</p>
+
+<h2>Nightfall vs Limina Reviews</h2>
+<p>Nightfall and Limina share a 4.6 average on G2, from 101 and 22 reviews. Nightfall has 2 Capterra reviews at 5.0/5, and we found no Capterra listing for Limina. Enigma Vault NoPII has one review on G2.</p>
+<div class="bl-tablewrap bl-tablewrap--tri"><table class="bl-table bl-table--tri"><thead><tr><th>Source</th><th>Nightfall</th><th>Limina</th><th class="bl-tri__ev"><span class="bl-tri__tag">Also consider</span>Enigma Vault NoPII</th></tr></thead><tbody>
+<tr><td>G2</td><td><a class="bl-link" href="https://www.g2.com/products/nightfall-ai/reviews" rel="nofollow noopener" target="_blank">4.6/5 from 101 reviews</a></td><td><a class="bl-link" href="https://www.g2.com/products/limina/reviews" rel="nofollow noopener" target="_blank">4.6/5 from 22 reviews</a></td><td class="bl-tri__ev"><a class="bl-link" href="https://www.g2.com/products/nopii/reviews" rel="nofollow noopener" target="_blank">5/5 from 1 review</a></td></tr>
+<tr><td>Capterra</td><td><a class="bl-link" href="https://www.capterra.com/p/211481/Nightfall-DLP/" rel="nofollow noopener" target="_blank">5.0/5 (2)</a></td><td>No listing found</td><td class="bl-tri__ev">No listing</td></tr>
+<tr><td>Other public proof</td><td>95% detection precision, measured during limited proofs of value per Nightfall</td><td>Customer names such as Zurich Insurance, MUFG Bank, and Providence Health; vendor-run benchmarks</td><td class="bl-tri__ev">Engine tests and a free tier you can run on real traffic</td></tr>
+<tr class="bl-tri__cta"><td>Next step</td><td colspan="2" class="bl-tri__note">Many Limina reviews predate the rebrand and name Private AI. Ask every vendor for a reference in your industry.</td><td class="bl-tri__ev"><div class="bl-tri__acts"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-nightfall-vs-limina--table-reviews" href="/request-demo/?interest=nightfall-vs-limina"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-tri__more cta-blog cta-nightfall-vs-limina--table-reviews-explore" href="/nopii/">Explore Enigma Vault NoPII &rarr;</a></div></td></tr>
+</tbody></table></div>
+<h3>What Nightfall Reviewers Say</h3>
+<p><a class="bl-link" href="https://www.g2.com/products/nightfall-ai/reviews" rel="nofollow noopener" target="_blank">Nightfall reviewers</a> praise its coverage of AI tools and SaaS apps, its policies, and its Slack alerts. Recurring complaints are false positives, alert fatigue, learning regex to exclude certain identifiers, and a wish for better reporting and filtering.</p>
+<h3>What Limina Reviewers Say</h3>
+<p><a class="bl-link" href="https://www.g2.com/products/limina/reviews" rel="nofollow noopener" target="_blank">Limina reviewers</a>, many writing when it was Private AI, praise detection accuracy, ease of implementation, and fast anonymization of PII. Critics call it pricey and mention the computing requirements of privacy-preserving processing, which fits the GPU needs of features such as synthetic replacement. The two G2 averages match, but 101 reviews give Nightfall’s score more weight than Limina’s 22.</p>
+<h3>What Enigma Vault NoPII Reviewers Say</h3>
+<div class="bl-evcall" role="note"><span class="bl-evcall__tag">Enigma Vault NoPII</span><p>Enigma Vault NoPII has one G2 review, which is too few to weigh against either vendor. Its proof is its engine tests and a free tier you can run on real traffic, and we would rather you test it than rely on a rating.</p><div class="bl-evcall__cta"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-nightfall-vs-limina--callout-reviews" href="/request-demo/?interest=nightfall-vs-limina"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-evcall__more cta-blog cta-nightfall-vs-limina--callout-reviews-explore" href="/nopii/">Explore Enigma Vault NoPII &rarr;</a></div></div>
+
+<h2>Who Should Choose Nightfall, Limina, or Enigma Vault NoPII</h2>
+
+<h3>Security Teams Watching Employees and SaaS Apps</h3>
+<p>Nightfall fits best. If the board question is “what are our people pasting into AI tools,” its browser plugins, endpoint coverage, SaaS connectors, and coaching are built for it. Expect a proof of value, a per-user quote, and agents to deploy through Jamf or Intune. Limina does not monitor people at all.</p>
+
+<h3>If You Clean Documents, Audio, and Images</h3>
+<p>Limina fits best. De-identifying transcripts, claims files, scanned forms, and call recordings inside your own network is its strength, and it names Zurich Insurance and MUFG Bank as customers. It also suits multilingual or non-US data, with a published language count and regional identifiers such as Quebec Law 25 and APPI. Budget for the team and hardware to run the container.</p>
+
+<h3>For Healthcare and Other Regulated Teams</h3>
+<p>Ask every vendor for a signed BAA before you send PHI. Nightfall’s pricing FAQ calls it “HIPAA-ready,” and we found no BAA on its pages. Limina handles DICOM and offers expert determination reports through partners, and we could not find a BAA statement. Enigma Vault NoPII offers a BAA on Enterprise.</p>
+<p>Clinicians pasting notes into chat tools is a Nightfall problem, and de-identifying imaging for research is a Limina one. See our guide to <a class="bl-link" href="/blog/pii-protection-for-llm-in-healthcare/">PII protection for LLMs in healthcare</a>.</p>
+
+<h3>Teams Wanting Published Prices and a Free Start</h3>
+<p>Nightfall and Limina both have free developer tiers but publish no production prices. If your product sends customer text to a model provider and the reply must keep real values, Enigma Vault NoPII handles it in the request path with a base-URL change, and it publishes every paid tier, from $49 a month, so you can price your own volume before talking to anyone.</p>
+
+<h2>Questions to Ask Nightfall and Limina Before You Sign</h2>
+<p>Bring these to both vendors. The answers shown are what each publishes today, so you can see where a sales call is needed.</p>
+<div class="bl-tablewrap bl-tablewrap--tri"><table class="bl-table bl-table--tri"><thead><tr><th>Question</th><th>Nightfall</th><th>Limina</th><th class="bl-tri__ev"><span class="bl-tri__tag">Also consider</span>Enigma Vault NoPII</th></tr></thead><tbody>
+<tr><td>What will year one cost?</td><td>Quote per user, or by volume for the API; ask how users are counted</td><td>Quote by volume and deployment</td><td class="bl-tri__ev">Published: $0, $49, $249, or $499 a month</td></tr>
+<tr><td>Where will our data be processed?</td><td>Nightfall’s cloud, US hosting</td><td>Your container, or Limina’s SaaS</td><td class="bl-tri__ev">NoPII Cloud, or yours on Enterprise</td></tr>
+<tr><td>Which languages are supported today?</td><td>Ask for the list</td><td>Ask which of 49+ to 52 are current</td><td class="bl-tri__ev">Listed on the product page</td></tr>
+<tr><td>Is audio and DICOM in scope?</td><td>Ask; not listed</td><td>Listed; ask about accuracy on your formats</td><td class="bl-tri__ev">Not covered</td></tr>
+<tr><td>Can you sign a BAA?</td><td>Ask; not found on its pages</td><td>Ask; not found on its pages</td><td class="bl-tri__ev">On Enterprise</td></tr>
+<tr><td>Which legal entity issues our contract and audit reports?</td><td>Ask</td><td>Ask, given the 2026 rebrand</td><td class="bl-tri__ev">Enigma Vault</td></tr>
+<tr><td>What hardware does self-hosting need?</td><td>Not applicable</td><td>Ask for CPU and GPU sizing at your volume</td><td class="bl-tri__ev">Enterprise only</td></tr>
+<tr class="bl-tri__cta"><td>Next step</td><td colspan="2" class="bl-tri__note">Put the same questions to Enigma Vault.</td><td class="bl-tri__ev"><div class="bl-tri__acts"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-nightfall-vs-limina--table-questions" href="/request-demo/?interest=nightfall-vs-limina"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-tri__more cta-blog cta-nightfall-vs-limina--table-questions-explore" href="/nopii/">Explore Enigma Vault NoPII &rarr;</a></div></td></tr>
+</tbody></table></div>
+<p>The entity row matters most for Limina buyers renewing paper signed as Private AI. Update allowlists and egress rules that name private-ai.com, and confirm that the container image paths your pipelines pin still resolve.</p>
+
+<h2>Moving From Nightfall or Limina to Enigma Vault NoPII</h2>
+<p>If you use either product only to clean prompts before an LLM call, Enigma Vault NoPII can take over that one job, so plan the move before you change anything.</p>
+<ul>
+<li><strong>List Your Redact and Re-Identify Calls:</strong> Find each place your code calls Nightfall or Limina around a model call.</li>
+<li><strong>Keep What Enigma Vault NoPII Does Not Cover:</strong> Document, image, audio, and DICOM de-identification and workforce DLP stay where they are.</li>
+<li><strong>Route One Provider First:</strong> Point one model client at the Enigma Vault NoPII base URL and compare the audit log with your current findings.</li>
+<li><strong>Run Both for a Few Weeks:</strong> Then remove the old calls once the logs agree.</li>
+</ul>
+<p>Our guide to <a class="bl-link" href="/blog/tokenization-vs-masking-vs-redaction-ai/">tokenization vs masking vs redaction for AI</a> explains the trade-offs. If you want help mapping your AI data path, <a class="bl-link cta-blog cta-nightfall-vs-limina--migration" href="/request-demo/?interest=nightfall-vs-limina">book a migration call</a>.</p>
+
+<h2>Final Verdict: Nightfall, Limina, or Enigma Vault NoPII?</h2>
+<p>Nightfall and Limina are built for different jobs. Nightfall is the stronger choice when you need to stop people leaking data across AI tools and SaaS apps, and you are happy for a SaaS vendor to do the scanning. Limina is the stronger choice when you need to de-identify text, documents, images, audio, and DICOM inside your own environment, in many languages, with the caveat that you operate the container.</p>
+<p>I’d decide on one question first: are you policing data in motion, or preparing data for use? Then I’d get a written quote with plan labels from either one before you commit.</p>
+<p>If what you need is PII kept out of your app’s LLM calls with real values in every reply, Enigma Vault NoPII does it with a base-URL change at published prices. It has no workforce monitoring and no document, audio, or DICOM coverage, so if your project depends on those, it is not the right choice.</p>
+<div class="bl-inlinecta"><div><p class="bl-inlinecta__t">See what reaches your model provider.</p><p class="bl-inlinecta__s">Book a demo to map your AI data path, or <a class="cta-blog cta-nightfall-vs-limina--final-explore" href="/nopii/">explore Enigma Vault NoPII</a> first.</p></div><a class="np-btn np-btn--on-dark np-btn--primary cta-blog cta-nightfall-vs-limina--final" href="/request-demo/?interest=nightfall-vs-limina"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a></div>
+<p>More comparisons: <a class="bl-link" href="/blog/nightfall-vs-protecto/">Nightfall vs Protecto</a>, <a class="bl-link" href="/blog/nightfall-vs-lakera/">Nightfall vs Lakera</a>, and <a class="bl-link" href="/blog/enigma-vault-nopii-vs-nightfall/">Enigma Vault NoPII vs Nightfall</a>.</p>
+
+<h2>How We Researched This Comparison</h2>
+<p>We checked Nightfall’s and Limina’s pricing pages and all other vendor facts on 22 November 2026. Nightfall facts come from nightfall.ai, including its pricing, security, and product pages and its help center. Limina facts come from getlimina.ai, including its pricing, product, and rebrand pages, its benchmark report, and its docs, plus Protecto’s comparison page.</p>
+<p>Reviews and listings come from G2 and Capterra, read on 22 November 2026, and Enigma Vault NoPII facts come from our own product and pricing pages.</p>
+<p>Where a vendor makes a claim about itself or a rival, we label it as a vendor claim. If something here is out of date, tell us through our <a class="bl-link" href="/contact/">contact page</a> and we will check it.</p>

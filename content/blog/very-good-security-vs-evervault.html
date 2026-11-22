@@ -1,0 +1,298 @@
+---
+title: "Very Good Security (VGS) vs Evervault: 2026 Comparison of Pricing and Architecture"
+slug: "very-good-security-vs-evervault"
+layout: "pii-style"
+metaTitle: "VGS vs Evervault: 2026 Comparison of Pricing and Architecture"
+description: "VGS vs Evervault compared on architecture, card capture, network tokens, pricing, compliance, and reviews, with Enigma Vault as a lower-cost third option."
+subtitle: "Choose VGS if you want one vendor holding your cards with the broadest card toolkit, choose Evervault if you want to keep encrypted card data in your own database, and look at Enigma Vault if a floor near $1,000 a month is more than you need."
+date: 2026-11-22
+category: "Card Vault"
+allOnly: true
+author: "abhilash-kumar"
+readTime: 17
+heroImage: "/assets/blog/img-03.png"
+heroAlt: "Very Good Security (VGS) vs Evervault comparison"
+excerpt: "A vault-first tokenization platform against an encryption platform that lets you hold the ciphertext, compared feature by feature, with Enigma Vault as a third column."
+tags: ["tokenization", "comparison", "card-vault"]
+ogType: article
+styles: ["blog.css", "pages/blog-pii-hero.css", "tr-pages.css", "pages/vs-tri-table.css"]
+scripts: ["blog-article.js", "pages/vs-tri-table.js"]
+faqSchema: true
+faqs:
+  - q: "Is VGS or Evervault Cheaper?"
+    a: "They are close at the floor. VGS Starter plans start at $1,000 a month, and Evervault’s Platform plan is $995 a month plus usage, such as $0.005 per decrypt, $0.03 per successful 3D Secure authentication, and $0.03 per network token operation. VGS publishes no usage rates and quotes Growth, and Vendr reports a median VGS contract of $56,700 a year. Enigma Vault’s Card Vault starts free and costs $49, $249, or $499 a month at published volumes."
+  - q: "What Is the Main Difference Between VGS and Evervault?"
+    a: "VGS is vault-first: the card sits in VGS’s vault, your systems store an alias, and its proxy restores the real value on the way to your processor. Evervault is encryption-first: the card is encrypted on the device, you store the ciphertext in your own database, and Evervault holds the keys and decrypts only inside its Relay proxy, Functions, or Enclaves. Evervault calls this a dual custody model."
+  - q: "Which Is Better for a Startup, VGS or Evervault?"
+    a: "Neither has a free production plan, and their entry prices are $5 apart. Very Good Security offers a free sandbox that is not for real data, and Evervault offers a free sandbox account with no time limit. A startup with modest card volume should also price Enigma Vault, whose Lite sandbox is free for testing and whose paid tiers start at $49 a month."
+  - q: "Which Has Better Reviews, VGS or Evervault?"
+    a: "VGS has more public reviews and a higher average: 4.7/5 from 47 on G2, against 4.4/5 from 17 for Evervault, as of 22 November 2026. VGS has a Capterra listing with no reviews, and Evervault has no Capterra listing. Both bases are small, so ask both vendors for references in your industry."
+  - q: "Do VGS and Evervault Both Support Network Tokens and Account Updater?"
+    a: "Yes. VGS lists network tokens and account updater on its Growth package and describes direct connections to all four card networks. Evervault’s docs list Visa, Mastercard, and American Express network tokens, with Discover marked as coming soon, at $0.03 per operation, and account updater at $0.25 per card update."
+  - q: "What Is the Difference Between VGS Compute and Evervault Enclaves?"
+    a: "VGS Compute runs your code inside VGS’s proxy on data in transit and is listed on VGS’s Growth package. Evervault offers Functions, which run Node.js or Python on decrypted data with unlimited requests, and Enclaves, which run your own Docker container inside an AWS Nitro Enclave with no shell access or persistent storage, priced by quote."
+  - q: "Can VGS or Evervault Protect PII and Files as Well as Cards?"
+    a: "Yes. VGS’s vault covers PII, and its Growth package lists large file transfers. Evervault offers field encryption for any data and charges $0.02 per file decrypt, and it says it can sign HIPAA BAAs. Enigma Vault has separate vaults for records and files, with free tiers."
+  - q: "What Is a Lower-Cost Alternative to VGS and Evervault?"
+    a: "Enigma Vault’s Card Vault is a PCI DSS Level 1 tokenization service with a free Lite sandbox for testing and published plans of $49, $249, and $499 a month. It adds phone card capture through Twilio Pay and charges through the gateway you already use, but it does not offer network tokens, account updater, 3D Secure, or custom code."
+---
+<p>Very Good Security (VGS) and Evervault are both developer-first platforms that keep card numbers off your own servers to shrink your PCI DSS scope, either by holding the card in a vault or by encrypting it before it reaches you.</p>
+<p>VGS is best for teams that want one vendor to hold the cards and supply a deep card toolkit, while Evervault is best for engineering teams that want to keep encrypted card data in their own database and run their own code on it.</p>
+
+<h2>VGS vs Evervault at a Glance</h2>
+<div class="bl-tablewrap bl-tablewrap--tri"><table class="bl-table bl-table--tri"><thead><tr><th>Vendor</th><th>VGS</th><th>Evervault</th><th class="bl-tri__ev"><span class="bl-tri__tag">Also consider</span>Enigma Vault</th></tr></thead><tbody>
+<tr><td>Best for</td><td>Payments teams that want one vendor holding cards plus a deep card toolkit</td><td>Engineering teams that want to keep encrypted card data in their own database</td><td class="bl-tri__ev">Teams protecting cards, records, and files without a four-figure floor</td></tr>
+<tr><td>Entry price</td><td>From $1,000/mo (Starter)</td><td>$995/mo plus metered usage</td><td class="bl-tri__ev">Free, then $49/mo</td></tr>
+<tr><td>Free option</td><td>Free sandbox, not for real data</td><td>Free sandbox account, no time limit</td><td class="bl-tri__ev">Free Lite sandbox: 1,000 requests a month</td></tr>
+<tr><td>Architecture</td><td>Vault-first, with inbound and outbound proxy routes</td><td>Encryption-first, with the Relay proxy; you hold the ciphertext</td><td class="bl-tri__ev">API vault, with a gateway proxy at charge time</td></tr>
+<tr><td>G2</td><td><a class="bl-link" href="https://www.g2.com/products/very-good-security-vgs-platform/reviews" rel="nofollow noopener" target="_blank">4.7/5 (47)</a></td><td><a class="bl-link" href="https://www.g2.com/products/evervault-2022-11-22/reviews" rel="nofollow noopener" target="_blank">4.4/5 (17)</a></td><td class="bl-tri__ev"><a class="bl-link" href="https://www.g2.com/products/enigma-vault/reviews" rel="nofollow noopener" target="_blank">4.4/5 (6)</a></td></tr>
+<tr><td>Capterra</td><td><a class="bl-link" href="https://www.capterra.com/p/195135/VGS-Platform/" rel="nofollow noopener" target="_blank">Listed, 0 reviews</a></td><td>No listing found</td><td class="bl-tri__ev"><a class="bl-link" href="https://www.capterra.com/p/241650/Enigma-Vault/" rel="nofollow noopener" target="_blank">4.8/5 (4)</a></td></tr>
+<tr class="bl-tri__cta"><td>Next step</td><td colspan="2" class="bl-tri__note">Free Lite tier, no card needed. Published plans from $49 a month.</td><td class="bl-tri__ev"><div class="bl-tri__acts"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-very-good-security-vs-evervault--table-glance" href="/request-demo/?interest=very-good-security-vs-evervault"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-tri__more cta-blog cta-very-good-security-vs-evervault--table-glance-explore" href="/vault/card-vault/">Explore Card Vault &rarr;</a></div></td></tr>
+</tbody></table></div>
+<p>Prices and features are as of 22 November 2026, from each vendor’s own pages and docs. G2 and Capterra figures are as of 22 November 2026. For a wider shortlist, see our guides to <a class="bl-link" href="/blog/very-good-security-alternatives/">Very Good Security alternatives</a> and <a class="bl-link" href="/blog/evervault-alternatives/">Evervault alternatives</a>.</p>
+<p>This guide compares Very Good Security and Evervault on architecture, features, cost at three business sizes, compliance, and reviews, with Enigma Vault alongside as a third option for teams that do not need either price floor.</p>
+
+<h2>VGS vs Evervault: Quick Verdict</h2>
+<p><strong>VGS:</strong> A processor-agnostic, PCI DSS Level 1 vault with Collect hosted fields and mobile SDKs, inbound and outbound proxy routes, VGS Compute, and a payments line that includes network tokens, agentic tokens, account updater, card attributes, 3D Secure, and a card management platform. Starter plans start at $1,000 a month, and Growth is by quote.</p>
+<p><strong>Evervault:</strong> An encryption platform built on a dual custody model. Cards are encrypted on the device, you store the ciphertext, and Evervault decrypts only inside Relay, Functions, or Enclaves. It adds its own 3D Secure server, Visa, Mastercard, and Amex network tokens, card insights, wallets, and Browser Tokens. The Platform plan is $995 a month plus metered usage, and it raised a $25M Series B in March 2026.</p>
+<div class="bl-evcall" role="note"><span class="bl-evcall__tag">Also consider</span><p><strong>Enigma Vault:</strong> A PCI DSS Level 1 vault for cards, records, files, and AI prompts, with a free tier and published plans from $49 to $499 a month per product.</p><div class="bl-evcall__cta"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-very-good-security-vs-evervault--callout-verdict" href="/request-demo/?interest=very-good-security-vs-evervault"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-evcall__more cta-blog cta-very-good-security-vs-evervault--callout-verdict-explore" href="/vault/card-vault/">Explore Card Vault &rarr;</a></div></div>
+<p><strong>VGS</strong> fits you if:</p>
+<ul>
+<li>You want a single vendor to hold the cards and provide network tokens on all four networks, account updater, and agentic tokens.</li>
+<li>You want audit help from the vendor, since its Growth package lists a PCI compliance subscription and a VGS-provided auditor.</li>
+<li>ISO 27001 is a hard requirement in your vendor review.</li>
+</ul>
+<p><strong>Evervault</strong> fits you if:</p>
+<ul>
+<li>You would rather keep encrypted card data in your own database than in a vendor’s vault.</li>
+<li>You need to run your own logic on decrypted data, in Functions or in a Nitro Enclave.</li>
+<li>You want every usage price published up front, from decrypts to chargeback alerts, and you need a HIPAA BAA.</li>
+</ul>
+<p><strong>Enigma Vault</strong> fits you if:</p>
+<ul>
+<li>A floor near $1,000 a month is more than your card volume justifies, and you want to start at $0.</li>
+<li>Cards still arrive by phone, or you also need to protect records, documents, and AI prompts.</li>
+<li>You can live without network tokens, account updater, 3D Secure, and custom code.</li>
+</ul>
+<p><strong>Bottom Line:</strong> Very Good Security holds your cards and wraps them in the broadest card toolkit, Evervault encrypts them so you keep the ciphertext and pay a published rate for every operation, and Enigma Vault gives teams without a four-figure monthly budget a PCI-scoped vault they can start building on for free.</p>
+
+<h2>VGS vs Evervault Pricing</h2>
+
+<h3>What VGS Charges</h3>
+<p>VGS’s <a class="bl-link" href="https://www.verygoodsecurity.com/pricing" rel="nofollow noopener" target="_blank">pricing page</a> shows two packages. Starter plans start at $1,000 a month, and the page lists no included features, units, or overage rates.</p>
+<p>Growth has no price, and its card lists network tokens, account updater, a PCI compliance subscription for Level 1 and Levels 2 to 4, a VGS-provided auditor, large file transfers, VGS Compute, and card attributes. A sandbox is free for building and testing, but it is not for real data.</p>
+<p>Beyond the floor, buyer data is the best guide. <a class="bl-link" href="https://www.vendr.com/marketplace/very-good-security" rel="nofollow noopener" target="_blank">Vendr</a>, which tracks software purchases, shows a median of $56,700 a year for VGS, with a range of $21,600 to $132,000. One G2 reviewer reports $40 for each extra custom domain.</p>
+
+<h3>What Evervault Charges</h3>
+<p>Evervault’s <a class="bl-link" href="https://evervault.com/pricing" rel="nofollow noopener" target="_blank">pricing page</a> lists a Platform plan at $995 a month plus usage, recommended for under 25,000 transactions a month, and a Custom plan by quote above that, with volume discounts, 24/7 support, and a 99.95% uptime SLA. A sandbox account is free with no time limit.</p>
+<div class="bl-tablewrap"><table class="bl-table"><thead><tr><th>Evervault item</th><th>Published price</th></tr></thead><tbody>
+<tr><td>Encryption</td><td>Unlimited encrypts; $0.005 per decrypt; $0.02 per file decrypt</td></tr>
+<tr><td>Relay and Functions</td><td>Unlimited requests</td></tr>
+<tr><td>Enclaves</td><td>Custom</td></tr>
+<tr><td>3D Secure</td><td>$0.03 per successful authentication; failed ones are free</td></tr>
+<tr><td>Network tokens</td><td>$0.03 per token created, per cryptogram, and per update</td></tr>
+<tr><td>Account updater</td><td>$0.25 per card update</td></tr>
+<tr><td>Browser Tokens</td><td>$0.25 per card session; $0.05 per credential; $1 per GB bandwidth</td></tr>
+<tr><td>Card insights</td><td>BIN lookup $0.005; PAR lookup $0.10; address check $0.15; name check $0.25</td></tr>
+<tr><td>Chargeback and retry</td><td>$15 per RDR alert; $25 per Ethoca alert; $0.45 per retry signal</td></tr>
+<tr class="bl-tri__solo"><td colspan="2"><div class="bl-tri__solo-in"><span class="bl-tri__solo-note">Compare: Enigma Vault’s Card Vault has a free Lite sandbox and published plans of $49, $249, and $499 a month.</span><div class="bl-tri__acts"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-very-good-security-vs-evervault--table-plans" href="/request-demo/?interest=very-good-security-vs-evervault"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-tri__more cta-blog cta-very-good-security-vs-evervault--table-plans-explore" href="/pricing/#vault">See Card Vault pricing &rarr;</a></div></div></td></tr>
+</tbody></table></div>
+<p>Evervault also sells capability checks at $0.02 and ASV scans with the first domain or IP free and $95 per extra domain or IP a year. The page does not say whether the $995 fee includes any usage, so we assume it does not.</p>
+
+<h3>What Enigma Vault Charges</h3>
+<div class="bl-evcall" role="note"><span class="bl-evcall__tag">Enigma Vault</span><p>Every Card Vault tier is published. Lite is a free sandbox with 1,000 requests and 100 stored tokens.</p><p>Starter is $49 a month for 20,000 requests (10,000 stored tokens), Growth is $249 for 250,000 (100,000 stored), and Business is $499 for 1,000,000 (1,000,000 stored), with yearly prices of $550, $2,700, and $5,500.</p><p>Overage is $0.02, $0.01, and $0.007 per request on the paid tiers. The AOC and SOC 2 report come with every paid plan, and you can buy through the developer portal or AWS Marketplace.</p><div class="bl-evcall__cta"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-very-good-security-vs-evervault--callout-charges" href="/request-demo/?interest=very-good-security-vs-evervault"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-evcall__more cta-blog cta-very-good-security-vs-evervault--callout-charges-explore" href="/pricing/#vault">See Card Vault pricing &rarr;</a></div></div>
+
+<h3>VGS vs Evervault Cost at Three Business Sizes</h3>
+<div class="bl-tablewrap bl-tablewrap--tri"><table class="bl-table bl-table--tri"><thead><tr><th>Business size</th><th>VGS</th><th>Evervault</th><th class="bl-tri__ev"><span class="bl-tri__tag">Also consider</span>Enigma Vault</th></tr></thead><tbody>
+<tr><td>Early-stage business (about 2,000 card transactions a month)</td><td>From $1,000/mo, or the free sandbox while you build</td><td>About $1,005/mo with one decrypt each; about $1,065 with 3DS on every charge</td><td class="bl-tri__ev">$49/mo on Starter (the free Lite sandbox is for testing)</td></tr>
+<tr><td>Growing SaaS or retailer (about 20,000 a month)</td><td>From $1,000/mo; Growth features by quote</td><td>About $1,095/mo with one decrypt each; about $1,695 with 3DS on every charge</td><td class="bl-tri__ev">$249/mo on Growth, since Starter’s 20,000 requests would be used up</td></tr>
+<tr><td>Established platform (about 100,000 a month)</td><td>Growth, by quote; Vendr’s median is $56,700 a year</td><td>Custom, by quote (above the 25,000 recommendation)</td><td class="bl-tri__ev">$249/mo on Growth if under 250,000 requests, or $2,700 a year</td></tr>
+<tr class="bl-tri__cta"><td>Next step</td><td colspan="2" class="bl-tri__note">Evervault figures are our arithmetic from its published rates, not a quote. Model your own volumes.</td><td class="bl-tri__ev"><div class="bl-tri__acts"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-very-good-security-vs-evervault--table-pricing" href="/request-demo/?interest=very-good-security-vs-evervault"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-tri__more cta-blog cta-very-good-security-vs-evervault--table-pricing-explore" href="/pricing/#vault">See Card Vault pricing &rarr;</a></div></td></tr>
+</tbody></table></div>
+<p><strong>How to Read This Table:</strong> The rows are sized by monthly card transactions. We assumed one decrypt per transaction at $0.005, and in the higher Evervault figure a successful 3D Secure check on every charge at $0.03.</p>
+<p>Network tokens, account updater, and card insights would add to Evervault’s bill and are bundled into VGS’s Growth quote, so they are left out.</p>
+<p>Enigma Vault bills on API requests, and a charge usually takes more than one request (store, then charge), so check your request count against each tier’s allowance.</p>
+<p><strong>The Practical Takeaway:</strong> At low volume the two floors are almost identical, and a year on either starts near $12,000.</p>
+<p>Evervault’s meter is easy to forecast because every rate is published, and VGS’s total is hard to forecast until you have a Growth quote. A full year of Card Vault Growth costs $2,700, before you account for the features it does not have. See our list of the <a class="bl-link" href="/blog/best-credit-card-tokenization-software/">best credit card tokenization software</a> for more price points.</p>
+
+<h2>How VGS and Evervault Differ at the Core</h2>
+<p>VGS keeps the card in its vault and gives your systems an alias, whereas Evervault encrypts the card on the device and gives your systems ciphertext to store while it keeps the keys. That one choice shapes who holds the dataset, what each vendor can do with it, and how you leave.</p>
+<div class="bl-tablewrap bl-tablewrap--tri"><table class="bl-table bl-table--tri"><thead><tr><th>Question</th><th>VGS (vault-first)</th><th>Evervault (encryption-first)</th><th class="bl-tri__ev"><span class="bl-tri__tag">Also consider</span>Enigma Vault (API vault)</th></tr></thead><tbody>
+<tr><td>What your database stores</td><td>A VGS alias</td><td>Evervault ciphertext</td><td class="bl-tri__ev">A Card Vault token, random or Luhn-passable</td></tr>
+<tr><td>Where the readable card lives</td><td>In VGS’s vault</td><td>Nowhere in plaintext; Evervault holds the keys in AWS Nitro Enclaves</td><td class="bl-tri__ev">In Card Vault; CVV deleted within 30 minutes</td></tr>
+<tr><td>How data reaches a third party</td><td>An outbound route restores the real value in transit</td><td>Relay decrypts the ciphertext in transit</td><td class="bl-tri__ev">The gateway proxy injects the card into an allowlisted gateway request</td></tr>
+<tr><td>Who can read the card</td><td>VGS, on your configured routes</td><td>Evervault, inside Relay, Functions, or Enclaves, with your API key</td><td class="bl-tri__ev">Enigma Vault, through the allowlisted gateway proxy</td></tr>
+<tr><td>Leaving the vendor</td><td>VGS exports the vaulted cards to your new PCI-compliant provider</td><td>You hold the data, but it is encrypted under Evervault’s keys</td><td class="bl-tri__ev">Card export to your new PCI-compliant provider</td></tr>
+<tr class="bl-tri__cta"><td>Next step</td><td colspan="2" class="bl-tri__note">Each vendor offers a free test environment. Enigma Vault’s first paid plan is $49 a month.</td><td class="bl-tri__ev"><div class="bl-tri__acts"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-very-good-security-vs-evervault--table-core" href="/request-demo/?interest=very-good-security-vs-evervault"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-tri__more cta-blog cta-very-good-security-vs-evervault--table-core-explore" href="/platform/overview/">Explore the platform &rarr;</a></div></td></tr>
+</tbody></table></div>
+<p><strong>Where the Vault Model Helps:</strong> VGS is the one place your cards live, so there is a single store to audit, and VGS can run network tokens and account updater directly against the cards it holds. The trade-off is a provider-to-provider card migration if you leave.</p>
+<p><strong>Where the Dual Custody Model Helps:</strong> Evervault’s FAQ says it cannot decrypt your data without your app’s API key, so a breach of either side alone exposes nothing readable. There are exceptions worth asking about, since features such as enrolling cards for account updates create card objects on Evervault’s side.</p>
+<p><strong>Where Each Costs You:</strong> With Evervault you never hand over the dataset, yet you still depend on Evervault to decrypt it. With VGS you hand over the dataset, and you depend on VGS to release it. Neither is free of lock-in.</p>
+<p>If your security team wants a single vendor-held store with the deepest network tools, the vault model is simpler. If it refuses to hand the card dataset to a third party, the dual custody model fits. Our guide to <a class="bl-link" href="/blog/vault-vs-vaultless-tokenization/">vault vs vaultless tokenization</a> covers the broader trade-off.</p>
+
+<h2>Card-on-File Workflow: VGS vs Evervault vs Enigma Vault</h2>
+<p>To make the comparison concrete, here is the same job on each platform: take a customer’s card, store it, and charge it later through your payment processor.</p>
+<div class="bl-tablewrap bl-tablewrap--tri"><table class="bl-table bl-table--tri"><thead><tr><th>Step</th><th>VGS</th><th>Evervault</th><th class="bl-tri__ev"><span class="bl-tri__tag">Also consider</span>Enigma Vault</th></tr></thead><tbody>
+<tr><td>1. Capture the card</td><td>Collect hosted fields on web, iOS, Android, or React Native, or an inbound route</td><td>Card Collection iframe or SDK encrypts it on the device</td><td class="bl-tri__ev">Hosted form, API, or Twilio Pay on a phone call (Growth and above)</td></tr>
+<tr><td>2. Store it</td><td>The vault keeps the card and returns an alias</td><td>Evervault returns ciphertext; no vault copy</td><td class="bl-tri__ev">Card Vault returns a random token, optionally Luhn-passable; CVV is deleted within 30 minutes</td></tr>
+<tr><td>3. Save the reference</td><td>Your database keeps the alias</td><td>Your database keeps the ciphertext</td><td class="bl-tri__ev">Your database keeps the token</td></tr>
+<tr><td>4. Charge later</td><td>An outbound route restores the card in the processor request</td><td>Relay decrypts in transit to the processor, at $0.005 per decrypt</td><td class="bl-tri__ev">The gateway proxy injects the card into an allowlisted gateway request</td></tr>
+<tr><td>5. Keep the card working</td><td>Network tokens and account updater (listed on the Growth package)</td><td>Visa, Mastercard, and Amex network tokens ($0.03 per operation) and account updater ($0.25 per update)</td><td class="bl-tri__ev">The customer re-enters an expired card</td></tr>
+<tr class="bl-tri__cta"><td>Next step</td><td colspan="2" class="bl-tri__note">Run the same five steps on Enigma Vault’s free Lite sandbox.</td><td class="bl-tri__ev"><div class="bl-tri__acts"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-very-good-security-vs-evervault--table-workflow" href="/request-demo/?interest=very-good-security-vs-evervault"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-tri__more cta-blog cta-very-good-security-vs-evervault--table-workflow-explore" href="/vault/card-vault/">Explore Card Vault &rarr;</a></div></td></tr>
+</tbody></table></div>
+<p>All three get the card number out of your servers. The differences show up at steps 1, 2, and 5.</p>
+<ul>
+<li><strong>Step 1:</strong> Very Good Security and Evervault both offer mature hosted fields for web and mobile. Enigma Vault adds the phone channel that neither packages.</li>
+<li><strong>Step 2:</strong> VGS and Enigma Vault keep a copy of the card in a vault. Evervault hands the encrypted card back to you, which is the core of its dual custody model.</li>
+<li><strong>Step 5:</strong> VGS bundles network tokens and account updater into its Growth quote, and Evervault meters them per operation. They matter most to subscription and card-on-file revenue, and Enigma Vault does not offer them.</li>
+</ul>
+
+<h2>VGS vs Evervault Features Compared</h2>
+<p>Compare Very Good Security and Evervault on capture, proxies, payments tools, data types, and AI. VGS is deeper on network-level card tools, while Evervault offers more ways to run your own code and a longer list of metered payment add-ons.</p>
+<div class="bl-tablewrap bl-tablewrap--tri"><table class="bl-table bl-table--tri"><thead><tr><th>Feature</th><th>VGS</th><th>Evervault</th><th class="bl-tri__ev"><span class="bl-tri__tag">Also consider</span>Enigma Vault</th></tr></thead><tbody>
+<tr><td>Web card fields</td><td>Collect</td><td>Card, PIN, and Reveal components</td><td class="bl-tri__ev">Hosted forms</td></tr>
+<tr><td>Mobile capture</td><td>Collect for iOS, Android, React Native</td><td>React Native, iOS, Android SDKs</td><td class="bl-tri__ev">API</td></tr>
+<tr><td>Phone (IVR) capture</td><td><span class="bl-tri__no">Not offered</span></td><td><span class="bl-tri__no">Not offered</span></td><td class="bl-tri__ev">Twilio Pay (Growth and above)</td></tr>
+<tr><td>Apple Pay and Google Pay</td><td>Wallet payments</td><td>Apple Pay and Google Pay, $0.01 each</td><td class="bl-tri__ev">Through your gateway</td></tr>
+<tr><td>Proxy</td><td>Inbound and outbound routes; HTTPS or SFTP</td><td>Relay: inbound, outbound, and to your frontend</td><td class="bl-tri__ev">Outbound gateway proxy, domain allowlisted</td></tr>
+<tr><td>Run your own code on data</td><td>VGS Compute (listed on Growth)</td><td>Functions (Node.js, Python) and Enclaves (Docker in Nitro)</td><td class="bl-tri__ev"><span class="bl-tri__no">Not offered</span></td></tr>
+<tr><td>Network tokens</td><td>Listed on Growth; four-network connections</td><td>Visa, Mastercard, and Amex, $0.03 per operation; Discover coming soon</td><td class="bl-tri__ev"><span class="bl-tri__no">Not offered</span></td></tr>
+<tr><td>Account updater</td><td>Listed on Growth</td><td>$0.25 per card update; real-time updater coming soon</td><td class="bl-tri__ev"><span class="bl-tri__no">Not offered</span></td></tr>
+<tr><td>3D Secure</td><td>Single-API 3DS</td><td>Own EMVCo-certified server, $0.03 per success</td><td class="bl-tri__ev">Through your gateway</td></tr>
+<tr><td>BIN and card data</td><td>Card attributes, BIN lookup, account validation</td><td>BIN, PAR, name, and address checks, priced per call</td><td class="bl-tri__ev"><span class="bl-tri__no">Not offered</span></td></tr>
+<tr><td>Chargeback and retry tools</td><td>Not listed on its pricing page</td><td>Pre-chargeback alerts ($15 RDR, $25 Ethoca); retry signals ($0.45)</td><td class="bl-tri__ev"><span class="bl-tri__no">Not offered</span></td></tr>
+<tr><td>Card issuing</td><td>Card management platform</td><td>Used by issuers such as Ramp; not an issuer itself</td><td class="bl-tri__ev"><span class="bl-tri__no">Not offered</span></td></tr>
+<tr><td>Agentic payments</td><td>Agentic tokens; Agentic Commerce Hub</td><td>Browser Tokens for agent checkout</td><td class="bl-tri__ev"><span class="bl-tri__no">Not offered</span></td></tr>
+<tr><td>PII beyond cards</td><td>Vault covers PII</td><td>Field encryption for any data</td><td class="bl-tri__ev">Data Vault on every tier</td></tr>
+<tr><td>Files</td><td>Large file transfers (listed on Growth)</td><td>$0.02 per file decrypt</td><td class="bl-tri__ev">File Vault, 5 GB free up to 5,000 GB</td></tr>
+<tr><td>LLM prompt protection</td><td><span class="bl-tri__no">Not offered</span></td><td><span class="bl-tri__no">Not offered</span></td><td class="bl-tri__ev">NoPII (separate product)</td></tr>
+<tr><td>Regions</td><td>US, EU, and Asia-Pacific environments</td><td>US and EU</td><td class="bl-tri__ev">US and EU; EU residency is an add-on from Growth</td></tr>
+<tr class="bl-tri__cta"><td>Next step</td><td colspan="2" class="bl-tri__note">Several Evervault features are marked preview or coming soon in its docs; confirm general availability.</td><td class="bl-tri__ev"><div class="bl-tri__acts"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-very-good-security-vs-evervault--table-features" href="/request-demo/?interest=very-good-security-vs-evervault"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-tri__more cta-blog cta-very-good-security-vs-evervault--table-features-explore" href="/vault/card-vault/">Explore Card Vault &rarr;</a></div></td></tr>
+</tbody></table></div>
+<p>Here is how the biggest differences play out in practice.</p>
+
+<h2>Where VGS and Evervault Differ in Practice</h2>
+
+<h3>Card Capture on the Web and in Apps</h3>
+<p>VGS Collect provides hosted form fields for JavaScript, iOS, Android, and React Native, and it can also take data over HTTPS or SFTP. A VGS inbound route strips card data from requests and replaces it with aliases before your servers see them, so you can protect existing endpoints mostly through route configuration.</p>
+<p>Evervault’s Card, PIN, and Reveal components cover JavaScript, React, React Native, iOS, and Android, and they encrypt the card on the device. Relay does the same interception as a VGS inbound route, except what it hands your servers is ciphertext you keep. Relay can also deliver data to your frontend, which helps when you need to show a stored card back to a customer.</p>
+<p>For most checkouts either one works, and both offer more ready-made pieces than Enigma Vault’s hosted forms and API.</p>
+
+<h3>Network Tokens, Account Updater, and Agentic Tokens</h3>
+<p>Network tokens keep stored cards working after reissue and can lift approval rates, so they matter most to subscription and card-on-file businesses. VGS leads with them.</p>
+<p>Its comparison page describes direct connections to all four card networks, and its agentic tokens page calls VGS the largest independent provider of agentic tokens, live across Visa, Mastercard, and American Express. It also links to agentic commerce hub pages for agents and merchants.</p>
+<p>Evervault’s docs list Visa, Mastercard, and American Express network tokens, with Discover marked as coming soon, so if a large share of your customers pay with Discover, that gap is worth a direct question.</p>
+<p>Its account updater is $0.25 per card update, with a real-time updater also listed as coming soon.</p>
+<p>For AI agents, Evervault sells Browser Tokens, which let an agent complete checkout on a merchant’s website without seeing the card number, at $0.25 per card session plus $0.05 per credential and $1 per GB of bandwidth.</p>
+<p>Network-level credentials suit merchants that accept them, and browser-level checkout reaches sites that do not.</p>
+
+<h3>Custom Code: VGS Compute and Evervault Functions and Enclaves</h3>
+<p>If you only forward card data to a processor, you may never need custom code. If you have to transform, validate, or sign sensitive values, this is where the two diverge most.</p>
+<ul>
+<li><strong>VGS Compute:</strong> Runs your logic inside VGS’s proxies on data in transit, for payload transformation, custom cryptography, or policy checks. It is listed on the Growth package, so it comes with a quote.</li>
+<li><strong>Evervault Functions:</strong> Run Node.js or Python on decrypted data, with unlimited requests on the Platform plan.</li>
+<li><strong>Evervault Enclaves:</strong> Run your own Docker container inside an AWS Nitro Enclave, with no persistent storage and no shell access, priced by quote. Its customer stories include Morse, which built a non-custodial wallet recovery flow on Evervault.</li>
+</ul>
+<div class="bl-evcall" role="note"><span class="bl-evcall__tag">Enigma Vault</span><p>Enigma Vault has no equivalent. It stores the card, then injects it into an allowlisted gateway request so the number never lands in your logs.</p><div class="bl-evcall__cta"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-very-good-security-vs-evervault--callout-code" href="/request-demo/?interest=very-good-security-vs-evervault"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-evcall__more cta-blog cta-very-good-security-vs-evervault--callout-code-explore" href="/vault/card-vault/">Explore Card Vault &rarr;</a></div></div>
+
+<h3>Beyond Cards: PII, Files, and AI Prompts</h3>
+<p>VGS’s vault holds more than cards, covering PII as well, and its Growth package lists large file transfers. VGS’s Trust Center does not list HIPAA. Evervault offers field encryption for any data, charges $0.02 per file decrypt, and says it can sign HIPAA BAAs, although its HIPAA page and its FAQ describe its position slightly differently.</p>
+<p>Neither vendor packages protection for the customer data your applications send to LLMs. VGS and Evervault both sell to companies building AI agents that pay, which is a different job.</p>
+<div class="bl-evcall" role="note"><span class="bl-evcall__tag">Enigma Vault</span><p>Enigma Vault covers these jobs with separate vaults: <a class="bl-link" href="/vault/data-vault/">Data Vault</a> for structured records from the free tier up, <a class="bl-link" href="/vault/file-vault/">File Vault</a> for documents, <a class="bl-link" href="/vault/customer-vault/">Customer Vault</a> for no-code intake, and <a class="bl-link" href="/nopii/">NoPII</a> for LLM prompts, where data is tokenized before it reaches the model provider, with a BAA for healthcare workloads.</p><div class="bl-evcall__cta"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-very-good-security-vs-evervault--callout-beyond" href="/request-demo/?interest=very-good-security-vs-evervault"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-evcall__more cta-blog cta-very-good-security-vs-evervault--callout-beyond-explore" href="/vault/data-vault/">Explore Data Vault &rarr;</a></div></div>
+
+<h3>Implementation Time and Support</h3>
+<p>Neither vendor publishes an implementation timeline we could check, so the useful signals are support terms and reviewer comments. G2 reviewers say the VGS proxy was quick to understand and praise fast chat support. Evervault reviewers like its onboarding and how easy relays are to set up, and one notes that connecting it to their system needed an IT specialist.</p>
+<div class="bl-tablewrap bl-tablewrap--tri"><table class="bl-table bl-table--tri"><thead><tr><th>Operations</th><th>VGS</th><th>Evervault</th><th class="bl-tri__ev"><span class="bl-tri__tag">Also consider</span>Enigma Vault</th></tr></thead><tbody>
+<tr><td>Support on entry plan</td><td>Not published; reviewers praise fast chat</td><td>Email and docs, weekdays 9am to 5pm GMT</td><td class="bl-tri__ev">Ask for support terms per plan</td></tr>
+<tr><td>Premium support</td><td>Ask</td><td>24/7, private Slack, solutions engineer (Custom)</td><td class="bl-tri__ev">Ask</td></tr>
+<tr><td>Uptime</td><td>Claims 99.99% reliability</td><td>99.9%+ on Platform; 99.95% SLA on Custom</td><td class="bl-tri__ev">Ask for SLA terms</td></tr>
+<tr class="bl-tri__cta"><td>Next step</td><td colspan="2" class="bl-tri__note">Uptime figures are each vendor’s own; get the SLA into the contract.</td><td class="bl-tri__ev"><div class="bl-tri__acts"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-very-good-security-vs-evervault--table-ops" href="/request-demo/?interest=very-good-security-vs-evervault"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-tri__more cta-blog cta-very-good-security-vs-evervault--table-ops-explore" href="/vault/card-vault/">Explore Card Vault &rarr;</a></div></td></tr>
+</tbody></table></div>
+
+<h2>VGS vs Evervault Security and Compliance</h2>
+<p>VGS, Evervault, and Enigma Vault all hold PCI DSS Level 1 and SOC 2. Very Good Security also lists ISO 27001, which Evervault does not claim and Enigma Vault is still working toward, while Evervault and Enigma Vault both offer a HIPAA BAA.</p>
+<div class="bl-tablewrap bl-tablewrap--tri"><table class="bl-table bl-table--tri"><thead><tr><th>Control</th><th>VGS</th><th>Evervault</th><th class="bl-tri__ev"><span class="bl-tri__tag">Also consider</span>Enigma Vault</th></tr></thead><tbody>
+<tr><td>PCI DSS</td><td>PCI DSS v4.0.1 in its Trust Center; Level 1</td><td>PCI DSS 4.0.1 Level 1 Service Provider</td><td class="bl-tri__ev">Level 1 Service Provider (Card, Data, File Vault in scope)</td></tr>
+<tr><td>SOC 2</td><td>Listed in its Trust Center</td><td>Type II</td><td class="bl-tri__ev">Type II</td></tr>
+<tr><td>ISO 27001</td><td>ISO/IEC 27001:2022 listed</td><td>Not claimed</td><td class="bl-tri__ev">In progress</td></tr>
+<tr><td>HIPAA</td><td>Not listed in its Trust Center</td><td>Can sign BAAs</td><td class="bl-tri__ev">BAA available</td></tr>
+<tr><td>Audit support</td><td>PCI compliance subscription and provided auditor listed on Growth</td><td>CSA STAR; EMVCo-certified 3DS server; ASV scans</td><td class="bl-tri__ev">AOC, responsibility matrix, and SOC 2 report from Starter; bring your own QSA</td></tr>
+<tr><td>Data residency</td><td>US, EU, and Asia-Pacific environments</td><td>US and EU</td><td class="bl-tri__ev">US and EU; EU residency is an add-on from Growth</td></tr>
+<tr class="bl-tri__cta"><td>Next step</td><td colspan="2" class="bl-tri__note">Ask every vendor for its current audit reports and, if you handle PHI, a signed BAA.</td><td class="bl-tri__ev"><div class="bl-tri__acts"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-very-good-security-vs-evervault--table-security" href="/request-demo/?interest=very-good-security-vs-evervault"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-tri__more cta-blog cta-very-good-security-vs-evervault--table-security-explore" href="/platform/data-security/">Explore security controls &rarr;</a></div></td></tr>
+</tbody></table></div>
+<p>Evervault leads its card pitch with PCI scope figures that measure different things. Its product page says it cuts scope to SAQ A in most cases and saves over $100,000 in compliance costs, its docs say it reduces scope by more than 90% in many cases, and its homepage says it cuts PCI requirements by up to 95%.</p>
+<p>These are vendor claims, and SAQ A eligibility depends on how your whole checkout is built. VGS quotes no percentage, and its Trust Center still lists Privacy Shield, a framework invalidated in 2020, so ask for current reports.</p>
+<p>With any of them, the vault can significantly reduce the systems in your PCI scope, but your acquirer or QSA confirms your final scope. Our guide to the <a class="bl-link" href="/blog/best-pci-dss-compliant-tokenization-software/">best PCI DSS compliant tokenization software</a> compares more certified vaults.</p>
+
+<h2>VGS vs Evervault Reviews</h2>
+<p>VGS has 47 reviews on G2 at 4.7/5, while Evervault has 17 at 4.4/5 and no Capterra listing. Enigma Vault has 6 on G2 and 4 on Capterra.</p>
+<div class="bl-tablewrap bl-tablewrap--tri"><table class="bl-table bl-table--tri"><thead><tr><th>Source</th><th>VGS</th><th>Evervault</th><th class="bl-tri__ev"><span class="bl-tri__tag">Also consider</span>Enigma Vault</th></tr></thead><tbody>
+<tr><td>G2</td><td><a class="bl-link" href="https://www.g2.com/products/very-good-security-vgs-platform/reviews" rel="nofollow noopener" target="_blank">4.7/5 from 47 reviews</a></td><td><a class="bl-link" href="https://www.g2.com/products/evervault-2022-11-22/reviews" rel="nofollow noopener" target="_blank">4.4/5 from 17 reviews</a></td><td class="bl-tri__ev"><a class="bl-link" href="https://www.g2.com/products/enigma-vault/reviews" rel="nofollow noopener" target="_blank">4.4/5 from 6 reviews</a></td></tr>
+<tr><td>Capterra</td><td><a class="bl-link" href="https://www.capterra.com/p/195135/VGS-Platform/" rel="nofollow noopener" target="_blank">Listed, no reviews</a></td><td>No listing found</td><td class="bl-tri__ev"><a class="bl-link" href="https://www.capterra.com/p/241650/Enigma-Vault/" rel="nofollow noopener" target="_blank">4.8/5 from 4 reviews</a></td></tr>
+<tr><td>Other public proof</td><td>Named customers include Robinhood, SumUp, and Albertsons</td><td>$25M Series B in March 2026; $46M raised in total</td><td class="bl-tri__ev">Reviewer quotes on support speed and cost</td></tr>
+<tr class="bl-tri__cta"><td>Next step</td><td colspan="2" class="bl-tri__note">Six reviews is a thin base. Ask every vendor for a reference in your industry.</td><td class="bl-tri__ev"><div class="bl-tri__acts"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-very-good-security-vs-evervault--table-reviews" href="/request-demo/?interest=very-good-security-vs-evervault"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-tri__more cta-blog cta-very-good-security-vs-evervault--table-reviews-explore" href="/platform/overview/">Explore the platform &rarr;</a></div></td></tr>
+</tbody></table></div>
+<h3>What VGS Reviewers Say</h3>
+<p>Reviewers on G2 often praise support, especially chat, and say the proxy was quick to understand. The critical notes cluster around price and polish. Two say cost runs on the high side, and two object to the $40 fee for each extra custom domain (CNAME). Others say some documentation is out of date and that log filtering could be better.</p>
+<h3>What Evervault Reviewers Say</h3>
+<p>Evervault reviewers like its onboarding, how easy relays are to set up, and not having to manage encryption keys themselves. Several call it expensive, especially at the enterprise level, and one notes that connecting it to their system needed an IT specialist.</p>
+<h3>What Enigma Vault Reviewers Say</h3>
+<div class="bl-evcall" role="note"><span class="bl-evcall__tag">Enigma Vault</span><p>Reviewers on G2 describe a developer-friendly tokenization service and secure file processing that has worked without issues. The critical notes ask for lower pricing and more documentation. Six reviews is a thin base, so ask for a reference in your industry here as well.</p><div class="bl-evcall__cta"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-very-good-security-vs-evervault--callout-reviews" href="/request-demo/?interest=very-good-security-vs-evervault"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-evcall__more cta-blog cta-very-good-security-vs-evervault--callout-reviews-explore" href="/platform/overview/">Explore the platform &rarr;</a></div></div>
+
+<h2>Does Evervault Compare Itself to VGS?</h2>
+<p>Many vendors publish head-to-head pages that rank for searches like this one. Here, neither vendor has a working page that names the other.</p>
+<ul>
+<li><strong>Evervault:</strong> Its site has listed an “Evervault vs VGS” page, but the URL returned a 404 when we checked on 22 November 2026, so there are no claims to check.</li>
+<li><strong>VGS:</strong> It publishes a page titled “VGS vs. Other Independent Vaults.” It describes VGS as the leading independent network token vault, with direct connections to all four card networks, 99.99% reliability, and proven throughput at enterprise scale. It does not name Evervault in its visible text.</li>
+</ul>
+<p>VGS’s four-network claim is one network wider than Evervault’s docs, which list Discover network tokens as coming soon. Its 99.99% figure is a vendor claim, while Evervault states 99.9%+ uptime on Platform and offers a 99.95% SLA on Custom. Treat both vendors’ positioning as marketing until you see it in a proof of concept.</p>
+
+<h2>Who Should Choose VGS, Evervault, or Enigma Vault</h2>
+
+<h3>Payments Fintechs and Marketplaces With an Engineering Team</h3>
+<p>Both VGS and Evervault fit. Pick VGS if you want one vendor holding the cards, audit help bundled with the vendor, or agentic tokens through the card networks. Pick Evervault if your security team will not hand over the card dataset, or if you need to sign, derive, or transform secrets inside Functions or an isolated Enclave. If your card volume is modest, price both against Enigma Vault first.</p>
+
+<h3>Subscription and Ecommerce Brands Storing Cards on File</h3>
+<p>Network tokens and account updater protect recurring revenue, and both vendors sell them: bundled into Growth at VGS and metered per operation at Evervault. If a meaningful share of customers pay with Discover, VGS’s four-network coverage is the safer pick right now, since Evervault lists Discover network tokens as coming soon.</p>
+<p>If customers can re-enter an expired card, Enigma Vault covers storage and gateway charging at a fraction of the price.</p>
+
+<h3>If Your Agency, Travel Business, Clinic, or Support Team Takes Cards by Phone</h3>
+<p>A proxy protects data arriving over HTTP. It does nothing for a card number read aloud on a call and typed into a ticket. Neither VGS nor Evervault packages a phone channel. Enigma Vault’s <a class="bl-link" href="/vault/card-vault/">Card Vault</a> includes Twilio Pay IVR from the Growth tier, so callers enter their card on the keypad and agents never hear it, from $249 a month.</p>
+
+<h3>For Teams That Want to Try Before Buying</h3>
+<p>Very Good Security offers a free sandbox that is not for real data. Evervault offers a free sandbox account with no time limit, and no free production plan. Enigma Vault’s Lite tier is also a free sandbox for development and testing, with hard limits and no card to enter, so you can build against the API before you pay anything. Paid plans start at $49 a month.</p>
+
+<h2>Questions to Ask VGS and Evervault Before You Sign</h2>
+<p>Bring these to both vendors. The answers shown are what each publishes today, so you can see where a sales call is needed.</p>
+<div class="bl-tablewrap bl-tablewrap--tri"><table class="bl-table bl-table--tri"><thead><tr><th>Question</th><th>VGS</th><th>Evervault</th><th class="bl-tri__ev"><span class="bl-tri__tag">Also consider</span>Enigma Vault</th></tr></thead><tbody>
+<tr><td>What will year one cost?</td><td>Starter from $1,000/mo; ask the billing unit and what Growth adds</td><td>$995/mo plus usage; ask whether the fee includes any usage</td><td class="bl-tri__ev">Published: $0, $49, $249, or $499 a month per product</td></tr>
+<tr><td>Can we test before signing?</td><td>Free sandbox, not for real data</td><td>Free sandbox account, no time limit</td><td class="bl-tri__ev">Yes, on the free Lite sandbox</td></tr>
+<tr><td>Which features are generally available?</td><td>Ask which Growth features run in the EU and Asia-Pacific</td><td>Ask about Discover network tokens and the real-time updater</td><td class="bl-tri__ev">Listed on the product page</td></tr>
+<tr><td>Can you sign a BAA?</td><td>Ask; HIPAA is not in its Trust Center</td><td>Yes, per its FAQ; get it in writing</td><td class="bl-tri__ev">Yes</td></tr>
+<tr><td>Who does the audit work?</td><td>Growth lists a PCI subscription and auditor</td><td>Ask; ASV scans are sold per domain</td><td class="bl-tri__ev">AOC and SOC 2 report from Starter; bring your own QSA</td></tr>
+<tr><td>How do we leave?</td><td>Ask for the card export process in writing</td><td>Ask how ciphertext is decrypted for a new provider</td><td class="bl-tri__ev">Ask for the export process in writing</td></tr>
+<tr class="bl-tri__cta"><td>Next step</td><td colspan="2" class="bl-tri__note">Put the same questions to Enigma Vault.</td><td class="bl-tri__ev"><div class="bl-tri__acts"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-very-good-security-vs-evervault--table-questions" href="/request-demo/?interest=very-good-security-vs-evervault"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-tri__more cta-blog cta-very-good-security-vs-evervault--table-questions-explore" href="/docs/">Explore the docs &rarr;</a></div></td></tr>
+</tbody></table></div>
+<p>The last row matters for all three, and most for Evervault buyers, who often assume that holding the ciphertext means an easy exit. You still need Evervault to decrypt the data for a provider-to-provider migration, so agree how that works before you sign.</p>
+
+<h2>Moving From VGS or Evervault to Enigma Vault</h2>
+<p>If the price or the feature set no longer fits, the move is a card migration between two PCI-compliant providers, which both vendors and your acquirer need to agree.</p>
+<ul>
+<li><strong>Map Your Aliases or Ciphertext First:</strong> List every table that stores a VGS alias or Evervault ciphertext, since neither works in a new vault.</li>
+<li><strong>Plan the Export or Decrypt:</strong> VGS exports vaulted cards, while Evervault ciphertext must be decrypted inside a PCI environment and sent directly to the new provider.</li>
+<li><strong>Check What You Rely On:</strong> If you use network tokens, account updater, 3D Secure, chargeback alerts, VGS Compute, or Enclaves, confirm your gateway covers them or that you can live without them.</li>
+<li><strong>Choose a Token Format, Then Run Both for a Few Weeks:</strong> Enigma Vault issues random tokens, with a Luhn-passable option if a legacy system checks card formats. Then cut over.</li>
+</ul>
+<p>Our guide to <a class="bl-link" href="/blog/how-to-migrate-from-vaultless-tokenization-to-vault/">migrating tokenization providers</a> covers the Evervault-style path in more detail. If you want help planning it, <a class="bl-link cta-blog cta-very-good-security-vs-evervault--migration" href="/request-demo/?interest=very-good-security-vs-evervault">book a migration call</a>.</p>
+
+<h2>Final Verdict: VGS, Evervault, or Enigma Vault?</h2>
+<p>Both VGS and Evervault are serious platforms. Very Good Security is the stronger fit if network tokens across all four networks, agentic tokens, and vendor audit help drive your decision, and you are comfortable with one vendor holding the cards.</p>
+<p>Evervault is the stronger fit if your security team wants the encrypted data in-house, your engineers need Functions or Enclaves, and you value a published price for every operation. I’d choose between them on custody first and price second, because their entry prices are within $5 a month of each other.</p>
+<p>If neither floor makes sense for your volume, or you also need to protect phone payments, records, documents, or AI prompts, Enigma Vault covers those at published prices, with a free sandbox to build on. It does not have network tokens, account updater, 3D Secure, or custom code, so if your revenue depends on those, it is not the right choice.</p>
+<div class="bl-inlinecta"><div><p class="bl-inlinecta__t">Price Card Vault at your volume.</p><p class="bl-inlinecta__s">Book a demo and we will model the cost against VGS and Evervault, or <a class="cta-blog cta-very-good-security-vs-evervault--final-explore" href="/vault/card-vault/">explore Card Vault</a> first.</p></div><a class="np-btn np-btn--on-dark np-btn--primary cta-blog cta-very-good-security-vs-evervault--final" href="/request-demo/?interest=very-good-security-vs-evervault"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a></div>
+<p>More comparisons: <a class="bl-link" href="/blog/basis-theory-vs-evervault/">Basis Theory vs Evervault</a>, <a class="bl-link" href="/blog/very-good-security-vs-basis-theory/">VGS vs Basis Theory</a>, <a class="bl-link" href="/blog/very-good-security-vs-tokenex/">VGS vs TokenEx</a>, and <a class="bl-link" href="/blog/enigma-vault-vs-very-good-security/">Enigma Vault vs VGS</a>.</p>
+
+<h2>How We Researched This Comparison</h2>
+<p>We checked prices, features, and comparison pages on 22 November 2026, and review figures on 22 November 2026. VGS facts come from verygoodsecurity.com, including its pricing page, its “VGS vs. Other Independent Vaults” page, its documentation, and its Trust Center.</p>
+<p>Evervault facts come from evervault.com, including its pricing page, product pages, docs, FAQ, and Series B announcement. Third-party figures come from Vendr, G2, and Capterra, and Enigma Vault facts come from our own pricing and product pages.</p>
+<p>Where a vendor makes a claim about itself or a rival, such as PCI scope percentages or uptime, we label it as a vendor claim, and the Evervault cost figures are our arithmetic from its published rates. If something here is out of date, tell us through our <a class="bl-link" href="/contact/">contact page</a> and we will check it.</p>

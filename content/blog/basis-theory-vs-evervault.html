@@ -1,0 +1,288 @@
+---
+title: "Basis Theory or Evervault? A 2026 Comparison for Engineering Teams"
+slug: "basis-theory-vs-evervault"
+layout: "pii-style"
+metaTitle: "Basis Theory or Evervault? A 2026 Comparison for Engineering Teams"
+description: "Basis Theory vs Evervault compared on architecture, payments depth, custom code, AI agents, pricing, compliance, and reviews, with Enigma Vault as a third option."
+subtitle: "Choose Basis Theory if your engineers want a vault that holds the card and bills per stored token, choose Evervault to keep ciphertext in your own database and pay per use, and look at Enigma Vault if you want published prices below $500 a month."
+date: 2026-11-22
+category: "Card Vault"
+allOnly: true
+author: "abhilash-kumar"
+readTime: 16
+heroImage: "/assets/blog/img-06.png"
+heroAlt: "Basis Theory vs Evervault comparison"
+excerpt: "A payments-first token vault against a usage-priced encryption platform, compared feature by feature, with Enigma Vault as a third column."
+tags: ["tokenization", "comparison", "card-vault"]
+ogType: article
+styles: ["blog.css", "pages/blog-pii-hero.css", "tr-pages.css", "pages/vs-tri-table.css"]
+scripts: ["blog-article.js", "pages/vs-tri-table.js"]
+faqSchema: true
+faqs:
+  - q: "Is Basis Theory or Evervault Cheaper?"
+    a: "It depends on your volume. Both publish a $995 monthly plan. Basis Theory’s includes 20,000 stored tokens, then $0.05 for each extra stored token. Evervault’s Platform plan adds usage on top, such as $0.005 per decrypt and $0.03 per network token operation. A large card base charged rarely costs less on Evervault, and a small card base charged very often can cost less on Basis Theory. Enigma Vault’s Card Vault has a free Lite sandbox and published plans of $49, $249, and $499 a month."
+  - q: "What Is the Main Difference Between Basis Theory and Evervault?"
+    a: "Basis Theory holds the card in its PCI Level 1 vault, and your systems keep a token. Evervault encrypts the card and returns ciphertext that you store in your own database, while Evervault holds the keys and decrypts only inside its own infrastructure, such as Relay, Functions, or Enclaves."
+  - q: "Does Basis Theory Include Network Tokens and Account Updater in Its $995 Plan?"
+    a: "Not clearly. As of 22 November 2026, Basis Theory’s docs label its Network Tokens and Batch Account Updater as Enterprise, its Universal 3D Secure as Enterprise, and its pricing page lists no price for any of them, so ask. On Evervault, network tokens and 3DS are part of the Platform plan at $0.03 per operation or successful authentication, and account updater costs $0.25 per card update."
+  - q: "How Do Basis Theory and Evervault Count Usage for Billing?"
+    a: "Basis Theory bills on the tokens stored in your vault during the calendar month, including cards, network tokens, and wallet tokens, and tokens deleted in the same month still count. Evervault does not charge for encrypts or for requests through Relay and Functions. It meters decrypts, fingerprints, and each payments feature you use."
+  - q: "Do Basis Theory and Evervault Offer Free Trials?"
+    a: "Both offer a free test environment, and neither has a free production plan. Evervault’s sandbox is free with no credit card, no sales call, and no time limit. Basis Theory’s free test tenant takes synthetic data only. Enigma Vault’s Card Vault has a free Lite sandbox, then paid plans from $49 a month."
+  - q: "Which Is Better for PII and PHI, Basis Theory or Evervault?"
+    a: "Evervault can encrypt any field or file on its Platform plan and says it signs BAAs. Basis Theory stores bank data and generic values but places PII and PHI options on Enterprise and caps payloads at 1 MB on its $995 plan. Ask each vendor for a signed BAA before you send PHI."
+  - q: "Which Is Better for AI Agents That Pay?"
+    a: "Both are early. Evervault’s Browser Tokens let an agent complete a merchant checkout without seeing the card, at $0.25 per card session plus bandwidth. Basis Theory lists agentic enrollments on Enterprise. Ask each which merchants, networks, and card types it supports today."
+  - q: "What Is a Lower-Cost Alternative to Basis Theory and Evervault?"
+    a: "Enigma Vault’s Card Vault is a PCI DSS Level 1 tokenization service with a free Lite sandbox and published plans of $49, $249, and $499 a month. It adds phone card capture through Twilio Pay from Growth, but it does not offer network tokens, account updater, routing, or custom code."
+---
+<p>Basis Theory and Evervault are both developer-first card platforms that keep usable card numbers out of your own systems and give your engineers an API to collect, store, and use them.</p>
+<p>Basis Theory is best for engineering teams that want the vendor to hold the card and bill per stored token, while Evervault is best for teams that want to keep encrypted card data in their own database and pay per use.</p>
+<p>This guide compares Basis Theory and Evervault on architecture, features, pricing, compliance, and reviews, with Enigma Vault alongside as a third option for teams that want published prices and a simpler start.</p>
+
+<h2>Basis Theory vs Evervault at a Glance</h2>
+<div class="bl-tablewrap bl-tablewrap--tri"><table class="bl-table bl-table--tri"><thead><tr><th>Vendor</th><th>Basis Theory</th><th>Evervault</th><th class="bl-tri__ev"><span class="bl-tri__tag">Also consider</span>Enigma Vault</th></tr></thead><tbody>
+<tr><td>Best for</td><td>Engineering teams that want the vendor to hold the card and run code on it</td><td>Engineering teams that want to keep ciphertext and pay per use</td><td class="bl-tri__ev">Teams that want PCI scope reduction at published prices below $500 a month</td></tr>
+<tr><td>Entry price</td><td>$995/mo, 20,000 stored tokens</td><td>$995/mo plus usage</td><td class="bl-tri__ev">Free Lite sandbox, then $49/mo</td></tr>
+<tr><td>Free option</td><td>Free test tenant, synthetic data only</td><td>Free sandbox, no card or sales call</td><td class="bl-tri__ev">Free Lite sandbox, with hard limits</td></tr>
+<tr><td>Architecture</td><td>Token vault with Elements, Proxy, and Reactors</td><td>Encryption with Relay, Functions, and Enclaves; you store ciphertext</td><td class="bl-tri__ev">Card Vault holds the card; gateway proxy to charge</td></tr>
+<tr><td>G2</td><td><a class="bl-link" href="https://www.g2.com/products/basis-theory/reviews" rel="nofollow noopener" target="_blank">Listed, no reviews</a></td><td><a class="bl-link" href="https://www.g2.com/products/evervault-2022-11-22/reviews" rel="nofollow noopener" target="_blank">4.4/5 (17)</a></td><td class="bl-tri__ev"><a class="bl-link" href="https://www.g2.com/products/enigma-vault/reviews" rel="nofollow noopener" target="_blank">4.4/5 (6)</a></td></tr>
+<tr><td>Capterra</td><td><a class="bl-link" href="https://www.capterra.com/p/10002181/Basis-Theory/" rel="nofollow noopener" target="_blank">Listed, 0 reviews</a></td><td>No listing found</td><td class="bl-tri__ev"><a class="bl-link" href="https://www.capterra.com/p/241650/Enigma-Vault/" rel="nofollow noopener" target="_blank">4.8/5 (4)</a></td></tr>
+<tr class="bl-tri__cta"><td>Next step</td><td colspan="2" class="bl-tri__note">Free Lite tier, no card needed. Published Card Vault plans from $49 a month.</td><td class="bl-tri__ev"><div class="bl-tri__acts"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-basis-theory-vs-evervault--table-glance" href="/request-demo/?interest=basis-theory-vs-evervault"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-tri__more cta-blog cta-basis-theory-vs-evervault--table-glance-explore" href="/vault/card-vault/">Explore Card Vault &rarr;</a></div></td></tr>
+</tbody></table></div>
+<p>Vendor figures were checked on 22 November 2026 on each vendor’s own site, docs, and pricing pages; review figures from G2 and Capterra are as of 22 November 2026. For more options, see our guides to <a class="bl-link" href="/blog/basis-theory-alternatives/">Basis Theory alternatives</a> and <a class="bl-link" href="/blog/evervault-alternatives/">Evervault alternatives</a>.</p>
+
+<h2>Basis Theory vs Evervault: Quick Verdict</h2>
+<p><strong>Basis Theory:</strong> A payments-first token vault with Elements for web and mobile, a proxy that forwards vaulted data to any API, and Reactors that run your own code against vaulted data.</p>
+<p>It publishes one plan at $995 a month for 20,000 stored tokens, then $0.05 per extra token, and its docs label its Network Tokens and Batch Account Updater as Enterprise, along with Universal 3D Secure, with no published price for any of them. It has no reviews yet on G2 or Capterra.</p>
+<p><strong>Evervault:</strong> An encryption platform where card data is encrypted before it reaches you, you store the ciphertext, and Evervault decrypts it only inside its own infrastructure: Relay for proxied API calls, Functions for short code, and Enclaves for full containers in AWS Nitro Enclaves.</p>
+<p>Its Platform plan is $995 a month plus usage and bundles card collection, 3DS, network tokens, wallets, and Browser Tokens, each billed per use. It is rated 4.4/5 from 17 reviews on G2.</p>
+<div class="bl-evcall" role="note"><span class="bl-evcall__tag">Also consider</span><p><strong>Enigma Vault:</strong> A PCI DSS Level 1 tokenization service with a free Lite sandbox and Card Vault plans of $49, $249, and $499 a month, plus phone card capture through Twilio Pay from Growth.</p><div class="bl-evcall__cta"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-basis-theory-vs-evervault--callout-verdict" href="/request-demo/?interest=basis-theory-vs-evervault"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-evcall__more cta-blog cta-basis-theory-vs-evervault--callout-verdict-explore" href="/pricing/#vault">See Card Vault pricing &rarr;</a></div></div>
+<p>Go with <strong>Basis Theory</strong> if:</p>
+<ul>
+<li>You never want card data, encrypted or not, in your own database.</li>
+<li>You charge a modest number of stored cards many times each month, so a stored-token bill stays flat while charges climb.</li>
+<li>ISO 27001 matters in your vendor review, since Basis Theory claims it and Evervault does not.</li>
+</ul>
+<p>Go with <strong>Evervault</strong> if:</p>
+<ul>
+<li>You store a large card base but charge each card only now and then, so per-decrypt pricing works in your favor.</li>
+<li>You want network tokens and 3DS on the entry plan at a published per-use price.</li>
+<li>You need to run whole services on sensitive data inside Enclaves.</li>
+</ul>
+<p>Go with <strong>Enigma Vault</strong> if:</p>
+<ul>
+<li>Your card volume does not justify about $12,000 a year in platform fees before usage.</li>
+<li>Some cards arrive by phone, and you want callers to key them in rather than read them aloud.</li>
+<li>Your gateway already handles network tokens, account updates, and 3DS, so you only need storage and a proxy to charge.</li>
+</ul>
+<p><strong>The short version:</strong> Basis Theory hands payments engineers a programmable vault priced on stored tokens, Evervault leaves ciphertext with you and prices on use, and Enigma Vault covers card storage and charging at published prices for teams that need neither model’s extras.</p>
+
+<h2>How Basis Theory and Evervault Differ at the Core</h2>
+<p>Basis Theory is a token vault your application sends data to, with the payments tooling built around it, whereas Evervault encrypts data and hands the ciphertext back to you, keeping the keys on its side in a dual-custody model. That difference shapes what sits in your database, who you depend on to use it, and what you pay for.</p>
+<p>To make it concrete, follow one subscriber signing up. They give a name, email, date of birth, a card for billing, and a scan of their ID.</p>
+<div class="bl-tablewrap bl-tablewrap--tri"><table class="bl-table bl-table--tri"><thead><tr><th>Piece of data</th><th>Basis Theory</th><th>Evervault</th><th class="bl-tri__ev"><span class="bl-tri__tag">Also consider</span>Enigma Vault</th></tr></thead><tbody>
+<tr><td>Card for billing</td><td>A card token, captured with Elements and charged through the Proxy</td><td>Ciphertext in your database, charged through Relay with a $0.005 decrypt</td><td class="bl-tri__ev">Card Vault, charged through the gateway proxy</td></tr>
+<tr><td>Name, email, date of birth</td><td>Generic tokens; PII options are Enterprise</td><td>Encrypted fields stored in your database</td><td class="bl-tri__ev">Data Vault, with exact-match lookup</td></tr>
+<tr><td>ID scan</td><td>Not a document store; 1 MB payload cap on the $995 plan</td><td>An encrypted file, with file decrypts at $0.02</td><td class="bl-tri__ev">File Vault, from 5 GB free</td></tr>
+<tr><td>How the subscriber submits it</td><td>Elements in your page or app</td><td>Evervault card components and web and mobile SDKs</td><td class="bl-tri__ev">A hosted form, or a Customer Vault intake link</td></tr>
+<tr><td>What a breach of your systems exposes</td><td>Tokens</td><td>Ciphertext without keys</td><td class="bl-tri__ev">Tokens</td></tr>
+<tr class="bl-tri__cta"><td>Next step</td><td colspan="2" class="bl-tri__note">Basis Theory’s test tenant, Evervault’s sandbox, and Enigma Vault’s Lite tiers are all free test environments. Enigma Vault’s first paid plan is $49 a month.</td><td class="bl-tri__ev"><div class="bl-tri__acts"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-basis-theory-vs-evervault--table-core" href="/request-demo/?interest=basis-theory-vs-evervault"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-tri__more cta-blog cta-basis-theory-vs-evervault--table-core-explore" href="/vault/card-vault/">Explore Card Vault &rarr;</a></div></td></tr>
+</tbody></table></div>
+<p><strong>Basis Theory’s Model:</strong> Nothing card-shaped lives in your systems, and the vendor handles key rotation and custody. The vault becomes the single place your cards live, which makes the exit process the most important clause in the contract.</p>
+<p><strong>Evervault’s Model:</strong> Your records stay in your own database, joined to your own customer rows, and Evervault never holds a copy of the card in the core encryption flow.</p>
+<p>If Evervault were breached on its own, there would be keys and no cards; if you were breached on your own, there would be ciphertext and no keys. You still store, back up, and retain that ciphertext, and some features, such as account updater enrollment, create objects on Evervault’s side.</p>
+<div class="bl-evcall" role="note"><span class="bl-evcall__tag">Enigma Vault</span><p><strong>Enigma Vault’s Model:</strong> Each piece of data goes to the vault built for it, and you adopt only what you need, each with its own free tier and published price.</p><div class="bl-evcall__cta"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-basis-theory-vs-evervault--callout-model" href="/request-demo/?interest=basis-theory-vs-evervault"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-evcall__more cta-blog cta-basis-theory-vs-evervault--callout-model-explore" href="/platform/overview/">Explore the platform &rarr;</a></div></div>
+<p>If you want no card data of any kind in your systems, Basis Theory’s model fits. If you want your records to stay in your own database and pay only when data is used, Evervault’s fits.</p>
+<p>If your job is getting cards, records, and documents out of email, phone calls, and databases at a predictable price, Enigma Vault’s fits. Our explainer on <a class="bl-link" href="/blog/vault-vs-vaultless-tokenization/">vault vs vaultless tokenization</a> covers the wider trade-off.</p>
+
+<h2>Basis Theory vs Evervault Features Compared</h2>
+<p>Compare Basis Theory and Evervault on capture, custom code, payments tools, and agentic commerce. They match on most rows; the differences are mainly in which plan each feature sits on and how it is billed.</p>
+<div class="bl-tablewrap bl-tablewrap--tri"><table class="bl-table bl-table--tri"><thead><tr><th>Feature</th><th>Basis Theory</th><th>Evervault</th><th class="bl-tri__ev"><span class="bl-tri__tag">Also consider</span>Enigma Vault</th></tr></thead><tbody>
+<tr><td>Core model</td><td>Token vault: vendor holds the card</td><td>Encryption: you store ciphertext, vendor holds keys</td><td class="bl-tri__ev">Token vault: Card Vault holds the card</td></tr>
+<tr><td>Card capture</td><td>Elements for web, iOS, Android, React Native</td><td>Card collection and Reveal components; web and mobile SDKs</td><td class="bl-tri__ev">Hosted forms and API</td></tr>
+<tr><td>Phone (IVR) capture</td><td><span class="bl-tri__no">Not offered</span></td><td><span class="bl-tri__no">Not offered</span></td><td class="bl-tri__ev">Twilio Pay (Growth and above)</td></tr>
+<tr><td>Proxy to third parties</td><td>Proxy to any API</td><td>Relay, inbound and outbound, unlimited requests</td><td class="bl-tri__ev">Gateway proxy, domain allowlisted</td></tr>
+<tr><td>Run your own code</td><td>Reactors</td><td>Functions (Node.js, Python); Enclaves (Docker, custom price)</td><td class="bl-tri__ev"><span class="bl-tri__no">Not offered</span></td></tr>
+<tr><td>Network tokens</td><td>Enterprise, per its docs</td><td>Platform plan, $0.03 per operation</td><td class="bl-tri__ev"><span class="bl-tri__no">Not offered</span></td></tr>
+<tr><td>Account updater</td><td>Batch updater Enterprise, per its docs</td><td>$0.25 per update</td><td class="bl-tri__ev"><span class="bl-tri__no">Not offered</span></td></tr>
+<tr><td>3D Secure</td><td>Universal 3D Secure is Enterprise, per its docs; no price published</td><td>Own 3DS server it describes as EMVCo-certified, $0.03 per success</td><td class="bl-tri__ev">Through your gateway</td></tr>
+<tr><td>Card data lookups</td><td>BIN lookup</td><td>BIN, PAR, name, and address verification</td><td class="bl-tri__ev"><span class="bl-tri__no">Not offered</span></td></tr>
+<tr><td>Apple Pay and Google Pay</td><td>Decrypts and vaults wallet tokens</td><td>$0.01 per transaction</td><td class="bl-tri__ev">Through your gateway</td></tr>
+<tr><td>Multi-PSP routing</td><td>Marketed for multi-PSP setups</td><td>Relay to any PSP; no routing engine listed</td><td class="bl-tri__ev"><span class="bl-tri__no">Not offered</span></td></tr>
+<tr><td>Agentic payments</td><td>Agentic enrollments (Enterprise)</td><td>Browser Tokens, $0.25 per card session</td><td class="bl-tri__ev"><span class="bl-tri__no">Not offered</span></td></tr>
+<tr><td>Duplicate card detection</td><td>Fingerprinting, per its comparison page</td><td>Fingerprints at $0.005 each</td><td class="bl-tri__ev">Ask about duplicate detection</td></tr>
+<tr><td>Token formats</td><td>Shaped with expressions</td><td>Evervault ciphertext format</td><td class="bl-tri__ev">Random or Luhn-passable</td></tr>
+<tr><td>Beyond cards</td><td>Bank data; PII and PHI on Enterprise</td><td>Any field or file can be encrypted</td><td class="bl-tri__ev">Data Vault, File Vault, Customer Vault</td></tr>
+<tr><td>Regions</td><td>One environment, US or EU, on the $995 plan</td><td>US and EU Relay endpoints</td><td class="bl-tri__ev">US and EU; EU residency is an add-on from Growth</td></tr>
+<tr class="bl-tri__cta"><td>Next step</td><td colspan="2" class="bl-tri__note">Check which features each vendor ships on the plan you would use.</td><td class="bl-tri__ev"><div class="bl-tri__acts"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-basis-theory-vs-evervault--table-features" href="/request-demo/?interest=basis-theory-vs-evervault"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-tri__more cta-blog cta-basis-theory-vs-evervault--table-features-explore" href="/vault/card-vault/">Explore Card Vault &rarr;</a></div></td></tr>
+</tbody></table></div>
+<p>Here is how the biggest differences play out in practice.</p>
+
+<h2>Where Basis Theory and Evervault Differ in Practice</h2>
+
+<h3>Developer Experience and Time to First Token</h3>
+<p>Both vendors let engineers start without a sales call. Evervault’s sandbox is free with no credit card, no sales call, and no time limit. Basis Theory has a free, self-serve test tenant that takes synthetic data only, with Elements and a proxy to build against.</p>
+<p>Custom code is where they split. Basis Theory Reactors run your code against data that stays in its vault, for jobs such as reformatting a card for a partner or calling an API that the proxy cannot reach on its own.</p>
+<p>Evervault splits the job in two: Functions run short Node.js or Python code on decrypted data, and Enclaves run a whole Docker container inside an AWS Nitro Enclave, with attestation checkable through Evervault’s open source clients.</p>
+<p>If you want to move an entire service, such as a scoring model or an issuer integration, Enclaves go further than either Reactors or Functions, but they are priced on a custom basis, so budget for a quote.</p>
+
+<h3>Payments Depth and What Sits Behind Enterprise</h3>
+<p>For subscription and card-on-file businesses, network tokens and account updater keep stored cards working after a reissue. Evervault bundles them into its Platform plan at published per-use rates, so a team on $995 can turn them on and know the cost.</p>
+<p>It also runs its own 3DS server, which it describes as EMVCo-certified, and charges only for successful authentications, which helps merchants facing strong customer authentication in Europe or high fraud rates in travel and digital goods.</p>
+<p>Basis Theory’s docs label its Network Tokens and Batch Account Updater as Enterprise, its Universal 3D Secure as Enterprise, and its pricing page lists no price for any of them, so ask. Its pricing details page also says network tokens count toward your stored-token total. If these features drive your revenue, the price you can see today is Evervault’s.</p>
+<div class="bl-evcall" role="note"><span class="bl-evcall__tag">Enigma Vault</span><p>Enigma Vault does not issue network tokens. Many gateways offer them, and Card Vault charges through the gateway you already use, so check your gateway before paying for them twice.</p><div class="bl-evcall__cta"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-basis-theory-vs-evervault--callout-nettokens" href="/request-demo/?interest=basis-theory-vs-evervault"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-evcall__more cta-blog cta-basis-theory-vs-evervault--callout-nettokens-explore" href="/vault/card-vault/">Explore Card Vault &rarr;</a></div></div>
+
+<h3>Data Types, Files, and PII</h3>
+<p>Basis Theory has card and bank-account token types and stores other values as generic tokens, but payloads are capped at 1 MB on the $995 plan, and PII and PHI options are Enterprise.</p>
+<p>Evervault can encrypt any field or file on its Platform plan, with encrypts unlimited, file decrypts at $0.02, and field decrypts at $0.005. Because Evervault’s ciphertext lives in your database, your own retention and backup rules apply to it.</p>
+<div class="bl-evcall" role="note"><span class="bl-evcall__tag">Enigma Vault</span><p>Enigma Vault splits these jobs across <a class="bl-link" href="/vault/data-vault/">Data Vault</a> for records, <a class="bl-link" href="/vault/file-vault/">File Vault</a> for documents, and <a class="bl-link" href="/vault/customer-vault/">Customer Vault</a> for no-code intake.</p><div class="bl-evcall__cta"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-basis-theory-vs-evervault--callout-data" href="/request-demo/?interest=basis-theory-vs-evervault"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-evcall__more cta-blog cta-basis-theory-vs-evervault--callout-data-explore" href="/vault/data-vault/">Explore Data Vault &rarr;</a></div></div>
+
+<h3>Governance, Logs, and Keys</h3>
+<p>Basis Theory keeps the keys and the cards. On the $995 plan, logs are kept for 24 hours, and custom log retention, SSO, and SAML are Enterprise.</p>
+<p>Evervault keeps the keys and leaves the ciphertext with you, so neither side alone holds a usable card. SAML SSO, 24/7 support, and a solutions engineer come with Evervault’s Custom plan.</p>
+<p>Marketplaces and subscription businesses that need to spot the same card on two accounts can do so on both: Basis Theory says it correlates tokens for the same card without touching the PAN, and Evervault charges $0.005 per fingerprint.</p>
+
+<h3>AI and Agents</h3>
+<p>Both vendors have moved toward AI agents that pay. Evervault’s Browser Tokens let an agent complete a merchant checkout without seeing the card, billed at $0.25 per card session plus bandwidth. Basis Theory lists agentic enrollments on Enterprise.</p>
+<p>Both are early products, so ask which merchants, networks, and card types each supports today, and what happens when an agent session fails partway.</p>
+
+<h3>Deployment and Data Residency</h3>
+<p>Basis Theory’s $995 plan runs in one environment. On 16 November its pricing page described that plan as US-only, and on 19 and 22 November it read “one environment (US or EU),” so ask which region your tenant will run in.</p>
+<p>Evervault offers US and EU Relay endpoints and runs Enclaves inside AWS Nitro Enclaves; ask about its EU processing commitments. Enigma Vault is managed in US and EU regions, with EU data residency an add-on from Card Vault Growth.</p>
+
+<h2>What Basis Theory’s Comparison Page Says About Evervault</h2>
+<p>Basis Theory publishes an <a class="bl-link" href="https://go.basistheory.com/compare/evervault" rel="nofollow noopener" target="_blank">Evervault comparison page</a> and an <a class="bl-link" href="https://go.basistheory.com/evervault-alternative" rel="nofollow noopener" target="_blank">Evervault alternative page</a> with the same table. We checked each claim about Evervault against Evervault’s own pages on 22 November 2026.</p>
+<ul>
+<li><strong>Evervault is charged per decryption:</strong> Accurate. Evervault charges $0.005 per decrypt, and encrypts are unlimited.</li>
+<li><strong>Evervault has no native fingerprinting:</strong> Contradicted. Evervault’s pricing page lists fingerprints at $0.005 each.</li>
+<li><strong>The decryption key is kept on Evervault’s side:</strong> Accurate, and consistent with Evervault’s dual-custody model. The same page’s table also says you are “responsible for securing the decryption key yourself,” which contradicts its own text.</li>
+<li><strong>Evervault holds PCI Level 1, SOC 2 Type II, and HIPAA:</strong> Incomplete. Evervault also lists CSA STAR and EMVCo certification for its 3DS server, and says it signs BAAs rather than claiming HIPAA certification.</li>
+<li><strong>Network tokens and account updater must be decrypted and passed between systems:</strong> We found no Evervault documentation describing it that way; both are Evervault-run features billed per use.</li>
+<li><strong>Migration needs active participation from Evervault:</strong> Partly. Evervault documents a self-serve export enclave that re-encrypts data to your own key, though the keys still sit with Evervault until then.</li>
+</ul>
+<p>The page also describes Basis Theory’s own 3DS, network tokens, and account updater as native to the vault without plan labels, while its docs place Network Tokens and Batch Account Updater on Enterprise, and it lists ISO 27701 and NACHA, which we did not see on its security page.</p>
+<p>Evervault has no page naming Basis Theory. Treat both as marketing, and let only the claims you can test in a proof of concept count.</p>
+
+<h2>Basis Theory vs Evervault Pricing</h2>
+
+<h3>What Basis Theory Charges</h3>
+<p>Basis Theory publishes one self-serve plan and a custom Enterprise tier. There is no free production plan, only a free test tenant. It bills on the tokens stored in your vault during the calendar month, including cards, network tokens, and wallet tokens, and tokens deleted in the same month still count.</p>
+<div class="bl-tablewrap"><table class="bl-table"><thead><tr><th>Basis Theory plan</th><th>What you get</th></tr></thead><tbody>
+<tr><td>$995/mo</td><td>20,000 tokens stored per calendar month, then $0.05 for each extra token; production PCI environment, 1 MB payload limit, 24 hours of logs, PCI AOC, one environment (US or EU)</td></tr>
+<tr><td>Enterprise (custom)</td><td>PII and PHI options, responses for 95% of PCI SAQ D, unlimited monthly interactions per token, custom log retention and payload sizes, uptime guarantees, SSO and SAML, white-label CNAME, dedicated IP; Network Tokens, Batch Account Updater, and Universal 3D Secure per its docs</td></tr>
+<tr class="bl-tri__solo"><td colspan="2"><div class="bl-tri__solo-in"><span class="bl-tri__solo-note">Compare: Enigma Vault’s Card Vault has a free Lite sandbox and published plans of $49, $249, and $499 a month.</span><div class="bl-tri__acts"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-basis-theory-vs-evervault--table-plans" href="/request-demo/?interest=basis-theory-vs-evervault"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-tri__more cta-blog cta-basis-theory-vs-evervault--table-plans-explore" href="/pricing/#vault">See published pricing &rarr;</a></div></div></td></tr>
+</tbody></table></div>
+<p>At the published overage rate, 50,000 stored tokens works out to about $2,495 a month and 200,000 to about $9,995. That is our arithmetic from the published figures, not a Basis Theory quote, and Enterprise terms may differ. We did not find whether the $995 plan limits how often each token is used.</p>
+
+<h3>What Evervault Charges</h3>
+<p>Evervault’s <a class="bl-link" href="https://evervault.com/pricing" rel="nofollow noopener" target="_blank">pricing page</a> lists a $995 monthly Platform plan plus usage, recommended for under 25,000 transactions a month, and a Custom plan above that with volume discounts, 24/7 support, a solutions engineer, and SAML SSO. Encrypts are unlimited, and so are requests through Relay and Functions. The metered items are:</p>
+<ul>
+<li><strong>Decrypts:</strong> $0.005 each; file decrypts $0.02; fingerprints $0.005.</li>
+<li><strong>Payments:</strong> 3DS $0.03 per successful authentication (failures free); network tokens $0.03 per creation, cryptogram, or update; Apple Pay and Google Pay $0.01 per transaction; account updater $0.25 per card update.</li>
+<li><strong>Card insights:</strong> BIN lookup $0.005, PAR lookup $0.10, address verification $0.15, name verification $0.25, capability check $0.02.</li>
+<li><strong>Agentic and fraud:</strong> Browser Tokens $0.25 per card session; retry signals $0.45; pre-chargeback alerts $15 (RDR) or $25 (Ethoca).</li>
+<li><strong>Enclaves:</strong> custom pricing.</li>
+</ul>
+<p>The Platform plan promises 99.9%+ uptime for payments and encryption workloads, with email support on weekdays from 9am to 5pm GMT; Custom raises that to a 99.95% SLA.</p>
+
+<h3>What Enigma Vault Charges</h3>
+<div class="bl-evcall" role="note"><span class="bl-evcall__tag">Enigma Vault</span><p>Every Card Vault tier is published. Lite is a free sandbox for testing (1,000 requests, 100 stored tokens). Starter is $49 a month for 20,000 requests and 10,000 stored tokens, Growth is $249 for 250,000 requests and 100,000 stored tokens, and Business is $499 for 1,000,000 of each.</p>
+<p>Overage is $0.02, $0.01, and $0.007 per request, and yearly prices are $550, $2,700, and $5,500. You can buy through the developer portal or AWS Marketplace, and the AOC and SOC 2 report come from Starter up.</p><div class="bl-evcall__cta"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-basis-theory-vs-evervault--callout-charges" href="/request-demo/?interest=basis-theory-vs-evervault"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-evcall__more cta-blog cta-basis-theory-vs-evervault--callout-charges-explore" href="/pricing/#vault">See published pricing &rarr;</a></div></div>
+
+<h3>Basis Theory vs Evervault Cost at Three Business Sizes</h3>
+<div class="bl-tablewrap bl-tablewrap--tri"><table class="bl-table bl-table--tri"><thead><tr><th>Business size</th><th>Basis Theory</th><th>Evervault</th><th class="bl-tri__ev"><span class="bl-tri__tag">Also consider</span>Enigma Vault</th></tr></thead><tbody>
+<tr><td>Small team (5,000 stored cards, 5,000 charges a month)</td><td>$995/mo</td><td>$995 + $25 in decrypts = $1,020/mo</td><td class="bl-tri__ev">$49/mo (Starter)</td></tr>
+<tr><td>Growing company (50,000 stored cards, 20,000 charges a month)</td><td>$995 + 30,000 × $0.05 = $2,495/mo</td><td>$995 + $100 in decrypts = $1,095/mo</td><td class="bl-tri__ev">$249/mo (Growth)</td></tr>
+<tr><td>Established platform (200,000 stored cards, 20,000 charges a month)</td><td>$995 + 180,000 × $0.05 = $9,995/mo, or Enterprise by quote</td><td>$995 + $100 in decrypts = $1,095/mo</td><td class="bl-tri__ev">$499/mo (Business)</td></tr>
+<tr class="bl-tri__cta"><td>Next step</td><td colspan="2" class="bl-tri__note">Our arithmetic from published rates, before 3DS, network token, or other add-ons. Ask both for a written quote.</td><td class="bl-tri__ev"><div class="bl-tri__acts"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-basis-theory-vs-evervault--table-pricing" href="/request-demo/?interest=basis-theory-vs-evervault"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-tri__more cta-blog cta-basis-theory-vs-evervault--table-pricing-explore" href="/pricing/#vault">See published pricing &rarr;</a></div></td></tr>
+</tbody></table></div>
+<p><strong>How to Read This Table:</strong> We assumed one decrypt per charge on Evervault and no other metered features. Basis Theory’s figures use the $0.05 overage from its billing docs.</p>
+<p>Enigma Vault bills on requests, so a tokenization plus a charge is roughly two requests, and every row stays inside the tier shown.</p>
+<p>The result flips for a small, busy card base: 15,000 stored cards charged 150,000 times a month stays at $995 on Basis Theory, while Evervault comes to $995 plus $750 in decrypts, or $1,745, above its 25,000-transaction recommendation for the Platform plan, so expect a Custom quote there.</p>
+<p>Add-ons change the math too. On the growing-company row, a network token cryptogram on every charge adds 20,000 × $0.03 = $600 on Evervault, a successful 3DS check on 30% of charges adds 6,000 × $0.03 = $180, and updates for 2% of cards add 1,000 × $0.25 = $250.</p>
+<p>That moves the Evervault bill from $1,095 to about $2,125, still below Basis Theory’s $2,495 published rate, which itself does not include those features.</p>
+<p><strong>The Practical Takeaway:</strong> Stored volume is what pushes Basis Theory up, and usage is what pushes Evervault up. A year of Card Vault Growth costs $2,700, against $11,940 in platform fees alone for either vendor.</p>
+<p>Ask each vendor for a written quote at your volume, including overage, renewal, and plan labels for every feature you need. See our list of the <a class="bl-link" href="/blog/best-credit-card-tokenization-software/">best credit card tokenization software</a> for more price points.</p>
+
+<h2>Basis Theory vs Evervault Security and Compliance</h2>
+<p>Basis Theory, Evervault, and Enigma Vault all hold PCI DSS Level 1 and SOC 2 Type II. Basis Theory also claims ISO 27001, which Evervault does not claim and Enigma Vault is still working toward; Evervault adds CSA STAR and EMVCo certification for its 3DS server.</p>
+<div class="bl-tablewrap bl-tablewrap--tri"><table class="bl-table bl-table--tri"><thead><tr><th>Control</th><th>Basis Theory</th><th>Evervault</th><th class="bl-tri__ev"><span class="bl-tri__tag">Also consider</span>Enigma Vault</th></tr></thead><tbody>
+<tr><td>PCI DSS</td><td>Level 1; PCI AOC in the $995 plan</td><td>Level 1</td><td class="bl-tri__ev">Level 1 Service Provider</td></tr>
+<tr><td>SOC 2</td><td>Type II</td><td>Type II</td><td class="bl-tri__ev">Type II</td></tr>
+<tr><td>ISO 27001</td><td>Claimed</td><td>Not claimed</td><td class="bl-tri__ev">In progress</td></tr>
+<tr><td>HIPAA</td><td>HIPAA claimed; PHI options on Enterprise</td><td>Signs BAAs</td><td class="bl-tri__ev">BAA available</td></tr>
+<tr><td>Other</td><td>SAQ D responses on Enterprise</td><td>CSA STAR; EMVCo-certified 3DS</td><td class="bl-tri__ev">AOC and SOC 2 report from Starter</td></tr>
+<tr><td>Key custody</td><td>Vendor holds cards and keys</td><td>Vendor holds keys; you hold ciphertext</td><td class="bl-tri__ev">Per-customer AES-256 keys</td></tr>
+<tr class="bl-tri__cta"><td>Next step</td><td colspan="2" class="bl-tri__note">Ask every vendor for current audit reports and a signed BAA before you send PHI.</td><td class="bl-tri__ev"><div class="bl-tri__acts"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-basis-theory-vs-evervault--table-security" href="/request-demo/?interest=basis-theory-vs-evervault"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-tri__more cta-blog cta-basis-theory-vs-evervault--table-security-explore" href="/platform/data-security/">Explore security controls &rarr;</a></div></td></tr>
+</tbody></table></div>
+<p>On reliability, Evervault’s Platform plan promises 99.9%+ uptime and its Custom plan a 99.95% SLA, while Basis Theory places uptime guarantees on Enterprise.</p>
+<p>With any of the three, a vault or encryption layer can significantly reduce the systems in your PCI scope, but your acquirer or QSA confirms your final scope. Our guide to the <a class="bl-link" href="/blog/best-pci-dss-compliant-tokenization-software/">best PCI DSS compliant tokenization software</a> compares more certified providers.</p>
+
+<h2>Basis Theory vs Evervault Reviews</h2>
+<p>Basis Theory has no reviews yet on G2 or Capterra. Evervault has 17 on G2 at 4.4/5 and no Capterra listing that we could find. Enigma Vault has 6 on G2 and 4 on Capterra.</p>
+<div class="bl-tablewrap bl-tablewrap--tri"><table class="bl-table bl-table--tri"><thead><tr><th>Source</th><th>Basis Theory</th><th>Evervault</th><th class="bl-tri__ev"><span class="bl-tri__tag">Also consider</span>Enigma Vault</th></tr></thead><tbody>
+<tr><td>G2</td><td><a class="bl-link" href="https://www.g2.com/products/basis-theory/reviews" rel="nofollow noopener" target="_blank">Listed, no reviews</a></td><td><a class="bl-link" href="https://www.g2.com/products/evervault-2022-11-22/reviews" rel="nofollow noopener" target="_blank">4.4/5 from 17 reviews</a></td><td class="bl-tri__ev"><a class="bl-link" href="https://www.g2.com/products/enigma-vault/reviews" rel="nofollow noopener" target="_blank">4.4/5 from 6 reviews</a></td></tr>
+<tr><td>Capterra</td><td><a class="bl-link" href="https://www.capterra.com/p/10002181/Basis-Theory/" rel="nofollow noopener" target="_blank">Listed, no reviews</a></td><td>No listing found</td><td class="bl-tri__ev"><a class="bl-link" href="https://www.capterra.com/p/241650/Enigma-Vault/" rel="nofollow noopener" target="_blank">4.8/5 from 4 reviews</a></td></tr>
+<tr><td>Other public proof</td><td>Customer stories and testimonials; $33M Series B in October 2025</td><td>$25M Series B in March 2026, $46M raised in total</td><td class="bl-tri__ev">Reviewer quotes on support speed and cost</td></tr>
+<tr class="bl-tri__cta"><td>Next step</td><td colspan="2" class="bl-tri__note">Small samples everywhere. Ask every vendor for a reference in your industry.</td><td class="bl-tri__ev"><div class="bl-tri__acts"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-basis-theory-vs-evervault--table-reviews" href="/request-demo/?interest=basis-theory-vs-evervault"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-tri__more cta-blog cta-basis-theory-vs-evervault--table-reviews-explore" href="/vault/card-vault/">Explore Card Vault &rarr;</a></div></td></tr>
+</tbody></table></div>
+<h3>What Basis Theory’s Public Proof Shows</h3>
+<p>With no third-party reviews yet, Basis Theory’s proof comes from its own customer stories and testimonials, such as Cubby going from proof of concept to live in about a week, and testimonials on its comparison pages. Treat those as marketing and ask for references in your industry.</p>
+<h3>What Evervault Reviewers Say</h3>
+<p><a class="bl-link" href="https://www.g2.com/products/evervault-2022-11-22/reviews" rel="nofollow noopener" target="_blank">Reviewers on G2</a> praise a friendly interface, quick Relay setup, and not having to manage encryption keys themselves. The critical notes center on cost, especially at the enterprise level, and one reviewer says connecting it to their system needed an IT specialist.</p>
+<h3>What Enigma Vault Reviewers Say</h3>
+<div class="bl-evcall" role="note"><span class="bl-evcall__tag">Enigma Vault</span><p>Reviewers on G2 describe a developer-friendly tokenization service and secure file processing that has worked without issues. The critical notes ask for lower pricing and more documentation. Six reviews is a thin base, so ask each vendor for a reference in your industry.</p><div class="bl-evcall__cta"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-basis-theory-vs-evervault--callout-reviews" href="/request-demo/?interest=basis-theory-vs-evervault"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-evcall__more cta-blog cta-basis-theory-vs-evervault--callout-reviews-explore" href="/vault/card-vault/">Explore Card Vault &rarr;</a></div></div>
+
+<h2>Who Should Choose Basis Theory, Evervault, or Enigma Vault</h2>
+
+<h3>Subscription Businesses Storing Hundreds of Thousands of Cards</h3>
+<p>Evervault fits best. Hundreds of thousands of stored cards, each charged once a month or less, is the profile where stored-token billing hurts most. At 200,000 cards, Basis Theory’s published overage reaches about $9,995 a month before Enterprise talks, while Evervault’s usage stays near $1,100 plus network token and updater fees.</p>
+
+<h3>If You Charge the Same Cards Many Times a Day</h3>
+<p>Basis Theory fits best. Ride-hailing, usage-based billing, or B2B platforms that charge a few thousand cards many times a day see the bill stay at $995 while stored tokens stay under 20,000, whereas Evervault meters every decrypt and recommends Custom above 25,000 transactions. Confirm how the $995 plan treats repeated use of the same token before you commit.</p>
+
+<h3>For Healthcare Teams That Need a BAA</h3>
+<p>Ask every vendor for a signed BAA before you send PHI. Basis Theory claims HIPAA, with PHI options on Enterprise.</p>
+<p>Evervault says it signs BAAs and can encrypt any field or file on its Platform plan. Enigma Vault offers a BAA for healthcare workloads. If ISO 27001 is a hard requirement, Basis Theory is the only one of the three that claims it today.</p>
+
+<h3>Teams That Want Published Prices and a Free Start</h3>
+<p>Basis Theory and Evervault both publish a $995 floor, about $11,940 a year before usage. Enigma Vault’s free Lite tier on <a class="bl-link" href="/vault/card-vault/">Card Vault</a> is a sandbox for development and testing, and it publishes every paid tier, from $49 a month, so you can price your own volume before talking to anyone.</p>
+<p>It also includes Twilio Pay IVR from Growth for teams that take cards by phone, which neither Basis Theory nor Evervault packages.</p>
+
+<h2>Questions to Ask Basis Theory and Evervault Before You Sign</h2>
+<p>Bring these to both vendors. The answers shown are what each publishes today, so you can see where a sales call is needed.</p>
+<div class="bl-tablewrap bl-tablewrap--tri"><table class="bl-table bl-table--tri"><thead><tr><th>Question</th><th>Basis Theory</th><th>Evervault</th><th class="bl-tri__ev"><span class="bl-tri__tag">Also consider</span>Enigma Vault</th></tr></thead><tbody>
+<tr><td>What will year one cost?</td><td>$995/mo for 20,000 stored tokens, then $0.05 each, counting network and wallet tokens</td><td>$995/mo plus decrypts and every metered feature</td><td class="bl-tri__ev">Published: $0, $49, $249, or $499 a month</td></tr>
+<tr><td>Which features are on which plan?</td><td>Network Tokens, Batch Account Updater, and Universal 3D Secure are Enterprise; ask</td><td>Network tokens and 3DS per use on Platform; Enclaves by quote</td><td class="bl-tri__ev">Published per tier</td></tr>
+<tr><td>Can we try it before signing?</td><td>A free test tenant, synthetic data only</td><td>A free sandbox, no card, no sales call, no time limit</td><td class="bl-tri__ev">Yes, on the free Lite sandbox, which has hard limits</td></tr>
+<tr><td>Which regions can hold our data?</td><td>One environment, US or EU, on the $995 plan</td><td>US and EU Relay endpoints; ask about EU processing commitments</td><td class="bl-tri__ev">US and EU; EU residency is an add-on from Growth</td></tr>
+<tr><td>What support do we get?</td><td>Enterprise support is Enterprise-only</td><td>Email, weekdays 9am to 5pm GMT, on Platform</td><td class="bl-tri__ev">Ask for SLA terms</td></tr>
+<tr><td>How do we leave?</td><td>Cards leave the vault in a secure file transfer; ask for the process in writing</td><td>Its docs describe an export enclave that re-encrypts your data to your own key; ask for the process in writing</td><td class="bl-tri__ev">Ask for the export process in writing</td></tr>
+<tr class="bl-tri__cta"><td>Next step</td><td colspan="2" class="bl-tri__note">Put the same questions to Enigma Vault.</td><td class="bl-tri__ev"><div class="bl-tri__acts"><a class="np-btn np-btn--primary np-btn--sm cta-blog cta-basis-theory-vs-evervault--table-questions" href="/request-demo/?interest=basis-theory-vs-evervault"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a><a class="bl-tri__more cta-blog cta-basis-theory-vs-evervault--table-questions-explore" href="/docs/">Explore the docs &rarr;</a></div></td></tr>
+</tbody></table></div>
+<p>The last row matters for all three, and most of all with Evervault, because its keys and your ciphertext only work together. Agree the exit process before you sign, whereas most buyers only ask when they are already leaving.</p>
+
+<h2>Moving From Basis Theory or Evervault to Enigma Vault</h2>
+<p>If the bill or the feature set no longer fits, the move is a card migration between PCI-compliant providers, which your current vendor and your acquirer need to support, so plan it before you cancel anything.</p>
+<ul>
+<li><strong>Agree the Transfer:</strong> From Basis Theory, cards leave the vault in a secure file transfer. From Evervault, its docs describe a decryption enclave that re-encrypts your data to your own key for export.</li>
+<li><strong>Rehome Custom Code:</strong> Reactors, Functions, and Enclaves need another home, since Enigma Vault does not run customer code.</li>
+<li><strong>Check Your Gateway:</strong> Confirm it covers network tokens, account updates, and 3DS if you rely on them.</li>
+<li><strong>Run Both, Then Cut Over:</strong> Write new cards to both for a few weeks, reconcile, then switch.</li>
+</ul>
+<p>Our guide to <a class="bl-link" href="/blog/how-to-migrate-from-vaultless-tokenization-to-vault/">migrating tokenization providers</a> has a checklist for running two vaults side by side. If you want help mapping what you store, <a class="bl-link cta-blog cta-basis-theory-vs-evervault--migration" href="/request-demo/?interest=basis-theory-vs-evervault">book a migration call</a>.</p>
+
+<h2>Final Verdict: Basis Theory, Evervault, or Enigma Vault?</h2>
+<p>Basis Theory and Evervault are closer than most pairs: both are built for engineers, both start at $995 a month, and both can run your code on card data. Evervault is the stronger choice when you store many cards, want network tokens and 3DS at a visible price, or need full Enclaves.</p>
+<p>Basis Theory is the stronger choice when you want no card data of any kind in your systems, need ISO 27001, or charge a small set of cards very often.</p>
+<p>I’d put your stored-card count and monthly charge count into the cost table above, and I’d get a written quote with plan labels and overage terms from either one before you commit.</p>
+<p>If your volume does not justify $995 a month, or you take cards by phone, Enigma Vault’s Card Vault starts free and its paid plans run from $49 to $499. It has no custom code, network tokens, or account updater, so if your project depends on those, it is not the right choice.</p>
+<div class="bl-inlinecta"><div><p class="bl-inlinecta__t">Price your own volume.</p><p class="bl-inlinecta__s">Book a demo and we will model the cost against Basis Theory and Evervault, or <a class="cta-blog cta-basis-theory-vs-evervault--final-explore" href="/vault/card-vault/">explore Card Vault</a> first.</p></div><a class="np-btn np-btn--on-dark np-btn--primary cta-blog cta-basis-theory-vs-evervault--final" href="/request-demo/?interest=basis-theory-vs-evervault"><span>Book a demo</span><span class="np-btn__arrow" aria-hidden="true">&rarr;</span></a></div>
+<p>More comparisons: <a class="bl-link" href="/blog/very-good-security-vs-evervault/">VGS vs Evervault</a>, <a class="bl-link" href="/blog/very-good-security-vs-basis-theory/">VGS vs Basis Theory</a>, <a class="bl-link" href="/blog/basis-theory-vs-skyflow/">Basis Theory vs Skyflow</a>, and <a class="bl-link" href="/blog/enigma-vault-vs-basis-theory/">Enigma Vault vs Basis Theory</a>.</p>
+
+<h2>How We Researched This Comparison</h2>
+<p>We checked vendor facts on 22 November 2026. Basis Theory facts come from basistheory.com, including its pricing page, billing and developer docs, and its Evervault comparison and alternative pages.</p>
+<p>Evervault facts come from evervault.com, including its pricing, product, and security pages, and its Series B announcement.</p>
+<p>Review figures come from G2 and Capterra as read on 22 November 2026, and Enigma Vault facts come from our own pricing and product pages. Cost scenarios are our own arithmetic from published rates, not vendor quotes.</p>
+<p>Where a vendor makes a claim about itself or a rival, we label it as a vendor claim. Enigma Vault publishes this page, so read it as a vendor-written comparison. If something here is out of date, tell us through our <a class="bl-link" href="/contact/">contact page</a> and we will check it.</p>

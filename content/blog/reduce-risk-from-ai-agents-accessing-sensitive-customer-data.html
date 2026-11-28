@@ -1,0 +1,508 @@
+---
+title: "How to Reduce AI Agent Risk to Sensitive Customer Data: A Practical Guide"
+slug: "reduce-risk-from-ai-agents-accessing-sensitive-customer-data"
+layout: "pii-style"
+metaTitle: "How to Reduce AI Agent Risk to Sensitive Customer Data: A Practical Guide"
+description: "Learn how to reduce AI agent risk to sensitive customer data by controlling what agents can see, hold, spend and claim, with practical steps and checks."
+subtitle: "To reduce AI agent risk to sensitive customer data, give each agent least-privilege access to its tools and data, and tokenize sensitive fields before they reach the model. Then gate high-risk actions with human approval and logging."
+date: 2026-11-28T00:11:00
+category: "AI Security"
+author: "abhilash-kumar"
+readTime: 25
+heroImage: "/assets/blog/img-02.png"
+heroAlt: "How to Reduce AI Agent Risk to Sensitive Customer Data: A Practical Guide"
+excerpt: "Learn how to reduce AI agent risk to sensitive customer data by controlling what agents can see, hold, spend and claim, with practical steps and checks."
+tags: ["ai-agents", "ai", "pii"]
+styles: ["blog.css", "pages/blog-pii-hero.css", "tr-pages.css"]
+scripts: ["blog-article.js"]
+faqSchema: true
+faqs:
+  - q: "Is it safe to give AI agents access to customer data?"
+    a: "It can be, once access matches the task. Scope each agent to the records it needs and tokenize values before model calls, then release real data only to approved destinations and check answers before they go out."
+  - q: "How do AI agents use payment cards without holding card numbers?"
+    a: "The agent works with a card token. When a charge is confirmed, a vault proxy swaps that token for the card number at the payment gateway, so the payment completes while the agent and the model never see the card itself."
+  - q: "Can you limit an AI agent to specific files or records?"
+    a: "Yes. File and record rules decide what each task may open, so a booking agent can read one booking and a passport expiry date while the full passport scan stays in the vault and never enters its context."
+  - q: "What happens if an AI agent is prompt-injected?"
+    a: "The damage depends on what it can reach. An agent holding only tokens has little to leak, and when releases are decided outside the model, an injected instruction can't approve its own request for real data."
+  - q: "Where should you start reducing AI agent risk?"
+    a: "Start with the agent task that touches the most sensitive data. Map who it acts for and where real values must go, score it on the four risk factors, then add access and tokenization controls before release rules."
+---
+
+<p><strong>To reduce AI agent risk to sensitive customer data, give each agent least-privilege access to its tools and data, and tokenize sensitive fields before they reach the model. Then gate high-risk actions with human approval and logging.</strong></p>
+
+<p>Most teams give AI agents broad access for a simple reason. An agent connected to more systems gets more done. The trouble shows up later. A booking agent rebooking a cancelled flight for a customer named Priya Shah reads her passport details and pulls her saved card. It then promises a refund window the fare rules don't support.</p>
+
+<p>When security teams ask what the agent touched and where those values went, nobody has a clear answer. The next agent launch waits in review until someone does.</p>
+
+<p>Reducing that risk doesn't mean rebuilding the agent. The steps below put controls around it, whichever agent you use, so each one sees only what its task needs and every sensitive release passes through rules your team sets.</p>
+
+<h2>What Makes AI Agents Risky for Sensitive Information Access?</h2>
+
+<p><strong>AI agents are risky because their access often exceeds the task in front of them. The data they touch then spreads through prompts and logs, and their answers can turn into refunds or customer messages before anyone checks them.</strong></p>
+
+<p>An agent earns its keep by working on its own. It pulls records from your CRM and ERP and reads documents and email. Then it answers customers or updates cases without waiting for a person.</p>
+
+<p>That independence is the point of the agent. It's also where three separate risks to customer data come from.</p>
+
+<h3>Access Can Exceed the Task</h3>
+
+<p>Connectors usually get set up early in a project, with whatever credentials make the first demo work. Those credentials tend to stay in place long after the agent goes live.</p>
+
+<p>Here's what that gap looks like for the booking agent:</p>
+
+<div class="bl-code bl-code--light">
+  <pre style="white-space:pre;overflow-x:auto"><code style="white-space:pre;">What the rebooking task needs:   Priya's booking BK-2207 and the fare rules for her ticket
+What the connector can reach:    Every traveler profile, saved cards and passport scans on file</code></pre>
+</div>
+
+<p>A single rebooking request now runs with access to every traveler the company serves. If a prompt goes wrong or a tool response is manipulated, the agent can reach records that have nothing to do with Priya.</p>
+
+<p>Wide access also makes reviews harder. When an agent could open everything, a security team can't easily narrow down what it actually did open.</p>
+
+<h3>Information Spreads Through the Stack</h3>
+
+<p>Customer data rarely stays where the agent found it. Priya's rebooking request passes through four stages, and each one can leave something behind:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Stage</th><th>What happens to Priya's data</th><th>What can stay behind</th></tr></thead>
+    <tbody>
+      <tr><td>Retrieve</td><td>Connectors and APIs pull her booking and profile, and tool responses add fields the task never asked for</td><td>Full records sitting in tool results</td></tr>
+      <tr><td>Assemble</td><td>Retrieved documents and past messages merge with instructions into one prompt through RAG and context building</td><td>A prompt carrying her passport number</td></tr>
+      <tr><td>Reason</td><td>The prompt goes to the model provider, and the response comes back</td><td>Provider-side copies, depending on retention terms</td></tr>
+      <tr><td>Act</td><td>The agent calls the airline API and writes to agent memory</td><td>Her details inside the API call and the memory entry</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>The copies keep going after the task ends. Traces record the full request for debugging, while agent memory keeps a summary for the next session.</p>
+
+<p>How much of this is kept depends on your framework configuration, connectors, logging and retention settings. Two teams running the same agent can end up with very different exposure. <a class="bl-link" href="/blog/pii-protection-for-llm/">PII protection for LLMs</a> explains why the model request is often where that exposure starts.</p>
+
+<h3>Outputs Become Business Decisions</h3>
+
+<p>An agent's answer often turns into an action before anyone reads it. That answer can sound confident and still be wrong for reasons that have nothing to do with the model's fluency:</p>
+
+<ul>
+
+  <li><strong>Missing evidence:</strong> The agent states a refund rule that no approved document supports.</li>
+
+  <li><strong>Outdated policy:</strong> It quotes last season's change fee from an old fare sheet.</li>
+
+  <li><strong>Conflicting sources:</strong> Two supplier documents disagree, and the agent picks one without saying so.</li>
+
+</ul>
+
+<p>For a booking agent, the result is concrete. A refund gets issued, or a promise lands in writing with a customer who will hold the company to it. Generated documents carry the same risk, since an itinerary or invoice built on a wrong fare travels straight to the customer.</p>
+
+<h2>How to Assess AI Agent Risk Before It Touches Sensitive Customer Data</h2>
+
+<p><strong>Assessing AI agent risk starts with mapping one agent task, including the data it uses and the places where real values must go. Then score that task on four risk factors, so the controls you add match how much damage it could do.</strong></p>
+
+<p>Risk depends on the task more than on the model. The same agent is low risk while it drafts replies for review, and high risk once it can rebook flights and charge cards.</p>
+
+<p>So assess one task at a time. Start with the task that touches the most sensitive data, because the controls you design for it will cover most of the others.</p>
+
+<h3>Map One Agent Workflow</h3>
+
+<p>A useful map covers five things. Here's how they come out for rebooking:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>What to map</th><th>Answer for rebooking</th><th>Why it matters</th></tr></thead>
+    <tbody>
+      <tr><td>Identities and permissions</td><td>The agent's own role, acting for the consultant assigned to the booking</td><td>Sets whose access limits the agent</td></tr>
+      <tr><td>Data</td><td>Booking record, fare rules, traveler name and passport expiry</td><td>Keeps everything else out of reach</td></tr>
+      <tr><td>Tools</td><td>Booking lookup, airline rebooking API, change fee charge</td><td>Defines what the agent can change</td></tr>
+      <tr><td>Destinations needing original values</td><td>Airline API and payment gateway</td><td>Marks the only places real values appear</td></tr>
+      <tr><td>Evidence</td><td>Current fare rules and supplier refund policy, by version</td><td>Sets what answers get checked against</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>Build the map with the people who own each system. The engineer behind a connector usually knows what it returns better than the team that asked for the agent.</p>
+
+<p>The finished map also gives you one place to record protected data paths and release rules, along with what your auditors will expect to see logged. Each control later in this article traces back to a row in it.</p>
+
+<h3>Score the Workflow on Four Risk Factors</h3>
+
+<p>With the map done, score the task on each factor. The more factors that land high, the stronger the controls it needs before it reaches customers:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Risk factor</th><th>Lower risk</th><th>Higher risk</th><th>Booking agent</th></tr></thead>
+    <tbody>
+      <tr><td>Data sensitivity</td><td>Order status, public product data</td><td>Passport numbers, card data, health details</td><td>High</td></tr>
+      <tr><td>Action reversibility</td><td>Drafts a reply for review</td><td>Changes bookings or deletes records</td><td>High</td></tr>
+      <tr><td>Money movement</td><td>No payment access</td><td>Issues refunds or charges cards</td><td>High</td></tr>
+      <tr><td>Customer exposure</td><td>Internal summaries</td><td>Messages sent straight to customers</td><td>Moderate</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>Scores mean more when you compare agents side by side. Three agents at the same travel company might look like this:</p>
+
+<ul>
+
+  <li><strong>Baggage policy assistant:</strong> Answers general questions from public rules, so it scores low on every factor and needs light controls.</li>
+
+  <li><strong>Itinerary summary agent:</strong> Reads bookings to brief consultants internally, so data sensitivity is high while the other factors stay low.</li>
+
+  <li><strong>Booking agent:</strong> Handles passports and charges fees, so it scores high on three factors and gets every control in this article.</li>
+
+</ul>
+
+<h2>How to Reduce AI Agent Risk to Sensitive Customer Data Across Four Areas</h2>
+
+<p><strong>You can reduce AI agent risk to sensitive customer data by working on four areas: what the agent can see, what it holds, what it can spend and what it claims. Each area maps to one control step, and each step builds on the last.</strong></p>
+
+<p>Every risk from the first section lands in one of these four areas. Here's how they line up:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Area</th><th>Risk it reduces</th><th>Control step</th><th>Main controls</th></tr></thead>
+    <tbody>
+      <tr><td>What the agent can see</td><td>Access beyond the task</td><td>Scope access</td><td>Task-specific permissions, file-level rules, own identity</td></tr>
+      <tr><td>What the agent holds</td><td>Copies spreading through the stack</td><td>Minimize exposure</td><td>Tokenization before model calls, fewer downstream copies</td></tr>
+      <tr><td>What the agent can spend</td><td>Unapproved payments and releases</td><td>Govern release</td><td>Approved destinations, card tokens, human approval</td></tr>
+      <tr><td>What the agent claims</td><td>Wrong answers becoming decisions</td><td>Check the output</td><td>Claim-level evidence checks with verdicts</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>The order matters. Narrow access shrinks the amount of data that needs tokenizing, and once the agent works on tokens, release rules have a clear job: deciding when a real value may come back.</p>
+
+<p>Output checks come last because they depend on the rest. An agent that can't reach the wrong records is less likely to make claims from them. Some teams start by removing values outright, and <a class="bl-link" href="/blog/data-redaction-for-ai/">data redaction for AI</a> explains where that fits next to tokenizing them.</p>
+
+<h2>Reduce What AI Agents Can See: Scope Access to the Task in Front of Them</h2>
+
+<p><strong>Reducing what an AI agent can see means authorizing only the records, files, tools and actions one task needs. Access follows your existing identity policy, so the agent never reaches data its user or its task isn't cleared for.</strong></p>
+
+<p>Every later control depends on this step. A record the agent never opens can't end up in a prompt or a customer email.</p>
+
+<h3>Authorize Records, Files, Tools and Actions per Workflow</h3>
+
+<p>Permissions should follow the task, so the agent's reach changes with the job in front of it. For rebooking, the split looks like this:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Permitted</th><th>Not permitted</th></tr></thead>
+    <tbody>
+      <tr><td>Priya's booking record</td><td>Other travelers' bookings</td></tr>
+      <tr><td>Fare rules for her ticket</td><td>Saved cards on her profile</td></tr>
+      <tr><td>Passport expiry date</td><td>Full passport scan</td></tr>
+      <tr><td>Airline rebooking API</td><td>Bulk export of traveler data</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>Tools and actions need the same treatment as data. During rebooking, the agent can call the airline API to change a flight, while the refund tool stays out of reach until a separate refund task begins.</p>
+
+<p>Anything in the right-hand column stays in its source system. If someone later asks why the agent couldn't open a record, the task map gives the answer.</p>
+
+<h3>Align Agent Access With Existing Identity Policy</h3>
+
+<p>Agents shouldn't run on a separate set of rules from the people they work for. Before launch, the booking agent should have a clear answer to each of these questions:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Identity question</th><th>Answer for the booking agent</th></tr></thead>
+    <tbody>
+      <tr><td>Who owns it?</td><td>The head of travel operations, who signs off on its tasks</td></tr>
+      <tr><td>Whose access does it use?</td><td>Its own narrow role, limited further by the assigned consultant's access</td></tr>
+      <tr><td>How long do its credentials last?</td><td>Minutes, issued per task from a secrets manager outside the model</td></tr>
+      <tr><td>Who can switch it off?</td><td>The owner and the security team, without touching other systems</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>The second row does most of the work. When the agent can open a booking only where its role and the consultant's access overlap, a consultant without access to Priya's booking gets nothing back, even through the same agent.</p>
+
+<p>Credentials belong in a secrets manager that your application reads at call time. The model only names the tool it wants, so a key never passes through its context or its logs.</p>
+
+<h3>Govern Access to Individual Files and Records</h3>
+
+<p>System-level permissions are often too coarse. A passport scan and a booking note can live in the same system, yet the agent should handle them very differently:</p>
+
+<div class="bl-code bl-code--light">
+  <pre style="white-space:pre;overflow-x:auto"><code style="white-space:pre;">Agent asks:     Open passport file for booking BK-2207
+Policy checks:  Task = rebooking, file type = passport, traveler = booking holder
+Released:       Traveler name and passport expiry date
+Kept in vault:  Full scan and passport number</code></pre>
+</div>
+
+<p>File-level rules let the agent finish the rebooking with the two fields it needs. The scan itself never enters its context, and neither does anything else on the page.</p>
+
+<p>Record-level rules work the same way. The agent can open booking BK-2207 because the task names it, while a search across all bookings returns nothing. Payment operations follow suit, so the rebooking task can charge a change fee but can't start a refund. Each release is written to vault access records, so the team can see later exactly which file fields the agent received.</p>
+
+<h2>Reduce What AI Agents Hold: Keep Original Values Inside a Protected Boundary</h2>
+
+<p><strong>Reducing what an AI agent holds means keeping original customer values inside a protected boundary. Sensitive fields are tokenized before model calls, so prompts and logs carry references that mean nothing outside your vault.</strong></p>
+
+<p>Scoped access decides which records the agent can open. This step decides what the model reads inside those records, and what copies get left behind afterwards.</p>
+
+<h3>Tokenize Sensitive Fields Before Model Calls</h3>
+
+<p>The model doesn't need Priya's real passport number to rebook a flight. It needs to know which traveler the request is about, and it needs that reference to stay consistent:</p>
+
+<div class="bl-code bl-code--light">
+  <pre style="white-space:pre;overflow-x:auto"><code style="white-space:pre;">Agent context:          Rebook Priya Shah, passport Z4829173, email priya@example.com,
+                        from the cancelled 6:15 PM flight to the next departure.
+
+What the model receives: Rebook [NAME_1], passport [ID_1], email [EMAIL_1],
+                        from the cancelled 6:15 PM flight to the next departure.</code></pre>
+</div>
+
+<p>Each reference stays fixed for Priya through supported interactions, so the model can follow her across a long rebooking chat without ever learning her name. Her real passport number reappears only where an authorized application asks for it, such as the airline API at the moment of rebooking.</p>
+
+<p>Coverage depends on which model and tool paths you configure, so check that every route the agent uses runs through tokenization. A good setup fails closed: if a protected request can't be tokenized, it doesn't go out.</p>
+
+<p>Scope still comes first. A tokenized copy of Priya's entire profile is still a copy of her entire profile, sent to a model that needed two fields. For the basics of how tokens stand in for real values, see <a class="bl-link" href="/blog/what-is-tokenization/">what is tokenization</a>.</p>
+
+<h3>Limit Copies in Logs, Memory and Vector Stores</h3>
+
+<p>Tokenizing the model request only helps if the copies around it follow suit. Here's what the booking agent tends to leave behind in each location, and the change that closes it:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Copy location</th><th>What the booking agent leaves there</th><th>Change to make</th></tr></thead>
+    <tbody>
+      <tr><td>Application logs</td><td>The rebooking request with Priya's passport number</td><td>Log tokens and entity types</td></tr>
+      <tr><td>Traces and observability</td><td>Every model call, with the full context attached</td><td>Send traces after tokenization</td></tr>
+      <tr><td>Agent memory</td><td>A note that Priya prefers aisle seats, plus her passport number</td><td>Save tokenized summaries with an expiry</td></tr>
+      <tr><td>Vector stores</td><td>Embedded supplier emails that name travelers</td><td>Tokenize names before embedding</td></tr>
+      <tr><td>Caches and retries</td><td>A repeated payload after the airline API timed out</td><td>Keep retry payloads tokenized and short-lived</td></tr>
+      <tr><td>Connected vendors</td><td>Booking notes synced to a helpdesk tool</td><td>Pass references unless the vendor needs the value</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>Go through this table with your own configuration open. Retention settings differ widely between frameworks, and the only reliable answer comes from checking each location directly.</p>
+
+<h3>Does the Agent Ever Need the Original Value?</h3>
+
+<p>Rarely. Most agent steps work with references, and the real value matters only at the point where it leaves your systems:</p>
+
+<ul>
+
+  <li><strong>Rebooking the flight:</strong> The airline API needs the passport number, so it's released at that boundary.</li>
+
+  <li><strong>Charging a change fee:</strong> The payment gateway needs the card, which reaches it through a vault proxy.</li>
+
+  <li><strong>Writing the confirmation email:</strong> Priya's name is restored in your application before the email goes out.</li>
+
+</ul>
+
+<p>In each case, the agent completes its step while holding a token. That's the idea behind the next area: real values stay inside the boundary until an approved destination asks for them.</p>
+
+<h2>Reduce What AI Agents Can Spend: Govern Release for Payments and Actions</h2>
+
+<p><strong>Reducing what an AI agent can spend means original values leave the protected boundary only for approved destinations. Agents pay with card tokens, and refunds or exports above set limits wait for a person to approve them.</strong></p>
+
+<p>Once the agent works on tokens, the remaining question is when a real value can come back out. Leaving that call to the model invites trouble, since anything in its context, including a planted instruction, can shape what it requests.</p>
+
+<h3>Release Original Values Only to Approved Destinations</h3>
+
+<p>Release decisions should run through application policy, checked outside the model on every request. Approved destinations usually include enterprise APIs and payment gateways, along with the application that made the call.</p>
+
+<p>Writing release rules per destination keeps them easy to review. Here's the set for the booking agent:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Destination</th><th>Value it may receive</th><th>Condition</th></tr></thead>
+    <tbody>
+      <tr><td>Airline rebooking API</td><td>Passport number and full name</td><td>An active rebooking task for that traveler</td></tr>
+      <tr><td>Payment gateway</td><td>Card number, through the vault proxy</td><td>A change fee confirmed for that booking</td></tr>
+      <tr><td>Consultant's screen</td><td>Traveler name and phone number</td><td>The consultant is assigned to the booking</td></tr>
+      <tr><td>Any outside email address</td><td>Nothing</td><td>Not an approved destination</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>A request that doesn't match a rule is refused and logged, and the original value stays in the vault. The agent can still ask, but asking never releases anything on its own.</p>
+
+<h3>Let Agents Pay With Card Tokens</h3>
+
+<p>Priya's change fee shows how money can move while the agent holds no card data at all:</p>
+
+<div class="bl-code bl-code--light">
+  <pre style="white-space:pre;overflow-x:auto"><code style="white-space:pre;">Booking system holds:  Card token tok_8F2K... for Priya's saved card
+Agent calls:           charge_change_fee(card = tok_8F2K..., amount = 75.00)
+Vault proxy:           Swaps the token for the card number at the gateway boundary
+Gateway:               Processes the charge and returns a result
+After the charge:      CVV values are purged within 30 minutes</code></pre>
+</div>
+
+<p>On supported gateways, that proxy step is HMAC-signed, so the gateway can confirm the request came through the vault. Neither the agent nor the model sees the card number, and it never touches your application servers.</p>
+
+<p>This matters for travel teams that store cards for later bookings. The card is captured once, the token is what moves around, and every release to the gateway leaves a record. <a class="bl-link" href="/vault/card-vault/">Enigma Card Vault</a> shows how card capture works without storing card numbers.</p>
+
+<h3>Require Human Approval for Refunds and Exports</h3>
+
+<p>Some actions carry enough risk that a person should look first. The useful part is deciding who approves and what they check:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Action</th><th>Who approves</th><th>What they check</th></tr></thead>
+    <tbody>
+      <tr><td>Refund above the fare's refundable amount</td><td>Senior consultant</td><td>Fare rules and the original payment record</td></tr>
+      <tr><td>Name correction on a ticket</td><td>Assigned consultant</td><td>Match against the passport on file</td></tr>
+      <tr><td>Export of a traveler list</td><td>Data owner</td><td>Purpose of the export and who receives it</td></tr>
+      <tr><td>Change to the agent's tool access</td><td>Security owner</td><td>Fit between the new access and the task map</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>During peak travel weeks, a consultant buried in approval requests will start waving them through. Set thresholds so only the costly cases reach a person, and record each decision with the approver's name and reason.</p>
+
+<h2>Reduce What AI Agents Can Claim: Check Outputs Against Approved Evidence</h2>
+
+<p><strong>Reducing what an AI agent can claim means checking each statement in its answer against approved, versioned evidence. Supported claims go ahead, while refused or conflicted ones go back for review before they reach a customer.</strong></p>
+
+<p>Agents act on their own answers, so trusting those answers is part of reducing risk. A reply can link to the right fare sheet and still misquote it, which is why the check has to test the claim itself.</p>
+
+<h3>Run Claim-Level Checks Beyond Attached Citations</h3>
+
+<p>A claim-level check breaks the draft into separate statements and tests the eligible ones against the approved evidence set. Greetings and booking references aren't claims, while statements about fees and refund timing are. Here's the booking agent's draft reply to Priya after checking:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Claim in the draft</th><th>Evidence checked</th><th>Verdict</th></tr></thead>
+    <tbody>
+      <tr><td>"Your new flight departs at 9:40 AM on Friday."</td><td>Booking record BK-2207, updated today</td><td>Supported</td></tr>
+      <tr><td>"Change fees are waived for this fare."</td><td>Fare rules v3 and supplier policy v2</td><td>Conflicted</td></tr>
+      <tr><td>"Your refund will arrive within 24 hours."</td><td>Supplier refund policy v2</td><td>Refused</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>The rebooking task's handling policy decides what happens to each verdict:</p>
+
+<ul>
+
+  <li><strong>Supported:</strong> The departure time goes to Priya as written.</li>
+
+  <li><strong>Conflicted:</strong> The fee claim goes to the consultant, who decides which fare document applies.</li>
+
+  <li><strong>Refused:</strong> The refund timeline comes out of the reply, since nothing approved backs it.</li>
+
+</ul>
+
+<p>Every verdict also records the exact document version behind it. If Priya disputes the fee next month, the consultant can open the same version of the fare rules the check relied on. <a class="bl-link" href="/triplets/">Triplets</a> shows how this kind of evidence check grounds AI answers.</p>
+
+<h3>What a Verified Output Means</h3>
+
+<p>"Verified" is easy to over-read, so it helps to be exact about what a verdict covers:</p>
+
+<ul>
+
+  <li><strong>What it confirms:</strong> The approved evidence supports that particular claim.</li>
+
+  <li><strong>What it traces:</strong> Each verdict links back to the source material and the version used.</li>
+
+  <li><strong>Where it stops:</strong> A supported verdict isn't a guarantee of truth beyond that evidence.</li>
+
+</ul>
+
+<p>A check is only as current as the documents behind it. Leave an expired fare sheet in the evidence set, and expired fees will pass as supported.</p>
+
+<p>Give each evidence source an owner who retires old versions when new ones arrive. For the booking agent, that means the fare team owns fare rules and the supplier team owns refund policies.</p>
+
+<h2>What to Do When an AI Agent Is Compromised or Exposes Customer Data</h2>
+
+<p><strong>When an AI agent is compromised, the damage depends on what it can reach. Keep original values out of its hands and authorize releases outside the model, then use vault access records to contain the incident and fix the control that failed.</strong></p>
+
+<p>Prompt injection or a manipulated tool response can push an agent toward an action nobody authorized. Agents read supplier emails and uploaded documents all day, so the path in is wide.</p>
+
+<h3>Separate the Value, Authorize Outside the Model and Limit Exposure</h3>
+
+<p>Here's how a planted instruction plays out against the booking agent once the earlier controls are in place:</p>
+
+<ol>
+
+  <li>Hidden in a supplier email is a line telling the agent to send every traveler's passport details to an outside address.</li>
+
+  <li>Gathering what it can, the agent finds its context holds [NAME_1] and [ID_1] references in place of real passports.</li>
+
+  <li>It asks the policy layer to release passport numbers to the outside address.</li>
+
+  <li>Policy checks refuse the request, because that address isn't an approved destination and rebooking doesn't need the data.</li>
+
+  <li>Vault access records log the refused attempt, giving the security team a clear signal.</li>
+
+</ol>
+
+<p>Each of the three principles shows up in that sequence. <strong>Separate the value</strong> meant the agent had only references to send. <strong>Authorize outside the model</strong> meant the injected instruction couldn't approve its own release. <strong>Limit exposure</strong> meant real values could reach only approved destinations, through a logged path.</p>
+
+<p>These controls narrow the damage without removing every prompt-injection or tool-security risk. Each new supplier feed or tool opens a fresh way in, so repeat the planted-instruction test whenever one is added.</p>
+
+<h3>Respond With Vault Access Records</h3>
+
+<p>If an agent does expose data, the vault access records become the starting point for the response:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Response step</th><th>What to do</th><th>What vault access records show</th></tr></thead>
+    <tbody>
+      <tr><td>Contain</td><td>Switch off the agent's identity</td><td>The last values it requested and when</td></tr>
+      <tr><td>Scope</td><td>Work out which values left and where they went</td><td>Destinations and timestamps for each release</td></tr>
+      <tr><td>Clean up</td><td>Purge or rotate linked tokens and credentials</td><td>Which tokens the agent held during the incident</td></tr>
+      <tr><td>Notify</td><td>Inform the teams and people your policies require</td><td>Which travelers' records were involved</td></tr>
+      <tr><td>Fix</td><td>Repair the failed control and rerun your tests</td><td>The request pattern that got through</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>Without those records, the scope step turns into guesswork across logs and vendor systems. With them, the team can say exactly what left the vault.</p>
+
+<p>Tokenized data usually still counts as personal data for reporting purposes, so check your notification duties with your privacy team.</p>
+
+<h2>How to Check Your AI Agent Risk Controls Are Protecting Customer Data</h2>
+
+<p><strong>To check your AI agent risk controls are protecting customer data, plant test records and replay real tasks through the protected setup. Then track tokenization coverage and refused releases over time, so gaps show up before customers feel them.</strong></p>
+
+<p>A control that works in a demo can still miss in production. Evaluating a setup comes down to three areas, each with its own test.</p>
+
+<p><strong>Tokenization coverage:</strong> Create test travelers with unique passport numbers and run real rebooking requests against them. Afterwards, search application logs, traces, memory and vector stores for those exact numbers. Any match shows a copy path that skipped tokenization.</p>
+
+<p><strong>Evidence handling:</strong> Send the agent questions where the approved documents disagree or say nothing. A healthy setup returns conflicted and refused verdicts for those claims, while a weak one lets confident answers through.</p>
+
+<p><strong>Operational fit:</strong> Replay a batch of past booking requests through the protected setup. Compare response times and completion rates with the unprotected version, and ask consultants whether approval requests arrive at a pace they can handle.</p>
+
+<p>Once the agent is live, a few signals tell you whether risk is moving in the right direction:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Signal</th><th>What a change points to</th></tr></thead>
+    <tbody>
+      <tr><td>Raw passport numbers found in logs or memory</td><td>A copy path is skipping tokenization</td></tr>
+      <tr><td>Refused release requests</td><td>Agents are asking for values their tasks don't need</td></tr>
+      <tr><td>Conflicted verdicts on fare questions</td><td>Fare documents disagree and need an owner to settle them</td></tr>
+      <tr><td>Approval requests per reviewer each day</td><td>Thresholds may be too low for careful review</td></tr>
+      <tr><td>Time taken to switch off an agent</td><td>Containment speed during a real incident</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>Run the full set of checks again whenever you add a tool or change models. If your agent calls a single provider, <a class="bl-link" href="/blog/how-to-use-openai-without-exposing-pii/">how to use OpenAI without exposing PII</a> shows what that path needs.</p>
+
+<h2>How Enigma AI Vault Reduces AI Agent Risk to Sensitive Customer Data</h2>
+
+<p>At Enigma Vault, we built <a class="bl-link" href="/ai-vault/">AI Vault</a> to control what your AI agents can see, hold, spend and claim, without rebuilding your agent stack. AI Vault isn't another agent platform. It sits underneath the agents you already run, combining The Vault, NoPII and Triplets with a policy layer outside the model.</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Component</th><th>What it does for your agents</th><th>Area it covers</th></tr></thead>
+    <tbody>
+      <tr><td>The Vault</td><td>Protects customer data and cards at the source, along with files, with task-specific access and controlled release, logged in vault access records</td><td>See</td></tr>
+      <tr><td>NoPII</td><td>Detects and tokenizes PII before model requests across nine model providers, along with 14 families of secret patterns, and fails closed when a protected request can't be tokenized</td><td>Hold</td></tr>
+      <tr><td>Policy and authorization</td><td>Releases original values only to approved destinations, including payment gateways through HMAC-signed payment proxy paths</td><td>Spend</td></tr>
+      <tr><td>Triplets</td><td>Checks each claim against approved, versioned evidence and traces every verdict to its source</td><td>Claim</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>AI Vault is backed by PCI DSS Level 1 and SOC 2 Type II, along with an AWS Foundational Technical Review. Vault operations run in under 100ms with a 99.99% uptime SLA. NoPII and the Data Vault can run as self-hosted containers, and you can buy through AWS Marketplace or a direct enterprise agreement.</p>
+
+<p>We start by mapping one of your agent use cases, from identities and data to the destinations that need original values. <a class="bl-link" href="/request-demo/?which_products__select_all_that_apply_=AI%20Vault&amp;interest=ai-vault-poc">Request a no-cost POC</a> to see AI Vault working with your own agent.</p>

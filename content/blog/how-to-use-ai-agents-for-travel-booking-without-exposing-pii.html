@@ -1,0 +1,552 @@
+---
+title: "AI Agents for Travel Booking: How to Book Trips Without Exposing Traveler PII or Card Data"
+slug: "how-to-use-ai-agents-for-travel-booking-without-exposing-pii"
+layout: "pii-style"
+metaTitle: "How to Use AI Agents for Travel Booking Without Exposing PII"
+description: "Learn how to use AI agents for travel booking without exposing PII, from secure traveler intake and tokenized cards to protected passports and supplier payments."
+subtitle: "To use AI agents for travel booking without exposing PII, collect traveler details through secure intake and tokenize passports and cards before any model request. Real values should reach only the supplier or payment gateway that needs them."
+date: 2026-11-28T00:08:00
+category: "NoPII"
+author: "abhilash-kumar"
+readTime: 25
+heroImage: "/assets/blog/img-08.png"
+heroAlt: "AI Agents for Travel Booking: How to Book Trips Without Exposing Traveler PII or Card Data"
+excerpt: "Learn how to use AI agents for travel booking without exposing PII, from secure traveler intake and tokenized cards to protected passports and supplier payments."
+tags: ["ai-agents", "ai", "pii"]
+styles: ["blog.css", "pages/blog-pii-hero.css", "tr-pages.css"]
+scripts: ["blog-article.js"]
+faqSchema: true
+faqs:
+  - q: "Can an AI travel agent book a flight without seeing my passport number?"
+    a: "Yes. The agent can search and hold flights using a token for your passport, and the real number goes to the airline only at ticketing, when advance passenger data has to be submitted to the carrier for the trip."
+  - q: "Is it safe to give an AI booking agent my credit card?"
+    a: "It's safer when the card goes into a hosted payment field or keypad capture and never into the chat itself. The agent then holds a token, and the card reaches the supplier only through an approved payment path."
+  - q: "Does tokenizing card data take a travel agency out of PCI DSS scope?"
+    a: "Not automatically. Tokenization can shrink the systems that touch card data, yet scope and questionnaire eligibility depend on the full setup and need confirmation from the acquirer or a qualified security assessor."
+  - q: "Which traveler details should never go into a public AI chatbot?"
+    a: "Passport numbers and full card details should stay out of public chatbots, and so should loyalty logins or birth dates tied to a name. Use an approved enterprise service with clear retention terms for traveler data."
+  - q: "Can an AI agent rebook a canceled flight without the traveler present?"
+    a: "It can within limits the business sets, such as staying in the same cabin and under a spend threshold. Changes beyond those limits, or a charge to a new card, should wait for the traveler to confirm with a one-time code."
+---
+
+<p><strong>To use AI agents for travel booking without exposing PII, collect traveler details through secure intake and tokenize passports and cards before any model request. Real values should reach only the supplier or payment gateway that needs them.</strong></p>
+
+<p>Booking travel asks an AI agent to handle more personal data in one conversation than almost any other customer task. A single trip can involve a passport number and a birth date exactly as they appear on government ID, plus a card to secure the deposit and a loyalty login for the upgrade. After the booking, those details get reused across supplier portals and the agency's own CRM, systems a travel business can't replace overnight.</p>
+
+<p>Very little of that data has to reach the model. An agent can search fares and hold seats while working with tokens, and the real passport or card number travels only to the supplier step that requires it. <a class="bl-link" href="/ai-vault/">Enigma AI Vault</a> controls what a booking agent can see and what it can spend, underneath whichever agent a travel business runs.</p>
+
+<h2>How to Use AI Agents for Travel Booking Without Exposing PII or Card Data</h2>
+
+<p><strong>Use AI agents for travel booking without exposing PII by collecting traveler details through secure intake links and tokenizing identifiers before model calls. Keep card numbers in hosted capture and release them only to approved suppliers.</strong></p>
+
+<p>The nine methods below follow the path of a booking, from the first traveler message to the moment a supplier charges the card.</p>
+
+<h3>Start With One Booking Route Before Expanding to Every Supplier</h3>
+
+<p>Travel businesses connect to a long list of suppliers, and protecting every route at once tends to stall the project. One route makes a better pilot, such as a leisure desk booking a single airline and its hotel partners:</p>
+
+<ol>
+
+  <li>Send the traveler a secure intake link for passport and card details</li>
+
+  <li>Store the resulting token with the booking record in the CRM</li>
+
+  <li>Complete one authorized payment through the supplier's gateway</li>
+
+  <li>Share the itinerary and documents back through an expiring link</li>
+
+</ol>
+
+<p>Once that route runs cleanly, the same pattern extends to the next desk or supplier with far less rework.</p>
+
+<h3>Collect Traveler Details Through Secure Intake Links Outside Email and Chat</h3>
+
+<p>Most travel exposure begins before any AI is involved. Travelers email passport scans and read card numbers over the phone, and any agent layered over those channels inherits every copy.</p>
+
+<p>A branded intake link fixes the starting point. The traveler opens it without creating an account and submits passport and card details into protected fields. The agent learns that the details arrived, while the values themselves stay in the vault. The CRM and the shared inbox end up holding a token in place of the full card number.</p>
+
+<p>Repeat travelers benefit most. A profile that keeps a tokenized card and governed document references means the agency stops asking for the same passport on every trip.</p>
+
+<h3>Tokenize Passport Numbers and Traveler Identifiers Before Every Model Request</h3>
+
+<p>Take Lucas Moreau, a consultant booking a week in Lisbon through his company's travel desk. Before each request leaves the agency, a privacy proxy in front of the model replaces his identifiers with tokens:</p>
+
+<div class="bl-code bl-code--light">
+  <pre style="white-space:pre;overflow-x:auto"><code style="white-space:pre;">{
+  "agent_context": "Lucas Moreau, passport 584219973, born 1986-03-14, LIS May 12-19, aisle seat",
+  "model_receives": "[NAME_1], passport [ID_1], born [DATE_1], LIS May 12-19, aisle seat"
+}</code></pre>
+</div>
+
+<p>Destination and seat preference stay readable because the model needs them to search. Tokens are deterministic, so [NAME_1] keeps pointing to Lucas across a long rebooking chat, and his real name returns only when the agency's application is authorized to restore it.</p>
+
+<p>Inside that protected path, the agency's logs and traces record tokens in place of raw values, which shrinks the number of systems holding Lucas's passport. Supplier responses deserve the same scan, since a fare quote can echo the passenger's name and document number back into context. Any protected request that tokenization can't handle fails closed, and the booking pauses for a consultant.</p>
+
+<p>Loyalty numbers and trusted traveler IDs often sit outside a detector's built-in list. Store them as encrypted structured fields and pass the agent references. <a class="bl-link" href="/blog/what-is-tokenization/">Tokenization basics</a> explain why a token has no value outside the system that issued it.</p>
+
+<h3>Keep Card Numbers Out of the Conversation With Hosted Capture</h3>
+
+<p>A card read aloud to a voice agent lands in the recording and the transcript, and a card typed into chat lands in the conversation log. Hosted capture removes both copies. On a call, the IVR collects digits through the keypad while the agent waits; in chat, the traveler enters the card into a payment field the model never sees.</p>
+
+<p>The agent receives a token it can attach to the booking. Security codes need extra care because PCI DSS bars storing them after authorization, so they need ephemeral handling: held only for the charge, then purged.</p>
+
+<h3>Release Cards to Suppliers Only Through an Authorized Proxy or Governed Reveal</h3>
+
+<p>Suppliers still need the real card. How it reaches them depends on how each supplier connects:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Supplier connection</th><th>How the card gets there</th><th>What the agent holds</th></tr></thead>
+    <tbody>
+      <tr><td>Gateway or API</td><td>A signed proxy hands the card to the gateway in place of the token</td><td>Token plus an approval reference</td></tr>
+      <tr><td>Manual web portal</td><td>Staff reveal the card in an approved session, ideally on an isolated device</td><td>Confirmation that payment went through</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>Either way, release follows policy set in the application, and each one is logged. Some airlines and hotels restrict third-party card use or ask for specific authorization evidence, so check supplier terms before automating payment.</p>
+
+<h3>Store Passports Visas and Travel Documents as Governed Files</h3>
+
+<p>Passport copies are among the most forwarded files in any travel business. Treat each one as a governed record:</p>
+
+<ul>
+
+  <li><strong>Upload:</strong> documents arrive through the intake link and land in protected file storage, away from shared folders</li>
+
+  <li><strong>Access:</strong> permissions tie each file to its booking and expire once the trip ends</li>
+
+  <li><strong>Reveal:</strong> passport numbers surface only at ticketing, when the airline needs them for advance passenger data</li>
+
+  <li><strong>Audit:</strong> every view and download is recorded against the person or system that made it</li>
+
+</ul>
+
+<h3>Scope What the Agent Can Read in the GDS CRM and Traveler Profiles</h3>
+
+<p>Connector credentials built for human consultants often open every traveler profile and booking history. A booking agent needs far less for each task, and the system should enforce that difference. Here is a generic example of a task policy:</p>
+
+<div class="bl-code bl-code--light">
+  <pre style="white-space:pre;overflow-x:auto"><code style="white-space:pre;">task: fare_search
+allowed_fields: [origin, destination, travel_dates, cabin_preference]
+denied_fields: [passport_number, card_number, loyalty_password, home_address]
+allowed_actions: [search_fares, hold_seat]
+denied_actions: [issue_refund, change_traveler_name]</code></pre>
+</div>
+
+<p>Scope covers actions as well as fields. An agent trusted to hold a seat has no reason to issue refunds or rename a ticket, and the brokering layer should refuse those calls outright.</p>
+
+<h3>Check Fare Rules Baggage and Entry Requirement Answers Against Approved Sources</h3>
+
+<p>Travelers act on what the agent tells them, and fare rules change often enough that last month's answer can be wrong today. Claim-level checks compare each eligible statement against approved sources such as the fare filing and the carrier's baggage policy, plus official entry rules. Each claim gets one of three verdicts:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Verdict</th><th>Travel example</th><th>What happens next</th></tr></thead>
+    <tbody>
+      <tr><td>Supported</td><td>Checked bag allowance matches the carrier's current policy</td><td>Answer goes to the traveler</td></tr>
+      <tr><td>Refused</td><td>No rule on file covers a same-day change on this fare</td><td>Consultant follows up</td></tr>
+      <tr><td>Conflicted</td><td>Fare filing allows changes while the carrier's site says otherwise</td><td>Held for review</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>The agency decides whether refused or conflicted answers are held for revision or sent to a person. Each verdict keeps a reference to the source and its version, which matters when a traveler disputes what they were told.</p>
+
+<h3>Set Retention for Call Recordings Chat Transcripts and Agent Memory</h3>
+
+<p>Booking channels leave copies long after the trip is paid for:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Where the copy lives</th><th>How long to keep it</th></tr></thead>
+    <tbody>
+      <tr><td>Call recordings</td><td>Pause during card capture, then keep for a short set period</td></tr>
+      <tr><td>Chat transcripts</td><td>Store with identifiers tokenized</td></tr>
+      <tr><td>Agent memory and caches</td><td>Expire at the end of the trip or session</td></tr>
+      <tr><td>Traveler profiles</td><td>Review on a schedule and delete inactive records</td></tr>
+      <tr><td>Passport and visa copies</td><td>Delete once the trip and any refund window close</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>Each copy that survives the trip has to be protected and later located during a privacy request, so the shortest workable lifetime is the safest one.</p>
+
+<h2>What Traveler PII and Payment Data an AI Travel Booking Agent Handles</h2>
+
+<p><strong>An AI travel booking agent handles passport details and payment cards, along with loyalty IDs and full itineraries. Meal and special assistance requests add sensitive context that can reveal far more than the traveler means to share.</strong></p>
+
+<p>Every field below has one party that needs the real value, and the agent can usually work with something less:</p>
+
+<p>For US flights, TSA Secure Flight screening relies on the name exactly as it appears on ID along with date of birth and gender. That's why agents can't book with nicknames or partial data.</p>
+
+<p>Some fields reveal more than they appear to. A kosher meal request can imply religion and a wheelchair request can imply a health condition, while an itinerary shows exactly when someone will be away from home. Combined with a name, these details become strong <a class="bl-link" href="/blog/what-is-pii/">personal identifiers</a> on their own.</p>
+
+<h3>How Traveler Data Differs Across Leisure Corporate and Group Bookings</h3>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Factor</th><th>Leisure</th><th>Corporate</th><th>Group</th></tr></thead>
+    <tbody>
+      <tr><td>Who supplies data</td><td>Traveler or a family member</td><td>Company travel profile</td><td>One organizer for many travelers</td></tr>
+      <tr><td>Payment pattern</td><td>Personal card per trip</td><td>Company card or central billing</td><td>Deposits plus individual balances</td></tr>
+      <tr><td>Biggest exposure</td><td>Cards read over the phone</td><td>Profiles synced across booking systems</td><td>Passport collections in spreadsheets</td></tr>
+      <tr><td>What to keep</td><td>Tokenized card on a profile</td><td>References to the corporate profile</td><td>Per-traveler documents with expiry</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>Group bookings carry the heaviest document load. One organizer often forwards dozens of passports in a single email thread, and every recipient ends up holding a copy.</p>
+
+<h2>Where Traveler PII Leaks When AI Agents Search Book and Change Trips</h2>
+
+<p><strong>Traveler PII leaks when AI booking agents get broad GDS or CRM access and when passports or cards linger in inboxes and recordings. Model requests carrying identifiers add exposure, as do supplier handoffs and answers nobody checks.</strong></p>
+
+<p>Booking agents open new paths for traveler data, and each leak below traces back to one of three exposures:</p>
+
+<ul>
+
+  <li><strong>Access can exceed the task:</strong> connector credentials return whole profiles when the booking needs a few fields</li>
+
+  <li><strong>Information spreads through the stack:</strong> passport and card copies end up in prompts and tool results, then in traces and agent memory</li>
+
+  <li><strong>Outputs become business decisions:</strong> a confident answer about a fare or visa gets acted on before anyone checks it</li>
+
+</ul>
+
+<h3>GDS and CRM Access Wider Than the Booking Needs</h3>
+
+<p>Agents often connect with credentials built for a human consultant, which open every traveler profile and booking history. Lucas's fare search needs his dates and cabin preference, yet the connection can return his passport and home address along with years of past trips. Whatever the connector returns lands in the prompt at the next stage, so wide access turns straight into wide exposure.</p>
+
+<h3>Card Numbers and Passports Left in Inboxes Notes and Recordings</h3>
+
+<p>Travel desks have long relied on email and phone, and each channel leaves copies behind:</p>
+
+<ul>
+
+  <li>Passport scans saved in shared drives and email threads</li>
+
+  <li>Card numbers typed into CRM notes for later supplier payment</li>
+
+  <li>Call recordings with travelers reading out card digits</li>
+
+  <li>Spreadsheets tracking group passports and payment status</li>
+
+  <li>Chat transcripts holding loyalty logins</li>
+
+</ul>
+
+<p>An agent that reads these sources pulls every one of those values into its context.</p>
+
+<h3>Model Requests Carrying Traveler Identifiers</h3>
+
+<p>Without tokenization, every request carries Lucas's name and passport number to the model provider, and how long those values stay there depends on that provider's policies. Moving to another model later repeats the problem with a new company, which is why one protection layer should front every provider the agency uses.</p>
+
+<p>The agency's own side adds copies too. A single request can be cached or retried and then captured in traces, and how much of that happens depends on how the agent framework and its logging are configured.</p>
+
+<h3>Supplier Portal Re-Entry and Agent Handoffs</h3>
+
+<p>Many airline and hotel portals still require manual card entry, so staff copy card numbers out of notes to complete payment. Each manual entry puts the full card on a consultant's screen, and often in clipboard history as well.</p>
+
+<p>Handoffs are harder to spot. A search agent passes the booking to a payment agent, which passes it on to a notification agent that only needed the itinerary, and the card details travel the whole way.</p>
+
+<h3>Wrong Answers About Fare Rules Visas and Refunds</h3>
+
+<p>A booking agent that tells Lucas his fare is refundable when it isn't creates a dispute the agency has to absorb. One that misstates passport validity rules can cost him the trip entirely.</p>
+
+<p><a class="bl-link" href="/triplets/">Claim-level checks</a> compare answers like these against approved sources before they go out, and refuse claims those sources can't back up.</p>
+
+<h2>What Are the Risks of Exposing Traveler PII Through AI Booking Agents</h2>
+
+<p><strong>Exposing traveler PII through AI booking agents can lead to passport identity fraud and card-not-present fraud. It can also enable loyalty account takeover and expose where travelers are, while widening PCI DSS scope and privacy obligations.</strong></p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Risk</th><th>What happens</th><th>Who carries it</th></tr></thead>
+    <tbody>
+      <tr><td>Passport identity fraud</td><td>Passport numbers and birth dates support fake accounts and applications</td><td>Travelers</td></tr>
+      <tr><td>Card fraud and disputes</td><td>Stolen cards fund fraudulent bookings, and card-not-present charges draw chargebacks</td><td>Agency and cardholder</td></tr>
+      <tr><td>Loyalty account takeover</td><td>Exposed logins let attackers drain points or redeem awards</td><td>Members and the loyalty program</td></tr>
+      <tr><td>Traveler safety</td><td>Itineraries reveal where someone will be and when their home is empty</td><td>Travelers and their employers</td></tr>
+      <tr><td>PCI DSS scope growth</td><td>Every system holding card data falls into assessment scope</td><td>Travel business</td></tr>
+      <tr><td>Privacy obligations</td><td>GDPR and CCPA rights and breach duties apply to traveler data</td><td>Business that collected the data</td></tr>
+      <tr><td>Supplier penalties</td><td>Some suppliers restrict third-party card use and can reject bookings</td><td>Agency, through its supplier contracts</td></tr>
+      <tr><td>Trust</td><td>Travelers stop sharing details or book elsewhere</td><td>Brand reputation</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>Storing a card in a vault doesn't prove the person paying is the cardholder. Card-not-present fraud screening still applies to every charge, and so does the agency's dispute process.</p>
+
+<h2>Ways to Secure AI Travel Booking Agents Against Unauthorized Release of Card and Passport Data</h2>
+
+<p><strong>Secure AI travel booking agents by giving them tokens and deciding every release of a card or passport with policy outside the model. Real values should reach only approved suppliers and gateways, with each release logged.</strong></p>
+
+<p>Data handling keeps traveler details away from the model. These controls cover the other half: what happens when the agent asks to use a real value, or when someone tries to make it ask.</p>
+
+<h3>Give the Agent Tokens and References So Real Values Never Enter Its Context</h3>
+
+<p>A booking agent can do almost everything with references. Here is Lucas's booking as the agent sees it:</p>
+
+<div class="bl-code bl-code--light">
+  <pre style="white-space:pre;overflow-x:auto"><code style="white-space:pre;">traveler:  [NAME_1]
+passport:  vault_ref_doc_7731
+payment:   card_tok_8f2c
+loyalty:   ****4410</code></pre>
+</div>
+
+<p>That's enough to compare fares and hold a seat. If the agent is manipulated or misconfigured, it holds references with no value outside the vault, so a compromised agent doesn't turn into a data breach.</p>
+
+<h3>Decide Card and Passport Release With Policy Outside the Model</h3>
+
+<p>Controlled release means every use of a real value passes through a decision the model doesn't control:</p>
+
+<ol>
+
+  <li>Agent asks to charge Lucas's card for the Lisbon hotel, naming the token and the hotel's gateway as the destination</li>
+
+  <li>Policy in the application checks the request against the booking and its approved destinations</li>
+
+  <li>On approval, the vault releases the card to the gateway and logs the access</li>
+
+  <li>If the request fails policy, nothing is released and a consultant reviews it</li>
+
+</ol>
+
+<p>Because release follows application policy, instructions hidden in a hotel description or supplier email can't unlock a card on their own. This limits exposure on integrated, protected paths and doesn't remove every prompt injection risk, which is why tight access scopes remain part of the design.</p>
+
+<h3>Send Real Values Only to Approved Suppliers and Payment Gateways</h3>
+
+<p>Keep a short register of destinations and what each one may receive:</p>
+
+<ul>
+
+  <li>Carrier payment gateway: the card, through a signed proxy on supported gateways</li>
+
+  <li>Hotel extranet: the card, by governed reveal with a named approver</li>
+
+  <li>Ticketing interface: the passport number, at ticketing only</li>
+
+  <li>Model provider: tokens, with raw values kept out entirely</li>
+
+</ul>
+
+<p>Anything missing from the register gets refused by default, including a destination the agent suggests on its own.</p>
+
+<h3>Keep GDS Credentials and API Keys Out of Prompts and Tool Results</h3>
+
+<p>Booking agents hold secrets of their own, and these leak in quieter ways than cards do:</p>
+
+<ul>
+
+  <li>GDS logins stored in a system prompt for convenience</li>
+
+  <li>Supplier API keys returned inside an error message from a tool call</li>
+
+  <li>Credentials a traveler or staff member pastes into a support chat</li>
+
+</ul>
+
+<p>Move the first two into a secrets manager tied to a service account. Secret detection on prompts and tool results catches the third before it reaches the model.</p>
+
+<h3>Require Step-Up Verification Before Changes Refunds and Loyalty Redemptions</h3>
+
+<p>Someone who knows Lucas's birth date calls the agency's voice agent posing as him and asks to send the refund for a canceled hotel night to a new card.</p>
+
+<p>A birth date and a convincing voice are easy to come by, so neither should unlock that request. The agent sends a one-time code to the phone already on Lucas's profile and holds the refund until the code comes back. Points redemptions and name changes on a ticket get the same treatment.</p>
+
+<h3>Set Approval Limits on Bulk Rebooking and High-Value Bookings</h3>
+
+<p>Flight disruptions push agents to rebook many travelers at once, often with nobody watching. Set thresholds for how many changes or how much spend the agent can approve alone, and route anything above them to a person. For a corporate desk, those limits might read:</p>
+
+<ul>
+
+  <li>Up to five rebookings per disruption without review</li>
+
+  <li>Hotel changes within the company's nightly rate cap</li>
+
+  <li>Refunds and charges to a new card always sent to a consultant</li>
+
+</ul>
+
+<p>Premium cabin upgrades fall outside the agent's authority entirely unless the travel policy allows them.</p>
+
+<h3>Log Every Release With the Token Destination and Approver</h3>
+
+<div class="bl-code bl-code--light">
+  <pre style="white-space:pre;overflow-x:auto"><code style="white-space:pre;">{"event": "card_release", "token": "tok_8f2c", "destination": "hotel_gateway_lisbon", "amount": "EUR 1,240.00", "approved_by": "policy:corporate_hotel_cap", "booking_ref": "LIS-20481", "time": "2026-05-02T14:07:11Z"}</code></pre>
+</div>
+
+<p>An entry like this answers who used which card and under which rule, while the log itself holds no card number.</p>
+
+<h2>Hosted Payment Capture vs Payment Links vs Vault Tokens for AI Agent Travel Booking</h2>
+
+<p><strong>Hosted capture collects cards inside the booking conversation without exposing digits to the agent, whereas payment links move payment to a separate page. Vault tokens let the agent reuse a card across suppliers through an authorized proxy.</strong></p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Approach</th><th>How it works</th><th>What the agent sees</th><th>Supplier fit</th><th>Trade-offs</th></tr></thead>
+    <tbody>
+      <tr><td>Hosted capture</td><td>Card entered in a secure field or by keypad during the call</td><td>Confirmation and a token</td><td>One-off charges at booking</td><td>Covers capture only, so supplier payment needs another step</td></tr>
+      <tr><td>Payment link</td><td>Traveler pays on a separate checkout page</td><td>Payment status</td><td>Simple prepaid bookings</td><td>Breaks the conversation and handles card reuse poorly</td></tr>
+      <tr><td>Vault token with proxy release</td><td>Card stored once and released to approved gateways on request</td><td>Reusable token</td><td>Multiple suppliers and repeat travelers</td><td>Manual portals still need a governed reveal</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>Most agencies pair hosted capture for the first card entry with vault tokens for supplier payment and future trips. None of these approaches settles PCI DSS questionnaire eligibility by itself, which the acquirer or a QSA has to confirm.</p>
+
+<p><a class="bl-link" href="/blog/card-vault-tokenization/">Card vault tokenization</a> covers how a stored card gets reused without reappearing in agency systems.</p>
+
+<h2>Example of an AI Agent Booking an International Trip With Tokenized Traveler Data</h2>
+
+<p><strong>In a secure AI booking, the traveler submits passport and card details through an intake link and the agent books with tokens. Real values reach the airline and hotel through approved release only, and each answer is checked first.</strong></p>
+
+<p>Here is Lucas's Lisbon trip from intake to rebooking:</p>
+
+<ol>
+
+  <li><strong>Intake:</strong> Lucas opens a branded link from his travel desk and submits his passport copy and corporate card. The CRM stores tokens against his profile.</li>
+
+  <li><strong>Search:</strong> the agent compares Lisbon fares using [NAME_1] and his travel dates, and the model never receives his passport number.</li>
+
+  <li><strong>Hold:</strong> an aisle seat and a hotel room are held with his card token attached.</li>
+
+  <li><strong>Pay:</strong> the airline charge goes through a signed proxy at its gateway, while the hotel's manual portal gets the card from a consultant in an approved session. Both releases are logged.</li>
+
+  <li><strong>Ticket:</strong> his passport number goes to the airline at ticketing for advance passenger data.</li>
+
+  <li><strong>Answer:</strong> Lucas asks whether his fare allows a free change. The fare filing and the carrier's site disagree, so the answer comes back conflicted and a consultant replies with the correct rule.</li>
+
+  <li><strong>Rebook:</strong> his return flight is canceled, so the agent proposes a new one. Lucas confirms with a one-time code, and the change fits inside his company's limit.</li>
+
+</ol>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>AI Vault step</th><th>Where it shows up in Lucas's trip</th></tr></thead>
+    <tbody>
+      <tr><td>Scope access</td><td>Fare search reads dates and cabin, never his passport</td></tr>
+      <tr><td>Minimize exposure</td><td>Model requests carry tokens for his name and document number</td></tr>
+      <tr><td>Govern release</td><td>Card goes to two gateways and his passport to one airline, each logged</td></tr>
+      <tr><td>Check the output</td><td>Change-fee answer held when sources conflict</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h2>AI Agent Travel Booking Security Checklist for Card Data and Passport Records</h2>
+
+<p><strong>Before an AI booking agent goes live, confirm that card data stays out of transcripts and that passports sit in governed storage. Then set retention and access rules for traveler profiles under GDPR or CCPA, with every release logged.</strong></p>
+
+<p><strong>Card data under PCI DSS:</strong></p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Area</th><th>What to confirm</th></tr></thead>
+    <tbody>
+      <tr><td>Card capture</td><td>Cards enter through hosted fields or keypad capture</td></tr>
+      <tr><td>Security codes</td><td>Codes are purged after authorization</td></tr>
+      <tr><td>Supplier payment</td><td>Release happens through a proxy or an approved session</td></tr>
+      <tr><td>Call recordings</td><td>Recording pauses during card capture</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p><strong>Traveler personal data under GDPR and CCPA:</strong></p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Area</th><th>What to confirm</th></tr></thead>
+    <tbody>
+      <tr><td>Lawful basis</td><td>A documented reason for collecting each traveler field</td></tr>
+      <tr><td>Minimization</td><td>Passport data requested only for bookings that need it</td></tr>
+      <tr><td>Traveler rights</td><td>Access and deletion requests reach profiles and transcripts</td></tr>
+      <tr><td>Cross-border transfers</td><td>Transfer terms with model providers outside the EU</td></tr>
+      <tr><td>Retention</td><td>Set lifetimes for passport copies and traveler profiles</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p><strong>Agent controls:</strong></p>
+
+<ul>
+
+  <li>Field-level scopes for each booking task</li>
+
+  <li>Destination and approver recorded for every release</li>
+
+  <li>Step-up verification before refunds and redemptions</li>
+
+  <li>Supplier connections mapped, showing which portals need manual entry and which accept proxy payment</li>
+
+</ul>
+
+<p>Tokenized traveler data is pseudonymous under GDPR, so it still counts as personal data because authorized systems can reverse it. <a class="bl-link" href="/blog/data-masking-vs-tokenization/">Masking and tokenization</a> differ on exactly that point, and the difference shapes which systems stay in scope.</p>
+
+<h2>Travel Booking Mistakes to Avoid When AI Agents Handle Traveler PII</h2>
+
+<p><strong>The most common mistakes are connecting booking agents to inboxes full of card numbers and giving them consultant-level access. Others include re-keying cards into supplier portals and letting fare or refund answers go out unchecked.</strong></p>
+
+<h3>Connecting the Agent to Shared Inboxes and Call Recordings</h3>
+
+<p>Card details still arrive by phone and email at most agencies, so these sources hold years of card numbers. An agent pointed at them pulls every value into its prompts. Collect through a secure intake link or keypad capture first, and let the agent read the token on the booking record.</p>
+
+<h3>Giving the Agent the Same CRM and GDS Access as a Consultant</h3>
+
+<p>Consultant logins are built to open everything on an account, and broad connector credentials like these can expose records that have nothing to do with the request. A simple fare search shows the gap:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>What the fare search needed</th><th>What a consultant login returned</th></tr></thead>
+    <tbody>
+      <tr><td>Travel dates and cabin preference</td><td>Full traveler profile with passport details</td></tr>
+      <tr><td>Loyalty tier</td><td>Every past booking on the account</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>Each booking task needs its own scope. That scope should cover the records and files the task can open, plus the tools and actions it can use. A fare search can read dates and hold a seat but never issue a refund. Enforce that scope in the layer that brokers the agent's access, where a prompt can't widen it.</p>
+
+<h3>Copying Card Numbers From CRM Notes Into Supplier Portals</h3>
+
+<p>An agent that can read card numbers in notes can paste them anywhere. Cards should reach suppliers through a signed proxy on supported gateways, or through a governed reveal in an approved consultant session.</p>
+
+<h3>Assuming Tokenization Covers Every System the Agent Touches</h3>
+
+<p>Tokens protect values inside the enforced data path. Copies still turn up outside it:</p>
+
+<ul>
+
+  <li>Application logs and traces outside the protected path</li>
+
+  <li>Vector stores built from old conversations</li>
+
+  <li>Identifiers the detector doesn't recognize</li>
+
+</ul>
+
+<h3>Letting Fare and Refund Answers Go Out Unchecked</h3>
+
+<p>Travelers act on what the agent says, so a wrong fare rule turns into a dispute. Check each eligible claim against the fare filing or carrier policy on file. The agency then decides whether unsupported answers are held for revision or passed to a consultant.</p>
+
+<h3>Claiming Smaller PCI Scope or Anonymous Data Too Early</h3>
+
+<p>Tokenizing cards can shrink the systems in PCI DSS scope, yet only the acquirer or a QSA can confirm questionnaire eligibility. Promising it before they review the setup tends to surface at assessment time.</p>
+
+<p>Privacy claims carry the same risk. Tokenized traveler data stays personal data under GDPR and CCPA, since authorized systems can map every token back to the traveler.</p>
+
+<h2>How Enigma AI Vault Protects Traveler Data for Any AI Booking Agent</h2>
+
+<p>It doesn't matter which AI agent you use for booking. Enigma AI Vault is the underlying infrastructure that protects traveler data around it, while the booking agent stays your choice to build and run. AI Vault combines The Vault and NoPII with Triplets, and each one maps to a moment in the trip.</p>
+
+<p><strong>Before booking:</strong> <a class="bl-link" href="/vault/customer-vault/">Customer Vault</a> sends travelers branded links that need no login, collecting passport copies and traveler cards along with travel insurance documents. Staff work from a shared inbox across locations, and itineraries or visa documents go back through time-limited links.</p>
+
+<p><strong>While the agent works:</strong> NoPII runs as a proxy in front of nine model providers and tokenizes supported identifiers, passport numbers among them. Within the enforced data path, logs and traces see tokens, and a protected request that can't be tokenized fails closed. Triplets checks eligible answers against approved evidence and labels each claim by how well that evidence supports it. A verified answer is one the evidence on file supports, so the quality of approved sources matters.</p>
+
+<p><strong>At payment:</strong> The Vault protects cards and files by granting task-specific access, and its controlled release decides when a real value leaves. Card Vault charges stored cards through the agency's existing processor, and phone bookings can be captured straight from the IVR. Supported gateways receive the card through a proxy that signs each request with HMAC, and every release leaves a vault access record. Security codes are purged within 30 minutes.</p>
+
+<p><strong>After the trip:</strong> File Vault holds passports and visas with permissions and expiry, plus an audit event for each access. As the program grows, the vault can also take on structured secrets such as loyalty and trusted traveler numbers.</p>
+
+<p>The Vault runs as a PCI DSS Level 1 service provider with SOC 2 Type II audits, and NoPII and Data Vault can also be deployed as self-hosted containers. Cardholder authentication and supplier card rules remain the agency's responsibility, along with any questionnaire eligibility the acquirer or QSA has to confirm.</p>
+
+<p><a class="bl-link" href="/request-demo/?which_products__select_all_that_apply_=AI%20Vault&amp;interest=ai-vault-poc">Request a no-cost POC</a> for one booking route. We'll map the data your booking agent touches and which supplier steps still require the real card or passport.</p>

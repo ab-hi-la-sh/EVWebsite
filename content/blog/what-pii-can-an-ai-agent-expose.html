@@ -1,0 +1,419 @@
+---
+title: "What PII Can an AI Agent Expose? Common Sensitive Data Agents Can Expose and How It Happens"
+slug: "what-pii-can-an-ai-agent-expose"
+layout: "pii-style"
+metaTitle: "What PII Can an AI Agent Expose? Common Types and How Exposure Happens"
+description: "Learn what PII an AI agent can expose, from direct identifiers and government IDs to card data and credentials, and how exposure happens at each step of a task."
+subtitle: "An AI agent can expose any PII it can reach, from direct identifiers and government IDs to card numbers and health details. Because agents query databases and call APIs on their own, they can also stitch scattered clues together and expose them."
+date: 2026-11-28T00:10:00
+category: "NoPII"
+author: "abhilash-kumar"
+readTime: 18
+heroImage: "/assets/blog/img-01.png"
+heroAlt: "What PII Can an AI Agent Expose? Common Sensitive Data Agents Can Expose and How It Happens"
+excerpt: "Learn what PII an AI agent can expose, from direct identifiers and government IDs to card data and credentials, and how exposure happens at each step of a task."
+tags: ["ai-agents", "ai", "pii"]
+styles: ["blog.css", "pages/blog-pii-hero.css", "tr-pages.css"]
+scripts: ["blog-article.js"]
+faqSchema: true
+faqs:
+  - q: "Can an AI agent expose PII it was never asked about?"
+    a: "Yes. Agents often pull full records when a task needs one field, and anything in the context can surface in a reply or a stored log. Users also paste PII the agent never requested, which then travels with the rest of the context."
+  - q: "Do AI agents store the PII they access?"
+    a: "Many do, often by accident. Request bodies land in logs and traces while memory features save facts for later sessions. How long those copies last depends on how your framework and logging settings are configured."
+  - q: "Can prompt injection make an AI agent reveal PII?"
+    a: "Yes. Instructions hidden in a document or email can tell an agent to send data elsewhere through a tool call. Keeping real values out of the agent's context and deciding release outside the model limits what it can reveal."
+  - q: "Does sending PII to an LLM provider count as exposure?"
+    a: "It counts as disclosure to a third party, so it falls under your privacy notices and vendor contracts. Whether that's acceptable depends on the provider's terms, though tokenizing PII first keeps raw values out of the request."
+  - q: "Which PII should never reach an AI agent's model?"
+    a: "Card numbers and government IDs rarely need to reach a model, and neither do credentials, since the agent can reason with tokens while approved systems use the real values. Health details and biometrics deserve the same caution."
+---
+
+<p><strong>An AI agent can expose any PII it can reach, from direct identifiers and government IDs to card numbers and health details. Because agents query databases and call APIs on their own, they can also stitch scattered clues together and expose them.</strong></p>
+
+<p>A customer named Jordan Blake asks a support agent why he was charged twice. That one narrow question gives the agent a path to every card on file and years of ticket history, and anything an agent can reach is something it can expose. The sections below map the PII and sensitive data within reach, then trace how each kind slips out, whichever agent you use with <a class="bl-link" href="/ai-vault/">Enigma AI Vault</a> as the infrastructure underneath.</p>
+
+<h2>Common PII and Sensitive Data an AI Agent Can Expose and Where It Comes From</h2>
+
+<p><strong>The PII an AI agent can expose runs from direct identifiers like names to government IDs and card numbers. Health details and private message contents are in reach too, along with credentials and confidential files that sit beside customer records.</strong></p>
+
+<p>Agents connect to the systems where sensitive information already lives, from CRM and ERP platforms to payment systems and document stores. Each new connection widens the pool of <a class="bl-link" href="/blog/what-is-pii/">direct and indirect identifiers</a> the agent can repeat or pass along.</p>
+
+<p>Agents rarely expose one isolated field. They expose whole categories of data, each reaching the agent through a different system and leaking for a different reason.</p>
+
+<h3>Direct and Contact Identifiers</h3>
+
+<p>These identifiers map straight to a real person, which makes them the PII an agent repeats most often. Full names sit beside home and shipping addresses in nearly every CRM record, along with personal email addresses and phone numbers. IP addresses and device location history belong here too, since they can place a customer at a specific address on a specific evening. Most exposure in this group happens when an agent confirms details back to someone who asks with enough confidence.</p>
+
+<h3>Government and National ID Numbers</h3>
+
+<p>Social Security and National Insurance numbers follow strict formats, as do passport and driver's license numbers. Tax IDs share that structure.</p>
+
+<p>Those formats should make them easy to catch, yet many legacy databases still store them unmasked. An agent querying an old onboarding system can receive a record like this in plain text:</p>
+
+<div class="bl-code bl-code--light">
+  <pre style="white-space:pre;overflow-x:auto"><code style="white-space:pre;">applicant_id=55821 name="Jordan Blake" ssn=123-45-6789 dl_number=B6024471 tax_id=91-4472185</code></pre>
+</div>
+
+<p>The task needed the last four digits of the SSN to confirm identity. Every other value in that line now sits in the agent's context with nothing stopping it from appearing in a reply or a log.</p>
+
+<h3>Financial and Account Information</h3>
+
+<p>An agent with API access to a customer profile or a payment gateway can reach the data fraudsters want most:</p>
+
+<ul>
+
+  <li><strong>Card data:</strong> full card numbers with expiry dates and security codes</li>
+
+  <li><strong>Bank details:</strong> account and routing numbers, plus IBANs for international payments</li>
+
+  <li><strong>Pay and tax records:</strong> salary history and tax filings held in payroll systems</li>
+
+  <li><strong>Policy and claim IDs:</strong> insurance policy numbers with the coverage details tied to them</li>
+
+  <li><strong>Account balances:</strong> what a customer owes or holds, which scammers use to sound credible</li>
+
+</ul>
+
+<p>Card data carries extra weight because PCI DSS bars storing security codes after authorization. An agent that saves a pasted CVV in a chat transcript creates a compliance problem on top of the exposure.</p>
+
+<h3>Health Data and Protected Health Information</h3>
+
+<p>Agents serving health plans or HR teams can reach some of the most sensitive data a person has. Each kind tends to arrive through its own route:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Health data</th><th>Typical route into the agent</th></tr></thead>
+    <tbody>
+      <tr><td>Medical histories and clinical diagnoses</td><td>Claim files and case notes</td></tr>
+      <tr><td>Prescriptions and current medications</td><td>Pharmacy benefit lookups</td></tr>
+      <tr><td>Medicare Beneficiary Identifiers and dates of birth</td><td>Eligibility checks</td></tr>
+      <tr><td>Voice prints and face images</td><td>Caller authentication</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>When a health plan or provider holds these details, they count as PHI under HIPAA and an exposure can become a reportable breach. Held anywhere else, they still fall under state health data and biometric privacy laws.</p>
+
+<h3>Credentials and API Secrets in Chats and Uploaded Files</h3>
+
+<p>Credentials aren't PII in the usual sense, yet they travel through the same conversations. A developer pastes an API key into a support chat, and an agent troubleshooting an outage reads an error log with a database connection string inside it. Secrets an agent can pick up this way include:</p>
+
+<ul>
+
+  <li>Cloud provider keys</li>
+
+  <li>Model API keys</li>
+
+  <li>Payment platform tokens</li>
+
+  <li>Code platform tokens</li>
+
+  <li>Database connection strings</li>
+
+  <li>Private keys and auth tokens</li>
+
+</ul>
+
+<p>Uploaded files bring their own risk. Customers send ID scans to verify an account, and bank statements or tax records during onboarding, so an agent reading those attachments can quote anything from a passport number to a balance months after the request closed.</p>
+
+<h3>Employee Records and Third-Party Details</h3>
+
+<p>HR and IT helpdesk agents sit on top of employee records, so an employee asking about pay bands for a role can get a colleague's actual salary back. Performance reviews and background check results live in the same systems. Customer agents carry behavioral data as well, such as usage patterns and the contents of private tickets or messages.</p>
+
+<p>Documents add PII about people who never spoke to your agent. A supplier email thread might loop in a logistics contact along with her work email and mobile number, and an agent asked to summarize that thread carries both details straight into its answer. Contracts name their signatories and invoices list supplier contacts in the same way, so third-party PII rides along with almost every document an agent reads.</p>
+
+<h3>Composed PII Built From Stitched-Together Clues</h3>
+
+<p>Composed PII is the hardest kind to block, because no single source contains it. Suppose an agent can read three datasets that each look anonymous:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Dataset</th><th>What it holds on its own</th></tr></thead>
+    <tbody>
+      <tr><td>Regional sales list</td><td>ZIP code for each order</td></tr>
+      <tr><td>Vehicle registry extract</td><td>Car model for each account</td></tr>
+      <tr><td>Loyalty program log</td><td>Birth year for each member</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>Joined in one answer, those fields can narrow a crowd down to a single customer. The agent has produced an identifier that none of the three datasets held.</p>
+
+<p>Inference goes a step further, because the agent creates facts nobody shared. A model reading purchase history might conclude that a customer is expecting a child, while missed payments can read as financial strain. Repeated questions about leave policies may even hint at a health issue, and repeating any such conclusion exposes something the customer never disclosed.</p>
+
+<h2>How AI Agents End Up Exposing PII and Sensitive Data While Completing Tasks</h2>
+
+<p><strong>AI agents expose PII at each stage of a task, from retrieving records and building prompts to calling the model and acting on its answer. Copies left behind extend the exposure, and a compromised agent can be pushed to reveal what it holds.</strong></p>
+
+<p>Agents work differently from a simple chat box. They query databases and call APIs on their own, often several times inside one task, so PII passes through more systems in a single request than a chat window touches all day. Jordan's billing question shows each route it can take.</p>
+
+<h3>Over-Fetching When the Agent Retrieves Records</h3>
+
+<p>Connectors often run on broad service credentials, because that was quicker during a pilot and nobody narrowed them afterward. Jordan's question is narrow, yet the CRM connector hands back much more:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>What Jordan's question needs</th><th>What the connector returned</th></tr></thead>
+    <tbody>
+      <tr><td>Amount on his latest invoice</td><td>His full profile with home address and phone number</td></tr>
+      <tr><td>Card used for the duplicate charge</td><td>Every stored card and its transaction history</td></tr>
+      <tr><td>Refund request status</td><td>Three years of tickets, one mentioning another customer's account</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>Everything in the right-hand column is now available to the agent, even though none of it helps answer the question.</p>
+
+<h3>PII Users Volunteer Without Being Asked</h3>
+
+<p>Not all exposure starts with retrieval. Jordan pastes his full card number into the chat to prove the card is his, then adds his date of birth for good measure. Neither detail was requested, yet both now sit in the transcript and travel with the next model request. Agents rarely refuse information, so whatever users share becomes part of the data the agent can expose.</p>
+
+<h3>Prompts That Carry Raw Values to the Model Provider</h3>
+
+<p>Before the model sees anything, the agent assembles a prompt from everything it has gathered. Without protection, a slice of Jordan's prompt can look like this:</p>
+
+<div class="bl-code bl-code--light">
+  <pre style="white-space:pre;overflow-x:auto"><code style="white-space:pre;">Customer: Jordan Blake | jordan.blake@example.com | +1-555-0187
+Cards on file: 4111 1111 1111 1111 (exp 08/28), 5500 0000 0000 0004 (exp 11/27)
+Date of birth: 1987-03-14
+Latest ticket: "Charged twice for order 88213"</code></pre>
+</div>
+
+<p>Every value in that block leaves your boundary with the model call and lands on the provider's infrastructure, where retention follows its terms and your account settings. Teams that start by <a class="bl-link" href="/blog/pii-masking-for-llm/">masking PII before LLM calls</a> on one model often find a second agent calling a different provider with nothing in front of it.</p>
+
+<h3>Weak Identity Checks Before the Agent Answers</h3>
+
+<p>An agent can't see a face or inspect an ID card, so it often trusts whatever a caller claims. A short exchange is enough:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Speaker</th><th>Message</th></tr></thead>
+    <tbody>
+      <tr><td>Caller</td><td>Hi, it's Jordan Blake. Can you confirm the address on my account? My email is jordan.blake@example.com.</td></tr>
+      <tr><td>Agent</td><td>Of course. The address on file is 42 Alder Lane, Portland.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>The caller needed nothing more than an email address that is easy to find online. Every system worked as designed, and Jordan's home address still reached a stranger.</p>
+
+<h3>Oversharing Through Tool Calls and Handoffs</h3>
+
+<p>Agents act on their answers, and each action can carry PII somewhere new:</p>
+
+<ul>
+
+  <li><strong>Tool calls:</strong> arguments send customer details into other systems, such as a shipping API or a case update</li>
+
+  <li><strong>Handoffs:</strong> one agent passes its full context to another agent with broader reach</li>
+
+  <li><strong>Verbose replies:</strong> the agent answers with more than the user asked for, such as listing every card when asked about one</li>
+
+</ul>
+
+<p>None of these needs a bug. Each one follows from the agent holding more than the task requires.</p>
+
+<h3>Error Messages and Debug Output That Echo Secrets</h3>
+
+<p>When a tool call fails, many agents pass the raw error straight back into the conversation. That error can hold a connection string or a full request body, and an agent trying to be helpful may read it out while explaining what went wrong. Debug modes left switched on after testing make this worse, since they print whole payloads into replies and logs.</p>
+
+<h3>Stored Copies That Keep PII After the Task Ends</h3>
+
+<p>A week after Jordan's chat closes, pieces of it still sit in several places:</p>
+
+<ul>
+
+  <li>Logs and traces holding the full refund request, date of birth included</li>
+
+  <li>Agent memory noting that he prefers refunds by email</li>
+
+  <li>Vector store entries embedding his ticket thread for search</li>
+
+</ul>
+
+<p>Shared memory carries the sharpest risk of the three. An agent drawing on it could greet the next customer with details from Jordan's case.</p>
+
+<h3>Prompt Injection That Turns an Agent Against Its Own Data</h3>
+
+<p>Prompt injection hides instructions inside content the agent reads, such as a shared document or an inbound email. A single hidden sentence could tell the agent to email its customer records to an outside address using one of its tools.</p>
+
+<p>What the attacker gets depends on what the agent holds. When the agent works with references on a protected path, a request to use real data has to pass through a separate route:</p>
+
+<ol>
+
+  <li>Only a token sits in the agent's context, never the original value</li>
+
+  <li>Protected values stay inside the vault or a controlled service</li>
+
+  <li>To use one, the agent sends the token along with its intended destination</li>
+
+  <li>Policy outside the model approves or refuses that request</li>
+
+  <li>Approved destinations receive the value, and each access is logged</li>
+
+</ol>
+
+<p>A hijacked agent following this path can ask for data, but it can't help itself to it. That narrows the damage without closing every injection route, so tool permissions still matter.</p>
+
+<h2>What Kinds of PII Do AI Agents Access Compared With What They Expose</h2>
+
+<p><strong>AI agents access PII whenever it enters their context from a connector or a user, whereas exposure happens when that PII reaches someone who shouldn't see it. Agents usually access far more than they expose, though every extra field raises the odds.</strong></p>
+
+<p>PII enters an agent's context through three routes. Each one calls for a different kind of control.</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Source of PII</th><th>How it enters the context</th><th>Example from Jordan's case</th></tr></thead>
+    <tbody>
+      <tr><td>Retrieved</td><td>Connectors and API calls pull records in</td><td>His profile and card history from the CRM</td></tr>
+      <tr><td>Volunteered</td><td>Users type or paste details into the chat</td><td>Jordan pastes his full card number to prove the card is his</td></tr>
+      <tr><td>Inferred</td><td>The model combines signals into a new fact</td><td>Guessing he has moved because his billing address changed</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>Agents tend to access more than they need for two reasons. Connectors inherit broad service-account permissions set up during a pilot, and retrieval steps pull whole documents when a task needs one paragraph.</p>
+
+<p>Access becomes exposure once PII reaches an audience without a need to see it:</p>
+
+<ul>
+
+  <li><strong>Another customer:</strong> a reply or shared memory reveals someone else's details</li>
+
+  <li><strong>Employees without a business need:</strong> traces and dashboards show raw values to support or engineering staff</li>
+
+  <li><strong>Model providers:</strong> raw values leave your boundary with every request</li>
+
+  <li><strong>Connected vendors:</strong> tool calls hand PII to third-party systems</li>
+
+  <li><strong>Attackers:</strong> a compromised agent sends data where it was never meant to go</li>
+
+</ul>
+
+<p>Access on its own still carries weight. Every field an agent can reach is a field that can surface later in a reply or a handoff, so shrinking access shrinks exposure.</p>
+
+<h2>What Are the Risks When an AI Agent Exposes PII and Sensitive Data</h2>
+
+<p><strong>The risks of an AI agent exposing PII range from identity theft and payment fraud to account takeover, and many data types trigger breach notification duties once they leak. The level of risk depends on which data type gets out and who receives it.</strong></p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Data type</th><th>Risk if exposed</th><th>Rules it can bring in</th></tr></thead>
+    <tbody>
+      <tr><td>Government and national IDs</td><td>Identity theft and fraudulent accounts</td><td>State breach notification laws</td></tr>
+      <tr><td>Card and bank data</td><td>Payment fraud and chargebacks</td><td>PCI DSS for cards; GLBA for financial institutions</td></tr>
+      <tr><td>Credentials and API secrets</td><td>Account takeover and wider system access</td><td>State breach laws that cover login credentials</td></tr>
+      <tr><td>Health and medical data</td><td>Discrimination and loss of privacy</td><td>HIPAA when PHI is involved; state health data laws</td></tr>
+      <tr><td>Voice and biometric data</td><td>Permanent loss, since a face or voice can't be reset</td><td>State biometric privacy laws such as Illinois BIPA</td></tr>
+      <tr><td>Salary and employee records</td><td>Workplace harm and broken trust</td><td>Employment and state privacy laws</td></tr>
+      <tr><td>Direct identifiers alone</td><td>Phishing and social engineering</td><td>State privacy laws, with breach duties usually tied to a second data element</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>Card data comes with the clearest rules, which is why many teams rely on <a class="bl-link" href="/blog/card-vault-tokenization/">card vault tokenization</a> to keep card numbers out of agents entirely.</p>
+
+<p>Exposure also hurts through wrong decisions. An agent that mixes up two customers' records might refund the wrong account or quote someone else's balance, and the customer acts on that answer before anyone notices.</p>
+
+<p>Accountability stays with the business that deployed the agent. Customers and regulators look to you when an agent exposes their data, whichever model or vendor sat behind it, so a provider's terms rarely move that responsibility elsewhere.</p>
+
+<h2>How to Find Out What PII Your AI Agent Can Expose Before Customers Do</h2>
+
+<p><strong>To find out what PII your AI agent can expose, list every connector and the fields it returns, then test with decoy records. Check logs and memory for raw values, and confirm exactly what reaches the model provider on each request.</strong></p>
+
+<p>Most teams have never checked what their agents can reach. A short audit on one agent gives you a real answer:</p>
+
+<ol>
+
+  <li><strong>List every connector:</strong> record each system the agent can query and every field each one returns</li>
+
+  <li><strong>Sample real tool results:</strong> compare what comes back against what the task actually needs</li>
+
+  <li><strong>Review stored copies:</strong> search logs and agent memory for raw names or card numbers</li>
+
+  <li><strong>Seed decoy records:</strong> add fake customers with distinctive values and watch where those values appear</li>
+
+  <li><strong>Test the hard cases:</strong> try unverified callers asking for account details, plus documents carrying hidden instructions</li>
+
+  <li><strong>Inspect provider requests:</strong> capture what actually leaves your boundary in each model call</li>
+
+</ol>
+
+<p>A decoy record can be as plain as this:</p>
+
+<div class="bl-code bl-code--light">
+  <pre style="white-space:pre;overflow-x:auto"><code style="white-space:pre;">{
+  "customer_name": "Avery Decoy",
+  "email": "avery.decoy@example.com",
+  "phone": "+1-555-0142",
+  "note": "Seeded test record for exposure audit"
+}</code></pre>
+</div>
+
+<p>If Avery's email turns up in a log or in a reply to someone else, you've found an exposure path. Where raw values already sit in logs, <a class="bl-link" href="/blog/data-redaction-for-ai/">data redaction for AI</a> at the source stops new copies from piling up while you fix the path itself.</p>
+
+<h3>Warning Signs Your Agent Is Already Exposing PII</h3>
+
+<p>Some exposure shows up before any audit starts. Watch for these signals in production:</p>
+
+<ul>
+
+  <li>Replies that include fields the user never asked for</li>
+
+  <li>Support tickets where customers mention seeing someone else's details</li>
+
+  <li>Raw card numbers or SSNs turning up in log searches</li>
+
+  <li>Memory entries that reference other customers by name</li>
+
+  <li>Model requests far larger than the task should need</li>
+
+</ul>
+
+<h2>How to Limit the PII an AI Agent Can Expose Without Slowing It Down</h2>
+
+<p><strong>To limit the PII an AI agent can expose, narrow what each connector returns and replace sensitive values with tokens before the model sees them. Keep real values for approved systems, and review replies before customers read them.</strong></p>
+
+<p>Each control below targets a different data type from the earlier sections, and together they leave the agent with what it needs to finish the job:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Control</th><th>Data it protects most</th><th>In Jordan's case</th></tr></thead>
+    <tbody>
+      <tr><td>Field-level connector scoping</td><td>Profiles and ticket history</td><td>The connector returns his latest invoice and the disputed charge</td></tr>
+      <tr><td>Identity verification before disclosure</td><td>Addresses and account details</td><td>The agent confirms nothing until Jordan passes a verification step</td></tr>
+      <tr><td>Tokenization before model calls</td><td>Names and contact details</td><td>The model sees [NAME_1] and [EMAIL_1] where his details used to be</td></tr>
+      <tr><td>Card tokens with a payment proxy</td><td>Card and bank numbers</td><td>The refund runs on a card token while the gateway receives the real number</td></tr>
+      <tr><td>Retention limits on memory and logs</td><td>Anything stored after the task</td><td>Transcripts keep tokens and expire on schedule</td></tr>
+      <tr><td>Reply checks against approved evidence</td><td>Wrong or unsupported details</td><td>The refund timeline is checked against the policy before Jordan sees it</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>Tokenization keeps the agent useful, because a consistent token lets the model follow one customer across a long conversation. <a class="bl-link" href="/blog/pii-tokenization-for-ai/">PII tokenization for AI</a> explains how that works in practice.</p>
+
+<p>Some disclosures deserve a person in the loop. Refunds above a set amount or exports of customer lists can wait for human approval, which keeps one agent's mistake from turning into a bulk exposure.</p>
+
+<h2>How Enigma AI Vault Limits PII Exposure Whichever AI Agent You Use</h2>
+
+<p>It doesn't matter which AI agent you use. Enigma AI Vault sits underneath as the infrastructure that protects your data, pairing The Vault for records and cards with <a class="bl-link" href="/nopii/">NoPII</a> for model requests, while Triplets checks what the agent says.</p>
+
+<p>Here is what each audience from Jordan's case receives once AI Vault is in place:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Who could see Jordan's data</th><th>What reaches them with AI Vault underneath</th></tr></thead>
+    <tbody>
+      <tr><td>Model provider</td><td>Tokens in place of his name and email, with the request blocked if tokenization fails</td></tr>
+      <tr><td>Logs and traces</td><td>Tokens within the enforced data path</td></tr>
+      <tr><td>Payment gateway</td><td>His real card number through an HMAC-signed proxy on supported gateways, released for the approved refund</td></tr>
+      <tr><td>Manipulated agent</td><td>A reference with no automatic route to the value behind it</td></tr>
+      <tr><td>Jordan himself</td><td>A reply whose claims were checked against approved evidence</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>NoPII's reach depends on the model and tool paths you configure, so the first step is looking at one agent in detail.</p>
+
+<p><a class="bl-link" href="/request-demo/?which_products__select_all_that_apply_=AI%20Vault&amp;interest=ai-vault-poc">Tell us what your agent needs to access</a>, and we'll show which PII stays protected and where its answers get verified.</p>

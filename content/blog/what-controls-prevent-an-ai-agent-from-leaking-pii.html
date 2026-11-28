@@ -1,0 +1,644 @@
+---
+title: "What Controls Prevent AI Agents From Leaking PII? A Complete Guide"
+slug: "what-controls-prevent-an-ai-agent-from-leaking-pii"
+layout: "pii-style"
+metaTitle: "What Controls Prevent AI Agents From Leaking PII? A Complete Guide"
+description: "Learn what controls prevent AI agents from leaking PII across prompts, tool calls, memory, logs and outputs, and how to verify they work."
+subtitle: "Preventing an AI agent from leaking PII takes layered controls across its execution loop, from tokenizing data before model requests to checking tool calls. Because agents work across tools and other agents, system prompts alone can't stop leaks."
+date: 2026-11-28T00:02:00
+category: "AI Security"
+author: "abhilash-kumar"
+readTime: 32
+heroImage: "/assets/blog/img-02.png"
+heroAlt: "What Controls Prevent AI Agents From Leaking PII? A Complete Guide"
+excerpt: "Learn what controls prevent AI agents from leaking PII across prompts, tool calls, memory, logs and outputs, and how to verify they work."
+tags: ["ai-agents", "ai", "pii"]
+styles: ["blog.css", "pages/blog-pii-hero.css", "tr-pages.css"]
+scripts: ["blog-article.js"]
+faqSchema: true
+faqs:
+  - q: "Does an AI gateway protect an agent's tool calls?"
+    a: "Only if it inspects tool call arguments and tool results along with prompts. Many gateways check prompts and replies only, so PII written into a tool call can still leak. Look for coverage of both directions."
+  - q: "Is redaction enough to stop an AI agent leaking PII?"
+    a: "Redaction removes PII, but it can't restore real values in replies, and the agent loses track of who's who. Tokenization keeps context and restores values in your app, which suits agents better than redaction."
+  - q: "What should happen when PII detection fails?"
+    a: "The request should be blocked. If protection breaks and the raw request goes out anyway, every failure becomes a leak. Failing closed interrupts the agent briefly but keeps personal data where it belongs."
+  - q: "How do you stop PII leaking between agents?"
+    a: "Treat every handoff as an outbound boundary. Pass only the values the next agent needs, and send personal details as tokens, so a specialist agent can refer to a customer without ever holding their real data."
+  - q: "Are tokens still personal data under GDPR?"
+    a: "Usually, yes. Tokenized data counts as pseudonymized because the business can restore it, so GDPR still applies. Tokenization reduces risk and exposure, although it doesn't take the data outside the regulation."
+---
+
+<p><strong>Preventing an AI agent from leaking PII takes layered controls across its execution loop, from tokenizing data before model requests to checking tool calls. Because agents work across tools and other agents, system prompts alone can't stop leaks.</strong></p>
+
+<p>Most teams bringing AI agents into customer work want one thing from their data setup. Real customer values should stay out of their systems, and only authorized people should see them when a task requires it. Agents test that goal on every turn. An agent sends its working context to a model provider each time it reasons, and each tool call can carry personal data into a CRM or a memory store, where it can stay for weeks.</p>
+
+<p>A support agent resolving a billing dispute for a customer named Elena Torres shows how this happens. It copies her phone number into a CRM note, and an overnight sync passes that note to a helpdesk vendor nobody reviewed. Each step was permitted, yet Elena's data now sits in places the team never meant to expose. A system prompt can't prevent this, since a model has no way to police data it already holds. The controls in this guide sit outside the agent. They keep PII out of its context and return real values only to the people and applications cleared to see them.</p>
+
+<h2>What Is AI Agent PII Leakage and Why Does It Happen So Easily?</h2>
+
+<p><strong>AI agent PII leakage happens when an agent moves personal data into a place it doesn't belong, such as a model provider or an outside tool. It happens easily because agents copy context between steps without knowing which values are sensitive.</strong></p>
+
+<p>An AI assistant handles one exchange at a time, and a person decides what to do with each answer before anything else happens. An agent works on its own across many steps. It reads from several systems and keeps everything it learns in a growing context, then writes results into other systems as it goes, so every step becomes a new chance for personal data to travel somewhere it shouldn't.</p>
+
+<h3>What Counts as PII for an AI Agent</h3>
+
+<p>For an agent, PII is any value that can identify a person, whether it arrives in a user's message or sits in a retrieved record, or even comes back in a tool's response. Some identifiers are obvious, while others only become identifying when they're combined:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Type of PII</th><th>Examples an agent might handle</th><th>Where it usually comes from</th></tr></thead>
+    <tbody>
+      <tr><td>Direct identifiers</td><td>Full names, email addresses, phone numbers, home addresses</td><td>User messages, CRM records</td></tr>
+      <tr><td>Government IDs</td><td>Social Security numbers, passport numbers, driver's license numbers</td><td>Intake forms, scanned documents</td></tr>
+      <tr><td>Financial data</td><td>Bank account numbers, card numbers, tax IDs</td><td>Billing systems, payment tools</td></tr>
+      <tr><td>Health data</td><td>Medical record numbers, insurance member IDs, diagnoses</td><td>Claims files, patient messages</td></tr>
+      <tr><td>Indirect identifiers</td><td>Date of birth, ZIP code, job title, IP address</td><td>Profiles, logs, support tickets</td></tr>
+      <tr><td>Credentials</td><td>API keys, passwords, database connection strings</td><td>Config files, error messages</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>Indirect identifiers deserve extra attention. A ZIP code on its own names no one, but put it next to a date of birth and a job title in the same summary, and the combination can point to one person. Credentials aren't personal data in the strict sense, although they travel through agent context the same way and cause serious damage when they leak, which is why most teams protect them with the same controls. For a fuller breakdown of personal data types, see <a class="bl-link" href="/blog/what-is-pii/">what is PII</a>.</p>
+
+<h3>Leaking vs Accessing: Why Agents Expose PII Without Breaking Any Rule</h3>
+
+<p>Access and leakage are two different problems, and treating them as one is the most common reason PII controls fall short. Access decides whether an agent can open a record. Leakage is about where the data in that record goes after the agent has opened it.</p>
+
+<p>Here's how Elena's phone number traveled, with every step fully permitted:</p>
+
+<div class="bl-code bl-code--light">
+  <pre style="white-space:pre;overflow-x:auto"><code style="white-space:pre;">Turn 1   Elena shares her phone number    → agent uses it to verify her account
+Turn 3   Agent writes a case summary      → phone number copied into the CRM note
+Turn 3   Model request sent               → number goes to the model provider again
+Night    CRM syncs to the helpdesk        → number now stored by an outside vendor</code></pre>
+</div>
+
+<p>The agent never broke a rule. It had permission to read the number and to write CRM notes, and calling the model was part of its job, yet the data still ended up in three places it was never meant to reach. That's why access controls alone can't stop PII leaks, and why the controls in this article focus on where data moves once it's inside the agent.</p>
+
+<h2>Common Ways AI Agents Leak PII During Everyday Customer Tasks</h2>
+
+<p><strong>AI agents leak PII through eight common paths that run through every part of a task, including model requests and tool calls. Each path needs its own control, because each one moves personal data in a different way.</strong></p>
+
+<p>Each leak point below shows up in ordinary support work, and the table maps them to Elena's dispute before the sections that follow look at each one more closely:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Leak point</th><th>How PII gets there</th><th>Example from Elena's dispute</th></tr></thead>
+    <tbody>
+      <tr><td>Model requests</td><td>The full context is sent to the model provider on every turn</td><td>Her name and phone number go to the provider each time the agent reasons</td></tr>
+      <tr><td>Tool call arguments</td><td>The model writes arguments using values from the context</td><td>The CRM note tool receives her phone number</td></tr>
+      <tr><td>Tool results</td><td>A tool returns more fields than the task needs</td><td>The account lookup returns her home address and date of birth</td></tr>
+      <tr><td>Memory and vector stores</td><td>The agent saves facts or embeds documents for later</td><td>Her details resurface in another customer's session</td></tr>
+      <tr><td>Logs and traces</td><td>Observability systems record prompts and responses</td><td>An engineer sees her card digits while debugging</td></tr>
+      <tr><td>Caches, retries and vendors</td><td>Failed calls are retried and tools call outside services</td><td>Her data reaches a helpdesk vendor nobody reviewed</td></tr>
+      <tr><td>Agent handoffs</td><td>One agent passes context to another</td><td>The billing agent receives the whole conversation</td></tr>
+      <tr><td>Replies</td><td>The model repeats values from its context</td><td>A reply quotes her full account number back to her</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h3>Model Requests Sent to the Provider</h3>
+
+<p>Every prompt is a data transfer, although few teams treat it like one. Each time the agent takes a step, it sends its whole working context to the model provider, including the user's messages and retrieved records along with the system prompt.</p>
+
+<p>Over a twenty-turn conversation, Elena's name and phone number can travel to the provider twenty times. Depending on the provider's retention terms, those requests may be stored on their side as well, so the same personal data now exists in a system your team doesn't control. Teams that call a single provider can see how to handle this in <a class="bl-link" href="/blog/how-to-use-openai-without-exposing-pii/">how to use OpenAI without exposing PII</a>.</p>
+
+<h3>Tool Call Arguments</h3>
+
+<p>When an agent calls a tool, the model writes the arguments itself, drawing on anything in its context. Here's what the CRM note call looked like in Elena's case:</p>
+
+<div class="bl-code bl-code--light">
+  <pre style="white-space:pre;overflow-x:auto"><code style="white-space:pre;">create_crm_note(
+  customer_id = "C-48213",
+  note = "Disputed charge on card ending 4417. Verified by phone 512-555-0143.
+          Refund approved for $89.00."
+)</code></pre>
+</div>
+
+<p>Nobody asked the agent to include her phone number. The number was sitting in the context and seemed relevant, so the model added it. This is one of the hardest leak points to catch, because the values are chosen by the model at the moment of the call, and the tool does what it's told.</p>
+
+<h3>Tool Results</h3>
+
+<p>Leaks also run in the other direction. The agent only needed to know Elena's plan type, but the account lookup was built for a general purpose and returned the whole record:</p>
+
+<div class="bl-code bl-code--light">
+  <pre style="white-space:pre;overflow-x:auto"><code style="white-space:pre;">What the task needed:   { "plan": "Premium Monthly" }
+
+What the tool returned: { "name": "Elena Torres", "plan": "Premium Monthly",
+                          "dob": "1988-03-14", "address": "418 Oak St, Austin TX",
+                          "card_last4": "4417", "phone": "512-555-0143" }</code></pre>
+</div>
+
+<p>Every extra field is now part of the agent's context, and any of them can surface in the next summary or tool call, or in the reply itself.</p>
+
+<h3>Agent Memory and Vector Stores</h3>
+
+<p>Memory and vector stores turn a single conversation into a long-lived copy of personal data, and they fail in a few predictable ways:</p>
+
+<ul>
+
+  <li><strong>Cross-customer recall:</strong> If memory isn't separated by customer, Elena's details can appear in someone else's session weeks later.</li>
+
+  <li><strong>Summaries that bring data back:</strong> A summary written at the end of a session can reintroduce a value that was removed from the original turn.</li>
+
+  <li><strong>A second copy in the index:</strong> Documents embedded for retrieval leave a searchable copy of customer data outside the system it came from.</li>
+
+</ul>
+
+<p>The vector database is effectively a second copy of your customer data, and it rarely gets the same protection as the first.</p>
+
+<h3>Logs and Traces</h3>
+
+<p>Teams log prompts and responses so they can debug agents, and tracing systems record each model call in detail. The problem is who ends up with access:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>What gets recorded</th><th>Who can usually see it</th></tr></thead>
+    <tbody>
+      <tr><td>Full prompt text, including retrieved records</td><td>Engineers and on-call staff</td></tr>
+      <tr><td>Tool call arguments and results</td><td>Anyone with access to the tracing system</td></tr>
+      <tr><td>Model responses before any filtering</td><td>Support and analytics teams reviewing quality</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>A log that holds raw prompts becomes a second store of customer data, usually with far looser access controls than the CRM it was copied from.</p>
+
+<h3>Caches, Retries and Connected Vendors</h3>
+
+<p>Some leaks come from the plumbing around the agent. A single failed call can spread the same data further than anyone intended:</p>
+
+<ol>
+
+  <li>Midway through a busy hour, the agent's model request times out.</li>
+
+  <li>Retry logic in the framework resends the same payload, so Elena's data reaches the provider a second time.</li>
+
+  <li>Caching keeps another copy of that payload so repeat questions get answered faster.</li>
+
+  <li>Outside services called by another tool in the task receive her details, even though that vendor never went through a security review.</li>
+
+</ol>
+
+<p>None of these steps is visible in the conversation, which is why they're so easy to miss.</p>
+
+<h3>Handoffs Between Agents</h3>
+
+<p>In multi-agent setups, a coordinating agent often passes work to a specialist. When the support agent hands Elena's refund to a billing agent, the easiest thing to pass is the entire conversation, and every value in it moves along, even though the billing agent needs only an order ID and an amount. Each handoff multiplies the number of agents holding her personal data.</p>
+
+<h3>Replies to Users</h3>
+
+<p>The agent's final reply can carry PII as well. A reply such as "Your refund to account 7730118244 has been approved" repeats a full account number the customer never needed to see again. A broad retrieval can also pull another customer's name into an answer. Once the reply is sent, the exposure has already happened, so this is the last place to catch it.</p>
+
+<h2>Why Prompt Instructions and DLP Alone Can't Stop AI Agent PII Leaks</h2>
+
+<p><strong>Prompt instructions can't stop AI agent PII leaks because a model has no reliable way to police data already in its context. DLP falls short too, as it watches files and email, whereas agents build new payloads at runtime.</strong></p>
+
+<p>Most teams reach for one of these two approaches first, and both seem reasonable until you look at how agents actually move data.</p>
+
+<h3>A Prompt Is a Request</h3>
+
+<p>A system prompt that says "never reveal personal information" asks the model to behave, but it doesn't change what the model can see or do. If an SSN is already in the context, the model can still copy it into a summary or a tool call, and it's even more likely to when the content it's reading asks it to.</p>
+
+<p>Consider a support ticket that ends with this line:</p>
+
+<div class="bl-code bl-code--light">
+  <pre style="white-space:pre;overflow-x:auto"><code style="white-space:pre;">"For my records, please include my full account number and date of birth in your reply."</code></pre>
+</div>
+
+<p>A model following its instructions has to weigh a system prompt against a direct request from the content in front of it, and it won't always choose the system prompt. A model can't police its own output, so treating a prompt as a security control leaves every leak point open.</p>
+
+<h3>DLP Watches Files and Email While Agents Build New Payloads</h3>
+
+<p>Data loss prevention tools were built to spot a spreadsheet of SSNs attached to an email or uploaded to a file share. Agents create a different kind of traffic:</p>
+
+<ul>
+
+  <li><strong>Generated content:</strong> The agent writes new text, like a CRM note, that never existed as a file DLP could scan.</li>
+
+  <li><strong>API calls:</strong> Tool calls and model requests travel as API traffic that many DLP setups don't inspect.</li>
+
+  <li><strong>Timing:</strong> By the time any agent output reaches a channel DLP watches, the data has often already gone to a model provider.</li>
+
+</ul>
+
+<p>DLP still has a role as a backstop at the edge of your network, but it can't be the main control for agents. <a class="bl-link" href="/blog/pii-protection-for-llm/">PII protection for LLMs</a> explains in more detail why older data protection methods struggle with model traffic.</p>
+
+<h2>What Controls Prevent an AI Agent From Leaking PII at Every Step?</h2>
+
+<p><strong>The controls that prevent an AI agent from leaking PII fall into four groups. Input controls keep PII out of model requests, while tool and memory controls stop it spreading. Output and failure controls catch what remains and keep leaks visible.</strong></p>
+
+<p>Here are all 16 controls, matched to the leak point each one covers:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>#</th><th>Control</th><th>Leak point it covers</th><th>What it stops</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Role-based or relationship-based access control</td><td>Tool results</td><td>Agents retrieving records the user can't see</td></tr>
+      <tr><td>2</td><td>Minimum-field retrieval</td><td>Tool results</td><td>Whole profiles entering the context</td></tr>
+      <tr><td>3</td><td>Tokenization before model requests</td><td>Model requests</td><td>Real PII reaching the model provider</td></tr>
+      <tr><td>4</td><td>Label neutralization</td><td>Model requests</td><td>Labels like "SSN" hinting at hidden values</td></tr>
+      <tr><td>5</td><td>Secret and API key detection</td><td>Model requests</td><td>Credentials leaking through prompts</td></tr>
+      <tr><td>6</td><td>Tool call argument scanning</td><td>Tool call arguments</td><td>PII written into outbound tools</td></tr>
+      <tr><td>7</td><td>Tool result checks</td><td>Tool results</td><td>Extra fields re-entering the context</td></tr>
+      <tr><td>8</td><td>Tokenized memory and vector stores</td><td>Memory and vector stores</td><td>Long-lived copies of real PII</td></tr>
+      <tr><td>9</td><td>Reference-only handoffs</td><td>Agent handoffs</td><td>Whole conversations passing between agents</td></tr>
+      <tr><td>10</td><td>Restoration inside your application</td><td>Replies</td><td>Real values leaving with the model's output</td></tr>
+      <tr><td>11</td><td>Mask or block by data type</td><td>Replies</td><td>Full values shown where partial ones would do</td></tr>
+      <tr><td>12</td><td>Streaming protection</td><td>Replies and tool calls</td><td>PII slipping out mid-stream</td></tr>
+      <tr><td>13</td><td>Fail-closed behavior</td><td>All leak points</td><td>Raw requests going out when protection breaks</td></tr>
+      <tr><td>14</td><td>Audit logs without real values</td><td>Logs and traces</td><td>Logs becoming a second copy of PII</td></tr>
+      <tr><td>15</td><td>Token purge and retention</td><td>Memory, logs and vendors</td><td>Data that outlives its purpose</td></tr>
+      <tr><td>16</td><td>Reveal policies</td><td>Replies and internal screens</td><td>Too many people seeing real values</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p><strong>Where to start:</strong> If you can only put a few controls in place this quarter, begin with minimum-field retrieval and tokenization before model requests, then make sure every control fails closed. Together they keep most personal data out of the context and make sure a failure never sends raw data out, and every other control builds on that base.</p>
+
+<h2>Input Controls That Keep PII Out of an AI Agent's Model Requests</h2>
+
+<p><strong>Input controls keep PII out of an AI agent's model requests by limiting what the agent retrieves and tokenizing personal data before each request. They also reword sensitive labels and catch secrets, so the model works without real values.</strong></p>
+
+<p>The cheapest leak to stop is the one that never enters the context. These five controls work before the model sees anything, which is why they carry most of the weight.</p>
+
+<h3>Enforce Role-Based or Relationship-Based Access Control on Every Retrieval</h3>
+
+<p>An agent that searches a knowledge base or a CRM should only get back records the requesting user is allowed to see. Without that check, a support agent answering one customer's question can retrieve another customer's ticket, and that person's details can end up in the reply.</p>
+
+<p>Two access models work well here, and many teams combine them:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Model</th><th>How it decides access</th><th>Example</th><th>Best fit</th></tr></thead>
+    <tbody>
+      <tr><td>Role-based access control (RBAC)</td><td>By the user's job role</td><td>Billing staff can read payment records, while support staff can't</td><td>Broad rules that apply to whole teams</td></tr>
+      <tr><td>Relationship-based access control (ReBAC)</td><td>By the user's relationship to the record</td><td>Only the agent assigned to Elena's ticket can read her account</td><td>Access that depends on who owns or handles a record</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>Whichever model you use, apply the check before results reach the agent. A document the user can't open should never enter the context at all, because once it does, every control after that point is cleanup.</p>
+
+<h3>Return Only the Fields the Task Needs</h3>
+
+<p>Even an allowed record usually holds far more than the task requires. The fix is to give agents narrow tools with fixed outputs, so the lookup that confirms a plan type returns the plan type and nothing else:</p>
+
+<div class="bl-code bl-code--light">
+  <pre style="white-space:pre;overflow-x:auto"><code style="white-space:pre;">Broad tool:    get_customer(id)        → returns the full customer record
+Narrow tool:   get_plan_type(id)       → returns { "plan": "Premium Monthly" }
+Narrow tool:   get_refund_status(id)   → returns { "status": "approved", "amount": 89.00 }</code></pre>
+</div>
+
+<p>Building narrow tools takes a little more work up front, but every field you leave out is one less value that can leak later. It still pays off even when you tokenize, because a tokenization layer is no reason to send whole records when the task needs one field.</p>
+
+<h3>Tokenize PII Before Every Model Request</h3>
+
+<p>The model never needed Elena's real details. It needed consistent ones, so it could tell her apart from other customers and follow her through the conversation. Tokenization gives it exactly that by swapping each personal value for a reference before the request reaches the model provider:</p>
+
+<div class="bl-code bl-code--light">
+  <pre style="white-space:pre;overflow-x:auto"><code style="white-space:pre;">Before:  Elena Torres (phone: 512-555-0143) disputes a charge on account 7730118244.
+After:   [NAME: Ry0Ixd1] (phone: [PHONE: bN3dF5h]) disputes a charge on account [ACCOUNT: k8Lm2n].</code></pre>
+</div>
+
+<p>Because the tokens are deterministic, the same value always gets the same token, and the model can reason about Elena across every turn without seeing who she is. For an agent, tokenization has to cover the whole request, which means four places:</p>
+
+<ol>
+
+  <li><strong>User messages</strong> and the conversation history</li>
+
+  <li><strong>System prompts</strong> that carry customer context</li>
+
+  <li><strong>Tool call arguments</strong> the model writes for functions</li>
+
+  <li><strong>Tool results</strong> that come back into the context</li>
+
+</ol>
+
+<p>Detection catches the identifiers it recognizes, so test it against your own data. Rare internal IDs and clues buried in free text can slip through until you add rules for them. <a class="bl-link" href="/blog/pii-tokenization-for-ai/">PII tokenization for AI</a> covers the full approach.</p>
+
+<h3>Neutralize Labels That Reveal What Was Hidden</h3>
+
+<p>A token hides the value, but the words around it can still give it away. A prompt that reads "Social Security number: [TOKEN]" tells the model exactly what was removed, and some models will refuse to continue once they see a label like that.</p>
+
+<p>Label neutralization rewrites those phrases before the request is sent:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Original label</th><th>Neutral label sent to the model</th></tr></thead>
+    <tbody>
+      <tr><td>Social Security number</td><td>ID number</td></tr>
+      <tr><td>Date of birth</td><td>Date</td></tr>
+      <tr><td>Credit card number</td><td>Account number</td></tr>
+      <tr><td>Passport number</td><td>Document number</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>The model still understands the structure of the request, so it can do its job, while nothing in the wording hints at the sensitive value behind the token.</p>
+
+<h3>Catch API Keys and Secrets in the Same Pass</h3>
+
+<p>Credentials reach agents in ordinary ways. An engineer pastes a failing config into an AI assistant, or a tool returns an error message that includes a database connection string. Scanning for secrets in the same pass as PII means one control covers both, and the common types to look for include:</p>
+
+<ul>
+
+  <li>Cloud provider keys and model provider API keys</li>
+
+  <li>Payment platform and code repository tokens</li>
+
+  <li>Database connection strings and private keys</li>
+
+  <li>Authentication tokens copied from headers or logs</li>
+
+</ul>
+
+<p>Catching these before the request leaves means a secret never reaches the model provider, which matters because a leaked key can expose far more than one customer's data.</p>
+
+<h2>Tool and Memory Controls That Stop PII Spreading Between Agent Steps</h2>
+
+<p><strong>Tool and memory controls stop PII spreading between agent steps by checking what goes into tools and what comes back. They also keep memory and vector stores tokenized and limit handoffs to references, so one leak doesn't travel further.</strong></p>
+
+<p>Input controls shrink what enters the context, but agents keep moving data between steps. These four controls cover the space between one step and the next, where most leaks in multi-step tasks actually happen.</p>
+
+<h3>Scan Tool Call Arguments Before the Tool Runs</h3>
+
+<p>The right place to check a tool call is inside the tool handler, after the model has written the arguments and before anything happens. At that point you can see exactly what the agent is about to send.</p>
+
+<p>What's acceptable usually depends on where the data is going, so the rules work best when they're set per tool:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Tool</th><th>Data allowed</th><th>Data blocked</th></tr></thead>
+    <tbody>
+      <tr><td>Internal CRM note</td><td>Customer ID, order ID, refund amount</td><td>Full card numbers, government IDs</td></tr>
+      <tr><td>Email to the customer</td><td>Customer's own name and order details</td><td>Other customers' data, internal notes</td></tr>
+      <tr><td>Outside webhook or helpdesk</td><td>Order ID, ticket status</td><td>Any direct identifier or contact detail</td></tr>
+      <tr><td>Payment tool</td><td>Card token, amount</td><td>Raw card numbers, CVV</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>With rules like these, the CRM note in Elena's case would have been stopped before it was written, because a phone number isn't on the allowed list for that tool.</p>
+
+<h3>Check Tool Results Before They Re-Enter the Context</h3>
+
+<p>Whatever a tool returns becomes part of the agent's context for every step that follows, so tool results need a check of their own. A good check runs in three steps:</p>
+
+<ol>
+
+  <li>Compare the result against the fields the task actually needs and drop the rest.</li>
+
+  <li>Tokenize any personal data that remains, so the model sees references in place of real values.</li>
+
+  <li>Treat any instructions inside the result as untrusted content, since a tool's output can carry text written by someone outside your business.</li>
+
+</ol>
+
+<p>This matters most for third-party APIs that return full objects you can't change. Checking their results at the point they arrive keeps the agent's context clean even when the tool isn't.</p>
+
+<h3>Keep Agent Memory and Vector Stores Tokenized</h3>
+
+<p>Memory and vector stores are long-lived copies of whatever an agent has seen, so they need their own rules:</p>
+
+<ul>
+
+  <li><strong>Memory entries:</strong> Check them for PII before they're saved and tokenize what remains, then give each entry an expiry so old details don't linger.</li>
+
+  <li><strong>Customer separation:</strong> Key every memory write to one customer and filter every read the same way, so details can't cross between sessions.</li>
+
+  <li><strong>Summaries:</strong> Treat a conversation summary as new content that needs its own check, since it can bring back a value that was removed from the original turn.</li>
+
+  <li><strong>Vector stores:</strong> Tokenize text before it's embedded, so the search index holds references in place of real identifiers.</li>
+
+</ul>
+
+<p>If the memory store is ever exposed, it reveals tokens that mean nothing outside your vault.</p>
+
+<h3>Pass Only References in Agent Handoffs</h3>
+
+<p>A handoff between agents is an outbound boundary like any other, so it should carry only what the next agent needs. Compare these two ways of handing Elena's refund to the billing agent:</p>
+
+<div class="bl-code bl-code--light">
+  <pre style="white-space:pre;overflow-x:auto"><code style="white-space:pre;">Full handoff:       Entire conversation history, including her name, phone number,
+                    card digits, address and dispute details
+
+Reference handoff:  { "customer": "[NAME: Ry0Ixd1]", "order_id": "ORD-55120",
+                      "refund_amount": 89.00 }</code></pre>
+</div>
+
+<p>The billing agent can complete the refund with the second version. Because the tokens are deterministic, it can still refer to the right customer, and the system knows exactly who [NAME: Ry0Ixd1] is when the refund is processed.</p>
+
+<h2>Output Controls That Catch PII Before an AI Agent's Reply Leaves</h2>
+
+<p><strong>Output controls catch PII before an AI agent's reply leaves by restoring real values only inside your application and masking or blocking sensitive data by type. They also protect streaming responses, so values can't slip out mid-stream.</strong></p>
+
+<p>The reply is the last point where a value can be stopped before it reaches a person or another system, so even agents with strong input controls need these checks.</p>
+
+<h3>Restore Real Values Only Inside Your Application</h3>
+
+<p>When the model works on tokens, its reply comes back with tokens in it. Restoration should happen inside your own application, after the response has left the model provider:</p>
+
+<div class="bl-code bl-code--light">
+  <pre style="white-space:pre;overflow-x:auto"><code style="white-space:pre;">Model provider sees:   "Hi [NAME: Ry0Ixd1], your refund has been approved."
+Elena sees:            "Hi Elena, your refund has been approved."</code></pre>
+</div>
+
+<p>This is what makes tokenization practical for agents. Elena gets a normal, personal reply, while the model provider never holds her real name, and restoration can follow your own rules about who gets to see what.</p>
+
+<h3>Mask or Block Based on the Data Type</h3>
+
+<p>Some values shouldn't appear in full even after restoration, and the right action depends on the data:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Data type</th><th>Recommended action</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td>Names and email addresses</td><td>Restore in full for the account owner</td><td>The reply needs them to make sense</td></tr>
+      <tr><td>Card and account numbers</td><td>Mask all but the last four digits</td><td>Partial display confirms the account without exposing it</td></tr>
+      <tr><td>SSNs and government IDs</td><td>Mask or remove from replies</td><td>Few customer replies ever need them</td></tr>
+      <tr><td>API keys and passwords</td><td>Block in every direction</td><td>No reply should ever contain a credential</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>Masking keeps a reply useful while limiting what it exposes, whereas blocking is the right call for values that should never leave at all. <a class="bl-link" href="/blog/pii-masking-for-llm/">PII masking for LLMs</a> covers the trade-offs of each approach.</p>
+
+<h3>Protect Streaming Responses and Tool Calls Mid-Stream</h3>
+
+<p>Many agents stream their replies so users see text as it's generated, which makes output checks harder. A value can arrive split across several chunks and leave before any single check sees it whole. A protection layer built for streaming deals with this in two ways:</p>
+
+<ul>
+
+  <li><strong>Reply text:</strong> Tokens are restored as each chunk arrives, so the user still sees a smooth response with real values only where they're allowed.</li>
+
+  <li><strong>Tool calls:</strong> Arguments that stream in pieces are held until the call is complete, so the full arguments can be checked before the tool runs.</li>
+
+</ul>
+
+<p>Without streaming support, teams often have to choose between a responsive agent and a protected one, and these two behaviors remove that trade-off.</p>
+
+<h2>Failure and Logging Controls That Keep AI Agent PII Leaks Contained</h2>
+
+<p><strong>Failure and logging controls keep AI agent PII leaks contained by blocking requests when protection breaks and keeping real values out of audit logs. They also purge tokens for erasure requests and limit who can reveal real data.</strong></p>
+
+<p>No control works perfectly every time. This last group decides what happens when something goes wrong and makes sure the records you keep don't turn into a leak of their own.</p>
+
+<h3>Fail Closed When Protection Breaks</h3>
+
+<p>If tokenization fails or times out, the system has to choose between sending the raw request anyway and blocking it. The difference matters more than it first appears:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Behavior</th><th>What happens when protection breaks</th><th>Result</th></tr></thead>
+    <tbody>
+      <tr><td>Fail open</td><td>The raw request goes to the model provider</td><td>Every failure becomes a leak, often unnoticed</td></tr>
+      <tr><td>Fail closed</td><td>The request is blocked and logged</td><td>The agent pauses briefly and the data stays put</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>Failing closed should be the default for every PII control in an agent. A control that fails open quietly disappears for the rest of the run, and nobody finds out until the data has already gone.</p>
+
+<h3>Keep Audit Logs Free of Real Values</h3>
+
+<p>You need a record of what your agents did, especially when an auditor or a customer asks. That record shouldn't hold the personal data it describes, so a good audit entry captures details like these:</p>
+
+<div class="bl-code bl-code--light">
+  <pre style="white-space:pre;overflow-x:auto"><code style="white-space:pre;">Token:         [PHONE: bN3dF5h]
+Masked value:  ***-***-0143
+Entity type:   Phone number
+Session:       support-7731
+Provider:      Model provider name
+Timestamp:     2026-11-25 14:02:17 UTC</code></pre>
+</div>
+
+<p>An entry like this shows exactly what was detected and where it went, without storing Elena's actual number. The log stays useful for audits and investigations, and it doesn't become a second leak if it's ever exposed.</p>
+
+<h3>Purge Tokens to Handle Erasure Requests</h3>
+
+<p>When a customer asks you to delete their data, tokenization turns a messy search into one action. Here's how Elena's erasure request plays out:</p>
+
+<ol>
+
+  <li>Elena asks the business to delete her personal data.</li>
+
+  <li>Her tokens are purged in the vault, where the real values live.</li>
+
+  <li>Copies of those tokens stop resolving to anything real, whether they sit in old prompts and logs or in memory and vendor systems.</li>
+
+  <li>Purge records show who carried it out and when, giving the team evidence for the request.</li>
+
+</ol>
+
+<p>Retention settings work the same way, since tokens can expire after a set period so personal data doesn't outlive its purpose. Tokenized data still counts as pseudonymized under GDPR, and <a class="bl-link" href="/blog/pseudonymization-vs-anonymization/">pseudonymization vs anonymization</a> explains what that means for your obligations.</p>
+
+<h3>Control Who Can Reveal Real Values</h3>
+
+<p>Tokenizing is safe to allow widely, but revealing is not. A reveal policy decides who can turn a token back into a real value, and strong policies usually include rules like these:</p>
+
+<ul>
+
+  <li><strong>Creator access:</strong> A token is revealed only to the user or application that created it.</li>
+
+  <li><strong>Time-boxed grants:</strong> Anyone else needs a temporary grant tied to a specific task, which expires on its own.</li>
+
+  <li><strong>Logged reveals:</strong> Every reveal is recorded with who saw which value and when.</li>
+
+  <li><strong>Safe failure:</strong> If the system that checks permissions is down, reveals are refused, following the same fail-closed principle as every other control.</li>
+
+</ul>
+
+<h2>PII Detection vs PII Prevention: Which Controls Actually Stop Agent Leaks?</h2>
+
+<p><strong>PII detection finds a leak after personal data has already moved, whereas PII prevention keeps that data out of the agent's context so there's nothing to leak. Detection is useful for evidence, while prevention is what stops the exposure.</strong></p>
+
+<p>Many products sold for agent PII protection are detection tools at heart. They scan logs or outputs and raise an alert when they find personal data, which is useful, but by the time the alert fires, the data has already reached the model provider or the outside system.</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Factor</th><th>PII detection</th><th>PII prevention</th></tr></thead>
+    <tbody>
+      <tr><td>When it acts</td><td>After data has moved</td><td>Before data enters the context or leaves</td></tr>
+      <tr><td>What it produces</td><td>Alerts and reports</td><td>Requests that carry tokens in place of real values</td></tr>
+      <tr><td>Typical controls</td><td>Log scanning, output monitoring</td><td>Tokenization, minimum-field retrieval, fail-closed blocking</td></tr>
+      <tr><td>What it can't do</td><td>Undo an exposure that already happened</td><td>Catch values it doesn't recognize</td></tr>
+      <tr><td>Best use</td><td>Evidence for audits and incident response</td><td>Stopping leaks at the source</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>The strongest setups use both, with prevention doing the main work and detection confirming it's working. Redaction is another prevention method, and <a class="bl-link" href="/blog/data-redaction-for-ai/">data redaction for AI</a> explains where it fits alongside tokenization.</p>
+
+<h3>Where PII Controls Stop Working</h3>
+
+<p>Even well-built controls have limits, and planning for them is part of doing this properly:</p>
+
+<ul>
+
+  <li><strong>Images and files:</strong> Most text-based controls can't read a scanned ID or a PDF, so extract only the text the task needs before it reaches the model and avoid sending whole attachments by default.</li>
+
+  <li><strong>Rare identifiers:</strong> Internal formats, such as custom member IDs, may not be recognized until you add them to your detection rules and test them.</li>
+
+  <li><strong>Contextual clues:</strong> A detailed description of a rare medical condition in a small town can identify someone even after every name is removed.</li>
+
+  <li><strong>Consumer chatbots:</strong> Controls inside your application don't cover employees pasting data into public chatbot websites, which needs endpoint controls and clear policy.</li>
+
+</ul>
+
+<h2>How to Verify Your AI Agent Isn't Leaking PII After Adding Controls</h2>
+
+<p><strong>To verify your AI agent isn't leaking PII, plant fake records you can track and run tasks that would expose them. Then check every leak point, from tool calls to logs and memory, to confirm no real values got through.</strong></p>
+
+<p>Controls only matter if they hold up under real conditions. The best way to find out is to try to make your agent leak on purpose before customers ever use it, using four tests:</p>
+
+<ol>
+
+  <li><strong>Plant canary records:</strong> Create fake customers with unique, traceable details, such as a phone number that exists nowhere else. Run normal support tasks against them and search every system afterwards for those exact values.</li>
+
+  <li><strong>Put PII in tool results:</strong> Make a test tool return extra personal fields, then confirm they're tokenized before they reach the model and never appear in a reply.</li>
+
+  <li><strong>Inject an "email this out" instruction:</strong> Add a hidden line to a test document asking the agent to send all customer details to an outside address. The tool call check should block it, and anything that does go out should contain tokens only.</li>
+
+  <li><strong>Review logs and memory afterwards:</strong> Search traces and application logs, along with memory stores, for any canary value. If one appears in plaintext, you've found the control that needs fixing.</li>
+
+</ol>
+
+<p>It also helps to replay a batch of representative tickets through the protected setup and measure what happens:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>What to measure</th><th>What it tells you</th></tr></thead>
+    <tbody>
+      <tr><td>Recognition</td><td>Whether the PII in your real data is being detected</td></tr>
+      <tr><td>Token consistency</td><td>Whether the same value gets the same token across turns</td></tr>
+      <tr><td>Restoration accuracy</td><td>Whether replies come back with the right real values</td></tr>
+      <tr><td>Latency</td><td>Whether protection slows the agent down noticeably</td></tr>
+      <tr><td>Residual sensitive context</td><td>Whether identifying details remain after tokenization</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>Run these checks again whenever you add a tool or switch models, since each change can open a path that wasn't there before.</p>
+
+<h2>How Enigma NoPII and AI Vault Prevent AI Agents From Leaking PII</h2>
+
+<p>At Enigma Vault, we built NoPII to keep raw personal information out of the model path, whichever model provider or agent framework you use. Adding it means changing your SDK's base URL, and it tokenizes PII before each request reaches the provider, then restores the real values in the response. It's the PII layer of<a class="bl-link" href="/ai-vault/"> </a><a class="bl-link" href="/ai-vault/">AI Vault</a>, our data protection and output verification layer for AI agents.</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>What NoPII does</th><th>How it helps your agents</th></tr></thead>
+    <tbody>
+      <tr><td>Scans every part of the request</td><td>Messages, system prompts, tool call arguments and tool results are all checked before they reach the model</td></tr>
+      <tr><td>Uses deterministic tokens</td><td>The same value gets the same token, so the model can follow each person across a conversation</td></tr>
+      <tr><td>Neutralizes sensitive labels</td><td>Phrases like "Social Security number" become "ID number" before the request is sent</td></tr>
+      <tr><td>Detects secrets by default</td><td>Fourteen credential pattern families are caught in the same pass as PII</td></tr>
+      <tr><td>Fails closed</td><td>If tokenization fails, the request is blocked</td></tr>
+      <tr><td>Keeps logs free of real values</td><td>Audit entries store tokens and masked values, never plaintext</td></tr>
+      <tr><td>Supports token purge</td><td>Erasure requests resolve at the vault, so every copy of a token stops resolving</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>NoPII works with nine model providers and frameworks such as LangChain and LlamaIndex. <a class="bl-link" href="https://app.nopii.co">Start free with one million protected tokens a month</a>, with no credit card needed.</p>

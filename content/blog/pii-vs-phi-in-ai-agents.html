@@ -1,0 +1,403 @@
+---
+title: "PII vs PHI in AI Agents: Key Differences and How to Secure Each Type of Sensitive Data"
+slug: "pii-vs-phi-in-ai-agents"
+layout: "pii-style"
+metaTitle: "PII vs PHI in AI Agents: Sensitive Data Protection Compared"
+description: "What is the difference between PII and PHI in AI agents? Learn how each type of sensitive data is defined and protected, from scoped access to verified outputs."
+subtitle: "In AI agents, PII is any data that identifies a person, whereas PHI is identifiable health data held by a HIPAA covered entity or its business associate. Agents often touch both in one task, so each type of sensitive data needs its own safeguards."
+date: 2026-11-28T00:06:00
+category: "NoPII"
+author: "abhilash-kumar"
+readTime: 18
+heroImage: "/assets/blog/img-06.png"
+heroAlt: "PII vs PHI in AI Agents: Key Differences and How to Secure Each Type of Sensitive Data"
+excerpt: "What is the difference between PII and PHI in AI agents? Learn how each type of sensitive data is defined and protected, from scoped access to verified outputs."
+tags: ["ai-agents", "ai", "pii"]
+styles: ["blog.css", "pages/blog-pii-hero.css", "tr-pages.css"]
+scripts: ["blog-article.js"]
+faqSchema: true
+faqs:
+  - q: "Is PHI a type of PII?"
+    a: "PHI is PII with two extra conditions: it relates to health or payment for care, and a HIPAA covered entity or business associate holds it. Identifiable health data outside that setting is PII but usually not PHI."
+  - q: "Can AI agents send PHI to OpenAI or Anthropic?"
+    a: "Only when the provider signs a BAA covering the exact service you use and the rest of the data path meets HIPAA safeguards. Tokenizing identifiers before the request also cuts how much PHI the provider ever receives."
+  - q: "Does tokenizing PHI make it de-identified under HIPAA?"
+    a: "No. Tokens map back to original values, so tokenized PHI stays pseudonymous. De-identification needs Safe Harbor or Expert Determination, and clinical free text often keeps identifiers that tokenizing misses."
+  - q: "Do AI agent and model vendors need a BAA?"
+    a: "Any vendor that receives or stores PHI for a covered entity or business associate needs a BAA. In an agent's path, that usually means the model provider and the data protection layer, plus any vendor that captures prompts."
+  - q: "Is health data stored in an AI agent's memory still PHI?"
+    a: "Yes, if the agent runs for a covered entity or business associate and the memory can identify the member. Saved facts about a condition or claim keep their PHI status, so memory needs retention limits and access controls."
+---
+
+<p><strong>In AI agents, PII is any data that identifies a person, whereas PHI is identifiable health data held by a HIPAA covered entity or its business associate. Agents often touch both in one task, so each type of sensitive data needs its own safeguards.</strong></p>
+
+<p>A member asks a health plan's AI agent why her claim was denied, and within seconds the agent holds her contact details next to her claim documents and the policy exclusions. Part of that context is PII and part is PHI, yet few teams can say which copies end up in logs or which vendors receive them. Protecting both starts with knowing where they differ, and it doesn't matter which AI agent you use when <a class="bl-link" href="/ai-vault/">Enigma AI Vault</a> is the underlying infrastructure that protects your data.</p>
+
+<h2>What Is the Difference Between PII and PHI When AI Agents Handle Sensitive Data</h2>
+
+<p><strong>PII covers any data that identifies a person in any setting, whereas PHI exists only when identifiable health or payment-for-care information sits with a covered entity or business associate. The same name can be either, depending on who holds it.</strong></p>
+
+<h3>PII: A Broad Privacy Category</h3>
+
+<p>PII has no single US federal definition. NIST describes it as information that can distinguish or trace a person's identity on its own or when combined with other data, and state privacy laws each draw the line a little differently.</p>
+
+<p>For an AI agent, that means almost any customer conversation carries PII. Names and email addresses count, and so do indirect details like a ZIP code paired with a birth date. Our explainer on <a class="bl-link" href="/blog/what-is-pii/">what counts as PII</a> covers the categories in depth.</p>
+
+<h3>PHI: A HIPAA Category Defined by Who Holds the Data</h3>
+
+<p>PHI is a legal category under HIPAA. Information counts as PHI when three conditions are met:</p>
+
+<ol>
+
+  <li>It relates to a person's health condition or the care they receive, including payment for that care</li>
+
+  <li>It identifies the person or could reasonably be used to identify them</li>
+
+  <li>Its holder is a covered entity or business associate</li>
+
+</ol>
+
+<p>Covered entities include health plans and most healthcare providers, along with healthcare clearinghouses. A business associate is any vendor that handles PHI on their behalf, which can include the companies behind an agent's model or its logs.</p>
+
+<h3>How the Same Data Lands in Different Categories</h3>
+
+<p>Context decides the category. The examples below show how one kind of detail can sit on either side of the line.</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Data in the agent's context</th><th>Classification</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td>A shopper's name and email in a retail CRM</td><td>PII only</td><td>Identifies a person with no health context and no covered entity</td></tr>
+      <tr><td>A member's name beside a diagnosis in a health plan record</td><td>PII that is also PHI</td><td>Identifiable health information held by a covered entity</td></tr>
+      <tr><td>A medical note an employer keeps in an HR file</td><td>PII, usually outside HIPAA</td><td>HIPAA excludes employment records, though other laws can apply</td></tr>
+      <tr><td>Claim statistics that meet HIPAA de-identification</td><td>Neither PII nor PHI</td><td>Identifiers have been removed to the HIPAA standard</td></tr>
+      <tr><td>A claim a health plan processes for a member</td><td>PHI tied to payment for care</td><td>Payment for care held by a covered entity</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h2>PII vs PHI Core Differences and How Each One Impacts AI Agents</h2>
+
+<p><strong>PII is defined by whether data identifies a person, whereas PHI is defined by health context and who holds it. For AI agents, that difference decides which vendors may receive a request and how strictly access and logging are controlled.</strong></p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Factor</th><th>PII</th><th>PHI</th><th>Impact on AI agents</th></tr></thead>
+    <tbody>
+      <tr><td>What defines it</td><td>Whether data can identify a person</td><td>Identifiable health or payment-for-care data held by a covered entity or business associate</td><td>Classification shifts with the source system, so one task can hold both</td></tr>
+      <tr><td>Governing rules</td><td>State privacy laws plus sector rules such as GLBA</td><td>HIPAA Privacy and Security Rules, plus breach notification</td><td>Agents serving health plans inherit HIPAA duties a retail support agent never meets</td></tr>
+      <tr><td>Who must comply</td><td>Any business collecting personal information</td><td>Covered entities and their business associates</td><td>Model providers and observability vendors in a PHI path take on business associate duties</td></tr>
+      <tr><td>Vendor contracts</td><td>Data processing terms that vary by law</td><td>A BAA with each vendor that handles PHI</td><td>PHI stays away from a model provider until a BAA covers that exact service</td></tr>
+      <tr><td>Access standard</td><td>Least privilege as good practice</td><td>Minimum necessary as a legal requirement for most uses</td><td>Retrieval has to be scoped per task, and broad connectors become a compliance gap</td></tr>
+      <tr><td>De-identification</td><td>Varies and is often loosely defined</td><td>Safe Harbor or Expert Determination</td><td>Tokenizing a prompt lowers exposure without meeting the HIPAA standard</td></tr>
+      <tr><td>Breach handling</td><td>State notification laws</td><td>HIPAA notice to affected individuals and HHS</td><td>A leaked trace or memory entry holding PHI can trigger formal notice</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>Some state laws now cover consumer health data that falls outside HIPAA, so health details held by a company that isn't a covered entity can still carry strict rules. Check those laws when your agent serves consumers directly.</p>
+
+<h2>PII and PHI Categories AI Agents Handle in Prompts and Tool Results</h2>
+
+<p><strong>AI agents handle PII categories that range from direct identifiers to government IDs, along with PHI categories like medical records and claims. Each category enters the agent's context through a different system, so detection has to run in each one.</strong></p>
+
+<h3>PII Categories in AI Agent Conversations</h3>
+
+<p>PII reaches an agent through chat messages and tool calls long before anyone labels it. The categories below cover what most enterprise agents meet:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>PII category</th><th>Examples</th><th>Where the agent picks it up</th></tr></thead>
+    <tbody>
+      <tr><td>Direct identifiers</td><td>Full name; email address; phone number</td><td>Chat messages and CRM lookups</td></tr>
+      <tr><td>Indirect identifiers</td><td>ZIP code with birth date; job title with employer</td><td>Profile fields and free-text notes</td></tr>
+      <tr><td>Government and financial IDs</td><td>Social Security numbers; passport numbers; bank account numbers</td><td>KYC files and payment tools</td></tr>
+      <tr><td>Payment card data</td><td>Card numbers and security codes, which PCI DSS governs</td><td>Checkout and billing tool calls</td></tr>
+      <tr><td>Online and device identifiers</td><td>IP addresses; device IDs</td><td>Web session context and application logs</td></tr>
+      <tr><td>Biometric data</td><td>Voice prints; face images</td><td>Call recordings and identity checks</td></tr>
+      <tr><td>Account credentials</td><td>Usernames paired with passwords or security answers</td><td>Support conversations about account access</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p><a class="bl-link" href="/blog/what-is-tokenization/">Tokenization</a> handles structured values like account numbers well because they follow known formats. Indirect identifiers are harder, since a job title and an employer only identify someone once they sit side by side.</p>
+
+<h3>PHI Categories in AI Agent Conversations</h3>
+
+<p>PHI covers far more than diagnoses. Any of these categories counts once a covered entity or business associate holds it and it can identify the member:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>PHI category</th><th>Examples</th><th>Where the agent picks it up</th></tr></thead>
+    <tbody>
+      <tr><td>Demographics tied to care</td><td>Member name and address held by a health plan</td><td>Member lookup tools</td></tr>
+      <tr><td>Health plan identifiers</td><td>Member IDs; Medicare Beneficiary Identifiers</td><td>Eligibility checks</td></tr>
+      <tr><td>Medical history and diagnoses</td><td>Conditions; diagnosis codes</td><td>Claim files and clinical notes</td></tr>
+      <tr><td>Treatment and prescriptions</td><td>Procedures; medications</td><td>Prior authorization requests</td></tr>
+      <tr><td>Test results and imaging</td><td>Lab results; scan reports</td><td>Attachments retrieved through RAG</td></tr>
+      <tr><td>Billing and payment for care</td><td>Claims; explanations of benefits; balances</td><td>Claims and billing systems</td></tr>
+      <tr><td>Appointments and encounters</td><td>Visit dates; treating provider names</td><td>Scheduling tools</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>Structured PHI like member IDs is the easy part. Clinical meaning lives in free text, where a medication and a visit date can identify a member without a single labeled field.</p>
+
+<h2>How PII Becomes PHI as AI Agents Retrieve and Combine Sensitive Data</h2>
+
+<p><strong>PII becomes PHI when a covered entity or business associate links it to health information or payment for care. Inside an AI agent this happens fast, because one retrieval can join a member's contact details to her claim and policy files.</strong></p>
+
+<p>Three triggers move data across the line:</p>
+
+<ul>
+
+  <li><strong>Linking:</strong> an identifier joins health or payment-for-care information in the same context</li>
+
+  <li><strong>Holding:</strong> the data sits with a covered entity or a vendor acting for one, while the same email in a retail loyalty program stays PII</li>
+
+  <li><strong>Record context:</strong> contact details stored in the same member record as claims take on PHI protection</li>
+
+</ul>
+
+<p>Follow a claims agent at a health plan as it answers a question from a member named Elena Ruiz. Each retrieval changes what the context holds.</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Agent action</th><th>What gets added</th><th>What the context now holds</th></tr></thead>
+    <tbody>
+      <tr><td>Elena starts a chat on the public site</td><td>Her name and email</td><td>Contact details the agent has not linked to any health record yet</td></tr>
+      <tr><td>Agent verifies her membership</td><td>Member ID and plan details</td><td>Identity tied to health coverage, which HIPAA treats as PHI</td></tr>
+      <tr><td>Agent pulls her claim</td><td>Claim documents with a procedure code</td><td>PHI carrying clinical detail</td></tr>
+      <tr><td>Agent reads the policy</td><td>Coverage terms and exclusions</td><td>Plan content that becomes part of her PHI once applied to her case</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>Free text speeds this up. A claim note that mentions a rare procedure and a date of service can point to one member even after her name has been replaced.</p>
+
+<h2>Why PII and PHI Create Different Risks When AI Agents Work With Them</h2>
+
+<p><strong>PII and PHI create different risks because the consequences differ when an AI agent overreaches. Exposed PII is usually a privacy incident, while exposed PHI can become a reportable HIPAA breach that pulls in vendor contracts and regulators.</strong></p>
+
+<p>AI agents create new paths for sensitive information. Each of the three paths below looks the same technically for PII and PHI, but the stakes change once health data is involved.</p>
+
+<h3>Access Can Exceed the Task</h3>
+
+<p>Broad connector credentials let an agent reach records unrelated to the request in front of it. A claims connector that returns every member's file gives the agent far more PHI than Elena's question needs.</p>
+
+<ul>
+
+  <li><strong>With PII:</strong> overreach exposes contact details and account history, which privacy laws and your own policies govern</li>
+
+  <li><strong>With PHI:</strong> overreach can count as a use or disclosure beyond the minimum necessary, which HIPAA restricts directly</li>
+
+</ul>
+
+<h3>Information Spreads Through the Stack</h3>
+
+<p>Every copy of PHI brings HIPAA safeguards to the system that holds it. Agents create copies quickly, often in places nobody reviews:</p>
+
+<ul>
+
+  <li><strong>Model providers:</strong> a provider that receives PHI is generally treated as a business associate and needs a BAA</li>
+
+  <li><strong>Tracing and observability:</strong> prompt captures put PHI inside debugging dashboards</li>
+
+  <li><strong>Agent memory:</strong> saved facts about a member's condition persist into later sessions</li>
+
+  <li><strong>Vector stores:</strong> embedded claim notes keep clinical detail searchable long after the case closes</li>
+
+</ul>
+
+<p>PII copies need protection too, and <a class="bl-link" href="/blog/pii-protection-for-llm/">PII protection for LLMs</a> covers the model side. With PHI, each copy also widens the set of vendors and systems that fall under HIPAA.</p>
+
+<h3>Outputs Become Business Decisions</h3>
+
+<p>A coverage answer is a decision the member acts on. If the agent says a procedure is covered when an exclusion applies, Elena may book care she ends up paying for herself.</p>
+
+<p>Answers can also leak. A reply that quotes details from another member's file turns a wrong answer into a disclosure, which is why output checks matter more for PHI than for most PII use cases.</p>
+
+<h2>PII and PHI Identification and Safeguards for AI Agents Across Industries</h2>
+
+<p><strong>Which data counts as PII or PHI depends on the industry an agent serves. Health plans and providers handle PHI daily, while banks and law firms mostly handle PII, with health details becoming PHI only in specific roles such as a business associate.</strong></p>
+
+<p>Identification starts with the systems an agent connects to and the role your organization plays. The same claim note means something different at a health plan than at a property insurer.</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Industry</th><th>PII the agent identifies</th><th>When PHI comes in</th><th>Safeguard that matters most</th></tr></thead>
+    <tbody>
+      <tr><td>Healthcare providers and health plans</td><td>Patient and member contact details; billing accounts</td><td>Almost always, since these organizations are covered entities</td><td>Minimum necessary retrieval and a BAA with every vendor in the path</td></tr>
+      <tr><td>Insurance</td><td>Policyholder IDs; bank details for settlements</td><td>In health plans, while injury details in property and casualty claims usually fall under state law</td><td>Claim-scoped access so an agent sees one claim at a time</td></tr>
+      <tr><td>Financial services</td><td>Account numbers; Social Security numbers; card data</td><td>Rarely, though health details in hardship requests still need careful handling</td><td>Tokenized identifiers with card data kept in a vault</td></tr>
+      <tr><td>Legal</td><td>Client IDs; financial statements</td><td>When the firm acts as a business associate for a covered entity</td><td>Matter-scoped access, with confidential context reviewed separately</td></tr>
+      <tr><td>Employers and HR</td><td>Employee Social Security numbers; payroll data</td><td>Seldom, since HIPAA excludes employment records, though a company's group health plan holds PHI</td><td>Separating HR agents from benefits plan data</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>Before an agent goes live in any of these settings, settle four questions with your privacy and security teams:</p>
+
+<ul>
+
+  <li><strong>Role:</strong> is the organization a covered entity or business associate for this agent?</li>
+
+  <li><strong>Sources:</strong> which connected systems hold health records, and which hold general customer data?</li>
+
+  <li><strong>Payments:</strong> does the agent touch card data, which PCI DSS governs separately and <a class="bl-link" href="/blog/card-vault-tokenization/">card vault tokenization</a> keeps out of the agent's context?</li>
+
+  <li><strong>Confidentiality:</strong> does privilege or a contractual duty apply on top of privacy law?</li>
+
+</ul>
+
+<p>Tokenizing client identifiers reduces exposure in legal and financial agents, though it doesn't protect privilege or replace KYC and fraud programs on its own.</p>
+
+<h2>Why Tokenizing PII Does Not Automatically De-Identify PHI for AI Agents</h2>
+
+<p><strong>Tokenizing PII in a prompt lowers exposure, yet it does not make PHI de-identified under HIPAA. Tokens can be reversed by an authorized system, and clinical free text often carries identifiers that a PII detector was never configured to catch.</strong></p>
+
+<h3>The 18 HIPAA Identifiers and Why Clinical Text Slips Past Them</h3>
+
+<p>HIPAA's Safe Harbor method lists 18 identifiers that must be removed before health data counts as de-identified. Grouped by type, they look like this:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Identifier group</th><th>Items on the Safe Harbor list</th></tr></thead>
+    <tbody>
+      <tr><td>Names and contact details</td><td>Names; phone and fax numbers; email addresses</td></tr>
+      <tr><td>Location and time</td><td>Geographic units smaller than a state; all dates tied to a person except the year</td></tr>
+      <tr><td>Record and account numbers</td><td>Medical record numbers; health plan beneficiary numbers; account numbers</td></tr>
+      <tr><td>Government and license IDs</td><td>Social Security numbers; certificate and license numbers</td></tr>
+      <tr><td>Device and online identifiers</td><td>Vehicle and device identifiers; URLs; IP addresses</td></tr>
+      <tr><td>Physical identifiers</td><td>Biometric identifiers; full-face photos</td></tr>
+      <tr><td>Catch-all</td><td>Any other unique identifying number, characteristic or code</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>Claim notes rarely follow a neat format. A date of service or a small town named in a sentence is an identifier under Safe Harbor, even though teams seldom think of it as personal data.</p>
+
+<h3>Safe Harbor vs Expert Determination</h3>
+
+<p>HIPAA offers two routes to de-identification. Both apply to the data set as a whole:</p>
+
+<ul>
+
+  <li><strong>Safe Harbor:</strong> remove all 18 identifiers and have no actual knowledge that what remains could identify someone</li>
+
+  <li><strong>Expert Determination:</strong> a qualified expert applies statistical methods and documents that the risk of re-identification is very small</li>
+
+</ul>
+
+<p>Masking a name in a prompt meets neither standard. An agent request is a working context, and de-identification is a formal finding about a data set.</p>
+
+<h3>Why Tokens Stay Pseudonymous</h3>
+
+<p>A token maps back to its original value inside a vault, which makes tokenized data pseudonymous. That is useful for an AI agent, because an authorized application can restore Elena's email when it sends her reply.</p>
+
+<p>The same reversibility means tokenized PHI should still be treated as PHI unless your privacy team has documented a de-identification method. <a class="bl-link" href="/blog/pseudonymization-vs-anonymization/">Pseudonymization and anonymization</a> differ on exactly this point.</p>
+
+<h2>How to Protect PII and PHI in AI Agents With Scoped Access and Verified Outputs</h2>
+
+<p><strong>Protect PII and PHI in AI agents by scoping access to the task and tokenizing identifiers before model calls, then checking outputs against approved evidence. PHI adds two steps up front: confirming your HIPAA role and signing BAAs with each vendor.</strong></p>
+
+<p>These six steps follow one agent path from planning to the reply Elena receives. Steps 1 and 2 matter most when PHI is involved, while steps 3 to 6 apply to any sensitive data.</p>
+
+<h3>Step 1: Map the Agent Path and Your HIPAA Role</h3>
+
+<p>Start with one agent and answer three questions before changing anything:</p>
+
+<ol>
+
+  <li>Does the agent handle PHI, or PII on its own?</li>
+
+  <li>Is your organization a covered entity or a business associate for this task, or neither?</li>
+
+  <li>Which systems receive data along the way, from the model provider to tracing and backups?</li>
+
+</ol>
+
+<p>The answers decide which rules apply. They also show where protection belongs and which vendors need contracts.</p>
+
+<h3>Step 2: Confirm a BAA With Every Vendor That Receives PHI</h3>
+
+<p>Any vendor that receives PHI on your behalf needs a BAA for the exact service and deployment you use. In an agent's path, that usually means the model provider and the data protection layer, plus any observability vendor that captures prompts.</p>
+
+<p>If a vendor won't sign, keep PHI out of its path. Tokenizing identifiers before they reach that vendor reduces exposure, though your compliance team still decides whether the remaining data counts as PHI.</p>
+
+<h3>Step 3: Scope Access to the Records the Task Needs</h3>
+
+<p>Elena's question needs her claim and the policy that governs it. Nothing else belongs in the agent's reach.</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Item</th><th>Access for Elena's claim question</th></tr></thead>
+    <tbody>
+      <tr><td>Applicable policy document</td><td>Allowed for this task</td></tr>
+      <tr><td>Elena's submitted claim evidence</td><td>Allowed, limited to her claim</td></tr>
+      <tr><td>Other members' records</td><td>Blocked even though the connector can reach them</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>Align these decisions with your existing identity and application policy. For PHI, this step is how the minimum necessary standard shows up in practice.</p>
+
+<h3>Step 4: Minimize Exposure Before Every Model Call</h3>
+
+<p>Replace identifiers with tokens before the request reaches any model. The model can still reason about Elena's case because each token stays consistent across the conversation.</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>What the agent assembles</th><th>What the model receives</th></tr></thead>
+    <tbody>
+      <tr><td>Elena Ruiz, member 5582-1047, elena.ruiz@example.com</td><td>[NAME_1], member [ID_1], [EMAIL_1]</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>Test detection against real claim notes before launch. Personal identifiers are one part of PHI, so procedure details and dates of service need review as well, and any request that can't be tokenized should be blocked.</p>
+
+<h3>Step 5: Govern Release Outside the Model</h3>
+
+<p>Original values stay inside a protected boundary until an approved destination needs them, such as the claims system or the member portal. Release decisions follow application policy, so instructions hidden in a prompt can't unlock Elena's record.</p>
+
+<p>This also limits damage if an agent is manipulated. On protected paths the agent holds references, and requests to use the underlying values are checked outside the model and logged. These controls reduce the consequences of a compromised agent without removing every prompt injection risk, so other agent defenses still apply.</p>
+
+<h3>Step 6: Check the Output Before It Reaches the Member</h3>
+
+<p>Check each statement in the agent's answer against the evidence it was allowed to use. <a class="bl-link" href="/triplets/">Claim-level verification</a> marks what the evidence supports, and your policy decides what happens to the rest.</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Statement in the agent's answer</th><th>Evidence check</th><th>What happens next</th></tr></thead>
+    <tbody>
+      <tr><td>Physical therapy visits are covered under her plan</td><td>Supported by the current policy clause</td><td>Sent to Elena</td></tr>
+      <tr><td>No referral is needed for these visits</td><td>Conflicted by a referral rule in the same policy</td><td>Held for a claims specialist</td></tr>
+      <tr><td>Her reimbursement will post tomorrow</td><td>Refused with no payment record on file</td><td>Removed from the reply</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>A verdict measures support within the approved evidence. It doesn't certify truth beyond that evidence, which is why the policy and claim files themselves need to be current.</p>
+
+<h2>How Enigma AI Vault Protects Sensitive Data for Any AI Agent Handling PII or PHI</h2>
+
+<p>It doesn't matter which AI agent you use for member services or claims. Enigma AI Vault is the underlying infrastructure that protects your sensitive data, and it works with the agent frameworks and model providers you already run.</p>
+
+<p>Here is how Elena's claim question moves through it:</p>
+
+<ol>
+
+  <li><strong>The Vault:</strong> limits the agent to the approved policy and claim files, and records each access</li>
+
+  <li><strong><a class="bl-link" href="/nopii/">NoPII</a>:</strong> keeps her identifiers out of supported model requests and blocks any request it can't tokenize</li>
+
+  <li><strong>Triplets:</strong> checks the coverage explanation against the current policy and relevant exclusions before it reaches her</li>
+
+  <li><strong>Controlled release:</strong> original values reach approved destinations only, with each request checked outside the model and logged</li>
+
+</ol>
+
+<p>A BAA is available for NoPII, though HIPAA compliance still depends on your full architecture and contracts.</p>
+
+<p><a class="bl-link" href="/request-demo/?which_products__select_all_that_apply_=AI%20Vault&amp;interest=ai-vault-poc">Walk us through one agent that touches member data</a> and we'll show where AI Vault fits around it.</p>

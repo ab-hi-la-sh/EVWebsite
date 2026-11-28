@@ -1,0 +1,399 @@
+---
+title: "How to Use AI Agents for Hotel Reservations Without Exposing PII: A Practical Approach for Hotels"
+slug: "how-to-use-ai-agents-for-hotel-reservations-without-exposing-pii"
+layout: "pii-style"
+metaTitle: "How to Use AI Agents for Hotel Reservations Without Exposing PII"
+description: "Learn how to use AI agents for hotel reservations without exposing PII, from secure card authorizations and PMS tokens to guest IDs and third-party bookings."
+subtitle: "To use AI agents for hotel reservations without exposing PII, let the agent confirm that a card or ID is on file without reading it. Collect guarantees through secure links, and charge cards only through an approved gateway path."
+date: 2026-11-28T00:09:00
+category: "NoPII"
+author: "abhilash-kumar"
+readTime: 23
+heroImage: "/assets/blog/img-09.png"
+heroAlt: "How to Use AI Agents for Hotel Reservations Without Exposing PII: A Practical Approach for Hotels"
+excerpt: "Learn how to use AI agents for hotel reservations without exposing PII, from secure card authorizations and PMS tokens to guest IDs and third-party bookings."
+tags: ["ai-agents", "ai", "pii"]
+styles: ["blog.css", "pages/blog-pii-hero.css", "tr-pages.css"]
+scripts: ["blog-article.js"]
+faqSchema: true
+faqs:
+  - q: "Can a hotel AI agent take a credit card over the phone?"
+    a: "It can collect one without hearing it. Keypad capture or a secure link sends the card to a protected payment page, and the agent receives a token for the reservation while the recording and transcript stay free of card digits."
+  - q: "Should a hotel AI agent ever confirm a guest's room number?"
+    a: "Only to the verified guest, and even then a verification code sent to the number on file is the safer route. For other callers, the agent should connect the call or take a message without confirming the room or the stay."
+  - q: "How do hotels handle third-party credit card authorizations with AI agents?"
+    a: "The agent sends the payer a branded link that tokenizes the card and captures a signature before the link expires. The reservation then carries a token and a signed record, which replaces the emailed PDF form."
+  - q: "Is masking card numbers enough for a hotel AI reservation agent?"
+    a: "Masking hides digits on screen, yet the hotel can't charge from a masked copy and the full number still sits somewhere. Tokenization keeps the agent useful for payments while the real card stays in a vault."
+  - q: "How long should a hotel keep guest ID scans collected at check-in?"
+    a: "Only as long as local law and the property's own policy require, which varies by country. Store scans in protected file storage with a deletion rule per property, and let most staff see a completion status alone."
+---
+
+<p><strong>To use AI agents for hotel reservations without exposing PII, let the agent confirm that a card or ID is on file without reading it. Collect guarantees through secure links, and charge cards only through an approved gateway path.</strong></p>
+
+<p>Hotels rarely get guest details from the guest alone. An executive assistant guarantees the room while a corporate travel team pays for it, and an event planner emails a rooming list for forty people, mostly outside the property management system. A reservation agent built on AI now sits in the middle of those exchanges, answering calls and messages that carry card numbers and ID scans, along with requests that hint at a guest's health.</p>
+
+<p>If you run reservations for a hotel, the agent can handle all of that work while the sensitive values stay out of its reach. With <a class="bl-link" href="/ai-vault/">Enigma AI Vault</a>, you decide what any reservation agent can see and hold, and what it's allowed to spend or claim on a guest's behalf.</p>
+
+<h2>How to Use AI Agents for Hotel Reservations Without Exposing Guest PII</h2>
+
+<p><strong>Use AI agents for hotel reservations without exposing guest PII by taking guarantees through secure links that return a PMS token. Keep ID scans and room numbers out of conversations, and route every charge through an approved gateway path.</strong></p>
+
+<p>Each method below maps to a moment in your guest's stay, from the first booking request to the concierge desk.</p>
+
+<h3>Take Booking Guarantees Through Secure Links That Return a PMS Token</h3>
+
+<p>Guarantees are where most card exposure starts. A guest reads digits to a voice agent or types them into the website chat, and the number lands in a recording or a log that nobody planned to protect.</p>
+
+<p>A secure booking link moves that step out of the conversation. The guest enters the card on a protected page, and the reservation receives a token. Phone guests can do the same by keypad while the agent stays on the line.</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Before</th><th>After</th></tr></thead>
+    <tbody>
+      <tr><td>Card number in the call recording and the reservation notes</td><td>Token on the reservation, nothing in the recording</td></tr>
+      <tr><td>Front desk reads the card from notes to charge it</td><td>Charge runs through the gateway against the token</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>An HTTPS booking form protects the card on its way to the hotel. What happens next matters as much. If your form emails submissions to the reservations inbox or saves them to the PMS notes, the problem has only moved one step along.</p>
+
+<p>Phone bookings need one more check. If you record calls, confirm that recording pauses while the guest keys in the card, and find out which notice or consent rules apply where the call takes place.</p>
+
+<h3>Replace Emailed Card Authorization Forms for Assistants and Planners</h3>
+
+<p>Third-party bookings still run on PDF authorization forms and photographed cards sent by email. A branded authorization link covers the same ground:</p>
+
+<ul>
+
+  <li><strong>Card capture:</strong> the card is tokenized the moment the payer enters it</li>
+
+  <li><strong>Signature:</strong> the cardholder signs on the same page, and the signature is stored with the reservation</li>
+
+  <li><strong>Charge scope:</strong> the form records which charges the card covers, such as room and tax only</li>
+
+  <li><strong>Expiry:</strong> the link stops working after a set time, so an old email can't be reused</li>
+
+</ul>
+
+<p>The hotel ends up with a traceable authorization record in place of a PDF forwarded between inboxes.</p>
+
+<h3>Let the Agent Confirm Guarantee Status Without Reading the Card</h3>
+
+<p>Most guest questions about payment need a yes or no. Is the card still on file? Will the room hold past 6 p.m.? The agent can answer both from the reservation status:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>What the agent can tell the guest</th><th>What it never receives</th></tr></thead>
+    <tbody>
+      <tr><td>A card ending in 4410 guarantees the Friday arrival</td><td>Full card number or expiry</td></tr>
+      <tr><td>The deposit cleared on March 3</td><td>Security code</td></tr>
+      <tr><td>Late arrival is covered under the guarantee</td><td>Billing address beyond the postcode</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>Brand and last four digits, where your processor permits showing them, are usually enough for a guest to recognize the card. Anything beyond that belongs in the vault.</p>
+
+<h3>Keep Guest Identifiers and Sensitive Requests Out of Raw Model Requests</h3>
+
+<p>Reservation notes carry more than a name and dates. A request for a refrigerator for medication or a ground-floor room near the elevator tells a model something about the guest's health, and a dietary note can point to religion.</p>
+
+<p>Before any request leaves the hotel, a privacy proxy swaps names and contact details, along with other recognized identifiers, for tokens. The references stay consistent, so the model can follow a long thread about the same guest, and only the hotel's own application can restore the real values. Failure is handled safely in both directions. A request that can't be tokenized gets blocked before it reaches the model, and if a reply can't be restored, the guest sees a placeholder token while the original stays hidden.</p>
+
+<p>Tokenizing the name doesn't erase what a request implies. A note about medication still describes a health need, so pass the agent a category such as "accessibility request on file" and route the detail to the team that handles it. Minimize what reaches the proxy first, then tokenize what remains.</p>
+
+<p>Detection has limits. Unusual name spellings or identifiers buried in free text can slip past, so test the proxy on your own reservation notes before launch. <a class="bl-link" href="/blog/pii-protection-for-llm/">PII protection for LLMs</a> covers how that layer handles notes like these.</p>
+
+<h3>Collect ID Documents at Check-In With Deletion Rules Set per Property</h3>
+
+<p>ID requirements differ by country and sometimes by property, so one global rule rarely fits. What stays constant is where the scan lives:</p>
+
+<ol>
+
+  <li>Guests upload the ID before arrival, or staff scan it at the desk into protected file storage</li>
+
+  <li>Staff who only need to confirm the ID exists see a status, while those who must view it get controlled access</li>
+
+  <li>Each property sets a deletion rule that matches its local requirement, and the file is removed on schedule</li>
+
+</ol>
+
+<p>The agent never needs the image. It needs to know whether the ID step is complete.</p>
+
+<h3>Keep Room Numbers Behind Guest Verification</h3>
+
+<p>Callers ask for room numbers all the time, and a helpful agent will happily answer unless it's told not to. Giving a room number to the wrong person is a guest safety problem before it's a privacy one.</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Caller asks</th><th>Agent response</th></tr></thead>
+    <tbody>
+      <tr><td>Which room is Daniel Price in?</td><td>Offers to connect the call without stating the number</td></tr>
+      <tr><td>Is Daniel Price staying here tonight?</td><td>Takes a message without confirming the stay</td></tr>
+      <tr><td>What's my room number? (guest calling from a new phone)</td><td>Sends a verification code to the number on file before answering</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h3>Charge Incidentals No-Shows and Concierge Purchases Through an Approved Gateway Path</h3>
+
+<p>Incidentals holds and no-show fees are routine, and the agent can trigger both against the token on the reservation. The agent sends a tokenized request to a proxy, which checks the policy and the destination before placing the real card into the gateway call. The hotel's systems get the gateway's response back, and the card number never passes through them. A token doesn't authorize a charge on its own, though. A no-show fee still needs the guest's agreement under your rate terms, plus any notice your jurisdiction requires.</p>
+
+<p>Concierge purchases need a different path. A theater box office or a private car service can't accept a proxy call, so a staff member has to use the card directly. That calls for a governed reveal or an isolated payment step. A named approver signs off, the screen limits what's displayed, and each use of the card is logged. Typing the card by hand doesn't take that step out of PCI scope either, since only an approved, isolated setup narrows exposure.</p>
+
+<h3>Split Reservations Front Desk Sales and Concierge Into Separate Agent Roles</h3>
+
+<p>Each team in your hotel handles different data, so one agent with access to everything carries every team's risk at once:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Agent role</th><th>Works with</th><th>Kept away from</th></tr></thead>
+    <tbody>
+      <tr><td>Reservations</td><td>Rates, availability, guarantee status</td><td>ID scans, event contracts</td></tr>
+      <tr><td>Front desk</td><td>Arrival status, ID completion, room assignment</td><td>Group deposit records</td></tr>
+      <tr><td>Group sales</td><td>Contracts, rooming lists, deposit schedules</td><td>Individual guest IDs</td></tr>
+      <tr><td>Concierge</td><td>Guest preferences, approved purchase requests</td><td>Stored cards outside approved purchases</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>Plan a documented route for urgent exceptions as well, such as a VIP arriving before the authorization is signed. Without one, staff fall back to email the first time a case doesn't fit.</p>
+
+<h2>Tokenization vs Masking vs Redaction vs Encryption for Hotel AI Reservation Agents</h2>
+
+<p><strong>Tokenization swaps guest data for references the hotel can restore and charge against, whereas masking hides digits for display and redaction deletes values outright. Encryption guards stored data yet releases plaintext to any app holding the keys.</strong></p>
+
+<p>Your hotel probably uses some version of each method already. They protect different things, and only one keeps a reservation agent fully useful with the originals locked away:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Method</th><th>What the agent sees</th><th>Can the hotel still use the value</th><th>Where it falls short for reservations</th></tr></thead>
+    <tbody>
+      <tr><td>Tokenization</td><td>A stable reference for the card or guest</td><td>Through an authorized proxy or the hotel's own app</td><td>Needs a vault and a release policy behind it</td></tr>
+      <tr><td>Masking</td><td>A card ending in 4410, or a partly hidden name</td><td>Not from the masked copy</td><td>Display only, so nothing can be charged from it</td></tr>
+      <tr><td>Redaction</td><td>A blank or a placeholder where the value was</td><td>Never, since the value is gone from that record</td><td>Breaks long conversations, because the agent can't tell one guest from another</td></tr>
+      <tr><td>Encryption</td><td>Ciphertext, or plaintext once an app decrypts it</td><td>Any app holding the keys can read it</td><td>Doesn't limit who receives the value after decryption</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>Tokenization fits reservation agents best for three practical reasons. The same guest keeps the same token across every message, so the agent can follow a booking change over several days. A proxy can charge the card behind a token, so payments still work. And a token has no useful meaning outside the vault that issued it and the systems it authorizes, so a copy in a log or a manipulated agent's context has nothing to give away.</p>
+
+<p>The other methods still have a place around it. Masking suits what staff and guests see on screen, and redaction suits transcripts kept for training or quality review. Encryption protects the vault itself. Tokens reduce plaintext exposure without removing every risk, so access rules and audit logs still matter, along with retention and key management. <a class="bl-link" href="/blog/data-masking-vs-tokenization/">Data masking vs tokenization</a> goes deeper on where each one belongs.</p>
+
+<h2>What a Hotel AI Reservation Agent Should Be Allowed to See and Spend</h2>
+
+<p><strong>A hotel AI reservation agent should see only the guest fields its task needs and hold tokens in place of cards or IDs. It should spend only through approved payment paths, and any rate or policy claim it makes should be checked first.</strong></p>
+
+<p>AI Vault frames agent control around what an agent can see and hold, and what it can spend or claim. Each of those has a hotel answer.</p>
+
+<h3>What the Agent Can See</h3>
+
+<p>Visibility should follow the task in front of the agent. Changing a reservation date needs a small set of fields:</p>
+
+<ul>
+
+  <li>Guest name as a token, plus loyalty tier</li>
+
+  <li>Current dates and room type with the rate code</li>
+
+  <li>Guarantee status and cancellation deadline</li>
+
+</ul>
+
+<p>The guest's full profile and past stays sit outside that view, along with the stored ID scan. Broad connector credentials are what usually expose those extra records.</p>
+
+<h3>What the Agent Can Hold</h3>
+
+<p>An agent working a booking holds references, and every other system in the stack should hold only what its job requires:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>System</th><th>What belongs there</th></tr></thead>
+    <tbody>
+      <tr><td>PMS and reservation agent</td><td>Card token, brand and last four where permitted, authorization status, audit references</td></tr>
+      <tr><td>Vault</td><td>Encrypted card numbers and protected ID files, isolated by tenant</td></tr>
+      <tr><td>Payment gateway</td><td>The charge, refund or hold request it has to process</td></tr>
+      <tr><td>Logs and analytics</td><td>Tokens, request IDs, outcomes and policy events, with no card numbers or security codes</td></tr>
+      <tr><td>Model provider</td><td>Tokenized prompts, with real values restored only on the hotel's side</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>If the agent is manipulated, the references it holds can't be turned into a card number or a passport image on their own, and every access to a real value leaves a vault access record.</p>
+
+<h3>What the Agent Can Spend</h3>
+
+<p><strong>Within policy:</strong> incidentals holds and no-show fees that match the rate rules, charged to the token on file.</p>
+
+<p><strong>Above a set limit:</strong> extended-stay charges or upgrades that need a staff approval before the gateway call goes out.</p>
+
+<p><strong>Never on its own:</strong> purchases from outside merchants or charges to a card that isn't on the reservation.</p>
+
+<h3>What the Agent Can Claim</h3>
+
+<p>Guests make plans around the agent's answers about rates and fees. Saying a cancellation is free when the deadline has passed, or leaving out a resort fee, turns a helpful reply into a dispute at checkout.</p>
+
+<p>Each eligible statement can be checked against the rate rules and policies on file before it goes out. A claim the evidence backs is supported, one it can't back is refused, and one where two sources disagree is conflicted. <a class="bl-link" href="/triplets/">Triplets</a> runs those checks and keeps a pointer to the policy version behind each verdict. Your hotel chooses how refused or conflicted answers are handled, whether that means a revision or a handoff to staff. A verified answer means the evidence on file supports it, so your rate sheets and policies need to be current for the check to mean anything.</p>
+
+<h2>How to Handle Third-Party Card Authorizations When AI Agents Take Hotel Bookings</h2>
+
+<p><strong>Handle third-party card authorizations by sending the payer a branded link that tokenizes the card and captures a signature with time-limited access. The agent links the signed record to the reservation and never sees the card number.</strong></p>
+
+<p>Assistants and event planners book for other people constantly, as do corporate travel teams, and each booking needs proof that the cardholder approved the charge. A common case is an executive assistant booking three nights for her company's CFO, with room and tax on the company card and incidentals on the guest's own card:</p>
+
+<ol>
+
+  <li><strong>Request:</strong> the assistant emails or calls the reservations team, and the agent holds the room under the CFO's name</li>
+
+  <li><strong>Authorization link:</strong> the agent sends the assistant a branded link that asks for the card and a signature, plus the charges it covers</li>
+
+  <li><strong>Record:</strong> once she completes it, the reservation carries a token and a signed authorization limited to room and tax, and the agent sees only that status</li>
+
+  <li><strong>Arrival:</strong> the front desk confirms the authorization is on file and takes the CFO's own card for incidentals</li>
+
+  <li><strong>Checkout:</strong> room and tax charge through the gateway against the assistant's token, and the folio goes to her without any card details on it</li>
+
+</ol>
+
+<p>At no point does the card number appear in an email or the PMS notes.</p>
+
+<p>Changes follow the same rule. If someone calls asking to cancel the stay or move the charge to another card, the agent sends a fresh link to the assistant's address on file and waits for her to complete it, since the caller may be neither the assistant nor the guest. A signed authorization also doesn't remove fraud or chargeback liability, so card-not-present checks still apply.</p>
+
+<p>Travel agencies booking independent hotels on a client's card face a variation of this. The agency's staff may need the full card to type into a hotel's own booking portal, which calls for controlled retrieval in a protected staff view. That view needs stronger sign-in and monitored sessions, so the full number appears only inside it and never in the agency's own systems.</p>
+
+<h2>How AI Agents Should Handle Group Blocks and Event Deposits Without Seeing Card Data</h2>
+
+<p><strong>AI agents should handle group blocks and event deposits by linking each sales record to card and file tokens. Deposits are charged over an approved gateway path while the sales system tracks payment status without holding card data.</strong></p>
+
+<p>Group sales teams collect contracts and deposit cards across long email threads, and those threads often get forwarded to whoever takes over the account. An agent helping with group bookings can follow the whole deposit schedule using tokens:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Group stage</th><th>What the sales team needs</th><th>What the agent works with</th></tr></thead>
+    <tbody>
+      <tr><td>Contract signed</td><td>Signed agreement on file</td><td>File token for the contract</td></tr>
+      <tr><td>First deposit</td><td>Charge against the organizer's card</td><td>Card token and gateway confirmation</td></tr>
+      <tr><td>Rooming list</td><td>Attendee names and arrival dates</td><td>Tokenized names, no attendee IDs</td></tr>
+      <tr><td>Final balance</td><td>Remaining amount charged before arrival</td><td>Card token and approved charge reference</td></tr>
+      <tr><td>Attrition review</td><td>Unused rooms billed under contract terms</td><td>Contract terms and room pickup counts</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>The sales system keeps track of what's paid and what's due. Card numbers stay in the vault, which keeps the sales platform out of card handling altogether.</p>
+
+<p>Rooming lists deserve their own attention. Planners often send attendee names alongside dietary needs and accessibility requests in one spreadsheet, so the agent should read the names as tokens and pass special requests to the right team without copying the whole sheet into its context. <a class="bl-link" href="/blog/card-vault-tokenization/">Card vault tokenization</a> shows how one stored card supports several scheduled charges.</p>
+
+<h2>Why a Staff PMS Login Gives a Hotel AI Agent Access to Every Guest Profile</h2>
+
+<p><strong>A staff PMS login gives a hotel AI agent the same access a front desk manager has, which means every guest profile and stored ID scan. Task-specific access limits the agent to the reservation fields each request actually needs.</strong></p>
+
+<p>Some hotel agents connect to the PMS by logging in as a staff member, and others read the screen directly. Either way, the agent inherits everything that login can open. A question about one booking can return the whole guest profile, and access ends up exceeding the task by a wide margin.</p>
+
+<p>The exposure doesn't stay on the screen either. Copies spread into:</p>
+
+<ul>
+
+  <li>Screenshots the agent captures to read the interface</li>
+
+  <li>Traces and logs kept for troubleshooting the agent</li>
+
+  <li>Guest messaging threads where the agent pastes details it found</li>
+
+</ul>
+
+<p>Scoped access works differently. The agent calls defined functions, such as "get guarantee status" or "change arrival date", and each one returns only the fields that function needs.</p>
+
+<p>Protection also holds only as far as the data path it covers. A staff member who copies a card number from a protected screen into a PMS note puts the PMS back in scope, and a second agent that calls the model directly bypasses the privacy proxy entirely. Every route the agent can take needs the same controls.</p>
+
+<h2>What Are the Risks When Hotel AI Agents Expose Guest PII and Card Data</h2>
+
+<p><strong>When hotel AI agents expose guest PII, the risks range from guests located by strangers to chargebacks and card fraud. Hotels also face PCI DSS scope growth and privacy law duties, plus brand damage that outlasts any single breach.</strong></p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Who carries it</th><th>What can go wrong</th><th>Hotel example</th></tr></thead>
+    <tbody>
+      <tr><td>Guest</td><td>Physical safety and identity theft</td><td>A caller learns a room number, or a leaked ID scan gets reused</td></tr>
+      <tr><td>Hotel</td><td>Chargebacks and card fraud</td><td>A disputed charge with no traceable authorization behind it</td></tr>
+      <tr><td>Payment partners</td><td>PCI DSS scope growth</td><td>Card numbers copied into PMS notes and call transcripts</td></tr>
+      <tr><td>Property owner and brand</td><td>Regulatory and reputational damage</td><td>GDPR or CCPA obligations after a guest data leak</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>Guest data also travels across borders more than most. One international booking can involve a European guest and a US-hosted model provider at a property in a third country, with each jurisdiction setting its own rules on <a class="bl-link" href="/blog/what-is-pii/">personally identifiable information</a>. ID document rules add another layer, since retention and inspection requirements differ by country and property.</p>
+
+<h2>Processor Tokenization vs Vault Tokenization for AI Agents Handling Hotel Payments</h2>
+
+<p><strong>Processor tokenization protects card numbers inside one payment provider and PMS connection, whereas vault tokenization protects cards and other guest data across every system an AI agent touches. Many hotels use both together.</strong></p>
+
+<p>If your PMS already stores processor tokens and you run a single property on one provider, that may be all you need. The gaps appear where data moves outside that single connection:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Factor</th><th>Processor tokenization</th><th>Vault tokenization</th></tr></thead>
+    <tbody>
+      <tr><td>What it protects</td><td>Card numbers for one processor</td><td>Cards, ID files, signed authorizations and other guest fields</td></tr>
+      <tr><td>Where tokens work</td><td>Inside that processor's network and the connected PMS</td><td>Across the PMS, sales tools, concierge purchases and agent requests</td></tr>
+      <tr><td>Third-party authorizations</td><td>Usually handled by emailed forms</td><td>Branded link with tokenized capture and signature</td></tr>
+      <tr><td>Model requests</td><td>Outside its scope</td><td>Identifiers tokenized before the model call</td></tr>
+      <tr><td>Changing processors</td><td>Tokens may need migration</td><td>Vault tokens stay the same</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>A vault becomes relevant when a hotel group charges through more than one gateway or pays independent suppliers. It also helps when staff need a protected view for cards that can't go through a proxy. A vault doesn't replace the processor relationship. It covers those cross-system gaps, and charges can still run through the existing processor. <a class="bl-link" href="/blog/what-is-tokenization/">How tokenization works</a> explains why a stolen token is useless to whoever takes it.</p>
+
+<h2>Questions to Answer Before Connecting an AI Agent to Your Hotel PMS</h2>
+
+<p><strong>Before connecting an AI agent to your hotel PMS, find out which teams accept third-party cards and whether the PMS stores tokens or full cards. Confirm which staff need to use guest data and which only need to confirm it exists.</strong></p>
+
+<ol>
+
+  <li><strong>Which teams accept third-party cards, and through which channels?</strong> Reservations and sales often keep separate inboxes for authorization forms, and the front desk may run a third. All of them need to move to the same secure link.</li>
+
+  <li><strong>Does the PMS store the processor token or the full card?</strong> If full numbers sit in your PMS or its notes field, the agent will find them. Clean that up before the first connection.</li>
+
+  <li><strong>How are authorization documents linked to reservations and deleted?</strong> An authorization record should belong to one reservation and follow a deletion rule, so it doesn't stay in a shared drive after checkout.</li>
+
+  <li><strong>Which staff need to use data, and which only need to confirm it exists?</strong> Most roles need a status. Far fewer need the card or ID itself, and the agent belongs in the first group. Map who may capture a value and who may reveal it, then decide who can share or delete it.</li>
+
+  <li><strong>Which model providers will see the agent's requests?</strong> A privacy proxy such as <a class="bl-link" href="/nopii/">NoPII</a> sits in front of supported providers, so changing models later doesn't reset the protection.</li>
+
+  <li><strong>How will rules apply across multiple properties?</strong> Groups with several hotels need shared policies with local exceptions, especially for ID retention and guest messaging. Confirm where vault data and its backups live for each region, along with logs.</li>
+
+  <li><strong>How will you know it's working?</strong> Count how often a card or ID still turns up in email or call recordings, and how many staff roles can open the full value. Watch the time from request to completed authorization, and how often staff fall back to email when a case is urgent. For the agent itself, run a set of sample notes through the proxy to confirm identifiers are recognized and restored correctly.</li>
+
+</ol>
+
+<h2>How Enigma AI Vault Protects Guest Data for Any Hotel Reservation Agent</h2>
+
+<p>It doesn't matter which AI agent you use for reservations. Enigma AI Vault is the underlying infrastructure that protects guest data around it, while you keep your own agent and PMS, along with your payment processor.</p>
+
+<p>Most properties roll it out in stages, starting where the most email traffic sits:</p>
+
+<ol>
+
+  <li><strong>Authorization forms:</strong> <a class="bl-link" href="/vault/customer-vault/">Customer Vault</a> sends branded links with no login required, capturing the card and the signature together, with a shared staff inbox for submissions, and Card Vault bills those stored cards through the hotel's existing processor</li>
+
+  <li><strong>Event deposits and group sales:</strong> sales records link to card and file tokens, so deposits run without card numbers in the sales system</li>
+
+  <li><strong>Phone bookings:</strong> the IVR takes card details on phone reservations, keeping them out of call recordings</li>
+
+  <li><strong>Concierge purchases:</strong> The Vault applies task-specific access and controlled release, with a vault access record each time a card leaves for an outside merchant</li>
+
+  <li><strong>Guest ID documents:</strong> File Vault holds scans with controlled staff access and deletion rules set per property</li>
+
+  <li><strong>Reservation agents:</strong> NoPII tokenizes guest identifiers before model requests, and Triplets checks rate and policy answers against the evidence on file</li>
+
+  <li><strong>Multi-property governance:</strong> shared policies and audit trails across every hotel in the group</li>
+
+</ol>
+
+<p>Supported gateways receive cards through an HMAC-signed proxy, and card security codes don't stay longer than 30 minutes. Enigma holds PCI DSS Level 1 service provider certification and is audited for SOC 2 Type II, though a provider's certification doesn't make the hotel itself exempt from PCI DSS. Fraud screening and chargeback handling remain the hotel's responsibility, and so do local ID rules.</p>
+
+<p><a class="bl-link" href="/request-demo/?which_products__select_all_that_apply_=AI%20Vault&amp;interest=ai-vault-poc">Request a no-cost POC</a> built around your highest-volume authorization form, and we'll show that booking running on tokens with an audit record behind every charge.</p>

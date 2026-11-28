@@ -1,0 +1,438 @@
+---
+title: "Data Access Control for AI Agents per User Role: A Practical Guide"
+slug: "how-to-control-what-data-an-ai-agent-sees-per-user-role"
+layout: "pii-style"
+metaTitle: "Data Access Control for AI Agents: How to Set Permissions per User Role"
+description: "Learn how data access control for AI agents works per user role, from identity and permission-aware retrieval to tokenization, controlled restoration and audit."
+subtitle: "To control what data an AI agent sees per user role, pass each user's identity into every request and filter what the agent retrieves. Keep sensitive fields tokenized by default, then restore real values only for roles your application policy clears."
+date: 2026-11-28T00:04:00
+category: "AI Security"
+author: "abhilash-kumar"
+readTime: 20
+heroImage: "/assets/blog/img-04.png"
+heroAlt: "Data Access Control for AI Agents per User Role: A Practical Guide"
+excerpt: "Learn how data access control for AI agents works per user role, from identity and permission-aware retrieval to tokenization, controlled restoration and audit."
+tags: ["ai-agents", "ai", "pii"]
+styles: ["blog.css", "pages/blog-pii-hero.css", "tr-pages.css"]
+scripts: ["blog-article.js"]
+faqSchema: true
+faqs:
+  - q: "Can one AI agent show different data to different users?"
+    a: "Yes. When the agent passes each user's identity into every request and restores real values by policy, the same question returns a different, correct view for each role without building separate agents."
+  - q: "Why isn't source-system access control enough for AI agents?"
+    a: "Source permissions stay on the file or record. Once an agent retrieves text and puts it in a prompt or index, those rules no longer apply, so agents need controls that follow the data through each request."
+  - q: "Do AI agents give worse answers when some fields stay tokenized?"
+    a: "Usually not. Deterministic tokens keep each value consistent, so the model can still follow the conversation and reason across records. Real values are restored afterwards for roles that are cleared to see them."
+  - q: "What happens to an agent's access when a user changes roles?"
+    a: "It should change right away. Tie agent sessions to your identity provider, end open sessions when a role changes and clear cached results, so the very next request runs with the new role's access and nothing older."
+  - q: "How do you prove which data each user saw through an AI agent?"
+    a: "Keep a record of every release of a real value, showing the user, role, task, field and the policy that allowed it. Those records let you answer audit questions quickly without storing the values themselves."
+---
+
+<p><strong>To control what data an AI agent sees per user role, pass each user's identity into every request and filter what the agent retrieves. Keep sensitive fields tokenized by default, then restore real values only for roles your application policy clears.</strong></p>
+
+<p>Ask a shared AI assistant to summarize a customer account, and the right answer depends on who's asking. A billing specialist needs payment details to resolve a dispute, while a support contractor handling a password reset needs almost none of it. Most assistants can't make that distinction, because they reach the CRM and billing system through one service account and give every user the same view.</p>
+
+<p>That's how a contractor ends up reading account numbers the compliance team is meant to guard, and why security reviews stall once an assistant goes company-wide. A line in the prompt asking the agent to be careful won't fix it. What works is access control that follows the person asking, whichever agent your teams use, and the steps below show how to set it up for one customer operations assistant and the four roles that rely on it.</p>
+
+<h2>What Is Data Access Control for AI Agents and Why User Roles Matter</h2>
+
+<p><strong>Data access control for AI agents decides what an agent can use and reveal on each request, based on the user, the agent, the task and your policy. With it, one shared agent can give each user role a different view of the same data.</strong></p>
+
+<p>Traditional access control protects a system. Data access control for AI agents protects each answer, because the same agent may serve a contractor at 9 a.m. and an auditor at 9:05.</p>
+
+<h3>One Agent Serves Many Users With Different Clearances</h3>
+
+<p>Shared agents are efficient. One assistant can answer support questions and explain invoices for the billing team, all from the same connections.</p>
+
+<p>The catch is that those users were never cleared to see the same things. In the CRM, a support rep and a compliance auditor see different screens. Through a shared agent, they often see the same reply.</p>
+
+<h3>How User Roles Work Alongside Task-Specific Access</h3>
+
+<p>Role and task answer different questions, and good controls check both:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Question</th><th>What answers it</th><th>Example</th></tr></thead>
+    <tbody>
+      <tr><td>Who is asking?</td><td>The user's identity and role</td><td>A billing specialist in the EMEA team</td></tr>
+      <tr><td>What is the agent doing?</td><td>The current task</td><td>Explaining a disputed invoice</td></tr>
+      <tr><td>What may be used?</td><td>Task-specific access</td><td>The invoice and its payment record</td></tr>
+      <tr><td>What may be revealed?</td><td>Your application policy</td><td>The account number, masked to the last four digits</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>A billing specialist explaining an invoice needs payment details. The same specialist asking for a general product summary doesn't, so the task narrows access even within one role.</p>
+
+<h2>Why Role-Based Access Control Breaks Down When One AI Agent Serves Every User</h2>
+
+<p><strong>Role-based access control breaks down in shared AI agents because permissions live on files and records in source systems. Once an agent retrieves the text, those permissions stay behind, and every user gets whatever the agent can reach.</strong></p>
+
+<p>Most teams already have solid role-based access control. The problem is that agents create new copies of data where those roles don't follow.</p>
+
+<h3>Retrieved Text Leaves Its Source Permissions Behind</h3>
+
+<p>When an agent searches a knowledge base, documents are often split into chunks and stored in a vector index. A chunk from a restricted pricing memo looks like any other chunk unless someone stored its permissions alongside it.</p>
+
+<p>Here's how the same paragraph travels:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Where the paragraph sits</th><th>Who can see it</th></tr></thead>
+    <tbody>
+      <tr><td>Pricing memo in the document system</td><td>Finance and sales leadership</td></tr>
+      <tr><td>Chunk in the vector index</td><td>Anyone whose question matches it</td></tr>
+      <tr><td>Agent's reply</td><td>Whoever asked that question</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>The memo was locked down. The chunk wasn't, and the reply certainly wasn't.</p>
+
+<h3>Shared Service Accounts Give Every User the Same View</h3>
+
+<p>Agents often connect to business systems through one service account set up during the pilot. That account usually holds broad read access so the agent works for everyone.</p>
+
+<p>Every user then inherits the service account's view, whatever their own role. Contractors and auditors alike query the CRM through the same credentials, so the CRM can't apply the rules it already has.</p>
+
+<h3>Prompt Instructions Can't Enforce Application Policy</h3>
+
+<p>Some teams try to fix this in the system prompt with a line like "Only show payment details to billing staff." The model has to trust whatever the conversation tells it about the user, and any user can claim to be in billing.</p>
+
+<p>Access decisions need to follow application policy, checked outside the model on every request. <a class="bl-link" href="/blog/pii-protection-for-llm/">PII protection for LLMs</a> explains why the model itself can't be the line of defense.</p>
+
+<h2>How AI Agent Data Access Should Change From One User Role to the Next</h2>
+
+<p><strong>AI agent data access should change by role so each user sees the records and fields their job needs. A support rep, billing specialist, manager and auditor asking the same question should each get a different, correct answer.</strong></p>
+
+<p>Four people ask the customer operations assistant the same thing: "Summarize the account for Maya Collins." Here's what each one gets back:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Role</th><th>What the agent includes</th><th>What it leaves out</th><th>What the user can do next</th></tr></thead>
+    <tbody>
+      <tr><td>Support rep</td><td>Maya's open cases and contact details</td><td>Her account number and any payment history</td><td>Update the cases assigned to them</td></tr>
+      <tr><td>Billing specialist</td><td>Invoices and payments, with her account shown as the last four digits</td><td>Internal notes from support cases</td><td>Issue an invoice credit within their limit</td></tr>
+      <tr><td>Team manager</td><td>Case counts and outcomes, along with monthly payment totals</td><td>Individual payments and her full account number</td><td>Reassign cases across the team</td></tr>
+      <tr><td>Compliance auditor</td><td>The complete record, including full account details</td><td>Nothing within the audit scope</td><td>Read and export, with no changes allowed</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>The data underneath is identical. What changes is the view, and every one of those decisions happens outside the model, based on who asked.</p>
+
+<h2>Role-Based Access Control vs Agent-Level Data Access Control for AI Agents</h2>
+
+<p><strong>Role-based access control decides which systems a user can open, whereas agent-level data access control decides what an agent may use and reveal for that user on each request. Shared agents need both, because RBAC stops at the source system.</strong></p>
+
+<p>Role-based access control (RBAC) isn't the problem. It covers less ground than an agent needs:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Factor</th><th>Role-based access control</th><th>Agent-level data access control</th></tr></thead>
+    <tbody>
+      <tr><td>What it protects</td><td>Systems, tables and files</td><td>Each request and each response</td></tr>
+      <tr><td>Unit of decision</td><td>A user's role in one application</td><td>User, task and data together</td></tr>
+      <tr><td>Follows data into the agent?</td><td>No, it stays with the source</td><td>Yes, through tokens and release rules</td></tr>
+      <tr><td>Handles shared agents?</td><td>Only if every query runs as the user</td><td>Yes, by design</td></tr>
+      <tr><td>Controls what is revealed?</td><td>Mostly all or nothing</td><td>Full, partial, token or hidden per field</td></tr>
+      <tr><td>Shows who saw what?</td><td>Logs access to the system</td><td>Records each release to each user</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h3>Where Each Model Stops</h3>
+
+<p>RBAC stops at the edge of the application. Once a record has been retrieved and pasted into a prompt, the CRM has no say in what happens next.</p>
+
+<p>Agent-level control picks up there. It decides which retrieved fields stay as tokens and which get restored, and for whom, so the role carries all the way to the reply.</p>
+
+<h2>How to Set Up Data Access Control for AI Agents per User Role: Step-by-Step</h2>
+
+<p><strong>Setting up data access control for AI agents per user role means mapping each role's needs and passing identity into every request. Then filter retrieval and tokenize sensitive fields, restore values by policy and audit what each role saw.</strong></p>
+
+<p>Here's the full sequence:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Step</th><th>What it controls</th><th>Usual owner</th></tr></thead>
+    <tbody>
+      <tr><td>1. Map records and files per role</td><td>What each role should be able to reach</td><td>Business owners with system owners</td></tr>
+      <tr><td>2. Pass the user's identity into every request</td><td>Who the agent is acting for</td><td>Identity and engineering teams</td></tr>
+      <tr><td>3. Use permission-aware retrieval</td><td>Which documents the agent can find</td><td>Engineering</td></tr>
+      <tr><td>4. Keep sensitive fields tokenized by default</td><td>What the model receives</td><td>Engineering and security</td></tr>
+      <tr><td>5. Restore values by application policy</td><td>What each role sees in the reply</td><td>Security with business owners</td></tr>
+      <tr><td>6. Apply task-specific access to sensitive files</td><td>Business documents with no fixed format</td><td>Data owners</td></tr>
+      <tr><td>7. Update permissions when roles change</td><td>How current each user's access stays</td><td>Identity team</td></tr>
+      <tr><td>8. Audit and test each role's view</td><td>Proof of what each user saw</td><td>Compliance and security</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h2>Step 1: Map the Records and Files Each User Role Needs From the Agent</h2>
+
+<p><strong>Mapping each role's needs means listing the records, files, tools and actions every role uses through the agent, along with what it must never see. That map turns vague job descriptions into rules your systems can enforce.</strong></p>
+
+<p>Start with one agent and the roles that use it most. A shared assistant with four roles is far easier to map than a company-wide rollout.</p>
+
+<h3>List the Records, Files, Tools and Actions per Role</h3>
+
+<p>For each role, work through four questions with the people who own the data:</p>
+
+<ol>
+
+  <li><strong>Records:</strong> Account and case records the role needs, with the fields inside them.</li>
+
+  <li><strong>Files:</strong> Documents the role may open through the agent, such as contracts or invoices.</li>
+
+  <li><strong>Tools:</strong> Lookups and integrations the agent may call on the role's behalf.</li>
+
+  <li><strong>Actions:</strong> Changes the agent may make, from updating a case to issuing a credit.</li>
+
+</ol>
+
+<p>Write down what each role should never see, too. That list often matters more than the allowed one.</p>
+
+<h3>Example: Access Map for Four User Roles</h3>
+
+<p>Here's the filled-in map for the customer operations assistant:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Map item</th><th>Support rep</th><th>Billing specialist</th><th>Team manager</th><th>Compliance auditor</th></tr></thead>
+    <tbody>
+      <tr><td>Records</td><td>Assigned cases, contact details</td><td>Invoices, payment records</td><td>Team cases, case outcomes</td><td>All records, read-only</td></tr>
+      <tr><td>Files</td><td>Help articles</td><td>Billing terms</td><td>Escalation playbooks</td><td>Policies, audit reports</td></tr>
+      <tr><td>Tools</td><td>Case lookup</td><td>Invoice lookup</td><td>Team dashboard</td><td>Audit export</td></tr>
+      <tr><td>Actions</td><td>Update own cases</td><td>Issue credits under a limit</td><td>Reassign cases</td><td>None</td></tr>
+      <tr><td>Never sees</td><td>Payment data</td><td>Internal case notes</td><td>Full account numbers</td><td>Nothing restricted, but can't change data</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h2>Step 2: Pass the Requesting User's Identity and Role Into Every Agent Request</h2>
+
+<p><strong>Passing the user's identity into every request lets each data source apply that user's own permissions. The agent then acts on the user's behalf and never sees more than that user could see by opening the system directly.</strong></p>
+
+<p>This step replaces the shared service account. It's the foundation for everything that follows.</p>
+
+<h3>Align Agent Access With Identity and Application Policy</h3>
+
+<p>Your identity provider already knows each user's role, and your applications already know what each role may open. The agent should carry that identity into every call:</p>
+
+<div class="bl-code bl-code--light">
+  <pre style="white-space:pre;overflow-x:auto"><code style="white-space:pre;">User signs in:        priya.shah@company.com (Billing, EMEA)
+Agent receives:       User token with role = billing_specialist, region = EMEA
+CRM query runs as:    Priya's identity, limited by the agent's own read-only role
+Result:               EMEA billing records only</code></pre>
+</div>
+
+<p>When a query runs as the user, the CRM's existing rules apply automatically. There's no second permission system to keep in sync.</p>
+
+<h3>Keep the User's Role Attached Across Agent-to-Agent Calls</h3>
+
+<p>Many setups use several agents, where a coordinating agent hands work to a specialist. Each handoff should carry the original user's identity, with access that can only narrow along the way.</p>
+
+<p>If the billing specialist's request reaches a reporting agent, that agent still acts for Priya. It should never fall back to its own broader access because the user context got lost in transit.</p>
+
+<h3>Fail Closed When the User's Identity Is Missing</h3>
+
+<p>Sometimes the identity doesn't arrive, perhaps because a token expired mid-session. The safe default is to refuse the request and ask the user to sign in again.</p>
+
+<p>Falling back to a service account, even once, recreates the original problem. A blocked request is a minor delay, while a fallback can expose every record the service account reaches.</p>
+
+<h2>Step 3: Use Permission-Aware Retrieval to Filter Documents by User Role</h2>
+
+<p><strong>Permission-aware retrieval filters search results by the requesting user's access before anything reaches the agent. Each indexed chunk carries its source permissions, so a restricted document can't surface in an unauthorized user's answer.</strong></p>
+
+<p>Retrieval is where most role leaks start, since search returns the best match whether or not the user may see it.</p>
+
+<h3>Store Permissions Alongside Each Indexed Document</h3>
+
+<p>When documents are split and indexed, copy their access rules into each chunk's metadata. The search then filters on those rules before ranking results:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Chunk metadata field</th><th>Example value</th></tr></thead>
+    <tbody>
+      <tr><td>Source document</td><td>pricing-memo-2026.pdf</td></tr>
+      <tr><td>Allowed roles</td><td>finance, sales_leadership</td></tr>
+      <tr><td>Region</td><td>Global</td></tr>
+      <tr><td>Classification</td><td>Confidential</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>A support rep's search skips this chunk entirely. It never reaches the agent, so it can't appear in the reply.</p>
+
+<h3>Recheck Access When Source Permissions Change</h3>
+
+<p>Permissions in the source system change over time, and the index can fall behind. A document moved into a restricted folder this morning may still be tagged as open in yesterday's index.</p>
+
+<p>For sensitive content, recheck access against the source system at query time, or sync permissions frequently enough that gaps stay short. Treat a mismatch as a reason to withhold the result.</p>
+
+<h2>Step 4: Keep Sensitive Fields Tokenized by Default for Every User Role</h2>
+
+<p><strong>Keeping sensitive fields tokenized by default means the model works on references in place of real values, whatever role is asking. Real values stay inside your protected boundary until application policy releases them.</strong></p>
+
+<p>Even after filtering, many answers still involve sensitive fields. Tokenizing them for everyone keeps the model's view the same across roles, while each role's final view differs.</p>
+
+<h3>How Deterministic References Let the Agent Work Without Real Values</h3>
+
+<p>The agent needs to know which customer it's discussing. It doesn't need her real account number to summarize her history:</p>
+
+<div class="bl-code bl-code--light">
+  <pre style="white-space:pre;overflow-x:auto"><code style="white-space:pre;">Retrieved record:  Maya Collins, account 7702-4418-93, last payment $1,240 on Oct 3
+Sent to the model: [NAME_1], account [ACCOUNT_1], last payment $1,240 on Oct 3</code></pre>
+</div>
+
+<p>References stay consistent through supported interactions, so [ACCOUNT_1] means Maya's account on every turn. If a protected request can't be tokenized, it should fail closed.</p>
+
+<h3>Why Tokenizing for Everyone Keeps Answers Consistent Across Roles</h3>
+
+<p>When every role's request is tokenized the same way, the model produces one consistent answer. Role differences happen afterwards, at restoration, where they're easy to check.</p>
+
+<p>The alternative, building a separate prompt for each role, means four versions of every answer and four chances for a mistake. <a class="bl-link" href="/blog/data-masking-vs-tokenization/">Data masking vs tokenization</a> explains why reversible tokens suit this better than permanent masking.</p>
+
+<h2>Step 5: Restore Original Values Only for Roles Cleared by Application Policy</h2>
+
+<p><strong>Restoring original values by application policy means tokens in the agent's reply are swapped for real values only where the user's role allows it. Other roles see a partial value, a token or nothing.</strong></p>
+
+<p>This is where one consistent answer becomes four different views.</p>
+
+<h3>Set Field-Level Views for Each Role</h3>
+
+<p>Write the restoration rules field by field:</p>
+
+<p>Partial views like "last four digits" let a billing specialist confirm the right account without exposing the full number. <a class="bl-link" href="/blog/pii-masking-for-llm/">PII masking for LLMs</a> covers the trade-offs of partial display.</p>
+
+<p>Card numbers never come back in clear for anyone. When a billing specialist refunds Maya's card, the agent passes the card token to the payment tool, and on supported gateways an HMAC-signed vault proxy releases the card number at the gateway boundary.</p>
+
+<h3>Restore Inside the Authorized Application</h3>
+
+<p>Restoration should happen inside the application the user is working in, after the model has finished. The model provider never holds the real values, and neither do any logs taken along the way.</p>
+
+<p>Because restoration follows application policy, a user who claims a different role in the chat gets nowhere. The application checks the identity from Step 2 and ignores what the conversation claims.</p>
+
+<h2>Step 6: Apply Task-Specific Access to Sensitive Files and Business Records</h2>
+
+<p><strong>Applying task-specific access to sensitive files means business documents like pricing memos or legal notes are released only when the user's role and current task permit. The agent receives only what that task needs.</strong></p>
+
+<p>Not all sensitive data has a pattern a scanner can spot. Pricing terms and legal comments read like ordinary text, so they need file-level and record-level rules.</p>
+
+<h3>Protect Pricing Terms and Legal Comments at the File Level</h3>
+
+<p>Classify sensitive business documents where they're stored, and keep them in protected storage with access rules attached:</p>
+
+<ul>
+
+  <li><strong>Pricing agreements:</strong> Released to sales leadership and finance, never to support.</li>
+
+  <li><strong>Compensation notes:</strong> Limited to HR and the employee's own manager.</li>
+
+  <li><strong>Legal comments on cases:</strong> Available to compliance and legal counsel only.</li>
+
+  <li><strong>Draft policies:</strong> Visible to the policy owner until they're approved.</li>
+
+</ul>
+
+<p>Some teams also remove these passages before indexing. <a class="bl-link" href="/blog/data-redaction-for-ai/">Data redaction for AI</a> explains when permanent removal makes sense.</p>
+
+<h3>Release Only What the Current Task Permits</h3>
+
+<p>Even an allowed role gets less when the task is narrow. A finance analyst asking about one customer's discount should receive that clause, while the rest of the pricing agreement stays in protected storage.</p>
+
+<p>Each release should be logged against the user and the task. That record feeds directly into the audit step.</p>
+
+<h2>Step 7: Update AI Agent Permissions the Moment a User's Role Changes</h2>
+
+<p><strong>Updating AI agent permissions when roles change means the agent's view shifts as soon as the identity provider does. Cached results and open sessions are cleared, so old access doesn't linger in the agent.</strong></p>
+
+<p>People move teams, take on new responsibilities and leave. The agent has to keep up with every change.</p>
+
+<h3>Clear Cached Results and Sessions on Role Changes</h3>
+
+<p>Agents often cache search results and keep conversation history to stay fast. Those caches were built for the user's old role.</p>
+
+<p>When a support rep becomes a team lead, here's what should happen:</p>
+
+<ol>
+
+  <li>Their identity provider record updates with the new role.</li>
+
+  <li>Open agent sessions end, and they sign in again with the new token.</li>
+
+  <li>Cached search results tied to their old role are cleared.</li>
+
+  <li>Their next request runs with team lead access from the start.</li>
+
+</ol>
+
+<h3>Remove Access the Same Day Someone Leaves</h3>
+
+<p>Departures are the most important case. If an agent session survives a user's last day, it can keep answering with their old access.</p>
+
+<p>Tie agent sessions to the identity provider so disabling the account ends them everywhere. Short-lived tokens help, because they expire soon even when a session isn't actively closed.</p>
+
+<h2>Step 8: Use Vault Access Records to Audit and Test What Each Role Saw</h2>
+
+<p><strong>Auditing what each role saw means recording every release of a real value against the user and the task, along with the policy that allowed it. Testing each role before launch confirms the controls work as written.</strong></p>
+
+<p>Controls are only as good as your ability to prove them. Regulators and enterprise customers will ask who saw what.</p>
+
+<h3>What a Per-User Access Record Should Show</h3>
+
+<p>Vault access records give one place to answer that question. A useful entry captures the decision without storing the value itself:</p>
+
+<div class="bl-code bl-code--light">
+  <pre style="white-space:pre;overflow-x:auto"><code style="white-space:pre;">User:          priya.shah@company.com
+Role:          Billing specialist, EMEA
+Task:          Explain disputed invoice INV-30418
+Record:        Customer 55190, account number
+View released: Last four digits
+Policy:        billing-partial-account rule
+Timestamp:     2026-11-25 14:02:17 UTC</code></pre>
+</div>
+
+<p>When an answer also draws on documents, trace it to the source and version used. <a class="bl-link" href="/triplets/">Triplets</a> shows how evidence checks keep that link between an answer and its source.</p>
+
+<h3>Test the Agent as Each Role Before It Goes Live</h3>
+
+<p>Before launch, sign in as each role and ask the same set of questions. Compare every reply against the access map from Step 1:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Test</th><th>What to check</th></tr></thead>
+    <tbody>
+      <tr><td>Same question, four roles</td><td>Each role gets the fields its map allows</td></tr>
+      <tr><td>Restricted document query</td><td>Unauthorized roles get no content from it</td></tr>
+      <tr><td>Role claimed in the chat</td><td>The agent ignores it and follows the real identity</td></tr>
+      <tr><td>Expired token mid-session</td><td>The request fails closed</td></tr>
+      <tr><td>Role change during testing</td><td>Old access disappears on the next request</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>Run the full set again whenever you add a role or a new data source.</p>
+
+<h2>How Enigma AI Vault Delivers Data Access Control for AI Agents per User Role</h2>
+
+<p>At Enigma Vault, we built <a class="bl-link" href="/ai-vault/">AI Vault</a> so that it doesn't matter which AI agent your teams use. AI Vault is the underlying infrastructure that protects your data before any agent touches it and verifies what comes back. It aligns access decisions with your existing identity and application policy, without rebuilding your agent stack.</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>What each role needs</th><th>How AI Vault supports it</th></tr></thead>
+    <tbody>
+      <tr><td>Access to the right records and files</td><td>The Vault protects customer data and cards at the source, along with files, through task-specific access and controlled release</td></tr>
+      <tr><td>A consistent answer without raw values in the model</td><td>NoPII tokenizes supported sensitive values before model requests with deterministic references, and fails closed if a request can't be tokenized</td></tr>
+      <tr><td>Real values only where policy allows</td><td>Original values are restored only through an authorized path, with release decisions that follow application policy</td></tr>
+      <tr><td>Values sent only to the right places</td><td>Releases go only to approved destinations, such as enterprise APIs, payment gateways and the approved caller</td></tr>
+      <tr><td>Proof of what each user saw</td><td>Vault access records log each release, and Triplets traces answers to their source and version</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>AI Vault isn't another agent platform. It's backed by PCI DSS Level 1 and SOC 2 Type II, along with an AWS Foundational Technical Review, and NoPII and the Data Vault are available as self-hosted containers.</p>
+
+<p><a class="bl-link" href="/request-demo/?which_products__select_all_that_apply_=AI%20Vault&amp;interest=ai-vault-poc">Talk to our team about your agent workflow</a> and we'll map how AI Vault fits the roles and data your assistants already handle.</p>

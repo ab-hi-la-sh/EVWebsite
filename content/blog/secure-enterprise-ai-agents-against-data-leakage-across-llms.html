@@ -1,0 +1,447 @@
+---
+title: "How to Secure Enterprise AI Applications and Agents Against Data Leakage Across OpenAI, Anthropic and Self-Hosted Models"
+slug: "secure-enterprise-ai-agents-against-data-leakage-across-llms"
+layout: "pii-style"
+metaTitle: "How to Secure Enterprise AI Agents Against Data Leakage"
+description: "Secure enterprise AI applications and agents against data leakage on OpenAI and Anthropic APIs as well as self-hosted models with one protection layer."
+subtitle: "To secure enterprise AI applications and agents against data leakage, tokenize sensitive data before each model request and decide where copies and original values can go. One protection layer then covers hosted APIs and self-hosted models alike."
+date: 2026-11-28T00:05:00
+category: "AI Security"
+author: "abhilash-kumar"
+readTime: 19
+heroImage: "/assets/blog/img-05.png"
+heroAlt: "How to Secure Enterprise AI Applications and Agents Against Data Leakage Across OpenAI, Anthropic and Self-Hosted Models"
+excerpt: "Secure enterprise AI applications and agents against data leakage on OpenAI and Anthropic APIs as well as self-hosted models with one protection layer."
+tags: ["ai-agents", "ai", "pii"]
+styles: ["blog.css", "pages/blog-pii-hero.css", "tr-pages.css"]
+scripts: ["blog-article.js"]
+faqSchema: true
+faqs:
+  - q: "Are OpenAI and Anthropic data settings enough to prevent enterprise data leakage?"
+    a: "No. Provider settings govern retention on the provider's side. They don't cover raw values sitting in your own logs and agent memory, so customer data needs protection before it ever leaves your systems."
+  - q: "How do you protect data sent to self-hosted AI models?"
+    a: "Tokenize sensitive fields before prompts reach the model and limit who can open inference servers or their logs. Running a model yourself keeps data inside your network, yet broad internal access can still expose it."
+  - q: "Does tokenizing data before a model request affect answer quality?"
+    a: "Deterministic tokens keep answers accurate because the same value always maps to the same token, so the model can follow one customer across a conversation. Masked values look alike and confuse the model more often."
+  - q: "What happens to data protection when you switch AI model providers?"
+    a: "If protection lives inside one SDK integration, switching providers resets it and opens gaps. A protection layer in the request path keeps the same policy and audit log, so the new model inherits your existing controls."
+  - q: "Is an AI gateway enough to stop data leakage from AI agents?"
+    a: "An AI gateway routes traffic and manages provider keys, but most gateways don't tokenize sensitive values inside prompts and tool results. Pair routing with a data protection layer so customer data stays covered end to end."
+---
+
+<p><strong>To secure enterprise AI applications and agents against data leakage, tokenize sensitive data before each model request and decide where copies and original values can go. One protection layer then covers hosted APIs and self-hosted models alike.</strong></p>
+
+<p>Few enterprises run a single model anymore, and every extra provider arrives with its own settings and logs but no shared policy. Each time a team adds or switches a model, customer data protection gets rebuilt from scratch and records slip through the gaps. One protection layer around the models you already run closes those gaps. It doesn't matter which AI agent you use, because <a class="bl-link" href="/ai-vault/">Enigma AI Vault</a> works as the underlying infrastructure that protects your data.</p>
+
+<h2>Why Enterprise AI Applications and Agents Leak Data Across Model Providers</h2>
+
+<p><strong>AI agents leak data across model providers because customer records move through every stage of a task, and each provider adds another path out of your boundary. Copies then settle in logs and agent memory long after the task has ended.</strong></p>
+
+<p>Agents behave differently from a chatbot answering one question. Within a single task, an agent may pull a customer record and build context around it, then call a payment service before updating the case. Every one of those moves carries customer data somewhere new, and the four stages below show where it can escape.</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Stage</th><th>What happens</th><th>Where customer data can escape</th></tr></thead>
+    <tbody>
+      <tr><td>Retrieve</td><td>Connectors and APIs pull CRM records and payment history</td><td>Tool responses carry the full record when the task needs one field</td></tr>
+      <tr><td>Assemble</td><td>Retrieved data is packed into prompts and RAG context</td><td>System prompts and context windows hold raw values</td></tr>
+      <tr><td>Reason</td><td>The request travels to a model and a response comes back</td><td>Requests leave your network for provider infrastructure</td></tr>
+      <tr><td>Act</td><td>The agent calls tools and saves facts to memory</td><td>Tool arguments and stored memory keep what the model saw</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h3>How One Customer Record Ends Up in Three Model Paths</h3>
+
+<p>Take a billing dispute for a customer named Sofia Grant. Her <a class="bl-link" href="/blog/what-is-pii/">personally identifiable information</a> travels further than most teams expect:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Model path</th><th>What it does with Sofia's record</th><th>Rules it follows</th></tr></thead>
+    <tbody>
+      <tr><td>Support agent on Anthropic</td><td>Pulls her profile and card history from the CRM to resolve the dispute</td><td>Anthropic account settings plus the agent's own logs</td></tr>
+      <tr><td>Document assistant on OpenAI</td><td>Drafts her refund letter from the same case notes</td><td>A separate integration with its own OpenAI settings</td></tr>
+      <tr><td>Internal model on company servers</td><td>Summarizes the case for a monthly reporting dashboard</td><td>Whatever the platform team configured</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>No single team can say where every copy of Sofia's record now sits.</p>
+
+<h3>Why More Providers Mean More Exposure</h3>
+
+<p>Multi-model setups rarely grow by design. Teams pick the model that suits their use case, and protection follows whatever each team happened to build.</p>
+
+<ul>
+
+  <li><strong>Separate integrations:</strong> each team wires its own SDK, and protection added to one integration rarely carries over to the next</li>
+
+  <li><strong>Uneven logging defaults:</strong> one gateway records full request bodies while another records nothing at all</li>
+
+  <li><strong>Model experiments:</strong> test traffic sent to a new release often skips the controls production traffic has</li>
+
+  <li><strong>Agent handoffs:</strong> one agent passes context to another agent running on a different provider</li>
+
+</ul>
+
+<h3>Where Copies Collect Outside the Model</h3>
+
+<p>Model calls are one part of the exposure. Information spreads through the stack, and copies gather in places that rarely get a security review:</p>
+
+<ul>
+
+  <li><strong>Application logs:</strong> request bodies written at debug level during an incident</li>
+
+  <li><strong>Traces and observability:</strong> full prompts captured to help engineers troubleshoot</li>
+
+  <li><strong>Agent memory:</strong> facts saved so the next conversation feels continuous</li>
+
+  <li><strong>Vector stores:</strong> embeddings of documents that still contain customer details</li>
+
+  <li><strong>Caches and retries:</strong> repeated requests holding the same payload</li>
+
+  <li><strong>Connected vendors:</strong> third-party services the agent calls with customer fields</li>
+
+</ul>
+
+<p>How much of this happens depends on how each framework and connector is configured, along with your logging and retention settings. Few teams can answer that question for every model they run.</p>
+
+<h2>OpenAI and Anthropic APIs Versus Self-Hosted Models: Where Data Leakage Happens</h2>
+
+<p><strong>With OpenAI and Anthropic APIs, data leaks as requests leave your boundary and fall under provider retention terms, whereas self-hosted models keep requests inside your network but leak through server logs and broad internal access.</strong></p>
+
+<p>Neither option is safe by default. Hosted APIs move the risk outside your network, while self-hosted models move it onto infrastructure your own teams have to lock down.</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Factor</th><th>Hosted APIs such as OpenAI and Anthropic</th><th>Self-hosted models</th></tr></thead>
+    <tbody>
+      <tr><td>Where requests go</td><td>Provider infrastructure outside your network</td><td>Servers in your cloud account or data center</td></tr>
+      <tr><td>Who sets retention</td><td>Provider terms combined with your account settings</td><td>Your own engineering and security teams</td></tr>
+      <tr><td>Main leak points</td><td>Raw values in prompts and tool results, plus copies in your own logs</td><td>Inference logs on shared GPU hosts that many engineers can open</td></tr>
+      <tr><td>Common blind spot</td><td>Assuming the provider contract covers your logs and memory</td><td>Assuming internal automatically means private</td></tr>
+      <tr><td>Who fixes a leak</td><td>You handle everything outside the API call</td><td>Every layer falls to you</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h3>What Provider Settings Can and Can't Do</h3>
+
+<p>Provider settings matter, but they govern the provider's side of the connection. Here is how the responsibility splits:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Covered by provider settings</th><th>Left to your team</th></tr></thead>
+    <tbody>
+      <tr><td>How long the provider keeps requests</td><td>Prompts your app logged before sending</td></tr>
+      <tr><td>Training use of your requests</td><td>Tool results stored in agent memory</td></tr>
+      <tr><td>Access controls on the provider's infrastructure</td><td>Copies in traces and vector stores</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>Those settings also vary between providers and account tiers. Teams that learn to <a class="bl-link" href="/blog/how-to-use-openai-without-exposing-pii/">keep PII out of OpenAI requests</a> often see the same gap reopen when a second provider arrives with a different SDK and nobody carries the protection over.</p>
+
+<h3>Why Self-Hosted Models Still Leak</h3>
+
+<p>Self-hosted models feel private because nothing crosses the public internet, yet customer data still spreads inside your own environment. What changes is who can reach it.</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Internal leak point</th><th>Who ends up with access</th></tr></thead>
+    <tbody>
+      <tr><td>Inference server logs written for debugging</td><td>Anyone with access to the cluster</td></tr>
+      <tr><td>Shared GPU hosts running several workloads</td><td>Teams that never needed customer data</td></tr>
+      <tr><td>Fine-tuning sets built from customer records</td><td>Every user of the model, since records can resurface in outputs</td></tr>
+      <tr><td>Prompt samples kept for quality review</td><td>Analysts checking model performance</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>Running the model yourself changes who can see the data without changing whether it needs protection.</p>
+
+<h3>Hybrid Setups Carry Both Risk Profiles</h3>
+
+<p>Many enterprises run hosted and self-hosted models side by side, which means managing both sets of leak points at once. A typical split looks like this:</p>
+
+<ul>
+
+  <li><strong>Internal servers:</strong> sensitive analytics and reporting that teams prefer to keep in-house</li>
+
+  <li><strong>Hosted APIs:</strong> customer-facing agents that call OpenAI or Anthropic for reasoning and drafting</li>
+
+</ul>
+
+<p>The riskiest moment is the handoff between them. Context produced on an internal model often flows into a request bound for a hosted provider, and protection that exists on one side rarely follows it across. Sofia's case summary, written internally, could end up inside the next prompt a support agent sends to Anthropic.</p>
+
+<h2>What a Data Protection Layer Needs to Cover on Every Model Provider</h2>
+
+<p><strong>A data protection layer for AI agents should sit outside the model and tokenize every part of a request, including tool calls. It also needs to fail closed and keep one audit log whose policy holds steady when you change providers.</strong></p>
+
+<p>Protection that lives inside one SDK integration breaks the moment a team adds a model, because the next integration starts without it. A layer in the request path between your applications and every provider avoids that problem, since the model behind it can change while the rules stay put. Use these requirements as a checklist when you assess any approach:</p>
+
+<ul>
+
+  <li><strong>Coverage of the whole request:</strong> user messages and system prompts carry customer data, and so do tool call arguments along with the results tools send back. Protection that scans the user message alone misses most of what an agent sends.</li>
+
+  <li><strong>Deterministic tokens:</strong> the same value always maps to the same token, so the model can tell that two mentions refer to one customer. <a class="bl-link" href="/blog/what-is-tokenization/">Tokenization</a> keeps the meaning of a value while hiding the value itself.</li>
+
+  <li><strong>Neutral labels:</strong> field names leak context too, so "Social security number" becomes "ID number" before the request leaves. The model still knows a value is an identifier without learning which kind.</li>
+
+  <li><strong>Secret detection:</strong> API keys and database connection strings end up in prompts more often than teams expect. They need the same treatment as PII because a leaked credential opens far more than one record.</li>
+
+  <li><strong>Fail-closed behavior:</strong> if a request can't be tokenized, it gets blocked before raw values reach the model. A protection layer that sends the original request on failure protects nothing during an outage.</li>
+
+  <li><strong>Streaming support:</strong> agents stream responses as they generate, so restoration has to work chunk by chunk without breaking the user experience.</li>
+
+  <li><strong>Controlled restoration:</strong> original values come back only for an authorized application that needs them, such as the system sending Sofia's refund confirmation.</li>
+
+  <li><strong>One audit log:</strong> every provider writes to the same record of what was tokenized and when, which gives security teams one place to answer an auditor.</li>
+
+  <li><strong>Stable policy across providers:</strong> switching models should leave your privacy controls exactly where they were.</li>
+
+</ul>
+
+<h3>Why Redaction and Masking Fall Short Across Providers</h3>
+
+<p>Redaction and masking are common first attempts. Both hide values, yet they break the agent or the business process in ways tokenization avoids.</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Approach</th><th>What the model receives</th><th>Can an authorized app recover the value?</th><th>Effect on agent reasoning</th></tr></thead>
+    <tbody>
+      <tr><td>Redaction</td><td>Blank spaces or [REDACTED] markers</td><td>No, the value is gone</td><td>Loses track of who is who in a multi-customer case</td></tr>
+      <tr><td>Static masking</td><td>Partial values such as ****1111</td><td>Only the visible digits, never the full number</td><td>Confuses records that share masked digits</td></tr>
+      <tr><td>Deterministic tokenization</td><td>Consistent tokens such as [NAME: Ry0Ixd1]</td><td>Yes, through controlled restoration</td><td>Follows each customer accurately across the conversation</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h2>How to Secure Enterprise AI Applications and Agents With Scoped Access and Controlled Release</h2>
+
+<p><strong>Start by mapping one agent path and scoping what it can reach. Tokenize data before every model call, then release original values to approved destinations once outputs pass an evidence check against the sources the agent was allowed to use.</strong></p>
+
+<p>These eight steps work for hosted and self-hosted models. Run them on one agent first, then repeat the pattern as more agents come online.</p>
+
+<h3>Step 1: Map One Agent Path Before Changing Anything</h3>
+
+<p>Pick one agent that handles real customer data, such as the support agent working on Sofia's dispute. Write down five things about it:</p>
+
+<ol>
+
+  <li>Identities and permissions it acts under</li>
+
+  <li>Data it touches, from CRM records to payment details</li>
+
+  <li>Tools it can invoke during a task</li>
+
+  <li>Destinations that need original values, such as a payment gateway</li>
+
+  <li>Evidence that should back its answers</li>
+
+</ol>
+
+<p>Note which model provider each part of the path calls. Sofia's support agent might reason on Anthropic, while the letter it triggers gets drafted on OpenAI.</p>
+
+<p>This map shows where protection belongs. It also keeps the first rollout small enough to test properly.</p>
+
+<h3>Step 2: Scope Access to What the Task Needs</h3>
+
+<p>Access often exceeds the task. Broad connector credentials let an agent reach records and files that have nothing to do with the request in front of it.</p>
+
+<p>For Sofia's dispute, the refund policy and her submitted evidence are relevant. Records belonging to other customers stay out of scope, even if the CRM connector can return them.</p>
+
+<p>Decide which records and files each agent may read, and which tools or actions it may trigger. Align those decisions with your existing identity and application policy so agent access follows the same rules as the rest of your stack.</p>
+
+<h3>Step 3: Tokenize Sensitive Fields Before Every Model Call</h3>
+
+<p>Replace sensitive values with tokens before the request reaches any provider. The model still understands the case because the structure of the request stays intact.</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>What your application sends</th><th>What the model receives</th></tr></thead>
+    <tbody>
+      <tr><td>Sofia Grant disputes a charge on credit card 4111 1111 1111 1111</td><td>[NAME: Ry0Ixd1] disputes a charge on account number [ACCOUNT: k82Hq4P]</td></tr>
+      <tr><td>Contact her at sofia.grant@example.com</td><td>Contact her at [EMAIL: p3Xw91L]</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>The same rule applies to every provider in the path. Your OpenAI and Anthropic calls should receive tokens for Sofia's details, and so should your internal model.</p>
+
+<p>If tokenization fails for any reason, block the request. A blocked request costs one retry, while a leaked one can't be pulled back from a provider's logs.</p>
+
+<h3>Step 4: Protect Tool Calls and Tool Results</h3>
+
+<p>Agents leak through tools as often as through prompts. A lookup tool returns a full customer record, and that result flows into the next model call untouched unless something scans it.</p>
+
+<p>Cover tool call arguments going out and tool results coming back. That includes function calls on interfaces such as the OpenAI Responses API and Anthropic tool use, since agents on both providers use them to call tools.</p>
+
+<p>Streamed tool calls need care as well. Arguments should be held until the call completes so a value split across chunks can't slip past detection.</p>
+
+<h3>Step 5: Limit Copies Across Logs and Agent Memory</h3>
+
+<p>When values are tokenized in the request path, downstream systems record tokens. Logs and traces stay useful for debugging, and a breach of your observability stack exposes references with no values behind them.</p>
+
+<p>Some copies need their own controls:</p>
+
+<ul>
+
+  <li><strong>Vector stores:</strong> embed documents after sensitive fields are tokenized</li>
+
+  <li><strong>Agent memory:</strong> set retention limits so saved facts expire on schedule</li>
+
+  <li><strong>Caches:</strong> keep retry payloads short-lived and out of long-term storage</li>
+
+  <li><strong>Connected vendors:</strong> send third parties tokens unless they are an approved destination for the real value</li>
+
+</ul>
+
+<h3>Step 6: Release Original Values Only to Approved Destinations</h3>
+
+<p>Some systems need the real value. A payment gateway needs the card number, and a notification service needs the email address to send Sofia's refund confirmation.</p>
+
+<p>Keep originals inside a protected boundary until one of those approved destinations asks for them. Typical destinations include enterprise APIs and payment gateways, plus the approved caller that started the task.</p>
+
+<p>This design limits the damage if an agent is manipulated through prompt injection:</p>
+
+<ul>
+
+  <li><strong>Separate the value:</strong> the agent handles a reference, so its context never holds the original</li>
+
+  <li><strong>Authorize outside the model:</strong> release decisions follow application policy, so instructions inside a prompt can't unlock raw data</li>
+
+  <li><strong>Limit exposure:</strong> an approved destination receives the value through a logged path</li>
+
+</ul>
+
+<p>For payments, the agent can hold a card token while the vault sends the real number to the processor. The agent completes the purchase without ever seeing the card.</p>
+
+<p>These controls reduce the consequences of a compromised agent. They don't remove every prompt injection or tool security risk, so keep your other agent defenses in place.</p>
+
+<h3>Step 7: Check Outputs Against Approved Evidence</h3>
+
+<p>Data leakage is one risk. Wrong answers are another, because agent outputs turn into customer responses and case updates that people act on.</p>
+
+<p>An answer can sound convincing while resting on missing evidence or an outdated policy. Check each claim in a response against the evidence the agent was allowed to use.</p>
+
+<p><a class="bl-link" href="/triplets/">Claim-level verification</a> marks which claims hold up. Your policy then decides whether refused or conflicted content gets held for review or revised before release.</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Claim in Sofia's refund response</th><th>Evidence check</th><th>Next action</th></tr></thead>
+    <tbody>
+      <tr><td>Her charge falls inside the dispute window</td><td>Supported by the current refund policy</td><td>Release to Sofia</td></tr>
+      <tr><td>She qualifies for an expedited refund</td><td>Conflicted by an older policy version</td><td>Hold for agent review</td></tr>
+      <tr><td>A goodwill credit was approved</td><td>Refused with no evidence on file</td><td>Remove before sending</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h3>Step 8: Keep the Same Policy When You Add or Switch Models</h3>
+
+<p>A model switch is where most gaps appear. Write the policy once and apply it to every provider, including internal models.</p>
+
+<p>The file below is a generic illustration of what such a policy captures. Field names and syntax will differ depending on the protection layer you use.</p>
+
+<div class="bl-code bl-code--light">
+  <pre style="white-space:pre;overflow-x:auto"><code style="white-space:pre;">policy: customer-data-v3
+providers:
+  - openai
+  - anthropic
+  - internal-llm
+tokenize:
+  - customer_name
+  - email
+  - card_number
+  - account_id
+on_tokenize_failure: block
+release:
+  card_number: payment_gateway
+  email: notification_service
+logging: tokens_only</code></pre>
+</div>
+
+<p>Retest whenever a model changes, using the same sample records each time. Before a new model goes live, confirm these points:</p>
+
+<ol>
+
+  <li>Requests to the new model contain tokens for every sensitive field</li>
+
+  <li>Tool calls and tool results are covered on its interface</li>
+
+  <li>Audit entries for the new provider land in the same log</li>
+
+  <li>Release rules behave exactly as they did on the previous model</li>
+
+</ol>
+
+<h2>Hosted or Self-Hosted Deployment: Choosing Where Your Data Protection Layer Runs</h2>
+
+<p><strong>A hosted protection proxy is quick to adopt and needs no infrastructure of your own, whereas a self-hosted deployment runs inside your environment and suits regulated data or strict residency rules. Many enterprises start hosted and move later.</strong></p>
+
+<p>The protection layer handles sensitive values itself, so where it runs matters as much as what it does. Compare the two options on the factors your security and platform teams care about.</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Factor</th><th>Hosted proxy</th><th>Self-hosted deployment</th></tr></thead>
+    <tbody>
+      <tr><td>Setup effort</td><td>Change the base URL and register provider keys</td><td>Deploy containers and plan for upgrades</td></tr>
+      <tr><td>Data residency</td><td>Depends on the vendor's available regions</td><td>Stays in the region you choose</td></tr>
+      <tr><td>Regulated workloads</td><td>Suits teams whose auditors accept vendor attestations</td><td>Fits teams that need the vault inside their boundary</td></tr>
+      <tr><td>Operations</td><td>Vendor handles scaling and uptime</td><td>Your platform team owns availability</td></tr>
+      <tr><td>Self-hosted models</td><td>Internal traffic may leave your network to reach the proxy</td><td>Protection sits next to your internal models</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>A hosted proxy is often the fastest way to prove the approach on one agent. Teams with strict residency rules or a heavy self-hosted footprint usually move the layer in-house once the pilot succeeds.</p>
+
+<p>Payment data often settles the question early. Teams that handle cards tend to keep <a class="bl-link" href="/blog/card-vault-tokenization/">card vault tokenization</a> inside a certified boundary from day one.</p>
+
+<h3>Protecting Self-Hosted Models in Practice</h3>
+
+<p>Self-hosted models need the same request-path discipline as hosted APIs. The servers themselves add a few controls of their own:</p>
+
+<ul>
+
+  <li><strong>Inference logging:</strong> turn off prompt logging in production, or write tokenized payloads to disk</li>
+
+  <li><strong>Server access:</strong> limit who can open model hosts and GPU nodes</li>
+
+  <li><strong>Retention:</strong> set expiry on prompt caches and stored conversations</li>
+
+  <li><strong>Fine-tuning data:</strong> tokenize records before they enter training sets</li>
+
+  <li><strong>Network egress:</strong> block model servers from calling external services they don't need</li>
+
+</ul>
+
+<h2>How Enigma AI Vault Protects Sensitive Data and Verifies Outputs on Every Model Provider</h2>
+
+<p>It doesn't matter which AI agent or model your teams use. Enigma AI Vault is the underlying infrastructure that secures and protects your data around the models and frameworks you already run, and it verifies outputs without rebuilding your agent stack.</p>
+
+<p>AI Vault is a data protection and output verification layer for the agents you already run, and it doesn't build or orchestrate agents. It combines The Vault and Triplets with NoPII at the points where information is retrieved and released.</p>
+
+<p><a class="bl-link" href="/nopii/">NoPII</a> is the model-facing layer of AI Vault. One proxy fronts nine model providers, including OpenAI and Anthropic, and your privacy controls don't reset when your model choice changes.</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>What you need across providers</th><th>AI Vault component</th><th>How it works</th></tr></thead>
+    <tbody>
+      <tr><td>Tokenization before model calls</td><td>NoPII tokenization</td><td>Tokenizes supported sensitive values before requests reach the model, including tool call arguments and results</td></tr>
+      <tr><td>Protection that fails safely</td><td>NoPII fail-closed mode</td><td>Blocks any protected request that can't be tokenized</td></tr>
+      <tr><td>One record across providers</td><td>NoPII provider accounts</td><td>Registers multiple providers under one account with a shared audit log</td></tr>
+      <tr><td>Controlled release of originals</td><td>The Vault</td><td>Holds protected customer records and files, releasing values to approved destinations</td></tr>
+      <tr><td>Payments without card numbers in the agent</td><td>Vault payment proxy</td><td>Sends cards through an HMAC-signed proxy on supported gateways and purges CVV within 30 minutes</td></tr>
+      <tr><td>Verified outputs</td><td>Triplets</td><td>Checks each claim against approved evidence and traces it to source and version</td></tr>
+      <tr><td>Deployment inside your environment</td><td>Self-hosted containers</td><td>Runs NoPII and Data Vault in your environment, with purchase through AWS Marketplace or direct enterprise agreements</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>On protected paths, an agent holds a reference without automatically gaining access to the value behind it. Requests to use protected information are checked outside the model and logged.</p>
+
+<p>Enigma Vault holds PCI DSS Level 1 and SOC 2 Type II, with sub-100ms vault operations. Coverage depends on the configured model and tool paths, which is why every evaluation starts with a single agent.</p>
+
+<p><a class="bl-link" href="/request-demo/?which_products__select_all_that_apply_=AI%20Vault&amp;interest=ai-vault-poc">Bring one agent path to our team</a> and we'll show how AI Vault protects it across the models you run today.</p>

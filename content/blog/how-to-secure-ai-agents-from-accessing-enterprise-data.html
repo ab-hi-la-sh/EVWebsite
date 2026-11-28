@@ -1,0 +1,535 @@
+---
+title: "How to Secure AI Agents From Accessing Enterprise Data: A Practical Guide"
+slug: "how-to-secure-ai-agents-from-accessing-enterprise-data"
+layout: "pii-style"
+metaTitle: "How to Secure AI Agents From Accessing Enterprise Data: A Practical Guide"
+description: "Learn how to secure AI agents from accessing enterprise data, from identity and task-scoped access to tokenization, release rules, audit trails and verified outputs."
+subtitle: "Securing AI agents that access enterprise data takes more than a login check. Give each agent its own identity and task-scoped access, then keep original values out of the model, since prompts alone can't control what agents do with data."
+date: 2026-11-28T00:03:00
+category: "AI Security"
+author: "abhilash-kumar"
+readTime: 25
+heroImage: "/assets/blog/img-03.png"
+heroAlt: "How to Secure AI Agents From Accessing Enterprise Data: A Practical Guide"
+excerpt: "Learn how to secure AI agents from accessing enterprise data, from identity and task-scoped access to tokenization, release rules, audit trails and verified outputs."
+tags: ["ai-agents", "ai", "pii"]
+styles: ["blog.css", "pages/blog-pii-hero.css", "tr-pages.css"]
+scripts: ["blog-article.js"]
+faqSchema: true
+faqs:
+  - q: "Should AI agents connect directly to enterprise databases?"
+    a: "Not with broad credentials. Route agent access through task-scoped permissions and a vault, so each agent receives only the records and fields its task needs, and every release is logged against its own identity."
+  - q: "Can AI agents work with enterprise data without seeing original values?"
+    a: "Yes, in most tasks. Tokenization swaps names and account numbers for consistent references before model calls, so the agent reasons over the data while original values stay inside your protected boundary."
+  - q: "How do you control which files an AI agent can open?"
+    a: "Use file-level rules tied to the agent's task. The agent gets the extracted fields it needs, such as a company's tax status from an onboarding form, while the full document and other files stay in the vault."
+  - q: "Can AI agent data protection run in your own cloud?"
+    a: "It can. Some data protection layers, including NoPII and the Data Vault, are available as self-hosted containers, so enterprise data can stay inside your own environment while agents keep working normally."
+  - q: "Do you need a new agent platform to secure enterprise data?"
+    a: "No. The controls sit between your data and your agents, working with your existing identity provider and applications. Teams can keep the agents and frameworks they already use while security improves."
+---
+
+<p><strong>Securing AI agents that access enterprise data takes more than a login check. Give each agent its own identity and task-scoped access, then keep original values out of the model, since prompts alone can't control what agents do with data.</strong></p>
+
+<p>Most enterprises don't give AI agents broad data access on purpose. It builds up one connector at a time, as each team wires its own agent into the CRM or the payment system. Before long, security can't say which agent touched which records, and audit questions take weeks to answer. New agent projects stall in review because nobody can vouch for the ones already running.</p>
+
+<p>What's missing is a layer that protects the data itself, whichever agent each team chose. The steps below show how to build it, with examples from three agents that many enterprises already run.</p>
+
+<h2>Why Enterprise Data Needs Protection Before AI Agents Can Reach It</h2>
+
+<p><strong>Enterprise data needs protection before AI agents reach it because agents copy what they retrieve into prompts and tool calls. Once a value leaves its source system, the access rules that governed it there no longer apply.</strong></p>
+
+<p>Inside a CRM or an ERP, customer records sit behind years of access rules and review. An agent can pull those records out in seconds, and the protection doesn't travel with them.</p>
+
+<h3>How AI Agents Reach Enterprise Data Today</h3>
+
+<p>Most agents reach business systems through a mix of connectors and APIs, with retrieval indexes on top. A typical enterprise setup looks something like this:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Agent</th><th>How it connects</th><th>What it can reach</th></tr></thead>
+    <tbody>
+      <tr><td>Support agent</td><td>CRM connector</td><td>Customer profiles and case history</td></tr>
+      <tr><td>Onboarding agent</td><td>Document store API</td><td>Signed forms, tax documents and ID scans</td></tr>
+      <tr><td>Billing agent</td><td>Payment system integration</td><td>Card tokens, invoices and payment plans</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>Each connection was built by a different team for a different deadline. None of them was designed with the others in mind, and together they give AI agents a wide view across the business.</p>
+
+<p>That view grows every time a team adds a tool. A support agent that starts with read access to cases often gains the ability to update records, then to issue credits, without anyone revisiting what data it can see.</p>
+
+<h3>What's at Stake When AI Agents Handle Enterprise Data</h3>
+
+<p>The cost of getting this wrong lands on several groups at once:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Who feels it</th><th>What goes wrong</th></tr></thead>
+    <tbody>
+      <tr><td>Security teams</td><td>They can't trace which agent opened which records, so investigations stall</td></tr>
+      <tr><td>Compliance and audit</td><td>Regulators ask who accessed customer data, and the answer is spread across five logging tools</td></tr>
+      <tr><td>Customers</td><td>Their details end up in places they never agreed to, such as a model provider's systems</td></tr>
+      <tr><td>Product teams</td><td>New agent launches wait months in review because nobody can vouch for the existing ones</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>That last row is the one leaders notice first. Weak controls create risk, and they also slow down every agent project that comes after.</p>
+
+<h2>Which Types of Enterprise Data Need the Most Protection From AI Agents</h2>
+
+<p><strong>The enterprise data that needs the most protection from AI agents includes database records in CRM and ERP systems, internal documents and email, customer PII and payment data. Each type leaks in a different way, so each needs its own control.</strong></p>
+
+<p>Not every record carries the same risk. Here's how the main types compare across the three agents:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Data type</th><th>Where it lives</th><th>Which agent reaches it</th><th>Main risk</th></tr></thead>
+    <tbody>
+      <tr><td>Database records</td><td>CRM and ERP</td><td>Support agent</td><td>Broad queries return far more rows than the task needs</td></tr>
+      <tr><td>Internal documents and email</td><td>Document stores, inboxes</td><td>Onboarding agent</td><td>Whole files enter the model when two fields would do</td></tr>
+      <tr><td>Customer PII</td><td>Spread across most systems</td><td>All three agents</td><td>Names and IDs travel into prompts and logs</td></tr>
+      <tr><td>Payment and financial data</td><td>Payment systems, ledgers</td><td>Billing agent</td><td>Card and account numbers reach places PCI scope never covered</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h3>Database Records in CRM and ERP Systems</h3>
+
+<p>Structured records feel safe because they sit in well-governed systems. The risk comes from how agents query them. A support agent asked about one customer's case can easily run a search that returns hundreds of profiles, and every row lands in its context.</p>
+
+<p>ERP data adds another layer. Contract values and supplier pricing are commercially sensitive even when they hold no personal data, and an agent that can read the whole ERP can repeat any of it in a reply.</p>
+
+<p>Field-level and record-level rules matter most here. The agent should get the one case and the few fields the question needs, while the rest of the table stays where it is.</p>
+
+<h3>Internal Documents and Email Attachments</h3>
+
+<p>Documents are harder to control than tables because sensitive details hide inside them. A single customer onboarding form can hold a tax ID on one page and bank account numbers on another.</p>
+
+<p>When an onboarding agent reads that form whole, everything on every page reaches the model. Passing the agent only the extracted fields it needs keeps the rest of the document in protected storage.</p>
+
+<p>Email attachments carry the same risk with less structure. A contract sent as a PDF reply may sit in an inbox the agent can search, with no record of which attachments it opened.</p>
+
+<h3>Customer PII Across Every System</h3>
+
+<p>Customer PII doesn't live in one place. Names and phone numbers sit in the CRM, while dates of birth turn up in onboarding files and email addresses appear in payment records. That spread is why PII needs protection at the point where data enters the model, wherever it came from. For a fuller list of what counts, see <a class="bl-link" href="/blog/what-is-pii/">what is PII</a>.</p>
+
+<h3>Payment and Financial Data</h3>
+
+<p>Card numbers and bank details carry their own rules under PCI DSS. If a billing agent can read raw card numbers, every system it writes to may come into PCI scope, including logs and memory stores nobody planned for.</p>
+
+<p>Keeping cards in a vault and giving the agent a token avoids that. The agent can still confirm a payment method or charge an invoice, while the card number stays out of its reach. <a class="bl-link" href="/blog/card-vault-tokenization/">Card vault tokenization</a> explains how that capture works.</p>
+
+<h2>What Happens When AI Agents Reach Enterprise Data Without Controls</h2>
+
+<p><strong>When AI agents reach enterprise data without controls, broad connectors expose unrelated records and copies spread into logs and memory. Unchecked answers then turn into case updates or payments before anyone reviews them.</strong></p>
+
+<p>None of this needs an attacker. It comes from agents doing their jobs with more access than the job requires.</p>
+
+<h3>Broad Connectors Reach Records Unrelated to the Request</h3>
+
+<p>Connector credentials are usually set up once, with whatever access made the first demo work. In many enterprises, the support agent's CRM connector runs on a service account that can read every customer and every case.</p>
+
+<p>When a customer named Daniel Reyes asks about a late fee, the agent needs his account and one policy document. Its connector could return the whole customer base. If a prompt goes wrong or a tool response is manipulated, those unrelated records are within reach.</p>
+
+<h3>Enterprise Data Spreads Into Logs and Outside Vendors</h3>
+
+<p>Once Daniel's details enter the agent's context, they rarely stay there. Here's where copies tend to land:</p>
+
+<ul>
+
+  <li><strong>Application logs:</strong> Requests get logged for debugging, often with full prompt text.</li>
+
+  <li><strong>Traces and observability:</strong> Each model call is recorded, along with the context sent to it.</li>
+
+  <li><strong>Agent memory:</strong> A summary of the chat is saved for the next session.</li>
+
+  <li><strong>Vector stores:</strong> Embedded documents keep a searchable copy of onboarding files.</li>
+
+  <li><strong>Caches and retries:</strong> A timed-out call gets resent with the same payload.</li>
+
+  <li><strong>Connected vendors:</strong> A ticket sync sends case notes to an outside helpdesk.</li>
+
+</ul>
+
+<p>How much is kept depends on your framework configuration, connectors, logging and retention settings. Each copy sits outside the system that was meant to govern it.</p>
+
+<h3>Unchecked Outputs Turn Into Business Decisions</h3>
+
+<p>Agents don't stop at reading data. They write case updates and generate documents, and some trigger payments or API calls. An onboarding agent's summary might decide whether a new customer gets approved, and a billing agent's note might trigger a refund.</p>
+
+<p>If that output rests on missing evidence or an outdated policy, the error becomes a business decision. It can also rest on two documents that disagree, and nobody notices until a customer complains or an auditor asks why.</p>
+
+<h2>Traditional IAM vs AI Agent Data Security: What Each One Controls</h2>
+
+<p><strong>Traditional IAM checks whether an agent can access a resource, whereas AI agent data security controls what happens to the data after retrieval. IAM can't follow a value into a prompt or a vendor at machine speed, so agents need both.</strong></p>
+
+<p>Most enterprises already run strong identity and access management. It's tempting to assume that covers agents too, but IAM was built for a different problem.</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Question</th><th>Traditional IAM</th><th>AI agent data security</th></tr></thead>
+    <tbody>
+      <tr><td>Can this agent connect to the system?</td><td>Yes, it checks credentials and roles</td><td>Relies on IAM for this</td></tr>
+      <tr><td>Which records and fields can it open?</td><td>Often at the resource or table level</td><td>Down to individual records, files and fields</td></tr>
+      <tr><td>What happens to values after retrieval?</td><td>Out of view once the data leaves the system</td><td>Values are tokenized before they reach the model</td></tr>
+      <tr><td>Where can those values go next?</td><td>No control over prompts, memory or vendors</td><td>Original values reach only approved destinations</td></tr>
+      <tr><td>Can you show what the agent did with the data?</td><td>Logs the login and the query</td><td>Records each release and traces outputs to evidence</td></tr>
+      <tr><td>How fast does it need to act?</td><td>Built for people making a few requests</td><td>Works on every agent step, at machine speed</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h3>Where IAM Stops and Data-Level Controls Take Over</h3>
+
+<p>Here's the gap in practice. The support agent passes every IAM check, and the data still ends up somewhere it shouldn't:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Step</th><th>What happens</th><th>Checked by IAM?</th></tr></thead>
+    <tbody>
+      <tr><td>1. Sign-in</td><td>Support agent authenticates and its CRM read role is confirmed</td><td>Yes, allowed</td></tr>
+      <tr><td>2. CRM query</td><td>Daniel Reyes's profile comes back, including his date of birth and tax ID</td><td>Yes, allowed</td></tr>
+      <tr><td>3. Model request</td><td>His full profile goes to the model provider</td><td>No</td></tr>
+      <tr><td>4. Agent memory</td><td>A summary holding his tax ID is saved for the next session</td><td>No</td></tr>
+      <tr><td>5. Ticket sync</td><td>A case note with his date of birth reaches a helpdesk vendor</td><td>No</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>IAM did its job on steps 1 and 2. Steps 3 to 5 happen after the data has left the CRM, where IAM has no view. Data-level controls cover that stretch, and the steps below show how to put them in place. <a class="bl-link" href="/blog/data-masking-vs-tokenization/">Data masking vs tokenization</a> explains the two main ways to protect values once they leave the source.</p>
+
+<h2>How to Secure AI Agents From Accessing Enterprise Data: Step-by-Step</h2>
+
+<p><strong>To secure AI agents from accessing enterprise data, map what each agent touches and tie it to existing identity policy. Then protect and tokenize data at the source, control where values go and verify outputs before rollout.</strong></p>
+
+<p>Each step builds on the one before it. Here's the full sequence, with who usually owns each part:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Step</th><th>What it secures</th><th>Usual owner</th></tr></thead>
+    <tbody>
+      <tr><td>1. Map the data each agent touches</td><td>A shared picture of every data path</td><td>Agent owner with system owners</td></tr>
+      <tr><td>2. Align access with identity policy</td><td>Who the agent is and what it may open</td><td>Identity and security teams</td></tr>
+      <tr><td>3. Protect records and files at the source</td><td>Customer data and cards held in a vault</td><td>Data and security teams</td></tr>
+      <tr><td>4. Tokenize fields before model requests</td><td>What the model provider receives</td><td>Engineering</td></tr>
+      <tr><td>5. Define protected data paths and release rules</td><td>Where original values may go</td><td>Security and engineering</td></tr>
+      <tr><td>6. Set audit requirements</td><td>Evidence of what each agent did</td><td>Compliance and audit</td></tr>
+      <tr><td>7. Verify outputs</td><td>Answers before they reach systems or customers</td><td>Business owners</td></tr>
+      <tr><td>8. Evaluate before rollout</td><td>Coverage, evidence handling and fit</td><td>Agent owner with security</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h2>Step 1: Map the Enterprise Data Each AI Agent Workflow Touches</h2>
+
+<p><strong>Mapping an AI agent's enterprise data means recording who it acts for, what it reads, which tools it calls, where original values must go and which evidence backs its answers. That map becomes the basis for every control that follows.</strong></p>
+
+<p>Start with one agent and one task. Trying to map every agent at once produces a document too broad to act on.</p>
+
+<h3>Five Things to Record for Every Agent</h3>
+
+<p>Work through these with the people who own each system the agent touches:</p>
+
+<ol>
+
+  <li><strong>Identities and permissions:</strong> The identity the agent runs as, and whose access it should inherit.</li>
+
+  <li><strong>Data:</strong> Records and fields the task needs, along with anything it should never see.</li>
+
+  <li><strong>Tools:</strong> Every action the agent can take, from reading a case to triggering a payment.</li>
+
+  <li><strong>Destinations:</strong> Systems that need original values, such as a payment gateway or an identity verification API.</li>
+
+  <li><strong>Evidence:</strong> Approved documents that should back the agent's answers, with the current version noted.</li>
+
+</ol>
+
+<p>The engineer who built a connector often knows what it returns better than the team that requested the agent. Bring both into the room.</p>
+
+<h3>Example: Mapping Three Enterprise AI Agents</h3>
+
+<p>Here's how the map looks once it's filled in for all three agents:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Map item</th><th>Support agent</th><th>Onboarding agent</th><th>Billing agent</th></tr></thead>
+    <tbody>
+      <tr><td>Acts for</td><td>Assigned support rep</td><td>Onboarding specialist</td><td>Billing specialist</td></tr>
+      <tr><td>Data needed</td><td>One customer's account and case</td><td>Company name and tax status from the form</td><td>Invoice balance and payment plan</td></tr>
+      <tr><td>Never needed</td><td>Other customers' records</td><td>Full ID scans</td><td>Raw card numbers</td></tr>
+      <tr><td>Tools</td><td>Case lookup, note update</td><td>Document extraction, summary</td><td>Payment request</td></tr>
+      <tr><td>Destinations</td><td>None</td><td>Identity verification API</td><td>Payment gateway</td></tr>
+      <tr><td>Evidence</td><td>Fee policy</td><td>Onboarding policy</td><td>Payment terms</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>The "Never needed" row is often the most useful. It names exactly what the controls in the next steps must keep out of reach.</p>
+
+<h2>Step 2: Align AI Agent Access With Existing Identity and Application Policy</h2>
+
+<p><strong>Aligning AI agent access with existing policy means each agent gets its own identity in your identity provider and inherits permissions from the applications it uses. Agents then follow the same rules as the people they work for.</strong></p>
+
+<p>Agents shouldn't need a parallel permission system. Your identity provider and your applications already know who may see what, and agents should plug into that.</p>
+
+<h3>Register Each Agent in Your Identity Provider</h3>
+
+<p>Shared service accounts are the most common shortcut, and the most costly later. When three agents share one account, nobody can tell which one made a request, and switching one off breaks the others.</p>
+
+<p>Give each agent its own identity, with a named owner and a stated purpose. Each of the three agents gets a separate entry, so any one of them can be audited or disabled alone.</p>
+
+<h3>Let Application Permissions Limit What Agents Open</h3>
+
+<p>The CRM already knows which reps can see which customers. Let the agent inherit that, limited further by its own narrow role:</p>
+
+<div class="bl-code bl-code--light">
+  <pre style="white-space:pre;overflow-x:auto"><code style="white-space:pre;">Rep's CRM access:     Customers in the Northeast region
+Agent's role:         Read cases and accounts, no exports
+Effective access:     Northeast customer cases and accounts, read-only</code></pre>
+</div>
+
+<p>When access is the overlap of the two, the agent never sees more than the rep could, and never does more than its role allows.</p>
+
+<h3>Keep Credentials Short-Lived and Outside the Model</h3>
+
+<p>Credentials should come from a secrets manager at the moment of each call. The model names the tool it wants, and your application fetches the key and makes the request.</p>
+
+<p>Short-lived tokens limit the damage of a leak, because a stolen key stops working soon after the task ends. Rotate any credential that has ever appeared in a log or a prompt.</p>
+
+<h2>Step 3: Protect Enterprise Records and Files at the Source in a Vault</h2>
+
+<p><strong>Protecting enterprise records at the source means keeping customer data and cards in a vault, along with files, and giving each agent task-specific access. The agent receives only what its current task permits, and every release is recorded.</strong></p>
+
+<p>Identity decides whether an agent may connect. The vault decides what it actually receives once it does.</p>
+
+<h3>Give Agents Task-Specific Access to Records and Files</h3>
+
+<p>Task-specific access means the same agent gets different data depending on what it's doing. Here's the onboarding agent reviewing a new business customer's file:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Requested item</th><th>Released to the agent</th><th>Kept in the vault</th></tr></thead>
+    <tbody>
+      <tr><td>Onboarding form</td><td>Company name and registered address</td><td>Owner's tax ID and home address</td></tr>
+      <tr><td>Tax document</td><td>Tax status and filing year</td><td>Full tax ID number</td></tr>
+      <tr><td>Owner's ID scan</td><td>Name match and expiry status</td><td>The scan itself</td></tr>
+      <tr><td>Other customers' files</td><td>Nothing</td><td>Everything</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>The agent can still summarize the application for the onboarding specialist. The files themselves never enter its context, so a mistake in the agent's reply can't expose what it never received.</p>
+
+<h3>Govern Payment Operations Separately</h3>
+
+<p>Payments need their own rules, because the risk is money leaving the business. The billing agent can charge an invoice on an agreed plan, while refunds and changes to stored payment details sit outside its permissions.</p>
+
+<p>Splitting operations this way changes what a manipulated prompt can achieve. An instruction hidden in an email can't turn a balance inquiry into a refund, because the agent never had refund permission to begin with.</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Payment operation</th><th>Billing agent</th><th>Who handles it</th></tr></thead>
+    <tbody>
+      <tr><td>Charge an invoice on an agreed plan</td><td>Permitted</td><td>The agent, through a card token</td></tr>
+      <tr><td>Issue a refund</td><td>Not permitted</td><td>Billing specialist</td></tr>
+      <tr><td>Change stored payment details</td><td>Not permitted</td><td>The customer, through a secure form</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h2>Step 4: Tokenize Sensitive Enterprise Fields Before Model Requests</h2>
+
+<p><strong>Tokenizing enterprise fields before model requests replaces names and account numbers with references. The model can still reason across a task, while original values stay inside your protected boundary.</strong></p>
+
+<p>Even with task-specific access, some sensitive values reach the agent because the task needs them. Tokenization keeps those values away from the model provider.</p>
+
+<h3>How Deterministic References Keep Agents Working</h3>
+
+<p>The support agent needs to know which customer it's helping. It doesn't need his real name or account number to do that:</p>
+
+<div class="bl-code bl-code--light">
+  <pre style="white-space:pre;overflow-x:auto"><code style="white-space:pre;">Before:  Daniel Reyes (acct 4417-2290-118) asks why a $35 late fee was added in March.
+After:   [NAME_1] (acct [ACCOUNT_1]) asks why a $35 late fee was added in March.</code></pre>
+</div>
+
+<p>References stay consistent through supported interactions, so [NAME_1] means Daniel on every turn. The model can follow the conversation and pull up the right policy without holding any of his real details.</p>
+
+<p>Coverage depends on which model and tool paths you configure, so check that every route the agent uses runs through tokenization. If a protected request can't be tokenized, it should fail closed.</p>
+
+<h3>Restore Original Values Only for Authorized Applications</h3>
+
+<p>When the reply comes back, the support rep's screen needs Daniel's real name. Restoration happens in that authorized application, after the model's work is done.</p>
+
+<p>Restoration can follow the same rules as everything else. The rep assigned to Daniel's case sees his name and contact details, while an analytics dashboard drawing on the same conversations sees only references.</p>
+
+<p>The model provider holds only references, and so do any logs or traces taken along the way. <a class="bl-link" href="/nopii/">NoPII</a> shows how this works in front of supported model providers.</p>
+
+<h2>Step 5: Define Protected Data Paths and Release Rules for Each Agent</h2>
+
+<p><strong>Defining protected data paths means original values stay inside the protected boundary until an approved destination needs them. Release rules run outside the model, so an agent can request a value but can't approve its own request.</strong></p>
+
+<p>By now the agents work on tokens. This step decides when a real value comes back out, and where it's allowed to go.</p>
+
+<h3>Name the Approved Destinations for Original Values</h3>
+
+<p>Approved destinations are usually enterprise APIs and payment gateways, along with the application that made the call. Writing them down per agent keeps the rules easy to check:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Agent</th><th>Approved destination</th><th>Value released</th><th>Condition</th></tr></thead>
+    <tbody>
+      <tr><td>Onboarding agent</td><td>Identity verification API</td><td>Owner's tax ID</td><td>Active onboarding case with signed consent</td></tr>
+      <tr><td>Billing agent</td><td>Payment gateway</td><td>Card number, through the vault proxy</td><td>Invoice charge on an agreed plan</td></tr>
+      <tr><td>Support agent</td><td>Rep's screen</td><td>Customer name and contact details</td><td>Rep assigned to the case</td></tr>
+      <tr><td>Any agent</td><td>Outside email or unknown API</td><td>Nothing</td><td>Not an approved destination</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>Anything not on the list is refused and logged. The original value stays in the vault.</p>
+
+<h3>Release Card Data Through Payment Proxy Paths</h3>
+
+<p>The billing agent can move money without ever holding a card number:</p>
+
+<ol>
+
+  <li>Daniel's card sits in the vault, and the payment system holds a token.</li>
+
+  <li>Next, the agent confirms the invoice amount and calls the payment tool with that token.</li>
+
+  <li>On supported gateways, an HMAC-signed proxy releases the card number at the gateway boundary.</li>
+
+  <li>Once the payment completes, CVV values are purged within 30 minutes.</li>
+
+</ol>
+
+<p>Neither the agent nor the model sees the card number, and it never reaches your application servers. That keeps them out of the path PCI DSS is concerned with.</p>
+
+<h3>Keep Release Decisions Outside the Model</h3>
+
+<p>Release rules have to live outside the model, because anything in the model's context can shape what it asks for. That includes a hidden line in a customer's uploaded document telling the agent to send records elsewhere.</p>
+
+<p>When the agent holds only references and releases follow application policy, that instruction gets nowhere. The agent can ask, but the policy refuses and the attempt shows up in the logs. These controls reduce the damage a compromised agent can cause, though they don't remove every prompt-injection or tool-security risk.</p>
+
+<h2>Step 6: Set Audit Requirements Before AI Agents Go Into Production</h2>
+
+<p><strong>Setting audit requirements before production means deciding what evidence you'll need about agent data access, then making sure it's recorded from day one. Vault access records and traceable outputs give auditors that evidence.</strong></p>
+
+<p>Adding audit trails after launch means rebuilding months of history from scattered logs. Agree on the requirements first.</p>
+
+<h3>What Auditors Will Ask About Agent Data Access</h3>
+
+<p>Expect questions like these from regulators and internal audit teams:</p>
+
+<ul>
+
+  <li><strong>Access:</strong> Which agents opened which customer records, and on whose behalf?</li>
+
+  <li><strong>Release:</strong> When did an original value leave the protected boundary, and where did it go?</li>
+
+  <li><strong>Decisions:</strong> What evidence backed an agent's answer that fed an approval or a payment?</li>
+
+  <li><strong>Deletion:</strong> Can you show a customer's data was removed everywhere an agent copied it?</li>
+
+</ul>
+
+<p>If your setup can't answer each one within a day, the audit requirements aren't complete yet.</p>
+
+<h3>Use Vault Access Records as the Audit Trail</h3>
+
+<p>Vault access records give a single place to answer the access and release questions. A typical entry captures the essentials without storing the value itself:</p>
+
+<div class="bl-code bl-code--light">
+  <pre style="white-space:pre;overflow-x:auto"><code style="white-space:pre;">Agent:        billing-agent-01
+Acting for:   Billing specialist, J. Patel
+Record:       Customer 88213, card token
+Operation:    Payment release to gateway
+Result:       Approved under invoice-plan rule
+Timestamp:    2026-11-25 10:42:07 UTC</code></pre>
+</div>
+
+<p>Tokenized data usually still counts as personal data under GDPR. <a class="bl-link" href="/blog/pseudonymization-vs-anonymization/">Pseudonymization vs anonymization</a> explains what that means for your record-keeping duties.</p>
+
+<h2>Step 7: Verify AI Agent Outputs Before They Update Enterprise Systems</h2>
+
+<p><strong>Verifying AI agent outputs means checking each claim against approved, versioned evidence before it updates a system of record or reaches a customer. Supported claims go through, while refused or conflicted ones go back for review.</strong></p>
+
+<p>Agents write back into enterprise systems, so an unchecked error doesn't stay in a chat window. It becomes an approval decision or a payment.</p>
+
+<h3>Run Claim-Level Checks on Agent Drafts</h3>
+
+<p>A claim-level check splits the draft into separate statements and tests each one against approved documents. Here's the onboarding agent's draft summary for a new business customer:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Claim in the summary</th><th>Evidence checked</th><th>Verdict</th></tr></thead>
+    <tbody>
+      <tr><td>"Registered address matches the tax document."</td><td>Tax document, onboarding form v2</td><td>Supported</td></tr>
+      <tr><td>"Customer qualifies for the expedited onboarding tier."</td><td>Onboarding policy v4 and tier terms v1</td><td>Conflicted</td></tr>
+      <tr><td>"No prior accounts exist for this owner."</td><td>Onboarding form v2</td><td>Refused</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>The specialist sees the supported claim as written. The tier question comes back for review because two approved documents disagree, and the prior-accounts claim is removed since the form alone can't support it.</p>
+
+<h3>Keep the Evidence Behind Each Verdict Current</h3>
+
+<p>Each verdict traces to the source document and the version used. That trail helps months later, when someone asks why a customer was approved or charged.</p>
+
+<p>A supported verdict isn't a guarantee of truth beyond that evidence, though. If last year's onboarding policy is still in the evidence set, the check will confirm last year's rules. Give each source an owner who retires old versions when new ones arrive.</p>
+
+<h2>Step 8: Evaluate Tokenization Coverage and Evidence Handling Before Rollout</h2>
+
+<p><strong>Evaluating before rollout means running real tasks through the protected setup to test coverage and evidence handling. Each test shows a different kind of gap, and closing those gaps before launch costs far less than fixing them later.</strong></p>
+
+<p>Treat the first agent as the pilot for the whole enterprise. What you learn here shapes how every later agent goes live.</p>
+
+<h3>Test the First Agent Before It Goes Live</h3>
+
+<p>Run these checks with real tasks and test customers:</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Area</th><th>How to test it</th><th>What a pass looks like</th></tr></thead>
+    <tbody>
+      <tr><td>Tokenization coverage</td><td>Run tasks with test customers, then search logs, traces and memory for their real values</td><td>No original values found anywhere outside the vault</td></tr>
+      <tr><td>Evidence handling</td><td>Ask questions where approved documents disagree or say nothing</td><td>Conflicted and refused verdicts, never confident guesses</td></tr>
+      <tr><td>Operational fit</td><td>Replay past requests through the protected setup</td><td>Response times and completion rates your teams accept</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>Any original value found outside the vault points to a route that skipped tokenization. Fix that route before moving on.</p>
+
+<h3>Reuse the Pattern for the Next Agent</h3>
+
+<p>Once the first agent passes, its map and tests become a template. In our example, the support agent goes first, and the onboarding and billing agents follow with their own data and destinations.</p>
+
+<p>Each new agent still needs its own map, since its data and tools differ. The difference is speed, because the team starts from a working pattern and review moves faster. <a class="bl-link" href="/blog/pii-tokenization-for-ai/">PII tokenization for AI</a> covers what to look for when you test coverage.</p>
+
+<h2>How Enigma AI Vault Protects Enterprise Data Whichever AI Agent You Use</h2>
+
+<p>Enterprise teams will keep choosing different agents and frameworks, and those choices will change. At Enigma Vault, we built <a class="bl-link" href="/ai-vault/">AI Vault</a> so that it doesn't matter which AI agent you use. AI Vault is the underlying infrastructure that protects your enterprise data before any agent touches it, then verifies what comes back out, without rebuilding your agent stack.</p>
+
+<div class="bl-tablewrap">
+  <table class="bl-table">
+    <thead><tr><th>Layer in your stack</th><th>Who keeps control of it</th><th>What AI Vault adds</th></tr></thead>
+    <tbody>
+      <tr><td>AI agents and frameworks</td><td>Each team, using whatever it prefers</td><td>Nothing to replace, since AI Vault isn't another agent platform</td></tr>
+      <tr><td>Identity provider and application policy</td><td>Your identity and security teams</td><td>Release decisions that follow the policy you already run</td></tr>
+      <tr><td>CRM, ERP, documents and payments</td><td>Data owners</td><td>The Vault protects customer data and cards, along with files, through task-specific access and vault access records</td></tr>
+      <tr><td>Model requests</td><td>Engineering</td><td>NoPII tokenizes supported sensitive values before requests reach the model and fails closed if a request can't be tokenized</td></tr>
+      <tr><td>Approved destinations</td><td>Security</td><td>Policy and authorization release original values only where approved, including HMAC-signed payment proxy paths</td></tr>
+      <tr><td>Agent outputs</td><td>Business owners</td><td>Triplets checks claims against approved, versioned evidence</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>AI Vault is backed by PCI DSS Level 1 and SOC 2 Type II, along with an AWS Foundational Technical Review. NoPII and the Data Vault run as self-hosted containers if you need them inside your own environment, and Enigma Vault is available on AWS Marketplace and through direct enterprise agreements.</p>
+
+<p><a class="bl-link" href="/request-demo/?which_products__select_all_that_apply_=AI%20Vault&amp;interest=ai-vault-poc">Request a no-cost POC</a> to see AI Vault protecting your enterprise data underneath the agents your teams already use.</p>
